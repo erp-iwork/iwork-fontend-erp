@@ -1,7 +1,8 @@
+import { STATE_LOGIN, STATE_SIGNUP } from './components/AuthForm';
 import GAListener from './components/GAListener';
-import { EmptyLayout, PublicRoute, MainLayout } from './components/Layout';
+import { EmptyLayout, LayoutRoute, MainLayout } from './components/Layout';
 import PageSpinner from './components/PageSpinner';
-import LoginPage from './components/Login'
+import AuthPage from './pages/AuthPage';
 import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
@@ -23,9 +24,6 @@ const ProgressPage = React.lazy(() => import('./pages/ProgressPage'));
 const TablePage = React.lazy(() => import('./pages/TablePage'));
 const TypographyPage = React.lazy(() => import('./pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('./pages/WidgetPage'));
-const AddEmployeePage = React.lazy(() => import('./pages/HR/AddEmployeePage'));
-const EmployeeListPage = React.lazy(() => import('./pages/HR/EmployeeListPage'));
-
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -37,15 +35,22 @@ class App extends React.Component {
       <BrowserRouter basename={getBasename()}>
         <GAListener>
           <Switch>
-            <PublicRoute
+            <LayoutRoute
               exact
               path="/login"
               layout={EmptyLayout}
               component={props => (
-                <LoginPage />
+                <AuthPage {...props} authState={STATE_LOGIN} />
               )}
             />
-
+            <LayoutRoute
+              exact
+              path="/signup"
+              layout={EmptyLayout}
+              component={props => (
+                <AuthPage {...props} authState={STATE_SIGNUP} />
+              )}
+            />
 
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
@@ -58,9 +63,6 @@ class App extends React.Component {
                 <Route exact path="/alerts" component={AlertPage} />
                 <Route exact path="/tables" component={TablePage} />
                 <Route exact path="/badges" component={BadgePage} />
-                <Route exact path="/add-employee" component={AddEmployeePage} />
-                <Route exact path="/view-all-employees" component={EmployeeListPage} />
-
                 <Route
                   exact
                   path="/button-groups"

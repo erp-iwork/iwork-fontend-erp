@@ -7,8 +7,7 @@ const SearchInput = () => {
     <Form inline className="cr-search-form" onSubmit={e => e.preventDefault()}>
       <MdSearch
         size="20"
-        className="cr-search-form__icon-search text-primary"
-        // color='primary'
+        className="cr-search-form__icon-search text-secondary"
       />
       <Input
         type="search"

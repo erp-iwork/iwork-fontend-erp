@@ -271,7 +271,6 @@ const FormPage = () => {
             </CardBody>
           </Card>
         </Col>
-        
       </Row>
 
       <Row>

@@ -59,8 +59,6 @@ class DashboardPage extends React.Component {
   render() {
     const primaryColor = getColor('primary');
     const secondaryColor = getColor('secondary');
-    const infoColor = getColor('info');
-
 
     return (
       <Page
@@ -74,7 +72,7 @@ class DashboardPage extends React.Component {
               title="Total Profit"
               subtitle="This month"
               number="9.8k"
-              color="primary"
+              color="secondary"
               progress={{
                 value: 75,
                 label: 'Last month',
@@ -87,7 +85,7 @@ class DashboardPage extends React.Component {
               title="Monthly Visitors"
               subtitle="This month"
               number="5,400"
-              color="primary"
+              color="secondary"
               progress={{
                 value: 45,
                 label: 'Last month',
@@ -100,7 +98,7 @@ class DashboardPage extends React.Component {
               title="New Users"
               subtitle="This month"
               number="3,400"
-              color="primary"
+              color="secondary"
               progress={{
                 value: 90,
                 label: 'Last month',
@@ -113,7 +111,7 @@ class DashboardPage extends React.Component {
               title="Bounce Rate"
               subtitle="This month"
               number="38%"
-              color="primary"
+              color="secondary"
               progress={{
                 value: 60,
                 label: 'Last month',
@@ -312,31 +310,7 @@ class DashboardPage extends React.Component {
         </Row>
 
         <Row>
-          <Col lg="6" md="12" sm="12" xs="12">
-            <InfiniteCalendar
-              selected={today}
-              minDate={lastWeek}
-              width="100%"
-              theme={{
-                accentColor: primaryColor,
-                floatingNav: {
-                  background: primaryColor,
-                  chevron: secondaryColor,
-                  color: '#FFF',
-                },
-                headerColor: primaryColor,
-                selectionColor: primaryColor,
-                textColor: {
-                  active: '#FFF',
-                  default: '#333',
-                },
-                todayColor: infoColor,
-                weekdayColor: primaryColor,
-              }}
-            />
-          </Col>
-
-          <Col lg="6" md="12" sm="12" xs="12">
+          <Col lg="4" md="12" sm="12" xs="12">
             <InfiniteCalendar
               selected={today}
               minDate={lastWeek}
@@ -360,6 +334,16 @@ class DashboardPage extends React.Component {
             />
           </Col>
 
+          {/* <Col lg="8" md="12" sm="12" xs="12">
+            <Card inverse className="bg-gradient-primary">
+              <CardHeader className="bg-gradient-primary">
+                Map with bubbles
+              </CardHeader>
+              <CardBody>
+                <MapWithBubbles />
+              </CardBody>
+            </Card>
+          </Col> */}
         </Row>
 
         <CardDeck style={{ marginBottom: '1rem' }}>
