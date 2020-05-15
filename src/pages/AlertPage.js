@@ -1,4 +1,3 @@
-
 import Page from '../components/Page';
 import Typography from '../components/Typography';
 import React from 'react';

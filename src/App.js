@@ -1,12 +1,14 @@
 import { STATE_LOGIN, STATE_SIGNUP } from './components/AuthForm';
 import GAListener from './components/GAListener';
-import { EmptyLayout, LayoutRoute, MainLayout } from './components/Layout';
+import { EmptyLayout, PublicRoute, MainLayout } from './components/Layout';
 import PageSpinner from './components/PageSpinner';
 import AuthPage from './pages/AuthPage';
+import LoginPage from './components/Login'
 import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
+import routes from './config/routes'
 
 const AlertPage = React.lazy(() => import('./pages/AlertPage'));
 const AuthModalPage = React.lazy(() => import('./pages/AuthModalPage'));
@@ -35,15 +37,15 @@ class App extends React.Component {
       <BrowserRouter basename={getBasename()}>
         <GAListener>
           <Switch>
-            <LayoutRoute
+            <PublicRoute
               exact
               path="/login"
               layout={EmptyLayout}
               component={props => (
-                <AuthPage {...props} authState={STATE_LOGIN} />
+                <LoginPage />
               )}
             />
-            <LayoutRoute
+            <PublicRoute
               exact
               path="/signup"
               layout={EmptyLayout}
