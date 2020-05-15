@@ -2,7 +2,6 @@ import logo200Image from '../../assets/img/logo/logo_200.png';
 import sidebarBgImage from '../../assets/img/sidebar/sidebar-4.jpg';
 import SourceLink from '../../components/SourceLink';
 import React from 'react';
-import { FaGithub } from 'react-icons/fa';
 import {
   MdAccountCircle,
   MdArrowDropDownCircle,
@@ -85,6 +84,8 @@ const navItems = [
   { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
   { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
   { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
+  { to: '/add-employee', name: 'Add Employee', exact: false, Icon: MdInsertChart },
+  { to: '/view-all-employees', name: 'All Employees', exact: false, Icon: MdWidgets },
 ];
 
 const bem = bn.create('sidebar');
@@ -121,7 +122,7 @@ class Sidebar extends React.Component {
                 alt=""
               />
               <span className="text-white">
-                Reduction <FaGithub />
+                ERP
               </span>
             </SourceLink>
           </Navbar>

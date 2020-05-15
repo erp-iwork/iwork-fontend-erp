@@ -8,6 +8,9 @@ import {
 import { TiSupport } from "react-icons/ti";
 import NotificationSystem from 'react-notification-system';
 import { NOTIFICATION_SYSTEM_STYLE } from '../../utils/constants';
+import { Redirect } from 'react-router-dom'
+import getToken from '../../auth/token'
+import routes from '../../config/routes'
 
 class MainLayout extends React.Component {
   static isSidebarOpen() {
@@ -21,9 +24,6 @@ class MainLayout extends React.Component {
       this.checkBreakpoint(breakpoint);
     }
   }
-
-
-  
 
   componentDidMount() {
     this.checkBreakpoint(this.props.breakpoint);
@@ -97,7 +97,7 @@ class MainLayout extends React.Component {
         <Sidebar />
         <Content fluid onClick={this.handleContentClick}>
           <Header />
-          {children}
+          {!getToken ? <Redirect to={routes.login} /> : children}
           <Footer />
         </Content>
 
