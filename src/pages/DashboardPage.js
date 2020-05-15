@@ -1,6 +1,5 @@
 import { AnnouncementCard, TodosCard } from '../components/Card';
 import HorizontalAvatarList from '../components/HorizontalAvatarList';
-import MapWithBubbles from '../components/MapWithBubbles';
 import Page from '../components/Page';
 import ProductMedia from '../components/ProductMedia';
 import SupportTicket from '../components/SupportTicket';
@@ -335,7 +334,7 @@ class DashboardPage extends React.Component {
             />
           </Col>
 
-          <Col lg="8" md="12" sm="12" xs="12">
+          {/* <Col lg="8" md="12" sm="12" xs="12">
             <Card inverse className="bg-gradient-primary">
               <CardHeader className="bg-gradient-primary">
                 Map with bubbles
@@ -344,7 +343,7 @@ class DashboardPage extends React.Component {
                 <MapWithBubbles />
               </CardBody>
             </Card>
-          </Col>
+          </Col> */}
         </Row>
 
         <CardDeck style={{ marginBottom: '1rem' }}>
