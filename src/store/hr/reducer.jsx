@@ -156,12 +156,8 @@ export default function hrReducer(state = initialState, action) {
       };
     }
 
-    case appConstants.DELETE_REQUEST: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
+   
+    
 
     case appConstants.DELETE_SUCCESS: {
       return {
