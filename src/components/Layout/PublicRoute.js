@@ -8,14 +8,6 @@ const PublicRoute = ({ component: Component, layout: Layout, ...rest }) => (
     {...rest}
     render={(props) => !getToken ? <Component {...props} /> : <Redirect to={{ pathname: routes.root }} />}
   />
-  // <Route
-  //   {...rest}
-  //   render={props => (
-  //     <Layout>
-  //       <Component {...props} />
-  //     </Layout>
-  //   )}
-  // />
 );
 
 export default PublicRoute;
