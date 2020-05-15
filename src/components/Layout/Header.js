@@ -29,7 +29,6 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import bn from '../../utils/bemnames';
-import routes from '../../config/routes'
 
 const bem = bn.create('header');
 
@@ -76,20 +75,14 @@ class Header extends React.Component {
     document.querySelector('.cr-sidebar').classList.toggle('cr-sidebar--open');
   };
 
-  logout = () => {
-    localStorage.clear()
-    window.location.href = routes.login
-  }
-
   render() {
     const { isNotificationConfirmed } = this.state;
 
     return (
       <Navbar light expand className={bem.b('bg-white')}>
-
-        <Nav navbar  className="mr-2">
-          <Button color="primary" outline onClick={this.handleSidebarControlButton}>
-            <MdClearAll  size={25} />
+        <Nav navbar className="mr-2">
+          <Button outline onClick={this.handleSidebarControlButton}>
+            <MdClearAll size={25} />
           </Button>
         </Nav>
         <Nav navbar>
@@ -102,13 +95,13 @@ class Header extends React.Component {
               {isNotificationConfirmed ? (
                 <MdNotificationsNone
                   size={25}
-                  className="text-primary can-click"
+                  className="text-secondary can-click"
                   onClick={this.toggleNotificationPopover}
                 />
               ) : (
                 <MdNotificationsActiveWithBadge
                   size={25}
-                  className="text-primary can-click animated swing infinite"
+                  className="text-secondary can-click animated swing infinite"
                   onClick={this.toggleNotificationPopover}
                 />
               )}
@@ -163,7 +156,7 @@ class Header extends React.Component {
                     <ListGroupItem tag="button" action className="border-light">
                       <MdHelp /> Help
                     </ListGroupItem>
-                    <ListGroupItem tag="button" action className="border-light" onClick={this.logout}>
+                    <ListGroupItem tag="button" action className="border-light">
                       <MdExitToApp /> Signout
                     </ListGroupItem>
                   </ListGroup>
