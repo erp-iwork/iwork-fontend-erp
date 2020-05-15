@@ -26,6 +26,9 @@ const ProgressPage = React.lazy(() => import('./pages/ProgressPage'));
 const TablePage = React.lazy(() => import('./pages/TablePage'));
 const TypographyPage = React.lazy(() => import('./pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('./pages/WidgetPage'));
+const AddEmployeePage = React.lazy(() => import('./pages/HR/AddEmployeePage'));
+const EmployeeListPage = React.lazy(() => import('./pages/HR/EmployeeListPage'));
+
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -65,6 +68,9 @@ class App extends React.Component {
                 <Route exact path="/alerts" component={AlertPage} />
                 <Route exact path="/tables" component={TablePage} />
                 <Route exact path="/badges" component={BadgePage} />
+                <Route exact path="/add-employee" component={AddEmployeePage} />
+                <Route exact path="/view-all-employees" component={EmployeeListPage} />
+
                 <Route
                   exact
                   path="/button-groups"
