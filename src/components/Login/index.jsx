@@ -35,48 +35,48 @@ class LoginForm extends React.Component {
         return (
             <Container className="container">
                 <Form onSubmit={this.handleSubmit} className="form">
-                <div className="text-center pb-4">
-                    <img
-                        src={logo200Image}
-                        className="rounded"
-                        style={{ width: 60, height: 60, cursor: 'pointer' }}
-                        alt="logo"
+                    <div className="text-center pb-4">
+                        <img
+                            src={logo200Image}
+                            className="rounded"
+                            style={{ width: 60, height: 60, cursor: 'pointer' }}
+                            alt="logo"
+                        />
+                    </div>
+                    <FormGroup>
+                        <Label for='username'>Username</Label>
+                        <Input type='text' id="username" name='username' onChange={this.handleChange} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for='password'>Password</Label>
+                        <Input type='password' name="password" onChange={this.handleChange} />
+                    </FormGroup>
+                    <Error
+                        error={
+                            this.props.errors.password
+                                ? this.props.errors.password
+                                : null
+                        }
                     />
-                </div>
-                <FormGroup>
-                    <Label for='username'>Username</Label>
-                    <Input type='text' id="username" name='username' onChange={this.handleChange}/>
-                </FormGroup>
-                <FormGroup>
-                    <Label for='password'>Password</Label>
-                    <Input type='password' name="password" onChange={this.handleChange} />
-                </FormGroup>
-                <Error
-                  error={
-                    this.props.errors.password
-                      ? this.props.errors.password
-                      : null
-                  }
-                />
-                <Error
-                  error={
-                    this.props.errors.Unauthorized
-                      ? this.props.errors.Unauthorized
-                      : null
-                  }
-                />
-                <hr />
-                {this.props.loading? (
-                    <Button size="lg" className="bg-gradient-theme-left border-0" block>
-                        <SpinnerLoader />
-                    </Button>
-                ) : (
-                    <Button size="lg" className="bg-gradient-theme-left border-0" block onClick={this.handleSubmit}>
-                        Login
-                    </Button>
-                )   
-                }
-            </Form>
+                    <Error
+                        error={
+                            this.props.errors.Unauthorized
+                                ? this.props.errors.Unauthorized
+                                : null
+                        }
+                    />
+                    <hr />
+                    {this.props.loading ? (
+                        <Button size="lg" className="bg-gradient-theme-left border-0" block>
+                            <SpinnerLoader />
+                        </Button>
+                    ) : (
+                            <Button size="lg" className="bg-gradient-theme-left border-0" block onClick={this.handleSubmit}>
+                                Login
+                            </Button>
+                        )
+                    }
+                </Form>
             </Container>
         );
     }
@@ -84,10 +84,10 @@ class LoginForm extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-      loading: state.loginReducer.loading,
-      users: state.loginReducer.users,
-      errors: state.loginReducer.errors,
-      isLogin: state.loginReducer.isLogin,
+        loading: state.loginReducer.loading,
+        users: state.loginReducer.users,
+        errors: state.loginReducer.errors,
+        isLogin: state.loginReducer.isLogin,
     };
 }
 
