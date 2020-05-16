@@ -9,6 +9,8 @@ import { connect } from "react-redux"
 import actions from '../../store/hr/action'
 import { countries, regions, termsOfEmployment, city } from './data'
 import Spinner from '../../components/loader'
+import { Redirect } from 'react-router-dom'
+import routes from '../../config/routes'
 
 class AddEmployee extends Component {
     constructor(props) {
@@ -35,12 +37,11 @@ class AddEmployee extends Component {
     async componentWillMount() {
         await this.props.getDepartment()
     }
-
     
     submit = async () => {
         this.setState({ complete: false })
         await this.props.addNewEmployee(this.state)
-        this.setState({ complete: true })
+        return <Redirect to={routes.allEmployees} />
     }
 
     departmentDropDown(e) {

@@ -3,11 +3,16 @@ import Page from '../../components/Page';
 import { Col, Row, Card, CardImg, CardBody, CardText, Button, CardTitle } from 'reactstrap';
 import './HR.scss'
 import bg11Image from '../../assets/img/bg/background_1920-11.jpg';
-
+import { connect } from "react-redux"
+import actions from '../../store/hr/action'
 
 class EmployeeProfilePage extends Component {
-    state = {}
+    componentDidMount = () => {
+        const employeId = this.props.location.state;
+        this.props.getEmployeDetail(employeId)
+    }
     render() {
+        const employeeInfos = this.props.employee
         return (
             <Page
                 title="Employee Profile"
@@ -38,42 +43,12 @@ class EmployeeProfilePage extends Component {
                             <Row>
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
-                                        First-Name : <b>Yohannes</b>
-                                    </CardBody>
-                                </Col>
-
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Last-Name : <b>Berhanu</b>
-                                    </CardBody>
-                                </Col>
-
-                            </Row>
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Email : <b>JohnLights51@gmail.com</b>
+                                        First-Name : <b>{employeeInfos.firstName}</b>
                                     </CardBody>
                                 </Col>
                                 <Col sm={12} md={6}>
-
                                     <CardBody className='titleValue'>
-                                        Phone-Number  :  <b>+251-921-25-8848</b>
-                                    </CardBody>
-
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        BirthDate : <b>Something</b>
-                                    </CardBody>
-                                </Col>
-
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Gender : <b>Berhanu</b>
+                                        Last-Name : <b>{employeeInfos.lastName}</b>
                                     </CardBody>
                                 </Col>
 
@@ -81,13 +56,41 @@ class EmployeeProfilePage extends Component {
                             <Row>
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
-                                        Department : <b>JohnLights51@gmail.com</b>
+                                        Email : <b>{employeeInfos.lastName}</b>
                                     </CardBody>
                                 </Col>
                                 <Col sm={12} md={6}>
 
                                     <CardBody className='titleValue'>
-                                        Role  :  <b>+251-921-25-8848</b>
+                                        Phone-Number  :  <b>{employeeInfos.telephone}</b>
+                                    </CardBody>
+
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={6}>
+                                    <CardBody className='titleValue'>
+                                        BirthDate : <b>{employeeInfos.birthDate}</b>
+                                    </CardBody>
+                                </Col>
+
+                                <Col sm={12} md={6}>
+                                    <CardBody className='titleValue'>
+                                        Gender : <b>M</b>
+                                    </CardBody>
+                                </Col>
+
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={6}>
+                                    <CardBody className='titleValue'>
+                                        Department : <b>{employeeInfos.department}</b>
+                                    </CardBody>
+                                </Col>
+                                <Col sm={12} md={6}>
+
+                                    <CardBody className='titleValue'>
+                                        Role  :  <b>{employeeInfos.role}</b>
                                     </CardBody>
 
                                 </Col>
@@ -97,13 +100,13 @@ class EmployeeProfilePage extends Component {
                             <Row>
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
-                                        Level : <b>Something</b>
+                                        Level : <b>{employeeInfos.level}</b>
                                     </CardBody>
                                 </Col>
 
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
-                                        Hired-Date : <b>Berhanu</b>
+                                        Hired-Date : <b>{employeeInfos.hiredDate}</b>
                                     </CardBody>
                                 </Col>
 
@@ -111,28 +114,13 @@ class EmployeeProfilePage extends Component {
                             <Row>
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
-                                        Employment-Type : <b>Contractual</b>
+                                        Employment-Type : <b>{employeeInfos.termOfEmployment}</b>
                                     </CardBody>
                                 </Col>
                                 <Col sm={12} md={6}>
 
                                     <CardBody className='titleValue'>
-                                        Country  :  <b>+251-921-25-8848</b>
-                                    </CardBody>
-
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Region : <b>JohnLights51@gmail.com</b>
-                                    </CardBody>
-                                </Col>
-                                <Col sm={12} md={6}>
-
-                                    <CardBody className='titleValue'>
-                                        City  :  <b>+251-921-25-8848</b>
+                                        Country  :  <b>{employeeInfos.country}</b>
                                     </CardBody>
 
                                 </Col>
@@ -141,14 +129,25 @@ class EmployeeProfilePage extends Component {
                             <Row>
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
-                                        Has-Account : <b>JohnLights51@gmail.com</b>
+                                        Region : <b>{employeeInfos.region}</b>
                                     </CardBody>
                                 </Col>
+                                <Col sm={12} md={6}>
 
+                                    <CardBody className='titleValue'>
+                                        City  :  <b>{employeeInfos.city}</b>
+                                    </CardBody>
+
+                                </Col>
                             </Row>
 
-
-
+                            <Row>
+                                <Col sm={12} md={6}>
+                                    <CardBody className='titleValue'>
+                                        Has-Account : <b>{employeeInfos.has_account}</b>
+                                    </CardBody>
+                                </Col>
+                            </Row>
                         </Card>
                     </Col>
                 </Row>
@@ -157,4 +156,16 @@ class EmployeeProfilePage extends Component {
     }
 }
 
-export default EmployeeProfilePage;
+const mapStateToProps = (state) => {
+    return {
+      loading: state.hrReducer.loading,
+      users: state.hrReducer.users,
+      employee: state.hrReducer.employee,
+      errors: state.hrReducer.errors,
+    }
+}
+const mapDispatchToProps = {
+    getEmployeDetail: actions.getEmployeDetail
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeProfilePage)
