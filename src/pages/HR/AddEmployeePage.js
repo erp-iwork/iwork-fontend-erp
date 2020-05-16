@@ -7,14 +7,11 @@ import {
     CardHeader,
     Col,
     Form,
-    FormFeedback,
     FormGroup,
-    FormText,
     Input,
     Label,
     Row,
 } from 'reactstrap';
-import AllEmployeesPage from "./AllEmployeesPage";
 
 class AddEmployee extends Component {
     state = {}
@@ -27,13 +24,13 @@ class AddEmployee extends Component {
                     breadcrumbs={[{ name: 'Add Employee', active: true }]}
                     className="FormPage"
                 >
-                    <Col xl={8} lg={12} md={12}>
+                    <Col lg={12} md={24}>
                         <Card>
                             <CardHeader>Form Grid</CardHeader>
                             <CardBody>
                                 <Form>
                                     <Row>
-                                        <Col xl={6}>
+                                        <Col md={6}>
                                             <FormGroup >
                                                 <Label for="exampleEmail" sm={5}>
                                                     First Name
@@ -47,7 +44,7 @@ class AddEmployee extends Component {
                                                 </Col>
                                             </FormGroup>
                                         </Col>
-                                        <Col xl={6}>
+                                        <Col md={6}>
                                             <FormGroup>
                                                 <Label for="examplePassword" sm={5}>
                                                     Last Name
@@ -63,7 +60,7 @@ class AddEmployee extends Component {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col xl={6}>
+                                        <Col md={6}>
                                             <FormGroup >
                                                 <Label for="exampleEmail" sm={5}>
                                                     Email
@@ -77,7 +74,7 @@ class AddEmployee extends Component {
                                                 </Col>
                                             </FormGroup>
                                         </Col>
-                                        <Col xl={6}>
+                                        <Col md={6}>
                                             <FormGroup>
                                                 <Label for="examplePassword" sm={5}>
                                                     Phone Number
@@ -93,7 +90,7 @@ class AddEmployee extends Component {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col xl={6}>
+                                        <Col md={6}>
                                             <FormGroup >
                                                 <Label for="exampleEmail" sm={5}>
                                                     Birthdate
@@ -108,7 +105,7 @@ class AddEmployee extends Component {
                                                 </Col>
                                             </FormGroup>
                                         </Col>
-                                        <Col xl={6}>
+                                        <Col md={6}>
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>
                                                     Gender
@@ -126,7 +123,7 @@ class AddEmployee extends Component {
 
                                     <Row>
 
-                                        <Col xl={4}>
+                                        <Col md={4}>
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>
                                                     Department
@@ -144,7 +141,7 @@ class AddEmployee extends Component {
                                                 </Col>
                                             </FormGroup>
                                         </Col>
-                                        <Col xl={4}>
+                                        <Col md={4}>
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>
                                                     Role
@@ -162,7 +159,7 @@ class AddEmployee extends Component {
                                                 </Col>
                                             </FormGroup>
                                         </Col>
-                                        <Col xl={4}>
+                                        <Col md={4}>
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>
                                                     Level
@@ -183,7 +180,7 @@ class AddEmployee extends Component {
                                     </Row>
 
                                     <Row>
-                                        <Col xl={6}>
+                                        <Col md={6}>
                                             <FormGroup >
                                                 <Label for="exampleEmail" sm={5}>
                                                     Hired Date
@@ -198,7 +195,7 @@ class AddEmployee extends Component {
                                                 </Col>
                                             </FormGroup>
                                         </Col>
-                                        <Col xl={6}>
+                                        <Col md={6}>
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>
                                                     Term Of Employment
@@ -219,7 +216,7 @@ class AddEmployee extends Component {
 
                                     <Row>
 
-                                        <Col xl={4}>
+                                        <Col md={4}>
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>
                                                     Country
@@ -237,7 +234,7 @@ class AddEmployee extends Component {
                                                 </Col>
                                             </FormGroup>
                                         </Col>
-                                        <Col xl={4}>
+                                        <Col md={4}>
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>
                                                     Region
@@ -255,7 +252,7 @@ class AddEmployee extends Component {
                                                 </Col>
                                             </FormGroup>
                                         </Col>
-                                        <Col xl={4}>
+                                        <Col md={4}>
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>
                                                     City

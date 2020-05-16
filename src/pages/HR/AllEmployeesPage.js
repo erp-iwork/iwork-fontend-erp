@@ -32,11 +32,6 @@ class AllEmployees extends Component {
                                             <th>Term Of Employment</th>
                                             <th>Account</th>
                                             <th>Action</th>
-
-
-
-
-
                                         </tr>
                                     </thead>
                                     <tbody>
