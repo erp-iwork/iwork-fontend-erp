@@ -4,9 +4,9 @@ import Page from '../../components/Page';
 import { MdCheckCircle } from "react-icons/md";
 import Swal from "sweetalert2"
 import { connect } from "react-redux"
-import actions from '../../store/hr/action'
 import { Link } from 'react-router-dom'
-
+import actions from '../../store/hr/action'
+import routes from '../../config/routes'
 
 class AllEmployees extends Component {
     constructor(props) {
@@ -75,7 +75,10 @@ class AllEmployees extends Component {
                                                     </Button>
                                                 </td>
                                                 <td>
-                                                    <Link>
+                                                    <Link to={{
+                                                        pathname: routes.employeeProfile,
+                                                        state: employeeInfos.employeId
+                                                    }}>
                                                         <Button color='primary'>
                                                             See Profile
                                                         </Button>

@@ -32,10 +32,6 @@ const AddEmployeePage = React.lazy(() => import('./pages/HR/AddEmployeePage'));
 const EmployeeProfilePage = React.lazy(() => import('./pages/HR/EmployeeProfilePage'));
 const ITAllEmployeesPage = React.lazy(() => import('./pages/IT/ViewAllEmployeePage'));
 
-
-
-
-
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
 };
@@ -67,7 +63,7 @@ class App extends React.Component {
                 <Route exact path="/badges" component={BadgePage} />
                 <Route exact path={routes.allEmployees} component={AllEmployeePage} />
                 <Route exact path={routes.addEmployee} component={AddEmployeePage} />
-                <Route exact path={routes.emploeeProfile} component={EmployeeProfilePage} />
+                <Route exact path={routes.employeeProfile} component={EmployeeProfilePage} />
                 <Route exact path={routes.itEmployeePage} component={ITAllEmployeesPage} />
 
                 <Route
