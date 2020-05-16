@@ -28,6 +28,8 @@ const WidgetPage = React.lazy(() => import('./pages/WidgetPage'));
 const AllEmployeePage = React.lazy(() => import('./pages/HR/AllEmployeesPage'));
 const AddEmployeePage = React.lazy(() => import('./pages/HR/AddEmployeePage'));
 const EmployeeProfilePage = React.lazy(() => import('./pages/HR/EmployeeProfilePage'));
+const ITAllEmployeesPage = React.lazy(() => import('./pages/IT/ViewAllEmployeePage'));
+
 
 
 
@@ -73,8 +75,7 @@ class App extends React.Component {
                 <Route exact path="/AllEmployees" component={AllEmployeePage} />
                 <Route exact path="/AddEmployee" component={AddEmployeePage} />
                 <Route exact path="/EmployeeProfile" component={EmployeeProfilePage} />
-
-
+                <Route exact path="/ITAllEmployeesPage" component={ITAllEmployeesPage} />
 
                 <Route
                   exact

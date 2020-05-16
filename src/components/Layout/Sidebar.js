@@ -87,10 +87,12 @@ const navItems = [
   { to: '/AllEmployees', name: 'All Employees', exact: false, Icon: MdWidgets },
   { to: '/AddEmployee', name: 'Add Employee', exact: false, Icon: MdWidgets },
   { to: '/EmployeeProfile', name: 'Profile', exact: false, Icon: MdWidgets },
+  { to: '/ITAllEmployeesPage', name: '(IT) All Employees', exact: false, Icon: MdWidgets },
 
 
 
-  
+
+
 ];
 
 const bem = bn.create('sidebar');
