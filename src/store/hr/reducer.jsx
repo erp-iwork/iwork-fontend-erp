@@ -1,4 +1,5 @@
 import { appConstants, itConstants } from "../../constant/constants";
+import { act } from "react-dom/test-utils";
 const initialState = {
   users: [],
   loading: false,

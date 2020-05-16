@@ -7,7 +7,9 @@ import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
+import routes from './config/routes'
 import LoginPage from './pages/Login'
+
 
 const AlertPage = React.lazy(() => import('./pages/AlertPage'));
 const AuthModalPage = React.lazy(() => import('./pages/AuthModalPage'));
@@ -27,6 +29,7 @@ const TypographyPage = React.lazy(() => import('./pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('./pages/WidgetPage'));
 const AllEmployeePage = React.lazy(() => import('./pages/HR/AllEmployeesPage'));
 const AddEmployeePage = React.lazy(() => import('./pages/HR/AddEmployeePage'));
+const EmployeeProfile =  React.lazy(() => import('./pages/HR/EmployeeProfilePage'))
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -40,21 +43,12 @@ class App extends React.Component {
           <Switch>
             <PublicRoute
               exact
-              path="/login"
+              path={routes.login}
               layout={EmptyLayout}
               component={props => (
                 <LoginPage />
               )}
             />
-            <PublicRoute
-              exact
-              path="/signup"
-              layout={EmptyLayout}
-              component={props => (
-                <AuthPage {...props} authState={STATE_SIGNUP} />
-              )}
-            />
-
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" component={DashboardPage} />
@@ -66,9 +60,9 @@ class App extends React.Component {
                 <Route exact path="/alerts" component={AlertPage} />
                 <Route exact path="/tables" component={TablePage} />
                 <Route exact path="/badges" component={BadgePage} />
-                <Route exact path="/AllEmployees" component={AllEmployeePage} />
-                <Route exact path="/AddEmployee" component={AddEmployeePage} />
-
+                <Route exact path={routes.allEmployees} component={AllEmployeePage} />
+                <Route exact path={routes.addEmployee} component={AddEmployeePage} />
+                <Route exact path={routes.emploeeProfile} component={EmployeeProfile} />
                 
                 <Route
                   exact

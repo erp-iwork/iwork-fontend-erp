@@ -1,13 +1,40 @@
 import React, { Component } from 'react';
-
 import { Card, CardBody, CardHeader, Col, Row, Table, Button } from 'reactstrap';
 import Page from '../../components/Page';
-
 import { MdCheckCircle } from "react-icons/md";
+import Swal from "sweetalert2"
+import { connect } from "react-redux"
+import actions from '../../store/hr/action'
 
 
 class AllEmployees extends Component {
-    state = {}
+    constructor(props) {
+        super(props)
+        this.state = {
+            employeeInfo: []
+        }
+    }
+
+    componentDidMount() {
+        this.props.getEmploye()
+    }
+
+    deleteFun(employeId) {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.value) {
+            this.props.deleteEmploye(employeId);
+          }
+        });
+    }
+
     render() {
         return (
             <Page
@@ -15,7 +42,6 @@ class AllEmployees extends Component {
                 breadcrumbs={[{ name: 'All Employees', active: true }]}
                 className="TablePage"
             >
-
                 <Row>
                     <Col>
                         <Card className="mb-3">
@@ -30,48 +56,30 @@ class AllEmployees extends Component {
                                             <th>Hired Date</th>
                                             <th>Phone Number</th>
                                             <th>Term Of Employment</th>
-                                            <th>Account</th>
-                                            <th>Action</th>
+                                            <th colSpan={2} align="center">Account</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Johnlights51@gmail.com</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td>
-                                                <Button color='success' disabled>
-                                                    <MdCheckCircle />
-
-                                                </Button>
-                                            </td>
-                                            <td>
-                                                <Button color='primary'>
-                                                    See Profile
-                                                </Button>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Otto</td>
-                                            <td>Johnlights51@gmail.com</td>
-
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td>@mdo</td>
-                                            <td>
-                                                <Button color='primary'>
-                                                    See Profile
-                                                </Button>
-                                            </td>
-
-                                        </tr>
-
+                                        {this.props.employees.map((employeeInfos, index) => (
+                                            <tr key={index}>
+                                                <th scope="row">{index + 1}</th>
+                                                <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
+                                                <td>{employeeInfos.email}</td>
+                                                <td>{employeeInfos.hiredDate}</td>
+                                                <td>{employeeInfos.telephone}</td>
+                                                <td>{employeeInfos.termOfEmployment}</td>
+                                                <td>
+                                                    <Button color='success'>
+                                                        <MdCheckCircle />
+                                                    </Button>
+                                                </td>
+                                                <td>
+                                                    <Button color='primary'>
+                                                        See Profile
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </Table>
                             </CardBody>
@@ -85,4 +93,18 @@ class AllEmployees extends Component {
     }
 }
 
-export default AllEmployees;
+const mapStateToProps = (state) => {
+    return {
+      loading: state.hrReducer.loading,
+      users: state.hrReducer.users,
+      employees: state.hrReducer.employees,
+      errors: state.hrReducer.errors
+    }
+}
+
+const mapDispatchToProps = {
+    getEmploye: actions.getEmploye,
+    deleteEmploye: actions.deleteEmploye
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllEmployees)

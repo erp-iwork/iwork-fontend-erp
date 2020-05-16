@@ -46,6 +46,13 @@ class LoginForm extends React.Component {
                 <FormGroup>
                     <Label for='username'>Username</Label>
                     <Input type='text' id="username" name='username' onChange={this.handleChange}/>
+                    <Error
+                        error={
+                            this.props.errors.username
+                            ? this.props.errors.username
+                            : null
+                        }
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label for='password'>Password</Label>

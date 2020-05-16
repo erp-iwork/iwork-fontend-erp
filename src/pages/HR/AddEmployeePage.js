@@ -1,24 +1,106 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
 import {
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Col,
-    Form,
-    FormGroup,
-    Input,
-    Label,
-    Row,
+    Button, Card, CardBody, CardHeader, Col, Form,
+    FormGroup, Input, Label, Row
 } from 'reactstrap';
+import Error from '../../components/error'
+import { connect } from "react-redux"
+import actions from '../../store/hr/action'
+import { countries, regions, termsOfEmployment, city } from './data'
+import Spinner from '../../components/loader'
 
 class AddEmployee extends Component {
-    state = {}
+    constructor(props) {
+        super(props)
+        this.state = {
+            firstName: "", lastName: "", email: "", telephone: "",
+            termOfEmployment: "", country: "", city: "", region: "",
+            birthDate: "", hiredDate: "", depValue: "", rolValue: "",
+            levValue: "",
+            deps: [],
+            rol: [],
+            lev: [],
+            username: "",
+            password: "",
+            complete: true
+        }
+        this.submit = this.submit.bind(this);
+        this.departmentDropDown = this.departmentDropDown.bind(this);
+        this.levelDropDown = this.levelDropDown.bind(this);
+        this.roleDropDown = this.roleDropDown.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    async componentWillMount() {
+        await this.props.getDepartment()
+    }
+
+    
+    submit = async () => {
+        this.setState({ complete: false })
+        await this.props.addNewEmployee(this.state)
+        this.setState({ complete: true })
+    }
+
+    departmentDropDown(e) {
+        this.setState({
+          depValue: e.target.value,
+        });
+        this.props.department.map((value, index) => {
+          if (
+            value.departmentId == e.target.value &&
+            value.department_roles != null
+          ) {
+            this.setState({
+              rol: value.department_roles,
+            });
+          }
+        });
+    }
+
+    roleDropDown(e) {
+        this.setState({
+          rolValue: e.target.value,
+        });
+        this.state.rol.map((value) => {
+          if (value.roleId == e.target.value && value.role_levels != null) {
+            console.log(value.role_levels);
+            this.setState({
+              lev: value.role_levels,
+            });
+          }
+        })
+    }
+    
+    levelDropDown(e) {
+        this.setState({
+          levValue: e.target.value,
+        });
+    }
+    
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+    }
+
     render() {
+        const { error, newEmployeeInfo, deps, rol, lev, empId } = this.state;
+        const { classes } = this.props;
+        var depValue = this.state.depValue;
+        var rolValue = this.state.rolValue;
+        var levValue = this.state.levValue;
+        var regionValue = this.state.regionValue;
+        var cityValue = this.state.cityValue;
+        var countryValue = this.state.countryValue;
+        var termofEmploymentValue = this.state.termofEmploymentValue;
+        var telephoneValue = this.state.telephoneValue;
+        var emailValue = this.state.emailValue;
+        var lastValue = this.state.lastValue;
+        var firstValue = this.state.firstValue;
         return (
             <>
-
                 <Page
                     title="Add Employee"
                     breadcrumbs={[{ name: 'Add Employee', active: true }]}
@@ -37,9 +119,16 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input
-                                                        // type="email"
-                                                        name="First Name"
+                                                        name="firstName"
                                                         placeholder="with a placeholder"
+                                                        onChange={this.handleChange}
+                                                    />
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.firstName
+                                                            ? this.props.errors.firstName
+                                                            : null
+                                                        }
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -51,9 +140,16 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input
-                                                        // type="password"
-                                                        name="Last Name"
+                                                        name="lastName"
                                                         placeholder="password placeholder"
+                                                        onChange={this.handleChange}
+                                                    />
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.lastName
+                                                            ? this.props.errors.lastName
+                                                            : null
+                                                        }
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -67,9 +163,14 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input
-                                                        // type="email"
-                                                        name="First Name"
+                                                        name="email"
                                                         placeholder="with a placeholder"
+                                                        onChange={this.handleChange}
+                                                    />
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.email ? this.props.errors.email : null
+                                                        }
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -81,9 +182,16 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input
-                                                        // type="password"
-                                                        name="Last Name"
+                                                        name="telephone"
                                                         placeholder="password placeholder"
+                                                        onChange={this.handleChange}
+                                                    />
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.telephone
+                                                            ? this.props.errors.telephone
+                                                            : null
+                                                        }
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -97,10 +205,17 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input
-                                                        disabled
-                                                        // type="email"
-                                                        name="First Name"
-                                                        placeholder="BirthDate"
+                                                        type="date"
+                                                        name="birthDate"
+                                                        placeholder="Birth Date"
+                                                        onChange={this.handleChange}
+                                                    />
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.birthDate
+                                                            ? this.props.errors.birthDate
+                                                            : null
+                                                        }
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -111,33 +226,37 @@ class AddEmployee extends Component {
                                                     Gender
                                             </Label>
                                                 <Col sm={12}>
-                                                    <Input type="select" name="select">
+                                                    <Input type="select" name="gender" onChange={this.handleChange}>
+                                                        <option aria-label="None" value="" />
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </Input>
-
                                                 </Col>
                                             </FormGroup>
                                         </Col>
                                     </Row>
-
                                     <Row>
-
                                         <Col md={4}>
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>
                                                     Department
                                             </Label>
                                                 <Col sm={12}>
-
-                                                    <Input type="select" name="select">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>5</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
+                                                    <Input type="select" onChange={this.departmentDropDown} value={depValue}>
+                                                        <option aria-label="None" value="" />
+                                                        {this.props.department.map((dep, index) => (
+                                                            <option value={dep.departmentId} key={index}>
+                                                                {dep.departmentName}
+                                                            </option>
+                                                        ))}
                                                     </Input>
-
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.department
+                                                            ? this.props.errors.department
+                                                            : null
+                                                        }
+                                                    />
                                                 </Col>
                                             </FormGroup>
                                         </Col>
@@ -147,15 +266,19 @@ class AddEmployee extends Component {
                                                     Role
                                             </Label>
                                                 <Col sm={12}>
-
-                                                    <Input type="select" name="select">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>5</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
+                                                    <Input type="select" onChange={this.roleDropDown} value={rolValue}>
+                                                        <option aria-label="None" value="" />
+                                                        {this.state.rol.map((rols) => (
+                                                            <option value={rols.roleId} key={rols.roleId}>
+                                                                {rols.role}
+                                                            </option>
+                                                        ))}
                                                     </Input>
-
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.roles ? this.props.errors.roles : null
+                                                        }
+                                                    />
                                                 </Col>
                                             </FormGroup>
                                         </Col>
@@ -165,15 +288,19 @@ class AddEmployee extends Component {
                                                     Level
                                             </Label>
                                                 <Col sm={12}>
-
-                                                    <Input type="select" name="select">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>5</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
+                                                    <Input type="select" onChange={this.levelDropDown}>
+                                                    <option aria-label="None" value="" />
+                                                    {this.state.lev.map((levs) => (
+                                                        <option value={levs.levelId} key={levs.levelId}>
+                                                            {levs.level}
+                                                        </option>
+                                                    ))}
                                                     </Input>
-
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.level ? this.props.errors.level : null
+                                                        }
+                                                    />
                                                 </Col>
                                             </FormGroup>
                                         </Col>
@@ -187,10 +314,16 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input
-                                                        disabled
-                                                        // type="email"
-                                                        name="First Name"
-                                                        placeholder="BirthDate"
+                                                        name="hiredDate"
+                                                        type="date"
+                                                        onChange={this.handleChange}
+                                                    />
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.hiredDate
+                                                            ? this.props.errors.hiredDate
+                                                            : null
+                                                        }
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -201,72 +334,83 @@ class AddEmployee extends Component {
                                                     Term Of Employment
                                             </Label>
                                                 <Col sm={12}>
-                                                    <Input type="select" name="select">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>5</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
+                                                    <Input type="select" name="termOfEmployment" onChange={this.handleChange}>
+                                                        <option aria-label="None" value="" />
+                                                        {termsOfEmployment.map((item, index) => (
+                                                            <option key={index} value={item}>{item}</option>
+                                                        ))}
                                                     </Input>
-
+                                                    <Error
+                                                        error={
+                                                        this.props.errors.termOfEmployment
+                                                            ? this.props.errors.termOfEmployment
+                                                            : null
+                                                        }
+                                                    />
                                                 </Col>
                                             </FormGroup>
                                         </Col>
                                     </Row>
-
                                     <Row>
-
                                         <Col md={4}>
                                             <FormGroup>
-                                                <Label for="exampleSelect" sm={5}>
-                                                    Country
-        </Label>
+                                                <Label for="exampleSelect" sm={5}>Country</Label>
                                                 <Col sm={12}>
-
-                                                    <Input type="select" name="select">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>5</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
+                                                    <Input type="select" name="country" onChange={this.handleChange}>
+                                                        <option aria-label="None" value="" />
+                                                        {countries.map((item, index) => (
+                                                            <option key={item} value={item}>{item}</option>
+                                                        ))}
                                                     </Input>
-
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.country
+                                                            ? this.props.errors.country
+                                                            : null
+                                                        }
+                                                    />
                                                 </Col>
                                             </FormGroup>
                                         </Col>
                                         <Col md={4}>
                                             <FormGroup>
-                                                <Label for="exampleSelect" sm={5}>
-                                                    Region
-        </Label>
+                                                <Label for="exampleSelect" sm={5}>Region</Label>
                                                 <Col sm={12}>
-
-                                                    <Input type="select" name="select">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>5</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
+                                                    <Input type="select" name="region" onChange={this.handleChange}>
+                                                        <option aria-label="None" value="" />
+                                                        {this.state.country?
+                                                            regions[this.state.country].map((item, index) => (
+                                                                <option key={item} value={item}>{item}</option>
+                                                            )) : ""
+                                                        }
                                                     </Input>
-
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.region
+                                                            ? this.props.errors.region
+                                                            : null
+                                                        }
+                                                    />
                                                 </Col>
                                             </FormGroup>
                                         </Col>
                                         <Col md={4}>
                                             <FormGroup>
-                                                <Label for="exampleSelect" sm={5}>
-                                                    City
-        </Label>
+                                                <Label for="exampleSelect" sm={5}>City</Label>
                                                 <Col sm={12}>
-
-                                                    <Input type="select" name="select">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>5</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
+                                                    <Input type="select" name="city" onChange={this.handleChange}>
+                                                        <option aria-label="None" value="" />
+                                                        {this.state.country? 
+                                                            city[this.state.country].map((item, index) => (
+                                                                <option key={item} value={item}>{item}</option>
+                                                            )) : ""
+                                                        }
                                                     </Input>
-
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.city ? this.props.errors.city : null
+                                                        }
+                                                    />
                                                 </Col>
                                             </FormGroup>
                                         </Col>
@@ -274,7 +418,9 @@ class AddEmployee extends Component {
 
                                     <FormGroup row align='center'>
                                         <Col>
-                                            <Button>Submit</Button>
+                                            <Button onClick={this.submit}>
+                                                {this.state.complete? "Register" : <Spinner />}
+                                            </Button>
                                         </Col>
                                     </FormGroup>
                                 </Form>
@@ -291,4 +437,22 @@ class AddEmployee extends Component {
     }
 }
 
-export default AddEmployee;
+const mapStateToProps = (state) => {
+    return {
+      loading: state.hrReducer.loading,
+      users: state.hrReducer.users,
+      errors: state.hrReducer.errors,
+      success: state.hrReducer.success,
+      department: state.hrReducer.department,
+    };
+}
+
+const mapDispatchToProps = {
+    addNewEmployee: actions.addNewEmployee,
+    getDepartment: actions.getDepartment
+}
+  
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AddEmployee)
