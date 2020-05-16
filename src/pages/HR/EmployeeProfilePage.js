@@ -5,6 +5,7 @@ import './HR.scss'
 import bg11Image from '../../assets/img/bg/background_1920-11.jpg';
 import { connect } from "react-redux"
 import actions from '../../store/hr/action'
+import PageSpinner from '../../components/PageSpinner'
 
 class EmployeeProfilePage extends Component {
     componentDidMount = () => {
@@ -13,6 +14,7 @@ class EmployeeProfilePage extends Component {
     }
     render() {
         const employeeInfos = this.props.employee
+        if (!employeeInfos.firstName) return <PageSpinner />
         return (
             <Page
                 title="Employee Profile"
@@ -90,7 +92,7 @@ class EmployeeProfilePage extends Component {
                                 <Col sm={12} md={6}>
 
                                     <CardBody className='titleValue'>
-                                        Role  :  <b>{employeeInfos.role}</b>
+                                        Role  :  <b>{employeeInfos.roles}</b>
                                     </CardBody>
 
                                 </Col>
@@ -144,7 +146,7 @@ class EmployeeProfilePage extends Component {
                             <Row>
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
-                                        Has-Account : <b>{employeeInfos.has_account}</b>
+                                        Has-Account : <b>{employeeInfos.has_account ? "True" : "False"}</b>
                                     </CardBody>
                                 </Col>
                             </Row>

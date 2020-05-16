@@ -7,6 +7,7 @@ import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
 import actions from '../../store/hr/action'
 import routes from '../../config/routes'
+import PageSpinner from '../../components/PageSpinner'
 
 class AllEmployees extends Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class AllEmployees extends Component {
     }
 
     render() {
+        if (!this.props.employees.length) return <PageSpinner />
         return (
             <Page
                 title="All Employees"
