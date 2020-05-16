@@ -38,7 +38,7 @@ class AddEmployee extends Component {
     async componentWillMount() {
         await this.props.getDepartment()
     }
-    
+
     submit = async () => {
         this.setState({ complete: false })
         await this.props.addNewEmployee(this.state)
@@ -49,10 +49,10 @@ class AddEmployee extends Component {
         this.setState({
             depValue: e.target.value,
         });
-        this.props.department.forEach((value, index) => {
+        this.props.department.forEach((value) => {
             if (
-                value.departmentId == e.target.value &&
-                value.department_roles != null
+                value.departmentId === parseInt(e.target.value) &&
+                value.department_roles !== null
             ) {
                 this.setState({
                     rol: value.department_roles,
@@ -65,14 +65,19 @@ class AddEmployee extends Component {
         this.setState({
             rolValue: e.target.value,
         });
+
         this.state.rol.forEach((value) => {
-            if (value.roleId == e.target.value && value.role_levels != null) {
-                console.log(value.role_levels);
+
+            if (value.roleId === parseInt(e.target.value) && value.role_levels != null) {
+
                 this.setState({
                     lev: value.role_levels,
                 });
             }
-        })
+
+        }
+
+        )
     }
 
     levelDropDown(e) {

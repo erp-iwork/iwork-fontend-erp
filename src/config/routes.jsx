@@ -5,5 +5,9 @@ export default {
     allEmployees: '/AllEmployees',
     addEmployee: '/AddEmployee',
     employeeProfile: '/employeeProfile',
-    itEmployeePage: '/ITAllEmployeesPage'
+    itEmployeePage: '/ITAllEmployeesPage',
+    createOrderPage: '/createOrderPage',
+    ViewAllOrdersPage: '/ViewAllOrdersPage',
+    ViewSingleOrderPage: '/ViewSingleOrderPage'
+
 }

@@ -29,6 +29,11 @@ const AllEmployeePage = React.lazy(() => import('./pages/HR/AllEmployeesPage'));
 const AddEmployeePage = React.lazy(() => import('./pages/HR/AddEmployeePage'));
 const EmployeeProfilePage = React.lazy(() => import('./pages/HR/EmployeeProfilePage'));
 const ITAllEmployeesPage = React.lazy(() => import('./pages/IT/ViewAllEmployeePage'));
+const CreateOrdersPage = React.lazy(() => import('./pages/Sales/CreateOrdersPage'));
+const ViewAllOrdersPage = React.lazy(() => import('./pages/Sales/ViewAllOrdersPage'));
+const ViewSingleOrderPage = React.lazy(() => import('./pages/Sales/ViewSingleOrderPage'));
+
+
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -63,6 +68,10 @@ class App extends React.Component {
                 <Route exact path={routes.addEmployee} component={AddEmployeePage} />
                 <Route exact path={routes.employeeProfile} component={EmployeeProfilePage} />
                 <Route exact path={routes.itEmployeePage} component={ITAllEmployeesPage} />
+                <Route exact path={routes.createOrderPage} component={CreateOrdersPage} />
+                <Route exact path={routes.ViewAllOrdersPage} component={ViewAllOrdersPage} />
+                <Route exact path={routes.ViewSingleOrderPage} component={ViewSingleOrderPage} />
+
 
                 <Route
                   exact

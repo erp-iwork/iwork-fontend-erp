@@ -35,6 +35,8 @@ import {
   NavLink as BSNavLink,
 } from 'reactstrap';
 import bn from '../../utils/bemnames';
+import routes from '../../config/routes'
+
 
 const sidebarBackground = {
   backgroundImage: `url("${sidebarBgImage}")`,
@@ -88,6 +90,8 @@ const navItems = [
   { to: '/AddEmployee', name: 'Add Employee', exact: false, Icon: MdWidgets },
   { to: '/EmployeeProfile', name: 'Profile', exact: false, Icon: MdWidgets },
   { to: '/ITAllEmployeesPage', name: '(IT) All Employees', exact: false, Icon: MdWidgets },
+  { to: routes.createOrderPage, name: 'Create Order', exact: false, Icon: MdWidgets },
+
 
 
 
