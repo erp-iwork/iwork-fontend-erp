@@ -37,6 +37,7 @@ class App extends React.Component {
       <BrowserRouter basename={getBasename()}>
         <GAListener>
           <Switch>
+        //signin page with public route. every one can get login page.
             <PublicRoute
               exact
               path="/login"
@@ -45,6 +46,7 @@ class App extends React.Component {
                 <LoginPage />
               )}
             />
+            
             <PublicRoute
               exact
               path="/signup"
