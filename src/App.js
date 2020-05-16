@@ -1,4 +1,4 @@
-import { STATE_LOGIN, STATE_SIGNUP } from './components/AuthForm';
+import { STATE_SIGNUP } from './components/AuthForm';
 import GAListener from './components/GAListener';
 import { EmptyLayout, PublicRoute, MainLayout } from './components/Layout';
 import PageSpinner from './components/PageSpinner';
@@ -27,8 +27,6 @@ const TypographyPage = React.lazy(() => import('./pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('./pages/WidgetPage'));
 const AllEmployeePage = React.lazy(() => import('./pages/HR/AllEmployeesPage'));
 const AddEmployeePage = React.lazy(() => import('./pages/HR/AddEmployeePage'));
-
-
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
