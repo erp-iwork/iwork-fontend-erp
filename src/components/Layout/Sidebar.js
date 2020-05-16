@@ -86,6 +86,8 @@ const navItems = [
   { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
   { to: '/AllEmployees', name: 'All Employees', exact: false, Icon: MdWidgets },
   { to: '/AddEmployee', name: 'Add Employee', exact: false, Icon: MdWidgets },
+  { to: '/EmployeeProfile', name: 'Profile', exact: false, Icon: MdWidgets },
+
 
 
   

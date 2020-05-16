@@ -3,7 +3,7 @@ import GAListener from './components/GAListener';
 import { EmptyLayout, PublicRoute, MainLayout } from './components/Layout';
 import PageSpinner from './components/PageSpinner';
 import AuthPage from './pages/AuthPage';
-import LoginPage from './components/Login' 
+import LoginPage from './components/Login'
 import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
@@ -27,6 +27,8 @@ const TypographyPage = React.lazy(() => import('./pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('./pages/WidgetPage'));
 const AllEmployeePage = React.lazy(() => import('./pages/HR/AllEmployeesPage'));
 const AddEmployeePage = React.lazy(() => import('./pages/HR/AddEmployeePage'));
+const EmployeeProfilePage = React.lazy(() => import('./pages/HR/EmployeeProfilePage'));
+
 
 
 
@@ -70,8 +72,10 @@ class App extends React.Component {
                 <Route exact path="/badges" component={BadgePage} />
                 <Route exact path="/AllEmployees" component={AllEmployeePage} />
                 <Route exact path="/AddEmployee" component={AddEmployeePage} />
+                <Route exact path="/EmployeeProfile" component={EmployeeProfilePage} />
 
-                
+
+
                 <Route
                   exact
                   path="/button-groups"

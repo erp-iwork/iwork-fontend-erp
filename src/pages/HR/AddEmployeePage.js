@@ -18,7 +18,6 @@ class AddEmployee extends Component {
     render() {
         return (
             <>
-
                 <Page
                     title="Add Employee"
                     breadcrumbs={[{ name: 'Add Employee', active: true }]}
