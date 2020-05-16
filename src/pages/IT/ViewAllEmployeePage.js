@@ -83,9 +83,6 @@ class AllEmployees extends Component {
 
                                                 <MdCheckCircle />
                                             </Button>
-
-
-
                                         </td>
                                         <td>
                                             <Button

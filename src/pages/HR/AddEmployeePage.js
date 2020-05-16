@@ -11,6 +11,7 @@ import { countries, regions, termsOfEmployment, city } from './data'
 import Spinner from '../../components/loader'
 import { Redirect } from 'react-router-dom'
 import routes from '../../config/routes'
+import AllEmployeesPage from "./AllEmployeesPage";
 
 class AddEmployee extends Component {
     constructor(props) {
@@ -46,40 +47,40 @@ class AddEmployee extends Component {
 
     departmentDropDown(e) {
         this.setState({
-          depValue: e.target.value,
+            depValue: e.target.value,
         });
-        this.props.department.map((value, index) => {
-          if (
-            value.departmentId == e.target.value &&
-            value.department_roles != null
-          ) {
-            this.setState({
-              rol: value.department_roles,
-            });
-          }
+        this.props.department.forEach((value, index) => {
+            if (
+                value.departmentId == e.target.value &&
+                value.department_roles != null
+            ) {
+                this.setState({
+                    rol: value.department_roles,
+                });
+            }
         });
     }
 
     roleDropDown(e) {
         this.setState({
-          rolValue: e.target.value,
+            rolValue: e.target.value,
         });
-        this.state.rol.map((value) => {
-          if (value.roleId == e.target.value && value.role_levels != null) {
-            console.log(value.role_levels);
-            this.setState({
-              lev: value.role_levels,
-            });
-          }
+        this.state.rol.forEach((value) => {
+            if (value.roleId == e.target.value && value.role_levels != null) {
+                console.log(value.role_levels);
+                this.setState({
+                    lev: value.role_levels,
+                });
+            }
         })
     }
-    
+
     levelDropDown(e) {
         this.setState({
-          levValue: e.target.value,
+            levValue: e.target.value,
         });
     }
-    
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value,
@@ -87,19 +88,9 @@ class AddEmployee extends Component {
     }
 
     render() {
-        const { error, newEmployeeInfo, deps, rol, lev, empId } = this.state;
-        const { classes } = this.props;
         var depValue = this.state.depValue;
         var rolValue = this.state.rolValue;
-        var levValue = this.state.levValue;
-        var regionValue = this.state.regionValue;
-        var cityValue = this.state.cityValue;
-        var countryValue = this.state.countryValue;
-        var termofEmploymentValue = this.state.termofEmploymentValue;
-        var telephoneValue = this.state.telephoneValue;
-        var emailValue = this.state.emailValue;
-        var lastValue = this.state.lastValue;
-        var firstValue = this.state.firstValue;
+
         return (
             <>
                 <Page
@@ -121,14 +112,14 @@ class AddEmployee extends Component {
                                                 <Col sm={12}>
                                                     <Input
                                                         name="firstName"
-                                                        placeholder="with a placeholder"
+                                                        placeholder="First Name"
                                                         onChange={this.handleChange}
                                                     />
                                                     <Error
                                                         error={
                                                             this.props.errors.firstName
-                                                            ? this.props.errors.firstName
-                                                            : null
+                                                                ? this.props.errors.firstName
+                                                                : null
                                                         }
                                                     />
                                                 </Col>
@@ -142,14 +133,14 @@ class AddEmployee extends Component {
                                                 <Col sm={12}>
                                                     <Input
                                                         name="lastName"
-                                                        placeholder="password placeholder"
+                                                        placeholder=" Last Name"
                                                         onChange={this.handleChange}
                                                     />
                                                     <Error
                                                         error={
                                                             this.props.errors.lastName
-                                                            ? this.props.errors.lastName
-                                                            : null
+                                                                ? this.props.errors.lastName
+                                                                : null
                                                         }
                                                     />
                                                 </Col>
@@ -165,7 +156,7 @@ class AddEmployee extends Component {
                                                 <Col sm={12}>
                                                     <Input
                                                         name="email"
-                                                        placeholder="with a placeholder"
+                                                        placeholder="Email"
                                                         onChange={this.handleChange}
                                                     />
                                                     <Error
@@ -184,14 +175,14 @@ class AddEmployee extends Component {
                                                 <Col sm={12}>
                                                     <Input
                                                         name="telephone"
-                                                        placeholder="password placeholder"
+                                                        placeholder="Phone Number"
                                                         onChange={this.handleChange}
                                                     />
                                                     <Error
                                                         error={
                                                             this.props.errors.telephone
-                                                            ? this.props.errors.telephone
-                                                            : null
+                                                                ? this.props.errors.telephone
+                                                                : null
                                                         }
                                                     />
                                                 </Col>
@@ -214,8 +205,8 @@ class AddEmployee extends Component {
                                                     <Error
                                                         error={
                                                             this.props.errors.birthDate
-                                                            ? this.props.errors.birthDate
-                                                            : null
+                                                                ? this.props.errors.birthDate
+                                                                : null
                                                         }
                                                     />
                                                 </Col>
@@ -254,8 +245,8 @@ class AddEmployee extends Component {
                                                     <Error
                                                         error={
                                                             this.props.errors.department
-                                                            ? this.props.errors.department
-                                                            : null
+                                                                ? this.props.errors.department
+                                                                : null
                                                         }
                                                     />
                                                 </Col>
@@ -290,12 +281,12 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.levelDropDown}>
-                                                    <option aria-label="None" value="" />
-                                                    {this.state.lev.map((levs) => (
-                                                        <option value={levs.levelId} key={levs.levelId}>
-                                                            {levs.level}
-                                                        </option>
-                                                    ))}
+                                                        <option aria-label="None" value="" />
+                                                        {this.state.lev.map((levs) => (
+                                                            <option value={levs.levelId} key={levs.levelId}>
+                                                                {levs.level}
+                                                            </option>
+                                                        ))}
                                                     </Input>
                                                     <Error
                                                         error={
@@ -322,8 +313,8 @@ class AddEmployee extends Component {
                                                     <Error
                                                         error={
                                                             this.props.errors.hiredDate
-                                                            ? this.props.errors.hiredDate
-                                                            : null
+                                                                ? this.props.errors.hiredDate
+                                                                : null
                                                         }
                                                     />
                                                 </Col>
@@ -343,9 +334,9 @@ class AddEmployee extends Component {
                                                     </Input>
                                                     <Error
                                                         error={
-                                                        this.props.errors.termOfEmployment
-                                                            ? this.props.errors.termOfEmployment
-                                                            : null
+                                                            this.props.errors.termOfEmployment
+                                                                ? this.props.errors.termOfEmployment
+                                                                : null
                                                         }
                                                     />
                                                 </Col>
@@ -366,8 +357,8 @@ class AddEmployee extends Component {
                                                     <Error
                                                         error={
                                                             this.props.errors.country
-                                                            ? this.props.errors.country
-                                                            : null
+                                                                ? this.props.errors.country
+                                                                : null
                                                         }
                                                     />
                                                 </Col>
@@ -379,7 +370,7 @@ class AddEmployee extends Component {
                                                 <Col sm={12}>
                                                     <Input type="select" name="region" onChange={this.handleChange}>
                                                         <option aria-label="None" value="" />
-                                                        {this.state.country?
+                                                        {this.state.country ?
                                                             regions[this.state.country].map((item, index) => (
                                                                 <option key={item} value={item}>{item}</option>
                                                             )) : ""
@@ -388,8 +379,8 @@ class AddEmployee extends Component {
                                                     <Error
                                                         error={
                                                             this.props.errors.region
-                                                            ? this.props.errors.region
-                                                            : null
+                                                                ? this.props.errors.region
+                                                                : null
                                                         }
                                                     />
                                                 </Col>
@@ -401,7 +392,7 @@ class AddEmployee extends Component {
                                                 <Col sm={12}>
                                                     <Input type="select" name="city" onChange={this.handleChange}>
                                                         <option aria-label="None" value="" />
-                                                        {this.state.country? 
+                                                        {this.state.country ?
                                                             city[this.state.country].map((item, index) => (
                                                                 <option key={item} value={item}>{item}</option>
                                                             )) : ""
@@ -420,7 +411,7 @@ class AddEmployee extends Component {
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button onClick={this.submit}>
-                                                {this.state.complete? "Register" : <Spinner />}
+                                                {this.state.complete ? "Register" : <Spinner />}
                                             </Button>
                                         </Col>
                                     </FormGroup>
@@ -429,9 +420,11 @@ class AddEmployee extends Component {
                         </Card>
                     </Col>
 
+                    <AllEmployeesPage />
+
+
                 </Page>
 
-                {/* <AllEmployeesPage /> */}
             </>
 
         );
@@ -440,11 +433,11 @@ class AddEmployee extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      loading: state.hrReducer.loading,
-      users: state.hrReducer.users,
-      errors: state.hrReducer.errors,
-      success: state.hrReducer.success,
-      department: state.hrReducer.department,
+        loading: state.hrReducer.loading,
+        users: state.hrReducer.users,
+        errors: state.hrReducer.errors,
+        success: state.hrReducer.success,
+        department: state.hrReducer.department,
     };
 }
 
@@ -452,7 +445,7 @@ const mapDispatchToProps = {
     addNewEmployee: actions.addNewEmployee,
     getDepartment: actions.getDepartment
 }
-  
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps
