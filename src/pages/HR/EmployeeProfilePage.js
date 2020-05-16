@@ -37,178 +37,116 @@ class EmployeeProfilePage extends Component {
                             <hr />
                             <Row>
                                 <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            First Name :
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Yohannes</b>
-                                        </CardBody>
-                                    </Row>
+                                    <CardBody className='titleValue'>
+                                        First-Name : <b>Yohannes</b>
+                                    </CardBody>
                                 </Col>
+
                                 <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Last Name :
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Berhanu</b>
-                                        </CardBody>
-                                    </Row>
+                                    <CardBody className='titleValue'>
+                                        Last-Name : <b>Berhanu</b>
+                                    </CardBody>
                                 </Col>
+
                             </Row>
                             <Row>
                                 <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Email :
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>JohnLights51@gmail.com</b>
-                                        </CardBody>
-                                    </Row>
+                                    <CardBody className='titleValue'>
+                                        Email : <b>JohnLights51@gmail.com</b>
+                                    </CardBody>
                                 </Col>
                                 <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Phone Number :
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>+251 921 25 8848</b>
-                                        </CardBody>
-                                    </Row>
+
+                                    <CardBody className='titleValue'>
+                                        Phone-Number  :  <b>+251-921-25-8848</b>
+                                    </CardBody>
+
                                 </Col>
                             </Row>
 
                             <Row>
                                 <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Gender :
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Male</b>
-                                        </CardBody>
-                                    </Row>
+                                    <CardBody className='titleValue'>
+                                        BirthDate : <b>Something</b>
+                                    </CardBody>
+                                </Col>
+
+                                <Col sm={12} md={6}>
+                                    <CardBody className='titleValue'>
+                                        Gender : <b>Berhanu</b>
+                                    </CardBody>
+                                </Col>
+
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={6}>
+                                    <CardBody className='titleValue'>
+                                        Department : <b>JohnLights51@gmail.com</b>
+                                    </CardBody>
                                 </Col>
                                 <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Age:
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>34</b>
-                                        </CardBody>
-                                    </Row>
+
+                                    <CardBody className='titleValue'>
+                                        Role  :  <b>+251-921-25-8848</b>
+                                    </CardBody>
+
+                                </Col>
+                            </Row>
+
+
+                            <Row>
+                                <Col sm={12} md={6}>
+                                    <CardBody className='titleValue'>
+                                        Level : <b>Something</b>
+                                    </CardBody>
+                                </Col>
+
+                                <Col sm={12} md={6}>
+                                    <CardBody className='titleValue'>
+                                        Hired-Date : <b>Berhanu</b>
+                                    </CardBody>
+                                </Col>
+
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={6}>
+                                    <CardBody className='titleValue'>
+                                        Employment-Type : <b>Contractual</b>
+                                    </CardBody>
+                                </Col>
+                                <Col sm={12} md={6}>
+
+                                    <CardBody className='titleValue'>
+                                        Country  :  <b>+251-921-25-8848</b>
+                                    </CardBody>
+
                                 </Col>
                             </Row>
 
                             <Row>
                                 <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Department :
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Logistics</b>
-                                        </CardBody>
-                                    </Row>
+                                    <CardBody className='titleValue'>
+                                        Region : <b>JohnLights51@gmail.com</b>
+                                    </CardBody>
                                 </Col>
                                 <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Role:
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Warehouse Manager</b>
-                                        </CardBody>
-                                    </Row>
+
+                                    <CardBody className='titleValue'>
+                                        City  :  <b>+251-921-25-8848</b>
+                                    </CardBody>
+
                                 </Col>
                             </Row>
 
                             <Row>
                                 <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Level :
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Manager</b>
-                                        </CardBody>
-                                    </Row>
-                                </Col>
-                                <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Hired Date:
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>11/12/2006</b>
-                                        </CardBody>
-                                    </Row>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Term Of Employment :
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Permanent</b>
-                                        </CardBody>
-                                    </Row>
-                                </Col>
-                                <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Country:
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Ethiopia</b>
-                                        </CardBody>
-                                    </Row>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Region :
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Somewhere</b>
-                                        </CardBody>
-                                    </Row>
-                                </Col>
-                                <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            City:
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Addis-Ababa</b>
-                                        </CardBody>
-                                    </Row>
+                                    <CardBody className='titleValue'>
+                                        Has-Account : <b>JohnLights51@gmail.com</b>
+                                    </CardBody>
                                 </Col>
 
                             </Row>
 
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <Row>
-                                        <CardBody>
-                                            Has Account :
-                                        </CardBody>
-                                        <CardBody align='right'>
-                                            <b>Yes</b>
-                                        </CardBody>
-                                    </Row>
-                                </Col>
-
-                            </Row>
 
 
                         </Card>

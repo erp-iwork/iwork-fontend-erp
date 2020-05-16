@@ -6,8 +6,8 @@ import {
   MdLoyalty,
 } from 'react-icons/md';
 import { TiSupport } from "react-icons/ti";
-import NotificationSystem from 'react-notification-system';
-import { NOTIFICATION_SYSTEM_STYLE } from '../../utils/constants';
+// import NotificationSystem from 'react-notification-system';
+// import { NOTIFICATION_SYSTEM_STYLE } from '../../utils/constants';
 import { Redirect } from 'react-router-dom'
 import getToken from '../../auth/token'
 import routes from '../../config/routes'
