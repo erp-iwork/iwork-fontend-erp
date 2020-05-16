@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Col, Row, Table, Button } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Row, Table, Button } from 'reactstrap'
 import Page from '../../components/Page';
 import { MdCheckCircle } from "react-icons/md";
 import Swal from "sweetalert2"
 import { connect } from "react-redux"
 import actions from '../../store/hr/action'
+import { Link } from 'react-router-dom'
 
 
 class AllEmployees extends Component {
@@ -74,9 +75,11 @@ class AllEmployees extends Component {
                                                     </Button>
                                                 </td>
                                                 <td>
-                                                    <Button color='primary'>
-                                                        See Profile
-                                                    </Button>
+                                                    <Link>
+                                                        <Button color='primary'>
+                                                            See Profile
+                                                        </Button>
+                                                    </Link>
                                                 </td>
                                             </tr>
                                         ))}

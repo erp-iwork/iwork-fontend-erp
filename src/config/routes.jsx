@@ -4,5 +4,6 @@ export default {
     signup: '/signup',
     allEmployees: '/AllEmployees',
     addEmployee: '/AddEmployee',
-    emploeeProfile: '/employeeProfile'
+    emploeeProfile: '/employeeProfile',
+    itEmployeePage: '/ITAllEmployeesPage'
 }

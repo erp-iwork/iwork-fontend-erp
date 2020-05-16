@@ -2,7 +2,7 @@ import { STATE_SIGNUP } from './components/AuthForm';
 import GAListener from './components/GAListener';
 import { EmptyLayout, PublicRoute, MainLayout } from './components/Layout';
 import PageSpinner from './components/PageSpinner';
-import AuthPage from './pages/AuthPage';
+import AuthPage from './pages/AuthPage'
 import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
@@ -29,7 +29,12 @@ const TypographyPage = React.lazy(() => import('./pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('./pages/WidgetPage'));
 const AllEmployeePage = React.lazy(() => import('./pages/HR/AllEmployeesPage'));
 const AddEmployeePage = React.lazy(() => import('./pages/HR/AddEmployeePage'));
-const EmployeeProfile =  React.lazy(() => import('./pages/HR/EmployeeProfilePage'))
+const EmployeeProfilePage = React.lazy(() => import('./pages/HR/EmployeeProfilePage'));
+const ITAllEmployeesPage = React.lazy(() => import('./pages/IT/ViewAllEmployeePage'));
+
+
+
+
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -62,8 +67,9 @@ class App extends React.Component {
                 <Route exact path="/badges" component={BadgePage} />
                 <Route exact path={routes.allEmployees} component={AllEmployeePage} />
                 <Route exact path={routes.addEmployee} component={AddEmployeePage} />
-                <Route exact path={routes.emploeeProfile} component={EmployeeProfile} />
-                
+                <Route exact path={routes.emploeeProfile} component={EmployeeProfilePage} />
+                <Route exact path={routes.itEmployeePage} component={ITAllEmployeesPage} />
+
                 <Route
                   exact
                   path="/button-groups"
