@@ -31,7 +31,7 @@ class EmployeeProfilePage extends Component {
                                 style={{ width: 'auto', height: 200 }}
                             />
                             <CardBody className="d-flex justify-content-between align-items-center">
-                                <CardText style={{ paddingTop: 10 }}>Yohannes Berhanu</CardText>
+                                <CardText style={{ paddingTop: 10 }}>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</CardText>
                                 <Button outline color="primary">
                                     Edit/Delete
                             </Button>
@@ -146,7 +146,7 @@ class EmployeeProfilePage extends Component {
                             <Row>
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
-                                        Has-Account : <b>{employeeInfos.has_account ? "True" : "False"}</b>
+                                        Has-Account : <b>{employeeInfos.has_account ? "Yes" : "No"}</b>
                                     </CardBody>
                                 </Col>
                             </Row>
