@@ -84,6 +84,11 @@ const navItems = [
   { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
   { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
   { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
+  { to: '/AllEmployees', name: 'All Employees', exact: false, Icon: MdWidgets },
+  { to: '/AddEmployee', name: 'Add Employee', exact: false, Icon: MdWidgets },
+
+
+  
 ];
 
 const bem = bn.create('sidebar');
