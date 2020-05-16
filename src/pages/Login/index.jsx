@@ -5,8 +5,8 @@ import './styles.scss'
 import actions from '../../store/login/action'
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import SpinnerLoader from '../loader'
-import Error from '../../error'
+import SpinnerLoader from '../../components/loader'
+import Error from '../../components/error'
 import routes from '../../config/routes'
 
 class LoginForm extends React.Component {
