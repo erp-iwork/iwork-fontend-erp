@@ -54,7 +54,7 @@ class AllEmployees extends Component {
                 </Modal>
 
                 <Col>
-                    <Card className="mb-3">
+                    <Card className="mb-4">
                         <CardHeader>All Employees</CardHeader>
                         <CardBody>
                             <Table responsive>
@@ -86,6 +86,7 @@ class AllEmployees extends Component {
                                         </td>
                                         <td>
                                             <Button
+                                                size='sm'
                                                 color='primary'>
                                                 See Profile
                                                 </Button>
@@ -105,7 +106,7 @@ class AllEmployees extends Component {
                                             </Button>
                                         </td>
                                         <td>
-                                            <Button color='primary'>
+                                            <Button size='sm' color='primary'>
                                                 See Profile
                                                 </Button>
                                         </td>
@@ -116,8 +117,6 @@ class AllEmployees extends Component {
                     </Card>
                 </Col>
             </Page>
-
-
         );
     }
 }

@@ -15,6 +15,7 @@ import {
     Label,
 } from 'reactstrap';
 import "./Sales.scss";
+import ViewAllOrdersPage from "./ViewAllOrdersPage";
 
 class CreateOrdersPage extends Component {
     constructor() {
@@ -70,8 +71,6 @@ class CreateOrdersPage extends Component {
                                     </Label>
                                         <Col sm={12}>
                                             <Input
-                                                // type="password"
-                                                // name="password"
                                                 placeholder=" Shipment Address"
                                             />
                                         </Col>
@@ -124,7 +123,7 @@ class CreateOrdersPage extends Component {
                         <Card >
                             <CardHeader>Recently Interacted Companies</CardHeader>
                             <CardBody>
-                                <Table responsive className="mb-3">
+                                <Table responsive className="scrollTable">
                                     <thead>
                                         <tr>
                                             <th> ID</th>
@@ -171,6 +170,7 @@ class CreateOrdersPage extends Component {
                                             <td>the Bird</td>
                                             <td>@twitter</td>
                                         </tr>
+
                                     </tbody>
                                 </Table>
                             </CardBody>
@@ -179,6 +179,8 @@ class CreateOrdersPage extends Component {
                     </Col>
 
                 </Row>
+
+                <ViewAllOrdersPage />
 
             </Page>
         );
