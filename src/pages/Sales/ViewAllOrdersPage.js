@@ -7,7 +7,7 @@ class ViewAllOrdersPage extends Component {
         return (
             <Page title="View All Orders" breadcrumbs={[{ name: 'All Orders', active: true }]}>
 
-                
+                View All Orders Page
             </Page>
           );
     }

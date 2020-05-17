@@ -1,0 +1,25 @@
+.scrollTable {
+    height: 600px;
+    display:block;
+  overflow-y : scroll;
+}
+
+.mb-3 {
+    height: 503px;
+    display:block;
+    width: 100%;
+    overflow-y : scroll;
+    
+}
+
+tr {
+    width: 100%;
+  }
+  
+  td {
+    width: 33%;
+  }
+
+  .duplicatedForm {
+      padding-top: 15px;
+  }
