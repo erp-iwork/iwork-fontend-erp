@@ -3,12 +3,15 @@ import Page from '../../components/Page';
 import { Col, Row, Card, CardHeader, Table, CardBody } from 'reactstrap';
 import './Sales.scss';
 import ViewAllOrdersPage from './ViewAllOrdersPage';
+import { IconBase } from 'react-icons/lib/cjs';
 
 class ViewSingleOrderPage extends Component {
     state = {}
     render() {
         return (
             <Page title="View Single Order" breadcrumbs={[{ name: 'Single Order', active: true }]}>
+
+
                 <Card className='padding'>
                     <Row sm={12} md={12} >
                         <Col md={4}>
@@ -50,22 +53,22 @@ class ViewSingleOrderPage extends Component {
                                 <b>Description</b>
 
                                 <Col>
-                                    
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
-                                Description Goes Here 
+
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
+                                    Description Goes Here
 
                                     </Col>
 
