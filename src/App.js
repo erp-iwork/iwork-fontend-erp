@@ -32,6 +32,8 @@ const ITAllEmployeesPage = React.lazy(() => import('./pages/IT/ViewAllEmployeePa
 const CreateOrdersPage = React.lazy(() => import('./pages/Sales/CreateOrdersPage'));
 const ViewAllOrdersPage = React.lazy(() => import('./pages/Sales/ViewAllOrdersPage'));
 const ViewSingleOrderPage = React.lazy(() => import('./pages/Sales/ViewSingleOrderPage'));
+const viewAllItemsPage = React.lazy(() => import('./pages/Inventory/viewAllItems'));
+
 
 
 
@@ -71,6 +73,8 @@ class App extends React.Component {
                 <Route exact path={routes.createOrderPage} component={CreateOrdersPage} />
                 <Route exact path={routes.ViewAllOrdersPage} component={ViewAllOrdersPage} />
                 <Route exact path={routes.ViewSingleOrderPage} component={ViewSingleOrderPage} />
+                <Route exact path={routes.ViewAllItems} component={viewAllItemsPage} />
+
 
 
                 <Route

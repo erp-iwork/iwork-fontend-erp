@@ -1,3 +1,4 @@
+
 export default {
     root: '/',
     login: '/login',
@@ -8,6 +9,8 @@ export default {
     itEmployeePage: '/ITAllEmployeesPage',
     createOrderPage: '/createOrderPage',
     ViewAllOrdersPage: '/ViewAllOrdersPage',
-    ViewSingleOrderPage: '/ViewSingleOrderPage'
+    ViewSingleOrderPage: '/ViewSingleOrderPage',
+    ViewAllItems: '/ViewAllItems'
+
 
 }
