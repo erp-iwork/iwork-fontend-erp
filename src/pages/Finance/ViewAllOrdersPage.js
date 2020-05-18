@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
+import { MdAssignment } from "react-icons/md";
 
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
 
@@ -40,7 +41,11 @@ class ViewAllOrdersPage extends Component {
                                     <td>Otto</td>
                                     <td>@mdo</td>
                                     <td>Mark</td>
-                                    <td>Delivered</td>
+                                    <td>
+                                        <Button size='sm' color='primary'>
+                                            <MdAssignment />
+                                        </Button>
+                                    </td>
                                     <td>
                                         <Button size='sm' color='primary'>
                                             See Order

@@ -44,7 +44,6 @@ class AddEmployee extends Component {
         await this.props.addNewEmployee(this.state)
         return <Redirect to={routes.allEmployees} />
     }
-
     departmentDropDown(e) {
         this.setState({
             depValue: e.target.value,
@@ -95,7 +94,7 @@ class AddEmployee extends Component {
     render() {
         var depValue = this.state.depValue;
         var rolValue = this.state.rolValue;
-        const { country, region } = this.state
+        const { country } = this.state
         return (
             <>
                 <Page
