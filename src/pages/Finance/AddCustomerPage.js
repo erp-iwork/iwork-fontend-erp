@@ -12,6 +12,8 @@ import {
     Row,
     Label,
 } from 'reactstrap';
+import AllCustomers from "./viewAllCutomersPage";
+import './Finance.scss'
 
 class AddCustomerPage extends Component {
     constructor(props) {
@@ -21,8 +23,8 @@ class AddCustomerPage extends Component {
     render() {
         return (
             <Page title="Add Customer" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
-                <Col lg={12} md={12}>
-                    <Card>
+                <Col lg={12} md={12} className='padding'>
+                    <Card>u
                         <CardHeader>ADD A NEW CUSTOMER TO WORK WITH</CardHeader>
                         <CardBody>
                             <Form>
@@ -33,27 +35,18 @@ class AddCustomerPage extends Component {
                                                 Customer Name
                                     </Label>
                                             <Col sm={12}>
-                                                <Input
-                                                    placeholder="Customer Name"
-                                                />
+                                                <Input placeholder="Customer Name" />
                                             </Col>
                                         </FormGroup>
 
                                         <FormGroup>
                                             <Label for="examplePassword" sm={12}>
                                                 General Manager
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
-                                                <Input
-
-                                                    placeholder="
-                                                General Manager
-                                                    
-                                                    "
-                                                />
+                                                <Input placeholder="General Manager" />
                                             </Col>
                                         </FormGroup>
-
                                         <FormGroup>
                                             <Label for="examplePassword" sm={12}>
                                                 Contact Person
@@ -75,7 +68,6 @@ class AddCustomerPage extends Component {
                                                 />
                                             </Col>
                                         </FormGroup>
-
                                     </Col>
                                     <Col>
                                         <FormGroup>
@@ -98,7 +90,6 @@ class AddCustomerPage extends Component {
                                                     <option>VAT</option>
                                                 </Input>
                                             </Col>
-
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="examplePassword" sm={12}>
@@ -121,10 +112,7 @@ class AddCustomerPage extends Component {
                         </CardBody>
                     </Card>
                 </Col>
-
-
-
-
+                <AllCustomers />
             </Page>
         );
     }

@@ -54,7 +54,7 @@ class viewAllCustomersPage extends Component {
                                         </td>
                                     </tr>
 
-                                    <tr>
+                                    <tr align='center'>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
