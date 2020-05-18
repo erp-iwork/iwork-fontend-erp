@@ -72,7 +72,7 @@ class AllEmployees extends Component {
                                                 <td>{employeeInfos.telephone}</td>
                                                 <td>{employeeInfos.termOfEmployment}</td>
                                                 <td>
-                                                    <Button  color='success'>
+                                                    <Button  color='success' onClick={() => this.deleteFun(employeeInfos.email)}>
                                                         <MdCheckCircle />
                                                     </Button>
                                                 </td>

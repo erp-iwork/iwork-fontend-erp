@@ -73,7 +73,7 @@ class EmployeeProfilePage extends Component {
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
                                         BirthDate : <b>{employeeInfos.birthDate}</b>
-                                    </CardBody> 
+                                    </CardBody>
                                 </Col>
 
                                 <Col sm={12} md={6}>
@@ -111,6 +111,7 @@ class EmployeeProfilePage extends Component {
                                         Hired-Date : <b>{employeeInfos.hiredDate}</b>
                                     </CardBody>
                                 </Col>
+
                             </Row>
                             <Row>
                                 <Col sm={12} md={6}>
@@ -119,12 +120,14 @@ class EmployeeProfilePage extends Component {
                                     </CardBody>
                                 </Col>
                                 <Col sm={12} md={6}>
+
                                     <CardBody className='titleValue'>
                                         Country  :  <b>{employeeInfos.country}</b>
                                     </CardBody>
 
                                 </Col>
                             </Row>
+
                             <Row>
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
@@ -139,6 +142,7 @@ class EmployeeProfilePage extends Component {
 
                                 </Col>
                             </Row>
+
                             <Row>
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>

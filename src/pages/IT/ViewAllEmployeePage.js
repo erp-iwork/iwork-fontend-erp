@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
     Card, CardBody, CardHeader, Col, Table, Button, Modal,
     ModalBody,
     ModalFooter,
     ModalHeader,
-} from 'reactstrap';
-import Page from '../../components/Page';
-import { MdCheckCircle } from "react-icons/md";
-
+} from 'reactstrap'
+import Page from '../../components/Page'
+import { MdCheckCircle } from "react-icons/md"
+import { Link } from 'react-router-dom'
+import { connect } from "react-redux"
+import actions from '../../store/hr/action'
+import routes from '../../config/routes'
+import PageSpinner from '../../components/PageSpinner'
 
 class AllEmployees extends Component {
     state = {
@@ -29,7 +33,13 @@ class AllEmployees extends Component {
             [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
         });
     };
+
+    componentDidMount() {
+        this.props.getEmploye()
+    }
+
     render() {
+        if (!this.props.employees[0]) return <PageSpinner />
         return (
             <Page
                 title="All Employees"
@@ -61,7 +71,7 @@ class AllEmployees extends Component {
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>First Name</th>
+                                        <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Hired Date</th>
                                         <th>Phone Number</th>
@@ -71,46 +81,36 @@ class AllEmployees extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Johnlights51@gmail.com</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>
-                                            <Button onClick={this.toggle()} color='primary'>
-
-                                                <MdCheckCircle />
-                                            </Button>
-                                        </td>
-                                        <td>
-                                            <Button
-                                                size='sm'
-                                                color='primary'>
-                                                See Profile
-                                                </Button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Otto</td>
-                                        <td>Johnlights51@gmail.com</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>
-                                            <Button onClick={this.toggle()} color='primary'>
-
-                                                <MdCheckCircle />
-                                            </Button>
-                                        </td>
-                                        <td>
-                                            <Button size='sm' color='primary'>
-                                                See Profile
-                                                </Button>
-                                        </td>
-                                    </tr>
+                                    {this.props.employees.map((employeeInfos, index) => (
+                                        <tr key={index}>
+                                            <th scope="row">{employeeInfos.employeId}</th>
+                                            <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
+                                            <td>{employeeInfos.email}</td>
+                                            <td>{employeeInfos.hiredDate}</td>
+                                            <td>{employeeInfos.telephone}</td>
+                                            <td>{employeeInfos.termOfEmployment}</td>
+                                            <td>
+                                                {employeeInfos.has_account? (
+                                                    <Button>Delete</Button>
+                                                ): (
+                                                    <Link to={{ pathname: routes.addAccount, state: { account: employeeInfos } }}>
+                                                        <Button color='primary'>
+                                                            <MdCheckCircle />
+                                                        </Button>
+                                                    </Link>
+                                                )}
+                                            </td>
+                                            <td>
+                                                <Link to={{ pathname: routes.employeeProfile, state: employeeInfos.employeId }}>
+                                                    <Button
+                                                        size='sm'
+                                                        color='primary'>
+                                                        See Profile
+                                                    </Button>
+                                                </Link>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </Table>
                         </CardBody>
@@ -121,4 +121,19 @@ class AllEmployees extends Component {
     }
 }
 
-export default AllEmployees;
+const mapStateToProps = (state) => {
+    return {
+      loading: state.hrReducer.loading,
+      users: state.hrReducer.users,
+      employees: state.hrReducer.employees,
+      errors: state.hrReducer.errors,
+    };
+}
+
+const mapDispatchToProps = {
+    addAccount: actions.addAccount,
+    getEmploye: actions.getEmploye,
+    deleteAccount: actions.deleteAccount,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllEmployees)

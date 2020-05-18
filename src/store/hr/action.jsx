@@ -207,31 +207,21 @@ function addAccount(employe) {
       type: itConstants.REGISTER_REQUEST,
       payload: true,
     });
-    Swal.fire({
-      title: "Is this User An Admin?",
-      text: "YES-(Make Admin), NO-(Create Basic Account)",
-      icon: "info",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes,",
-      cancelButtonText: "no",
-    }).then((result) => {
-      axios
+      return axios
         .request({
           method: "POST",
           url: API + "account/",
           responseType: "json",
           headers: headers,
           data: {
-            username: employe.email,
-            password: employe.email,
+            username: employe.username,
+            password: employe.password,
             email: employe.email,
             employe: employe.employe,
             department: employe.department,
             roles: employe.role,
             claim: employe.claim,
-            is_admin: result.value ? true : false,
+            is_admin: employe.is_admin
           },
         })
         .then((response) => {
@@ -248,7 +238,7 @@ function addAccount(employe) {
           });
         })
         .catch((error) => {
-          console.log(error.response);
+          console.log(error)
           Swal.fire({
             title: "Error", text: "Something Went Wrong",
             icon: "error",
@@ -269,7 +259,6 @@ function addAccount(employe) {
             });
           }
         });
-    });
   };
 }
 

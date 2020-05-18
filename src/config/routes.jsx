@@ -6,11 +6,10 @@ export default {
     allEmployees: '/AllEmployees',
     addEmployee: '/AddEmployee',
     employeeProfile: '/employeeProfile',
-    itEmployeePage: '/ITAllEmployeesPage',
+    itEmployeePage: '/IT/AllEmployeesPage',
+    addAccount: '/IT/addaccount',
     createOrderPage: '/createOrderPage',
     ViewAllOrdersPage: '/ViewAllOrdersPage',
     ViewSingleOrderPage: '/ViewSingleOrderPage',
     ViewAllItems: '/ViewAllItems'
-
-
 }
