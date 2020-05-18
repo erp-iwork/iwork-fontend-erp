@@ -7,7 +7,7 @@ import {
 import Error from '../../components/error'
 import { connect } from "react-redux"
 import actions from '../../store/hr/action'
-import { countries, regions, termsOfEmployment, city } from './data'
+import { countries, regions, termsOfEmployment, cities } from './data'
 import Spinner from '../../components/loader'
 import { Redirect } from 'react-router-dom'
 import routes from '../../config/routes'
@@ -95,7 +95,7 @@ class AddEmployee extends Component {
     render() {
         var depValue = this.state.depValue;
         var rolValue = this.state.rolValue;
-
+        const { country, region } = this.state
         return (
             <>
                 <Page
@@ -224,7 +224,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="gender" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" > Gender </option>
+                                                        <option aria-label="Gender" selected disabled>Select Gender </option>
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </Input>
@@ -240,7 +240,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.departmentDropDown} value={depValue}>
-                                                        <option aria-label="None" value="" > Department </option>
+                                                        <option aria-label="None" selected disabled value="" > Select Department </option>
 
                                                         {this.props.department.map((dep, index) => (
                                                             <option value={dep.departmentId} key={index}>
@@ -265,7 +265,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.roleDropDown} value={rolValue}>
-                                                        <option aria-label="None" value="" >Role</option>
+                                                        <option aria-label="None" disabled selected value="" > Select Role</option>
                                                         {this.state.rol.map((rols) => (
                                                             <option value={rols.roleId} key={rols.roleId}>
                                                                 {rols.role}
@@ -287,7 +287,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.levelDropDown}>
-                                                        <option aria-label="None" value="" >Level</option>
+                                                        <option aria-label="None" disabled selected value="" >Select Level</option>
                                                         {this.state.lev.map((levs) => (
                                                             <option value={levs.levelId} key={levs.levelId}>
                                                                 {levs.level}
@@ -333,7 +333,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="termOfEmployment" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" >Term Of Employment</option>
+                                                        <option aria-label="None" selected disabled value="" > Select Term Of Employment</option>
                                                         {termsOfEmployment.map((item, index) => (
                                                             <option key={index} value={item}>{item}</option>
                                                         ))}
@@ -355,7 +355,7 @@ class AddEmployee extends Component {
                                                 <Label for="exampleSelect" sm={5}>Country</Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="country" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" >Country</option>
+                                                        <option aria-label="None" selected disabled value="" >Select Country</option>
                                                         {countries.map((item, index) => (
                                                             <option key={item} value={item}>{item}</option>
                                                         ))}
@@ -375,7 +375,7 @@ class AddEmployee extends Component {
                                                 <Label for="exampleSelect" sm={5}>Region</Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="region" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" >Region</option>
+                                                        <option aria-label="None" value="" disabled selected > Select Region</option>
                                                         {this.state.country ?
                                                             regions[this.state.country].map((item, index) => (
                                                                 <option key={item} value={item}>{item}</option>
@@ -397,9 +397,10 @@ class AddEmployee extends Component {
                                                 <Label for="exampleSelect" sm={5}>City</Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="city" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" >City</option>
+                                                        <option aria-label="None" disabled selected value="" >Select City</option>
                                                         {this.state.country ?
-                                                            city[this.state.country].map((item, index) => (
+                                                            //city[countries[0]][regions[countries[0]][1]]
+                                                            cities[country].map((item, index) => (
                                                                 <option key={item} value={item}>{item}</option>
                                                             )) : ""
                                                         }
@@ -417,7 +418,7 @@ class AddEmployee extends Component {
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button color='primary' onClick={this.submit}>
-                                                {this.state.complete ? "Register" : <Spinner />}
+                                                {this.props.loading ? <Spinner /> : "Register"}
                                             </Button>
                                         </Col>
                                     </FormGroup>
@@ -425,10 +426,7 @@ class AddEmployee extends Component {
                             </CardBody>
                         </Card>
                     </Col>
-
                     <AllEmployeesPage />
-
-
                 </Page>
 
             </>

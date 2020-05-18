@@ -6,7 +6,7 @@ import {
     ModalHeader,
 } from 'reactstrap'
 import Page from '../../components/Page'
-import {  MdLibraryAdd } from "react-icons/md"
+import { MdLibraryAdd } from "react-icons/md"
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux"
 import Swal from "sweetalert2"
@@ -34,11 +34,10 @@ class AllEmployees extends Component {
             [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
         });
     };
-
     deleteFun(email) {
         Swal.fire({
             title: "Are you sure?",
-            text: "This user will be deleted permamently!",
+            text: "This user will be deleted Permamently!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",

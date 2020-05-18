@@ -13,6 +13,7 @@ export default {
     ViewSingleOrderPage: '/ViewSingleOrderPage',
     ViewAllItems: '/ViewAllItems',
     viewCustomers: '/viewCustomers',
-    AddCustomer: '/AddCustomer'
+    AddCustomer: '/AddCustomer',
+    ViewOrdersFinance: '/ViewOrdersFinance'
 
 }
