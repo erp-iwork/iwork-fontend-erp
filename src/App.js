@@ -34,6 +34,10 @@ const CreateOrdersPage = React.lazy(() => import('./pages/Sales/CreateOrdersPage
 const ViewAllOrdersPage = React.lazy(() => import('./pages/Sales/ViewAllOrdersPage'));
 const ViewSingleOrderPage = React.lazy(() => import('./pages/Sales/ViewSingleOrderPage'));
 const viewAllItemsPage = React.lazy(() => import('./pages/Inventory/viewAllItems'));
+const AddCustomerPage = React.lazy(() => import('./pages/Finance/AddCustomerPage'));
+const viewAllCutomersPage = React.lazy(() => import('./pages/Finance/viewAllCutomersPage'));
+
+
 
 
 
@@ -67,15 +71,26 @@ class App extends React.Component {
                 <Route exact path="/alerts" component={AlertPage} />
                 <Route exact path="/tables" component={TablePage} />
                 <Route exact path="/badges" component={BadgePage} />
+                {/* HR ROUTES/ */}
                 <Route exact path={routes.allEmployees} component={AllEmployeePage} />
                 <Route exact path={routes.addEmployee} component={AddEmployeePage} />
                 <Route exact path={routes.employeeProfile} component={EmployeeProfilePage} />
+                {/* IT ROUTES/ */}
                 <Route exact path={routes.itEmployeePage} component={ITAllEmployeesPage} />
                 <Route exact path={routes.addAccount} component={ITAddaccount} />
+                {/* SALES ROUTES */}
                 <Route exact path={routes.createOrderPage} component={CreateOrdersPage} />
                 <Route exact path={routes.ViewAllOrdersPage} component={ViewAllOrdersPage} />
                 <Route exact path={routes.ViewSingleOrderPage} component={ViewSingleOrderPage} />
+                {/* INVENTORY ROUTES/ */}
                 <Route exact path={routes.ViewAllItems} component={viewAllItemsPage} />
+                {/* FINANCE ROUTES/ */}
+                <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
+                <Route exact path={routes.viewCustomers} component={viewAllCutomersPage} />
+
+
+
+
 
 
 
