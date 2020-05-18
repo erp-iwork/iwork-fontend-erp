@@ -3,7 +3,6 @@ import Page from '../../components/Page';
 import { Col, Row, Card, CardHeader, Table, CardBody } from 'reactstrap';
 import './Sales.scss';
 import ViewAllOrdersPage from './ViewAllOrdersPage';
-import { IconBase } from 'react-icons/lib/cjs';
 
 class ViewSingleOrderPage extends Component {
     state = {}

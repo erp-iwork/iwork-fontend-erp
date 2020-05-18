@@ -17,7 +17,7 @@ class ViewAllOrdersPage extends Component {
                                 <thead>
                                     <tr>
                                         <th>Order #</th>
-                                        <th>Company</th>
+                                        <th>Customer</th>
                                         <th>Sales Person</th>
                                         <th>Shipment Address</th>
                                         <th>Order Date</th>

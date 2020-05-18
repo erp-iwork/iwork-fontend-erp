@@ -39,7 +39,7 @@ function addNewEmployee(data) {
           title: "Created",
           icon: "success",
           showConfirmButton: false,
-          timer: 1000
+          timer: 1000,
         });
         dispatch({
           type: appConstants.REGISTER_SUCCESS,
@@ -54,10 +54,11 @@ function addNewEmployee(data) {
           });
         } else {
           Swal.fire({
-            title: "Error", text: "Connection Problem",
+            title: "Error",
+            text: "Connection Problem",
             icon: "error",
             showConfirmButton: false,
-            timer: 1000
+            timer: 1000,
           });
         }
       });
@@ -91,16 +92,16 @@ function getEmploye() {
           });
         } else {
           Swal.fire({
-            title: "Error", text: "Connection Problem",
+            title: "Error",
+            text: "Connection Problem",
             icon: "error",
             showConfirmButton: false,
-            timer: 1000
+            timer: 1000,
           });
         }
       });
   };
 }
-
 
 function deleteEmploye(employeId) {
   return (dispatch) => {
@@ -120,7 +121,7 @@ function deleteEmploye(employeId) {
           title: "Deleted",
           icon: "success",
           showConfirmButton: false,
-          timer: 1000
+          timer: 1000,
         });
         dispatch({
           type: appConstants.DELETE_SUCCESS,
@@ -129,10 +130,11 @@ function deleteEmploye(employeId) {
       })
       .catch((error) => {
         Swal.fire({
-          title: "Error", text: "Something Went Wrong",
+          title: "Error",
+          text: "Something Went Wrong",
           icon: "error",
           showConfirmButton: false,
-          timer: 1000
+          timer: 1000,
         });
         if (error.response && error.response.data) {
           dispatch({
@@ -141,16 +143,16 @@ function deleteEmploye(employeId) {
           });
         } else {
           Swal.fire({
-            title: "Error", text: "Connection Problem",
+            title: "Error",
+            text: "Connection Problem",
             icon: "error",
             showConfirmButton: false,
-            timer: 1000
+            timer: 1000,
           });
         }
       });
   };
 }
-
 
 function deleteAccount(email) {
   return (dispatch) => {
@@ -178,7 +180,7 @@ function deleteAccount(email) {
           text: "Account Has Been Deleted",
           icon: "success",
           showConfirmButton: false,
-          timer: 1000
+          timer: 1000,
         });
       })
 
@@ -190,16 +192,16 @@ function deleteAccount(email) {
           });
         } else {
           Swal.fire({
-            title: "Error", text: "Connection Problem",
+            title: "Error",
+            text: "Connection Problem",
             icon: "error",
             showConfirmButton: false,
-            timer: 1000
+            timer: 1000,
           });
         }
       });
   };
 }
-
 
 function addAccount(employe) {
   return (dispatch) => {
@@ -230,7 +232,7 @@ function addAccount(employe) {
             text: "Account Has Been Created",
             icon: "success",
             showConfirmButton: false,
-            timer: 1000
+            timer: 1000,
           });
           dispatch({
             type: itConstants.REGISTER_SUCCESS,
@@ -240,10 +242,11 @@ function addAccount(employe) {
         .catch((error) => {
           console.log(error)
           Swal.fire({
-            title: "Error", text: "Something Went Wrong",
+            title: "Error",
+            text: "Something Went Wrong",
             icon: "error",
             showConfirmButton: false,
-            timer: 1000
+            timer: 1000,
           });
           if (error.response && error.response.data) {
             dispatch({
@@ -252,16 +255,16 @@ function addAccount(employe) {
             });
           } else {
             Swal.fire({
-              title: "Error", text: "Connection Problem",
+              title: "Error",
+              text: "Connection Problem",
               icon: "error",
               showConfirmButton: false,
-              timer: 1000
+              timer: 1000,
             });
           }
         });
   };
 }
-
 
 function getEmployeDetail(employeId) {
   return (dispatch) => {
@@ -290,16 +293,16 @@ function getEmployeDetail(employeId) {
           });
         } else {
           Swal.fire({
-            title: "Error", text: "Connection Problem",
+            title: "Error",
+            text: "Connection Problem",
             icon: "error",
             showConfirmButton: false,
-            timer: 1000
+            timer: 1000,
           });
         }
       });
   };
 }
-
 
 function getDepartment() {
   return (dispatch) => {
@@ -315,8 +318,7 @@ function getDepartment() {
         headers: headers,
       })
       .then((response) => {
-        
-        console.log(response)
+        console.log(response);
         dispatch({
           type: appConstants.FETCH_DEPARTMENT_SUCCESS,
           payload: response.data,
@@ -330,10 +332,11 @@ function getDepartment() {
           });
         } else {
           Swal.fire({
-            title: "Error", text: "Connection Problem",
+            title: "Error",
+            text: "Connection Problem",
             icon: "error",
             showConfirmButton: false,
-            timer: 1000
+            timer: 1000,
           });
         }
       });

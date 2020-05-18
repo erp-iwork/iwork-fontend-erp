@@ -55,11 +55,11 @@ class CreateOrdersPage extends Component {
                                 <Form>
                                     <FormGroup>
                                         <Label for="exampleSelect" sm={5}>
-                                            Company
+                                            Customer
                                             </Label>
                                         <Col sm={12}>
                                             <Input type="select" name="gender" onChange={this.handleChange}>
-                                                <option aria-label="None" value="" disabled>Company Name</option>
+                                                <option aria-label="None" value="" disabled>Customer Name</option>
                                                 <option>Something</option>
                                                 <option>Something</option>
                                             </Input>
@@ -121,15 +121,15 @@ class CreateOrdersPage extends Component {
                     </Col>
                     <Col md={6} sm={12}>
                         <Card >
-                            <CardHeader>Recently Interacted Companies</CardHeader>
+                            <CardHeader>Recent Orders</CardHeader>
                             <CardBody>
                                 <Table responsive className="scrollTable">
                                     <thead>
                                         <tr>
                                             <th> ID</th>
-                                            <th >Company Name</th>
-                                            <th>Account</th>
-                                            <th>Last Interaction</th>
+                                            <th >Customer</th>
+                                            <th>Sales Person</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -6,7 +6,6 @@ import {
     ModalHeader,
 } from 'reactstrap';
 import Page from '../../components/Page';
-import { MdCheckCircle } from "react-icons/md";
 
 
 class ViewAllItems extends Component {
