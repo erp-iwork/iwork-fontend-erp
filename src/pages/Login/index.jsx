@@ -5,8 +5,8 @@ import './styles.scss'
 import actions from '../../store/login/action'
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import SpinnerLoader from '../loader'
-import Error from '../../error'
+import SpinnerLoader from '../../components/loader'
+import Error from '../../components/error'
 import routes from '../../config/routes'
 
 class LoginForm extends React.Component {
@@ -27,7 +27,7 @@ class LoginForm extends React.Component {
     handleSubmit = async event => {
         event.preventDefault()
         const { username, password } = this.state
-        const response = await this.props.login(username, password)
+        await this.props.login(username, password)
     }
 
     render() {
@@ -46,6 +46,13 @@ class LoginForm extends React.Component {
                 <FormGroup>
                     <Label for='username'>Username</Label>
                     <Input type='text' id="username" name='username' onChange={this.handleChange}/>
+                    <Error
+                        error={
+                            this.props.errors.username
+                            ? this.props.errors.username
+                            : null
+                        }
+                    />
                 </FormGroup>
                 <FormGroup>
                     <Label for='password'>Password</Label>

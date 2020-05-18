@@ -3,7 +3,6 @@ import { UserCard } from '../../components/Card';
 import Notifications from '../../components/Notifications';
 import SearchInput from '../../components/SearchInput';
 import { notificationsData } from '../../demos/header';
-import { Redirect } from 'react-router-dom'
 import withBadge from '../../hocs/withBadge';
 import React from 'react';
 import {
