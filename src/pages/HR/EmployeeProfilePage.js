@@ -73,7 +73,7 @@ class EmployeeProfilePage extends Component {
                                 <Col sm={12} md={6}>
                                     <CardBody className='titleValue'>
                                         BirthDate : <b>{employeeInfos.birthDate}</b>
-                                    </CardBody>
+                                    </CardBody> 
                                 </Col>
 
                                 <Col sm={12} md={6}>
