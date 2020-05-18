@@ -51,40 +51,40 @@ class AddAccount extends React.Component {
         return (
             <Container className="container">
                 <Form onSubmit={this.handleSubmit} className="form" noValidate formNoValidate>
-                <div className="text-center pb-4">
-                    <img
-                        src={logo200Image}
-                        className="rounded"
-                        style={{ width: 60, height: 60, cursor: 'pointer' }}
-                        alt="logo"
-                    />
-                </div>
-                <FormGroup>
-                    <Label for='username'>Username</Label>
-                    <Input type='text' id="username" required name='username' onChange={this.handleChange}/>
-                    {this.state.errorUsername? <Label style={{ color: "red" }}>Username is required</Label> : ""}
-                </FormGroup>
-                <FormGroup>
-                    <Label for='password'>Password</Label>
-                    <Input type='password' name="password" required onChange={this.handleChange} />
-                    {this.state.errorPassword? <Label style={{ color: "red" }}>Password is required</Label> : ""}
-                </FormGroup>
-                <FormGroup className="checkbox">
-                    <Label for="is_admin">Is Admin?</Label>
-                    <Input type="checkbox" name="is_admin" onClick={(e) => this.handleChange({ target: { name: 'is_admin', value: e.target.checked } })} />
-                </FormGroup>
-                <hr />
-                {this.props.loading? (
-                    <Button size="lg" className="bg-gradient-theme-left border-0" block>
-                        <SpinnerLoader />
-                    </Button>
-                ) : (
-                    <Button size="lg" className="bg-gradient-theme-left border-0" block onClick={this.handleSubmit}>
-                        Register Account
-                    </Button>
-                )   
-                }
-            </Form>
+                    <div className="text-center pb-4">
+                        <img
+                            src={logo200Image}
+                            className="rounded"
+                            style={{ width: 60, height: 60, cursor: 'pointer' }}
+                            alt="logo"
+                        />
+                    </div>
+                    <FormGroup>
+                        <Label for='username'>Username</Label>
+                        <Input type='text' id="username" required name='username' onChange={this.handleChange} />
+                        {this.state.errorUsername ? <Label style={{ color: "red" }}>Username is required</Label> : ""}
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for='password'>Password</Label>
+                        <Input type='password' name="password" required onChange={this.handleChange} />
+                        {this.state.errorPassword ? <Label style={{ color: "red" }}>Password is required</Label> : ""}
+                    </FormGroup>
+                    <FormGroup className="checkbox">
+                        <Label for="is_admin">Is Admin?</Label>
+                        <Input type="checkbox" name="is_admin" onClick={(e) => this.handleChange({ target: { name: 'is_admin', value: e.target.checked } })} />
+                    </FormGroup>
+                    <hr />
+                    {this.props.loading ? (
+                        <Button size="lg" className="bg-gradient-theme-left border-0" block>
+                            <SpinnerLoader />
+                        </Button>
+                    ) : (
+                            <Button size="lg" className="bg-gradient-theme-left border-0" block onClick={this.handleSubmit}>
+                                Register Account
+                            </Button>
+                        )
+                    }
+                </Form>
             </Container>
         );
     }
