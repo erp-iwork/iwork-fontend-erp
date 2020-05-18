@@ -185,12 +185,6 @@ export default function hrReducer(state = initialState, action) {
       };
     }
 
-    case appConstants.DELETE_REQUEST: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
 
     case itConstants.DELETE_SUCCESS: {
       const index = state.employees.findIndex(

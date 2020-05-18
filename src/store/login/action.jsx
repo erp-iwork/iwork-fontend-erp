@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
-import { appConstants, errorsConstant } from "../../constant/constants";
+import { appConstants } from "../../constant/constants";
 import headers from "./../headers";
 function login(username, password) {
   return (dispatch) => {
