@@ -9,6 +9,7 @@ import Page from '../../components/Page'
 import { MdCheckCircle } from "react-icons/md"
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux"
+import Swal from "sweetalert2"
 import actions from '../../store/hr/action'
 import routes from '../../config/routes'
 import PageSpinner from '../../components/PageSpinner'
@@ -33,6 +34,22 @@ class AllEmployees extends Component {
             [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
         });
     }; 
+
+    deleteFun(email) {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "This user will be deleted permamently!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.value) {
+            this.props.deleteAccount(email);
+          }
+        });
+    }
 
     componentDidMount() {
         this.props.getEmploye()
@@ -91,7 +108,7 @@ class AllEmployees extends Component {
                                             <td>{employeeInfos.termOfEmployment}</td>
                                             <td>
                                                 {employeeInfos.has_account? (
-                                                    <Button>Delete</Button>
+                                                    <Button onClick={() => this.deleteFun(employeeInfos.email)}>Delete</Button>
                                                 ): (
                                                     <Link to={{ pathname: routes.addAccount, state: { account: employeeInfos } }}>
                                                         <Button color='primary'>
