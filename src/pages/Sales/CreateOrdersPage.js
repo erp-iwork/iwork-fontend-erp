@@ -59,7 +59,7 @@ class CreateOrdersPage extends Component {
                                             </Label>
                                         <Col sm={12}>
                                             <Input type="select" name="gender" onChange={this.handleChange}>
-                                                <option aria-label="None" value="" disabled>Customer Name</option>
+                                                <option aria-label="None" value="">Customer Name</option>
                                                 <option>Something</option>
                                                 <option>Something</option>
                                             </Input>
