@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardHeader, Col, Row, Table, Button } from 'reactstrap'
 import Page from '../../components/Page';
-import { MdCheckCircle } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
@@ -72,8 +72,8 @@ class AllEmployees extends Component {
                                                 <td>{employeeInfos.telephone}</td>
                                                 <td>{employeeInfos.termOfEmployment}</td>
                                                 <td>
-                                                    <Button  color='success' onClick={() => this.deleteFun(employeeInfos.email)}>
-                                                        <MdCheckCircle />
+                                                    <Button  color='danger' onClick={() => this.deleteFun(employeeInfos.email)}>
+                                                        <MdDelete />
                                                     </Button>
                                                 </td>
                                                 <td>
