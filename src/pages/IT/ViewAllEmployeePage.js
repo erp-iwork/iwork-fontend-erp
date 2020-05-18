@@ -5,7 +5,7 @@ import {
     ModalFooter,
     ModalHeader,
 } from 'reactstrap'
-import Page from '../../components/Page'
+import Page from '../../components/Page' 
 import { MdCheckCircle } from "react-icons/md"
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux"
