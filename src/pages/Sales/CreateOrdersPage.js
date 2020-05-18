@@ -159,7 +159,7 @@ class CreateOrdersPage extends Component {
                                                 }
                                             />
                                         </Col>
-                                    </FormGroup>
+                                    </FormGroup> 
 
                                     <CardHeader>Item Information</CardHeader>
                                     {items.map((v, i) => {
