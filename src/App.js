@@ -60,7 +60,6 @@ class App extends React.Component {
                 <LoginPage />
               )}
             />
-
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" component={DashboardPage} />
@@ -72,6 +71,8 @@ class App extends React.Component {
                 <Route exact path="/alerts" component={AlertPage} />
                 <Route exact path="/tables" component={TablePage} />
                 <Route exact path="/badges" component={BadgePage} />
+                {/* HR ROUTES/ */}
+
                 {/* HR ROUTES/ */}
                 <Route exact path={routes.allEmployees} component={AllEmployeePage} />
                 <Route exact path={routes.addEmployee} component={AddEmployeePage} />

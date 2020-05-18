@@ -52,7 +52,7 @@ class AllEmployees extends Component {
                             <CardBody>
                                 <Table responsive>
                                     <thead>
-                                        <tr>
+                                        <tr align='center'>
                                             <th>#</th>
                                             <th>First Name</th>
                                             <th>Email</th>
@@ -64,7 +64,7 @@ class AllEmployees extends Component {
                                     </thead>
                                     <tbody>
                                         {this.props.employees.map((employeeInfos, index) => (
-                                            <tr key={index}>
+                                            <tr align='center' key={index}>
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
                                                 <td>{employeeInfos.email}</td>
