@@ -5,7 +5,7 @@ import {
     ModalFooter,
     ModalHeader,
 } from 'reactstrap'
-import Page from '../../components/Page' 
+import Page from '../../components/Page'
 import { MdCheckCircle } from "react-icons/md"
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux"
@@ -33,21 +33,21 @@ class AllEmployees extends Component {
         this.setState({
             [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
         });
-    }; 
+    };
 
     deleteFun(email) {
         Swal.fire({
-          title: "Are you sure?",
-          text: "This user will be deleted permamently!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#d33",
-          cancelButtonColor: "#3085d6",
-          confirmButtonText: "Yes, delete it!",
+            title: "Are you sure?",
+            text: "This user will be deleted permamently!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
         }).then((result) => {
-          if (result.value) {
-            this.props.deleteAccount(email);
-          }
+            if (result.value) {
+                this.props.deleteAccount(email);
+            }
         });
     }
 
@@ -86,36 +86,36 @@ class AllEmployees extends Component {
                         <CardBody>
                             <Table responsive>
                                 <thead>
-                                    <tr>
+                                    <tr align='center'>
                                         <th>#</th>
                                         <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Hired Date</th>
                                         <th>Phone Number</th>
                                         <th>Term Of Employment</th>
-                                        <th>Account</th>
+                                        <th align='center'>Account</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {this.props.employees.map((employeeInfos, index) => (
-                                        <tr key={index}>
+                                        <tr align='center' key={index}>
                                             <th scope="row">{employeeInfos.employeId}</th>
                                             <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
                                             <td>{employeeInfos.email}</td>
                                             <td>{employeeInfos.hiredDate}</td>
                                             <td>{employeeInfos.telephone}</td>
-                                            <td>{employeeInfos.termOfEmployment}</td>
-                                            <td>
-                                                {employeeInfos.has_account? (
-                                                    <Button onClick={() => this.deleteFun(employeeInfos.email)}>Delete</Button>
-                                                ): (
-                                                    <Link to={{ pathname: routes.addAccount, state: { account: employeeInfos } }}>
-                                                        <Button color='primary'>
-                                                            <MdCheckCircle />
-                                                        </Button>
-                                                    </Link>
-                                                )}
+                                            <td >{employeeInfos.termOfEmployment}</td>
+                                            <td >
+                                                {employeeInfos.has_account ? (
+                                                    <Button size='sm' onClick={() => this.deleteFun(employeeInfos.email)}>Delete Account</Button>
+                                                ) : (
+                                                        <Link to={{ pathname: routes.addAccount, state: { account: employeeInfos } }}>
+                                                            <Button color='primary'>
+                                                                <MdCheckCircle />
+                                                            </Button>
+                                                        </Link>
+                                                    )}
                                             </td>
                                             <td>
                                                 <Link to={{ pathname: routes.employeeProfile, state: employeeInfos.employeId }}>
@@ -140,10 +140,10 @@ class AllEmployees extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      loading: state.hrReducer.loading,
-      users: state.hrReducer.users,
-      employees: state.hrReducer.employees,
-      errors: state.hrReducer.errors,
+        loading: state.hrReducer.loading,
+        users: state.hrReducer.users,
+        employees: state.hrReducer.employees,
+        errors: state.hrReducer.errors,
     };
 }
 

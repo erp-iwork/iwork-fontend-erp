@@ -1,21 +1,62 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import actions from '../../store/sales/action'
+import routes from '../../config/routes'
+import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
+import PageSpinner from '../../components/PageSpinner'
 
-import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
+const Order = ({ order }) => {
+    return (
+        <tr align="center">
+            <th scope="row">{order.orderNumber}</th>
+            <td>{order.company}</td>
+            <td>{order.salesPerson}</td>
+            <td>{order.shipmentAddress}</td>
+            <td>{order.orderDate}</td>
+            <td>{order.status}</td>
+            <td>
+                <Link to={{ pathname: routes.ViewSingleOrderPage, state: order }}>
+                    <Button size='sm' color='primary'>
+                        See Order
+                    </Button>
+                </Link>
+            </td>
+        </tr>
+    )
+}
 
 
 class ViewAllOrdersPage extends Component {
-    state = {}
+    constructor(props) {
+        super(props)
+        this.state = {
+            orders: this.props.lists,
+            passedOrders: false
+        }
+    }
+    
+    async componentDidMount() {
+        if (!this.props.lists) {
+            await this.props.getAllOrder()
+            this.setState({ passedOrders: true })
+            console.log(this.props.orders[0])
+        } else this.setState({ passedOrders: true })
+    }
+
     render() {
+        if (!this.props.lists) {
+            if (!this.props.orders[0]) return <PageSpinner />
+        }
         return (
             <Page title="View All Orders" breadcrumbs={[{ name: 'All Orders', active: true }]}>
-
                     <Card className="mb-3">
                         <CardHeader>All Orders</CardHeader>
                         <CardBody>
                             <Table responsive >
                                 <thead>
-                                    <tr>
+                                    <tr align='center'>
                                         <th>Order #</th>
                                         <th>Customer</th>
                                         <th>Sales Person</th>
@@ -27,45 +68,11 @@ class ViewAllOrdersPage extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>Mark</td>
-                                        <td>Delivered</td>
-                                        <td>
-                                            <Button size='sm' color='primary'>
-                                                See Order
-                                            </Button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <td>Mark</td>
-                                        <td>Issued</td>
-                                        <td>
-                                            <Button size='sm' color='primary'>
-                                                See Order
-                                            </Button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                        <td>Mark</td>
-                                        <td>Issued</td>
-                                        <td>
-                                            <Button size='sm' color='primary'>
-                                                See Order
-                                            </Button>
-                                        </td>
-                                    </tr>
+                                    {this.props.lists? this.props.lists.map((order, index) => (
+                                        <Order order={order} />
+                                    )) : this.props.orders.map((order, index) => (
+                                        <Order order={order}/>
+                                    ))}
                                 </tbody>
                             </Table>
                         </CardBody>
@@ -75,4 +82,21 @@ class ViewAllOrdersPage extends Component {
     }
 }
 
-export default ViewAllOrdersPage;
+const mapStateToProps = (state) => {
+    return {
+      loading: state.salesReducer.loading,
+      errors: state.salesReducer.errors,
+      items: state.salesReducer.items,
+      companys: state.salesReducer.companys,
+      success: state.salesReducer.success,
+      orders:state.salesReducer.orders
+    }
+}
+const mapDispatchToProps = {
+    createOrder: actions.createOrder,
+    getAllItem: actions.getAllItem,
+    getAllCompany: actions.getAllCompany,
+    getAllOrder: actions.getAllOrder
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewAllOrdersPage)

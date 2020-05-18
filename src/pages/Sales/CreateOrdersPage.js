@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom'
 import Error from '../../components/error'
 import actions from '../../store/sales/action'
 import PageSpinner from '../../components/PageSpinner'
+import Loader from '../../components/loader'
 
 class CreateOrdersPage extends Component {
     constructor() {
@@ -42,13 +43,13 @@ class CreateOrdersPage extends Component {
         this.ItemNameChange = this.ItemNameChange.bind(this)
         this.ItemQuantityChange = this.ItemQuantityChange.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.submit = this.submit.bind(this)
     }
 
     componentDidMount() {
         this.props.getAllCompany()
         this.props.getAllItem()
         this.props.getAllOrder()
-        console.log(this.props.orders)
     }
 
     handleAddItem = () => {
@@ -74,7 +75,7 @@ class CreateOrdersPage extends Component {
           };
         });
     
-        this.setState({ order_items: neworder_items });
+        this.setState({ order_items: neworder_items })
     }
 
     ItemQuantityChange = (idx) => (evt) => {
@@ -88,6 +89,24 @@ class CreateOrdersPage extends Component {
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value })
+    }
+
+    submit = () => {
+        this.props.createOrder(this.state);
+        this.componentDidMount();
+        if (this.props.success) {
+          this.setState({
+            fieldName: "",
+            orderNumber: "",
+            orderName: "",
+            company: "",
+            description: "",
+            discount: "",
+            itemQuantity: 0,
+            InventoryItem: "",
+            shipmentAddress: "",
+          })
+        }
     }
 
     render() {
@@ -168,8 +187,8 @@ class CreateOrdersPage extends Component {
                                                 <Col md={6}>
                                                     <Input onChange={this.ItemNameChange(i)} value={v.InventoryItemId} type="select">
                                                         <option aria-label="None" value="">Item Name</option>
-                                                        {this.props.items.map((_item) => (
-                                                            <option value={_item.InventoryItemId}>
+                                                        {this.props.items.map((_item, idx) => (
+                                                            <option value={_item.InventoryItemId} key={idx}>
                                                             {_item.itemName}
                                                             </option>
                                                         ))}
@@ -192,14 +211,9 @@ class CreateOrdersPage extends Component {
                                     {
                                         this.props.errors.item_order ? this.props.errors.item_order.map((item) => (
                                         <Error
-                                            error={
-                                            item.InventoryItem
-
-                                            }
+                                            error={item.InventoryItem}
                                         />
-                                        )
-
-                                        ) : null
+                                        )) : null
                                     }
                                     <Error
                                         error={
@@ -208,16 +222,20 @@ class CreateOrdersPage extends Component {
                                             : null
                                         }
                                     />
-                                    <Button
-                                        onClick={() => this.handleAddItem()}
-                                        size='sm'
-                                        color='primary'
-                                    >
-                                        Add Another Item
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Button
+                                            onClick={() => this.handleAddItem()}
+                                            size='sm'
+                                            color='primary'
+                                        >
+                                            Add Another Item
                                     </Button>
                                     </FormGroup>
                                     <FormGroup align='center'>
-                                        <Button color='primary' onClick={this.submit}>Place Order</Button>
+                                        <Button color='primary' onClick={this.submit}>
+                                            {this.props.loading? <Loader /> : "Place Order"}
+                                        </Button>
                                     </FormGroup>
                                 </Form>
                             </CardBody>
@@ -252,7 +270,7 @@ class CreateOrdersPage extends Component {
                         </Card>
                     </Col>
                 </Row>
-                <ViewAllOrdersPage orders={this.props.orders} />
+                <ViewAllOrdersPage lists={this.props.orders} />
             </Page>
         );
     }
