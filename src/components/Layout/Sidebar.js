@@ -35,6 +35,8 @@ import {
   NavLink as BSNavLink,
 } from 'reactstrap';
 import bn from '../../utils/bemnames';
+import routes from '../../config/routes'
+
 
 const sidebarBackground = {
   backgroundImage: `url("${sidebarBgImage}")`,
@@ -84,10 +86,16 @@ const navItems = [
   { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
   { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
   { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
-  { to: '/AllEmployees', name: 'All Employees', exact: false, Icon: MdWidgets },
-  { to: '/AddEmployee', name: 'Add Employee', exact: false, Icon: MdWidgets },
-  { to: '/EmployeeProfile', name: 'Profile', exact: false, Icon: MdWidgets },
-  { to: '/ITAllEmployeesPage', name: '(IT) All Employees', exact: false, Icon: MdWidgets },
+  { to: routes.allEmployees, name: 'All Employees', exact: false, Icon: MdWidgets },
+  { to: routes.addEmployee, name: 'Add Employee', exact: false, Icon: MdWidgets },
+  { to: routes.employeeProfile, name: 'Profile', exact: false, Icon: MdWidgets },
+  { to: routes.itEmployeePage, name: 'All Employees', exact: false, Icon: MdWidgets },
+  { to: routes.createOrderPage, name: 'Create Order', exact: false, Icon: MdWidgets },
+  { to: routes.ViewAllOrdersPage, name: 'View All Orders', exact: false, Icon: MdWidgets },
+  { to: routes.ViewSingleOrderPage, name: 'Single Order', exact: false, Icon: MdWidgets },
+
+
+
 
 
 

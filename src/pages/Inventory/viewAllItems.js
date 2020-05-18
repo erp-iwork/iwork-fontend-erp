@@ -9,7 +9,7 @@ import Page from '../../components/Page';
 import { MdCheckCircle } from "react-icons/md";
 
 
-class AllEmployees extends Component {
+class ViewAllItems extends Component {
     state = {
         modal: false,
         modal_backdrop: false,
@@ -32,8 +32,8 @@ class AllEmployees extends Component {
     render() {
         return (
             <Page
-                title="All Employees"
-                breadcrumbs={[{ name: 'All Employees', active: true }]}
+                title="All Items"
+                breadcrumbs={[{ name: 'All Items', active: true }]}
                 className="TablePage">
                 <Modal
                     isOpen={this.state.modal}
@@ -55,19 +55,23 @@ class AllEmployees extends Component {
 
                 <Col>
                     <Card className="mb-4">
-                        <CardHeader>All Employees</CardHeader>
+                        <CardHeader>Inventory Status</CardHeader>
                         <CardBody>
                             <Table responsive>
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Email</th>
-                                        <th>Hired Date</th>
-                                        <th>Phone Number</th>
-                                        <th>Term Of Employment</th>
-                                        <th>Account</th>
-                                        <th>Action</th>
+                                        <th>Item ID</th>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                        <th>Retail Price</th>
+                                        <th>Packaging</th>
+                                        <th>Warehouse Name</th>
+                                        <th>Discount</th>
+                                        <th>Category</th>
+                                        <th>Actions</th>
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -78,17 +82,12 @@ class AllEmployees extends Component {
                                         <td>Mark</td>
                                         <td>Otto</td>
                                         <td>@mdo</td>
+                                        <td>Johnlights51@gmail.com</td>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
                                         <td>
-                                            <Button onClick={this.toggle()} color='primary'>
-
-                                                <MdCheckCircle />
-                                            </Button>
-                                        </td>
-                                        <td>
-                                            <Button
-                                                size='sm'
-                                                color='primary'>
-                                                See Profile
+                                            <Button size='sm' color='primary'>
+                                                See More
                                                 </Button>
                                         </td>
                                     </tr>
@@ -99,15 +98,12 @@ class AllEmployees extends Component {
                                         <td>Mark</td>
                                         <td>Otto</td>
                                         <td>@mdo</td>
-                                        <td>
-                                            <Button onClick={this.toggle()} color='primary'>
-
-                                                <MdCheckCircle />
-                                            </Button>
-                                        </td>
+                                        <td>Johnlights51@gmail.com</td>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
                                         <td>
                                             <Button size='sm' color='primary'>
-                                                See Profile
+                                                See More
                                                 </Button>
                                         </td>
                                     </tr>
@@ -121,4 +117,4 @@ class AllEmployees extends Component {
     }
 }
 
-export default AllEmployees;
+export default ViewAllItems;

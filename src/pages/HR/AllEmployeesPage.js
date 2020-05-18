@@ -72,7 +72,7 @@ class AllEmployees extends Component {
                                                 <td>{employeeInfos.telephone}</td>
                                                 <td>{employeeInfos.termOfEmployment}</td>
                                                 <td>
-                                                    <Button color='success'>
+                                                    <Button  color='success'>
                                                         <MdCheckCircle />
                                                     </Button>
                                                 </td>
@@ -81,7 +81,7 @@ class AllEmployees extends Component {
                                                         pathname: routes.employeeProfile,
                                                         state: employeeInfos.employeId
                                                     }}>
-                                                        <Button color='primary'>
+                                                        <Button size='sm' color='primary'>
                                                             See Profile
                                                         </Button>
                                                     </Link>
