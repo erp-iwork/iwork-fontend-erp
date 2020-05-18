@@ -53,6 +53,27 @@ class viewAllCustomersPage extends Component {
 
                                         </td>
                                     </tr>
+
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>Mark</td>
+                                        <td>
+                                            <Col align='center'>
+                                                <Button color='danger' size='sm'>
+
+                                                    <MdDelete />
+                                                </Button>
+                                            </Col>
+
+
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </Table>
                         </CardBody>
