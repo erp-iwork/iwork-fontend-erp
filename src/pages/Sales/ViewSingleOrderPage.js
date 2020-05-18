@@ -43,7 +43,7 @@ class ViewSingleOrderPage extends Component {
                                 </Row>
                                 <Row>
                                     <Col>
-                                        Order Date:
+                                        Order Date :
                                     </Col>
                                     <Col>
                                         <b>{details.orderDate}</b>
