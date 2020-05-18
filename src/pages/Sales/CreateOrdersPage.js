@@ -16,38 +16,80 @@ import {
 } from 'reactstrap';
 import "./Sales.scss";
 import ViewAllOrdersPage from "./ViewAllOrdersPage";
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import Error from '../../components/error'
+import actions from '../../store/sales/action'
+import PageSpinner from '../../components/PageSpinner'
 
 class CreateOrdersPage extends Component {
     constructor() {
         super();
         this.state = {
-            items: [""]
-        };
+            fieldName: "",
+            orderNumber: "",
+            orderName: "",
+            company: "",
+            description: "",
+            discount: "",
+            itemQuantity: 0,
+            InventoryItem: "",
+            shipmentAddress: "",
+            order_items: [{ InventoryItem: "", quantity: 1 }]
+        }
     }
 
-    handleItems() {
+    componentDidMount() {
+        this.props.getAllCompany()
+        this.props.getAllItem()
+        this.props.getAllOrder()
+    }
+
+    handleAddItem = () => {
         this.setState({
-            items: [...this.state.items, '']
-        });
+          order_items: this.state.order_items.concat([
+            { InventoryItem: "", quantity: 1 },
+          ])
+        })
     }
 
-    handleChange(e, i) {
-        let { items } = this.state;
-        let itemsUpdate = [...items];
-        items.splice(i, 1);
-
-        itemsUpdate[i] = e.target.value;
+    handleRemoveItem = (idx) => {
         this.setState({
-            items: itemsUpdate
-        });
+          order_items: this.state.order_items.filter((s, sidx) => idx !== sidx),
+        })
     }
+
+    ItemNameChange = (idx) => (evt) => {
+        const neworder_items = this.state.order_items.map((item, sidx) => {
+          if (idx !== sidx) return item;
+          return {
+            ...item,
+            InventoryItem: evt.target.value,
+          };
+        });
+    
+        this.setState({ order_items: neworder_items });
+    }
+
+    ItemQuantityChange = (idx) => (evt) => {
+        const neworder_items = this.state.order_items.map((item, sidx) => {
+          if (idx !== sidx) return item;
+          return { ...item, quantity: evt.target.value, name: evt.target.name };
+        });
+    
+        this.setState({ order_items: neworder_items });
+    }
+
+    handleChange(e) {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+
     render() {
-        let { items } = this.state;
+        let { order_items: items } = this.state;
+        if (!this.props.companys[0]) return <PageSpinner />
         return (
             <Page title="Create Order" breadcrumbs={[{ name: 'Create Order', active: true }]}>
-
                 <Row>
-
                     <Col md={6} sm={12}>
                         <Card>
                             <CardHeader>Order Information</CardHeader>
@@ -60,9 +102,19 @@ class CreateOrdersPage extends Component {
                                         <Col sm={12}>
                                             <Input type="select" name="gender" onChange={this.handleChange}>
                                                 <option aria-label="None" value="" disabled>Customer Name</option>
-                                                <option>Something</option>
-                                                <option>Something</option>
+                                                {this.props.companys.map((comp, idx) => (
+                                                    <option value={comp.companyId} key={idx}>
+                                                        {comp.companyName}
+                                                    </option>
+                                                ))}
                                             </Input>
+                                            <Error
+                                                error={
+                                                    this.props.errors.company
+                                                    ? this.props.errors.company
+                                                    : null
+                                                }
+                                            />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup>
@@ -71,7 +123,16 @@ class CreateOrdersPage extends Component {
                                     </Label>
                                         <Col sm={12}>
                                             <Input
+                                                name="shipmentAddress"
                                                 placeholder=" Shipment Address"
+                                                onChange={this.handleChange}
+                                            />
+                                            <Error
+                                                error={
+                                                    this.props.errors.shipmentAddress
+                                                    ? this.props.errors.shipmentAddress
+                                                    : null
+                                                }
                                             />
                                         </Col>
                                     </FormGroup>
@@ -80,40 +141,77 @@ class CreateOrdersPage extends Component {
                                             Description
                                     </Label>
                                         <Col sm={12}>
-                                            <Input placeholder=" Description About the Order" type="textarea" name="text" />
+                                            <Input placeholder=" Description About the Order" type="textarea"
+                                                name="description"
+                                                onChange={this.handleChange}
+                                            />
+                                            <Error
+                                                error={
+                                                    this.props.errors.description
+                                                    ? this.props.errors.description
+                                                    : null
+                                                }
+                                            />
                                         </Col>
                                     </FormGroup>
 
                                     <CardHeader>Item Information</CardHeader>
                                     {items.map((v, i) => {
                                         return (
-                                            <Row className='duplicatedForm'>
+                                            <Row className='duplicatedForm' key={i}>
                                                 <Col md={6}>
-                                                    <Input value={v} onChange={e => this.handleChange(e, i)} type="select" name="Item Name">
+                                                    <Input value={v} onChange={this.ItemNameChange(i)} type="select" name="Item Name">
                                                         <option aria-label="None" value="" disabled>Item Name</option>
-                                                        <option>Something</option>
-                                                        <option>Something</option>
+                                                        {this.props.items.map((_item) => (
+                                                            <option value={_item.InventoryItemId}>
+                                                            {_item.itemName}
+                                                            </option>
+                                                        ))}
                                                     </Input>
                                                 </Col>
-                                                <Col md={6}>
-                                                    <Input placeholder='Item Quantity' name="Quantity">
+                                                <Col md={5}>
+                                                    <Input
+                                                        placeholder={`Item #${i + 1} quantity`}
+                                                        onChange={this.ItemQuantityChange(i)}
+                                                    >
                                                     </Input>
+                                                </Col>
+                                                <Col md={1}>
+                                                    <Button onClick={() => this.handleRemoveItem(i)}>-</Button>
                                                 </Col>
                                             </Row>
                                         );
                                     })}
-                                    <FormGroup align='right'>
+                                    <FormGroup>
+                                    {
+                                        this.props.errors.item_order ? this.props.errors.item_order.map((item) => (
+                                        <Error
+                                            error={
+                                            item.InventoryItem
 
-                                        <Button
-                                            onClick={() => this.handleItems()}
-                                            size='sm'
-                                            color='primary'
-                                        >
-                                            Add Another Item
+                                            }
+                                        />
+                                        )
+
+                                        ) : null
+                                    }
+                                    <Error
+                                        error={
+                                        this.props.errors.itemName
+                                            ? this.props.errors.itemName
+                                            : null
+                                        }
+                                    />
+                                    <Button
+                                        onClick={() => this.handleAddItem()}
+                                        size='sm'
+                                        color='primary'
+                                    >
+                                        Add Another Item
                                     </Button>
                                     </FormGroup>
                                     <FormGroup align='center'>
-                                        <Button color='primary'>Submit</Button>
+                                        <Button color='primary' onClick={this.submit}>Place Order</Button>
                                     </FormGroup>
                                 </Form>
                             </CardBody>
@@ -187,4 +285,21 @@ class CreateOrdersPage extends Component {
     }
 }
 
-export default CreateOrdersPage;
+const mapStateToProps = (state) => {
+    return {
+      loading: state.salesReducer.loading,
+      errors: state.salesReducer.errors,
+      items: state.salesReducer.items,
+      companys: state.salesReducer.companys,
+      success: state.salesReducer.success,
+      orders:state.salesReducer.orders
+    }
+}
+const mapDispatchToProps = {
+    createOrder: actions.createOrder,
+    getAllItem: actions.getAllItem,
+    getAllCompany: actions.getAllCompany,
+    getAllOrder: actions.getAllOrder
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateOrdersPage)
