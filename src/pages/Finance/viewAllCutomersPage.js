@@ -20,7 +20,7 @@ class viewAllCustomersPage extends Component {
                         <CardBody>
                             <Table responsive>
                                 <thead>
-                                    <tr align='center'>
+                                    <tr align='left'>
                                         <th>#</th>
                                         <th>Customer Name</th>
                                         <th>General Manager</th>
@@ -33,7 +33,7 @@ class viewAllCustomersPage extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr align='center'>
+                                    <tr align='left'>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
@@ -43,7 +43,7 @@ class viewAllCustomersPage extends Component {
                                         <td>@mdo</td>
                                         <td>Mark</td>
                                         <td>
-                                            <Col align='center'>
+                                            <Col align='left'>
                                                 <Button color='danger' size='sm'>
 
                                                     <MdDelete />
@@ -54,7 +54,7 @@ class viewAllCustomersPage extends Component {
                                         </td>
                                     </tr>
 
-                                    <tr align='center'>
+                                    <tr align='left'>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>

@@ -59,9 +59,9 @@ class AllEmployees extends Component {
                             <CardBody>
                                 <Table responsive>
                                     <thead>
-                                        <tr align='center'>
+                                        <tr  >
                                             <th>#</th>
-                                            <th>First Name</th>
+                                            <th  >First Name</th>
                                             <th>Email</th>
                                             <th>Hired Date</th>
                                             <th>Phone Number</th>
@@ -71,15 +71,15 @@ class AllEmployees extends Component {
                                     </thead>
                                     <tbody>
                                         {this.props.employees.map((employeeInfos, index) => (
-                                            <tr align='center' key={index}>
+                                            <tr align='left' key={index}>
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
-                                                <td>{employeeInfos.email}</td>
+                                                <td >{employeeInfos.email}</td>
                                                 <td>{employeeInfos.hiredDate}</td>
                                                 <td>{employeeInfos.telephone}</td>
                                                 <td>{employeeInfos.termOfEmployment}</td>
                                                 <td>
-                                                    <Button  color='danger' onClick={() => this.deleteFun(employeeInfos.employeId)}>
+                                                    <Button size='sm' color='danger' onClick={() => this.deleteFun(employeeInfos.employeId)}>
                                                         <MdDelete />
                                                     </Button>
                                                 </td>
