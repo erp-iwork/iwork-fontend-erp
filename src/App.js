@@ -36,6 +36,10 @@ const ViewSingleOrderPage = React.lazy(() => import('./pages/Sales/ViewSingleOrd
 const viewAllItemsPage = React.lazy(() => import('./pages/Inventory/viewAllItems'));
 const AddCustomerPage = React.lazy(() => import('./pages/Finance/AddCustomerPage'));
 const viewAllCutomersPage = React.lazy(() => import('./pages/Finance/viewAllCutomersPage'));
+const ViewAllOrdersFinancePage = React.lazy(() => import('./pages/Finance/ViewAllOrdersPage'));
+const ViewAllOrdersLogisticsPage = React.lazy(() => import('./pages/Logistics/ViewAllOrdersPage'));
+
+
 
 
 
@@ -89,13 +93,12 @@ class App extends React.Component {
                 {/* FINANCE ROUTES/ */}
                 <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
                 <Route exact path={routes.viewCustomers} component={viewAllCutomersPage} />
+                <Route exact path={routes.ViewOrdersFinance} component={ViewAllOrdersFinancePage} />
+                {/* LOGISTICS ROUTES */}
+                <Route exact path={routes.ViewOrdersLogistics} component={ViewAllOrdersLogisticsPage} />
 
 
-
-
-
-
-
+                
                 <Route
                   exact
                   path="/button-groups"
