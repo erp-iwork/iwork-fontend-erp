@@ -224,7 +224,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="gender" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" />
+                                                        <option aria-label="None" value="" > Gender </option>
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </Input>
@@ -240,7 +240,8 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.departmentDropDown} value={depValue}>
-                                                        <option aria-label="None" value="" />
+                                                        <option aria-label="None" value="" > Department </option>
+
                                                         {this.props.department.map((dep, index) => (
                                                             <option value={dep.departmentId} key={index}>
                                                                 {dep.departmentName}
@@ -264,7 +265,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.roleDropDown} value={rolValue}>
-                                                        <option aria-label="None" value="" />
+                                                        <option aria-label="None" value="" >Role</option>
                                                         {this.state.rol.map((rols) => (
                                                             <option value={rols.roleId} key={rols.roleId}>
                                                                 {rols.role}
@@ -286,7 +287,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.levelDropDown}>
-                                                        <option aria-label="None" value="" />
+                                                        <option aria-label="None" value="" >Level</option>
                                                         {this.state.lev.map((levs) => (
                                                             <option value={levs.levelId} key={levs.levelId}>
                                                                 {levs.level}
@@ -332,7 +333,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="termOfEmployment" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" />
+                                                        <option aria-label="None" value="" >Term Of Employment</option>
                                                         {termsOfEmployment.map((item, index) => (
                                                             <option key={index} value={item}>{item}</option>
                                                         ))}
@@ -354,7 +355,7 @@ class AddEmployee extends Component {
                                                 <Label for="exampleSelect" sm={5}>Country</Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="country" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" />
+                                                        <option aria-label="None" value="" >Country</option>
                                                         {countries.map((item, index) => (
                                                             <option key={item} value={item}>{item}</option>
                                                         ))}
@@ -374,7 +375,7 @@ class AddEmployee extends Component {
                                                 <Label for="exampleSelect" sm={5}>Region</Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="region" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" />
+                                                        <option aria-label="None" value="" >Region</option>
                                                         {this.state.country ?
                                                             regions[this.state.country].map((item, index) => (
                                                                 <option key={item} value={item}>{item}</option>
@@ -396,7 +397,7 @@ class AddEmployee extends Component {
                                                 <Label for="exampleSelect" sm={5}>City</Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="city" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" />
+                                                        <option aria-label="None" value="" >City</option>
                                                         {this.state.country ?
                                                             city[this.state.country].map((item, index) => (
                                                                 <option key={item} value={item}>{item}</option>
