@@ -99,7 +99,7 @@ class AllEmployees extends Component {
                                 <tbody>
                                     {this.props.employees.map((employeeInfos, index) => (
                                         <tr align='center' key={index}>
-                                            <th scope="row">{employeeInfos.employeId}</th>
+                                            <th scope="row">{index + 1}</th>
                                             <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
                                             <td>{employeeInfos.email}</td>
                                             <td>{employeeInfos.hiredDate}</td>

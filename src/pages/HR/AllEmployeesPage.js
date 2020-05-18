@@ -24,7 +24,7 @@ class AllEmployees extends Component {
     deleteFun(employeId) {
         Swal.fire({
           title: "Are you sure?",
-          text: "You won't be able to revert this!",
+          text: "You won't be able to revert this Action!",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -32,9 +32,16 @@ class AllEmployees extends Component {
           confirmButtonText: "Yes, delete it!",
         }).then((result) => {
           if (result.value) {
+            Swal.fire({
+                title: "Delteing Account...",
+                icon: "warning",
+                showCancelButton: false,
+                allowOutsideClick: false,
+                showConfirmButton: false
+            })
             this.props.deleteEmploye(employeId);
           }
-        });
+        })
     }
 
     render() {
@@ -72,7 +79,7 @@ class AllEmployees extends Component {
                                                 <td>{employeeInfos.telephone}</td>
                                                 <td>{employeeInfos.termOfEmployment}</td>
                                                 <td>
-                                                    <Button  color='danger' onClick={() => this.deleteFun(employeeInfos.email)}>
+                                                    <Button  color='danger' onClick={() => this.deleteFun(employeeInfos.employeId)}>
                                                         <MdDelete />
                                                     </Button>
                                                 </td>

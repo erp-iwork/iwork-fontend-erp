@@ -3,6 +3,9 @@ import axios from "axios";
 import API from "../../api/API";
 import { appConstants, itConstants } from "../../constant/constants";
 import headers from "./../headers";
+import React from 'react'
+import { Redirect } from 'react-router-dom'
+import routes from '../../config/routes'
 
 function addNewEmployee(data) {
   return (dispatch) => {
@@ -26,7 +29,7 @@ function addNewEmployee(data) {
       type: appConstants.REGISTER_REQUEST,
       payload: true,
     });
-    axios
+    return axios
       .request({
         method: "POST",
         url: API + "employe/",
@@ -35,16 +38,18 @@ function addNewEmployee(data) {
         data: param,
       })
       .then((response) => {
-        Swal.fire({
+        return Swal.fire({
           title: "Created",
           icon: "success",
           showConfirmButton: false,
           timer: 1000,
-        });
-        dispatch({
-          type: appConstants.REGISTER_SUCCESS,
-          payload: response.data,
-        });
+        }).then(res => {
+          dispatch({
+            type: appConstants.REGISTER_SUCCESS,
+            payload: response.data,
+          });
+        })
+        
       })
       .catch((error) => {
         if (error.response && error.response.data) {
