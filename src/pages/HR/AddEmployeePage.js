@@ -105,7 +105,7 @@ class AddEmployee extends Component {
                 >
                     <Col lg={12} md={24}>
                         <Card>
-                            <CardHeader>Form Grid</CardHeader>
+                            <CardHeader>Add employee</CardHeader>
                             <CardBody>
                                 <Form>
                                     <Row>

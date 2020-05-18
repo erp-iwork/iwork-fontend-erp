@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { Card, CardBody, CardHeader, Col, Table } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Table, Button } from 'reactstrap';
+import { MdDelete } from "react-icons/md";
 
 
 class viewAllCustomersPage extends Component {
@@ -41,7 +42,37 @@ class viewAllCustomersPage extends Component {
                                         <td>Otto</td>
                                         <td>@mdo</td>
                                         <td>Mark</td>
+                                        <td>
+                                            <Col align='center'>
+                                                <Button color='danger' size='sm'>
+
+                                                    <MdDelete />
+                                                </Button>
+                                            </Col>
+
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
                                         <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                        <td>Mark</td>
+                                        <td>
+                                            <Col align='center'>
+                                                <Button color='danger' size='sm'>
+
+                                                    <MdDelete />
+                                                </Button>
+                                            </Col>
+
+
+                                        </td>
                                     </tr>
                                 </tbody>
                             </Table>

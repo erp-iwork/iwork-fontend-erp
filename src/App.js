@@ -52,6 +52,7 @@ class App extends React.Component {
       <BrowserRouter basename={getBasename()}>
         <GAListener>
           <Switch>
+        //signin page with public route. every one can get login page.
             <PublicRoute
               exact
               path={routes.login}
@@ -71,6 +72,8 @@ class App extends React.Component {
                 <Route exact path="/alerts" component={AlertPage} />
                 <Route exact path="/tables" component={TablePage} />
                 <Route exact path="/badges" component={BadgePage} />
+                {/* HR ROUTES/ */}
+
                 {/* HR ROUTES/ */}
                 <Route exact path={routes.allEmployees} component={AllEmployeePage} />
                 <Route exact path={routes.addEmployee} component={AddEmployeePage} />

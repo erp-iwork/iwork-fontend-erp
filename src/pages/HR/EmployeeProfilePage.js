@@ -42,114 +42,252 @@ class EmployeeProfilePage extends Component {
                         <Card className='additionalInformation'>
                             <CardTitle color="primary">Additional Information</CardTitle>
                             <hr />
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        First-Name : <b>{employeeInfos.firstName}</b>
-                                    </CardBody>
-                                </Col>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Last-Name : <b>{employeeInfos.lastName}</b>
-                                    </CardBody>
-                                </Col>
+                            <CardBody>
 
-                            </Row>
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Email : <b>{employeeInfos.lastName}</b>
-                                    </CardBody>
-                                </Col>
-                                <Col sm={12} md={6}>
+                                <Row>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={5}>
 
-                                    <CardBody className='titleValue'>
-                                        Phone-Number  :  <b>{employeeInfos.telephone}</b>
-                                    </CardBody>
+                                                First Name :
+                                        </Col>
+                                            <Col>
 
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        BirthDate : <b>{employeeInfos.birthDate}</b>
-                                    </CardBody>
-                                </Col>
+                                                <b>{employeeInfos.firstName}</b>
+                                            </Col>
 
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Gender : <b>M</b>
-                                    </CardBody>
-                                </Col>
+                                        </Row>
 
-                            </Row>
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Department : <b>{employeeInfos.department}</b>
-                                    </CardBody>
-                                </Col>
-                                <Col sm={12} md={6}>
+                                    </Col>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={6}>
 
-                                    <CardBody className='titleValue'>
-                                        Role  :  <b>{employeeInfos.roles}</b>
-                                    </CardBody>
+                                                Last Name :
+                                        </Col>
+                                            <Col>
 
-                                </Col>
-                            </Row>
+                                                <b>{employeeInfos.lastName}</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+
+                                </Row>
 
 
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Level : <b>{employeeInfos.level}</b>
-                                    </CardBody>
-                                </Col>
+                                <Row>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={5}>
 
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Hired-Date : <b>{employeeInfos.hiredDate}</b>
-                                    </CardBody>
-                                </Col>
+                                                Email :
+                                        </Col>
+                                            <Col>
 
-                            </Row>
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Employment-Type : <b>{employeeInfos.termOfEmployment}</b>
-                                    </CardBody>
-                                </Col>
-                                <Col sm={12} md={6}>
+                                                <b>{employeeInfos.email}</b>
+                                            </Col>
 
-                                    <CardBody className='titleValue'>
-                                        Country  :  <b>{employeeInfos.country}</b>
-                                    </CardBody>
+                                        </Row>
 
-                                </Col>
-                            </Row>
+                                    </Col>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={6}>
 
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Region : <b>{employeeInfos.region}</b>
-                                    </CardBody>
-                                </Col>
-                                <Col sm={12} md={6}>
+                                                Phone Number :
+                                        </Col>
+                                            <Col>
 
-                                    <CardBody className='titleValue'>
-                                        City  :  <b>{employeeInfos.city}</b>
-                                    </CardBody>
+                                                <b>{employeeInfos.telephone}</b>
+                                            </Col>
 
-                                </Col>
-                            </Row>
+                                        </Row>
 
-                            <Row>
-                                <Col sm={12} md={6}>
-                                    <CardBody className='titleValue'>
-                                        Has-Account : <b>{employeeInfos.has_account ? "Yes" : "No"}</b>
-                                    </CardBody>
-                                </Col>
-                            </Row>
+                                    </Col>
+
+                                </Row>
+
+                                <Row>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={5}>
+
+                                                BirthDate :
+                                        </Col>
+                                            <Col>
+
+                                                <b>{employeeInfos.birthDate}</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={6}>
+
+                                                Gender :
+                                        </Col>
+                                            <Col>
+
+                                                {/* <b>{employeeInfos.Male}</b> */}
+                                                <b>Male</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+
+                                </Row>
+
+                                <Row>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={5}>
+
+                                                Department :
+                                        </Col>
+                                            <Col>
+
+                                                <b>{employeeInfos.department}</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={6}>
+
+                                                Role :
+                                        </Col>
+                                            <Col>
+
+                                                <b>{employeeInfos.roles}</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+
+                                </Row>
+
+                                <Row>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={5}>
+
+                                                Level :
+                                        </Col>
+                                            <Col>
+
+                                                <b>{employeeInfos.level}</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={6}>
+
+                                                Hired Date :
+                                        </Col>
+                                            <Col>
+
+                                                <b>{employeeInfos.hiredDate}</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+
+                                </Row>
+
+                                <Row>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={5}>
+
+                                                Employment Type :
+                                        </Col>
+                                            <Col>
+
+                                                <b>{employeeInfos.termOfEmployment}</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={6}>
+
+                                                Country :
+                                        </Col>
+                                            <Col>
+
+                                                <b>{employeeInfos.country}</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+
+                                </Row>
+
+                                <Row>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={5}>
+
+                                                Region :
+                                        </Col>
+                                            <Col>
+
+                                                <b>{employeeInfos.region}</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={6}>
+
+                                                City :
+                                        </Col>
+                                            <Col>
+
+                                                <b>{employeeInfos.city}</b>
+                                            </Col>
+
+                                        </Row>
+
+                                    </Col>
+
+                                </Row>
+
+                                <Row>
+                                    <Col sm={12} md={6}>
+                                        <Row>
+                                            <Col md={6}>
+
+                                                Has Account :
+                                        </Col>
+                                            <Col>
+
+                                                <b>{employeeInfos.has_account ? "Yes" : "No"}</b>
+                                            </Col>
+
+                                        </Row>
+                                        {/* Has-Account : <b>{employeeInfos.has_account ? "Yes" : "No"}</b> */}
+                                    </Col>
+                                </Row>
+                            </CardBody>
+
                         </Card>
                     </Col>
                 </Row>
@@ -160,10 +298,10 @@ class EmployeeProfilePage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      loading: state.hrReducer.loading,
-      users: state.hrReducer.users,
-      employee: state.hrReducer.employee,
-      errors: state.hrReducer.errors,
+        loading: state.hrReducer.loading,
+        users: state.hrReducer.users,
+        employee: state.hrReducer.employee,
+        errors: state.hrReducer.errors,
     }
 }
 const mapDispatchToProps = {

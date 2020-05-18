@@ -1,3 +1,4 @@
+
 export default {
     root: '/',
     login: '/login',
@@ -10,5 +11,8 @@ export default {
     createOrderPage: '/createOrderPage',
     ViewAllOrdersPage: '/ViewAllOrdersPage',
     ViewSingleOrderPage: '/ViewSingleOrderPage',
-    ViewAllItems: '/ViewAllItems'
+    ViewAllItems: '/ViewAllItems',
+    viewCustomers: '/viewCustomers',
+    AddCustomer: '/AddCustomer'
+
 }
