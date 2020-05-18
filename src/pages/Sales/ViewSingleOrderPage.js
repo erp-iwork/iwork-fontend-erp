@@ -51,7 +51,7 @@ class ViewSingleOrderPage extends Component {
                                 </Row>
                                 <Row>
                                     <Col>
-                                        Shipment Address:
+                                        Shipment Address :
                                     </Col>
                                     <Col>
                                         <b>{details.shipmentAddress}</b>
