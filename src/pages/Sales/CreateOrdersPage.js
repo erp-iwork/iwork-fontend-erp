@@ -37,12 +37,18 @@ class CreateOrdersPage extends Component {
             shipmentAddress: "",
             order_items: [{ InventoryItem: "", quantity: 1 }]
         }
+        this.handleAddItem = this.handleAddItem.bind(this)
+        this.handleRemoveItem = this.handleRemoveItem.bind(this)
+        this.ItemNameChange = this.ItemNameChange.bind(this)
+        this.ItemQuantityChange = this.ItemQuantityChange.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
 
     componentDidMount() {
         this.props.getAllCompany()
         this.props.getAllItem()
         this.props.getAllOrder()
+        console.log(this.props.orders)
     }
 
     handleAddItem = () => {
@@ -100,8 +106,8 @@ class CreateOrdersPage extends Component {
                                             Customer
                                             </Label>
                                         <Col sm={12}>
-                                            <Input type="select" name="gender" onChange={this.handleChange}>
-                                                <option aria-label="None" value="" disabled>Customer Name</option>
+                                            <Input type="select" name="company" onChange={this.handleChange}>
+                                                <option aria-label="None" value="">Customer Name</option>
                                                 {this.props.companys.map((comp, idx) => (
                                                     <option value={comp.companyId} key={idx}>
                                                         {comp.companyName}
@@ -160,8 +166,8 @@ class CreateOrdersPage extends Component {
                                         return (
                                             <Row className='duplicatedForm' key={i}>
                                                 <Col md={6}>
-                                                    <Input value={v} onChange={this.ItemNameChange(i)} type="select" name="Item Name">
-                                                        <option aria-label="None" value="" disabled>Item Name</option>
+                                                    <Input onChange={this.ItemNameChange(i)} value={v.InventoryItemId} type="select">
+                                                        <option aria-label="None" value="">Item Name</option>
                                                         {this.props.items.map((_item) => (
                                                             <option value={_item.InventoryItemId}>
                                                             {_item.itemName}
@@ -231,55 +237,22 @@ class CreateOrdersPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td >Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                    {this.props.orders ? this.props.orders.slice(0)
+                                    .reverse().slice(0, 9).map((order, index) => (
+                                        <tr key={index}>
+                                            <th scope="row">{order.orderNumber}</th>
+                                            <td>{order.company}</td>
+                                            <td>{order.salesPerson}</td>
+                                            <td>{order.status}</td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td >Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td >Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-
+                                    )) : ""}
                                     </tbody>
                                 </Table>
                             </CardBody>
                         </Card>
-
                     </Col>
-
                 </Row>
-
-                <ViewAllOrdersPage />
-
+                <ViewAllOrdersPage orders={this.props.orders} />
             </Page>
         );
     }
