@@ -32,7 +32,7 @@ class AllEmployees extends Component {
         this.setState({
             [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
         });
-    };
+    }; 
 
     componentDidMount() {
         this.props.getEmploye()
