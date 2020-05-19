@@ -1,6 +1,7 @@
 import { companyConstant, errorsConstant } from "../../constant/constants";
 const initialState = {
   companys: [],
+  suppliers: [],
   success: false,
   errors: [],
 };
@@ -24,6 +25,20 @@ export default function companyReducer(state = initialState, action) {
         companys: [...state.companys, action.payload],
         success: true,
         errors: [],
+      };
+    
+    case companyConstant.GET_SUPPLIER:
+      return {
+        ...state,
+        suppliers: action.payload
+      }
+
+    case companyConstant.ADD_SUPPLIER:
+      return {
+        ...state,
+        suppliers: [...state.suppliers, action.payload],
+        success: true,
+        errors: []
       };
 
     case companyConstant.DELETE_COMPANY:

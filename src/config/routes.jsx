@@ -1,7 +1,7 @@
 export default {
   root: "/",
   login: "/login",
-  signup: "/signup", 
+  signup: "/signup",
   allEmployees: "/AllEmployees",
   addEmployee: "/AddEmployee",
   employeeProfile: "/employeeProfile",
@@ -13,6 +13,7 @@ export default {
   ViewAllItems: "/ViewAllItems",
   viewCustomers: "/viewCustomers",
   AddCustomer: "/AddCustomer",
+  AddSupplier: "/AddSupplier",
   ViewOrdersFinance: "/ViewOrdersFinance",
   ViewOrdersLogistics: "/ViewOrdersLogistics",
   ViewOrdersInventory: "/ViewOrdersInventory",

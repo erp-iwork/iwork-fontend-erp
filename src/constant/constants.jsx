@@ -41,12 +41,14 @@ export const inventoryConstant = {
 
 export const companyConstant = {
   ADD_COMPANY: "ADD_COMPANY",
-  GET_COMPANYS: "GET_COMPANYS",
+  GET_COMPANYS: "GET_COMPANYS", 
   DELETE_COMPANY: "DELETE_COMPANY",
+  ADD_SUPPLIER: "ADD_SUPPLIER",
+  GET_SUPPLIER: "GET_SUPPLIER"
 };
 
 export const errorsConstant = {
-  GET_ERRORS: "GET_ERRORS",
+  GET_ERRORS: "GET_ERRORS"
 };
 
 export const GET_INVOICE = "GET_INVOICE";
