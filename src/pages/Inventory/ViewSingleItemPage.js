@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
+import { Card, CardHeader, CardBody } from 'reactstrap';
 
 class ViewSingleItemPage extends Component {
     constructor(props) {
@@ -11,8 +12,17 @@ class ViewSingleItemPage extends Component {
             <Page
                 title="Single Item Page"
                 breadcrumbs={[{ name: 'Single Item Page', active: true }]}
-                className="CardPage"
+                className=""
             >
+                <Card>
+                    <CardHeader>
+                        ITEM id Goes here
+                    </CardHeader>
+                    <CardBody>
+
+                        ITEM id Goes here
+                    </CardBody>
+                </Card>
 
             </Page>
         );

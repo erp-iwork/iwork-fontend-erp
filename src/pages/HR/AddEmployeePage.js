@@ -413,7 +413,7 @@ class AddEmployee extends Component {
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button color='primary' onClick={this.submit}>
-                                                {!this.props.loading || this.state.complete ? "Register" : <Spinner /> }
+                                                {!this.props.loading || this.state.complete ? "Register" : <Spinner />}
                                             </Button>
                                         </Col>
                                     </FormGroup>

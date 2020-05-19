@@ -11,7 +11,7 @@ const Order = ({ order, id }) => {
     return (
         <tr align="center">
             <th scope="row">{id}</th>
-            <td>{order.company}</td>
+            <td>{order.customer}</td>
             <td>{order.salesPerson}</td>
             <td>{order.shipmentAddress}</td>
             <td>{order.orderDate}</td>
@@ -64,18 +64,18 @@ class ViewAllOrdersPage extends Component {
                                     <th>Status</th>
                                     <th>Actions</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.props.lists? this.props.lists.map((order, index) => (
-                                        <Order order={order} id={index + 1} />
-                                    )) : this.props.orders.map((order, index) => (
-                                        <Order order={order} id={index + 1} />
-                                    ))}
-                                </tbody>
-                            </Table>
-                        </CardBody>
-                    </Card>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.props.lists ? this.props.lists.map((order, index) => (
+                                    <Order order={order} id={index + 1} />
+                                )) : this.props.orders.map((order, index) => (
+                                    <Order order={order} id={index + 1} />
+                                ))}
+                            </tbody>
+                        </Table>
+                    </CardBody>
+                </Card>
             </Page>
         );
     }

@@ -102,9 +102,13 @@ const SALES = [
   { to: routes.ViewAllOrdersPage, name: 'View All Orders', exact: false, Icon: MdWidgets },
 
 
+
+
 ]
 
 const FINANCE = [
+  { to: routes.viewSuppliers, name: 'View All Suppliers', exact: false, Icon: MdWidgets },
+  { to: routes.AddSupplier, name: 'Add Supplier ', exact: false, Icon: MdWidgets },
 
 
   { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },
@@ -117,9 +121,11 @@ const INVENTORY = [
   { to: routes.ViewAllItems, name: 'View Items', exact: false, Icon: MdWidgets },
   { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
   { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
+  { to: routes.ViewSingleItemPage, name: 'Single Item', exact: false, Icon: MdWidgets },
 
 
-  
+
+
 ]
 
 const navItems = [

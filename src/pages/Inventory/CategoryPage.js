@@ -19,21 +19,21 @@ class CategoryPage extends Component {
                 className="CardPage"
             >
                 <Row>
-                    <Col md={4}>
+                    <Col md={4} sm={12} xs={12}>
                         <Card className='box' >
                             <CardBody>
                                 <Row >
-                                    <Col className='icons' md={3}>
+                                    <Col className='icons' md={3} sm={12} xs={12}>
                                         <FontAwesomeIcon icon={faShareAlt} size="5x" color="#7D7D7D"  transform={{ rotate: 42 }} />
                                     </Col>
-                                    <Col size='lg'>
-                                        <h3>Consumable Goods</h3>
+                                    <Col >
+                                        <h4>Consumable Goods</h4>
                                     </Col>
                                 </Row>
                             </CardBody>
                         </Card>
                     </Col>
-                    <Col md={4}>
+                    <Col md={4} sm={12} xs={12}>
                         <Card className='box' >
                             <CardBody>
                                 <Row >
@@ -41,21 +41,21 @@ class CategoryPage extends Component {
                                         <FontAwesomeIcon color='primary' icon={faBox} size="5x" color="#7D7D7D" transform={{ rotate: -42 }} />
                                     </Col>
                                     <Col size='lg' >
-                                        <h3 color='primary'>Stored Goods</h3>
+                                        <h4>Stored Goods</h4>
                                     </Col>
                                 </Row>
                             </CardBody>
                         </Card>
                     </Col>
-                    <Col md={4}>
+                    <Col md={4} sm={12} xs={12}>
                         <Card className='box' >
                             <CardBody>
                                 <Row >
-                                    <Col className='icons' md={3}>
+                                    <Col className='icons' md={3} xs={12} sm={12}>
                                         <FontAwesomeIcon icon={faScrewdriver} color='primary' color="#7D7D7D" size="5x" transform={{ rotate: -2 }} />
                                     </Col>
                                     <Col size='lg'>
-                                        <h3>Services</h3>
+                                        <h4>Services</h4>
                                     </Col>
                                 </Row>
                             </CardBody>
