@@ -20,7 +20,7 @@ class ViewAllOrdersPage extends Component {
                     <CardBody>
                         <Table responsive >
                             <thead>
-                                <tr align='center'>
+                                <tr align='left'>
                                     <th>Order #</th>
                                     <th>Customer</th>
                                     <th>Sales Person</th>
@@ -32,7 +32,7 @@ class ViewAllOrdersPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr align='center'>
+                                <tr align='left'>
                                     <th scope="row">1</th>
                                     <td>Mark</td>
                                     <td>Otto</td>

@@ -17,7 +17,6 @@ import {
 import "./Sales.scss";
 import ViewAllOrdersPage from "./ViewAllOrdersPage";
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import Error from '../../components/error'
 import actions from '../../store/sales/action'
 import PageSpinner from '../../components/PageSpinner'
@@ -113,7 +112,7 @@ class CreateOrdersPage extends Component {
         let { order_items: items } = this.state;
         if (!this.props.companys[0]) return <PageSpinner />
         return (
-            <Page title="Create Order" breadcrumbs={[{ name: 'Create Order', active: true }]}>
+            <Page title="Create Sales Order" breadcrumbs={[{ name: 'Create Sales Order', active: true }]}>
                 <Row>
                     <Col md={6} sm={12}>
                         <Card>
@@ -196,6 +195,8 @@ class CreateOrdersPage extends Component {
                                                 </Col>
                                                 <Col md={5}>
                                                     <Input
+                                                    type='number'
+                                                    defaultValue={1}
                                                         placeholder={`Item #${i + 1} quantity`}
                                                         onChange={this.ItemQuantityChange(i)}
                                                     >
@@ -258,7 +259,7 @@ class CreateOrdersPage extends Component {
                                     {this.props.orders ? this.props.orders.slice(0)
                                     .reverse().slice(0, 9).map((order, index) => (
                                         <tr key={index}>
-                                            <th scope="row">{order.orderNumber}</th>
+                                            <th scope="row">{index + 1}</th>
                                             <td>{order.company}</td>
                                             <td>{order.salesPerson}</td>
                                             <td>{order.status}</td>

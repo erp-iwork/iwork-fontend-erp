@@ -85,7 +85,7 @@ class AllEmployees extends Component {
                         <CardBody>
                             <Table responsive>
                                 <thead>
-                                    <tr align='center'>
+                                    <tr align='left'>
                                         <th>#</th>
                                         <th>Full Name</th>
                                         <th>Email</th>

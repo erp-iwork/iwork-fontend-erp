@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
-import { salesConstants, errorsConstant } from "../../constant/constants";
+import { salesConstants } from "../../constant/constants";
 const headers = {
   "Content-Type": "application/json",
   Authorization: "Bearer" + localStorage.getItem("token"),
@@ -45,7 +45,7 @@ function createOrder(data) {
       })
       .catch((error) => {
         if (error.response && error.response.data) {
-          if (error.response.status == 404) {
+          if (error.response.status === 404) {
             Swal.fire({
               title: "<strong>Error <u>info</u></strong><p>",
               icon: "error",

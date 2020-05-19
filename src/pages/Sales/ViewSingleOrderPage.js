@@ -58,7 +58,7 @@ class ViewSingleOrderPage extends Component {
                                     </Col>
                                 </Row>
                                 <b>Description</b>
-                                    <Col>{details.description}</Col>
+                                <Col>{details.description}</Col>
                             </CardBody>
                         </Col>
                         <Col md={8}>
