@@ -1,7 +1,7 @@
 export default {
   root: "/",
   login: "/login",
-  signup: "/signup",
+  signup: "/signup", 
   allEmployees: "/AllEmployees",
   addEmployee: "/AddEmployee",
   employeeProfile: "/employeeProfile",
