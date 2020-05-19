@@ -12,15 +12,15 @@ import {
     Row,
     Label,
 } from 'reactstrap';
-import AllCustomers from "./viewAllCutomersPage";
 import './Finance.scss'
 import Error from '../../components/error'
 import { connect } from 'react-redux'
-import { addCompany, getCompany } from '../../store/company/action'
+import { addSupplier, getSupplier } from '../../store/company/action'
 import Loader from '../../components/loader'
 import PageSpinner from '../../components/PageSpinner'
+import ViewAllSuppliers from './viewAllSuppliersPage'
 
-class AddCustomerPage extends Component {
+class AddSupplierPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,7 +40,7 @@ class AddCustomerPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getCompany()
+        this.props.getSupplier()
     }
 
     handleChange = event => {
@@ -51,7 +51,7 @@ class AddCustomerPage extends Component {
     submit = async (e) => {
         e.preventDefault();
         const newCompany = {
-            customerName: this.state.companyName,
+            suplierName: this.state.companyName,
             generalManger: this.state.generalManger,
             contactPerson: this.state.contactPerson,
             workingField: this.state.workingField,
@@ -60,7 +60,7 @@ class AddCustomerPage extends Component {
             tinNumber: this.state.tinNumber
         }
         this.setState({ loading: this.state.loading + 1 })
-        this.props.addCompany(newCompany).then(res => {
+        this.props.addSupplier(newCompany).then(res => {
             this.setState({ loading: this.state.loading + 1 })
         })
         this.componentDidMount()
@@ -78,22 +78,23 @@ class AddCustomerPage extends Component {
     }
 
     render() {
-        if (!this.props.companys[0]) return <PageSpinner />
+        console.log(this.props.suppliers.length)
+        if (!this.props.suppliers[0]) return <PageSpinner />
         return (
-            <Page title="Add Customer" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
+            <Page title="Add Supplier" breadcrumbs={[{ name: 'Add Supplier', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
                     <Card>
-                        <CardHeader>ADD A NEW CUSTOMER TO WORK WITH</CardHeader>
+                        <CardHeader>ADD A NEW SUPPLIER TO WORK WITH</CardHeader>
                         <CardBody>
                             <Form>
                                 <Row>
                                     <Col md={6} sm={12}>
                                         <FormGroup>
                                             <Label for="exampleEmail" sm={12}>
-                                                Customer Name
+                                                Supplier Name
                                     </Label>
                                             <Col sm={12}>
-                                                <Input placeholder="Enter Customer Name" name="companyName" onChange={this.handleChange} />
+                                                <Input placeholder="Enter Supplier Name" name="companyName" onChange={this.handleChange} />
                                                 <Error
                                                     error={
                                                     this.props.errors.companyName
@@ -158,13 +159,13 @@ class AddCustomerPage extends Component {
                                     <Col>
                                         <FormGroup>
                                             <Label for="exampleEmail" sm={12}>
-                                                Customer Email
+                                                Supplier Email
                                     </Label>
                                             <Col sm={12}>
                                                 <Input
                                                     type="email"
                                                     name="email"
-                                                    placeholder="Customer Email"
+                                                    placeholder="Supplier Email"
                                                     onChange={this.handleChange}
                                                 />
                                                 <Error
@@ -213,7 +214,7 @@ class AddCustomerPage extends Component {
                                 <FormGroup >
                                     <Col align='center'>
                                         <Button color='primary' onClick={this.submit}>
-                                            {this.state.loading === 1 ? <Loader /> : "Add Customer"}
+                                            {this.state.loading === 1 ? <Loader /> : "Add Supplier"}
                                         </Button>
                                     </Col>
                                 </FormGroup>
@@ -221,16 +222,16 @@ class AddCustomerPage extends Component {
                         </CardBody>
                     </Card>
                 </Col>
-                <AllCustomers lists={this.props.companys} update={this.state.update} />
+                <ViewAllSuppliers lists={this.props.suppliers} />
             </Page>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    companys: state.companyReducer.companys,
+    suppliers: state.companyReducer.suppliers,
     errors: state.companyReducer.errors,
     success: state.companyReducer.success
 })
 
-export default connect(mapStateToProps, { addCompany, getCompany })(AddCustomerPage)
+export default connect(mapStateToProps, { addSupplier, getSupplier })(AddSupplierPage)

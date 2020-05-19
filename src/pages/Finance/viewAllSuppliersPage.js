@@ -3,15 +3,15 @@ import Page from '../../components/Page';
 import { Card, CardBody, CardHeader, Col, Table, Button } from 'reactstrap';
 import { MdDelete } from "react-icons/md";
 import { connect } from 'react-redux'
-import { deleteCompany, getCompany } from '../../store/company/action'
+import { deleteSupplier, getSupplier } from '../../store/company/action'
 import PageSpinner from '../../components/PageSpinner'
 import Swal from "sweetalert2"
 
 const Customer = ({ company, index, deleteCompany }) => {
     return (
-        <tr align='center'>
+        <tr align='left'>
             <th scope="row">{index + 1}</th>
-            <td>{company.customerName}</td>
+            <td>{company.suplierName}</td>
             <td>{company.generalManger}</td>
             <td>{company.email}</td>
             <td>{company.contactPerson}</td>
@@ -20,7 +20,7 @@ const Customer = ({ company, index, deleteCompany }) => {
             <td>{company.tinNumber}</td>
             <td>
                 <Col align='center'>
-                    <Button color='danger' size='sm' onClick={() => deleteCompany(company.customerId)}>
+                    <Button color='danger' size='sm' onClick={() => deleteCompany(company.suplierId)}>
                         <MdDelete />
                     </Button>
                 </Col>
@@ -29,23 +29,23 @@ const Customer = ({ company, index, deleteCompany }) => {
     )
 }
 
-class ViewAllCustomersPage extends Component {
+class ViewAllSuppliers extends Component {
     constructor(props) {
         super(props);
         this.state = {
             companies: []
         }
-        this.deleteCustomer = this.deleteCustomer.bind(this)
+        this.deleteSupplier = this.deleteSupplier.bind(this)
     }
 
     async componentDidMount() {
         if (!this.props.lists) {
-            await this.props.getCompany()
+            await this.props.getSupplier()
         }
     }
 
-    deleteCustomer(id) {
-        this.props.deleteCompany(id).then(res => {
+    deleteSupplier(id) {
+        this.props.deleteSupplier(id).then(res => {
             if (res) {
                 Swal.fire({
                     title: "Delteing Account...",
@@ -60,12 +60,10 @@ class ViewAllCustomersPage extends Component {
     }
 
     render() {
-        if (!(this.props.companys[0])) return <PageSpinner />
-        if (this.props.update) {
-            if (!this.props.companys[0]) return <PageSpinner />
-        }
+        if (!(this.props.suppliers[0])) return <PageSpinner />
+        console.log(this.props.suppliers)
         return (
-            <Page title="All Customers" breadcrumbs={[{ name: 'All Customer', active: true }]}>
+            <Page title="All Customers" breadcrumbs={[{ name: 'All Supplier', active: true }]}>
                 <Col>
                     <Card className="mb-3">
                         <CardHeader>All Customers</CardHeader>
@@ -74,7 +72,7 @@ class ViewAllCustomersPage extends Component {
                                 <thead>
                                     <tr align='left'>
                                         <th>#</th>
-                                        <th>Customer Name</th>
+                                        <th>Supplier Name</th>
                                         <th>General Manager</th>
                                         <th>Email</th>
                                         <th>Contact Person</th>
@@ -85,10 +83,10 @@ class ViewAllCustomersPage extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.props.lists? this.props.lists.slice(0).reverse().map((item, index) => (
-                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteCustomer} />
-                                    )) : this.props.companys.slice(0).reverse().map((item, index) => (
-                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteCustomer} />
+                                    {this.props.lists ? this.props.lists.slice(0).reverse().map((item, index) => (
+                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteSupplier} />
+                                    )) : this.props.suppliers.slice(0).reverse().map((item, index) => (
+                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteSupplier} />
                                     ))}
                                 </tbody>
                             </Table>
@@ -101,8 +99,8 @@ class ViewAllCustomersPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    companys: state.companyReducer.companys,
+    suppliers: state.companyReducer.suppliers,
     errors: state.companyReducer.errors,
 })
 
-export default connect(mapStateToProps, { getCompany, deleteCompany })(ViewAllCustomersPage)
+export default connect(mapStateToProps, { getSupplier, deleteSupplier })(ViewAllSuppliers)

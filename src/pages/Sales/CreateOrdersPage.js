@@ -17,7 +17,6 @@ import {
 import "./Sales.scss";
 import ViewAllOrdersPage from "./ViewAllOrdersPage";
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import Error from '../../components/error'
 import actions from '../../store/sales/action'
 import PageSpinner from '../../components/PageSpinner'
@@ -54,36 +53,36 @@ class CreateOrdersPage extends Component {
 
     handleAddItem = () => {
         this.setState({
-          order_items: this.state.order_items.concat([
-            { InventoryItem: "", quantity: 1 },
-          ])
+            order_items: this.state.order_items.concat([
+                { InventoryItem: "", quantity: 1 },
+            ])
         })
     }
 
     handleRemoveItem = (idx) => {
         this.setState({
-          order_items: this.state.order_items.filter((s, sidx) => idx !== sidx),
+            order_items: this.state.order_items.filter((s, sidx) => idx !== sidx),
         })
     }
 
     ItemNameChange = (idx) => (evt) => {
         const neworder_items = this.state.order_items.map((item, sidx) => {
-          if (idx !== sidx) return item;
-          return {
-            ...item,
-            InventoryItem: evt.target.value,
-          };
+            if (idx !== sidx) return item;
+            return {
+                ...item,
+                InventoryItem: evt.target.value,
+            };
         });
-    
+
         this.setState({ order_items: neworder_items })
     }
 
     ItemQuantityChange = (idx) => (evt) => {
         const neworder_items = this.state.order_items.map((item, sidx) => {
-          if (idx !== sidx) return item;
-          return { ...item, quantity: evt.target.value, name: evt.target.name };
+            if (idx !== sidx) return item;
+            return { ...item, quantity: evt.target.value, name: evt.target.name };
         });
-    
+
         this.setState({ order_items: neworder_items });
     }
 
@@ -95,25 +94,25 @@ class CreateOrdersPage extends Component {
         this.props.createOrder(this.state);
         this.componentDidMount();
         if (this.props.success) {
-          this.setState({
-            fieldName: "",
-            orderNumber: "",
-            orderName: "",
-            company: "",
-            description: "",
-            discount: "",
-            itemQuantity: 0,
-            InventoryItem: "",
-            shipmentAddress: "",
-          })
+            this.setState({
+                fieldName: "",
+                orderNumber: "",
+                orderName: "",
+                company: "",
+                description: "",
+                discount: "",
+                itemQuantity: 0,
+                InventoryItem: "",
+                shipmentAddress: "",
+            })
         }
     }
 
     render() {
         let { order_items: items } = this.state;
-        if (!this.props.companys[0]) return <PageSpinner />
+        if (!this.props.customers[0]) return <PageSpinner />
         return (
-            <Page title="Create Order" breadcrumbs={[{ name: 'Create Order', active: true }]}>
+            <Page title="Create Sales Order" breadcrumbs={[{ name: 'Create Sales Order', active: true }]}>
                 <Row>
                     <Col md={6} sm={12}>
                         <Card>
@@ -127,17 +126,17 @@ class CreateOrdersPage extends Component {
                                         <Col sm={12}>
                                             <Input type="select" name="company" onChange={this.handleChange}>
                                                 <option aria-label="None" value="">Customer Name</option>
-                                                {this.props.companys.map((comp, idx) => (
-                                                    <option value={comp.companyId} key={idx}>
-                                                        {comp.companyName}
+                                                {this.props.customers.map((comp, idx) => (
+                                                    <option value={comp.customerId} key={idx}>
+                                                        {comp.customerName}
                                                     </option>
                                                 ))}
                                             </Input>
                                             <Error
                                                 error={
                                                     this.props.errors.company
-                                                    ? this.props.errors.company
-                                                    : null
+                                                        ? this.props.errors.company
+                                                        : null
                                                 }
                                             />
                                         </Col>
@@ -155,8 +154,8 @@ class CreateOrdersPage extends Component {
                                             <Error
                                                 error={
                                                     this.props.errors.shipmentAddress
-                                                    ? this.props.errors.shipmentAddress
-                                                    : null
+                                                        ? this.props.errors.shipmentAddress
+                                                        : null
                                                 }
                                             />
                                         </Col>
@@ -173,12 +172,12 @@ class CreateOrdersPage extends Component {
                                             <Error
                                                 error={
                                                     this.props.errors.description
-                                                    ? this.props.errors.description
-                                                    : null
+                                                        ? this.props.errors.description
+                                                        : null
                                                 }
                                             />
                                         </Col>
-                                    </FormGroup> 
+                                    </FormGroup>
 
                                     <CardHeader>Item Information</CardHeader>
                                     {items.map((v, i) => {
@@ -189,13 +188,15 @@ class CreateOrdersPage extends Component {
                                                         <option aria-label="None" value="">Item Name</option>
                                                         {this.props.items.map((_item, idx) => (
                                                             <option value={_item.InventoryItemId} key={idx}>
-                                                            {_item.itemName}
+                                                                {_item.itemName}
                                                             </option>
                                                         ))}
                                                     </Input>
                                                 </Col>
                                                 <Col md={5}>
                                                     <Input
+                                                        type='number'
+                                                        defaultValue={1}
                                                         placeholder={`Item #${i + 1} quantity`}
                                                         onChange={this.ItemQuantityChange(i)}
                                                     >
@@ -208,20 +209,20 @@ class CreateOrdersPage extends Component {
                                         );
                                     })}
                                     <FormGroup>
-                                    {
-                                        this.props.errors.item_order ? this.props.errors.item_order.map((item) => (
-                                        <Error
-                                            error={item.InventoryItem}
-                                        />
-                                        )) : null
-                                    }
-                                    <Error
-                                        error={
-                                        this.props.errors.itemName
-                                            ? this.props.errors.itemName
-                                            : null
+                                        {
+                                            this.props.errors.item_order ? this.props.errors.item_order.map((item) => (
+                                                <Error
+                                                    error={item.InventoryItem}
+                                                />
+                                            )) : null
                                         }
-                                    />
+                                        <Error
+                                            error={
+                                                this.props.errors.itemName
+                                                    ? this.props.errors.itemName
+                                                    : null
+                                            }
+                                        />
                                     </FormGroup>
                                     <FormGroup>
                                         <Button
@@ -234,7 +235,7 @@ class CreateOrdersPage extends Component {
                                     </FormGroup>
                                     <FormGroup align='center'>
                                         <Button color='primary' onClick={this.submit}>
-                                            {this.props.loading? <Loader /> : "Place Order"}
+                                            {this.props.loading ? <Loader /> : "Place Order"}
                                         </Button>
                                     </FormGroup>
                                 </Form>
@@ -255,15 +256,15 @@ class CreateOrdersPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {this.props.orders ? this.props.orders.slice(0)
-                                    .reverse().slice(0, 9).map((order, index) => (
-                                        <tr key={index}>
-                                            <th scope="row">{order.orderNumber}</th>
-                                            <td>{order.company}</td>
-                                            <td>{order.salesPerson}</td>
-                                            <td>{order.status}</td>
-                                        </tr>
-                                    )) : ""}
+                                        {this.props.orders ? this.props.orders.slice(0)
+                                            .reverse().slice(0, 9).map((order, index) => (
+                                                <tr key={index}>
+                                                    <th scope="row">{index + 1}</th>
+                                                    <td>{order.company}</td>
+                                                    <td>{order.salesPerson}</td>
+                                                    <td>{order.status}</td>
+                                                </tr>
+                                            )) : ""}
                                     </tbody>
                                 </Table>
                             </CardBody>
@@ -278,12 +279,12 @@ class CreateOrdersPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      loading: state.salesReducer.loading,
-      errors: state.salesReducer.errors,
-      items: state.salesReducer.items,
-      companys: state.salesReducer.companys,
-      success: state.salesReducer.success,
-      orders:state.salesReducer.orders
+        loading: state.salesReducer.loading,
+        errors: state.salesReducer.errors,
+        items: state.salesReducer.items,
+        customers: state.salesReducer.companys,
+        success: state.salesReducer.success,
+        orders: state.salesReducer.orders
     }
 }
 const mapDispatchToProps = {

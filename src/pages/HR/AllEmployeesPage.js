@@ -24,7 +24,7 @@ class AllEmployees extends Component {
     deleteFun(employeId) {
         Swal.fire({
           title: "Are you sure?",
-          text: "You won't be able to revert this!",
+          text: "You won't be able to revert this Action!",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -32,9 +32,16 @@ class AllEmployees extends Component {
           confirmButtonText: "Yes, delete it!",
         }).then((result) => {
           if (result.value) {
+            Swal.fire({
+                title: "Delteing Account...",
+                icon: "warning",
+                showCancelButton: false,
+                allowOutsideClick: false,
+                showConfirmButton: false
+            })
             this.props.deleteEmploye(employeId);
           }
-        });
+        })
     }
 
     render() {
@@ -52,9 +59,9 @@ class AllEmployees extends Component {
                             <CardBody>
                                 <Table responsive>
                                     <thead>
-                                        <tr align='center'>
+                                        <tr  >
                                             <th>#</th>
-                                            <th>First Name</th>
+                                            <th  >First Name</th>
                                             <th>Email</th>
                                             <th>Hired Date</th>
                                             <th>Phone Number</th>
@@ -64,15 +71,15 @@ class AllEmployees extends Component {
                                     </thead>
                                     <tbody>
                                         {this.props.employees.map((employeeInfos, index) => (
-                                            <tr align='center' key={index}>
+                                            <tr align='left' key={index}>
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
-                                                <td>{employeeInfos.email}</td>
+                                                <td >{employeeInfos.email}</td>
                                                 <td>{employeeInfos.hiredDate}</td>
                                                 <td>{employeeInfos.telephone}</td>
                                                 <td>{employeeInfos.termOfEmployment}</td>
                                                 <td>
-                                                    <Button  color='danger' onClick={() => this.deleteFun(employeeInfos.email)}>
+                                                    <Button size='sm' color='danger' onClick={() => this.deleteFun(employeeInfos.employeId)}>
                                                         <MdDelete />
                                                     </Button>
                                                 </td>
