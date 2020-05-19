@@ -18,4 +18,4 @@ export default {
   ViewOrdersInventory: "/ViewOrdersInventory",
   CategoriesInventoryPage: "/CategoriesInventory",
   ViewSingleItemPage: "/ViewSingleItem"
-};
+}
