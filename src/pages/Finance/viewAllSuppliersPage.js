@@ -71,7 +71,7 @@ class ViewAllSuppliers extends Component {
                             <Table responsive>
                                 <thead>
                                     <tr align='left'> 
-                                        <th>#</th> 
+                                        <th>#</th>  
                                         <th>Customer Name</th>
                                         <th>General Manager</th>
                                         <th>Email</th>
