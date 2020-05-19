@@ -81,25 +81,52 @@ const pageContents = [
   },
 ];
 
+const HR = [
+
+  { to: routes.allEmployees, name: 'All Employees', exact: false, Icon: MdWidgets },
+  { to: routes.addEmployee, name: 'Add Employee', exact: false, Icon: MdWidgets },
+
+]
+
+const IT = [
+
+  { to: routes.itEmployeePage, name: 'All Employees', exact: false, Icon: MdWidgets },
+
+
+]
+
+const SALES = [
+
+
+  { to: routes.createOrderPage, name: 'Create Order', exact: false, Icon: MdWidgets },
+  { to: routes.ViewAllOrdersPage, name: 'View All Orders', exact: false, Icon: MdWidgets },
+
+
+]
+
+const FINANCE = [
+
+
+  { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },
+  { to: routes.AddCustomer, name: 'Add Customer', exact: false, Icon: MdWidgets },
+
+
+]
+
+const INVENTORY = [
+  { to: routes.ViewAllItems, name: 'View Items', exact: false, Icon: MdWidgets },
+  { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
+  { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
+
+
+  
+]
+
 const navItems = [
   { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
   { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
   { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
   { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
-  { to: routes.allEmployees, name: 'All Employees', exact: false, Icon: MdWidgets },
-  { to: routes.addEmployee, name: 'Add Employee', exact: false, Icon: MdWidgets },
-  { to: routes.itEmployeePage, name: 'All Employees', exact: false, Icon: MdWidgets },
-  { to: routes.createOrderPage, name: 'Create Order', exact: false, Icon: MdWidgets },
-  { to: routes.ViewAllOrdersPage, name: 'View All Orders', exact: false, Icon: MdWidgets },
-  { to: routes.ViewSingleOrderPage, name: 'Single Order', exact: false, Icon: MdWidgets },
-
-
-
-
-
-
-
-
 ];
 
 const bem = bn.create('sidebar');
@@ -156,6 +183,233 @@ class Sidebar extends React.Component {
                 </BSNavLink>
               </NavItem>
             ))}
+            {/* START HR */}
+
+            <NavItem
+              className={bem.e('nav-item')}
+              onClick={this.handleClick('Components')}
+            >
+              <BSNavLink className={bem.e('nav-item-collapse')}>
+                <div className="d-flex">
+                  <MdExtension className={bem.e('nav-item-icon')} />
+                  <span className=" align-self-start">HR</span>
+                </div>
+                <MdKeyboardArrowDown
+                  className={bem.e('nav-item-icon')}
+                  style={{
+                    padding: 0,
+                    transform: this.state.isOpenComponents
+                      ? 'rotate(0deg)'
+                      : 'rotate(-90deg)',
+                    transitionDuration: '0.3s',
+                    transitionProperty: 'transform',
+                  }}
+                />
+              </BSNavLink>
+            </NavItem>
+
+            <Collapse isOpen={this.state.isOpenComponents}>
+              {HR.map(({ to, name, exact, Icon }, index) => (
+                <NavItem key={index} className={bem.e('nav-item')}>
+                  <BSNavLink
+                    id={`navItem-${name}-${index}`}
+                    className="text-uppercase"
+                    tag={NavLink}
+                    to={to}
+                    activeClassName="active"
+                    exact={exact}
+                  >
+                    <Icon className={bem.e('nav-item-icon')} />
+                    <span className="">{name}</span>
+                  </BSNavLink>
+                </NavItem>
+              ))}
+            </Collapse>
+
+            {/* END HR */}
+
+            {/* START IT */}
+
+            <NavItem
+              className={bem.e('nav-item')}
+              onClick={this.handleClick('Components')}
+            >
+              <BSNavLink className={bem.e('nav-item-collapse')}>
+                <div className="d-flex">
+                  <MdExtension className={bem.e('nav-item-icon')} />
+                  <span className=" align-self-start">IT</span>
+                </div>
+                <MdKeyboardArrowDown
+                  className={bem.e('nav-item-icon')}
+                  style={{
+                    padding: 0,
+                    transform: this.state.isOpenComponents
+                      ? 'rotate(0deg)'
+                      : 'rotate(-90deg)',
+                    transitionDuration: '0.3s',
+                    transitionProperty: 'transform',
+                  }}
+                />
+              </BSNavLink>
+            </NavItem>
+
+            <Collapse isOpen={this.state.isOpenComponents}>
+              {IT.map(({ to, name, exact, Icon }, index) => (
+                <NavItem key={index} className={bem.e('nav-item')}>
+                  <BSNavLink
+                    id={`navItem-${name}-${index}`}
+                    className="text-uppercase"
+                    tag={NavLink}
+                    to={to}
+                    activeClassName="active"
+                    exact={exact}
+                  >
+                    <Icon className={bem.e('nav-item-icon')} />
+                    <span className="">{name}</span>
+                  </BSNavLink>
+                </NavItem>
+              ))}
+            </Collapse>
+
+            {/* END IT */}
+
+            {/* START SALES */}
+
+            <NavItem
+              className={bem.e('nav-item')}
+              onClick={this.handleClick('Components')}
+            >
+              <BSNavLink className={bem.e('nav-item-collapse')}>
+                <div className="d-flex">
+                  <MdExtension className={bem.e('nav-item-icon')} />
+                  <span className=" align-self-start">SALES</span>
+                </div>
+                <MdKeyboardArrowDown
+                  className={bem.e('nav-item-icon')}
+                  style={{
+                    padding: 0,
+                    transform: this.state.isOpenComponents
+                      ? 'rotate(0deg)'
+                      : 'rotate(-90deg)',
+                    transitionDuration: '0.3s',
+                    transitionProperty: 'transform',
+                  }}
+                />
+              </BSNavLink>
+            </NavItem>
+
+            <Collapse isOpen={this.state.isOpenComponents}>
+              {SALES.map(({ to, name, exact, Icon }, index) => (
+                <NavItem key={index} className={bem.e('nav-item')}>
+                  <BSNavLink
+                    id={`navItem-${name}-${index}`}
+                    className="text-uppercase"
+                    tag={NavLink}
+                    to={to}
+                    activeClassName="active"
+                    exact={exact}
+                  >
+                    <Icon className={bem.e('nav-item-icon')} />
+                    <span className="">{name}</span>
+                  </BSNavLink>
+                </NavItem>
+              ))}
+            </Collapse>
+
+            {/* END SALES */}
+
+            {/* START FINANCE */}
+
+            <NavItem
+              className={bem.e('nav-item')}
+              onClick={this.handleClick('Components')}
+            >
+              <BSNavLink className={bem.e('nav-item-collapse')}>
+                <div className="d-flex">
+                  <MdExtension className={bem.e('nav-item-icon')} />
+                  <span className=" align-self-start">FINANCE</span>
+                </div>
+                <MdKeyboardArrowDown
+                  className={bem.e('nav-item-icon')}
+                  style={{
+                    padding: 0,
+                    transform: this.state.isOpenComponents
+                      ? 'rotate(0deg)'
+                      : 'rotate(-90deg)',
+                    transitionDuration: '0.3s',
+                    transitionProperty: 'transform',
+                  }}
+                />
+              </BSNavLink>
+            </NavItem>
+
+            <Collapse isOpen={this.state.isOpenComponents}>
+              {FINANCE.map(({ to, name, exact, Icon }, index) => (
+                <NavItem key={index} className={bem.e('nav-item')}>
+                  <BSNavLink
+                    id={`navItem-${name}-${index}`}
+                    className="text-uppercase"
+                    tag={NavLink}
+                    to={to}
+                    activeClassName="active"
+                    exact={exact}
+                  >
+                    <Icon className={bem.e('nav-item-icon')} />
+                    <span className="">{name}</span>
+                  </BSNavLink>
+                </NavItem>
+              ))}
+            </Collapse>
+
+            {/* END FINANCE */}
+
+            {/* START INVENTORY */}
+
+            <NavItem
+              className={bem.e('nav-item')}
+              onClick={this.handleClick('Components')}
+            >
+              <BSNavLink className={bem.e('nav-item-collapse')}>
+                <div className="d-flex">
+                  <MdExtension className={bem.e('nav-item-icon')} />
+                  <span className=" align-self-start">Inventory</span>
+                </div>
+                <MdKeyboardArrowDown
+                  className={bem.e('nav-item-icon')}
+                  style={{
+                    padding: 0,
+                    transform: this.state.isOpenComponents
+                      ? 'rotate(0deg)'
+                      : 'rotate(-90deg)',
+                    transitionDuration: '0.3s',
+                    transitionProperty: 'transform',
+                  }}
+                />
+              </BSNavLink>
+            </NavItem>
+
+            <Collapse isOpen={this.state.isOpenComponents}>
+              {INVENTORY.map(({ to, name, exact, Icon }, index) => (
+                <NavItem key={index} className={bem.e('nav-item')}>
+                  <BSNavLink
+                    id={`navItem-${name}-${index}`}
+                    className="text-uppercase"
+                    tag={NavLink}
+                    to={to}
+                    activeClassName="active"
+                    exact={exact}
+                  >
+                    <Icon className={bem.e('nav-item-icon')} />
+                    <span className="">{name}</span>
+                  </BSNavLink>
+                </NavItem>
+              ))}
+            </Collapse>
+
+            {/* END INVENTORY */}
+
+
+
 
             <NavItem
               className={bem.e('nav-item')}
@@ -179,6 +433,7 @@ class Sidebar extends React.Component {
                 />
               </BSNavLink>
             </NavItem>
+
             <Collapse isOpen={this.state.isOpenComponents}>
               {navComponents.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>

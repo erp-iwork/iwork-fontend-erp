@@ -12,6 +12,7 @@ import Spinner from '../../components/loader'
 import { Redirect } from 'react-router-dom'
 import routes from '../../config/routes'
 import AllEmployeesPage from "./AllEmployeesPage";
+import PageSpinner from '../../components/PageSpinner'
 
 class AddEmployee extends Component {
     constructor(props) {
@@ -26,7 +27,8 @@ class AddEmployee extends Component {
             lev: [],
             username: "",
             password: "",
-            complete: true
+            complete: true,
+            redirect: false
         }
         this.submit = this.submit.bind(this);
         this.departmentDropDown = this.departmentDropDown.bind(this);
@@ -41,8 +43,9 @@ class AddEmployee extends Component {
 
     submit = async () => {
         this.setState({ complete: false })
-        await this.props.addNewEmployee(this.state)
-        return <Redirect to={routes.allEmployees} />
+        await this.props.addNewEmployee(this.state).then(res => {
+            this.setState({ redirect: true })
+        })
     }
     departmentDropDown(e) {
         this.setState({
@@ -64,19 +67,11 @@ class AddEmployee extends Component {
         this.setState({
             rolValue: e.target.value,
         });
-
         this.state.rol.forEach((value) => {
-
             if (value.roleId === parseInt(e.target.value) && value.role_levels != null) {
-
-                this.setState({
-                    lev: value.role_levels,
-                });
+                this.setState({ lev: value.role_levels })
             }
-
-        }
-
-        )
+        })
     }
 
     levelDropDown(e) {
@@ -95,6 +90,8 @@ class AddEmployee extends Component {
         var depValue = this.state.depValue;
         var rolValue = this.state.rolValue;
         const { country } = this.state
+        if (!this.props.department[0]) return <PageSpinner />
+        if (this.state.redirect) return <Redirect to={routes.allEmployees} />
         return (
             <>
                 <Page
@@ -398,7 +395,6 @@ class AddEmployee extends Component {
                                                     <Input type="select" name="city" onChange={this.handleChange}>
                                                         <option aria-label="None" disabled selected value="" >Select City</option>
                                                         {this.state.country ?
-                                                            //city[countries[0]][regions[countries[0]][1]]
                                                             cities[country].map((item, index) => (
                                                                 <option key={item} value={item}>{item}</option>
                                                             )) : ""
@@ -417,7 +413,7 @@ class AddEmployee extends Component {
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button color='primary' onClick={this.submit}>
-                                                {this.props.loading ? <Spinner /> : "Register"}
+                                                {!this.props.loading || this.state.complete ? "Register" : <Spinner /> }
                                             </Button>
                                         </Col>
                                     </FormGroup>

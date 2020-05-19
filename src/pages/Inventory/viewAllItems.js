@@ -58,7 +58,7 @@ class ViewAllItems extends Component {
                         <CardBody>
                             <Table responsive>
                                 <thead>
-                                    <tr align='center'>
+                                    <tr align='left'>
                                         <th>#</th>
                                         <th>Item ID</th>
                                         <th>Item Name</th>
@@ -74,7 +74,7 @@ class ViewAllItems extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr align='center'>
+                                    <tr align='left'>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Johnlights51@gmail.com</td>

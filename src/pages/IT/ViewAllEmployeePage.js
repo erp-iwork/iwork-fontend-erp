@@ -85,7 +85,7 @@ class AllEmployees extends Component {
                         <CardBody>
                             <Table responsive>
                                 <thead>
-                                    <tr align='center'>
+                                    <tr align='left'>
                                         <th>#</th>
                                         <th>Full Name</th>
                                         <th>Email</th>
@@ -98,8 +98,8 @@ class AllEmployees extends Component {
                                 </thead>
                                 <tbody>
                                     {this.props.employees.map((employeeInfos, index) => (
-                                        <tr align='center' key={index}>
-                                            <th scope="row">{employeeInfos.employeId}</th>
+                                        <tr key={index}>
+                                            <th scope="row">{index + 1}</th>
                                             <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
                                             <td>{employeeInfos.email}</td>
                                             <td>{employeeInfos.hiredDate}</td>
@@ -107,10 +107,10 @@ class AllEmployees extends Component {
                                             <td >{employeeInfos.termOfEmployment}</td>
                                             <td >
                                                 {employeeInfos.has_account ? (
-                                                    <Button size='sm' onClick={() => this.deleteFun(employeeInfos.email)}>Delete Account</Button>
+                                                    <Button size='sm' onClick={() => this.deleteFun(employeeInfos.email)}>Delete</Button>
                                                 ) : (
                                                         <Link to={{ pathname: routes.addAccount, state: { account: employeeInfos } }}>
-                                                            <Button color='primary'>
+                                                            <Button size='sm' color='primary'>
                                                                 <MdLibraryAdd />
                                                             </Button>
                                                         </Link>

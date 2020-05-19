@@ -43,7 +43,7 @@ class ViewSingleOrderPage extends Component {
                                 </Row>
                                 <Row>
                                     <Col>
-                                        Order Date:
+                                        Order Date :
                                     </Col>
                                     <Col>
                                         <b>{details.orderDate}</b>
@@ -51,14 +51,14 @@ class ViewSingleOrderPage extends Component {
                                 </Row>
                                 <Row>
                                     <Col>
-                                        Shipment Address:
+                                        Shipment Address :
                                     </Col>
                                     <Col>
                                         <b>{details.shipmentAddress}</b>
                                     </Col>
                                 </Row>
                                 <b>Description</b>
-                                    <Col>{details.description}</Col>
+                                <Col>{details.description}</Col>
                             </CardBody>
                         </Col>
                         <Col md={8}>

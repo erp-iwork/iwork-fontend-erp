@@ -7,10 +7,10 @@ import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
 
-const Order = ({ order }) => {
+const Order = ({ order, id }) => {
     return (
         <tr align="center">
-            <th scope="row">{order.orderNumber}</th>
+            <th scope="row">{id}</th>
             <td>{order.company}</td>
             <td>{order.salesPerson}</td>
             <td>{order.shipmentAddress}</td>
@@ -36,12 +36,11 @@ class ViewAllOrdersPage extends Component {
             passedOrders: false
         }
     }
-    
+
     async componentDidMount() {
         if (!this.props.lists) {
             await this.props.getAllOrder()
             this.setState({ passedOrders: true })
-            console.log(this.props.orders[0])
         } else this.setState({ passedOrders: true })
     }
 
@@ -50,28 +49,28 @@ class ViewAllOrdersPage extends Component {
             if (!this.props.orders[0]) return <PageSpinner />
         }
         return (
-            <Page title="View All Orders" breadcrumbs={[{ name: 'All Orders', active: true }]}>
-                    <Card className="mb-3">
-                        <CardHeader>All Orders</CardHeader>
-                        <CardBody>
-                            <Table responsive >
-                                <thead>
-                                    <tr align='center'>
-                                        <th>Order #</th>
-                                        <th>Customer</th>
-                                        <th>Sales Person</th>
-                                        <th>Shipment Address</th>
-                                        <th>Order Date</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
+            <Page title="View All Sales Orders" breadcrumbs={[{ name: 'All Sales Orders', active: true }]}>
+                <Card className="mb-3">
+                    <CardHeader>All Orders</CardHeader>
+                    <CardBody>
+                        <Table responsive >
+                            <thead>
+                                <tr align='center'>
+                                    <th>Order #</th>
+                                    <th>Customer</th>
+                                    <th>Sales Person</th>
+                                    <th>Shipment Address</th>
+                                    <th>Order Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {this.props.lists? this.props.lists.map((order, index) => (
-                                        <Order order={order} />
+                                        <Order order={order} id={index + 1} />
                                     )) : this.props.orders.map((order, index) => (
-                                        <Order order={order}/>
+                                        <Order order={order} id={index + 1} />
                                     ))}
                                 </tbody>
                             </Table>
@@ -84,12 +83,12 @@ class ViewAllOrdersPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      loading: state.salesReducer.loading,
-      errors: state.salesReducer.errors,
-      items: state.salesReducer.items,
-      companys: state.salesReducer.companys,
-      success: state.salesReducer.success,
-      orders:state.salesReducer.orders
+        loading: state.salesReducer.loading,
+        errors: state.salesReducer.errors,
+        items: state.salesReducer.items,
+        companys: state.salesReducer.companys,
+        success: state.salesReducer.success,
+        orders: state.salesReducer.orders
     }
 }
 const mapDispatchToProps = {
