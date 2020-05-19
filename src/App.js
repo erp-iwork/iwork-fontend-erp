@@ -40,6 +40,8 @@ const viewAllCutomersPage = React.lazy(() => import('./pages/Finance/viewAllCuto
 const ViewAllOrdersFinancePage = React.lazy(() => import('./pages/Finance/ViewAllOrdersPage'));
 const ViewAllOrdersLogisticsPage = React.lazy(() => import('./pages/Logistics/ViewAllOrdersPage'));
 const CategoriesInventoryPage = React.lazy(() => import('./pages/Inventory/CategoryPage'));
+const ViewSingleItemPage = React.lazy(() => import('./pages/Inventory/ViewSingleItemPage'));
+
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -87,6 +89,8 @@ class App extends React.Component {
                 <Route exact path={routes.ViewAllItems} component={viewAllItemsPage} />
                 <Route exact path={routes.ViewOrdersInventory} component={ViewAllOrdersInventoryPage} />
                 <Route exact path={routes.CategoriesInventoryPage} component={CategoriesInventoryPage} />
+                <Route exact path={routes.ViewSingleItemPage} component={ViewSingleItemPage} />
+
 
 
                 {/* FINANCE ROUTES/ */}
