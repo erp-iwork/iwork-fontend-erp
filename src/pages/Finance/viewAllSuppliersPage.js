@@ -70,7 +70,7 @@ class ViewAllSuppliers extends Component {
                         <CardBody>
                             <Table responsive>
                                 <thead>
-                                    <tr align='left'>
+                                    <tr align='left'> 
                                         <th>#</th>
                                         <th>Customer Name</th>
                                         <th>General Manager</th>
