@@ -24,7 +24,7 @@ class CategoryPage extends Component {
                             <CardBody>
                                 <Row >
                                     <Col className='icons' md={3}>
-                                        <FontAwesomeIcon icon={faShareAlt} size="5x" spin />
+                                        <FontAwesomeIcon icon={faShareAlt} size="5x" color="#7D7D7D"  transform={{ rotate: 42 }} />
                                     </Col>
                                     <Col size='lg'>
                                         <h3>Consumable Goods</h3>
@@ -38,7 +38,7 @@ class CategoryPage extends Component {
                             <CardBody>
                                 <Row >
                                     <Col className='icons' md={3}>
-                                        <FontAwesomeIcon color='primary' icon={faBox} size="5x" spin />
+                                        <FontAwesomeIcon color='primary' icon={faBox} size="5x" color="#7D7D7D" transform={{ rotate: -42 }} />
                                     </Col>
                                     <Col size='lg' >
                                         <h3 color='primary'>Stored Goods</h3>
@@ -52,7 +52,7 @@ class CategoryPage extends Component {
                             <CardBody>
                                 <Row >
                                     <Col className='icons' md={3}>
-                                        <FontAwesomeIcon icon={faScrewdriver} color='primary' size="5x" spin />
+                                        <FontAwesomeIcon icon={faScrewdriver} color='primary' color="#7D7D7D" size="5x" transform={{ rotate: -2 }} />
                                     </Col>
                                     <Col size='lg'>
                                         <h3>Services</h3>
