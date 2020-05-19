@@ -126,7 +126,7 @@ function getAllItem() {
     axios
       .request({
         method: "GET",
-        url: API + "item/",
+        url: API + "items/",
         responseType: "json",
         headers: {
           "Content-Type": "application/json",
@@ -175,8 +175,6 @@ function getAllOrder() {
         },
       })
       .then((response) => {
-        console.log(response.data);
-
         dispatch({
           type: salesConstants.ORDER_GETALL_SUCCESS,
           payload: response.data,

@@ -41,9 +41,6 @@ const ViewAllOrdersFinancePage = React.lazy(() => import('./pages/Finance/ViewAl
 const ViewAllOrdersLogisticsPage = React.lazy(() => import('./pages/Logistics/ViewAllOrdersPage'));
 const CategoriesInventoryPage = React.lazy(() => import('./pages/Inventory/CategoryPage'));
 
-
-
-
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
 };
