@@ -8,7 +8,6 @@ import './styles/reduction.scss';
 import routes from './config/routes'
 import LoginPage from './pages/Login'
 
-
 const AlertPage = React.lazy(() => import('./pages/AlertPage'));
 const AuthModalPage = React.lazy(() => import('./pages/AuthModalPage'));
 const BadgePage = React.lazy(() => import('./pages/BadgePage'));
@@ -75,8 +74,6 @@ class App extends React.Component {
                 <Route exact path="/tables" component={TablePage} />
                 <Route exact path="/badges" component={BadgePage} />
                 {/* HR ROUTES/ */}
-
-                {/* HR ROUTES/ */}
                 <Route exact path={routes.allEmployees} component={AllEmployeePage} />
                 <Route exact path={routes.addEmployee} component={AddEmployeePage} />
                 <Route exact path={routes.employeeProfile} component={EmployeeProfilePage} />
@@ -92,9 +89,6 @@ class App extends React.Component {
                 <Route exact path={routes.ViewOrdersInventory} component={ViewAllOrdersInventoryPage} />
                 <Route exact path={routes.CategoriesInventoryPage} component={CategoriesInventoryPage} />
                 <Route exact path={routes.ViewSingleItemPage} component={ViewSingleItemPage} />
-
-
-
                 {/* FINANCE ROUTES/ */}
                 <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
                 <Route exact path={routes.viewCustomers} component={viewAllCutomersPage} />

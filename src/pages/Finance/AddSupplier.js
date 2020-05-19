@@ -81,7 +81,7 @@ class AddSupplierPage extends Component {
         console.log(this.props.suppliers.length)
         if (!this.props.suppliers[0]) return <PageSpinner />
         return (
-            <Page title="Add Customer" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
+            <Page title="Add Supplier" breadcrumbs={[{ name: 'Add Supplier', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
                     <Card>
                         <CardHeader>ADD A NEW SUPPLIER TO WORK WITH</CardHeader>
@@ -94,7 +94,7 @@ class AddSupplierPage extends Component {
                                                 Supplier Name
                                     </Label>
                                             <Col sm={12}>
-                                                <Input placeholder="Enter Customer Name" name="companyName" onChange={this.handleChange} />
+                                                <Input placeholder="Enter Supplier Name" name="companyName" onChange={this.handleChange} />
                                                 <Error
                                                     error={
                                                     this.props.errors.companyName
@@ -165,7 +165,7 @@ class AddSupplierPage extends Component {
                                                 <Input
                                                     type="email"
                                                     name="email"
-                                                    placeholder="Customer Email"
+                                                    placeholder="Supplier Email"
                                                     onChange={this.handleChange}
                                                 />
                                                 <Error
@@ -214,7 +214,7 @@ class AddSupplierPage extends Component {
                                 <FormGroup >
                                     <Col align='center'>
                                         <Button color='primary' onClick={this.submit}>
-                                            {this.state.loading === 1 ? <Loader /> : "Add Customer"}
+                                            {this.state.loading === 1 ? <Loader /> : "Add Supplier"}
                                         </Button>
                                     </Col>
                                 </FormGroup>
