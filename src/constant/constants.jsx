@@ -43,6 +43,8 @@ export const companyConstant = {
   ADD_COMPANY: "ADD_COMPANY",
   GET_COMPANYS: "GET_COMPANYS",
   DELETE_COMPANY: "DELETE_COMPANY",
+  ADD_SUPPLIER: "ADD_SUPPLIER",
+  GET_SUPPLIER: "GET_SUPPLIER"
 };
 
 export const errorsConstant = {
