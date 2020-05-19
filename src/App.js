@@ -1,12 +1,13 @@
-import { STATE_LOGIN, STATE_SIGNUP } from './components/AuthForm';
 import GAListener from './components/GAListener';
-import { EmptyLayout, LayoutRoute, MainLayout } from './components/Layout';
+import { EmptyLayout, PublicRoute, MainLayout } from './components/Layout';
 import PageSpinner from './components/PageSpinner';
-import AuthPage from './pages/AuthPage';
 import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
+import routes from './config/routes'
+import LoginPage from './pages/Login'
+
 
 const AlertPage = React.lazy(() => import('./pages/AlertPage'));
 const AuthModalPage = React.lazy(() => import('./pages/AuthModalPage'));
@@ -24,6 +25,21 @@ const ProgressPage = React.lazy(() => import('./pages/ProgressPage'));
 const TablePage = React.lazy(() => import('./pages/TablePage'));
 const TypographyPage = React.lazy(() => import('./pages/TypographyPage'));
 const WidgetPage = React.lazy(() => import('./pages/WidgetPage'));
+const AllEmployeePage = React.lazy(() => import('./pages/HR/AllEmployeesPage'));
+const AddEmployeePage = React.lazy(() => import('./pages/HR/AddEmployeePage'));
+const EmployeeProfilePage = React.lazy(() => import('./pages/HR/EmployeeProfilePage'));
+const ITAllEmployeesPage = React.lazy(() => import('./pages/IT/ViewAllEmployeePage'));
+const ITAddaccount = React.lazy(() => import('./pages/IT/AddAccount'));
+const CreateOrdersPage = React.lazy(() => import('./pages/Sales/CreateOrdersPage'));
+const ViewAllOrdersPage = React.lazy(() => import('./pages/Sales/ViewAllOrdersPage'));
+const ViewSingleOrderPage = React.lazy(() => import('./pages/Sales/ViewSingleOrderPage'));
+const viewAllItemsPage = React.lazy(() => import('./pages/Inventory/viewAllItems'));
+const ViewAllOrdersInventoryPage = React.lazy(() => import('./pages/Inventory/ViewAllOrdersPage'));
+const AddCustomerPage = React.lazy(() => import('./pages/Finance/AddCustomerPage'));
+const viewAllCutomersPage = React.lazy(() => import('./pages/Finance/viewAllCutomersPage'));
+const ViewAllOrdersFinancePage = React.lazy(() => import('./pages/Finance/ViewAllOrdersPage'));
+const ViewAllOrdersLogisticsPage = React.lazy(() => import('./pages/Logistics/ViewAllOrdersPage'));
+const CategoriesInventoryPage = React.lazy(() => import('./pages/Inventory/CategoryPage'));
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -35,23 +51,14 @@ class App extends React.Component {
       <BrowserRouter basename={getBasename()}>
         <GAListener>
           <Switch>
-            <LayoutRoute
+            <PublicRoute
               exact
-              path="/login"
+              path={routes.login}
               layout={EmptyLayout}
               component={props => (
-                <AuthPage {...props} authState={STATE_LOGIN} />
+                <LoginPage />
               )}
             />
-            <LayoutRoute
-              exact
-              path="/signup"
-              layout={EmptyLayout}
-              component={props => (
-                <AuthPage {...props} authState={STATE_SIGNUP} />
-              )}
-            />
-
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" component={DashboardPage} />
@@ -63,6 +70,35 @@ class App extends React.Component {
                 <Route exact path="/alerts" component={AlertPage} />
                 <Route exact path="/tables" component={TablePage} />
                 <Route exact path="/badges" component={BadgePage} />
+                {/* HR ROUTES/ */}
+
+                {/* HR ROUTES/ */}
+                <Route exact path={routes.allEmployees} component={AllEmployeePage} />
+                <Route exact path={routes.addEmployee} component={AddEmployeePage} />
+                <Route exact path={routes.employeeProfile} component={EmployeeProfilePage} />
+                {/* IT ROUTES/ */}
+                <Route exact path={routes.itEmployeePage} component={ITAllEmployeesPage} />
+                <Route exact path={routes.addAccount} component={ITAddaccount} />
+                {/* SALES ROUTES */}
+                <Route exact path={routes.createOrderPage} component={CreateOrdersPage} />
+                <Route exact path={routes.ViewAllOrdersPage} component={ViewAllOrdersPage} />
+                <Route exact path={routes.ViewSingleOrderPage} component={ViewSingleOrderPage} />
+                {/* INVENTORY ROUTES/ */}
+                <Route exact path={routes.ViewAllItems} component={viewAllItemsPage} />
+                <Route exact path={routes.ViewOrdersInventory} component={ViewAllOrdersInventoryPage} />
+                <Route exact path={routes.CategoriesInventoryPage} component={CategoriesInventoryPage} />
+
+
+                {/* FINANCE ROUTES/ */}
+                <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
+                <Route exact path={routes.viewCustomers} component={viewAllCutomersPage} />
+                <Route exact path={routes.ViewOrdersFinance} component={ViewAllOrdersFinancePage} />
+                {/* LOGISTICS ROUTES */}
+                <Route exact path={routes.ViewOrdersLogistics} component={ViewAllOrdersLogisticsPage} />
+
+
+
+
                 <Route
                   exact
                   path="/button-groups"
