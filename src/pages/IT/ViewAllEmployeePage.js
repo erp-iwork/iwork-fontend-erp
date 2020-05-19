@@ -98,7 +98,7 @@ class AllEmployees extends Component {
                                 </thead>
                                 <tbody>
                                     {this.props.employees.map((employeeInfos, index) => (
-                                        <tr align='center' key={index}>
+                                        <tr key={index}>
                                             <th scope="row">{index + 1}</th>
                                             <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
                                             <td>{employeeInfos.email}</td>
@@ -107,10 +107,10 @@ class AllEmployees extends Component {
                                             <td >{employeeInfos.termOfEmployment}</td>
                                             <td >
                                                 {employeeInfos.has_account ? (
-                                                    <Button size='sm' onClick={() => this.deleteFun(employeeInfos.email)}>Delete Account</Button>
+                                                    <Button size='sm' onClick={() => this.deleteFun(employeeInfos.email)}>Delete</Button>
                                                 ) : (
                                                         <Link to={{ pathname: routes.addAccount, state: { account: employeeInfos } }}>
-                                                            <Button color='primary'>
+                                                            <Button size='sm' color='primary'>
                                                                 <MdLibraryAdd />
                                                             </Button>
                                                         </Link>

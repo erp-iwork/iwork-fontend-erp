@@ -15,5 +15,7 @@ export default {
     viewCustomers: '/viewCustomers',
     AddCustomer: '/AddCustomer',
     ViewOrdersFinance: '/ViewOrdersFinance',
-    ViewOrdersLogistics: '/ViewOrdersLogistics'
+    ViewOrdersLogistics: '/ViewOrdersLogistics',
+    ViewOrdersInventory: '/ViewOrdersInventory'
+
 }
