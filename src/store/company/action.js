@@ -6,20 +6,20 @@ import headers from './../headers'
 
 // ADD COMPANY
 export const addCompany = (company) => (dispatch) => {
-
-  axios
+  return axios
     .post(API + "company/", company, headers)
     .then((res) => {
-      Swal.fire({
+      return Swal.fire({
         title: "Success",
         icon: "success",
         showConfirmButton: false,
         timer: 1000
-      });
-      dispatch({
-        type: companyConstant.ADD_COMPANY,
-        payload: res.data,
-      });
+      }).then(res => {
+        dispatch({
+          type: companyConstant.ADD_COMPANY,
+          payload: res.data,
+        })
+      })
     })
     .catch((err) => {
       try {
@@ -62,7 +62,7 @@ export const getCompany = () => (dispatch) => {
 
 // DELETE COMPANY
 export const deleteCompany = (companyId) => (dispatch) => {
-  Swal.fire({
+  return Swal.fire({
     title: "Are you sure?",
     text: "Are you not revert this action!",
     icon: "warning",
@@ -73,11 +73,10 @@ export const deleteCompany = (companyId) => (dispatch) => {
     cancelButtonText: "no",
   }).then((result) => {
     if (result.value) {
-      axios
+      return axios
         .delete(API + `company/${companyId}/`, headers)
         .then((res) => {
-
-          Swal.fire({
+          return Swal.fire({
             title: "Deleted",
             icon: "success",
             showConfirmButton: false,

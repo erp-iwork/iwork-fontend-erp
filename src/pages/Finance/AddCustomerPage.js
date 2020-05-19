@@ -14,17 +14,66 @@ import {
 } from 'reactstrap';
 import AllCustomers from "./viewAllCutomersPage";
 import './Finance.scss'
+import Error from '../../components/error'
+import { connect } from 'react-redux'
+import { addCompany, getCompany } from '../../store/company/action'
+import Loader from '../../components/loader'
+import PageSpinner from '../../components/PageSpinner'
 
 class AddCustomerPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            companyName: "",
+            generalManger: "",
+            contactPerson: "",
+            workingField: "",
+            paymentOption: "",
+            email: "",
+            tinNumber: "",
+            companys: [],
+            loading: false
+        }
+        this.submit = this.submit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
+
+    handleChange = event => {
+        const { name, value } = event.target
+        this.setState({ [name]: value })
+    }
+
+    submit = async (e) => {
+        e.preventDefault();
+        const newCompany = {
+          companyName: this.state.companyName,
+          generalManger: this.state.generalManger,
+          contactPerson: this.state.contactPerson,
+          workingField: this.state.workingField,
+          paymentOption: this.state.paymentOption,
+          email: this.state.email,
+          tinNumber: this.state.tinNumber,
+        }
+        this.setState({ loading: true })
+        this.props.addCompany(newCompany).then(res => this.setState({ loading: false }))
+        if (this.props.success) {
+          this.setState({
+            companyName: "",
+            generalManger: "",
+            contactPerson: "",
+            workingField: "",
+            paymentOption: "",
+            email: "",
+            tinNumber: ""
+          })
+        }
+    }
+
     render() {
         return (
             <Page title="Add Customer" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
-                    <Card>u
+                    <Card>
                         <CardHeader>ADD A NEW CUSTOMER TO WORK WITH</CardHeader>
                         <CardBody>
                             <Form>
@@ -35,7 +84,14 @@ class AddCustomerPage extends Component {
                                                 Customer Name
                                     </Label>
                                             <Col sm={12}>
-                                                <Input placeholder="Customer Name" />
+                                                <Input placeholder="Customer Name" name="companyName" onChange={this.handleChange} />
+                                                <Error
+                                                    error={
+                                                    this.props.errors.companyName
+                                                        ? this.props.errors.companyName
+                                                        : null
+                                                    }
+                                                />
                                             </Col>
                                         </FormGroup>
 
@@ -44,18 +100,30 @@ class AddCustomerPage extends Component {
                                                 General Manager
                                             </Label>
                                             <Col sm={12}>
-                                                <Input placeholder="General Manager" />
+                                                <Input placeholder="General Manager" name="generalManger" onChange={this.handleChange} />
+                                                <Error
+                                                    error={
+                                                    this.props.errors.generalManger
+                                                        ? this.props.errors.generalManger
+                                                        : null
+                                                    }
+                                                />
                                             </Col>
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="examplePassword" sm={12}>
-                                                Contact Person
-                                    </Label>
+                                            <Label for="examplePassword" sm={12}>Contact Person</Label>
                                             <Col sm={12}>
                                                 <Input
-                                                    placeholder="Contact Person"
+                                                    placeholder="Contact Person" name="contactPerson" onChange={this.handleChange}
                                                 />
                                             </Col>
+                                            <Error
+                                                error={
+                                                this.props.errors.contactPerson
+                                                    ? this.props.errors.contactPerson
+                                                    : null
+                                                }
+                                            />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="examplePassword" sm={12}>
@@ -65,6 +133,15 @@ class AddCustomerPage extends Component {
                                                 <Input
                                                     type="number"
                                                     placeholder="Tin Number"
+                                                    name="tinNumber"
+                                                    onChange={this.handleChange}
+                                                />
+                                                <Error
+                                                    error={
+                                                        this.props.errors.tinNumber
+                                                        ? this.props.errors.tinNumber
+                                                        : null
+                                                    }
                                                 />
                                             </Col>
                                         </FormGroup>
@@ -79,25 +156,46 @@ class AddCustomerPage extends Component {
                                                     type="email"
                                                     name="email"
                                                     placeholder="Customer Email"
+                                                    onChange={this.handleChange}
+                                                />
+                                                <Error
+                                                    error={
+                                                    this.props.errors.email ? this.props.errors.email : null
+                                                    }
                                                 />
                                             </Col>
                                         </FormGroup>
                                         <FormGroup>
                                             <Label sm={12} for="exampleSelect">Payment Option</Label>
                                             <Col>
-                                                <Input type="select" name="select">
+                                                <Input type="select" name="paymentOption" onChange={this.handleChange}>
+                                                    <option aria-label="None" value="" />
                                                     <option>TOT</option>
                                                     <option>VAT</option>
                                                 </Input>
+                                                <Error
+                                                    error={
+                                                        this.props.errors.paymentOption
+                                                        ? this.props.errors.paymentOption
+                                                        : null
+                                                    }
+                                                />
                                             </Col>
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="examplePassword" sm={12}>
-                                                Field Of Work
-                                    </Label>
+                                            <Label for="examplePassword" sm={12}>Field Of Work</Label>
                                             <Col sm={12}>
                                                 <Input
                                                     placeholder="Field Of Work"
+                                                    name="workingField"
+                                                    onChange={this.handleChange}
+                                                />
+                                                <Error
+                                                    error={
+                                                    this.props.errors.workingField
+                                                        ? this.props.errors.workingField
+                                                        : null
+                                                    }
                                                 />
                                             </Col>
                                         </FormGroup>
@@ -105,17 +203,25 @@ class AddCustomerPage extends Component {
                                 </Row>
                                 <FormGroup >
                                     <Col align='center'>
-                                        <Button color='primary'>Add Customer</Button>
+                                        <Button color='primary' onClick={this.submit}>
+                                            {this.state.loading? <Loader /> : "Add Customer"}
+                                        </Button>
                                     </Col>
                                 </FormGroup>
                             </Form>
                         </CardBody>
                     </Card>
                 </Col>
-                <AllCustomers />
+                <AllCustomers companys={this.props.companys} />
             </Page>
         );
     }
 }
 
-export default AddCustomerPage;
+const mapStateToProps = (state) => ({
+    companys: state.companyReducer.companys,
+    errors: state.companyReducer.errors,
+    success: state.companyReducer.success
+})
+
+export default connect(mapStateToProps, { addCompany, getCompany })(AddCustomerPage)
