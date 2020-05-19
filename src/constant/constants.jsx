@@ -48,7 +48,7 @@ export const companyConstant = {
 };
 
 export const errorsConstant = {
-  GET_ERRORS: "GET_ERRORS",
+  GET_ERRORS: "GET_ERRORS"
 };
 
 export const GET_INVOICE = "GET_INVOICE";
