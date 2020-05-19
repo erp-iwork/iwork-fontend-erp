@@ -114,11 +114,12 @@ const FINANCE = [
 ]
 
 const INVENTORY = [
-
-
   { to: routes.ViewAllItems, name: 'View Items', exact: false, Icon: MdWidgets },
+  { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
+  { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
 
 
+  
 ]
 
 const navItems = [
@@ -362,9 +363,9 @@ class Sidebar extends React.Component {
 
             {/* END FINANCE */}
 
-                        {/* START INVENTORY */}
+            {/* START INVENTORY */}
 
-                        <NavItem
+            <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}
             >

@@ -39,6 +39,10 @@ const AddCustomerPage = React.lazy(() => import('./pages/Finance/AddCustomerPage
 const viewAllCutomersPage = React.lazy(() => import('./pages/Finance/viewAllCutomersPage'));
 const ViewAllOrdersFinancePage = React.lazy(() => import('./pages/Finance/ViewAllOrdersPage'));
 const ViewAllOrdersLogisticsPage = React.lazy(() => import('./pages/Logistics/ViewAllOrdersPage'));
+const CategoriesInventoryPage = React.lazy(() => import('./pages/Inventory/CategoryPage'));
+
+
+
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -85,6 +89,8 @@ class App extends React.Component {
                 {/* INVENTORY ROUTES/ */}
                 <Route exact path={routes.ViewAllItems} component={viewAllItemsPage} />
                 <Route exact path={routes.ViewOrdersInventory} component={ViewAllOrdersInventoryPage} />
+                <Route exact path={routes.CategoriesInventoryPage} component={CategoriesInventoryPage} />
+
 
                 {/* FINANCE ROUTES/ */}
                 <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
@@ -95,7 +101,7 @@ class App extends React.Component {
 
 
 
-                
+
                 <Route
                   exact
                   path="/button-groups"
