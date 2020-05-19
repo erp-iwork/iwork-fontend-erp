@@ -11,7 +11,7 @@ const Customer = ({ company, index, deleteCompany }) => {
     return (
         <tr align='center'>
             <th scope="row">{index + 1}</th>
-            <td>{company.companyName}</td>
+            <td>{company.customerName}</td>
             <td>{company.generalManger}</td>
             <td>{company.email}</td>
             <td>{company.contactPerson}</td>
@@ -20,7 +20,7 @@ const Customer = ({ company, index, deleteCompany }) => {
             <td>{company.tinNumber}</td>
             <td>
                 <Col align='center'>
-                    <Button color='danger' size='sm' onClick={() => deleteCompany(company.companyId)}>
+                    <Button color='danger' size='sm' onClick={() => deleteCompany(company.customerId)}>
                         <MdDelete />
                     </Button>
                 </Col>
@@ -40,37 +40,30 @@ class ViewAllCustomersPage extends Component {
 
     async componentDidMount() {
         if (!this.props.lists) {
-            console.log("Here")
             await this.props.getCompany()
         }
     }
 
     deleteCustomer(id) {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this Action!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-          }).then(result => {
-            if (result.value) {
+        this.props.deleteCompany(id).then(res => {
+            if (res) {
                 Swal.fire({
                     title: "Delteing Account...",
                     icon: "warning",
                     showCancelButton: false,
                     allowOutsideClick: false,
-                    showConfirmButton: false
+                    showConfirmButton: false,
+                    onDestroy: () => this.componentDidMount()
                 })
-                this.props.deleteCompany(id)
             }
         })
     }
 
     render() {
-        console.log(this.props.companys)
         if (!(this.props.companys[0])) return <PageSpinner />
+        if (this.props.update) {
+            if (!this.props.companys[0]) return <PageSpinner />
+        }
         return (
             <Page title="All Customers" breadcrumbs={[{ name: 'All Customer', active: true }]}>
                 <Col>

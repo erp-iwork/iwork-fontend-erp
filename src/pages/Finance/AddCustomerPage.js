@@ -32,10 +32,15 @@ class AddCustomerPage extends Component {
             email: "",
             tinNumber: "",
             companys: [],
-            loading: false
+            loading: 0,
+            update: false
         }
         this.submit = this.submit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.getCompany()
     }
 
     handleChange = event => {
@@ -46,16 +51,19 @@ class AddCustomerPage extends Component {
     submit = async (e) => {
         e.preventDefault();
         const newCompany = {
-          companyName: this.state.companyName,
-          generalManger: this.state.generalManger,
-          contactPerson: this.state.contactPerson,
-          workingField: this.state.workingField,
-          paymentOption: this.state.paymentOption,
-          email: this.state.email,
-          tinNumber: this.state.tinNumber,
+            customerName: this.state.companyName,
+            generalManger: this.state.generalManger,
+            contactPerson: this.state.contactPerson,
+            workingField: this.state.workingField,
+            paymentOption: this.state.paymentOption,
+            email: this.state.email,
+            tinNumber: this.state.tinNumber
         }
-        this.setState({ loading: true })
-        this.props.addCompany(newCompany).then(res => this.setState({ loading: false }))
+        this.setState({ loading: this.state.loading + 1 })
+        this.props.addCompany(newCompany).then(res => {
+            this.setState({ loading: this.state.loading + 1 })
+        })
+        this.componentDidMount()
         if (this.props.success) {
           this.setState({
             companyName: "",
@@ -70,6 +78,7 @@ class AddCustomerPage extends Component {
     }
 
     render() {
+        if (!this.props.companys[0]) return <PageSpinner />
         return (
             <Page title="Add Customer" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
@@ -204,7 +213,7 @@ class AddCustomerPage extends Component {
                                 <FormGroup >
                                     <Col align='center'>
                                         <Button color='primary' onClick={this.submit}>
-                                            {this.state.loading? <Loader /> : "Add Customer"}
+                                            {this.state.loading === 1 ? <Loader /> : "Add Customer"}
                                         </Button>
                                     </Col>
                                 </FormGroup>
@@ -212,7 +221,7 @@ class AddCustomerPage extends Component {
                         </CardBody>
                     </Card>
                 </Col>
-                <AllCustomers lists={this.props.companys} />
+                <AllCustomers lists={this.props.companys} update={this.state.update} />
             </Page>
         );
     }

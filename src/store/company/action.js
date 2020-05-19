@@ -9,16 +9,15 @@ export const addCompany = (company) => (dispatch) => {
   return axios
     .post(API + "customer/", company, headers)
     .then((res) => {
-      return Swal.fire({
+      Swal.fire({
         title: "Success",
         icon: "success",
         showConfirmButton: false,
         timer: 1000
-      }).then(res => {
-        dispatch({
-          type: companyConstant.ADD_COMPANY,
-          payload: res.data,
-        })
+      })
+      dispatch({
+        type: companyConstant.ADD_COMPANY,
+        payload: res.data,
       })
     })
     .catch((err) => {
@@ -73,10 +72,10 @@ export const deleteCompany = (companyId) => (dispatch) => {
     cancelButtonText: "no",
   }).then((result) => {
     if (result.value) {
-      return axios
+      axios
         .delete(API + `customer/${companyId}/`, headers)
         .then((res) => {
-          return Swal.fire({
+          Swal.fire({
             title: "Deleted",
             icon: "success",
             showConfirmButton: false,
@@ -104,5 +103,6 @@ export const deleteCompany = (companyId) => (dispatch) => {
           }
         });
     }
+    return result.value
   });
 };

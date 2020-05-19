@@ -34,7 +34,7 @@ const CreateOrdersPage = React.lazy(() => import('./pages/Sales/CreateOrdersPage
 const ViewAllOrdersPage = React.lazy(() => import('./pages/Sales/ViewAllOrdersPage'));
 const ViewSingleOrderPage = React.lazy(() => import('./pages/Sales/ViewSingleOrderPage'));
 const viewAllItemsPage = React.lazy(() => import('./pages/Inventory/viewAllItems'));
-const ViewAllOrdersInventoryPage = React.lazy(() => import('./pages/Inventory/viewAllItems'));
+const ViewAllOrdersInventoryPage = React.lazy(() => import('./pages/Inventory/ViewAllOrdersPage'));
 const AddCustomerPage = React.lazy(() => import('./pages/Finance/AddCustomerPage'));
 const viewAllCutomersPage = React.lazy(() => import('./pages/Finance/viewAllCutomersPage'));
 const ViewAllOrdersFinancePage = React.lazy(() => import('./pages/Finance/ViewAllOrdersPage'));
