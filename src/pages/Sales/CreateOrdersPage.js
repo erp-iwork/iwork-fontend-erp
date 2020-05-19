@@ -110,7 +110,7 @@ class CreateOrdersPage extends Component {
 
     render() {
         let { order_items: items } = this.state;
-        if (!this.props.companys) return <PageSpinner />
+        if (!this.props.customers) return <PageSpinner />
         return (
             <Page title="Create Sales Order" breadcrumbs={[{ name: 'Create Sales Order', active: true }]}>
                 <Row>
@@ -126,7 +126,7 @@ class CreateOrdersPage extends Component {
                                         <Col sm={12}>
                                             <Input type="select" name="company" onChange={this.handleChange}>
                                                 <option aria-label="None" value="">Customer Name</option>
-                                                {this.props.companys.map((comp, idx) => (
+                                                {this.props.customers.map((comp, idx) => (
                                                     <option value={comp.companyId} key={idx}>
                                                         {comp.companyName}
                                                     </option>
@@ -282,7 +282,7 @@ const mapStateToProps = (state) => {
         loading: state.salesReducer.loading,
         errors: state.salesReducer.errors,
         items: state.salesReducer.items,
-        companys: state.salesReducer.companys,
+        customers: state.salesReducer.customers,
         success: state.salesReducer.success,
         orders: state.salesReducer.orders
     }

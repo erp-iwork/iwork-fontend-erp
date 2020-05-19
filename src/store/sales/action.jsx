@@ -89,7 +89,7 @@ function getAllCompany() {
     axios
       .request({
         method: "GET",
-        url: API + "company/",
+        url: API + "customer/",
         responseType: "json",
         headers: headers,
       })
