@@ -84,7 +84,7 @@ class AddCustomerPage extends Component {
                                                 Customer Name
                                     </Label>
                                             <Col sm={12}>
-                                                <Input placeholder="Customer Name" name="companyName" onChange={this.handleChange} />
+                                                <Input placeholder="Enter Customer Name" name="companyName" onChange={this.handleChange} />
                                                 <Error
                                                     error={
                                                     this.props.errors.companyName
@@ -168,8 +168,8 @@ class AddCustomerPage extends Component {
                                         <FormGroup>
                                             <Label sm={12} for="exampleSelect">Payment Option</Label>
                                             <Col>
-                                                <Input type="select" name="paymentOption" onChange={this.handleChange}>
-                                                    <option aria-label="None" value="" />
+                                                <Input type="select" name="paymentOption" placeholder="Select payment option" onChange={this.handleChange}>
+                                                    <option aria-label="None" value="Select payment option" />
                                                     <option>TOT</option>
                                                     <option>VAT</option>
                                                 </Input>
@@ -212,7 +212,7 @@ class AddCustomerPage extends Component {
                         </CardBody>
                     </Card>
                 </Col>
-                <AllCustomers companys={this.props.companys} />
+                <AllCustomers lists={this.props.companys} />
             </Page>
         );
     }

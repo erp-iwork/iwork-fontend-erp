@@ -38,8 +38,11 @@ class ViewAllCustomersPage extends Component {
         this.deleteCustomer = this.deleteCustomer.bind(this)
     }
 
-    componentDidMount() {
-        this.props.getCompany()
+    async componentDidMount() {
+        if (!this.props.lists) {
+            console.log("Here")
+            await this.props.getCompany()
+        }
     }
 
     deleteCustomer(id) {
@@ -66,6 +69,7 @@ class ViewAllCustomersPage extends Component {
     }
 
     render() {
+        console.log(this.props.companys)
         if (!(this.props.companys[0])) return <PageSpinner />
         return (
             <Page title="All Customers" breadcrumbs={[{ name: 'All Customer', active: true }]}>
@@ -88,7 +92,9 @@ class ViewAllCustomersPage extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.props.companys.slice(0).reverse().map((item, index) => (
+                                    {this.props.lists? this.props.lists.slice(0).reverse().map((item, index) => (
+                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteCustomer} />
+                                    )) : this.props.companys.slice(0).reverse().map((item, index) => (
                                         <Customer key={index} company={item} index={index} deleteCompany={this.deleteCustomer} />
                                     ))}
                                 </tbody>

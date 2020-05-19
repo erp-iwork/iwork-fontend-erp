@@ -41,7 +41,6 @@ class ViewAllOrdersPage extends Component {
         if (!this.props.lists) {
             await this.props.getAllOrder()
             this.setState({ passedOrders: true })
-            console.log(this.props.orders[0])
         } else this.setState({ passedOrders: true })
     }
 
