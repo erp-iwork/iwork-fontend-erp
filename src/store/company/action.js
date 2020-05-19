@@ -84,6 +84,53 @@ export const getSupplier = () => (dispatch) => {
     })
 }
 
+export const deleteSupplier = (supplierID) => (dispatch) => {
+  return Swal.fire({
+    title: "Are you sure?",
+    text: "Are you not revert this action!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes,",
+    cancelButtonText: "no",
+  }).then(res => {
+    if (res.value) {
+      axios
+        .delete(API + `${routes.supplier}${supplierID}/`, headers)
+        .then((res) => {
+          Swal.fire({
+            title: "Deleted",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1000
+          }).then(res => {
+            dispatch({
+              type: companyConstant.DELETE_SUPPLIER,
+              payload: supplierID,
+            });
+          })
+        })
+        .catch((err) => {
+          if (err.response && err.response.data) {
+            dispatch({
+              type: errorsConstant.GET_ERRORS,
+              payload: err.response.data,
+            });
+          } else {
+            Swal.fire({
+              title: "Error", text: "Connection Problem",
+              icon: "error",
+              showConfirmButton: false,
+              timer: 1000
+            });
+          }
+        })
+        return res.value
+    }
+  })
+}
+
 // GET COMPANYS
 export const getCompany = () => (dispatch) => {
   axios

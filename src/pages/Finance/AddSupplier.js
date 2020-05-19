@@ -18,6 +18,7 @@ import { connect } from 'react-redux'
 import { addSupplier, getSupplier } from '../../store/company/action'
 import Loader from '../../components/loader'
 import PageSpinner from '../../components/PageSpinner'
+import ViewAllSuppliers from './viewAllSuppliersPage'
 
 class AddSupplierPage extends Component {
     constructor(props) {
@@ -50,7 +51,7 @@ class AddSupplierPage extends Component {
     submit = async (e) => {
         e.preventDefault();
         const newCompany = {
-            customerName: this.state.companyName,
+            suplierName: this.state.companyName,
             generalManger: this.state.generalManger,
             contactPerson: this.state.contactPerson,
             workingField: this.state.workingField,
@@ -59,7 +60,7 @@ class AddSupplierPage extends Component {
             tinNumber: this.state.tinNumber
         }
         this.setState({ loading: this.state.loading + 1 })
-        this.props.addCompany(newCompany).then(res => {
+        this.props.addSupplier(newCompany).then(res => {
             this.setState({ loading: this.state.loading + 1 })
         })
         this.componentDidMount()
@@ -77,8 +78,8 @@ class AddSupplierPage extends Component {
     }
 
     render() {
-        // if (!this.props.companys[0]) return <PageSpinner />
-        console.log(this.props.suppliers)
+        console.log(this.props.suppliers.length)
+        if (!this.props.suppliers[0]) return <PageSpinner />
         return (
             <Page title="Add Customer" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
@@ -221,7 +222,7 @@ class AddSupplierPage extends Component {
                         </CardBody>
                     </Card>
                 </Col>
-                {/* <AllCustomers lists={this.props.companys} update={this.state.update} /> */}
+                <ViewAllSuppliers lists={this.props.suppliers} />
             </Page>
         );
     }
