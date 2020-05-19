@@ -3,10 +3,6 @@ import axios from "axios";
 import API from "../../api/API";
 import { appConstants, itConstants } from "../../constant/constants";
 import headers from "./../headers";
-import React from 'react'
-import { Redirect } from 'react-router-dom'
-import routes from '../../config/routes'
-
 function addNewEmployee(data) {
   return (dispatch) => {
     var param = {
@@ -43,13 +39,12 @@ function addNewEmployee(data) {
           icon: "success",
           showConfirmButton: false,
           timer: 1000,
-        }).then(res => {
+        }).then((res) => {
           dispatch({
             type: appConstants.REGISTER_SUCCESS,
             payload: response.data,
           });
-        })
-        
+        });
       })
       .catch((error) => {
         if (error.response && error.response.data) {
@@ -214,60 +209,60 @@ function addAccount(employe) {
       type: itConstants.REGISTER_REQUEST,
       payload: true,
     });
-      return axios
-        .request({
-          method: "POST",
-          url: API + "account/",
-          responseType: "json",
-          headers: headers,
-          data: {
-            username: employe.username,
-            password: employe.password,
-            email: employe.email,
-            employe: employe.employe,
-            department: employe.department,
-            roles: employe.role,
-            claim: employe.claim,
-            is_admin: employe.is_admin
-          },
-        })
-        .then((response) => {
-          Swal.fire({
-            title: "Created",
-            text: "Account Has Been Created",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1000,
-          });
+    return axios
+      .request({
+        method: "POST",
+        url: API + "account/",
+        responseType: "json",
+        headers: headers,
+        data: {
+          username: employe.username,
+          password: employe.password,
+          email: employe.email,
+          employe: employe.employe,
+          department: employe.department,
+          roles: employe.role,
+          claim: employe.claim,
+          is_admin: employe.is_admin,
+        },
+      })
+      .then((response) => {
+        Swal.fire({
+          title: "Created",
+          text: "Account Has Been Created",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        dispatch({
+          type: itConstants.REGISTER_SUCCESS,
+          payload: response.data.email,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: "Error",
+          text: "Something Went Wrong",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        if (error.response && error.response.data) {
           dispatch({
-            type: itConstants.REGISTER_SUCCESS,
-            payload: response.data.email,
+            type: itConstants.REGISTER_FAILURE,
+            payload: error.response.data.errors,
           });
-        })
-        .catch((error) => {
-          console.log(error)
+        } else {
           Swal.fire({
             title: "Error",
-            text: "Something Went Wrong",
+            text: "Connection Problem",
             icon: "error",
             showConfirmButton: false,
             timer: 1000,
           });
-          if (error.response && error.response.data) {
-            dispatch({
-              type: itConstants.REGISTER_FAILURE,
-              payload: error.response.data.errors,
-            });
-          } else {
-            Swal.fire({
-              title: "Error",
-              text: "Connection Problem",
-              icon: "error",
-              showConfirmButton: false,
-              timer: 1000,
-            });
-          }
-        });
+        }
+      });
   };
 }
 
