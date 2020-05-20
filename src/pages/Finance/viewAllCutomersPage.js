@@ -24,7 +24,11 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
                     <Button color='danger' size='sm' onClick={() => deleteCompany(company.customerId)} className='spacing'>
                         <MdDelete />
                     </Button>
+<<<<<<< HEAD
                     <Button onClick={toggle} color='primary' size='sm' >
+=======
+                    <Button onClick={() => toggle()} color='primary' size='sm' >
+>>>>>>> ad758490622ac607b371fd5531378126648f931d
                         <MdRemoveRedEye />
                     </Button>
                 </Row>
@@ -42,6 +46,7 @@ class ViewAllCustomersPage extends Component {
         backdrop: true,
     };
 
+<<<<<<< HEAD
     toggle = modalType => () => {
         console.log(modalType)
         if (!modalType) {
@@ -53,6 +58,13 @@ class ViewAllCustomersPage extends Component {
             [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
         });
     };
+=======
+    toggle = () => {
+        return this.setState({
+            modal: !this.state.modal,
+        })
+    }
+>>>>>>> ad758490622ac607b371fd5531378126648f931d
     constructor(props) {
         super(props);
         this.state = {
@@ -99,9 +111,15 @@ class ViewAllCustomersPage extends Component {
             <Page title="All Customers" breadcrumbs={[{ name: 'All Customer', active: true }]}>
                 <Modal
                     isOpen={this.state.modal}
-                    toggle={this.toggle()}
+                    backdrop="static"
                     className={this.props.className}>
+<<<<<<< HEAD
                     <ModalHeader toggle={this.toggle()}>Modal Title</ModalHeader>
+=======
+                    <ModalHeader>
+                        Modal title
+                    </ModalHeader>
+>>>>>>> ad758490622ac607b371fd5531378126648f931d
                     <ModalBody>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -112,17 +130,12 @@ class ViewAllCustomersPage extends Component {
                         occaecat cupidatat non proident, sunt in culpa qui officia
                         deserunt mollit anim id est laborum.
                   </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.toggle()}>
-                            Do Something
-                    </Button>{' '}
-                        <Button color="secondary" onClick={this.toggle()}>
-                            Cancel
-                    </Button>
-                    </ModalFooter>
+                  <ModalFooter>
+                      <Button onClick={() => this.toggle()}>
+                          Close
+                      </Button>
+                  </ModalFooter>
                 </Modal>
-
-
                 <Col>
                     <Card className="mb-3">
                         <CardHeader>All Customers</CardHeader>
