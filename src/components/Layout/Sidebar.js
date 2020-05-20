@@ -102,9 +102,13 @@ const SALES = [
   { to: routes.ViewAllOrdersPage, name: 'View All Orders', exact: false, Icon: MdWidgets },
 
 
+
+
 ]
 
 const FINANCE = [
+  { to: routes.viewSuppliers, name: 'View All Suppliers', exact: false, Icon: MdWidgets },
+  { to: routes.AddSupplier, name: 'Add Supplier ', exact: false, Icon: MdWidgets },
 
 
   { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },
@@ -121,7 +125,7 @@ const INVENTORY = [
 
 
 
-  
+
 ]
 
 const navItems = [

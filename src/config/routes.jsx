@@ -12,10 +12,12 @@ export default {
   ViewSingleOrderPage: "/ViewSingleOrder",
   ViewAllItems: "/ViewAllItems",
   viewCustomers: "/viewCustomers",
+  viewSuppliers: '/viewSuppliers',
   AddCustomer: "/AddCustomer",
+  AddSupplier: "/AddSupplier",
   ViewOrdersFinance: "/ViewOrdersFinance",
   ViewOrdersLogistics: "/ViewOrdersLogistics",
   ViewOrdersInventory: "/ViewOrdersInventory",
   CategoriesInventoryPage: "/CategoriesInventory",
   ViewSingleItemPage: "/ViewSingleItem"
-};
+}
