@@ -23,7 +23,6 @@ class AddMasterDataPage extends Component {
 
         }
     }
-
     handleAddItem = () => {
         this.setState({
             order_items: this.state.order_items.concat([
@@ -31,7 +30,6 @@ class AddMasterDataPage extends Component {
             ])
         })
     }
-
     handleRemoveItem = (idx) => {
         this.setState({
             order_items: this.state.order_items.filter((s, sidx) => idx !== sidx),
@@ -107,14 +105,9 @@ class AddMasterDataPage extends Component {
                                     <Col>
                                         <Input sm={12} md={12} type="checkbox" id="checkbox2" /> is Manufactured
                                     </Col>
-
-
-
                                 </FormGroup>
                                 <hr></hr>
                                 <FormGroup>
-
-
                                     {items.map((v, i) => {
                                         return (
                                             <>
@@ -138,7 +131,7 @@ class AddMasterDataPage extends Component {
                                                                 Unit Of Measurment
                                                         </Label>
                                                             <Col md={12}>
-                                                                <Input type='select' value=''>
+                                                                <Input type='select' >
 
                                                                     <option>Litre</option>
                                                                     <option>KM</option>
@@ -155,7 +148,7 @@ class AddMasterDataPage extends Component {
                                                                 Quantity
                                                         </Label>
                                                             <Col md={12}>
-                                                                <Input type='number' value=''>
+                                                                <Input type='number' >
                                                                 </Input>
                                                             </Col>
                                                         </FormGroup>
@@ -179,7 +172,7 @@ class AddMasterDataPage extends Component {
 
                                 <FormGroup align='center'>
                                     <Col >
-                                        <Button onClick={() => this.handleAddItem()} color='primary'>Submit</Button>
+                                        <Button  color='primary'>Submit</Button>
                                     </Col>
                                 </FormGroup>
                             </Form>
