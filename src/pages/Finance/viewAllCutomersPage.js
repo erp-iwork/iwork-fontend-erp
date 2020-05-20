@@ -24,7 +24,7 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
                     <Button color='danger' size='sm' onClick={() => deleteCompany(company.customerId)} className='spacing'>
                         <MdDelete />
                     </Button>
-                    <Button onClick={toggle()} color='primary' size='sm' >
+                    <Button onClick={() => toggle()} color='primary' size='sm' >
                         <MdRemoveRedEye />
                     </Button>
                 </Row>
@@ -43,17 +43,11 @@ class ViewAllCustomersPage extends Component {
         backdrop: true,
     };
 
-    toggle = modalType => () => {
-        if (!modalType) {
-            return this.setState({
-                modal: !this.state.modal,
-            });
-        }
-
-        this.setState({
-            [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
-        });
-    };
+    toggle = () => {
+        return this.setState({
+            modal: !this.state.modal,
+        })
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -91,9 +85,11 @@ class ViewAllCustomersPage extends Component {
 
                 <Modal
                     isOpen={this.state.modal}
-                    toggle={this.toggle()}
+                    backdrop="static"
                     className={this.props.className}>
-                    <ModalHeader toggle={this.toggle()}>Modal title</ModalHeader>
+                    <ModalHeader>
+                        Modal title
+                    </ModalHeader>
                     <ModalBody>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -104,17 +100,12 @@ class ViewAllCustomersPage extends Component {
                         occaecat cupidatat non proident, sunt in culpa qui officia
                         deserunt mollit anim id est laborum.
                   </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.toggle()}>
-                            Do Something
-                    </Button>{' '}
-                        <Button color="secondary" onClick={this.toggle()}>
-                            Cancel
-                    </Button>
-                    </ModalFooter>
+                  <ModalFooter>
+                      <Button onClick={() => this.toggle()}>
+                          Close
+                      </Button>
+                  </ModalFooter>
                 </Modal>
-
-
                 <Col>
                     <Card className="mb-3">
                         <CardHeader>All Customers</CardHeader>
