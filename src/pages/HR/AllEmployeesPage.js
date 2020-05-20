@@ -45,7 +45,8 @@ class AllEmployees extends Component {
     }
 
     render() {
-        if (!this.props.employees.length) return <PageSpinner />
+        if (this.props.loading) return <PageSpinner />
+        if (this.props.employees.length === 0) return <h2>No employees yet.</h2>
         return (
             <Page
                 title="All Employees"
