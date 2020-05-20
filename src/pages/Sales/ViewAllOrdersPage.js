@@ -46,7 +46,8 @@ class ViewAllOrdersPage extends Component {
 
     render() {
         if (!this.props.lists) {
-            if (!this.props.orders[0]) return <PageSpinner />
+            if (this.props.loading) return <PageSpinner />
+            if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
         }
         return (
             <Page title="View All Sales Orders" breadcrumbs={[{ name: 'All Sales Orders', active: true }]}>

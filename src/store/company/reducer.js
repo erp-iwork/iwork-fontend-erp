@@ -2,6 +2,7 @@ import { companyConstant, errorsConstant } from "../../constant/constants";
 const initialState = {
   companys: [],
   suppliers: [],
+  loading: true,
   success: false,
   errors: [],
 };
@@ -18,6 +19,7 @@ export default function companyReducer(state = initialState, action) {
       return {
         ...state,
         companys: action.payload,
+        loading: false,
       };
     case companyConstant.ADD_COMPANY:
       return {
@@ -30,7 +32,8 @@ export default function companyReducer(state = initialState, action) {
     case companyConstant.GET_SUPPLIER:
       return {
         ...state,
-        suppliers: action.payload
+        suppliers: action.payload,
+        loading: false
       }
 
     case companyConstant.ADD_SUPPLIER:

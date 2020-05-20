@@ -60,10 +60,8 @@ class ViewAllCustomersPage extends Component {
     }
 
     render() {
-        if (!(this.props.companys[0])) return <PageSpinner />
-        if (this.props.update) {
-            if (!this.props.companys[0]) return <PageSpinner />
-        }
+        if (this.props.loading) return <PageSpinner />
+        if (this.props.companys.length === 0) return <h2>No customers have been registered</h2>
         return (
             <Page title="All Customers" breadcrumbs={[{ name: 'All Customer', active: true }]}>
                 <Col>
@@ -101,6 +99,7 @@ class ViewAllCustomersPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    loading: state.companyReducer.loading,
     companys: state.companyReducer.companys,
     errors: state.companyReducer.errors,
 })

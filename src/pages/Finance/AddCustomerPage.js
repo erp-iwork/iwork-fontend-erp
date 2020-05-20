@@ -19,6 +19,7 @@ import { connect } from 'react-redux'
 import { addCompany, getCompany } from '../../store/company/action'
 import Loader from '../../components/loader'
 import PageSpinner from '../../components/PageSpinner'
+import { companyConstant } from '../../constant/constants';
 
 class AddCustomerPage extends Component {
     constructor(props) {
@@ -59,7 +60,7 @@ class AddCustomerPage extends Component {
             email: this.state.email,
             tinNumber: this.state.tinNumber
         }
-        this.setState({ loading: this.state.loading + 1 })
+        this.setState({ loading: 1 })
         this.props.addCompany(newCompany).then(res => {
             this.setState({ loading: this.state.loading + 1 })
         })
@@ -78,7 +79,8 @@ class AddCustomerPage extends Component {
     }
 
     render() {
-        if (!this.props.companys[0]) return <PageSpinner />
+        if (this.props.loading) return <PageSpinner />
+        const { companyName, generalManger, contactPerson, workingField, email, tinNumber } = this.state
         return (
             <Page title="Add Customer" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
@@ -89,15 +91,13 @@ class AddCustomerPage extends Component {
                                 <Row>
                                     <Col md={6} sm={12}>
                                         <FormGroup>
-                                            <Label for="exampleEmail" sm={12}>
-                                                Customer Name
-                                    </Label>
+                                            <Label for="exampleEmail" sm={12}>Customer Name</Label>
                                             <Col sm={12}>
-                                                <Input placeholder="Enter Customer Name" name="companyName" onChange={this.handleChange} />
+                                                <Input placeholder="Enter Customer Name" value={companyName} name="companyName" onChange={this.handleChange} />
                                                 <Error
                                                     error={
-                                                    this.props.errors.companyName
-                                                        ? this.props.errors.companyName
+                                                    this.props.errors.customerName
+                                                        ? this.props.errors.customerName
                                                         : null
                                                     }
                                                 />
@@ -109,7 +109,7 @@ class AddCustomerPage extends Component {
                                                 General Manager
                                             </Label>
                                             <Col sm={12}>
-                                                <Input placeholder="General Manager" name="generalManger" onChange={this.handleChange} />
+                                                <Input placeholder="General Manager" value={generalManger} name="generalManger" onChange={this.handleChange} />
                                                 <Error
                                                     error={
                                                     this.props.errors.generalManger
@@ -123,7 +123,7 @@ class AddCustomerPage extends Component {
                                             <Label for="examplePassword" sm={12}>Contact Person</Label>
                                             <Col sm={12}>
                                                 <Input
-                                                    placeholder="Contact Person" name="contactPerson" onChange={this.handleChange}
+                                                    placeholder="Contact Person" value={contactPerson} name="contactPerson" onChange={this.handleChange}
                                                 />
                                             </Col>
                                             <Error
@@ -144,6 +144,7 @@ class AddCustomerPage extends Component {
                                                     placeholder="Tin Number"
                                                     name="tinNumber"
                                                     onChange={this.handleChange}
+                                                    value={tinNumber}
                                                 />
                                                 <Error
                                                     error={
@@ -165,6 +166,7 @@ class AddCustomerPage extends Component {
                                                     type="email"
                                                     name="email"
                                                     placeholder="Customer Email"
+                                                    value={email}
                                                     onChange={this.handleChange}
                                                 />
                                                 <Error
@@ -198,6 +200,7 @@ class AddCustomerPage extends Component {
                                                     placeholder="Field Of Work"
                                                     name="workingField"
                                                     onChange={this.handleChange}
+                                                    value={workingField}
                                                 />
                                                 <Error
                                                     error={
@@ -228,6 +231,7 @@ class AddCustomerPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    loading: state.companyReducer.loading,
     companys: state.companyReducer.companys,
     errors: state.companyReducer.errors,
     success: state.companyReducer.success

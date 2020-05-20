@@ -14,14 +14,16 @@ import {
 } from 'reactstrap';
 import './Finance.scss'
 
-class AddMasterDataPage extends Component {
+class AddMasterDataPage extends Component { 
     constructor(props) {
         super(props);
         this.state = {
             order_items: [],
-            items: ''
-
+            items: '',
+            can_be_manufactured: false,
+            productName: '', productType: '', productCategory: '', productPrice: ''
         }
+        this.handleChange = this.handleChange.bind(this)
     }
 
     handleAddItem = () => {
@@ -37,9 +39,14 @@ class AddMasterDataPage extends Component {
             order_items: this.state.order_items.filter((s, sidx) => idx !== sidx),
         })
     }
-    render() {
-        let { order_items: items } = this.state;
 
+    handleChange = event => {
+        const { name, value } = event.target
+        this.setState({ [name]: value })
+    }
+
+    render() {
+        let { order_items: items } = this.state
         return (
             <Page
                 title="Master Data"
@@ -105,74 +112,58 @@ class AddMasterDataPage extends Component {
                                 <FormGroup row>
                                     <Label className='isManufactured'> </Label>
                                     <Col>
-                                        <Input sm={12} md={12} type="checkbox" id="checkbox2" /> is Manufactured
+                                        <Input sm={12} md={12} type="checkbox" id="checkbox2" /> Can Be Manufactured
                                     </Col>
-
-
-
                                 </FormGroup>
                                 <hr></hr>
                                 <FormGroup>
-
-
-                                    {items.map((v, i) => {
-                                        return (
-                                            <>
-                                                <Row>
-                                                    <Col md={4}>
-                                                        <FormGroup>
-                                                            <Label md={12}>
-                                                                Item Name
-                                                        </Label>
-                                                            <Col md={12}>
-                                                                <Input >
-
-
-                                                                </Input>
-                                                            </Col>
-                                                        </FormGroup>
+                                    {items.map((v, i) => (
+                                        <Row>
+                                            <Col md={4}>
+                                                <FormGroup>
+                                                    <Label md={12}>
+                                                        Item Name
+                                                </Label>
+                                                    <Col md={12}>
+                                                        <Input></Input>
                                                     </Col>
-                                                    <Col md={4}>
-                                                        <FormGroup>
-                                                            <Label md={12}>
-                                                                Unit Of Measurment
-                                                        </Label>
-                                                            <Col md={12}>
-                                                                <Input type='select' value=''>
-
-                                                                    <option>Litre</option>
-                                                                    <option>KM</option>
-                                                                    <option>Liter</option>
-
-
-                                                                </Input>
-                                                            </Col>
-                                                        </FormGroup>
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md={4}>
+                                                <FormGroup>
+                                                    <Label md={12}>
+                                                        Unit Of Measurment
+                                                </Label>
+                                                    <Col md={12}>
+                                                        <Input type='select' value=''>
+                                                            <option>Litre</option>
+                                                            <option>KM</option>
+                                                            <option>Liter</option>
+                                                        </Input>
                                                     </Col>
-                                                    <Col md={3}>
-                                                        <FormGroup>
-                                                            <Label md={12}>
-                                                                Quantity
-                                                        </Label>
-                                                            <Col md={12}>
-                                                                <Input type='number' value=''>
-                                                                </Input>
-                                                            </Col>
-                                                        </FormGroup>
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md={3}>
+                                                <FormGroup>
+                                                    <Label md={12}>
+                                                        Quantity
+                                                </Label>
+                                                    <Col md={12}>
+                                                        <Input type='number' value=''>
+                                                        </Input>
                                                     </Col>
-
-                                                    <Col md={1}>
-                                                        <FormGroup>
-                                                            <Label>
-                                                                Remove
-                                                            </Label>
-                                                            <Button onClick={() => this.handleRemoveItem(i)}>-</Button>
-                                                        </FormGroup>
-                                                    </Col>
-                                                </Row>
-                                            </>
-                                        );
-                                    })}
+                                                </FormGroup>
+                                            </Col>
+                                            <Col md={1}>
+                                                <FormGroup>
+                                                    <Label>
+                                                        Remove
+                                                    </Label>
+                                                    <Button onClick={() => this.handleRemoveItem(i)}>-</Button>
+                                                </FormGroup>
+                                            </Col>
+                                        </Row>
+                                        ))}
                                     <Button onClick={() => this.handleAddItem()} color='primary'>Add Another One</Button>
 
                                 </FormGroup>

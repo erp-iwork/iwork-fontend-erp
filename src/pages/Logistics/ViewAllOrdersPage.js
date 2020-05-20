@@ -67,11 +67,9 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            
                                 {this.props.orders.map((item, index) => (
                                     <Order order={item} key={index} index={index} />
                                 ))}
-                            
                         </Table>
                     </CardBody>
                 </Card>
