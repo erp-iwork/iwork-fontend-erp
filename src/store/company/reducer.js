@@ -3,6 +3,7 @@ const initialState = {
   companys: [],
   suppliers: [],
   loading: true,
+  masterData: [],
   success: false,
   errors: [],
 };
@@ -52,6 +53,12 @@ export default function companyReducer(state = initialState, action) {
         ),
         loading: false,
       };
+    
+    case companyConstant.ADD_MASTERDATA:
+      return {
+        ...state,
+        loading: false
+      }
 
     default:
       return state;

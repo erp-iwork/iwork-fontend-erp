@@ -13,6 +13,8 @@ import {
     Label,
 } from 'reactstrap';
 import './Finance.scss'
+import { connect } from 'react-redux'
+import { addMasterData } from '../../store/company/action'
 
 class AddMasterDataPage extends Component {
     constructor(props) {
@@ -28,6 +30,7 @@ class AddMasterDataPage extends Component {
         this.ItemNameChange = this.ItemNameChange.bind(this)
         this.ItemUnitChange = this.ItemUnitChange.bind(this)
         this.ItemQuantityChange = this.ItemQuantityChange.bind(this)
+        this.submit = this.submit.bind(this)
     }
 
     handleAddItem = () => {
@@ -85,6 +88,10 @@ class AddMasterDataPage extends Component {
         });
 
         this.setState({ order_items: neworder_items });
+    }
+
+    submit = () => {
+
     }
 
     render() {
@@ -208,7 +215,7 @@ class AddMasterDataPage extends Component {
                                 </FormGroup>
                                 <FormGroup align='center'>
                                     <Col >
-                                        <Button onClick={() => this.handleAddItem()} color='primary'>Submit</Button>
+                                        <Button onClick={this.submit} color='primary'>Add to Product</Button>
                                     </Col>
                                 </FormGroup>
                             </Form>
@@ -220,4 +227,8 @@ class AddMasterDataPage extends Component {
     }
 }
 
-export default AddMasterDataPage;
+const mapStateToProps = (state) => ({
+    loading: state.companyReducer.loading
+})
+
+export default connect(mapStateToProps, { addMasterData })(AddMasterDataPage)

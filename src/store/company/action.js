@@ -205,3 +205,30 @@ export const deleteCompany = (companyId) => (dispatch) => {
     return result.value
   });
 };
+
+export const addMasterData = (masterData) => (dispatch) => {
+  return axios
+    .post(API + routes.masterData, masterData, headers)
+    .then((res) => {
+      Swal.fire({
+        title: "Success",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1000
+      })
+      dispatch({
+        type: companyConstant.ADD_MASTERDATA,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      try {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } catch {
+        console.log("Error occured in adding master data")
+      }
+    });
+}

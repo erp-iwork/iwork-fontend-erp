@@ -24,7 +24,7 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
                     <Button color='danger' size='sm' onClick={() => deleteCompany(company.customerId)} className='spacing'>
                         <MdDelete />
                     </Button>
-                    <Button onClick={toggle()} color='primary' size='sm' >
+                    <Button onClick={toggle} color='primary' size='sm' >
                         <MdRemoveRedEye />
                     </Button>
                 </Row>
@@ -34,7 +34,6 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
 }
 
 class ViewAllCustomersPage extends Component {
-
     state = {
         modal: false,
         modal_backdrop: false,
@@ -44,12 +43,12 @@ class ViewAllCustomersPage extends Component {
     };
 
     toggle = modalType => () => {
+        console.log(modalType)
         if (!modalType) {
             return this.setState({
                 modal: !this.state.modal,
             });
         }
-
         this.setState({
             [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
         });
@@ -57,9 +56,17 @@ class ViewAllCustomersPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            companies: []
+            companies: [],
+            id: null
         }
         this.deleteCustomer = this.deleteCustomer.bind(this)
+        this.handleToggle = this.handleToggle.bind(this)
+    }
+
+    handleToggle = modalType => {
+        console.log("Here")
+        this.toggle()
+        this.toggle()
     }
 
     async componentDidMount() {
@@ -86,14 +93,15 @@ class ViewAllCustomersPage extends Component {
     render() {
         if (this.props.loading) return <PageSpinner />
         if (this.props.companys.length === 0) return <h2>No customers have been registered</h2>
+        const { companys } = this.props
+        const { id } = this.state
         return (
             <Page title="All Customers" breadcrumbs={[{ name: 'All Customer', active: true }]}>
-
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle()}
                     className={this.props.className}>
-                    <ModalHeader toggle={this.toggle()}>Modal title</ModalHeader>
+                    <ModalHeader toggle={this.toggle()}>Modal Title</ModalHeader>
                     <ModalBody>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -135,9 +143,9 @@ class ViewAllCustomersPage extends Component {
                                 </thead>
                                 <tbody>
                                     {this.props.lists ? this.props.lists.slice(0).reverse().map((item, index) => (
-                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteCustomer} toggle={this.toggle} />
+                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteCustomer} toggle={this.handleToggle} />
                                     )) : this.props.companys.slice(0).reverse().map((item, index) => (
-                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteCustomer} toggle={this.toggle} />
+                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteCustomer} toggle={this.handleToggle} />
                                     ))}
                                 </tbody>
                             </Table>

@@ -1,5 +1,6 @@
 const routes = {
-    supplier: 'suplier/'
+    supplier: 'suplier/',
+    masterData: 'masterdata/'
 }
 
 export default routes 
