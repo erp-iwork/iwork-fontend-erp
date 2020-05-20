@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { deleteCompany, getCompany } from '../../store/company/action'
 import PageSpinner from '../../components/PageSpinner'
 import Swal from "sweetalert2"
+import './Finance.scss'
 
 const Customer = ({ company, index, deleteCompany, toggle }) => {
     return (
@@ -20,7 +21,7 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
             <td>{company.tinNumber}</td>
             <td >
                 <Row >
-                    <Button color='danger' size='sm' onClick={() => deleteCompany(company.customerId)}>
+                    <Button color='danger' size='sm' onClick={() => deleteCompany(company.customerId)} className='spacing'>
                         <MdDelete />
                     </Button>
                     <Button onClick={toggle()} color='primary' size='sm' >

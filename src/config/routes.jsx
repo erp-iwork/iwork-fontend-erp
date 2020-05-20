@@ -22,4 +22,5 @@ export default {
   ViewSingleItemPage: "/ViewSingleItem",
   SivPage: "SivPage",
   AddMasterDataPage: "/AddMasterDataPage",
+  ViewAllMasterData: '/ViewAllMasterData'
 };
