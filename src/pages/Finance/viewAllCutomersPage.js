@@ -96,11 +96,11 @@ class ViewAllCustomersPage extends Component {
                         <Row>Payment Option: {customer.paymentOption}</Row>
                         <Row>Tin Number: {customer.tinNumber}</Row>
                   </ModalBody>
-                  <ModalFooter>
-                      <Button onClick={() => this.toggle()}>
-                          Close
+                    <ModalFooter>
+                        <Button onClick={() => this.toggle()}>
+                            Close
                       </Button>
-                  </ModalFooter>
+                    </ModalFooter>
                 </Modal>
                 <Col>
                     <Card className="mb-3">

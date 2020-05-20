@@ -96,7 +96,7 @@ class ViewAllMasterData extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                                {this.props.masterData.reverse().map((item, index) => (
+                                {this.props.masterData.slice(0).reverse().map((item, index) => (
                                     <Data item={item} key={index} index={index} toggle={this.toggle} />
                                 ))}
                         </Table>

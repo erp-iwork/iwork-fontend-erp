@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import Logo from '../../../Assets/NAZO.png';
 import {
     Page,
@@ -6,7 +6,6 @@ import {
     View,
     Document,
     StyleSheet,
-    Image,
 } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -169,7 +168,7 @@ function PdfDocument(props) {
                     <View container style={styles.header}>
 
                         <View item >
-                            <Text align='left' style={styles.textBody} style={{ color: '#11669F' }} variant='body2' color=''>
+                            <Text align='left' style={styles.textBody} variant='body2' color=''>
                                 Invoice To
                                         </Text>
                             <View style={{

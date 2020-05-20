@@ -19,7 +19,7 @@ const Order = ({ order, index }) => {
                 <td>{order.status}</td>
                 <td align='center'>
                     <Button size='sm' color='primary'>
-                        <MdAssignment /> Generate
+                        <MdAssignment /> Deliever
                     </Button>
                 </td>
                 <td>
@@ -63,13 +63,13 @@ class ViewAllOrdersPage extends Component {
                                     <th>Sales Person</th>
                                     <th>Shipment Address</th>
                                     <th>Status</th>
-                                    <th style={{ margin: "auto" }}>Generate Invoice</th>
+                                    <th style={{ margin: "auto" }}>Approve</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                                {this.props.orders.map((item, index) => (
-                                    <Order order={item} key={index} index={index} />
-                                ))}
+                            {this.props.orders.map((item, index) => (
+                                <Order order={item} key={index} index={index} />
+                            ))}
                         </Table>
                     </CardBody>
                 </Card>
