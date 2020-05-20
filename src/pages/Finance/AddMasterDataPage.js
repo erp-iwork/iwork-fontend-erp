@@ -14,7 +14,11 @@ import {
 } from 'reactstrap';
 import './Finance.scss'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { addMasterData } from '../../store/company/action'
+import Error from '../../components/error'
+import Loader from '../../components/loader'
+import routes from '../../config/routes'
 
 class AddMasterDataPage extends Component {
     constructor(props) {
@@ -23,8 +27,7 @@ class AddMasterDataPage extends Component {
             order_items: [],
             items: '', lockPage: false,
             can_be_manufactured: false, can_be_sold: false, can_be_purchased: false,
-            productName: '', productType: '', productCategory: '', productPrice: '',
-            price: ''
+            productName: '', productType: '', productCategory: '', productPrice: '', unitOfMeasurement: ''
         }
         this.handleChange = this.handleChange.bind(this)
         this.ItemNameChange = this.ItemNameChange.bind(this)
@@ -36,7 +39,7 @@ class AddMasterDataPage extends Component {
     handleAddItem = () => {
         this.setState({
             order_items: this.state.order_items.concat([
-                { InventoryItem: "", quantity: 1, unit: "" },
+                { materialName: "", materialQuantity: 1, materialUnitOfMeasurement: "" },
             ])
         })
     }
@@ -65,7 +68,7 @@ class AddMasterDataPage extends Component {
             if (idx !== sidx) return item;
             return {
                 ...item,
-                InventoryItem: evt.target.value,
+                materialName: evt.target.value,
             };
         });
 
@@ -75,7 +78,7 @@ class AddMasterDataPage extends Component {
     ItemUnitChange = (idx) => (evt) => {
         const neworder_items = this.state.order_items.map((item, sidx) => {
             if (idx !== sidx) return item;
-            return { ...item, unit: evt.target.value };
+            return { ...item, materialUnitOfMeasurement: evt.target.value };
         });
 
         this.setState({ order_items: neworder_items });
@@ -84,17 +87,29 @@ class AddMasterDataPage extends Component {
     ItemQuantityChange = (idx) => (evt) => {
         const neworder_items = this.state.order_items.map((item, sidx) => {
             if (idx !== sidx) return item;
-            return { ...item, quantity: evt.target.value };
+            return { ...item, materialQuantity: evt.target.value };
         });
 
         this.setState({ order_items: neworder_items });
     }
 
     submit = () => {
-
+        const {
+            productName, productCategory, can_be_manufactured, can_be_purchased, can_be_sold,
+            order_items, productType, productPrice, unitOfMeasurement
+        } = this.state
+        const data = {
+            productName, productCategory, isManufactured: can_be_manufactured,
+            canBePurchased: can_be_purchased, canBeSold: can_be_sold, productType,
+            productPrice, unitOfMeasurement, product_material: order_items
+        }
+        this.props.addMasterData(data)
     }
 
     render() {
+        if (this.props.success) {
+            return <Redirect to={routes.ViewAllMasterData} />
+        }
         let { order_items: items, can_be_manufactured } = this.state
         return (
             <Page
@@ -110,6 +125,7 @@ class AddMasterDataPage extends Component {
                                     <Label for="productName" sm={2}>Product Name</Label>
                                     <Col sm={12}>
                                         <Input id="productName" placeholder="Product Name" onChange={this.handleChange} name="productName" />
+                                        <Error error={this.props.errors.productName} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
@@ -120,17 +136,39 @@ class AddMasterDataPage extends Component {
                                             type="select"
                                             name="productType"
                                             onChange={this.handleChange}
+                                            defaultValue={""}
                                         >
+                                            <option disabled></option>
                                             <option value="Consumable">Consumable</option>
                                             <option value="Stored">Stored</option>
                                             <option value="Service">Service</option>
                                         </Input>
+                                        <Error error={this.props.errors.productType} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
                                     <Label for="productCategory" sm={2}>Product Category</Label>
                                     <Col sm={12}>
-                                        <Input id="productCategory" placeholder="Product Category" name="productCategory" onChange={this.handleChange} />
+                                        <Input id="productCategory"  defaultValue={""} type="select" placeholder="Product Category" name="productCategory" onChange={this.handleChange}>
+                                            <option disabled></option>
+                                            <option>Spare Parts</option>
+                                            <option>Finished Goods</option>
+                                            <option>Raw Material</option>
+                                            <option>Retail Item</option>
+                                        </Input>
+                                        <Error error={this.props.errors.productCategory} />
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup >
+                                    <Label for="unitOfMeasurement" sm={2}>Unit of Measurment</Label>
+                                    <Col sm={12}>
+                                        <Input type='select' defaultValue={""} id="unitOfMeasurement" name="unitOfMeasurement" onChange={this.handleChange}>
+                                            <option disabled></option>
+                                            <option>Litre</option>
+                                            <option>KM</option>
+                                            <option>Kilos</option>
+                                        </Input>
+                                        <Error error={this.props.errors.unitOfMeasurement} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
@@ -141,10 +179,11 @@ class AddMasterDataPage extends Component {
                                         <Input
                                             placeholder="Price"
                                             id="price"
-                                            name="price"
+                                            name="productPrice"
                                             type="number"
                                             onChange={this.handleChange}
                                         />
+                                        <Error error={this.props.errors.productPrice} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup>
@@ -172,7 +211,7 @@ class AddMasterDataPage extends Component {
                                 <hr></hr>
                                 <FormGroup>
                                     {items.map((v, i) => (
-                                        <Row style={{ display: can_be_manufactured ? "flex" : "none" }}>
+                                        <Row style={{ display: can_be_manufactured ? "flex" : "none" }} key={i}>
                                             <Col md={4}>
                                                 <FormGroup>
                                                     <Label md={12} for="item_name">Item Name</Label>
@@ -189,7 +228,7 @@ class AddMasterDataPage extends Component {
                                                             <option disabled></option>
                                                             <option>Litre</option>
                                                             <option>KM</option>
-                                                            <option>Liter</option>
+                                                            <option>Kilos</option>
                                                         </Input>
                                                     </Col>
                                                 </FormGroup>
@@ -215,7 +254,9 @@ class AddMasterDataPage extends Component {
                                 </FormGroup>
                                 <FormGroup align='center'>
                                     <Col >
-                                        <Button onClick={this.submit} color='primary'>Add to Product</Button>
+                                        <Button onClick={this.submit} color='primary'>
+                                            {this.props.loading ? <Loader /> : "Add to Product"}
+                                        </Button>
                                     </Col>
                                 </FormGroup>
                             </Form>
@@ -223,12 +264,14 @@ class AddMasterDataPage extends Component {
                     </Card>
                 </Col>
             </Page>
-        );
+        )
     }
 }
 
 const mapStateToProps = (state) => ({
-    loading: state.companyReducer.loading
+    success: state.companyReducer.success,
+    loading: state.companyReducer.loading,
+    errors: state.companyReducer.errors
 })
 
 export default connect(mapStateToProps, { addMasterData })(AddMasterDataPage)

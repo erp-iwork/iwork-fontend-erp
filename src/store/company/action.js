@@ -7,6 +7,10 @@ import headers from './../headers'
 
 // ADD COMPANY
 export const addCompany = (company) => (dispatch) => {
+  dispatch({
+    type: companyConstant.REQUEST_GET_COMANY,
+    payload: true
+  })
   return axios
     .post(API + "customer/", company, headers)
     .then((res) => {
@@ -60,6 +64,10 @@ export const addSupplier = (supplier) => (dispatch) => {
 }
 
 export const getSupplier = () => (dispatch) => {
+  dispatch({
+    type: companyConstant.REQUEST_GET_SUPPLIER,
+    payload: true
+  })
   axios.get(API + routes.supplier, headers)
     .then(res => {
       dispatch({
@@ -207,11 +215,15 @@ export const deleteCompany = (companyId) => (dispatch) => {
 };
 
 export const addMasterData = (masterData) => (dispatch) => {
+  dispatch({
+    type: companyConstant.REQUEST_ADD_MASTERDATA,
+    payload: true
+  })
   return axios
     .post(API + routes.masterData, masterData, headers)
     .then((res) => {
       Swal.fire({
-        title: "Success",
+        title: "Added Product",
         icon: "success",
         showConfirmButton: false,
         timer: 1000
@@ -230,5 +242,34 @@ export const addMasterData = (masterData) => (dispatch) => {
       } catch {
         console.log("Error occured in adding master data")
       }
-    });
+    })
+}
+
+export const getMasterData = () => (dispatch) => {
+  dispatch({
+    type: companyConstant.REQUEST_GET_MASTERDATA,
+    payload: true
+  })
+  return axios.get(API + routes.masterData, headers)
+  .then(res => {
+    dispatch({
+      type: companyConstant.GET_MASTERDATA,
+      payload: res.data
+    })
+  })
+  .catch(err => {
+    if (err.response && err.response.data) {
+      dispatch({
+        type: errorsConstant.GET_ERRORS,
+        payload: err.response.data,
+      });
+    } else {
+      Swal.fire({
+        title: "Error", text: "Connection Problem",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1000
+      });
+    }
+  })
 }

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { Card, CardBody, Modal, ModalFooter, ModalHeader, ModalBody, CardHeader, Col, Table, Button } from 'reactstrap';
+import {
+    Card, CardBody, Modal, ModalFooter, ModalHeader,
+    ModalBody, CardHeader, Col, Table, Button, Row
+} from 'reactstrap';
 import { MdDelete, MdRemoveRedEye } from "react-icons/md";
 import { connect } from 'react-redux'
 import { deleteSupplier, getSupplier } from '../../store/company/action'
@@ -25,7 +28,7 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
                     <Button color='danger' size='sm' onClick={() => deleteCompany(company.suplierId)} className='spacing'>
                         <MdDelete />
                     </Button>
-                    <Button onClick={toggle()} color='primary' size='sm' >
+                    <Button onClick={() => toggle(company)} color='primary' size='sm' >
                         <MdRemoveRedEye />
                     </Button>
                 </Col>
@@ -35,39 +38,28 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
 }
 
 class ViewAllSuppliers extends Component {
-
-    state = {
-        modal: false,
-        modal_backdrop: false,
-        modal_nested_parent: false,
-        modal_nested: false,
-        backdrop: true,
-    };
-
-    toggle = modalType => () => {
-        if (!modalType) {
-            return this.setState({
-                modal: !this.state.modal,
-            });
-        }
-
-        this.setState({
-            [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
-        });
-    };
-
     constructor(props) {
         super(props);
         this.state = {
-            companies: []
+            companies: [],
+            modal: false,
+            supplier: {}
         }
         this.deleteSupplier = this.deleteSupplier.bind(this)
+        this.toggle = this.toggle.bind(this)
     }
 
     async componentDidMount() {
         if (!this.props.lists) {
             await this.props.getSupplier()
         }
+    }
+
+    toggle = (supplier) => {
+        return this.setState({
+            modal: !this.state.modal,
+            supplier: !this.state.modal? supplier : this.state.supplier
+        })
     }
 
     deleteSupplier(id) {
@@ -88,32 +80,29 @@ class ViewAllSuppliers extends Component {
     render() {
         if (this.props.loading) return <PageSpinner />
         if (this.props.suppliers.length === 0) return <h2>No suppliers have been registered</h2>
+        const { supplier } = this.state
         return (
             <Page title="All Customers" breadcrumbs={[{ name: 'All Supplier', active: true }]}>
-
                 <Modal
                     isOpen={this.state.modal}
-                    toggle={this.toggle()}
+                    backdrop="static"
                     className={this.props.className}>
-                    <ModalHeader toggle={this.toggle()}>Modal title</ModalHeader>
+                    <ModalHeader>
+                        {supplier.suplierName}
+                    </ModalHeader>
                     <ModalBody>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                        Duis aute irure dolor in reprehenderit in voluptate velit
-                        esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                        occaecat cupidatat non proident, sunt in culpa qui officia
-                        deserunt mollit anim id est laborum.
+                        <Row>General Manager: {supplier.generalManger}</Row>
+                        <Row>Email: {supplier.email}</Row>
+                        <Row>Contact Person: {supplier.contactPerson}</Row>
+                        <Row>Working Field: {supplier.workingField}</Row>
+                        <Row>Payment Option: {supplier.paymentOption}</Row>
+                        <Row>Tin Number: {supplier.tinNumber}</Row>
                   </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.toggle()}>
-                            Do Something
-                    </Button>{' '}
-                        <Button color="secondary" onClick={this.toggle()}>
-                            Cancel
-                    </Button>
-                    </ModalFooter>
+                  <ModalFooter>
+                      <Button onClick={() => this.toggle()}>
+                          Close
+                      </Button>
+                  </ModalFooter>
                 </Modal>
 
 
