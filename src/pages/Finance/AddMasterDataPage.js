@@ -20,7 +20,6 @@ class AddMasterDataPage extends Component {
         this.state = {
             order_items: [],
             items: ''
-
         }
     }
     handleAddItem = () => {
@@ -43,6 +42,8 @@ class AddMasterDataPage extends Component {
                 title="Master Data"
                 breadcrumbs={[{ name: 'Add Master Data', active: true }]}
             >
+
+                
                 <Col lg={12} md={12}>
                     <Card>
                         <CardHeader>Add Master Data</CardHeader>
@@ -173,9 +174,7 @@ class AddMasterDataPage extends Component {
                                         );
                                     })}
                                     <Button onClick={() => this.handleAddItem()} color='primary'>Add Another One</Button>
-
                                 </FormGroup>
-
                                 <FormGroup align='center'>
                                     <Col >
                                         <Button color='primary'>Submit</Button>
