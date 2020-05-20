@@ -7,7 +7,7 @@ import {
 import Error from '../../components/error'
 import { connect } from "react-redux"
 import actions from '../../store/hr/action'
-import { countries, regions, termsOfEmployment, cities } from './data'
+import { countries, regions, termsOfEmployment, getCity } from './data'
 import Spinner from '../../components/loader'
 import { Redirect } from 'react-router-dom'
 import routes from '../../config/routes'
@@ -89,7 +89,7 @@ class AddEmployee extends Component {
     render() {
         var depValue = this.state.depValue;
         var rolValue = this.state.rolValue;
-        const { country } = this.state
+        const { country, region } = this.state
         if (!this.props.department[0]) return <PageSpinner />
         if (this.state.redirect) return <Redirect to={routes.allEmployees} />
         return (
@@ -395,7 +395,7 @@ class AddEmployee extends Component {
                                                     <Input type="select" name="city" onChange={this.handleChange}>
                                                         <option aria-label="None" disabled selected value="" >Select City</option>
                                                         {this.state.country ?
-                                                            cities[country].map((item, index) => (
+                                                            getCity(region, country).map((item, index) => (
                                                                 <option key={item} value={item}>{item}</option>
                                                             )) : ""
                                                         }
