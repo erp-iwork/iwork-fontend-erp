@@ -100,11 +100,20 @@ class AddMasterDataPage extends Component {
                                         />
                                     </Col>
                                 </FormGroup>
-                                <FormGroup row>
-                                    <Label className='isManufactured'> </Label>
-                                    <Col>
-                                        <Input sm={12} md={12} type="checkbox" id="checkbox2" /> is Manufactured
+                                <FormGroup>
+                                    <Row className='isManufactured'>
+
+                                        <Col md={4}>
+                                            <Input type="checkbox" id="checkbox2" /> Can Be Manufactured
                                     </Col>
+                                        <Col md={4}>
+                                            <Input type="checkbox" id="checkbox2" /> Can Be Sold
+                                    </Col>
+                                        <Col md={4}>
+                                            <Input type="checkbox" id="checkbox2" /> Can Be Purchased
+                                    </Col>
+                                    </Row>
+
                                 </FormGroup>
                                 <hr></hr>
                                 <FormGroup>
@@ -132,12 +141,9 @@ class AddMasterDataPage extends Component {
                                                         </Label>
                                                             <Col md={12}>
                                                                 <Input type='select' >
-
                                                                     <option>Litre</option>
                                                                     <option>KM</option>
                                                                     <option>Liter</option>
-
-
                                                                 </Input>
                                                             </Col>
                                                         </FormGroup>
@@ -172,7 +178,7 @@ class AddMasterDataPage extends Component {
 
                                 <FormGroup align='center'>
                                     <Col >
-                                        <Button  color='primary'>Submit</Button>
+                                        <Button color='primary'>Submit</Button>
                                     </Col>
                                 </FormGroup>
                             </Form>
