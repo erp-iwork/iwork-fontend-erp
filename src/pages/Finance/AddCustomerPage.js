@@ -12,14 +12,13 @@ import {
     Row,
     Label,
 } from 'reactstrap';
-import AllCustomers from "./viewAllCutomersPage";
+import AllCustomers from "./viewAllCutomersPage"
 import './Finance.scss'
 import Error from '../../components/error'
 import { connect } from 'react-redux'
 import { addCompany, getCompany } from '../../store/company/action'
 import Loader from '../../components/loader'
 import PageSpinner from '../../components/PageSpinner'
-import { companyConstant } from '../../constant/constants';
 
 class AddCustomerPage extends Component {
     constructor(props) {

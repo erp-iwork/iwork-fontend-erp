@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import './Finance.scss'
 
-class AddMasterDataPage extends Component { 
+class AddMasterDataPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -121,9 +121,7 @@ class AddMasterDataPage extends Component {
                                         <Row>
                                             <Col md={4}>
                                                 <FormGroup>
-                                                    <Label md={12}>
-                                                        Item Name
-                                                </Label>
+                                                    <Label md={12}>Item Name</Label>
                                                     <Col md={12}>
                                                         <Input></Input>
                                                     </Col>
