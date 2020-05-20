@@ -220,7 +220,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="gender" onChange={this.handleChange}>
-                                                        <option aria-label="Gender" selected disabled>Select Gender </option>
+                                                        <option aria-label="Gender" defaultValue disabled>Select Gender </option>
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </Input>
@@ -236,7 +236,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.departmentDropDown} value={depValue}>
-                                                        <option aria-label="None" selected disabled value="" > Select Department </option>
+                                                        <option aria-label="None" defaultValue disabled value="" > Select Department </option>
 
                                                         {this.props.department.map((dep, index) => (
                                                             <option value={dep.departmentId} key={index}>
@@ -261,7 +261,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.roleDropDown} value={rolValue}>
-                                                        <option aria-label="None" disabled selected value="" > Select Role</option>
+                                                        <option aria-label="None" disabled defaultValue value="" > Select Role</option>
                                                         {this.state.rol.map((rols) => (
                                                             <option value={rols.roleId} key={rols.roleId}>
                                                                 {rols.role}
@@ -283,7 +283,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.levelDropDown}>
-                                                        <option aria-label="None" disabled selected value="" >Select Level</option>
+                                                        <option aria-label="None" defaultValue selected value="" >Select Level</option>
                                                         {this.state.lev.map((levs) => (
                                                             <option value={levs.levelId} key={levs.levelId}>
                                                                 {levs.level}
@@ -329,7 +329,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="termOfEmployment" onChange={this.handleChange}>
-                                                        <option aria-label="None" selected disabled value="" > Select Term Of Employment</option>
+                                                        <option aria-label="None" defaultValue disabled value="" > Select Term Of Employment</option>
                                                         {termsOfEmployment.map((item, index) => (
                                                             <option key={index} value={item}>{item}</option>
                                                         ))}
@@ -351,7 +351,7 @@ class AddEmployee extends Component {
                                                 <Label for="exampleSelect" sm={5}>Country</Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="country" onChange={this.handleChange}>
-                                                        <option aria-label="None" selected disabled value="" >Select Country</option>
+                                                        <option aria-label="None" defaultValue disabled value="" >Select Country</option>
                                                         {countries.map((item, index) => (
                                                             <option key={item} value={item}>{item}</option>
                                                         ))}
@@ -371,7 +371,7 @@ class AddEmployee extends Component {
                                                 <Label for="exampleSelect" sm={5}>Region</Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="region" onChange={this.handleChange}>
-                                                        <option aria-label="None" value="" disabled selected > Select Region</option>
+                                                        <option aria-label="None" value="" disabled defaultValue > Select Region</option>
                                                         {this.state.country ?
                                                             regions[this.state.country].map((item, index) => (
                                                                 <option key={item} value={item}>{item}</option>
@@ -393,7 +393,7 @@ class AddEmployee extends Component {
                                                 <Label for="exampleSelect" sm={5}>City</Label>
                                                 <Col sm={12}>
                                                     <Input type="select" name="city" onChange={this.handleChange}>
-                                                        <option aria-label="None" disabled selected value="" >Select City</option>
+                                                        <option aria-label="None" disabled defaultValue value="" >Select City</option>
                                                         {this.state.country ?
                                                             cities[country].map((item, index) => (
                                                                 <option key={item} value={item}>{item}</option>

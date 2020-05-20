@@ -11,7 +11,7 @@ const Order = ({ order, id }) => {
     return (
         <tr align="center">
             <th scope="row">{id}</th>
-            <td>{order.company}</td>
+            <td>{order.customer}</td>
             <td>{order.salesPerson}</td>
             <td>{order.shipmentAddress}</td>
             <td>{order.orderDate}</td>

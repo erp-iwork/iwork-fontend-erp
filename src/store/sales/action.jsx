@@ -9,7 +9,7 @@ const headers = {
 function createOrder(data) {
   var params = {
     orderNumber: data.orderNumber,
-    company: data.company,
+    customer: data.company,
     quantity: data.itemQuantity,
     description: data.description,
     discount: data.discount,

@@ -157,9 +157,7 @@ class AddCustomerPage extends Component {
                                     </Col>
                                     <Col>
                                         <FormGroup>
-                                            <Label for="exampleEmail" sm={12}>
-                                                Customer Email
-                                    </Label>
+                                            <Label for="exampleEmail" sm={12}>Customer Email</Label>
                                             <Col sm={12}>
                                                 <Input
                                                     type="email"
@@ -178,7 +176,7 @@ class AddCustomerPage extends Component {
                                             <Label sm={12} for="exampleSelect">Payment Option</Label>
                                             <Col>
                                                 <Input type="select" name="paymentOption" placeholder="Select payment option" onChange={this.handleChange}>
-                                                    <option aria-label="None" value="Select payment option" />
+                                                    <option aria-label="None" defaultValue disabled>Select payment option</option>
                                                     <option>TOT</option>
                                                     <option>VAT</option>
                                                 </Input>

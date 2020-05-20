@@ -9,7 +9,7 @@ import Swal from "sweetalert2"
 
 const Customer = ({ company, index, deleteCompany }) => {
     return (
-        <tr align='center'>
+        <tr align='left'>
             <th scope="row">{index + 1}</th>
             <td>{company.suplierName}</td>
             <td>{company.generalManger}</td>
@@ -63,7 +63,7 @@ class ViewAllSuppliers extends Component {
         if (!(this.props.suppliers[0])) return <PageSpinner />
         console.log(this.props.suppliers)
         return (
-            <Page title="All Customers" breadcrumbs={[{ name: 'All Customer', active: true }]}>
+            <Page title="All Customers" breadcrumbs={[{ name: 'All Supplier', active: true }]}>
                 <Col>
                     <Card className="mb-3">
                         <CardHeader>All Customers</CardHeader>
@@ -71,8 +71,8 @@ class ViewAllSuppliers extends Component {
                             <Table responsive>
                                 <thead>
                                     <tr align='left'>
-                                        <th>#</th>  
-                                        <th>Customer Name</th>
+                                        <th>#</th>
+                                        <th>Supplier Name</th>
                                         <th>General Manager</th>
                                         <th>Email</th>
                                         <th>Contact Person</th>
@@ -83,7 +83,7 @@ class ViewAllSuppliers extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.props.lists? this.props.lists.slice(0).reverse().map((item, index) => (
+                                    {this.props.lists ? this.props.lists.slice(0).reverse().map((item, index) => (
                                         <Customer key={index} company={item} index={index} deleteCompany={this.deleteSupplier} />
                                     )) : this.props.suppliers.slice(0).reverse().map((item, index) => (
                                         <Customer key={index} company={item} index={index} deleteCompany={this.deleteSupplier} />
