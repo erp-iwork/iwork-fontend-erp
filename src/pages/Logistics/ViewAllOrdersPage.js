@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
 
-
 class ViewAllOrdersPage extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +13,6 @@ class ViewAllOrdersPage extends Component {
                 title="Orders"
                 breadcrumbs={[{ name: 'All Orders', active: true }]}
                 className="TablePage">
-
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>
                     <CardBody>
@@ -54,9 +52,6 @@ class ViewAllOrdersPage extends Component {
                         </Table>
                     </CardBody>
                 </Card>
-
-
-
             </Page>
         );
     }

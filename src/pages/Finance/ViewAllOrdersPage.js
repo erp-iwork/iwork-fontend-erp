@@ -10,25 +10,27 @@ import routes from '../../config/routes'
 
 const Order = ({ order, index }) => {
     return (
-        <tr align="center">
-            <th scope="row">{index + 1}</th>
-            <td>{order.customer}</td>
-            <td>{order.salesPerson}</td>
-            <td>{order.shipmentAddress}</td>
-            <td>{order.status}</td>
-            <td>
-                <Button size='sm' color='primary'>
-                    <MdAssignment />
-                </Button>
-            </td>
-            <td>
-                <Link to={{ pathname: routes.ViewSingleOrderPage, state: order }}>
+        <tbody>
+            <tr>
+                <th scope="row">{index + 1}</th>
+                <td>{order.customer}</td>
+                <td>{order.salesPerson}</td>
+                <td>{order.shipmentAddress}</td>
+                <td>{order.status}</td>
+                <td align='center'>
                     <Button size='sm' color='primary'>
-                        See Order
+                        <MdAssignment /> Generate
                     </Button>
-                </Link>
-            </td>
-        </tr>
+                </td>
+                <td>
+                    <Link to={{ pathname: routes.ViewSingleOrderPage, state: order }}>
+                        <Button size='sm' color='primary'>
+                            See Order
+                        </Button>
+                    </Link>
+                </td>
+            </tr>
+        </tbody>
     )
 }
 
@@ -43,8 +45,8 @@ class ViewAllOrdersPage extends Component {
     }
 
     render() {
-        console.log(this.props.orders)
-        if (!this.props.orders[0]) return <PageSpinner />
+        if (this.props.loading) return <PageSpinner />
+        if (this.props.orders.length === 0) return <h2>No order to show</h2>
         return (
             <Page
                 title="All Orders"
@@ -61,15 +63,15 @@ class ViewAllOrdersPage extends Component {
                                     <th>Sales Person</th>
                                     <th>Shipment Address</th>
                                     <th>Status</th>
-                                    <th>Generate Invoice</th>
+                                    <th style={{ margin: "auto" }}>Generate Invoice</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            
                                 {this.props.orders.map((item, index) => (
                                     <Order order={item} key={index} index={index} />
                                 ))}
-                            </tbody>
+                            
                         </Table>
                     </CardBody>
                 </Card>
