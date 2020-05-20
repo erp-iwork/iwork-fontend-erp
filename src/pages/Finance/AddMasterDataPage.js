@@ -21,7 +21,8 @@ class AddMasterDataPage extends Component {
             order_items: [],
             items: '',
             can_be_manufactured: false,
-            productName: '', productType: '', productCategory: '', productPrice: ''
+            productName: '', productType: '', productCategory: '', productPrice: '',
+            price: ''
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -58,62 +59,67 @@ class AddMasterDataPage extends Component {
                         <CardBody>
                             <Form>
                                 <FormGroup >
-                                    <Label for="exampleEmail" sm={2}>
-                                        Product Name
-                                    </Label>
+                                    <Label for="productName" sm={2}>Product Name</Label>
                                     <Col sm={12}>
-                                        <Input
-                                            placeholder="Product Name"
-                                        />
+                                        <Input id="productName" placeholder="Product Name" onChange={this.handleChange} name="productName" />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
-                                    <Label for="examplePassword" sm={2}>
-                                        Product Type
-                                    </Label>
+                                    <Label for="productType" sm={2}>Product Type</Label>
                                     <Col sm={12}>
                                         <Input
+                                            id="productType"
                                             type="select"
-                                            name="select"
+                                            name="productType"
+                                            onChange={this.handleChange}
                                         >
-                                            <option>Consumable</option>
-                                            <option>Stored</option>
-                                            <option>Service</option>
-
+                                            <option value="Consumable">Consumable</option>
+                                            <option value="Stored">Stored</option>
+                                            <option value="Service">Service</option>
                                         </Input>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
-                                    <Label for="examplePassword" sm={2}>
-                                        Product Category
-                                    </Label>
+                                    <Label for="productCategory" sm={2}>Product Category</Label>
                                     <Col sm={12}>
-                                        <Input
-                                            type="select"
-                                            name="select"
-                                        >
-                                            <option>Something</option>
-                                            <option>Something</option>
-                                            <option>Something</option>
-
-                                        </Input>
+                                        <Input id="productCategory" placeholder="Product Category"  name="productCategory" onChange={this.handleChange} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
-                                    <Label for="exampleEmail" sm={2}>
+                                    <Label for="price" sm={2}>
                                         Price
                                     </Label>
                                     <Col sm={12}>
                                         <Input
                                             placeholder="Price"
+                                            id="price"
+                                            name="price"
+                                            type="number"
+                                            onChange={this.handleChange}
                                         />
                                     </Col>
                                 </FormGroup>
-                                <FormGroup row>
-                                    <Label className='isManufactured'> </Label>
-                                    <Col>
-                                        <Input sm={12} md={12} type="checkbox" id="checkbox2" /> Can Be Manufactured
-                                    </Col>
+                                <FormGroup>
+                                    <Row className='isManufactured'>
+                                        <Col sm={12} md={4}>
+                                            <Input name="" type="checkbox" id="checkbox1" onChange={
+                                                (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked }}) 
+                                            }/>
+                                            <Label for="checkbox1">Can Be Manufactured</Label>
+                                        </Col>
+                                        <Col sm={4} md={4}>
+                                            <Input  type="checkbox" id="checkbox2" onChange={
+                                                (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked }}) 
+                                            }/>
+                                            <Label for="checkbox2">Can Be Sold</Label>
+                                        </Col>
+                                        <Col sm={12} md={4}>
+                                            <Input  type="checkbox" id="checkbox3" onChange={
+                                                (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked }}) 
+                                            }/>
+                                        <Label for="checkbox3">Can Be Purchased</Label>
+                                        </Col>
+                                    </Row>
                                 </FormGroup>
                                 <hr></hr>
                                 <FormGroup>
@@ -163,9 +169,7 @@ class AddMasterDataPage extends Component {
                                         </Row>
                                         ))}
                                     <Button onClick={() => this.handleAddItem()} color='primary'>Add Another One</Button>
-
                                 </FormGroup>
-
                                 <FormGroup align='center'>
                                     <Col >
                                         <Button onClick={() => this.handleAddItem()} color='primary'>Submit</Button>
