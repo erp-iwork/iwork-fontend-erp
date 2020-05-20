@@ -115,6 +115,8 @@ const FINANCE = [
   { to: routes.AddCustomer, name: 'Add Customer', exact: false, Icon: MdWidgets },
   { to: routes.AddMasterDataPage, name: 'Add Master Data', exact: false, Icon: MdWidgets },
   { to: routes.ViewAllMasterData, name: 'All Master Data', exact: false, Icon: MdWidgets },
+  { to: routes.ViewOrdersFinance, name: 'All Orders', exact: false, Icon: MdWidgets },
+
 
 
 

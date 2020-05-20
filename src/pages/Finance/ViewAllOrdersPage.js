@@ -7,6 +7,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import actions from '../../store/sales/action'
 import routes from '../../config/routes'
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import Invoice from './INVOICE'
+
 
 const Order = ({ order, index }) => {
     return (
@@ -17,10 +20,19 @@ const Order = ({ order, index }) => {
                 <td>{order.salesPerson}</td>
                 <td>{order.shipmentAddress}</td>
                 <td>{order.status}</td>
-                <td align='center'>
-                    <Button size='sm' color='primary'>
-                        <MdAssignment /> Generate
-                    </Button>
+                <td >
+
+                    <PDFDownloadLink
+                        document={<Invoice />}
+                        fileName="Invoice.pdf"
+
+                    >
+                        {({ loading }) =>
+                            loading ? <Button size='sm' color='primary'> Loading</Button>
+                                : <Button size='sm' color='primary'> <MdAssignment color='light' /> Generate Invoice</Button>
+
+                        }
+                    </PDFDownloadLink>
                 </td>
                 <td>
                     <Link to={{ pathname: routes.ViewSingleOrderPage, state: order }}>
@@ -39,7 +51,6 @@ class ViewAllOrdersPage extends Component {
         super(props);
         this.state = {}
     }
-
     componentDidMount() {
         this.props.getAllOrder()
     }
@@ -67,11 +78,10 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            
-                                {this.props.orders.map((item, index) => (
-                                    <Order order={item} key={index} index={index} />
-                                ))}
-                            
+                            {this.props.orders.map((item, index) => (
+                                <Order order={item} key={index} index={index} />
+                            ))}
+
                         </Table>
                     </CardBody>
                 </Card>
