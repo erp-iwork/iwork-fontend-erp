@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   Row,
   Col,
@@ -11,7 +10,6 @@ import {
   CardBody,
   CardText,
 } from 'reactstrap';
-
 import Page from '../components/Page';
 
 class ButtonPage extends React.Component {
