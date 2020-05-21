@@ -10,7 +10,7 @@ class ViewSingleOrderPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            details: this.props.location.state
+            details: this.props.location.state 
         }
     }
 
@@ -21,7 +21,7 @@ class ViewSingleOrderPage extends Component {
     }
 
     render() {
-        if (!this.props.order.orderNumber) return <PageSpinner />
+        if (!this.props.loading_single_order) return <PageSpinner />
         const { details } = this.state
         const { order } = this.props
         return (
@@ -95,6 +95,7 @@ class ViewSingleOrderPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        loading_single_order: state.ordersReducer.ordersReducer,
         order: state.ordersReducer.order,
         items: state.ordersReducer.items,
     }
