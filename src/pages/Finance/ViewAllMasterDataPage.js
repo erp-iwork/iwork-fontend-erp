@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { MdAssignment } from "react-icons/md";
 import {
     Card, CardBody, CardHeader, Button, Table, Modal,
     ModalHeader, ModalBody, ModalFooter, Row
 } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { getMasterData } from '../../store/company/action'
-import routes from '../../config/routes'
 
 const Data = ({ item, index, toggle }) => {
     return (
@@ -48,7 +45,7 @@ class ViewAllMasterData extends Component {
     toggle = (data) => {
         return this.setState({
             modal: !this.state.modal,
-            data: !this.state.modal? data : this.state.data
+            data: !this.state.modal ? data : this.state.data
         })
     }
 
@@ -74,12 +71,12 @@ class ViewAllMasterData extends Component {
                         <Row>Type: {data.productType}</Row>
                         <Row>Price: {data.productPrice}</Row>
                         <Row>Unit of Measurement: {data.unitOfMeasurement}</Row>
-                  </ModalBody>
-                  <ModalFooter>
-                      <Button onClick={() => this.toggle()}>
-                          Close
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={() => this.toggle()}>
+                            Close
                       </Button>
-                  </ModalFooter>
+                    </ModalFooter>
                 </Modal>
                 <Card className="mb-3">
                     <CardHeader>All Products</CardHeader>
@@ -96,9 +93,9 @@ class ViewAllMasterData extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                                {this.props.masterData.slice(0).reverse().map((item, index) => (
-                                    <Data item={item} key={index} index={index} toggle={this.toggle} />
-                                ))}
+                            {this.props.masterData.slice(0).reverse().map((item, index) => (
+                                <Data item={item} key={index} index={index} toggle={this.toggle} />
+                            ))}
                         </Table>
                     </CardBody>
                 </Card>

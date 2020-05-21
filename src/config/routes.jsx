@@ -20,7 +20,8 @@ export default {
   ViewOrdersInventory: "/ViewOrdersInventory",
   CategoriesInventoryPage: "/CategoriesInventory",
   ViewSingleItemPage: "/ViewSingleItem",
-  SivPage: "SivPage",
   AddMasterDataPage: "/AddMasterDataPage",
-  ViewAllMasterData: '/ViewAllMasterData'
+  ViewAllMasterData: '/ViewAllMasterData',
+  SivPage: '/SivPage',
+
 };

@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import Logo from "../../../Assets/NAZO.png";
 import {
   Page,
   Text,
   View,
   Document,
   StyleSheet,
-  Image,
 } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
@@ -128,7 +126,7 @@ class SIVPdf extends Component {
                   marginLeft: 160,
                 }}
               >
-                <Image source={Logo} alt="" style={styles.logo} />
+                {/* <Image source={Logo} alt="" style={styles.logo} /> */}
               </View>
             </View>
           </View>

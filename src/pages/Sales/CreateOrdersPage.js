@@ -112,8 +112,8 @@ class CreateOrdersPage extends Component {
         let { order_items: items, submitted } = this.state
         if ((this.props.loading_companies || this.props.loading_orders || this.props.loading_items) && !submitted) return <PageSpinner />
         const {
-            company, fieldName, orderNumber, orderName, description, 
-            discount, itemQuantity, InventoryItem, shipmentAddress
+            company, description, 
+            shipmentAddress
         } = this.state
         return (
             <Page title="Create Sales Order" breadcrumbs={[{ name: 'Create Sales Order', active: true }]}>

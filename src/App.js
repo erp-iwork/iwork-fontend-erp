@@ -46,6 +46,8 @@ const ViewAllMasterDataPage = React.lazy(() => import('./pages/Finance/ViewAllMa
 const ViewAllOrdersLogisticsPage = React.lazy(() => import('./pages/Logistics/ViewAllOrdersPage'));
 const CategoriesInventoryPage = React.lazy(() => import('./pages/Inventory/CategoryPage'));
 const ViewSingleItemPage = React.lazy(() => import('./pages/Inventory/ViewSingleItemPage'));
+const SivPage = React.lazy(() => import('./pages/Inventory/SIV'));
+
 
 
 
@@ -94,14 +96,14 @@ class App extends React.Component {
                 <Route exact path={routes.ViewOrdersInventory} component={ViewAllOrdersInventoryPage} />
                 <Route exact path={routes.CategoriesInventoryPage} component={CategoriesInventoryPage} />
                 <Route exact path={routes.ViewSingleItemPage} component={ViewSingleItemPage} />
-                {/* <Route exact path={routes.SivPage} component={SivPage} /> */}
+                <Route exact path={routes.SivPage} component={SivPage} />
 
                 {/* FINANCE ROUTES/ */}
                 <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
                 <Route exact path={routes.viewCustomers} component={viewAllCutomersPage} />
                 <Route exact path={routes.viewSuppliers} component={viewAllSuppliersPage} />
                 <Route exact path={routes.AddSupplier} component={AddSupplierPage} />
-                
+
                 <Route exact path={routes.ViewOrdersFinance} component={ViewAllOrdersFinancePage} />
                 <Route exact path={routes.AddMasterDataPage} component={AddMasterDataPage} />
                 <Route exact path={routes.ViewAllMasterData} component={ViewAllMasterDataPage} />

@@ -1,27 +1,11 @@
 import React from 'react';
-import {
-  withStyles,
-  Box,
-  Paper,
-  Typography,
-  Grid,
-  Button,
-} from '@material-ui/core';
-import Logo from '../../../Assets/NAZO.png';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import { connect } from 'react-redux';
-import { getSiv, updateSiv } from '../../../store/Siv/action';
+import Typography from '../../components/Typography'
 import SIVPdf from './Printable_SIV';
-import PrintIcon from '@material-ui/icons/Print';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import AutorenewIcon from '@material-ui/icons/Autorenew';
+import Page from '../../components/Page';
+import { Button, CardBody, Col, Table } from 'reactstrap';
 
-const styles = {
+const classes = {
 
   pdf: {
     width: '792px',
@@ -30,7 +14,7 @@ const styles = {
     marginLeft: 100,
     padding: 5,
   },
-  Paper: {
+  Card: {
     backgroundColor: '#4083B0',
     height: 130,
     borderRadius: 0,
@@ -49,9 +33,6 @@ const styles = {
   },
   SIVStyling: {
     padding: 30,
-  },
-  table: {
-    padding: 10,
   },
   textBody: {
     color: '#686868',
@@ -101,7 +82,7 @@ const styles = {
 class SIV extends React.Component {
   componentDidMount() {
 
-    this.props.getSiv(this.props.location.state.order);
+    // this.props.getSiv(this.props.location.state.order);
 
   }
   submit(e) {
@@ -110,223 +91,193 @@ class SIV extends React.Component {
 
 
   render() {
-    const { classes } = this.props;
     return (
-      this.props.sivs ? [this.props.sivs].map(item => (
-        < div >
-          <Box
-            style={{
-              height: 100,
-            }}
-          ></Box>
-          <div className={classes.pdf}>
-            <Paper className={classes.Paper}>
-              <Grid
-                container
-                xs={12}
-                display="flex"
-                justify="space-between"
-                className={classes.Header}
-              >
-                <Grid item>
-                  <Grid
-                    container
-                    style={{
-                      marginTop: 10,
-                      marginLeft: 10,
-                    }}
+      <Page
+        title="SIV"
+        breadcrumbs={[{ name: 'SIV', active: true }]}
+      >
+        <hr />
+
+
+        <div
+          style={{
+            height: 100,
+          }}
+        ></div>
+        <div style={classes.pdf}>
+          <div style={classes.Card}>
+            <div
+              container
+              xs={12}
+              display="flex"
+              justify="space-between"
+              style={classes.Header}
+            >
+              <div>
+                <div
+                  container
+                  style={{
+                    marginTop: 10,
+                    marginLeft: 10,
+                  }}
+                >
+                  {/* <img src={Logo} alt="" style={classes.logo} /> */}
+                  <Typography
+                    variant="h6"
+
+                    style={classes.text}
+
                   >
-                    <img src={Logo} alt="" className={classes.logo} />
-                    <Typography
-                      className={classes.text}
-                      variant="h6"
-                      style={{
-                        marginTop: 20,
-                        marginLeft: 10,
-                      }}
-                    >
-                      NAZO
+                    NAZO
                     </Typography>
-                  </Grid>
-                </Grid>
-                <Grid item>
-                  <Typography
-                    className={classes.text}
-                    variant="body2"
-                    gutterBottom
-                  >
-                    <b>SIV Status : </b> {item.sivStatus}
+                </div>
+              </div>
+              <div >
+                <Typography
+                  style={classes.text}
+                  variant="body2"
+                  gutterBottom
+                >
+                  <b>SIV Status : </b> Something
                   </Typography>
-                  <Typography
-                    className={classes.text}
-                    variant="body2"
-                    gutterBottom
-                  >
-                    <b>Warehouse Name : </b> {item.warehouseName}
+                <Typography
+                  style={classes.text}
+                  variant="body2"
+                  gutterBottom
+                >
+                  <b>Warehouse Name : </b> Something
                   </Typography>
-                  <Typography
-                    className={classes.text}
-                    variant="body2"
-                    gutterBottom
-                  >
-                    <b>Issued By :</b> {localStorage.getItem('username')}
+                <Typography
+                  style={classes.text}
+                  variant="body2"
+                  gutterBottom
+                >
+                  <b>Issued By :</b>Something
                   </Typography>
-                  <Typography
-                    className={classes.text}
-                    variant="body2"
-                    gutterBottom
-                  >
-                    <b>SIV Date :</b> {item.sivDate}
+                <Typography
+                  style={classes.text}
+                  variant="body2"
+                  gutterBottom
+                >
+                  <b>SIV Date :</b> Something
                   </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-            <Box
+              </div>
+            </div>
+          </div>
+
+
+          <Col>
+            <CardBody>
+              <Table size="sm">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </CardBody>
+          </Col>
+
+          <div
+            style={{
+              paddingLeft: 20,
+            }}
+          >
+            <div
               style={{
                 display: 'flex',
                 justifyContent: 'flex-start',
-                padding: 20,
               }}
             >
-              <Typography className={classes.textBody} variant="body2" color="">
-              </Typography>
-            </Box>
-
-            <TableContainer>
-              <Table size="small" aria-label="a dense table">
-                <TableHead>
-                  <TableRow>
-
-                    <TableCell>Item Name</TableCell>
-                    <TableCell align="right">Quantity</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.props.siv_item
-                    ? this.props.siv_item.map((item) => (
-                      <TableRow key={item.sivId}>
-                        <TableCell component="th" scope="row">
-                          {item.itemName}
-                        </TableCell>
-                        <TableCell align="right">{item.quantity}</TableCell>
-                      </TableRow>
-                    ))
-                    : null}
-                </TableBody>
-              </Table>
-            </TableContainer>
-
-            <Box
-              style={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                paddingTop: 10,
-              }}
-            >
-            </Box>
+              <Typography
+                style={classes.textBody}
+                variant="body2"
+                color=""
+              >
+                <b>Recipient Name :</b> _______________________
+                </Typography>
+            </div>
             <div
               style={{
-                paddingLeft: 20,
+                display: 'flex',
+                justifyContent: 'flex-start',
+                paddingTop: 15,
               }}
             >
-              <Box
-                style={{
-                  display: 'flex',
-                  justifyContent: 'flex-start',
-                }}
+              <Typography
+                style={classes.textBody}
+                variant="body2"
+                color=""
               >
-                <Typography
-                  className={classes.textBody}
-                  variant="body2"
-                  color=""
-                >
-                  <b>Recipient Name :</b> _______________________
+                <b>Recipient Signature :</b> _______________________
                 </Typography>
-              </Box>
-              <Box
-                style={{
-                  display: 'flex',
-                  justifyContent: 'flex-start',
-                  paddingTop: 15,
-                }}
-              >
-                <Typography
-                  className={classes.textBody}
-                  variant="body2"
-                  color=""
-                >
-                  <b>Recipient Signature :</b> _______________________
-                </Typography>
-              </Box>
             </div>
-
-          </div>
-          <div style={{
-            marginLeft: 400,
-            paddingTop: 20
-          }}>
-            {
-
-              this.props.success ? (<PDFDownloadLink
-                document={
-                  <SIVPdf siv_item={item ? item.siv_item : null} sivs={item ? item : null} />
-                }
-                fileName={"SIV_" + item.sivId + ".pdf"}
-                style={{
-                  textDecoration: 'none',
-
-                }}
-              >
-                {({ loading }) => (loading ?
-                  <AutorenewIcon fontSize='large' /> :
-                  <Grid >
-                    <PrintIcon style={{
-                      marginLeft: 8,
-                      color: '#11669F'
-
-                    }} fontSize='large' />
-                    <Typography style={{
-                      color: '#818181'
-
-                    }}
-                    >
-                      Print SIV
-</Typography>
-                  </Grid>
-                )}
-              </PDFDownloadLink>) : null
-
-
-
-
-
-            }
-
-            <Grid item style={{
-              marginLeft: 60,
-              paddingTop: 10,
-            }}>
-            </Grid>
           </div>
 
-        </div >
+        </div>
+        <div style={{
+          marginLeft: 400,
+          paddingTop: 20
+        }}>
+          {
 
-      )
-      ) : null
+            this.props.success ? (<PDFDownloadLink
+              document={
+                <SIVPdf />
+              }
+              fileName={"SIV_"}
+              style={{
+                textDecoration: 'none',
 
+              }}
+            >
+              {({ loading }) => (loading ?
+                <Button size='sm' /> :
+                <div >
+                  <Button style={{
+                    marginLeft: 8,
+                    color: '#11669F'
+
+                  }} fontSize='large' />
+                  <Typography style={{
+                    color: '#818181'
+
+                  }}
+                  >
+                    Print SIV
+                    </Typography>
+                </div>
+              )}
+            </PDFDownloadLink>) : null
+          }
+        </div>
+      </Page>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    sivs: state.sivReducer.sivs,
-    siv_item: state.sivReducer.siv_item,
-    success: state.sivReducer.success,
 
-  };
-}
-
-export default connect(mapStateToProps, { getSiv })(
-  withStyles(styles)(SIV)
-);
+export default SIV;

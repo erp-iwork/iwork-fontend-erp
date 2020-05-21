@@ -39,9 +39,10 @@ class ViewAllCustomersPage extends Component {
         this.state = {
             companies: [],
             modal: false,
-            customer: { customerName: '', generalManger: '', email: '', contactPerson: '',
-            workingField: '', paymentOption: '', tinNumber: ''
-        }
+            customer: {
+                customerName: '', generalManger: '', email: '', contactPerson: '',
+                workingField: '', paymentOption: '', tinNumber: ''
+            }
         }
         this.deleteCustomer = this.deleteCustomer.bind(this)
         this.toggle = this.toggle.bind(this)
@@ -56,7 +57,7 @@ class ViewAllCustomersPage extends Component {
     toggle = (customer) => {
         return this.setState({
             modal: !this.state.modal,
-            customer: !this.state.modal? customer : this.state.customer
+            customer: !this.state.modal ? customer : this.state.customer
         })
     }
 
@@ -86,18 +87,33 @@ class ViewAllCustomersPage extends Component {
                     backdrop="static"
                     className={this.props.className}>
                     <ModalHeader>
-                        {customer.customerName}
+                        <b> {customer.customerName}</b>
                     </ModalHeader>
                     <ModalBody>
-                        <Row>General Manager: {customer.generalManger}</Row>
-                        <Row>Email: {customer.email}</Row>
-                        <Row>Contact Person: {customer.contactPerson}</Row>
-                        <Row>Working Field: {customer.workingField}</Row>
-                        <Row>Payment Option: {customer.paymentOption}</Row>
-                        <Row>Tin Number: {customer.tinNumber}</Row>
-                  </ModalBody>
+                        <Col>
+                            <Row><Col><b>General Manager</b>:</Col>
+                                <Col>{customer.generalManger}</Col>
+                            </Row>
+                            <Row><Col><b>Email</b>:</Col>
+                                <Col>{customer.email}</Col>
+                            </Row>
+                            <Row><Col><b>Contact Person</b>:</Col>
+                                <Col>{customer.contactPerson}</Col>
+                            </Row>
+                            <Row><Col><b> Working Field</b>:</Col>
+                                <Col>{customer.workingField}</Col>
+                            </Row>
+                            <Row><Col><b> Payment Option</b>:</Col>
+                                <Col>{customer.paymentOption}</Col>
+                            </Row>
+                            <Row><Col><b>Tin Number </b> :</Col>
+                                <Col>{customer.tinNumber}</Col>
+                            </Row>
+                        </Col>
+
+                    </ModalBody>
                     <ModalFooter>
-                        <Button onClick={() => this.toggle()}>
+                        <Button color='primary' onClick={() => this.toggle()}>
                             Close
                       </Button>
                     </ModalFooter>

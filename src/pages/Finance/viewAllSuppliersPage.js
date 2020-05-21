@@ -58,7 +58,7 @@ class ViewAllSuppliers extends Component {
     toggle = (supplier) => {
         return this.setState({
             modal: !this.state.modal,
-            supplier: !this.state.modal? supplier : this.state.supplier
+            supplier: !this.state.modal ? supplier : this.state.supplier
         })
     }
 
@@ -83,29 +83,44 @@ class ViewAllSuppliers extends Component {
         const { supplier } = this.state
         return (
             <Page title="All Customers" breadcrumbs={[{ name: 'All Supplier', active: true }]}>
+
+
                 <Modal
                     isOpen={this.state.modal}
                     backdrop="static"
                     className={this.props.className}>
                     <ModalHeader>
-                        {supplier.suplierName}
+                        <b> {supplier.suplierName}</b>
                     </ModalHeader>
                     <ModalBody>
-                        <Row>General Manager: {supplier.generalManger}</Row>
-                        <Row>Email: {supplier.email}</Row>
-                        <Row>Contact Person: {supplier.contactPerson}</Row>
-                        <Row>Working Field: {supplier.workingField}</Row>
-                        <Row>Payment Option: {supplier.paymentOption}</Row>
-                        <Row>Tin Number: {supplier.tinNumber}</Row>
-                  </ModalBody>
-                  <ModalFooter>
-                      <Button onClick={() => this.toggle()}>
-                          Close
+                        <Col>
+                            <Row><Col><b>General Manager</b>:</Col>
+                                <Col>{supplier.generalManger}</Col>
+                            </Row>
+                            <Row><Col><b>Email</b>:</Col>
+                                <Col>{supplier.email}</Col>
+                            </Row>
+                            <Row><Col><b>Contact Person</b>:</Col>
+                                <Col>{supplier.contactPerson}</Col>
+                            </Row>
+                            <Row><Col><b> Working Field</b>:</Col>
+                                <Col>{supplier.workingField}</Col>
+                            </Row>
+                            <Row><Col><b> Payment Option</b>:</Col>
+                                <Col>{supplier.paymentOption}</Col>
+                            </Row>
+                            <Row><Col><b>Tin Number </b> :</Col>
+                                <Col>{supplier.tinNumber}</Col>
+                            </Row>
+                        </Col>
+
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color='primary' onClick={() => this.toggle()}>
+                            Close
                       </Button>
-                  </ModalFooter>
+                    </ModalFooter>
                 </Modal>
-
-
                 <Col>
                     <Card className="mb-3">
                         <CardHeader>All Customers</CardHeader>
