@@ -65,7 +65,7 @@ class ViewAllOrdersPage extends Component {
         const createdOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === "Created" }) : "";
         if (createdOrders.length === 0) return <h2>No orders to show</h2>
         return (
-            <Page 
+            <Page
                 title="All Orders"
                 breadcrumbs={[{ name: 'All Orders', active: true }]}
                 className="TablePage">
