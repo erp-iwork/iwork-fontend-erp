@@ -91,60 +91,23 @@ class ViewAllCustomersPage extends Component {
                     </ModalHeader>
                     <ModalBody>
                         <Col>
-                            <Row>
-                                <Col>
-                                    <b>General Manager</b>:
-                                </Col>
-                                <Col>
-                                    {customer.generalManger}
-                                </Col>
+                            <Row><Col><b>General Manager</b>:</Col>
+                                <Col>{customer.generalManger}</Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <b>Email</b>:
-                                </Col>
-                                <Col>
-                                    {customer.email}
-                                </Col>
+                            <Row><Col><b>Email</b>:</Col>
+                                <Col>{customer.email}</Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <b>Contact Person</b>:
-
-                                </Col>
-                                <Col>
-                                    {customer.contactPerson}
-                                </Col>
+                            <Row><Col><b>Contact Person</b>:</Col>
+                                <Col>{customer.contactPerson}</Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <b> Working Field</b>:
-
-
-                                </Col>
-                                <Col>
-                                    {customer.workingField}
-                                </Col>
+                            <Row><Col><b> Working Field</b>:</Col>
+                                <Col>{customer.workingField}</Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <b> Payment Option</b>:
-
-                                </Col>
-                                <Col>
-                                    {customer.paymentOption}
-                                </Col>
+                            <Row><Col><b> Payment Option</b>:</Col>
+                                <Col>{customer.paymentOption}</Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <b>
-                                        Tin Number
-
-                                </b> :
-                                </Col>
-                                <Col>
-                                    {customer.tinNumber}
-                                </Col>
+                            <Row><Col><b>Tin Number </b> :</Col>
+                                <Col>{customer.tinNumber}</Col>
                             </Row>
                         </Col>
 

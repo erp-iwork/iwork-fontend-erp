@@ -58,7 +58,7 @@ class ViewAllSuppliers extends Component {
     toggle = (supplier) => {
         return this.setState({
             modal: !this.state.modal,
-            supplier: !this.state.modal? supplier : this.state.supplier
+            supplier: !this.state.modal ? supplier : this.state.supplier
         })
     }
 
@@ -85,7 +85,7 @@ class ViewAllSuppliers extends Component {
             <Page title="All Customers" breadcrumbs={[{ name: 'All Supplier', active: true }]}>
 
 
-<Modal
+                <Modal
                     isOpen={this.state.modal}
                     backdrop="static"
                     className={this.props.className}>
@@ -94,60 +94,23 @@ class ViewAllSuppliers extends Component {
                     </ModalHeader>
                     <ModalBody>
                         <Col>
-                            <Row>
-                                <Col>
-                                    <b>General Manager</b>:
-                                </Col>
-                                <Col>
-                                    {supplier.generalManger}
-                                </Col>
+                            <Row><Col><b>General Manager</b>:</Col>
+                                <Col>{supplier.generalManger}</Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <b>Email</b>:
-                                </Col>
-                                <Col>
-                                    {supplier.email}
-                                </Col>
+                            <Row><Col><b>Email</b>:</Col>
+                                <Col>{supplier.email}</Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <b>Contact Person</b>:
-
-                                </Col>
-                                <Col>
-                                    {supplier.contactPerson}
-                                </Col>
+                            <Row><Col><b>Contact Person</b>:</Col>
+                                <Col>{supplier.contactPerson}</Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <b> Working Field</b>:
-
-
-                                </Col>
-                                <Col>
-                                    {supplier.workingField}
-                                </Col>
+                            <Row><Col><b> Working Field</b>:</Col>
+                                <Col>{supplier.workingField}</Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <b> Payment Option</b>:
-
-                                </Col>
-                                <Col>
-                                    {supplier.paymentOption}
-                                </Col>
+                            <Row><Col><b> Payment Option</b>:</Col>
+                                <Col>{supplier.paymentOption}</Col>
                             </Row>
-                            <Row>
-                                <Col>
-                                    <b>
-                                        Tin Number
-
-                                </b> :
-                                </Col>
-                                <Col>
-                                    {supplier.tinNumber}
-                                </Col>
+                            <Row><Col><b>Tin Number </b> :</Col>
+                                <Col>{supplier.tinNumber}</Col>
                             </Row>
                         </Col>
 
