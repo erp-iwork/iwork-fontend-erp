@@ -75,7 +75,7 @@ class CreateOrdersPage extends Component {
         const neworder_items = this.state.order_items.map((item, sidx) => {
             if (idx !== sidx) return item;
             return {
-                ...item,
+                ...item, 
                 InventoryItem: evt.target.value,
             };
         });
