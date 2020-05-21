@@ -5,10 +5,11 @@ import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import actions from '../../store/sales/action'
+import { getStatus, getOrders } from '../../store/order/action'
+import { getSiv, updateSiv } from '../../store/Siv/action'
 import routes from '../../config/routes'
 
-const Order = ({ order, index }) => {
+const Order = ({ order, index, handleApprove }) => {
     return (
         <tbody>
             <tr>
@@ -17,10 +18,17 @@ const Order = ({ order, index }) => {
                 <td>{order.salesPerson}</td>
                 <td>{order.shipmentAddress}</td>
                 <td>{order.status}</td>
-                <td align='center'>
-                    <Button size='sm' color='primary'>
-                        <MdAssignment /> Generate
+                <td>
+                {order.status === "Issued"?
+                    <Link to={{ pathname: routes.SivPage, state: { order: order.orderNumber } }}>
+                        <Button size='sm' color='primary'>
+                            <MdAssignment /> SIV Issued
+                        </Button>
+                    </Link>:
+                    <Button size='sm' color='primary' onClick={() => handleApprove(order.orderNumber)}>
+                        <MdAssignment /> Approve
                     </Button>
+                }
                 </td>
                 <td>
                     <Link to={{ pathname: routes.ViewSingleOrderPage, state: order }}>
@@ -38,15 +46,24 @@ class ViewAllOrdersPage extends Component {
     constructor(props) {
         super(props);
         this.state = {}
+        this.handleApprove = this.handleApprove.bind(this)
     }
 
     componentDidMount() {
-        this.props.getAllOrder()
+        this.props.getOrders()
+    }
+
+    handleApprove = (order) => {
+        this.props.updateSiv(order, {
+          'sivStatus': 'Approved',
+        })
+        this.props.getSiv(order);
     }
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        if (this.props.orders.length === 0) return <h2>No orders to show</h2>
+        const createdOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === "Created" }) : "";
+        if (createdOrders.length === 0) return <h2>No orders to show</h2>
         return (
             <Page
                 title="All Orders"
@@ -63,39 +80,30 @@ class ViewAllOrdersPage extends Component {
                                     <th>Sales Person</th>
                                     <th>Shipment Address</th>
                                     <th>Status</th>
-                                    <th style={{ margin: "auto" }}>Generate Invoice</th>
+                                    <th>Generate SIV</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            
-                                {this.props.orders.map((item, index) => (
-                                    <Order order={item} key={index} index={index} />
+                                {createdOrders.map((item, index) => (
+                                    <Order order={item} key={index} index={index} handleApprove={this.handleApprove} />
                                 ))}
-                            
                         </Table>
                     </CardBody>
                 </Card>
             </Page>
-        );
+        )
     }
 }
 
 
 const mapStateToProps = (state) => {
     return {
-        loading: state.salesReducer.loading,
-        errors: state.salesReducer.errors,
-        items: state.salesReducer.items,
-        companys: state.salesReducer.companys,
-        success: state.salesReducer.success,
-        orders: state.salesReducer.orders
+        loading:state.ordersReducer.loading,
+        orders: state.ordersReducer.orders,
+        status: state.ordersReducer.status,
+        sivs: state.invoiceReducer.sivs,
+        siv_item: state.invoiceReducer.siv_item,
     }
 }
-const mapDispatchToProps = {
-    createOrder: actions.createOrder,
-    getAllItem: actions.getAllItem,
-    getAllCompany: actions.getAllCompany,
-    getAllOrder: actions.getAllOrder
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewAllOrdersPage)
+export default connect(mapStateToProps, { getOrders, getStatus, getSiv, updateSiv })(ViewAllOrdersPage)

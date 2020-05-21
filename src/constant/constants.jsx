@@ -60,6 +60,7 @@ export const errorsConstant = {
 
 export const GET_INVOICE = "GET_INVOICE";
 export const GET_SIV = "GET_SIV";
+export const REQUEST_SIV = "REQUEST_SIV"
 export const REQUEST_ORDERS = "REQUEST_ORDERS"
 export const REQUEST_SINGLE_ORDER = "REQUEST_SINGLE_ORDER"
 export const GET_ORDER = "GET_ORDER";

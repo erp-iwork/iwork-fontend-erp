@@ -54,8 +54,8 @@ class ViewAllOrdersPage extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        const createdOrders = this.props.orders.filter((order) => { return order.status === "Created" || order.status === "Delivered" })
-        //if (this.props.orders.length === 0) return <h2>No orders to show</h2>
+        const deliveredOrders = this.props.orders.filter((order) => { return order.status === "Created" || order.status === "Issued" })
+        if (deliveredOrders.length === 0) return <h2>No orders to show</h2>
         return (
             <Page
                 title="All Orders"
@@ -76,7 +76,7 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {createdOrders.map((item, index) => (
+                            {deliveredOrders.map((item, index) => (
                                 <Order order={item} key={index} index={index} deliver={this.deliver} />
                             ))}
                         </Table>

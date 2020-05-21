@@ -3,10 +3,12 @@ import Typography from '../../components/Typography'
 import SIVPdf from './Printable_SIV';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import Page from '../../components/Page';
-import { Button, CardBody, Col, Table } from 'reactstrap';
+import { Button, CardBody, Col, Table } from 'reactstrap'
+import { getSiv } from '../../store/Siv/action'
+import { connect } from 'react-redux'
+import PageSpinner from '../../components/PageSpinner'
 
 const classes = {
-
   pdf: {
     width: '792px',
     height: '450px',
@@ -81,24 +83,21 @@ const classes = {
 };
 class SIV extends React.Component {
   componentDidMount() {
-
-    // this.props.getSiv(this.props.location.state.order);
-
+    this.props.getSiv(this.props.location.state.order)
   }
   submit(e) {
     e.preventDefault();
   }
 
-
   render() {
+    if (this.props.loading) return <PageSpinner />
+    console.log(this.props.sivs)
     return (
       <Page
         title="SIV"
         breadcrumbs={[{ name: 'SIV', active: true }]}
       >
         <hr />
-
-
         <div
           style={{
             height: 100,
@@ -138,64 +137,50 @@ class SIV extends React.Component {
                   variant="body2"
                   gutterBottom
                 >
-                  <b>SIV Status : </b> Something
+                  <b>SIV Status : </b> {this.props.sivs.sivStatus}
                   </Typography>
                 <Typography
                   style={classes.text}
                   variant="body2"
                   gutterBottom
                 >
-                  <b>Warehouse Name : </b> Something
+                  <b>Warehouse Name : </b> {this.props.sivs.warehouseName}
                   </Typography>
                 <Typography
                   style={classes.text}
                   variant="body2"
                   gutterBottom
                 >
-                  <b>Issued By :</b>Something
+                  <b>Issued By :</b> {localStorage.getItem('username')}
                   </Typography>
                 <Typography
                   style={classes.text}
                   variant="body2"
                   gutterBottom
                 >
-                  <b>SIV Date :</b> Something
+                  <b>SIV Date :</b> {this.props.sivs.sivDate}
                   </Typography>
               </div>
             </div>
           </div>
-
-
           <Col>
             <CardBody>
               <Table size="sm">
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                  {this.props.sivs.siv_item.map((item, index) => (
+                    <tr>
+                      <th scope="row">{index + 1}</th>
+                      <td>{item.itemName}</td>
+                      <td>{item.quantity}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </CardBody>
@@ -243,15 +228,13 @@ class SIV extends React.Component {
           paddingTop: 20
         }}>
           {
-
             this.props.success ? (<PDFDownloadLink
               document={
-                <SIVPdf />
+                <SIVPdf siv_item={this.props.sivs.siv_item} sivs={this.props.sivs} />
               }
-              fileName={"SIV_"}
+              fileName={"SIV_" + this.props.sivs.sivId + ".pdf"}
               style={{
                 textDecoration: 'none',
-
               }}
             >
               {({ loading }) => (loading ?
@@ -280,4 +263,14 @@ class SIV extends React.Component {
 }
 
 
-export default SIV;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.sivReducer.loading,
+    sivs: state.sivReducer.sivs,
+    siv_item: state.sivReducer.siv_item,
+    success: state.sivReducer.success,
+  }
+}
+
+
+export default connect(mapStateToProps, { getSiv })(SIV)

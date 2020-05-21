@@ -12,7 +12,6 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import Invoice from './INVOICE'
 
 const Order = ({ order, index, data, handlePrint }) => {
-    console.log(data)
     return (
         <tbody>
             <tr>
@@ -22,7 +21,7 @@ const Order = ({ order, index, data, handlePrint }) => {
                 <td>{order.shipmentAddress}</td>
                 <td>{order.status}</td>
                 <td>
-                    {data.success && (data.currentOrder === order.orderNumber) && data.invoices ?
+                    {order.orderNumber === data.currentOrder && data.success?
                         <PDFDownloadLink
                           document={<Invoice data={data.invoices} invoice_item={data.invoice_item} />}
                           fileName={`order_${order.orderNumber}.pdf`}>
@@ -77,7 +76,6 @@ class ViewAllOrdersPage extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        //if (this.props.orders.length === 0) return <h2>No orders to show</h2>
         const deliveredOrders =  this.state.orders ? this.state.orders.filter((order) => {
             return (order.status === "Delivered") || (order.status === "Invoiced")
         }) : "" 

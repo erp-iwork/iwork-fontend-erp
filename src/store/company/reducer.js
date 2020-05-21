@@ -2,7 +2,7 @@ import { companyConstant, errorsConstant } from "../../constant/constants";
 const initialState = {
   companys: [],
   suppliers: [],
-  loading: true,
+  loading: false,
   masterData: [],
   success: false,
   errors: []

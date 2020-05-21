@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
     }
 });
 
-function PdfDocument({ props }) {
-    console.log(props)
+function PdfDocument({ data }) {
+    const { customer, invoice_item } = data
     return (
         <Document>
             <Page style={styles.pdf}>
@@ -177,7 +177,7 @@ function PdfDocument({ props }) {
                                     </View>
                                     <View style={{width: 10}}></View>
                                     <View item>
-                                        <Text align='right' style={styles.textBody}>{"props.customer"}</Text>
+                                        <Text align='right' style={styles.textBody}>{customer.customerName}</Text>
                                     </View>
                                 </View>
                                 <View style={{
@@ -203,7 +203,7 @@ function PdfDocument({ props }) {
                                     <View item>
 
                                         <Text align='right' style={styles.textBody} >
-                                            Something
+                                            {customer.workingField}
                                         </Text>
                                     </View>
                                 </View>
@@ -233,16 +233,13 @@ function PdfDocument({ props }) {
                                     <View item>
 
                                         <Text align='right' style={styles.textBody} >
-                                            {/* {data.company.generalManger} */}
-                                        Something
-
+                                            {customer.generalManger}
                                         </Text>
                                     </View>
                                 </View>
                                 <View style={{
                                     height: 10
                                 }} />
-
                                 <View container style={{
                                     flexDirection: 'row',
                                     display: 'flex',
@@ -265,11 +262,7 @@ function PdfDocument({ props }) {
                                     <View item>
 
                                         <Text align='right' style={styles.textBody} >
-                                            {/* {data.company.contactPerson}
-                                        Something
-                                             */}
-                                        Something
-
+                                            {customer.contactPerson}
                                         </Text>
                                     </View>
                                 </View>
@@ -298,10 +291,7 @@ function PdfDocument({ props }) {
                                     <View item>
 
                                         <Text align='right' style={styles.textBody} >
-                                            {/* {data.company.email}
-                                             */}
-                                        Something
-
+                                            {customer.email}
                                         </Text>
                                     </View>
                                 </View>
@@ -323,7 +313,7 @@ function PdfDocument({ props }) {
                                     </View>
                                     <View item>
                                         <Text align='right' style={styles.textBody} >
-                                            {/* {data.company.tinNumber} */} Something
+                                            {customer.tinNumber}
                                         </Text>
                                     </View>
                                 </View>
@@ -344,7 +334,7 @@ function PdfDocument({ props }) {
                                     <View style={{ width: 10 }}></View>
                                     <View item>
                                         <Text align='right' style={styles.textBody} >
-                                            {/* {data.company.paymentOption} */}Something
+                                            {customer.paymentOption}
                                         </Text>
                                     </View>
                                 </View>
@@ -369,9 +359,7 @@ function PdfDocument({ props }) {
                                 </View>
                                 <View item >
                                     <Text align='right' style={styles.textBody} >
-                                        {/* {data.order}
-                                         */}
-                                        Something
+                                        {data.order}
                                     </Text>
                                 </View>
                             </View>
@@ -390,8 +378,7 @@ function PdfDocument({ props }) {
                                 </View>
                                 <View item>
                                     <Text align='right' style={styles.textBody} >
-                                        {/* {data.invoiceId} */}
-                                        Something
+                                        {data.invoiceId}
                                     </Text>
                                 </View>
                             </View>
@@ -416,8 +403,7 @@ function PdfDocument({ props }) {
                                 </View>
                                 <View item>
                                     <Text align='right' style={styles.textBody} >
-                                        {/* {data.date} */}
-                                        Something
+                                        {data.date}
                                     </Text>
                                 </View>
                             </View>
@@ -473,7 +459,7 @@ function PdfDocument({ props }) {
                             </View>
                         </View>
                     </View>
-                    {props.invoice_item ? props.invoice_item.map((item, index) => {
+                    {data.invoice_item ? data.invoice_item.map((item, index) => {
                         return (
                             <View key={index} style={styles.tableRow}>
                                 <View style={styles.tableCol}>
@@ -518,9 +504,7 @@ function PdfDocument({ props }) {
                             </View>
                             <View item>
                                 <Text align='right' style={styles.textBody} >
-                                    {/* {data.subTotal}
-                                     */}
-                                        Something
+                                    {data.subTotal}
                                 </Text>
                             </View>
                         </View>
@@ -545,8 +529,7 @@ function PdfDocument({ props }) {
                             </View>
                             <View item>
                                 <Text align='right' style={styles.textBody} >
-                                    {/* {data.Tax} */}
-                                    Something
+                                    {data.Tax}
                                 </Text>
                             </View>
 
@@ -568,8 +551,7 @@ function PdfDocument({ props }) {
                             <View style={{width: 10}}></View>
                             <View item>
                                 <Text align='right' style={styles.textBody} >
-                                    {/* {data.Total} */}
-                                    Something
+                                    {data.Total}
                                 </Text>
                             </View>
                         </View>
