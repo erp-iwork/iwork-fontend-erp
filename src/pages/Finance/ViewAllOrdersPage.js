@@ -80,7 +80,7 @@ class ViewAllOrdersPage extends Component {
         //if (this.props.orders.length === 0) return <h2>No orders to show</h2>
         const deliveredOrders =  this.state.orders ? this.state.orders.filter((order) => {
             return (order.status === "Delivered") || (order.status === "Invoiced")
-        }) : ""
+        }) : "" 
         return (
             <Page
                 title="All Orders"
