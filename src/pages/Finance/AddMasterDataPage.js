@@ -15,7 +15,8 @@ import {
 import './Finance.scss'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { addMasterData } from '../../store/company/action'
+import { addMasterData, getMasterData } from '../../store/company/action'
+import PageSpinner from '../../components/PageSpinner'
 import Error from '../../components/error'
 import Loader from '../../components/loader'
 import routes from '../../config/routes'
@@ -42,6 +43,10 @@ class AddMasterDataPage extends Component {
                 { materialName: "", materialQuantity: 1, materialUnitOfMeasurement: "" },
             ])
         })
+    }
+
+    componentDidMount() {
+        this.props.getMasterData()
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -107,6 +112,7 @@ class AddMasterDataPage extends Component {
     }
 
     render() {
+        if (this.props.loading) return <PageSpinner />
         if (this.props.success) {
             return <Redirect to={routes.ViewAllMasterData} />
         }
@@ -216,7 +222,11 @@ class AddMasterDataPage extends Component {
                                                 <FormGroup>
                                                     <Label md={12} for="item_name">Item Name</Label>
                                                     <Col md={12}>
-                                                        <Input type="text" id="item_name" name="item_name" onChange={this.ItemNameChange(i)} />
+                                                        <Input type="select" id="item_name" name="item_name" onChange={this.ItemNameChange(i)}>
+                                                            {this.props.masterData.map((item, index) => (
+                                                                <option key={index}>{item.productName}</option>
+                                                            ))}
+                                                        </Input>
                                                     </Col>
                                                 </FormGroup>
                                             </Col>
@@ -269,9 +279,10 @@ class AddMasterDataPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    success: state.companyReducer.success,
     loading: state.companyReducer.loading,
+    masterData: state.companyReducer.masterData,
+    success: state.companyReducer.success,
     errors: state.companyReducer.errors
 })
 
-export default connect(mapStateToProps, { addMasterData })(AddMasterDataPage)
+export default connect(mapStateToProps, { addMasterData, getMasterData })(AddMasterDataPage)
