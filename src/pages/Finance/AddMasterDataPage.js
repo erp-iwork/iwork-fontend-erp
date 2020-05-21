@@ -216,6 +216,7 @@ class AddMasterDataPage extends Component {
                                 </FormGroup>
                                 <hr></hr>
                                 <FormGroup>
+                                    <h2 style={{ display: can_be_manufactured ? "flex" : "none" }}>BOM</h2>
                                     {items.map((v, i) => (
                                         <Row style={{ display: can_be_manufactured ? "flex" : "none" }} key={i}>
                                             <Col md={4}>
