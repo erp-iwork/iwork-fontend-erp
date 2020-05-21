@@ -150,7 +150,7 @@ class ViewAllCustomersPage extends Component {
 
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={() => this.toggle()}>
+                        <Button color='primary' onClick={() => this.toggle()}>
                             Close
                       </Button>
                     </ModalFooter>
