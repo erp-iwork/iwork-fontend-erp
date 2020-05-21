@@ -5,10 +5,10 @@ import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import actions from '../../store/sales/action'
+import { getOrders, updateStatus } from '../../store/order/action'
 import routes from '../../config/routes'
 
-const Order = ({ order, index }) => {
+const Order = ({ order, index, deliver }) => {
     return (
         <tbody>
             <tr>
@@ -17,9 +17,12 @@ const Order = ({ order, index }) => {
                 <td>{order.salesPerson}</td>
                 <td>{order.shipmentAddress}</td>
                 <td>{order.status}</td>
-                <td align='center'>
-                    <Button size='sm' color='primary'>
-                        <MdAssignment /> Deliever
+                <td align='left'>
+                    <Button size='sm' color='primary'
+                        onClick={() => deliver(order.orderNumber)}
+                        disabled={order.status === "Delivered"? true : false}
+                    >
+                        <MdAssignment /> {order.status === "Delivered"? "Delivered" : "Deliever"}
                     </Button>
                 </td>
                 <td>
@@ -38,22 +41,28 @@ class ViewAllOrdersPage extends Component {
     constructor(props) {
         super(props);
         this.state = {}
+        this.deliver = this.deliver.bind(this)
     }
 
     componentDidMount() {
-        this.props.getAllOrder()
+        this.props.getOrders()
+    }
+
+    deliver(order) {
+        this.props.updateStatus(order, { status: "Delivered" })
     }
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        if (this.props.orders.length === 0) return <h2>No orders to show</h2>
+        const createdOrders = this.props.orders.filter((order) => { return order.status === "Created" || order.status === "Delivered" })
+        //if (this.props.orders.length === 0) return <h2>No orders to show</h2>
         return (
             <Page
                 title="All Orders"
                 breadcrumbs={[{ name: 'All Orders', active: true }]}
                 className="TablePage">
                 <Card className="mb-3">
-                    <CardHeader>All Orders</CardHeader>
+                    <CardHeader>All Created & Delivered Orders</CardHeader>
                     <CardBody>
                         <Table responsive >
                             <thead>
@@ -67,8 +76,8 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {this.props.orders.map((item, index) => (
-                                <Order order={item} key={index} index={index} />
+                            {createdOrders.map((item, index) => (
+                                <Order order={item} key={index} index={index} deliver={this.deliver} />
                             ))}
                         </Table>
                     </CardBody>
@@ -81,19 +90,11 @@ class ViewAllOrdersPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading: state.salesReducer.loading,
-        errors: state.salesReducer.errors,
-        items: state.salesReducer.items,
-        companys: state.salesReducer.companys,
-        success: state.salesReducer.success,
-        orders: state.salesReducer.orders
+        loading: state.ordersReducer.loading,
+        orders: state.ordersReducer.orders,
+        status: state.ordersReducer.status,
+        success: state.ordersReducer.success,
     }
 }
-const mapDispatchToProps = {
-    createOrder: actions.createOrder,
-    getAllItem: actions.getAllItem,
-    getAllCompany: actions.getAllCompany,
-    getAllOrder: actions.getAllOrder
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewAllOrdersPage)
+export default connect(mapStateToProps, { getOrders, updateStatus })(ViewAllOrdersPage)

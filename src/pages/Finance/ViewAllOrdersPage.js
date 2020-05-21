@@ -5,13 +5,14 @@ import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import actions from '../../store/sales/action'
+import { getOrders } from '../../store/order/action'
+import { getInvoice } from '../../store/Invoice/action'
 import routes from '../../config/routes'
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import Invoice from './INVOICE'
 
-
-const Order = ({ order, index }) => {
+const Order = ({ order, index, data, handlePrint }) => {
+    console.log(data)
     return (
         <tbody>
             <tr>
@@ -20,19 +21,17 @@ const Order = ({ order, index }) => {
                 <td>{order.salesPerson}</td>
                 <td>{order.shipmentAddress}</td>
                 <td>{order.status}</td>
-                <td >
-
-                    <PDFDownloadLink
-                        document={<Invoice />}
-                        fileName="Invoice.pdf"
-
-                    >
-                        {({ loading }) =>
-                            loading ? <Button size='sm' color='primary'> Loading</Button>
-                                : <Button size='sm' color='primary'> <MdAssignment color='light' /> Generate Invoice</Button>
-
-                        }
-                    </PDFDownloadLink>
+                <td>
+                    {data.success && (data.currentOrder === order.orderNumber) && data.invoices ?
+                        <PDFDownloadLink
+                          document={<Invoice data={data.invoices} invoice_item={data.invoice_item} />}
+                          fileName={`order_${order.orderNumber}.pdf`}>
+                          <Button>Download</Button>
+                        </PDFDownloadLink> :
+                          <Button onClick={() => handlePrint(order.orderNumber)}>
+                              Generate PDF
+                          </Button>
+                    }
                 </td>
                 <td>
                     <Link to={{ pathname: routes.ViewSingleOrderPage, state: order }}>
@@ -49,15 +48,39 @@ const Order = ({ order, index }) => {
 class ViewAllOrdersPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            order: '',
+            orders: [],
+            show: false,
+            lockPage: false
+        }
+        this.handlePrint = this.handlePrint.bind(this)
     }
+
     componentDidMount() {
-        this.props.getAllOrder()
+        this.props.getOrders()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading && !this.state.lockPage) {
+            this.setState({
+                orders: this.props.orders,
+                lockPage: true
+            })
+        }
+    }
+
+    handlePrint(order) {
+        this.props.getInvoice(order)
+        this.setState({ show: true, order })
     }
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        if (this.props.orders.length === 0) return <h2>No order to show</h2>
+        //if (this.props.orders.length === 0) return <h2>No orders to show</h2>
+        const deliveredOrders =  this.state.orders ? this.state.orders.filter((order) => {
+            return (order.status === "Delivered") || (order.status === "Invoiced")
+        }) : ""
         return (
             <Page
                 title="All Orders"
@@ -74,38 +97,34 @@ class ViewAllOrdersPage extends Component {
                                     <th>Sales Person</th>
                                     <th>Shipment Address</th>
                                     <th>Status</th>
-                                    <th style={{ margin: "auto" }}>Generate Invoice</th>
+                                    <th>Generate Invoice</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {this.props.orders.map((item, index) => (
-                                <Order order={item} key={index} index={index} />
+                            {deliveredOrders.map((item, index) => (
+                                <Order order={item} key={index} index={index} data={{
+                                    currentOrder: this.state.order,
+                                    success: this.props.success,
+                                    invoices: this.props.invoices,
+                                    invoice_item: this.props.invoice_item
+                                }} handlePrint={this.handlePrint} />
                             ))}
-
                         </Table>
                     </CardBody>
                 </Card>
             </Page>
-        );
+        )
     }
 }
 
 
-const mapStateToProps = (state) => {
-    return {
-        loading: state.salesReducer.loading,
-        errors: state.salesReducer.errors,
-        items: state.salesReducer.items,
-        companys: state.salesReducer.companys,
-        success: state.salesReducer.success,
-        orders: state.salesReducer.orders
-    }
-}
-const mapDispatchToProps = {
-    createOrder: actions.createOrder,
-    getAllItem: actions.getAllItem,
-    getAllCompany: actions.getAllCompany,
-    getAllOrder: actions.getAllOrder
-}
+const mapStateToProps = (state) => ({
+    loading: state.ordersReducer.loading,
+    orders: state.ordersReducer.orders,
+    status: state.ordersReducer.status,
+    invoices: state.invoiceReducer.invoices,
+    invoice_item: state.invoiceReducer.invoice_item,
+    success: state.invoiceReducer.success,
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewAllOrdersPage)
+export default connect(mapStateToProps, { getOrders, getInvoice })(ViewAllOrdersPage)

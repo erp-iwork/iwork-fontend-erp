@@ -3,6 +3,8 @@ import {
   GET_STATUS,
   UPDATE_STATUS,
   GET_SINGLE_ORDER,
+  REQUEST_ORDERS,
+  REQUEST_SINGLE_ORDER,
   errorsConstant,
 } from "../../constant/constants";
 import axios from "axios";
@@ -13,10 +15,13 @@ import headers from './../headers'
 
 // GET ORDER
 export const getOrders = () => (dispatch) => {
+  dispatch({
+    type: REQUEST_ORDERS,
+    payload: true
+  })
   axios
     .get(API + "orderstatus/", headers)
     .then((res) => {
-
       dispatch({
         type: GET_ORDER,
         payload: res.data,
@@ -42,11 +47,14 @@ export const getOrders = () => (dispatch) => {
 
 // GET ORDER
 export const getSingleOrder = (orderNumber) => (dispatch) => {
+  console.log("This should come first")
+  dispatch({
+    type: REQUEST_SINGLE_ORDER,
+    payload: true
+  })
   axios
     .get(API + `order/${orderNumber}/`, headers)
     .then((res) => {
-
-
       dispatch({
         type: GET_SINGLE_ORDER,
         payload: res.data,
@@ -107,8 +115,12 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
         type: UPDATE_STATUS,
         payload: { order: orderNumber, status: res.data.status },
       });
-
-
+      Swal.fire({
+        title: "Delivered",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1000
+      });
     })
     .catch((err) => {
 
