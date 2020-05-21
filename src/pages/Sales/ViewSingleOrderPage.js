@@ -14,16 +14,14 @@ class ViewSingleOrderPage extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         if (this.props.location.state) {
-            console.log("YES it goes in here")
-            this.props.getSingleOrder(this.state.details.orderNumber)
+            await this.props.getSingleOrder(this.state.details.orderNumber)
         }
     }
 
     render() {
-        this.componentDidMount()
-        if (this.props.loading_single_order) return <PageSpinner />
+        if (!this.props.order.orderNumber) return <PageSpinner />
         const { details } = this.state
         const { order } = this.props
         return (
@@ -77,7 +75,7 @@ class ViewSingleOrderPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.items.map((item, index) => (
+                                        {order.item_order.map((item, index) => (
                                             <tr key={index}>
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{item.itemName}</td>
@@ -97,8 +95,6 @@ class ViewSingleOrderPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading_single_order: state.ordersReducer.loading_single_order,
-        loading: state.ordersReducer.loading,
         order: state.ordersReducer.order,
         items: state.ordersReducer.items,
     }

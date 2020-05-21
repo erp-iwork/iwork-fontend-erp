@@ -47,7 +47,6 @@ export const getOrders = () => (dispatch) => {
 
 // GET ORDER
 export const getSingleOrder = (orderNumber) => (dispatch) => {
-  console.log("This should come first")
   dispatch({
     type: REQUEST_SINGLE_ORDER,
     payload: true
