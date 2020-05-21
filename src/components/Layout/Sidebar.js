@@ -82,46 +82,27 @@ const pageContents = [
 ];
 
 const HR = [
-
   { to: routes.allEmployees, name: 'All Employees', exact: false, Icon: MdWidgets },
   { to: routes.addEmployee, name: 'Add Employee', exact: false, Icon: MdWidgets },
-
 ]
 
 const IT = [
-
   { to: routes.itEmployeePage, name: 'All Employees', exact: false, Icon: MdWidgets },
-
-
 ]
 
 const SALES = [
-
-
   { to: routes.createOrderPage, name: 'Create Order', exact: false, Icon: MdWidgets },
   { to: routes.ViewAllOrdersPage, name: 'View All Orders', exact: false, Icon: MdWidgets },
-
-
-
-
 ]
 
 const FINANCE = [
   { to: routes.viewSuppliers, name: 'View All Suppliers', exact: false, Icon: MdWidgets },
   { to: routes.AddSupplier, name: 'Add Supplier ', exact: false, Icon: MdWidgets },
-
-
   { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },
   { to: routes.AddCustomer, name: 'Add Customer', exact: false, Icon: MdWidgets },
   { to: routes.AddMasterDataPage, name: 'Add Master Data', exact: false, Icon: MdWidgets },
   { to: routes.ViewAllMasterData, name: 'All Master Data', exact: false, Icon: MdWidgets },
   { to: routes.ViewOrdersFinance, name: 'All Orders', exact: false, Icon: MdWidgets },
-
-
-
-
-
-
 ]
 
 const INVENTORY = [
@@ -129,20 +110,15 @@ const INVENTORY = [
   { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
   { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
   { to: routes.ViewSingleItemPage, name: 'Single Item', exact: false, Icon: MdWidgets },
-
-
-
-
 ]
 
 
 const LOGISTICS = [
   { to: routes.ViewOrdersLogistics, name: 'View Orders', exact: false, Icon: MdWidgets },
+]
 
-
-
-
-
+const PROCURMENT = [
+  { to: routes.CreatePurchaseOrder, name: 'Create Purchase Order', exact: false, Icon: MdWidgets },
 ]
 
 const navItems = [
@@ -431,9 +407,9 @@ class Sidebar extends React.Component {
 
             {/* END INVENTORY */}
 
-                        {/* START LOGISTICS */}
+            {/* START LOGISTICS */}
 
-                        <NavItem
+            <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Components')}
             >
@@ -475,6 +451,52 @@ class Sidebar extends React.Component {
             </Collapse>
 
             {/* END LOGISTICS */}
+
+
+            {/* START PROCURMENT */}
+
+            <NavItem
+              className={bem.e('nav-item')}
+              onClick={this.handleClick('Components')}
+            >
+              <BSNavLink className={bem.e('nav-item-collapse')}>
+                <div className="d-flex">
+                  <MdExtension className={bem.e('nav-item-icon')} />
+                  <span className=" align-self-start">Procurment</span>
+                </div>
+                <MdKeyboardArrowDown
+                  className={bem.e('nav-item-icon')}
+                  style={{
+                    padding: 0,
+                    transform: this.state.isOpenComponents
+                      ? 'rotate(0deg)'
+                      : 'rotate(-90deg)',
+                    transitionDuration: '0.3s',
+                    transitionProperty: 'transform',
+                  }}
+                />
+              </BSNavLink>
+            </NavItem>
+
+            <Collapse isOpen={this.state.isOpenComponents}>
+              {PROCURMENT.map(({ to, name, exact, Icon }, index) => (
+                <NavItem key={index} className={bem.e('nav-item')}>
+                  <BSNavLink
+                    id={`navItem-${name}-${index}`}
+                    className="text-uppercase"
+                    tag={NavLink}
+                    to={to}
+                    activeClassName="active"
+                    exact={exact}
+                  >
+                    <Icon className={bem.e('nav-item-icon')} />
+                    <span className="">{name}</span>
+                  </BSNavLink>
+                </NavItem>
+              ))}
+            </Collapse>
+
+            {/* END PROCURMENT */}
 
 
 

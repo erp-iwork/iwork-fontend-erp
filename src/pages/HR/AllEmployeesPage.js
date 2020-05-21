@@ -46,7 +46,11 @@ class AllEmployees extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        if (this.props.employees.length === 0) return <h2>No employees yet.</h2>
+        if (this.props.employees.length === 0) 
+        return <Page  title="All Employees"
+        breadcrumbs={[{ name: 'All Employees', active: true }]}
+        className="TablePage">
+            <h1>No Employees Yet.</h1></Page>
         return (
             <Page
                 title="All Employees"

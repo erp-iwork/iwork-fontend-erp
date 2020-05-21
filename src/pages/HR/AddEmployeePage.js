@@ -91,7 +91,7 @@ class AddEmployee extends Component {
         var rolValue = this.state.rolValue;
         const { country, region } = this.state
         if (!this.props.department[0]) return <PageSpinner />
-        //else if (this.props.department.length === 0) return <h2>No departments. Please add departments. </h2>
+        else if (this.props.department.length === 0) return <h2>No departments. Please add departments. </h2>
         if (this.state.redirect) return <Redirect to={routes.allEmployees} />
         return (
             <>
