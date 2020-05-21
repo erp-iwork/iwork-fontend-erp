@@ -139,9 +139,7 @@ class CreateOrdersPage extends Component {
                                                 error={
                                                     this.props.errors.company
                                                         ? this.props.errors.company
-                                                        : null
-                                                }
-                                            />
+                                                        : null} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup>
@@ -153,15 +151,12 @@ class CreateOrdersPage extends Component {
                                                 name="shipmentAddress"
                                                 placeholder=" Shipment Address"
                                                 onChange={this.handleChange}
-                                                value={shipmentAddress}
-                                            />
+                                                value={shipmentAddress} />
                                             <Error
                                                 error={
                                                     this.props.errors.shipmentAddress
                                                         ? this.props.errors.shipmentAddress
-                                                        : null
-                                                }
-                                            />
+                                                        : null} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup >
@@ -172,15 +167,12 @@ class CreateOrdersPage extends Component {
                                             <Input placeholder=" Description About the Order" type="textarea"
                                                 name="description"
                                                 onChange={this.handleChange}
-                                                value={description}
-                                            />
+                                                value={description} />
                                             <Error
                                                 error={
                                                     this.props.errors.description
                                                         ? this.props.errors.description
-                                                        : null
-                                                }
-                                            />
+                                                        : null} />
                                         </Col>
                                     </FormGroup>
                                     <CardHeader>Item Information</CardHeader>
