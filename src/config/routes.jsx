@@ -21,7 +21,7 @@ export default {
   CategoriesInventoryPage: "/CategoriesInventory",
   ViewSingleItemPage: "/ViewSingleItem",
   AddMasterDataPage: "/AddMasterDataPage",
-  ViewAllMasterData: '/ViewAllMasterData',
-  SivPage: '/SivPage',
-
+  ViewAllMasterData: "/ViewAllMasterData",
+  SivPage: "/SivPage",
+  CreatePurchaseOrder: "/CreatePurchaseOrder",
 };

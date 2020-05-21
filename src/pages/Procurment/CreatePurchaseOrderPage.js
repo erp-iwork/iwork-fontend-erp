@@ -14,8 +14,7 @@ import {
     Table,
     Label,
 } from 'reactstrap';
-import "./Sales.scss";
-import ViewAllOrdersPage from "./ViewAllOrdersPage";
+import "./Procurment.scss";
 import { connect } from 'react-redux'
 import Error from '../../components/error'
 import actions from '../../store/sales/action'
@@ -276,7 +275,6 @@ class CreateOrdersPage extends Component {
                         </Card>
                     </Col>
                 </Row>
-                <ViewAllOrdersPage lists={this.props.orders} />
             </Page>
         )
     }
