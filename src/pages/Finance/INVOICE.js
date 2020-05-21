@@ -97,15 +97,12 @@ const styles = StyleSheet.create({
 });
 
 function PdfDocument(props) {
-
-
     return (
         <Document>
             <Page style={styles.pdf}>
                 <View style={{
                     height: 40
                 }} />
-
                 <>
                     <View container style={styles.header}>
                         <View item xs={6}>

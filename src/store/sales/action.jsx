@@ -161,7 +161,7 @@ function getAllItem() {
 function getAllOrder() {
   return (dispatch) => {
     dispatch({
-      type: salesConstants.ITEM_GETALL_REQUEST,
+      type: salesConstants.ORDER_REQUEST,
       payload: true,
     });
     axios
