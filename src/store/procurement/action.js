@@ -11,7 +11,7 @@ const { GET, POST, PUT } = purchaseConstants
 
 export const getOrders = () => (dispatch) => {
     dispatch({ type: GET.REQUEST_GET_ORDER })
-    return Axios.get(API + routes.purchaseStatus, headers)
+    return Axios.get(API + routes.purchase, headers)
         .then(res => {
             dispatch({
                 type: GET.SUCCESS_GET_ORDER,
