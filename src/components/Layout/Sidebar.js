@@ -99,15 +99,12 @@ const SALES = [
 const FINANCE = [
   { to: routes.viewSuppliers, name: 'View All Suppliers', exact: false, Icon: MdWidgets },
   { to: routes.AddSupplier, name: 'Add Supplier ', exact: false, Icon: MdWidgets },
-
   { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },
   { to: routes.AddCustomer, name: 'Add Customer', exact: false, Icon: MdWidgets },
   { to: routes.AddMasterDataPage, name: 'Add Master Data', exact: false, Icon: MdWidgets },
   { to: routes.ViewAllMasterData, name: 'All Master Data', exact: false, Icon: MdWidgets },
   { to: routes.ViewOrdersFinance, name: 'All Orders', exact: false, Icon: MdWidgets },
   { to: routes.SupplierInvoice, name: 'Supplier Invoice', exact: false, Icon: MdWidgets },
-
-
 ]
 
 const INVENTORY = [
@@ -115,6 +112,7 @@ const INVENTORY = [
   { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
   { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
   { to: routes.ViewSingleItemPage, name: 'Single Item', exact: false, Icon: MdWidgets },
+  { to: routes.ViewPurchasedItems, name: 'Purchased Items', exact: false, Icon: MdWidgets },
 ]
 
 
@@ -140,9 +138,20 @@ const bem = bn.create('sidebar');
 
 class Sidebar extends React.Component {
   state = {
-    isOpenComponents: true,
-    isOpenContents: true,
-    isOpenPages: true,
+    // isOpenComponents: true,
+    // isOpenContents: true,
+    // isOpenPages: true,
+    isOpenHR: false,
+    isOpenIT: false,
+    isOpenSALES: false,
+    isOpenFINANCE: false,
+    isOpenINVENTORY: false,
+    isOpenLOGISTICS: false,
+    isOpenPROCURMENT: false
+
+
+
+
   };
 
   handleClick = name => () => {
@@ -196,7 +205,7 @@ class Sidebar extends React.Component {
 
             <NavItem
               className={bem.e('nav-item')}
-              onClick={this.handleClick('Components')}
+              onClick={this.handleClick('HR')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
@@ -207,7 +216,7 @@ class Sidebar extends React.Component {
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
-                    transform: this.state.isOpenComponents
+                    transform: this.state.isOpenHR
                       ? 'rotate(0deg)'
                       : 'rotate(-90deg)',
                     transitionDuration: '0.3s',
@@ -217,7 +226,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
 
-            <Collapse isOpen={this.state.isOpenComponents}>
+            <Collapse isOpen={this.state.isOpenHR}>
               {HR.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
@@ -241,7 +250,7 @@ class Sidebar extends React.Component {
 
             <NavItem
               className={bem.e('nav-item')}
-              onClick={this.handleClick('Components')}
+              onClick={this.handleClick('IT')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
@@ -252,7 +261,7 @@ class Sidebar extends React.Component {
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
-                    transform: this.state.isOpenComponents
+                    transform: this.state.isOpenIT
                       ? 'rotate(0deg)'
                       : 'rotate(-90deg)',
                     transitionDuration: '0.3s',
@@ -262,7 +271,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
 
-            <Collapse isOpen={this.state.isOpenComponents}>
+            <Collapse isOpen={this.state.isOpenIT}>
               {IT.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
@@ -286,7 +295,7 @@ class Sidebar extends React.Component {
 
             <NavItem
               className={bem.e('nav-item')}
-              onClick={this.handleClick('Components')}
+              onClick={this.handleClick('SALES')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
@@ -297,7 +306,7 @@ class Sidebar extends React.Component {
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
-                    transform: this.state.isOpenComponents
+                    transform: this.state.isOpenSALES
                       ? 'rotate(0deg)'
                       : 'rotate(-90deg)',
                     transitionDuration: '0.3s',
@@ -307,7 +316,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
 
-            <Collapse isOpen={this.state.isOpenComponents}>
+            <Collapse isOpen={this.state.isOpenSALES}>
               {SALES.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
@@ -331,7 +340,7 @@ class Sidebar extends React.Component {
 
             <NavItem
               className={bem.e('nav-item')}
-              onClick={this.handleClick('Components')}
+              onClick={this.handleClick('FINANCE')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
@@ -342,7 +351,7 @@ class Sidebar extends React.Component {
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
-                    transform: this.state.isOpenComponents
+                    transform: this.state.isOpenFINANCE
                       ? 'rotate(0deg)'
                       : 'rotate(-90deg)',
                     transitionDuration: '0.3s',
@@ -352,7 +361,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
 
-            <Collapse isOpen={this.state.isOpenComponents}>
+            <Collapse isOpen={this.state.isOpenFINANCE}>
               {FINANCE.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
@@ -376,7 +385,7 @@ class Sidebar extends React.Component {
 
             <NavItem
               className={bem.e('nav-item')}
-              onClick={this.handleClick('Components')}
+              onClick={this.handleClick('INVENTORY')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
@@ -387,7 +396,7 @@ class Sidebar extends React.Component {
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
-                    transform: this.state.isOpenComponents
+                    transform: this.state.isOpenINVENTORY
                       ? 'rotate(0deg)'
                       : 'rotate(-90deg)',
                     transitionDuration: '0.3s',
@@ -397,7 +406,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
 
-            <Collapse isOpen={this.state.isOpenComponents}>
+            <Collapse isOpen={this.state.isOpenINVENTORY}>
               {INVENTORY.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
@@ -421,7 +430,7 @@ class Sidebar extends React.Component {
 
             <NavItem
               className={bem.e('nav-item')}
-              onClick={this.handleClick('Components')}
+              onClick={this.handleClick('LOGISTICS')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
@@ -432,7 +441,7 @@ class Sidebar extends React.Component {
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
-                    transform: this.state.isOpenComponents
+                    transform: this.state.isOpenLOGISTICS
                       ? 'rotate(0deg)'
                       : 'rotate(-90deg)',
                     transitionDuration: '0.3s',
@@ -442,7 +451,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
 
-            <Collapse isOpen={this.state.isOpenComponents}>
+            <Collapse isOpen={this.state.isOpenLOGISTICS}>
               {LOGISTICS.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
@@ -467,7 +476,7 @@ class Sidebar extends React.Component {
 
             <NavItem
               className={bem.e('nav-item')}
-              onClick={this.handleClick('Components')}
+              onClick={this.handleClick('PROCURMENT')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
                 <div className="d-flex">
@@ -478,7 +487,7 @@ class Sidebar extends React.Component {
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
-                    transform: this.state.isOpenComponents
+                    transform: this.state.isOpenPROCURMENT
                       ? 'rotate(0deg)'
                       : 'rotate(-90deg)',
                     transitionDuration: '0.3s',
@@ -488,7 +497,7 @@ class Sidebar extends React.Component {
               </BSNavLink>
             </NavItem>
 
-            <Collapse isOpen={this.state.isOpenComponents}>
+            <Collapse isOpen={this.state.isOpenPROCURMENT}>
               {PROCURMENT.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item')}>
                   <BSNavLink
@@ -552,7 +561,7 @@ class Sidebar extends React.Component {
               ))}
             </Collapse> */}
 
-            <NavItem
+            {/* <NavItem
               className={bem.e('nav-item')}
               onClick={this.handleClick('Contents')}
             >
@@ -590,7 +599,7 @@ class Sidebar extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
-            </Collapse>
+            </Collapse> */}
 
             {/* <NavItem
               className={bem.e('nav-item')}
