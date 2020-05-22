@@ -53,6 +53,7 @@ class CategoryPage extends Component {
                                 <Row >
                                     <Col className='icons' md={3} xs={12} sm={12}>
                                         <FontAwesomeIcon icon={faScrewdriver} color="#7D7D7D" size="5x" transform={{ rotate: -2 }} />
+
                                     </Col>
                                     <Col size='lg'>
                                         <h4>Services</h4>

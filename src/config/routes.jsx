@@ -13,6 +13,7 @@ export default {
   ViewAllItems: "/ViewAllItems",
   viewCustomers: "/viewCustomers",
   viewSuppliers: "/viewSuppliers",
+
   AddCustomer: "/AddCustomer",
   AddSupplier: "/AddSupplier",
   ViewOrdersFinance: "/ViewOrdersFinance",
@@ -25,3 +26,4 @@ export default {
   SivPage: "/SivPage",
   CreatePurchaseOrder: "/CreatePurchaseOrder",
 };
+

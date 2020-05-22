@@ -5,6 +5,7 @@ import {
     ModalBody, CardHeader, Col, Table, Button, Row
 } from 'reactstrap';
 import { MdDelete, MdRemoveRedEye } from "react-icons/md";
+
 import { connect } from 'react-redux'
 import { deleteSupplier, getSupplier } from '../../store/company/action'
 import PageSpinner from '../../components/PageSpinner'
@@ -13,6 +14,7 @@ import './Finance.scss'
 
 
 const Customer = ({ company, index, deleteCompany, toggle }) => {
+
     return (
         <tr align='left'>
             <th scope="row">{index + 1}</th>
@@ -31,6 +33,7 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
                     <Button onClick={() => toggle(company)} color='primary' size='sm' >
                         <MdRemoveRedEye />
                     </Button>
+
                 </Col>
             </td>
         </tr>
@@ -121,6 +124,7 @@ class ViewAllSuppliers extends Component {
                       </Button>
                     </ModalFooter>
                 </Modal>
+
                 <Col>
                     <Card className="mb-3">
                         <CardHeader>All Customers</CardHeader>
@@ -144,6 +148,7 @@ class ViewAllSuppliers extends Component {
                                         <Customer key={index} company={item} index={index} deleteCompany={this.deleteSupplier} toggle={this.toggle} />
                                     )) : this.props.suppliers.slice(0).reverse().map((item, index) => (
                                         <Customer key={index} company={item} index={index} deleteCompany={this.deleteSupplier} toggle={this.toggle} />
+
                                     ))}
                                 </tbody>
                             </Table>
@@ -157,6 +162,7 @@ class ViewAllSuppliers extends Component {
 
 const mapStateToProps = (state) => ({
     loading: state.companyReducer.loading,
+
     suppliers: state.companyReducer.suppliers,
     errors: state.companyReducer.errors,
 })

@@ -93,11 +93,13 @@ const IT = [
 const SALES = [
   { to: routes.createOrderPage, name: 'Create Order', exact: false, Icon: MdWidgets },
   { to: routes.ViewAllOrdersPage, name: 'View All Orders', exact: false, Icon: MdWidgets },
+
 ]
 
 const FINANCE = [
   { to: routes.viewSuppliers, name: 'View All Suppliers', exact: false, Icon: MdWidgets },
   { to: routes.AddSupplier, name: 'Add Supplier ', exact: false, Icon: MdWidgets },
+
   { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },
   { to: routes.AddCustomer, name: 'Add Customer', exact: false, Icon: MdWidgets },
   { to: routes.AddMasterDataPage, name: 'Add Master Data', exact: false, Icon: MdWidgets },
@@ -117,8 +119,10 @@ const LOGISTICS = [
   { to: routes.ViewOrdersLogistics, name: 'View Orders', exact: false, Icon: MdWidgets },
 ]
 
+
 const PROCURMENT = [
   { to: routes.CreatePurchaseOrder, name: 'Create Purchase Order', exact: false, Icon: MdWidgets },
+
 ]
 
 const navItems = [

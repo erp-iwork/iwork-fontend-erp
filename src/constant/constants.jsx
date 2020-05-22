@@ -52,6 +52,7 @@ export const companyConstant = {
   REQUEST_GET_MASTERDATA: "REGUEST_MASTERDATA",
   ADD_MASTERDATA: "ADD_MASTERDATA",
   GET_MASTERDATA: "GET_MASTERDATA"
+
 };
 
 export const errorsConstant = {

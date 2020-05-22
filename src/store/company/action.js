@@ -68,6 +68,7 @@ export const getSupplier = () => (dispatch) => {
     type: companyConstant.REQUEST_GET_SUPPLIER,
     payload: true
   })
+
   axios.get(API + routes.supplier, headers)
     .then(res => {
       dispatch({

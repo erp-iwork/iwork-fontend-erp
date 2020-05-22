@@ -4,6 +4,7 @@ const initialState = {
   suppliers: [],
   loading: false,
   masterData: [],
+
   success: false,
   errors: []
 };
@@ -49,6 +50,7 @@ export default function companyReducer(state = initialState, action) {
         ...state,
         suppliers: action.payload,
         loading: false
+
       }
 
     case companyConstant.ADD_SUPPLIER:

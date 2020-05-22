@@ -98,6 +98,7 @@ class App extends React.Component {
                 <Route exact path={routes.ViewSingleItemPage} component={ViewSingleItemPage} />
                 <Route exact path={routes.SivPage} component={SivPage} />
 
+
                 {/* FINANCE ROUTES/ */}
                 <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
                 <Route exact path={routes.viewCustomers} component={viewAllCutomersPage} />
