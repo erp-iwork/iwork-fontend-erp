@@ -1,13 +1,16 @@
 import { purchaseConstants, errorsConstant } from '../../constant/constants'
 const initialState = {
-    errors: [],
+    errors: { purchaseOrder: {
+        suplier: [], orderdBy: [], purchase_item_order: [] 
+    }},
     orders: [],
     suppliers: [],
     masterdata: [],
     loading_purchase: false,
     loading_orders: false,
     loading_suppliers: false,
-    loading_masterdata: false
+    loading_masterdata: false,
+    success: false
 }
 
 const procurementReducer = (state = initialState, action) => {
@@ -23,10 +26,8 @@ const procurementReducer = (state = initialState, action) => {
         
         case GET.REQUEST_GET_ORDER:
             return { ...state, loading_orders: true }
-
         case GET.REQUEST_GET_SUPPLIERS:
             return { ...state, loading_suppliers: true }
-
         case GET.REQUEST_GET_MASTERDATA:
             return { ...state, loading_suppliers: true }
         
@@ -52,8 +53,10 @@ const procurementReducer = (state = initialState, action) => {
             }
         case POST.SUCCESS_POST_PURCHASE:
             return {
-                ...state, loading_purchase: false,
-                orders: action.payload
+                ...state,
+                loading_purchase: false,
+                success: true,
+                orders: [ ...state.orders, action.payload.purchaseOrder]
             }
         
         default:

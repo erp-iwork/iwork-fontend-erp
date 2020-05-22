@@ -1,7 +1,7 @@
 const routes = {
     supplier: 'suplier/',
     masterData: 'masterdata/',
-    purchase: 'purchase/'
+    purchase: 'purchaseorder/'
 }
 
 export default routes 

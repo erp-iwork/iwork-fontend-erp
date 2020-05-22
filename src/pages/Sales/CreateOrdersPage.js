@@ -138,8 +138,8 @@ class CreateOrdersPage extends Component {
                                             </Input>
                                             <Error
                                                 error={
-                                                    this.props.errors.company
-                                                        ? this.props.errors.company
+                                                    this.props.errors.customer
+                                                        ? this.props.errors.customer
                                                         : null
                                                 }
                                             />

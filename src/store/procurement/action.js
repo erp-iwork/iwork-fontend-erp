@@ -67,6 +67,7 @@ export const getMasterdata = () => (dispatch) => {
     dispatch({ type: GET.REQUEST_GET_MASTERDATA })
     return Axios.get(API + routes.masterData)
         .then(res => {
+          console.log(res.data)
             dispatch({
                 type: GET.SUCCESS_GET_MASTERDATA,
                 payload: res.data
@@ -90,13 +91,19 @@ export const getMasterdata = () => (dispatch) => {
         })
 }
 
-export const addPurchaseOrder = (order) => {
+export const addPurchaseOrder = (order) => (dispatch) => {
     dispatch({ type: POST.REQUEST_POST_PURCHASE })
-    return Axios.post(API + routes.purchase)
+    return Axios.post(API + routes.purchase, order, headers)
         .then(res => {
             dispatch({
                 type: POST.SUCCESS_POST_PURCHASE,
                 payload: res.data
+            })
+            Swal.fire({
+              title: "Added Order",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1000
             })
         })
         .catch(err => {
