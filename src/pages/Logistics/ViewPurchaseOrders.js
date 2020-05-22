@@ -6,7 +6,7 @@ import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getOrders, updateStatus } from '../../store/procurement/action'
-import routes from '../../config/routes'  
+import routes from '../../config/routes'
 
 const Order = ({ order, index, deliver }) => {
     return (
