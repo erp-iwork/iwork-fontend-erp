@@ -47,10 +47,12 @@ const ViewAllOrdersLogisticsPage = React.lazy(() => import('./pages/Logistics/Vi
 const ViewPurchaseOrdersLogistics = React.lazy(() => import('./pages/Logistics/ViewPurchaseOrders'));
 const CategoriesInventoryPage = React.lazy(() => import('./pages/Inventory/CategoryPage'));
 const ViewSingleItemPage = React.lazy(() => import('./pages/Inventory/ViewSingleItemPage'));
+const ViewPurchasedItemsPage = React.lazy(() => import('./pages/Inventory/ViewPurchasedItems'));
+
 const SivPage = React.lazy(() => import('./pages/Inventory/SIV'));
 const CreatePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/CreatePurchaseOrderPage'));
 const ViewAllPurchaseOrderPage = React.lazy(() => import('./pages/Procurment/ViewAllPurchaseOrder'));
-const ViewSinglePurchaseOrderPage  = React.lazy(() => import('./pages/Procurment/ViewSinglePurchaseOrder'));
+const ViewSinglePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/ViewSinglePurchaseOrder'));
 
 
 
@@ -86,17 +88,21 @@ class App extends React.Component {
                 <Route exact path="/alerts" component={AlertPage} />
                 <Route exact path="/tables" component={TablePage} />
                 <Route exact path="/badges" component={BadgePage} />
+
                 {/* HR ROUTES/ */}
                 <Route exact path={routes.allEmployees} component={AllEmployeePage} />
                 <Route exact path={routes.addEmployee} component={AddEmployeePage} />
                 <Route exact path={routes.employeeProfile} component={EmployeeProfilePage} />
+
                 {/* IT ROUTES/ */}
                 <Route exact path={routes.itEmployeePage} component={ITAllEmployeesPage} />
                 <Route exact path={routes.addAccount} component={ITAddaccount} />
+
                 {/* SALES ROUTES */}
                 <Route exact path={routes.createOrderPage} component={CreateOrdersPage} />
                 <Route exact path={routes.ViewAllOrdersPage} component={ViewAllOrdersPage} />
                 <Route exact path={routes.ViewSingleOrderPage} component={ViewSingleOrderPage} />
+
                 {/* INVENTORY ROUTES/ */}
                 <Route exact path={routes.ViewAllItems} component={viewAllItemsPage} />
                 <Route exact path={routes.ViewOrdersInventory} component={ViewAllOrdersInventoryPage} />
@@ -114,6 +120,8 @@ class App extends React.Component {
                 <Route exact path={routes.AddMasterDataPage} component={AddMasterDataPage} />
                 <Route exact path={routes.ViewAllMasterData} component={ViewAllMasterDataPage} />
                 <Route exact path={routes.SupplierInvoice} component={SupplierInvoicePage} />
+                <Route exact path={routes.ViewPurchasedItems} component={ViewPurchasedItemsPage} />
+
 
 
                 {/* LOGISTICS ROUTES */}
