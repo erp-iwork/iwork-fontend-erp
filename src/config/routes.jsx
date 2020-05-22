@@ -18,6 +18,7 @@ export default {
   AddSupplier: "/AddSupplier",
   ViewOrdersFinance: "/ViewOrdersFinance",
   ViewOrdersLogistics: "/ViewOrdersLogistics",
+  ViewPurchaseOrdersLogistics: '/ViewPurchaseOrderLogistics',
   ViewOrdersInventory: "/ViewOrdersInventory",
   CategoriesInventoryPage: "/CategoriesInventory",
   ViewSingleItemPage: "/ViewSingleItem",

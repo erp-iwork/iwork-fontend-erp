@@ -121,14 +121,13 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
       });
     })
     .catch((err) => {
-
-
       if (err.response && err.response.data) {
         dispatch({
           type: errorsConstant.GET_ERRORS,
           payload: err.response.data,
         });
       } else {
+        console.log(err)
         Swal.fire({
           title: "Error",
           text: "Connection Problem",

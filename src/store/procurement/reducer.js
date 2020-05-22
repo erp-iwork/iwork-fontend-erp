@@ -4,17 +4,20 @@ const initialState = {
         suplier: [], orderdBy: [], purchase_item_order: [] 
     }},
     orders: [],
+    order: {},
     suppliers: [],
     masterdata: [],
     loading_purchase: false,
     loading_orders: false,
     loading_suppliers: false,
     loading_masterdata: false,
-    success: false
+    loading_single_order: true,
+    success: false,
+    updating_status: false
 }
 
 const procurementReducer = (state = initialState, action) => {
-    const { GET, POST } = purchaseConstants
+    const { GET, POST, PUT } = purchaseConstants
     switch(action.type) {
         case errorsConstant.GET_ERRORS:
             return {
@@ -30,6 +33,8 @@ const procurementReducer = (state = initialState, action) => {
             return { ...state, loading_suppliers: true }
         case GET.REQUEST_GET_MASTERDATA:
             return { ...state, loading_suppliers: true }
+        case GET.REQUEST_GET_SINGLE_ORDER:
+            return { ...state, loading_single_order: true } 
         
         case GET.SUCCESS_GET_ORDER:
             return { 
@@ -46,6 +51,11 @@ const procurementReducer = (state = initialState, action) => {
                 ...state, loading_masterdata: false,
                 masterdata: action.payload
             }
+        case GET.SUCCESS_GET_SINGLE_ORDER:
+            return {
+                ...state, loading_single_order: false,
+                order: action.payload
+            }
         
         case POST.REQUEST_POST_PURCHASE:
             return {
@@ -59,6 +69,22 @@ const procurementReducer = (state = initialState, action) => {
                 orders: [ ...state.orders, action.payload.purchaseOrder]
             }
         
+        case PUT.REQUEST_POST_UPDATE_STATUS:
+            return { ...state, updating_status: true }
+        
+        case PUT.SUCCESS_POST_UPDATE_STATUS:
+            const index = state.orders.findIndex(
+                (item) => item.purchaseOrderNumber === action.payload.order
+              )
+              state.orders[index].status = action.payload.status;
+            return {
+                ...state,
+                success: true,
+                orders: state.orders,
+                order: state.order,
+                status: action.payload,
+            }
+
         default:
             return { ...state }
     }

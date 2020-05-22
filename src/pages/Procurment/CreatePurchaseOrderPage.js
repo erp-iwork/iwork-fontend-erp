@@ -119,7 +119,6 @@ class CreatePurchaseOrder extends Component {
 
     render() {
         let { order_items: items } = this.state
-        console.log(this.props.errors)
         if (this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) return <PageSpinner />
         const {
             supplier, description

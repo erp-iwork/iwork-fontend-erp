@@ -3,7 +3,7 @@ import Page from '../../components/Page';
 import { Col, Row, Card, CardHeader, Table, CardBody } from 'reactstrap';
 import './Procurment.scss';
 import { connect } from 'react-redux'
-import { getSingleOrder } from '../../store/order/action'
+import { getSingleOrder } from '../../store/procurement/action'
 import PageSpinner from '../../components/PageSpinner'
 
 class ViewSinglePurchaseOrderPage extends Component {
@@ -16,16 +16,14 @@ class ViewSinglePurchaseOrderPage extends Component {
 
     componentDidMount() {
         if (this.props.location.state) {
-            this.props.getSingleOrder(this.state.details.orderNumber)
+            this.props.getSingleOrder(this.props.location.state.purchaseOrderNumber)
         }
     }
 
     render() {
         if (this.props.loading_single_order === true || this.props.loading_single_order === undefined) return <PageSpinner />
-        const { details } = this.state
-        const { order } = this.props
         return (
-            <Page title="View Single Order" breadcrumbs={[{ name: 'Single Order', active: true }]}>
+            <Page title="View Single Purchase Order" breadcrumbs={[{ name: 'Single Order', active: true }]}>
                 <Card className='padding'>
                     <Row sm={12} md={12} >
                         <Col md={4}>
@@ -38,7 +36,7 @@ class ViewSinglePurchaseOrderPage extends Component {
                                         Order Id:
                                     </Col>
                                     <Col>
-                                        <b>{details.orderNumber}</b>
+                                        <b>{this.props.order.purchaseOrderNumber}</b>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -46,19 +44,19 @@ class ViewSinglePurchaseOrderPage extends Component {
                                         Order Date :
                                     </Col>
                                     <Col>
-                                        <b>{details.orderDate}</b>
+                                        <b>{this.props.order.purchaseOrderDate}</b>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
-                                        Shipment Address :
+                                        Status :
                                     </Col>
                                     <Col>
-                                        <b>{details.shipmentAddress}</b>
+                                        <b>{this.props.order.status}</b>
                                     </Col>
                                 </Row>
                                 <b>Description</b>
-                                <Col>{details.description}</Col>
+                                <Col>{this.props.order.description}</Col>
                             </CardBody>
                         </Col>
                         <Col md={8}>
@@ -69,17 +67,17 @@ class ViewSinglePurchaseOrderPage extends Component {
                                 <Table responsive className="scrollTableSales">
                                     <thead>
                                         <tr>
-                                            <th>Order Id</th>
+                                            <th>Order #</th>
                                             <th>Order Name</th>
-                                            <th>Quantity</th>
+                                            <th>Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {order.item_order.map((item, index) => (
+                                        {this.props.order.items.map((item, index) => (
                                             <tr key={index}>
                                                 <th scope="row">{index + 1}</th>
-                                                <td>{item.itemName}</td>
-                                                <td>{item.quantity}</td>
+                                                <td>{item['product Name']}</td>
+                                                <td>{item.productPrice}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -89,15 +87,14 @@ class ViewSinglePurchaseOrderPage extends Component {
                     </Row>
                 </Card>
             </Page>
-        );
+        )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        loading_single_order: state.ordersReducer.loading_single_order,
-        order: state.ordersReducer.order,
-        items: state.ordersReducer.items,
+        loading_single_order: state.procurementReducer.loading_single_order,
+        order: state.procurementReducer.order,
     }
 }
 
