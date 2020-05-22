@@ -12,7 +12,6 @@ import Swal from "sweetalert2";
 import API from "../../api/API";
 import headers from './../headers'
 
-
 // GET ORDER
 export const getOrders = () => (dispatch) => {
   dispatch({
@@ -47,7 +46,6 @@ export const getOrders = () => (dispatch) => {
 
 // GET ORDER
 export const getSingleOrder = (orderNumber) => (dispatch) => {
-  console.log("Here")
   dispatch({
     type: REQUEST_SINGLE_ORDER,
     payload: true

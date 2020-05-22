@@ -26,7 +26,6 @@ export default function ordersReducer(state = initialState, action) {
       }
     
     case REQUEST_SINGLE_ORDER:
-      console.log("It has been dispatched")
       return {
         loading_single_order: true
       }
