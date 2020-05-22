@@ -105,6 +105,9 @@ const FINANCE = [
   { to: routes.AddMasterDataPage, name: 'Add Master Data', exact: false, Icon: MdWidgets },
   { to: routes.ViewAllMasterData, name: 'All Master Data', exact: false, Icon: MdWidgets },
   { to: routes.ViewOrdersFinance, name: 'All Orders', exact: false, Icon: MdWidgets },
+  { to: routes.SupplierInvoice, name: 'Supplier Invoice', exact: false, Icon: MdWidgets },
+
+
 ]
 
 const INVENTORY = [

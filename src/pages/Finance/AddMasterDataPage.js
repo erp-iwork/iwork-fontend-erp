@@ -155,7 +155,7 @@ class AddMasterDataPage extends Component {
                                 <FormGroup >
                                     <Label for="productCategory" sm={2}>Product Category</Label>
                                     <Col sm={12}>
-                                        <Input id="productCategory"  defaultValue={""} type="select" placeholder="Product Category" name="productCategory" onChange={this.handleChange}>
+                                        <Input id="productCategory" defaultValue={""} type="select" placeholder="Product Category" name="productCategory" onChange={this.handleChange}>
                                             <option disabled></option>
                                             <option>Spare Parts</option>
                                             <option>Finished Goods</option>
@@ -196,21 +196,21 @@ class AddMasterDataPage extends Component {
                                     <Row className='isManufactured'>
                                         <Col sm={12} md={4}>
                                             <Input name="can_be_manufactured" type="checkbox" id="checkbox1" onChange={
-                                                (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked }}) 
-                                            }/>
+                                                (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
+                                            } />
                                             <Label for="checkbox1">Can Be Manufactured</Label>
                                         </Col>
                                         <Col sm={4} md={4}>
                                             <Input name="can_be_sold" type="checkbox" id="checkbox2" onChange={
-                                                (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked }}) 
-                                            }/>
+                                                (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
+                                            } />
                                             <Label for="checkbox2">Can Be Sold</Label>
                                         </Col>
                                         <Col sm={12} md={4}>
                                             <Input name="can_be_purchased" type="checkbox" id="checkbox3" onChange={
-                                                (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked }}) 
-                                            }/>
-                                        <Label for="checkbox3">Can Be Purchased</Label>
+                                                (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
+                                            } />
+                                            <Label for="checkbox3">Can Be Purchased</Label>
                                         </Col>
                                     </Row>
                                 </FormGroup>
@@ -258,9 +258,9 @@ class AddMasterDataPage extends Component {
                                                 </FormGroup>
                                             </Col>
                                         </Row>
-                                        ))}
+                                    ))}
                                     <Button onClick={() => this.handleAddItem()} color='primary'
-                                        style={{ display: can_be_manufactured? "flex" : "none", marginLeft: "1%" }}
+                                        style={{ display: can_be_manufactured ? "flex" : "none", marginLeft: "1%" }}
                                     >Add Another One</Button>
                                 </FormGroup>
                                 <FormGroup align='center'>

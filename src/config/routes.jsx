@@ -27,6 +27,7 @@ export default {
   CreatePurchaseOrder: "/CreatePurchaseOrder",
   ViewAllPurchaseOrder: "/ViewAllPurchaseOrder",
   ViewSinglePurchaseOrder: "/ViewSinglePurchaseOrder",
+  SupplierInvoice: "/SupplierInvoice"
 
 };
 
