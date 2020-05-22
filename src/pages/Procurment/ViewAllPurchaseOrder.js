@@ -58,8 +58,8 @@ class ViewAllPurchaseOrderPage extends Component {
                             <thead>
                                 <tr align='center'>
                                     <th>Order #</th>
-                                    <th>Customer</th>
-                                    <th>Sales Person</th>
+                                    <th>Supplier</th>
+                                    <th>Ordered By</th>
                                     <th>Shipment Address</th>
                                     <th>Order Date</th>
                                     <th>Status</th>

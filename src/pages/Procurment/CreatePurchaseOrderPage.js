@@ -243,7 +243,7 @@ class CreatePurchaseOrder extends Component {
                                             .reverse().slice(0, 9).map((order, index) => (
                                                 <tr key={index}>
                                                     <th scope="row">{index + 1}</th>
-                                                    <td>{"order.customer"}</td>
+                                                    <td>{order.suplier.suplierName}</td>
                                                     <td>{order.orderdBy}</td>
                                                     <td>{order.purchaseOrderDate}</td>
                                                 </tr>
