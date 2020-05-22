@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { Card, CardBody, CardHeader, Table } from 'reactstrap';
+import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
+import { MdAssignment } from "react-icons/md";
+
 
 
 class ViewPurchasedItems extends Component {
@@ -16,11 +18,14 @@ class ViewPurchasedItems extends Component {
                     <CardBody>
                         <Table responsive>
                             <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
+                                <tr >
+                                    <th>Order #</th>
+                                    <th>Supplier</th>
+                                    <th>Recieved By</th>
+                                    <th>Warehouse Name</th>
+                                    <th>Status</th>
+                                    <th>Generate GRV</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,18 +34,13 @@ class ViewPurchasedItems extends Component {
                                     <td>Mark</td>
                                     <td>Otto</td>
                                     <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
+                                    <td>Shipment Address</td>
+                                    <th>
+                                        <Button size='sm' color='primary'>
+                                            <MdAssignment /> Recieved
+                                        </Button>
+                                    </th>
+                                    <td>Actions</td>
                                 </tr>
                             </tbody>
                         </Table>
