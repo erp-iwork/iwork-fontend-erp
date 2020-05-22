@@ -36,7 +36,7 @@ class CreatePurchaseOrder extends Component {
             shipmentAddress: "",
             submitted: false,
             lockPage: false,
-            order_items: [{ masterData: "", purchaseQuantity: 1 }]
+            order_items: [{ masterData_id: "", purchaseQuantity: 1 }]
         }
         this.handleAddItem = this.handleAddItem.bind(this)
         this.handleRemoveItem = this.handleRemoveItem.bind(this)
@@ -59,7 +59,7 @@ class CreatePurchaseOrder extends Component {
     handleAddItem = () => {
         this.setState({
             order_items: this.state.order_items.concat([
-                { masterData: "", purchaseQuantity: 1 },
+                { masterData_id: "", purchaseQuantity: 1 },
             ])
         })
     }
@@ -75,7 +75,7 @@ class CreatePurchaseOrder extends Component {
             if (idx !== sidx) return item;
             return {
                 ...item,
-                masterData: evt.target.value,
+                masterData_id: evt.target.value,
             };
         });
 
@@ -106,7 +106,7 @@ class CreatePurchaseOrder extends Component {
             "purchase_item_order": this.state.order_items,
             "orderdBy": localStorage.getItem('username'),
             "description": this.state.description,
-            suplier: this.state.supplier
+            suplier_id: this.state.supplier
         });
         this.setState({ lockPage: false })
         if (this.props.success) {
@@ -119,6 +119,7 @@ class CreatePurchaseOrder extends Component {
 
     render() {
         let { order_items: items } = this.state
+        console.log(this.props.orders)
         if (this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) return <PageSpinner />
         const {
             supplier, description
