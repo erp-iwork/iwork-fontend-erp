@@ -25,5 +25,8 @@ export default {
   ViewAllMasterData: "/ViewAllMasterData",
   SivPage: "/SivPage",
   CreatePurchaseOrder: "/CreatePurchaseOrder",
+  ViewAllPurchaseOrder: "/ViewAllPurchaseOrder",
+  ViewSinglePurchaseOrder: "/ViewSinglePurchaseOrder",
+
 };
 
