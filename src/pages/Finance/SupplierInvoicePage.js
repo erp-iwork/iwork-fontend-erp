@@ -227,38 +227,41 @@ class SupplierInvoicePage extends Component {
                                                     </Col>
                                                 </FormGroup>
                                             </Col>
-                                            <Col sm={12} md={2}>
+                                            <Col sm={12} md={3}>
                                                 <FormGroup >
                                                     <Label for="examplePassword" sm={12}>
                                                         Amount
                                                     </Label>
-                                                    <Col sm={12}>
-                                                        <Input
-                                                            disabled
-                                                            type='number'
+                                                    <Row>
 
-                                                            placeholder="Amount"
-                                                        />
-                                                    </Col>
+                                                        <Col sm={10}>
+                                                            <Input
+                                                                disabled
+                                                                placeholder="Amount"
+                                                            />
+                                                        </Col>
+                                                        <Col>
+
+                                                            <Button
+                                                            >-</Button>
+                                                        </Col>
+
+                                                    </Row>
+
+
                                                 </FormGroup>
                                             </Col>
                                             <Col sm={12} md={1}>
                                                 <FormGroup >
-
                                                     <Col align='center' sm={12}>
-                                                        <Button className='removeButton'
-                                                        >-</Button>
+
                                                     </Col>
                                                 </FormGroup>
                                             </Col>
                                         </Row>
-
-
                                     );
                                 })
                             }
-
-
                             <FormGroup align='right'>
                                 <Button onClick={(e) => this.manageItems(e, 'add')} size='sm' color='primary'>Add Another Item</Button>
                             </FormGroup>
