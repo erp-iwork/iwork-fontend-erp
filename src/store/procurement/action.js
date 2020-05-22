@@ -20,10 +20,6 @@ export const getOrders = () => (dispatch) => {
         })
         .catch(err => {
             if (err.response && err.response.data) {
-                dispatch({
-                  type: errorsConstant.GET_ERRORS,
-                  payload: err.response.data,
-                });
               } else {
                 Swal.fire({
                   title: "Error",

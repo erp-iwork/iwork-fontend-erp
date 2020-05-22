@@ -5,7 +5,7 @@ import React from 'react';
 import {
   // MdAccountCircle,
   // MdArrowDropDownCircle,
-  MdBorderAll,
+  // MdBorderAll,
   // MdBrush,
   // MdChromeReaderMode,
   MdDashboard,
@@ -16,9 +16,9 @@ import {
   // MdNotificationsActive,
   // MdPages,
   // MdRadioButtonChecked,
-  MdSend,
+  // MdSend,
   // MdStar,
-  MdTextFields,
+  // MdTextFields,
   // MdViewCarousel,
   // MdViewDay,
   // MdViewList,
@@ -66,10 +66,10 @@ const sidebarBackground = {
 //   { to: '/modals', name: 'modals', exact: false, Icon: MdViewDay },
 // ];
 
-const navContents = [
-  { to: '/typography', name: 'typography', exact: false, Icon: MdTextFields },
-  { to: '/tables', name: 'tables', exact: false, Icon: MdBorderAll },
-];
+// const navContents = [
+//   { to: '/typography', name: 'typography', exact: false, Icon: MdTextFields },
+//   { to: '/tables', name: 'tables', exact: false, Icon: MdBorderAll },
+// ];
 
 // const pageContents = [
 //   { to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
