@@ -1,4 +1,4 @@
-import { GET_SIV, UPDATE_SIV, errorsConstant, UPDATE_STATUS } from "../../constant/constants";
+import { GET_SIV, REQUEST_SIV, errorsConstant, UPDATE_STATUS } from "../../constant/constants";
 import axios from "axios";
 import Swal from "sweetalert2";
 import API from "../../api/API";
@@ -6,7 +6,10 @@ import headers from "./../headers";
 
 // GET SIV TAKES ORDER NUMBER
 export const getSiv = (order) => (dispatch) => {
-
+  dispatch({
+    type: REQUEST_SIV,
+    payload: true
+  })
   axios
     .get(API + `generatesiv/${order}`, headers)
     .then((res) => {

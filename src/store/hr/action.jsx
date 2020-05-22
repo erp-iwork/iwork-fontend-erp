@@ -318,7 +318,6 @@ function getDepartment() {
         headers: headers,
       })
       .then((response) => {
-        console.log(response);
         dispatch({
           type: appConstants.FETCH_DEPARTMENT_SUCCESS,
           payload: response.data,

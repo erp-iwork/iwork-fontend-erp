@@ -59,7 +59,8 @@ class AddSupplierPage extends Component {
             email: this.state.email,
             tinNumber: this.state.tinNumber
         }
-        this.setState({ loading: this.state.loading + 1 })
+        this.setState({ loading: 1 })
+
         this.props.addSupplier(newCompany).then(res => {
             this.setState({ loading: this.state.loading + 1 })
         })
@@ -78,8 +79,8 @@ class AddSupplierPage extends Component {
     }
 
     render() {
-        console.log(this.props.suppliers.length)
-        if (!this.props.suppliers[0]) return <PageSpinner />
+        if (this.props.loading) return <PageSpinner />
+
         return (
             <Page title="Add Supplier" breadcrumbs={[{ name: 'Add Supplier', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
@@ -229,6 +230,8 @@ class AddSupplierPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    loading: state.companyReducer.loading,
+
     suppliers: state.companyReducer.suppliers,
     errors: state.companyReducer.errors,
     success: state.companyReducer.success

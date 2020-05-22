@@ -39,9 +39,16 @@ const AddSupplierPage = React.lazy(() => import('./pages/Finance/AddSupplier'))
 const viewAllCutomersPage = React.lazy(() => import('./pages/Finance/viewAllCutomersPage'));
 const viewAllSuppliersPage = React.lazy(() => import('./pages/Finance/viewAllSuppliersPage'));
 const ViewAllOrdersFinancePage = React.lazy(() => import('./pages/Finance/ViewAllOrdersPage'));
+const AddMasterDataPage = React.lazy(() => import('./pages/Finance/AddMasterDataPage'));
+const ViewAllMasterDataPage = React.lazy(() => import('./pages/Finance/ViewAllMasterDataPage'));
 const ViewAllOrdersLogisticsPage = React.lazy(() => import('./pages/Logistics/ViewAllOrdersPage'));
 const CategoriesInventoryPage = React.lazy(() => import('./pages/Inventory/CategoryPage'));
 const ViewSingleItemPage = React.lazy(() => import('./pages/Inventory/ViewSingleItemPage'));
+const SivPage = React.lazy(() => import('./pages/Inventory/SIV'));
+const CreatePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/CreatePurchaseOrderPage'));
+
+
+
 
 
 const getBasename = () => {
@@ -89,14 +96,23 @@ class App extends React.Component {
                 <Route exact path={routes.ViewOrdersInventory} component={ViewAllOrdersInventoryPage} />
                 <Route exact path={routes.CategoriesInventoryPage} component={CategoriesInventoryPage} />
                 <Route exact path={routes.ViewSingleItemPage} component={ViewSingleItemPage} />
+                <Route exact path={routes.SivPage} component={SivPage} />
+
+
                 {/* FINANCE ROUTES/ */}
                 <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
                 <Route exact path={routes.viewCustomers} component={viewAllCutomersPage} />
                 <Route exact path={routes.viewSuppliers} component={viewAllSuppliersPage} />
                 <Route exact path={routes.AddSupplier} component={AddSupplierPage} />
                 <Route exact path={routes.ViewOrdersFinance} component={ViewAllOrdersFinancePage} />
+                <Route exact path={routes.AddMasterDataPage} component={AddMasterDataPage} />
+                <Route exact path={routes.ViewAllMasterData} component={ViewAllMasterDataPage} />
+
                 {/* LOGISTICS ROUTES */}
                 <Route exact path={routes.ViewOrdersLogistics} component={ViewAllOrdersLogisticsPage} />
+
+                {/* PROCURMENT ROUTES */}
+                <Route exact path={routes.CreatePurchaseOrder} component={CreatePurchaseOrderPage} />
 
 
 

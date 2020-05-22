@@ -1,10 +1,10 @@
-import Avatar from  '../../components/Avatar';
+import React from 'react';
+import Avatar from '../../components/Avatar';
 import { UserCard } from '../../components/Card';
 import Notifications from '../../components/Notifications';
 import SearchInput from '../../components/SearchInput';
 import { notificationsData } from '../../demos/header';
 import withBadge from '../../hocs/withBadge';
-import React from 'react';
 import {
   MdClearAll,
   MdExitToApp,
@@ -20,7 +20,6 @@ import {
   Button,
   ListGroup,
   ListGroupItem,
-  // NavbarToggler,
   Nav,
   Navbar,
   NavItem,
@@ -32,7 +31,6 @@ import bn from '../../utils/bemnames';
 import routes from '../../config/routes'
 
 const bem = bn.create('header');
-
 const MdNotificationsActiveWithBadge = withBadge({
   size: 'md',
   color: 'primary',
@@ -83,19 +81,17 @@ class Header extends React.Component {
 
   render() {
     const { isNotificationConfirmed } = this.state;
-
     return (
       <Navbar light expand className={bem.b('bg-white')}>
 
-        <Nav navbar  className="mr-2">
+        <Nav navbar className="mr-2">
           <Button color="primary" outline onClick={this.handleSidebarControlButton}>
-            <MdClearAll  size={25} />
+            <MdClearAll size={25} />
           </Button>
         </Nav>
         <Nav navbar>
           <SearchInput />
         </Nav>
-
         <Nav navbar className={bem.e('nav-right')}>
           <NavItem className="d-inline-flex">
             <NavLink id="Popover1" className="position-relative">
@@ -106,12 +102,12 @@ class Header extends React.Component {
                   onClick={this.toggleNotificationPopover}
                 />
               ) : (
-                <MdNotificationsActiveWithBadge
-                  size={25}
-                  className="text-primary can-click animated swing infinite"
-                  onClick={this.toggleNotificationPopover}
-                />
-              )}
+                  <MdNotificationsActiveWithBadge
+                    size={25}
+                    className="text-primary can-click animated swing infinite"
+                    onClick={this.toggleNotificationPopover}
+                  />
+                )}
             </NavLink>
             <Popover
               placement="bottom"
@@ -126,12 +122,18 @@ class Header extends React.Component {
           </NavItem>
 
           <NavItem>
+
             <NavLink id="Popover2">
+
               <Avatar
                 onClick={this.toggleUserCardPopover}
                 className="can-click"
               />
+              <div>
+                Logged Person Name
+              </div>
             </NavLink>
+
             <Popover
               placement="bottom-end"
               isOpen={this.state.isOpenUserCardPopover}
@@ -171,6 +173,7 @@ class Header extends React.Component {
               </PopoverBody>
             </Popover>
           </NavItem>
+
         </Nav>
       </Navbar>
     );

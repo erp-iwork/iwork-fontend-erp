@@ -69,8 +69,6 @@ class ViewAllItems extends Component {
                                         <th>Discount</th>
                                         <th>Category</th>
                                         <th>Actions</th>
-
-
                                     </tr>
                                 </thead>
                                 <tbody>

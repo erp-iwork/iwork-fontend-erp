@@ -7,6 +7,9 @@ const initialState = {
   orders: [],
   companys: [],
   items: [],
+  loading_orders: true,
+  loading_companies: true,
+  loading_items: true,
 };
 export default function salesReducer(state = initialState, action) {
   switch (action.type) {
@@ -20,13 +23,14 @@ export default function salesReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        loading_orders: true
       };
     }
     case salesConstants.ORDER_GETALL_SUCCESS: {
       return {
         ...state,
         orders: action.payload,
-        // errors: [],
+        loading_orders: false,
         loading: false,
         isLogin: true,
         success: false,
@@ -46,6 +50,7 @@ export default function salesReducer(state = initialState, action) {
         ...state,
         errors: [],
         items: [...state.items, action.payload],
+        loading_orders: false,
         loading: false,
         isLogin: true,
         success: true,
@@ -65,16 +70,17 @@ export default function salesReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        loading_items: true,
       };
     }
     case salesConstants.ITEM_GETALL_SUCCESS: {
       return {
         ...state,
         items: action.payload,
-        // errors: [],
         loading: false,
         isLogin: true,
         success: false,
+        loading_items: false,
       };
     }
     case salesConstants.ITEM_GETALL_FAILURE: {
@@ -91,6 +97,7 @@ export default function salesReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        loading_companies: true
       };
     }
     case salesConstants.COMPANY_GETALL_SUCCESS: {
@@ -100,6 +107,7 @@ export default function salesReducer(state = initialState, action) {
         loading: false,
         isLogin: true,
         success: false,
+        loading_companies: false
       };
     }
     case salesConstants.COMPANY_GETALL_FAILURE: {
