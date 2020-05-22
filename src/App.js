@@ -46,6 +46,9 @@ const CategoriesInventoryPage = React.lazy(() => import('./pages/Inventory/Categ
 const ViewSingleItemPage = React.lazy(() => import('./pages/Inventory/ViewSingleItemPage'));
 const SivPage = React.lazy(() => import('./pages/Inventory/SIV'));
 const CreatePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/CreatePurchaseOrderPage'));
+const ViewAllPurchaseOrderPage = React.lazy(() => import('./pages/Procurment/ViewAllPurchaseOrder'));
+const ViewSinglePurchaseOrderPage  = React.lazy(() => import('./pages/Procurment/ViewSinglePurchaseOrder'));
+
 
 
 
@@ -113,6 +116,9 @@ class App extends React.Component {
 
                 {/* PROCURMENT ROUTES */}
                 <Route exact path={routes.CreatePurchaseOrder} component={CreatePurchaseOrderPage} />
+                <Route exact path={routes.ViewAllPurchaseOrder} component={ViewAllPurchaseOrderPage} />
+                <Route exact path={routes.ViewSinglePurchaseOrder} component={ViewSinglePurchaseOrderPage} />
+
 
 
 

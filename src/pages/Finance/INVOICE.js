@@ -1,5 +1,4 @@
 import React from 'react';
-// import Logo from '../../../Assets/NAZO.png';
 import {
     Page,
     Text,
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
 });
 
 function PdfDocument({ data }) {
-    const { customer, invoice_item } = data
+    const { customer } = data
     return (
         <Document>
             <Page style={styles.pdf}>
