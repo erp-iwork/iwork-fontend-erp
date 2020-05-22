@@ -129,7 +129,6 @@ class Header extends React.Component {
                 onClick={this.toggleUserCardPopover}
                 className="can-click"
               />
-
             </NavLink>
 
             <Popover

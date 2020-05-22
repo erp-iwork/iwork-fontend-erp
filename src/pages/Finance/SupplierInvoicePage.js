@@ -228,7 +228,7 @@ class SupplierInvoicePage extends Component {
                                                 </FormGroup>
                                             </Col>
                                             <Col sm={12} md={2}>
-                                                <FormGroup >
+                                                <FormGroup>
                                                     <Label for="examplePassword" sm={12}>
                                                         Amount
                                                     </Label>
