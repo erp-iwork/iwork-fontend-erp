@@ -63,7 +63,7 @@ export const getSuppliers = () => (dispatch) => {
         })
 }
 
-export const getMasterdata = () => (dispatch) => {
+export const getMasterdata = () => (dispatch) => { 
     dispatch({ type: GET.REQUEST_GET_MASTERDATA })
     return Axios.get(API + routes.masterData)
         .then(res => {
