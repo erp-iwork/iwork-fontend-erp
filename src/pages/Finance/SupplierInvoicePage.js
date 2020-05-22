@@ -227,34 +227,25 @@ class SupplierInvoicePage extends Component {
                                                     </Col>
                                                 </FormGroup>
                                             </Col>
-                                            <Col sm={12} md={3}>
+                                            <Col sm={12} md={2}>
                                                 <FormGroup >
                                                     <Label for="examplePassword" sm={12}>
                                                         Amount
                                                     </Label>
-                                                    <Row>
-
-                                                        <Col sm={10}>
-                                                            <Input
-                                                                disabled
-                                                                placeholder="Amount"
-                                                            />
-                                                        </Col>
-                                                        <Col>
-
-                                                            <Button
-                                                            >-</Button>
-                                                        </Col>
-
-                                                    </Row>
-
-
+                                                    <Col sm={12}>
+                                                        <Input
+                                                            disabled
+                                                            placeholder="Amount"
+                                                        />
+                                                    </Col>
                                                 </FormGroup>
                                             </Col>
                                             <Col sm={12} md={1}>
                                                 <FormGroup >
-                                                    <Col align='center' sm={12}>
 
+                                                    <Col align='center' sm={12}>
+                                                        <Button className='removeButton'
+                                                        >-</Button>
                                                     </Col>
                                                 </FormGroup>
                                             </Col>
