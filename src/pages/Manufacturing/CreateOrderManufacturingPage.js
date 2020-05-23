@@ -140,9 +140,6 @@ class CreateOrderManufacturingPage extends Component {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-
-
-
                                 <FormGroup align='center'>
                                     <Button color='primary'>Submit</Button>
                                 </FormGroup>
@@ -150,7 +147,6 @@ class CreateOrderManufacturingPage extends Component {
                         </CardBody>
                     </Card>
                 </Col>
-
             </Page>
         );
     }
