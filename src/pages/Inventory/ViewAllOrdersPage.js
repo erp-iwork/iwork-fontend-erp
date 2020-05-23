@@ -45,7 +45,9 @@ const Order = ({ order, index, handleApprove }) => {
 class ViewAllOrdersPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            orderNumber: null
+        }
         this.handleApprove = this.handleApprove.bind(this)
     }
 
@@ -57,13 +59,13 @@ class ViewAllOrdersPage extends Component {
         this.props.updateSiv(order, {
           'sivStatus': 'Approved',
         })
+        this.setState({ orderNumber: order })
         this.props.getSiv(order);
     }
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        const createdOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === "Created" || order.status === "Issued" }) : "";
-        console.log(this.props.orders)
+        const createdOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === "Created" || order.orderNumber === this.state.orderNumber }) : "";
         if (createdOrders.length === 0) return <h2>No orders to show</h2>
         return (
             <Page
