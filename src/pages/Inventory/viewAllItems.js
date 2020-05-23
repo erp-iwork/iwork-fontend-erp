@@ -8,7 +8,7 @@ import {
 import Page from '../../components/Page';
 import { getItemsByCategory } from '../../store/inventory/action'
 import PageSpinner from '../../components/PageSpinner'
-import { connect } from 'react-redux' 
+import { connect } from 'react-redux'
 
 class ViewAllItems extends Component {
     state = {
@@ -31,6 +31,7 @@ class ViewAllItems extends Component {
         });
     };
 
+
     componentDidMount() {
         this.props.getItemsByCategory(this.props.location.state)
     }
@@ -52,11 +53,8 @@ class ViewAllItems extends Component {
                         Create An Account For <b>Mark</b> as a Something!!
                   </ModalBody>
                     <ModalFooter>
-                        <Button color="secondary" onClick={this.toggle()}>
-                            Cancel
-                    </Button>{' '}
                         <Button color="primary" onClick={this.toggle()}>
-                            Create
+                            Cancel
                     </Button>
                     </ModalFooter>
                 </Modal>
@@ -89,8 +87,8 @@ class ViewAllItems extends Component {
                                             <td>{item.productType}</td>
                                             <td>{item.catagory.catagory}</td>
                                             <td>
-                                                <Button size='sm' color='primary'>
-                                                    See More
+                                                <Button size='sm' color='primary' onClick={this.toggle()}>
+                                                    See Item
                                                 </Button>
                                             </td>
                                         </tr>

@@ -131,7 +131,6 @@ class CreateOrderManufacturingPage extends Component {
                                     </Row>
                                     <hr />
                                 </div>
-
                                 <FormGroup >
                                     <Label for="examplePassword" sm={12}>
                                         Description
