@@ -44,13 +44,18 @@ class CreateOrderManufacturingPage extends Component {
                                                 Required Product
                                     </Label>
                                             <Col sm={12}>
-                                                <Input type="select" name="select" >
-                                                    <option>Hello</option>
-                                                    <option>Hello</option>
-                                                    <option>Hello</option>
-                                                    <option>Hello</option>
-                                                    <option>Hello</option>
-                                                    <option>Hello</option>
+                                                <Input name="dropdown" type="select" id="checkbox1"
+                                                    onChange={
+                                                        (event) => this.handleChange({ target: { name: event.target.name, value: event.target.value } })
+                                                    } >
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+
 
                                                 </Input>
                                             </Col>
@@ -71,15 +76,6 @@ class CreateOrderManufacturingPage extends Component {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-                                <Col sm={12} md={4}>
-                                    <Input name="dropdown" type="checkbox" id="checkbox1"
-                                        // onChange={(event) => this.handleChange({ name: event.target.name,  value: event.target.value})}>
-                                        onChange={
-                                            (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
-                                        } >
-                                        <option value='123'>hello</option>
-                                    </Input>
-                                </Col>
                                 <hr />
                                 <Row style={{ display: dropdown ? "flex" : "none" }}>
                                     <Col sm={12} md={3}>
@@ -123,8 +119,6 @@ class CreateOrderManufacturingPage extends Component {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-
-
                                 <FormGroup >
                                     <Label for="examplePassword" sm={12}>
                                         Description
@@ -139,7 +133,6 @@ class CreateOrderManufacturingPage extends Component {
                                 <Row>
                                     <Col sm={12} md={6}>
                                         <FormGroup >
-
                                             <Label for="exampleSelect" sm={12}>
                                                 Manufactuting Start Date
                                             </Label>
@@ -155,8 +148,6 @@ class CreateOrderManufacturingPage extends Component {
                                             </Label>
                                             <Col sm={12}>
                                                 <Input type="date" name="select" />
-
-
                                             </Col>
                                         </FormGroup>
                                     </Col>
