@@ -13,7 +13,6 @@ export default {
   ViewAllItems: "/ViewAllItems",
   viewCustomers: "/viewCustomers",
   viewSuppliers: "/viewSuppliers",
-
   AddCustomer: "/AddCustomer",
   AddSupplier: "/AddSupplier",
   ViewOrdersFinance: "/ViewOrdersFinance",
@@ -29,7 +28,10 @@ export default {
   ViewAllPurchaseOrder: "/ViewAllPurchaseOrder",
   ViewSinglePurchaseOrder: "/ViewSinglePurchaseOrder",
   SupplierInvoice: "/SupplierInvoice",
-  ViewPurchasedItems: '/ViewPurchasedItems'
+  ViewPurchasedItems: '/ViewPurchasedItems',
+  CreateOrderManufacturing: '/CreateOrderManufacturing',
+  ViewAllOrdersManufacturing: '/ViewAllOrdersManufacturing'
+
 
 };
 

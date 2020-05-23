@@ -81,7 +81,7 @@ class AddCustomerPage extends Component {
         if (this.props.loading) return <PageSpinner />
         const { companyName, generalManger, contactPerson, workingField, email, tinNumber } = this.state
         return (
-            <Page title="Add Customer" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
+            <Page title="Finance" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
                     <Card>
                         <CardHeader>ADD A NEW CUSTOMER TO WORK WITH</CardHeader>

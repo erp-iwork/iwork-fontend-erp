@@ -14,7 +14,7 @@ class CategoryPage extends Component {
     render() {
         return (
             <Page
-                title="Categories"
+                title="Inventory"
                 breadcrumbs={[{ name: 'Categories', active: true }]}
                 className="CardPage"
             >

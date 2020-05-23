@@ -59,7 +59,7 @@ class AllEmployees extends Component {
         if (this.props.employees.length === 0) return <h2>No employees yet.</h2>
         return (
             <Page
-                title="All Employees"
+                title="IT"
                 breadcrumbs={[{ name: 'All Employees', active: true }]}
                 className="TablePage">
                 <Modal

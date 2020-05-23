@@ -38,7 +38,7 @@ class SupplierInvoicePage extends Component {
     }
     render() {
         return (
-            <Page title="Supplier Invoice" breadcrumbs={[{ name: 'Supplier Invoice', active: true }]}>
+            <Page title="Finance" breadcrumbs={[{ name: 'Supplier Invoice', active: true }]}>
                 <Card>
                     <CardHeader>Supplier Information</CardHeader>
                     <CardBody>
