@@ -62,7 +62,8 @@ class ViewAllOrdersPage extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        const createdOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === "Created" }) : "";
+        const createdOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === "Created" || order.status === "Issued" }) : "";
+        console.log(this.props.orders)
         if (createdOrders.length === 0) return <h2>No orders to show</h2>
         return (
             <Page
