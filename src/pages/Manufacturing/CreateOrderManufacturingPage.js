@@ -12,6 +12,9 @@ import {
     Label,
     Row,
 } from 'reactstrap';
+import { connect } from 'react-redux'
+import { getMasterdata } from '../../store/manufacturing/action'
+import PageSpinner from '../../components/PageSpinner'
 
 class CreateOrderManufacturingPage extends Component {
     constructor(props) {
@@ -19,17 +22,29 @@ class CreateOrderManufacturingPage extends Component {
         this.state = {
             order_items: [],
             dropdown: false,
+            productMaterial: [],
+            productID: null
         }
+        this.handleChange = this.handleChange.bind(this)
     }
     handleChange = event => {
         const { name, value } = event.target
-        this.setState({ [name]: value })
+        if (name === "productMaterial") {
+            this.setState({ productMaterial: this.props.masterdata[value], dropdown: true })
+        } else {
+            this.setState({ [name]: value.material, productID: value })
+        }
+    }
+
+    componentDidMount() {
+        this.props.getMasterdata()
     }
 
 
     render() {
         let { dropdown } = this.state
-
+        if (this.props.loading_masterdata) return <PageSpinner />
+        const canBeManudactured = this.props.masterdata.filter((data) => { return data.isManufactured })
         return (
             <Page title="Manufacturing" breadcrumbs={[{ name: 'Create Order', active: true }]}>
                 <Col md={12}>
@@ -42,21 +57,13 @@ class CreateOrderManufacturingPage extends Component {
                                         <FormGroup >
                                             <Label for="exampleSelect" sm={12}>
                                                 Required Product
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
-                                                <Input name="dropdown" type="select" id="checkbox1"
-                                                    onChange={
-                                                        (event) => this.handleChange({ target: { name: event.target.name, value: event.target.value } })
-                                                    } >
-                                                    <option value='123'>Some Item Name</option>
-                                                    <option value='123'>Some Item Name</option>
-                                                    <option value='123'>Some Item Name</option>
-                                                    <option value='123'>Some Item Name</option>
-                                                    <option value='123'>Some Item Name</option>
-                                                    <option value='123'>Some Item Name</option>
-                                                    <option value='123'>Some Item Name</option>
-
-
+                                                <Input name="productMaterial" type="select" id="checkbox1" onChange={this.handleChange}>
+                                                    <option selected></option>
+                                                    {canBeManudactured.map((item, index) => (
+                                                        <option value={index}>{item.productName}</option>
+                                                    ))}
                                                 </Input>
                                             </Col>
                                         </FormGroup>
@@ -164,4 +171,11 @@ class CreateOrderManufacturingPage extends Component {
     }
 }
 
-export default CreateOrderManufacturingPage;
+const mapStateToProps = (state) => {
+    return {
+        loading_masterdata: state.manuFacturingReducer.loading_masterdata,
+        masterdata: state.manuFacturingReducer.masterdata
+    }
+}
+
+export default connect(mapStateToProps, { getMasterdata })(CreateOrderManufacturingPage)

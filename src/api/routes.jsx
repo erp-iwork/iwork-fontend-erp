@@ -5,7 +5,8 @@ const routes = {
     purchaseStatus: 'purchaseorderstatus/',
     updatePurchaseStatus: 'purchasestatus/',
     category: 'catagory/',
-    itemByCategory: 'itembycatagory/'
+    itemByCategory: 'itembycatagory/',
+    manufacturing: 'manufactureOrder/'
 }
 
 export default routes 
