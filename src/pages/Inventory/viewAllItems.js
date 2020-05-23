@@ -6,7 +6,9 @@ import {
     ModalHeader,
 } from 'reactstrap';
 import Page from '../../components/Page';
-
+import { getItemsByCategory } from '../../store/inventory/action'
+import PageSpinner from '../../components/PageSpinner'
+import { connect } from 'react-redux' 
 
 class ViewAllItems extends Component {
     state = {
@@ -28,7 +30,14 @@ class ViewAllItems extends Component {
             [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
         });
     };
+
+    componentDidMount() {
+        this.props.getItemsByCategory(this.props.location.state)
+    }
+
     render() {
+        if (this.props.loading_items) return <PageSpinner />
+        console.log(this.props.items)
         return (
             <Page
                 title="Inventory"
@@ -60,50 +69,32 @@ class ViewAllItems extends Component {
                                 <thead>
                                     <tr align='left'>
                                         <th>#</th>
-                                        <th>Item ID</th>
                                         <th>Item Name</th>
                                         <th>Quantity</th>
                                         <th>Retail Price</th>
-                                        <th>Packaging</th>
-                                        <th>Warehouse Name</th>
-                                        <th>Discount</th>
+                                        <th>Unit</th>
+                                        <th>Product Type</th>
                                         <th>Category</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr align='left'>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Johnlights51@gmail.com</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>Johnlights51@gmail.com</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>
-                                            <Button size='sm' color='primary'>
-                                                See More
+                                    {this.props.items.item_catagory.map((item, index) => (
+                                        <tr align='left'>
+                                            <th scope="row">1</th>
+                                            <td>{item.itemName}</td>
+                                            <td>{item.quantity}</td>
+                                            <td>{item.retailPrice}</td>
+                                            <td>{item.unitOfMeasurement}</td>
+                                            <td>{item.productType}</td>
+                                            <td>{item.catagory.catagory}</td>
+                                            <td>
+                                                <Button size='sm' color='primary'>
+                                                    See More
                                                 </Button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Otto</td>
-                                        <td>Johnlights51@gmail.com</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>Johnlights51@gmail.com</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>
-                                            <Button size='sm' color='primary'>
-                                                See More
-                                                </Button>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </Table>
                         </CardBody>
@@ -114,4 +105,12 @@ class ViewAllItems extends Component {
     }
 }
 
-export default ViewAllItems;
+const mapStateToProps = (state) => {
+    return {
+        loading_items: state.inventoryReducer.loading_items,
+        items: state.inventoryReducer.items,
+        success: state.inventoryReducer.success
+    }
+}
+
+export default connect(mapStateToProps, { getItemsByCategory })(ViewAllItems)

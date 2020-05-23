@@ -3,6 +3,10 @@ const initialState = {
   items: [],
   errors: [],
   success: false,
+  loading_categories: true,
+  loading_items: true,
+  categories: [],
+  items: []
 };
 
 export default function inventoryReducer(state = initialState, action) {
@@ -56,6 +60,28 @@ export default function inventoryReducer(state = initialState, action) {
         ),
         loading: false,
       };
+    
+    case inventoryConstant.REQUEST_GET_EXISTING_CATEGORIES:
+      return {
+        ...state, loading_categories: true
+      }
+
+    case inventoryConstant.SUCCESS_GET_EXISTING_CATEGORIES:
+      return {
+        ...state, loading_categories: false, success: true,
+        categories: action.payload
+      }
+
+    case inventoryConstant.REQUEST_GET_CATEGORIES:
+      return {
+        ...state, loading_items: true
+      }
+
+    case inventoryConstant.SUCCESS_GET_CATEGORIES:
+      return {
+        ...state, loading_items: false, success: true,
+        items: action.payload
+      }
 
     default:
       return state;

@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
+import routes from '../../api/routes'
 import { inventoryConstant, errorsConstant } from "../../constant/constants";
 import headers from "./../headers";
 
@@ -169,3 +170,57 @@ export const deleteItem = (InventoryItemId) => (dispatch) => {
     }
   });
 };
+
+export const getExistingCategories = () => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_EXISTING_CATEGORIES })
+  return axios.get(API + routes.category, headers)
+    .then(res => {
+      dispatch({
+        type: inventoryConstant.SUCCESS_GET_EXISTING_CATEGORIES,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const getItemsByCategory = (categoryID) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_CATEGORIES })
+  return axios.get(API + routes.itemByCategory + categoryID + "/")
+    .then(res => {
+      dispatch({
+        type: inventoryConstant.SUCCESS_GET_CATEGORIES,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
