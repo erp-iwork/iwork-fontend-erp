@@ -30,7 +30,9 @@ export default {
   SupplierInvoice: "/SupplierInvoice",
   ViewPurchasedItems: '/ViewPurchasedItems',
   CreateOrderManufacturing: '/CreateOrderManufacturing',
-  ViewAllOrdersManufacturing: '/ViewAllOrdersManufacturing'
+  ViewAllOrdersManufacturing: '/ViewAllOrdersManufacturing',
+  ViewSingleOrderManufacturing: '/ViewSingleOrderManufacturing',
+
 
 
 };

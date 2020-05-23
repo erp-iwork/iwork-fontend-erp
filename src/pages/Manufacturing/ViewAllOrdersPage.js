@@ -25,9 +25,6 @@ class ViewAllOrdersManufacturingPage extends Component {
                                     <th>End Date</th>
                                     <th>Quantity</th>
                                     <th>Actions</th>
-
-
-
                                 </tr>
                             </thead>
                             <tbody>
