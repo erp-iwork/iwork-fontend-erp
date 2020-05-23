@@ -53,8 +53,54 @@ class CreateOrderManufacturingPage extends Component {
                                     </Label>
                                             <Col sm={12}>
                                                 <Input
+                                                    disabled
                                                     placeholder="The Person Requesting The Order"
                                                 />
+                                            </Col>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+
+                                <hr />
+                                <Row>
+                                    <Col sm={12} md={3}>
+                                        <FormGroup >
+
+                                            <Label for="exampleSelect" sm={12}>
+                                                Material Name
+                                    </Label>
+                                            <Col sm={12}>
+                                                <Input disabled type="text" placeholder='Material Name' name="select" />
+                                            </Col>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm={12} md={3}>
+                                        <FormGroup >
+                                            <Label for="exampleSelect" sm={12}>
+                                                Quantity
+                                    </Label>
+                                            <Col sm={12}>
+                                                <Input type="number" />
+                                            </Col>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm={12} md={3}>
+                                        <FormGroup >
+                                            <Label for="exampleSelect" sm={12}>
+                                                Unit Of Measurment
+                                    </Label>
+                                            <Col sm={12}>
+                                                <Input type="text" disabled />
+                                            </Col>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col sm={12} md={3}>
+                                        <FormGroup >
+                                            <Label for="exampleSelect" sm={12}>
+                                                Price
+                                    </Label>
+                                            <Col sm={12}>
+                                                <Input type="text" disabled />
                                             </Col>
                                         </FormGroup>
                                     </Col>
@@ -93,8 +139,10 @@ class CreateOrderManufacturingPage extends Component {
                                             </Col>
                                         </FormGroup>
                                     </Col>
-                                    <hr />
                                 </Row>
+
+
+
                                 <FormGroup align='center'>
                                     <Button color='primary'>Submit</Button>
                                 </FormGroup>
