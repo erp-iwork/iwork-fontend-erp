@@ -108,7 +108,7 @@ const FINANCE = [
 
 const INVENTORY = [
   // { to: routes.ViewAllItems, name: 'View Items', exact: false, Icon: MdWidgets },
-  { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
+  // { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
   { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
   // { to: routes.ViewSingleItemPage, name: 'Single Item', exact: false, Icon: MdWidgets },
   // { to: routes.ViewPurchasedItems, name: 'Purchased Items', exact: false, Icon: MdWidgets },
@@ -166,7 +166,7 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <aside className={bem.b()} data-image={sidebarBgImage}>
+      <aside className={bem.b('Something')} data-image={sidebarBgImage}>
         <div className={bem.e('background')} style={sidebarBackground} />
         <div className={bem.e('content')}>
           <Navbar>
@@ -185,7 +185,7 @@ class Sidebar extends React.Component {
           </Navbar>
           <Nav vertical>
             {navItems.map(({ to, name, exact, Icon }, index) => (
-              <NavItem key={index} className={bem.e('nav-item')}>
+              <NavItem key={index} className={bem.e('nav-item1')}>
                 <BSNavLink
                   id={`navItem-${name}-${index}`}
                   tag={NavLink}
@@ -203,7 +203,7 @@ class Sidebar extends React.Component {
             {/* START HR */}
 
             <NavItem
-              className={bem.e('nav-item')}
+              className={bem.e('nav-item2')}
               onClick={this.handleClick('HR')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -227,7 +227,7 @@ class Sidebar extends React.Component {
 
             <Collapse isOpen={this.state.isOpenHR}>
               {HR.map(({ to, name, exact, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
+                <NavItem key={index} className={bem.e('nav-item2')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
                     className="text-uppercase"
@@ -248,7 +248,7 @@ class Sidebar extends React.Component {
             {/* START IT */}
 
             <NavItem
-              className={bem.e('nav-item')}
+              className={bem.e('nav-item3')}
               onClick={this.handleClick('IT')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -272,7 +272,7 @@ class Sidebar extends React.Component {
 
             <Collapse isOpen={this.state.isOpenIT}>
               {IT.map(({ to, name, exact, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
+                <NavItem key={index} className={bem.e('nav-item3')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
                     className="text-uppercase"
@@ -293,7 +293,7 @@ class Sidebar extends React.Component {
             {/* START SALES */}
 
             <NavItem
-              className={bem.e('nav-item')}
+              className={bem.e('nav-item4')}
               onClick={this.handleClick('SALES')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -317,7 +317,7 @@ class Sidebar extends React.Component {
 
             <Collapse isOpen={this.state.isOpenSALES}>
               {SALES.map(({ to, name, exact, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
+                <NavItem key={index} className={bem.e('nav-item4')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
                     className="text-uppercase"
@@ -338,7 +338,7 @@ class Sidebar extends React.Component {
             {/* START FINANCE */}
 
             <NavItem
-              className={bem.e('nav-item')}
+              className={bem.e('nav-item5')}
               onClick={this.handleClick('FINANCE')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -362,7 +362,7 @@ class Sidebar extends React.Component {
 
             <Collapse isOpen={this.state.isOpenFINANCE}>
               {FINANCE.map(({ to, name, exact, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
+                <NavItem key={index} className={bem.e('nav-item5')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
                     className="text-uppercase"
@@ -383,7 +383,7 @@ class Sidebar extends React.Component {
             {/* START INVENTORY */}
 
             <NavItem
-              className={bem.e('nav-item')}
+              className={bem.e('nav-item6')}
               onClick={this.handleClick('INVENTORY')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -407,7 +407,7 @@ class Sidebar extends React.Component {
 
             <Collapse isOpen={this.state.isOpenINVENTORY}>
               {INVENTORY.map(({ to, name, exact, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
+                <NavItem key={index} className={bem.e('nav-item6')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
                     className="text-uppercase"
@@ -428,7 +428,7 @@ class Sidebar extends React.Component {
             {/* START LOGISTICS */}
 
             <NavItem
-              className={bem.e('nav-item')}
+              className={bem.e('nav-item7')}
               onClick={this.handleClick('LOGISTICS')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -437,7 +437,7 @@ class Sidebar extends React.Component {
                   <span className=" align-self-start">Logistics</span>
                 </div>
                 <MdKeyboardArrowDown
-                  className={bem.e('nav-item-icon')}
+                  className={bem.e('nav-item-icon7')}
                   style={{
                     padding: 0,
                     transform: this.state.isOpenLOGISTICS
@@ -452,7 +452,7 @@ class Sidebar extends React.Component {
 
             <Collapse isOpen={this.state.isOpenLOGISTICS}>
               {LOGISTICS.map(({ to, name, exact, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
+                <NavItem key={index} className={bem.e('nav-item7')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
                     className="text-uppercase"
@@ -473,7 +473,7 @@ class Sidebar extends React.Component {
 
             {/* START PROCURMENT */}
             <NavItem
-              className={bem.e('nav-item')}
+              className={bem.e('nav-item8')}
               onClick={this.handleClick('PROCURMENT')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -497,7 +497,7 @@ class Sidebar extends React.Component {
 
             <Collapse isOpen={this.state.isOpenPROCURMENT}>
               {PROCURMENT.map(({ to, name, exact, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
+                <NavItem key={index} className={bem.e('nav-item8')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
                     className="text-uppercase"
@@ -517,7 +517,7 @@ class Sidebar extends React.Component {
 
             {/* START MANUFACTURING */}
             <NavItem
-              className={bem.e('nav-item')}
+              className={bem.e('nav-item9')}
               onClick={this.handleClick('MANUFACTURING')}
             >
               <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -541,7 +541,7 @@ class Sidebar extends React.Component {
 
             <Collapse isOpen={this.state.isOpenMANUFACTURING}>
               {MANUFACTURING.map(({ to, name, exact, Icon }, index) => (
-                <NavItem key={index} className={bem.e('nav-item')}>
+                <NavItem key={index} className={bem.e('nav-item9')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
                     className="text-uppercase"
@@ -587,7 +587,7 @@ class Sidebar extends React.Component {
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
                     className="text-uppercase"
-                    tag={NavLink}
+                    tag={NavLink} 
                     to={to}
                     activeClassName="active"
                     exact={exact}

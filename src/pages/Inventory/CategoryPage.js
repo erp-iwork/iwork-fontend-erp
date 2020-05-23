@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Card,  Row, Col,  CardBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBox, faScrewdriver, faShareAlt } from '@fortawesome/free-solid-svg-icons'
+import { faShareAlt } from '@fortawesome/free-solid-svg-icons'
 import './Inventory.scss'
 import PageSpinner from '../../components/PageSpinner'
 import { getExistingCategories } from '../../store/inventory/action'

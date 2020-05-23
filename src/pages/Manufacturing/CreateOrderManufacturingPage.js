@@ -11,7 +11,6 @@ import {
     Input,
     Label,
     Row,
-    Container,
 } from 'reactstrap';
 
 class CreateOrderManufacturingPage extends Component {
