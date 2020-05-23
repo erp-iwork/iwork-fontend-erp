@@ -83,7 +83,6 @@ class CreateOrderManufacturingPage extends Component {
                                 <Row style={{ display: dropdown ? "flex" : "none" }}>
                                     <Col sm={12} md={3}>
                                         <FormGroup >
-
                                             <Label for="exampleSelect" sm={12}>
                                                 Material Name
                                             </Label>
