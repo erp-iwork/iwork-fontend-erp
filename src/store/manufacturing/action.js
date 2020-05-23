@@ -35,3 +35,57 @@ export const getMasterdata = () => (dispatch) => {
         })
 }
 
+export const addManufacturingOrder = (data) => (dispatch) => {
+    dispatch({ type: manuFacturingConstant.REQUEST_POST_MANUFATURE })
+    return Axios.post(API + routes.manufacturing, data, headers)
+      .then(res => {
+        dispatch({ type: manuFacturingConstant.SUCCESS_POST_MANUFATURE, payload: res.data })
+        Swal.fire({
+          title: 'Added Manufacture Order',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      })
+      .catch(err => {
+        if (err.response && err.response.data) {
+            dispatch({
+              type: errorsConstant.GET_ERRORS,
+              payload: err.response.data,
+            });
+          } else {
+            Swal.fire({
+              title: "Error",
+              text: "Connection Problem",
+              icon: "error",
+              showConfirmButton: false,
+              timer: 1000
+            })
+        }
+    })
+}
+
+export const getOrders = () => (dispatch) => {
+  dispatch({ type: manuFacturingConstant.REQUEST_GET_ORDERS })
+  return Axios.post(API + routes.manufacturing, headers)
+    .then(res => {
+      dispatch({ type: manuFacturingConstant.SUCCESS_GET_ORDERS, payload: res.data })
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+          dispatch({
+            type: errorsConstant.GET_ERRORS,
+            payload: err.response.data,
+          });
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "Connection Problem",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 1000
+          })
+      }
+  })
+}
+
