@@ -13,6 +13,7 @@ export const getOrders = () => (dispatch) => {
     dispatch({ type: GET.REQUEST_GET_ORDER })
     return Axios.get(API + routes.purchase, headers)
         .then(res => {
+          console.log(res.data)
             dispatch({
                 type: GET.SUCCESS_GET_ORDER,
                 payload: res.data
@@ -121,7 +122,7 @@ export const addPurchaseOrder = (order) => (dispatch) => {
 
 export const getSingleOrder = (orderID) => (dispatch) => {
     dispatch({ type: GET.REQUEST_GET_SINGLE_ORDER })
-    return Axios.get(API + routes.updatePurchaseStatus + orderID + "/")
+    return Axios.get(API + routes.purchase + orderID + "/")
       .then(res => {
         dispatch({
           type: GET.SUCCESS_GET_SINGLE_ORDER,

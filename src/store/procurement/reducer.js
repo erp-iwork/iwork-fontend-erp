@@ -66,7 +66,7 @@ const procurementReducer = (state = initialState, action) => {
                 ...state,
                 loading_purchase: false,
                 success: true,
-                orders: [ ...state.orders, action.payload.purchaseOrder]
+                orders: [ ...state.orders, action.payload]
             }
         
         case PUT.REQUEST_POST_UPDATE_STATUS:

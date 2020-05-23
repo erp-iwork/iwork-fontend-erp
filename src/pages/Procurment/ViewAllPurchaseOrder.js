@@ -11,10 +11,10 @@ const Order = ({ order, index }) => {
     return (
         <tr align="center">
             <th scope="row">{index + 1}</th>
-            <td>{order.suplier}</td>
+            <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
             <td>{order.purchaseOrderDate}</td>
-            <td>{order.status}</td>
+            <td>{order.status_purchase_order[0].status}</td>
             <td>
                 <Link to={{ pathname: routes.ViewSinglePurchaseOrder, state: order }}>
                     <Button size='sm' color='primary'>

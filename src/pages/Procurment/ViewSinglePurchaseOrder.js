@@ -22,6 +22,7 @@ class ViewSinglePurchaseOrderPage extends Component {
 
     render() {
         if (this.props.loading_single_order === true || this.props.loading_single_order === undefined) return <PageSpinner />
+        console.log(this.props.order)
         return (
             <Page title="View Single Purchase Order" breadcrumbs={[{ name: 'Single Order', active: true }]}>
                 <Card className='padding'>
@@ -52,7 +53,7 @@ class ViewSinglePurchaseOrderPage extends Component {
                                         Status :
                                     </Col>
                                     <Col>
-                                        <b>{this.props.order.status}</b>
+                                        <b>{this.props.order.status_purchase_order[0]['status']}</b>
                                     </Col>
                                 </Row>
                                 <b>Description</b>
@@ -73,11 +74,11 @@ class ViewSinglePurchaseOrderPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.order.items.map((item, index) => (
+                                        {this.props.order.purchase_item_order.map((item, index) => (
                                             <tr key={index}>
                                                 <th scope="row">{index + 1}</th>
-                                                <td>{item['product Name']}</td>
-                                                <td>{item.productPrice}</td>
+                                                <td>{item.masterData.productName}</td>
+                                                <td>{item.masterData.productPrice}</td>
                                             </tr>
                                         ))}
                                     </tbody>

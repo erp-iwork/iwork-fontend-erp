@@ -9,14 +9,15 @@ import { getOrders, updateStatus } from '../../store/procurement/action'
 import routes from '../../config/routes' 
 
 const Order = ({ order, index, deliver }) => {
+    console.log(order)
     return (
         <tbody>
             <tr>
                 <th scope="row">{index + 1}</th>
-                <td>{order.suplier}</td>
+                <td>{order.suplier.suplierName}</td>
                 <td>{order.orderdBy}</td>
                 <td>{order.purchaseOrderDate}</td>
-                <td>{order.status}</td>
+                <td>{"order.status"}</td>
                 <td align='left'>
                     <Button size='sm' color='primary'
                         onClick={() => deliver(order.purchaseOrderNumber)}
