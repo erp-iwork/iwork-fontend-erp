@@ -37,7 +37,7 @@ class ViewAllItems extends Component {
 
     render() {
         if (this.props.loading_items) return <PageSpinner />
-        console.log(this.props.items)
+        if (this.props.items.item_catagory.length === 0) return <h2>No items in this Category yet</h2>
         return (
             <Page
                 title="Inventory"

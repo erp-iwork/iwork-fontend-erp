@@ -86,6 +86,7 @@ class CreateOrdersPage extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (this.props.success && !this.state.lockPage) {
             this.setState({ company: "", description: "", shipmentAddress: "", lockPage: true })
+            this.componentDidMount()
         }
     }
 

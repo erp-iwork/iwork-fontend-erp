@@ -19,7 +19,7 @@ class ViewPurchasedItems extends Component {
                         <Table responsive>
                             <thead>
                                 <tr>
-                                    <th>Order #</th>
+                                    <th>Order #</th> 
                                     <th>Supplier</th>
                                     <th>Recieved By</th>
                                     <th>Warehouse Name</th>
