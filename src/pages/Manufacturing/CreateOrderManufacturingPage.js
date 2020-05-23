@@ -11,6 +11,7 @@ import {
     Input,
     Label,
     Row,
+    Container,
 } from 'reactstrap';
 
 class CreateOrderManufacturingPage extends Component {
@@ -76,49 +77,61 @@ class CreateOrderManufacturingPage extends Component {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-                                <hr />
-                                <Row style={{ display: dropdown ? "flex" : "none" }}>
-                                    <Col sm={12} md={3}>
-                                        <FormGroup >
-                                            <Label for="exampleSelect" sm={12}>
-                                                Material Name
-                                            </Label>
-                                            <Col sm={12}>
-                                                <Input disabled type="text" placeholder='Material Name' name="select" />
-                                            </Col>
-                                        </FormGroup>
+
+                                <div style={{ display: dropdown ? "" : "none" }}>
+                                    <Col>
                                     </Col>
-                                    <Col sm={12} md={3}>
-                                        <FormGroup >
-                                            <Label for="exampleSelect" sm={12}>
-                                                Quantity
+                                    <h4>Bill Of Materials</h4>
+                                    <hr />
+
+
+
+                                    <Row >
+
+                                        <Col sm={12} md={3}>
+                                            <FormGroup >
+                                                <Label for="exampleSelect" sm={12}>
+                                                    Material Name
                                             </Label>
-                                            <Col sm={12}>
-                                                <Input type="number" />
-                                            </Col>
-                                        </FormGroup>
-                                    </Col>
-                                    <Col sm={12} md={3}>
-                                        <FormGroup >
-                                            <Label for="exampleSelect" sm={12}>
-                                                Unit Of Measurment
+                                                <Col sm={12}>
+                                                    <Input disabled type="text" placeholder='Material Name' name="select" />
+                                                </Col>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm={12} md={3}>
+                                            <FormGroup >
+                                                <Label for="exampleSelect" sm={12}>
+                                                    Quantity
                                             </Label>
-                                            <Col sm={12}>
-                                                <Input type="text" disabled />
-                                            </Col>
-                                        </FormGroup>
-                                    </Col>
-                                    <Col sm={12} md={3}>
-                                        <FormGroup >
-                                            <Label for="exampleSelect" sm={12}>
-                                                Price
+                                                <Col sm={12}>
+                                                    <Input type="number" />
+                                                </Col>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm={12} md={3}>
+                                            <FormGroup >
+                                                <Label for="exampleSelect" sm={12}>
+                                                    Unit Of Measurment
                                             </Label>
-                                            <Col sm={12}>
-                                                <Input type="text" disabled />
-                                            </Col>
-                                        </FormGroup>
-                                    </Col>
-                                </Row>
+                                                <Col sm={12}>
+                                                    <Input type="text" disabled />
+                                                </Col>
+                                            </FormGroup>
+                                        </Col>
+                                        <Col sm={12} md={3}>
+                                            <FormGroup >
+                                                <Label for="exampleSelect" sm={12}>
+                                                    Price
+                                            </Label>
+                                                <Col sm={12}>
+                                                    <Input type="text" disabled />
+                                                </Col>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
+                                    <hr />
+                                </div>
+
                                 <FormGroup >
                                     <Label for="examplePassword" sm={12}>
                                         Description
