@@ -21,7 +21,6 @@ class CreateOrderManufacturingPage extends Component {
             dropdown: false,
         }
     }
-
     handleChange = event => {
         const { name, value } = event.target
         this.setState({ [name]: value })
@@ -72,11 +71,13 @@ class CreateOrderManufacturingPage extends Component {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-
                                 <Col sm={12} md={4}>
-                                    <Input name="dropdown" type="checkbox" id="checkbox1" onChange={
-                                        (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
-                                    } >
+                                    <Input name="dropdown" type="checkbox" id="checkbox1"
+                                        // onChange={(event) => this.handleChange({ name: event.target.name,  value: event.target.value})}>
+                                        onChange={
+                                            (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
+                                        } >
+                                        <option value='123'>hello</option>
                                     </Input>
                                 </Col>
                                 <hr />
@@ -154,6 +155,8 @@ class CreateOrderManufacturingPage extends Component {
                                             </Label>
                                             <Col sm={12}>
                                                 <Input type="date" name="select" />
+
+
                                             </Col>
                                         </FormGroup>
                                     </Col>
