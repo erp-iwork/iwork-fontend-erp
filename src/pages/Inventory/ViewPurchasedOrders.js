@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
-import { MdAssignment } from "react-icons/md";
-
-
+import { MdAssignment } from "react-icons/md"
+import { connect } from 'react-redux'
 
 class ViewPurchasedItems extends Component {
     constructor(props) {

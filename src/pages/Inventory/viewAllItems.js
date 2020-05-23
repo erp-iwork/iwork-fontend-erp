@@ -81,7 +81,7 @@ class ViewAllItems extends Component {
                                 <tbody>
                                     {this.props.items.item_catagory.map((item, index) => (
                                         <tr align='left'>
-                                            <th scope="row">1</th>
+                                            <th scope="row">{index + 1}</th>
                                             <td>{item.itemName}</td>
                                             <td>{item.quantity}</td>
                                             <td>{item.retailPrice}</td>

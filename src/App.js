@@ -47,7 +47,7 @@ const ViewAllOrdersLogisticsPage = React.lazy(() => import('./pages/Logistics/Vi
 const ViewPurchaseOrdersLogistics = React.lazy(() => import('./pages/Logistics/ViewPurchaseOrders'));
 const CategoriesInventoryPage = React.lazy(() => import('./pages/Inventory/CategoryPage'));
 const ViewSingleItemPage = React.lazy(() => import('./pages/Inventory/ViewSingleItemPage'));
-const ViewPurchasedItemsPage = React.lazy(() => import('./pages/Inventory/ViewPurchasedItems'));
+const ViewPurchasedItemsPage = React.lazy(() => import('./pages/Inventory/ViewPurchasedOrders'));
 
 const SivPage = React.lazy(() => import('./pages/Inventory/SIV'));
 const CreatePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/CreatePurchaseOrderPage'));
