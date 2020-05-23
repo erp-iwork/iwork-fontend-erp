@@ -9,7 +9,6 @@ import { getOrders, updateStatus } from '../../store/procurement/action'
 import routes from '../../config/routes' 
 
 const Order = ({ order, index, deliver }) => {
-    console.log(order)
     return (
         <tbody>
             <tr>
@@ -17,13 +16,13 @@ const Order = ({ order, index, deliver }) => {
                 <td>{order.suplier.suplierName}</td>
                 <td>{order.orderdBy}</td>
                 <td>{order.purchaseOrderDate}</td>
-                <td>{"order.status"}</td>
+                <td>{order.status_purchase_order[0]['status']}</td>
                 <td align='left'>
                     <Button size='sm' color='primary'
                         onClick={() => deliver(order.purchaseOrderNumber)}
-                        disabled={order.status === "Delivered"? true : false}
+                        disabled={order.status_purchase_order[0]['status'] === "Delivered"? true : false}
                     >
-                        <MdAssignment /> {order.status === "Delivered"? "Delivered" : "Deliever"}
+                        <MdAssignment /> {order.status_purchase_order[0]['status'] === "Delivered"? "Delivered" : "Deliever"}
                     </Button>
                 </td>
                 <td>
@@ -65,7 +64,7 @@ class ViewAllOrdersPage extends Component {
 
     render() {
         if (this.props.loading_orders) return <PageSpinner />
-        const deliveredOrders = this.props.orders.filter((order) => { return order.status === "Created" || order.status === "Delivered" })
+        const deliveredOrders = this.props.orders.filter((order) => { return order.status_purchase_order[0]['status'] === "Created" || order.status_purchase_order[0]['status'] === "Delivered" })
         if (deliveredOrders.length === 0) return <h2>No orders to show</h2>
         return (
             <Page

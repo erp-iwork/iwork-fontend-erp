@@ -4,8 +4,6 @@ import API from "../../api/API";
 import { inventoryConstant, errorsConstant } from "../../constant/constants";
 import headers from "./../headers";
 
-
-
 // ADD ITEM
 export const addItem = (item) => (dispatch) => {
   dispatch({

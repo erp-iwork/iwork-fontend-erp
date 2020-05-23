@@ -3,7 +3,9 @@ const routes = {
     masterData: 'masterdata/',
     purchase: 'purchaseorder/',
     purchaseStatus: 'purchaseorderstatus/',
-    updatePurchaseStatus: 'purchasestatus/'
+    updatePurchaseStatus: 'purchasestatus/',
+    category: '/catagory/',
+    itemByCategory: '/itembycatagory/'
 }
 
 export default routes 

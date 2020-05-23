@@ -66,7 +66,7 @@ const procurementReducer = (state = initialState, action) => {
                 ...state,
                 loading_purchase: false,
                 success: true,
-                orders: [ ...state.orders, action.payload]
+                orders: [ ...state.orders, action.payload.purchaseOrder]
             }
         
         case PUT.REQUEST_POST_UPDATE_STATUS:
@@ -76,7 +76,8 @@ const procurementReducer = (state = initialState, action) => {
             const index = state.orders.findIndex(
                 (item) => item.purchaseOrderNumber === action.payload.order
               )
-              state.orders[index].status = action.payload.status;
+              console.log(state.orders[index].status_purchase_order)
+              state.orders[index].status_purchase_order[0]['status'] = action.payload.status
             return {
                 ...state,
                 success: true,

@@ -235,7 +235,7 @@ class CreatePurchaseOrder extends Component {
                                             <th>ID</th>
                                             <th>Supplier</th>
                                             <th>Orderd By</th>
-                                            <th>Date</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -245,7 +245,7 @@ class CreatePurchaseOrder extends Component {
                                                     <th scope="row">{index + 1}</th>
                                                     <td>{order.suplier.suplierName}</td>
                                                     <td>{order.orderdBy}</td>
-                                                    <td>{order.purchaseOrderDate}</td>
+                                                    <td>{order.status_purchase_order[0]['status']}</td>
                                                 </tr>
                                             )) : ""}
                                     </tbody>
