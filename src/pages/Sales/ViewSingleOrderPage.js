@@ -10,7 +10,7 @@ class ViewSingleOrderPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            details: this.props.location.state 
+            details: this.props.location.state
         }
     }
 
@@ -27,7 +27,7 @@ class ViewSingleOrderPage extends Component {
         return (
             <Page title="View Single Order" breadcrumbs={[{ name: 'Single Order', active: true }]}>
 
-<div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+                <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
                     <div class="step completed">
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-cart"></i></div>
