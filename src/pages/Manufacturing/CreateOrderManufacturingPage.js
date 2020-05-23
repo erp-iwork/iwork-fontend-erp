@@ -16,9 +16,20 @@ import {
 class CreateOrderManufacturingPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            order_items: [],
+            dropdown: false,
+        }
     }
+    handleChange = event => {
+        const { name, value } = event.target
+        this.setState({ [name]: value })
+    }
+
+
     render() {
+        let { dropdown } = this.state
+
         return (
             <Page title="Manufacturing" breadcrumbs={[{ name: 'Create Order', active: true }]}>
                 <Col md={12}>
@@ -33,13 +44,18 @@ class CreateOrderManufacturingPage extends Component {
                                                 Required Product
                                     </Label>
                                             <Col sm={12}>
-                                                <Input type="select" name="select" >
-                                                    <option>Hello</option>
-                                                    <option>Hello</option>
-                                                    <option>Hello</option>
-                                                    <option>Hello</option>
-                                                    <option>Hello</option>
-                                                    <option>Hello</option>
+                                                <Input name="dropdown" type="select" id="checkbox1"
+                                                    onChange={
+                                                        (event) => this.handleChange({ target: { name: event.target.name, value: event.target.value } })
+                                                    } >
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+                                                    <option value='123'>Some Item Name</option>
+
 
                                                 </Input>
                                             </Col>
@@ -60,15 +76,13 @@ class CreateOrderManufacturingPage extends Component {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-
                                 <hr />
-                                <Row>
+                                <Row style={{ display: dropdown ? "flex" : "none" }}>
                                     <Col sm={12} md={3}>
                                         <FormGroup >
-
                                             <Label for="exampleSelect" sm={12}>
                                                 Material Name
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input disabled type="text" placeholder='Material Name' name="select" />
                                             </Col>
@@ -78,7 +92,7 @@ class CreateOrderManufacturingPage extends Component {
                                         <FormGroup >
                                             <Label for="exampleSelect" sm={12}>
                                                 Quantity
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input type="number" />
                                             </Col>
@@ -88,7 +102,7 @@ class CreateOrderManufacturingPage extends Component {
                                         <FormGroup >
                                             <Label for="exampleSelect" sm={12}>
                                                 Unit Of Measurment
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input type="text" disabled />
                                             </Col>
@@ -98,14 +112,13 @@ class CreateOrderManufacturingPage extends Component {
                                         <FormGroup >
                                             <Label for="exampleSelect" sm={12}>
                                                 Price
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input type="text" disabled />
                                             </Col>
                                         </FormGroup>
                                     </Col>
                                 </Row>
-
                                 <FormGroup >
                                     <Label for="examplePassword" sm={12}>
                                         Description
@@ -120,10 +133,9 @@ class CreateOrderManufacturingPage extends Component {
                                 <Row>
                                     <Col sm={12} md={6}>
                                         <FormGroup >
-
                                             <Label for="exampleSelect" sm={12}>
                                                 Manufactuting Start Date
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input type="date" name="select" />
                                             </Col>
@@ -133,7 +145,7 @@ class CreateOrderManufacturingPage extends Component {
                                         <FormGroup >
                                             <Label for="exampleSelect" sm={12}>
                                                 Manufacturing End Date
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input type="date" name="select" />
                                             </Col>

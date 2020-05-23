@@ -19,16 +19,16 @@ const Order = ({ order, index, handleApprove }) => {
                 <td>{order.shipmentAddress}</td>
                 <td>{order.status}</td>
                 <td>
-                {order.status === "Issued"?
-                    <Link to={{ pathname: routes.SivPage, state: { order: order.orderNumber } }}>
-                        <Button size='sm' color='primary'>
-                            <MdAssignment /> SIV Issued
+                    {order.status === "Issued" ?
+                        <Link to={{ pathname: routes.SivPage, state: { order: order.orderNumber } }}>
+                            <Button size='sm' color='primary'>
+                                <MdAssignment /> SIV Issued
                         </Button>
-                    </Link>:
-                    <Button size='sm' color='primary' onClick={() => handleApprove(order.orderNumber)}>
-                        <MdAssignment /> Approve
+                        </Link> :
+                        <Button size='sm' color='primary' onClick={() => handleApprove(order.orderNumber)}>
+                            <MdAssignment /> Approve
                     </Button>
-                }
+                    }
                 </td>
                 <td>
                     <Link to={{ pathname: routes.ViewSingleOrderPage, state: order }}>
@@ -57,7 +57,7 @@ class ViewAllOrdersPage extends Component {
 
     handleApprove = (order) => {
         this.props.updateSiv(order, {
-          'sivStatus': 'Approved',
+            'sivStatus': 'Approved',
         })
         this.setState({ orderNumber: order })
         this.props.getSiv(order);
@@ -87,9 +87,9 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                                {createdOrders.map((item, index) => (
-                                    <Order order={item} key={index} index={index} handleApprove={this.handleApprove} />
-                                ))}
+                            {createdOrders.map((item, index) => (
+                                <Order order={item} key={index} index={index} handleApprove={this.handleApprove} />
+                            ))}
                         </Table>
                     </CardBody>
                 </Card>
@@ -101,7 +101,7 @@ class ViewAllOrdersPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading:state.ordersReducer.loading,
+        loading: state.ordersReducer.loading,
         orders: state.ordersReducer.orders,
         status: state.ordersReducer.status,
         sivs: state.invoiceReducer.sivs,
