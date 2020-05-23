@@ -6,7 +6,6 @@ const initialState = {
   loading_categories: true,
   loading_items: true,
   categories: [],
-  items: []
 };
 
 export default function inventoryReducer(state = initialState, action) {

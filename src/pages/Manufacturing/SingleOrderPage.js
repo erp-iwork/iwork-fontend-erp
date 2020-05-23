@@ -1,33 +1,19 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Col, Row, Card, CardHeader, Table, CardBody } from 'reactstrap';
-import './Sales.scss';
-import { connect } from 'react-redux'
-import { getSingleOrder } from '../../store/order/action'
-import PageSpinner from '../../components/PageSpinner'
+import "./Manufacturing.scss";
 
-class ViewSingleOrderPage extends Component {
+
+class SingleOrderPage extends Component {
     constructor(props) {
-        super(props)
-        this.state = {
-            details: this.props.location.state 
-        }
+        super(props);
+        this.state = {}
     }
-
-    componentDidMount() {
-        if (this.props.location.state) {
-            this.props.getSingleOrder(this.state.details.orderNumber)
-        }
-    }
-
     render() {
-        if (this.props.loading_single_order === true || this.props.loading_single_order === undefined) return <PageSpinner />
-        const { details } = this.state
-        const { order } = this.props
         return (
-            <Page title="View Single Order" breadcrumbs={[{ name: 'Single Order', active: true }]}>
+            <Page title="Manufacturing" breadcrumbs={[{ name: 'Order', active: true }]}>
 
-<div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+                <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
                     <div class="step completed">
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-cart"></i></div>
@@ -59,19 +45,20 @@ class ViewSingleOrderPage extends Component {
                         <h4 class="step-title">Recieved</h4>
                     </div>
                 </div>
+
                 <Card className='padding'>
                     <Row sm={12} md={12} >
                         <Col md={4}>
                             <CardHeader >
                                 Order Information
-                        </CardHeader>
+                            </CardHeader>
                             <CardBody>
                                 <Row>
                                     <Col>
                                         Order Id:
                                     </Col>
                                     <Col>
-                                        <b>{details.orderNumber}</b>
+                                        <b>Something</b>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -79,7 +66,7 @@ class ViewSingleOrderPage extends Component {
                                         Order Date :
                                     </Col>
                                     <Col>
-                                        <b>{details.orderDate}</b>
+                                        <b>Something</b>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -87,11 +74,11 @@ class ViewSingleOrderPage extends Component {
                                         Shipment Address :
                                     </Col>
                                     <Col>
-                                        <b>{details.shipmentAddress}</b>
+                                        <b>Something</b>
                                     </Col>
                                 </Row>
                                 <b>Description</b>
-                                <Col>{details.description}</Col>
+                                <Col>Something</Col>
                             </CardBody>
                         </Col>
                         <Col md={8}>
@@ -108,13 +95,11 @@ class ViewSingleOrderPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {order.item_order.map((item, index) => (
-                                            <tr key={index}>
-                                                <th scope="row">{index + 1}</th>
-                                                <td>{item.itemName}</td>
-                                                <td>{item.quantity}</td>
-                                            </tr>
-                                        ))}
+                                        <tr>
+                                            <th scope="row">Something</th>
+                                            <td>Something</td>
+                                            <td>Something</td>
+                                        </tr>
                                     </tbody>
                                 </Table>
                             </CardBody>
@@ -126,12 +111,4 @@ class ViewSingleOrderPage extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        loading_single_order: state.ordersReducer.loading_single_order,
-        order: state.ordersReducer.order,
-        items: state.ordersReducer.items,
-    }
-}
-
-export default connect(mapStateToProps, { getSingleOrder })(ViewSingleOrderPage)
+export default SingleOrderPage;

@@ -54,7 +54,7 @@ class ViewAllItems extends Component {
                   </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.toggle()}>
-                            Cancel
+                            Close
                     </Button>
                     </ModalFooter>
                 </Modal>
