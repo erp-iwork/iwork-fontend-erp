@@ -12,13 +12,13 @@ class ViewPurchasedItems extends Component {
     }
     render() {
         return (
-            <Page title="Purchased Items" breadcrumbs={[{ name: 'Purchased Items', active: true }]}>
+            <Page title="Inventory" breadcrumbs={[{ name: 'Purchased Items', active: true }]}>
                 <Card className="mb-3">
                     <CardHeader>Purchased Items</CardHeader>
                     <CardBody>
                         <Table responsive>
                             <thead>
-                                <tr >
+                                <tr>
                                     <th>Order #</th>
                                     <th>Supplier</th>
                                     <th>Recieved By</th>
@@ -46,8 +46,6 @@ class ViewPurchasedItems extends Component {
                         </Table>
                     </CardBody>
                 </Card>
-
-
             </Page>
         );
     }

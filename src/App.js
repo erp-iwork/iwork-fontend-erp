@@ -55,6 +55,11 @@ const ViewAllPurchaseOrderPage = React.lazy(() => import('./pages/Procurment/Vie
 const ViewSinglePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/ViewSinglePurchaseOrder'));
 
 
+const CreateOrderManufacturingPage = React.lazy(() => import('./pages/Manufacturing/CreateOrderManufacturingPage'));
+const ViewAllOrdersManufacturingPage = React.lazy(() => import('./pages/Manufacturing/ViewAllOrdersPage'));
+
+
+
 
 
 
@@ -110,7 +115,6 @@ class App extends React.Component {
                 <Route exact path={routes.ViewSingleItemPage} component={ViewSingleItemPage} />
                 <Route exact path={routes.SivPage} component={SivPage} />
 
-
                 {/* FINANCE ROUTES/ */}
                 <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
                 <Route exact path={routes.viewCustomers} component={viewAllCutomersPage} />
@@ -122,8 +126,6 @@ class App extends React.Component {
                 <Route exact path={routes.SupplierInvoice} component={SupplierInvoicePage} />
                 <Route exact path={routes.ViewPurchasedItems} component={ViewPurchasedItemsPage} />
 
-
-
                 {/* LOGISTICS ROUTES */}
                 <Route exact path={routes.ViewOrdersLogistics} component={ViewAllOrdersLogisticsPage} />
                 <Route exact path={routes.ViewPurchaseOrdersLogistics} component={ViewPurchaseOrdersLogistics} />
@@ -133,9 +135,9 @@ class App extends React.Component {
                 <Route exact path={routes.ViewAllPurchaseOrder} component={ViewAllPurchaseOrderPage} />
                 <Route exact path={routes.ViewSinglePurchaseOrder} component={ViewSinglePurchaseOrderPage} />
 
-
-
-
+                {/* MANUFACTURING ROUTES */}
+                <Route exact path={routes.CreateOrderManufacturing} component={CreateOrderManufacturingPage} />
+                <Route exact path={routes.ViewAllOrdersManufacturing} component={ViewAllOrdersManufacturingPage} />
 
                 <Route
                   exact

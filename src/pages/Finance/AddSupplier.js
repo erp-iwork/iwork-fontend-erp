@@ -82,7 +82,7 @@ class AddSupplierPage extends Component {
         if (this.props.loading) return <PageSpinner />
 
         return (
-            <Page title="Add Supplier" breadcrumbs={[{ name: 'Add Supplier', active: true }]}>
+            <Page title="Finance" breadcrumbs={[{ name: 'Add Supplier', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
                     <Card>
                         <CardHeader>ADD A NEW SUPPLIER TO WORK WITH</CardHeader>

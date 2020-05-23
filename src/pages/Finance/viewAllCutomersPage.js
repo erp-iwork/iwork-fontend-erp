@@ -81,7 +81,7 @@ class ViewAllCustomersPage extends Component {
         if (this.props.companys.length === 0) return <h2>No customers have been registered</h2>
         const { customer } = this.state
         return (
-            <Page title="All Customers" breadcrumbs={[{ name: 'All Customer', active: true }]}>
+            <Page title="Finance" breadcrumbs={[{ name: 'All Customer', active: true }]}>
                 <Modal
                     isOpen={this.state.modal}
                     backdrop="static"

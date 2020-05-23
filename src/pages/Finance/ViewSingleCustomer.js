@@ -18,7 +18,7 @@ class ViewSingleCustomer extends Component {
         //if (!this.props.order.orderNumber) return <PageSpinner />
         const { details } = this.state
         return (
-            <Page title="View Single Customer" breadcrumbs={[{ name: 'Single Customer', active: true }]}>
+            <Page title="Finance" breadcrumbs={[{ name: 'Single Customer', active: true }]}>
                 <Card className='padding'>
                     <CardBody>
                         <Row className="singleRow" md={8}>Customer Name: <b className="rowValue">Nib Bank</b></Row>
@@ -26,7 +26,7 @@ class ViewSingleCustomer extends Component {
                         <Row className="singleRow" md={8}>Customer Name: <b className="rowValue">Nib Bank</b></Row>
                         <Row className="singleRow" md={8}>Customer Name: <b className="rowValue">Nib Bank</b></Row>
                         <Row className="singleRow" md={8}>Customer Name: <b className="rowValue">Nib Bank</b></Row>
-                        <Row className="singleRow" md={8}>Customer Name: <b className="rowValue">Nib Bank</b></Row> 
+                        <Row className="singleRow" md={8}>Customer Name: <b className="rowValue">Nib Bank</b></Row>
                     </CardBody>
                 </Card>
             </Page>

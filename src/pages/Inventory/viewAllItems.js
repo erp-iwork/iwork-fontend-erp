@@ -31,7 +31,7 @@ class ViewAllItems extends Component {
     render() {
         return (
             <Page
-                title="All Items"
+                title="Inventory"
                 breadcrumbs={[{ name: 'All Items', active: true }]}
                 className="TablePage">
                 <Modal

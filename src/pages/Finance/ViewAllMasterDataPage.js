@@ -55,7 +55,7 @@ class ViewAllMasterData extends Component {
         const { data } = this.state
         return (
             <Page
-                title="All Master Data"
+                title="Finance"
                 breadcrumbs={[{ name: 'All Master Data', active: true }]}
                 className="TablePage">
                 <Modal
