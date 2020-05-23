@@ -16,9 +16,21 @@ import {
 class CreateOrderManufacturingPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            order_items: [],
+            dropdown: false,
+        }
     }
+
+    handleChange = event => {
+        const { name, value } = event.target
+        this.setState({ [name]: value })
+    }
+
+
     render() {
+        let { dropdown } = this.state
+
         return (
             <Page title="Manufacturing" breadcrumbs={[{ name: 'Create Order', active: true }]}>
                 <Col md={12}>
@@ -61,14 +73,20 @@ class CreateOrderManufacturingPage extends Component {
                                     </Col>
                                 </Row>
 
+                                <Col sm={12} md={4}>
+                                    <Input name="dropdown" type="checkbox" id="checkbox1" onChange={
+                                        (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
+                                    } >
+                                    </Input>
+                                </Col>
                                 <hr />
-                                <Row>
+                                <Row style={{ display: dropdown ? "flex" : "none" }}>
                                     <Col sm={12} md={3}>
                                         <FormGroup >
 
                                             <Label for="exampleSelect" sm={12}>
                                                 Material Name
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input disabled type="text" placeholder='Material Name' name="select" />
                                             </Col>
@@ -78,7 +96,7 @@ class CreateOrderManufacturingPage extends Component {
                                         <FormGroup >
                                             <Label for="exampleSelect" sm={12}>
                                                 Quantity
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input type="number" />
                                             </Col>
@@ -88,7 +106,7 @@ class CreateOrderManufacturingPage extends Component {
                                         <FormGroup >
                                             <Label for="exampleSelect" sm={12}>
                                                 Unit Of Measurment
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input type="text" disabled />
                                             </Col>
@@ -98,13 +116,14 @@ class CreateOrderManufacturingPage extends Component {
                                         <FormGroup >
                                             <Label for="exampleSelect" sm={12}>
                                                 Price
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input type="text" disabled />
                                             </Col>
                                         </FormGroup>
                                     </Col>
                                 </Row>
+
 
                                 <FormGroup >
                                     <Label for="examplePassword" sm={12}>
@@ -123,7 +142,7 @@ class CreateOrderManufacturingPage extends Component {
 
                                             <Label for="exampleSelect" sm={12}>
                                                 Manufactuting Start Date
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input type="date" name="select" />
                                             </Col>
@@ -133,7 +152,7 @@ class CreateOrderManufacturingPage extends Component {
                                         <FormGroup >
                                             <Label for="exampleSelect" sm={12}>
                                                 Manufacturing End Date
-                                    </Label>
+                                            </Label>
                                             <Col sm={12}>
                                                 <Input type="date" name="select" />
                                             </Col>
