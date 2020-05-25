@@ -1,17 +1,13 @@
-import { AnnouncementCard, TodosCard } from '../../components/Card';
 import HorizontalAvatarList from '../../components/HorizontalAvatarList';
 import Page from '../../components/Page';
 import ProductMedia from '../../components/ProductMedia';
-import SupportTicket from '../../components/SupportTicket';
 import UserProgressTable from '../../components/UserProgressTable';
-import { IconWidget, NumberWidget } from '../../components/Widget';
+import { IconWidget } from '../../components/Widget';
 import { getStackLineChart, stackLineChartOptions } from '../../demos/chartjs';
 import {
   avatarsData,
   chartjs,
   productsData,
-  supportTicketsData,
-  todosData,
   userProgressTableData,
 } from '../../demos/dashboardPage';
 import React from 'react';
@@ -26,10 +22,8 @@ import {
   MdShowChart,
   MdThumbUp,
 } from 'react-icons/md';
-import InfiniteCalendar from 'react-infinite-calendar';
 import {
   Badge,
-  Button,
   Card,
   CardBody,
   CardDeck,
@@ -43,12 +37,7 @@ import {
 } from 'reactstrap';
 import { getColor } from '../../utils/colors';
 
-const today = new Date();
-const lastWeek = new Date(
-  today.getFullYear(),
-  today.getMonth(),
-  today.getDate() - 7,
-);
+
 
 class DashboardPage extends React.Component {
   componentDidMount() {
@@ -58,8 +47,6 @@ class DashboardPage extends React.Component {
 
   render() {
     const primaryColor = getColor('primary');
-    const secondaryColor = getColor('secondary');
-    const infoColor = getColor('info');
 
 
     return (
@@ -68,60 +55,26 @@ class DashboardPage extends React.Component {
         title="IT"
         breadcrumbs={[{ name: 'Dashboard', active: true }]}
       >
-        <Row>
-          <Col lg={3} md={6} sm={6} xs={12}>
-            <NumberWidget
-              title="Total Profit"
-              subtitle="This month"
-              number="9.8k"
-              color="primary"
-              progress={{
-                value: 75,
-                label: 'Last month',
-              }}
-            />
-          </Col>
+                <CardDeck style={{ marginBottom: '1rem' }}>
+          <Card body style={{ overflowX: 'auto','paddingBottom':'15px','height': 'fit-content','paddingTop': 'inherit'}}>
+          <CardHeader>Employees That Has Accounts</CardHeader>
 
-          <Col lg={3} md={6} sm={6} xs={12}>
-            <NumberWidget
-              title="Monthly Visitors"
-              subtitle="This month"
-              number="5,400"
-              color="primary"
-              progress={{
-                value: 45,
-                label: 'Last month',
-              }}
+            <HorizontalAvatarList
+              avatars={avatarsData}
+              avatarProps={{ size: 50 }}
             />
-          </Col>
+          </Card>
 
-          <Col lg={3} md={6} sm={6} xs={12}>
-            <NumberWidget
-              title="New Users"
-              subtitle="This month"
-              number="3,400"
-              color="primary"
-              progress={{
-                value: 90,
-                label: 'Last month',
-              }}
+          <Card body style={{ overflowX: 'auto','paddingBottom':'15px','height': 'fit-content','paddingTop': 'inherit'}}>
+          <CardHeader>Employees That Has No Accounts</CardHeader>
+
+            <HorizontalAvatarList
+              avatars={avatarsData}
+              avatarProps={{ size: 50 }}
+              reversed
             />
-          </Col>
-
-          <Col lg={3} md={6} sm={6} xs={12}>
-            <NumberWidget
-              title="Bounce Rate"
-              subtitle="This month"
-              number="38%"
-              color="primary"
-              progress={{
-                value: 60,
-                label: 'Last month',
-              }}
-            />
-          </Col>
-        </Row>
-
+          </Card>
+        </CardDeck>
         <Row>
           <Col lg="8" md="12" sm="12" xs="12">
             <Card>
@@ -311,112 +264,9 @@ class DashboardPage extends React.Component {
           </Col>
         </Row>
 
-        <Row>
-          <Col lg="6" md="12" sm="12" xs="12">
-            <InfiniteCalendar
-              selected={today}
-              minDate={lastWeek}
-              width="100%"
-              theme={{
-                accentColor: primaryColor,
-                floatingNav: {
-                  background: primaryColor,
-                  chevron: secondaryColor,
-                  color: '#FFF',
-                },
-                headerColor: primaryColor,
-                selectionColor: primaryColor,
-                textColor: {
-                  active: '#FFF',
-                  default: '#333',
-                },
-                todayColor: infoColor,
-                weekdayColor: primaryColor,
-              }}
-            />
-          </Col>
 
-          <Col lg="6" md="12" sm="12" xs="12">
-            <InfiniteCalendar
-              selected={today}
-              minDate={lastWeek}
-              width="100%"
-              theme={{
-                accentColor: primaryColor,
-                floatingNav: {
-                  background: secondaryColor,
-                  chevron: primaryColor,
-                  color: '#FFF',
-                },
-                headerColor: primaryColor,
-                selectionColor: secondaryColor,
-                textColor: {
-                  active: '#FFF',
-                  default: '#333',
-                },
-                todayColor: secondaryColor,
-                weekdayColor: primaryColor,
-              }}
-            />
-          </Col>
 
-        </Row>
 
-        <CardDeck style={{ marginBottom: '1rem' }}>
-          <Card body style={{ overflowX: 'auto','paddingBottom':'15px','height': 'fit-content','paddingTop': 'inherit'}}>
-            <HorizontalAvatarList
-              avatars={avatarsData}
-              avatarProps={{ size: 50 }}
-            />
-          </Card>
-
-          <Card body style={{ overflowX: 'auto','paddingBottom':'15px','height': 'fit-content','paddingTop': 'inherit'}}>
-            <HorizontalAvatarList
-              avatars={avatarsData}
-              avatarProps={{ size: 50 }}
-              reversed
-            />
-          </Card>
-        </CardDeck>
-
-        <Row>
-          <Col lg="4" md="12" sm="12" xs="12">
-            <AnnouncementCard
-              color="gradient-secondary"
-              header="Announcement"
-              avatarSize={60}
-              name="Jamy"
-              date="1 hour ago"
-              text="Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy euismod tinciduntut laoreet doloremagna"
-              buttonProps={{
-                children: 'show',
-              }}
-              style={{ height: 500 }}
-            />
-          </Col>
-
-          <Col lg="4" md="12" sm="12" xs="12">
-            <Card>
-              <CardHeader>
-                <div className="d-flex justify-content-between align-items-center">
-                  <span>Support Tickets</span>
-                  <Button>
-                    <small>View All</small>
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardBody>
-                {supportTicketsData.map(supportTicket => (
-                  <SupportTicket key={supportTicket.id} {...supportTicket} />
-                ))}
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col lg="4" md="12" sm="12" xs="12">
-            <TodosCard todos={todosData} />
-          </Col>
-        </Row>
       </Page>
     );
   }

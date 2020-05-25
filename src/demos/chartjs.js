@@ -7,14 +7,14 @@ export const getStackLineChart = ({ labels, data }) => canvas => {
   gradient.addColorStop(
     0,
     ChartJS.helpers
-      .color('#00c9ff')
+      .color('#11669F')
       .alpha(1)
       .rgbString()
   );
   gradient.addColorStop(
     1,
     ChartJS.helpers
-      .color('#00c9ff')
+      .color('#11669F')
       .alpha(0.2)
       .rgbString()
   );
