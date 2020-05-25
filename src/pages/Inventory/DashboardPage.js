@@ -1,9 +1,7 @@
 
 import Page from '../../components/Page';
 import { NumberWidget } from '../../components/Widget';
-import {
-  chartjs,
-} from '../../demos/dashboardPage';
+import { chartjs } from '../../demos/dashboardPage';
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
