@@ -17,20 +17,11 @@ class ViewSingleDelieveredOrderPage extends Component {
                             <CardHeader>Order Information</CardHeader>
                             <CardBody>
                                 <Row>
-                                    <Col>
-                                        Order Id:
-                                    </Col>
-                                    <Col>
-                                        <b>Something</b>
-                                    </Col>
+                                    <Col>Order Id:</Col>
+                                    <Col><b>Something</b></Col>
                                 </Row>
-                                <Row>
-                                    <Col>
-                                        Order Date :
-                                    </Col>
-                                    <Col>
-                                        <b>Something</b>
-                                    </Col>
+                                <Row><Col>Order Date :</Col>
+                                    <Col><b>Something</b></Col>
                                 </Row>
                                 <Row>
                                     <Col>
@@ -55,8 +46,6 @@ class ViewSingleDelieveredOrderPage extends Component {
                                             <th>Quantity</th>
                                             <th>Old Price</th>
                                             <th>Update Price</th>
-
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,7 +56,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                                             <td>Hello</td>
                                             <td md={2}>
                                                 <div class='col-xs-2'>
-                                                    <Input />
+                                                    <Input type='number' />
                                                 </div>
                                             </td>
                                         </tr>
