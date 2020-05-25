@@ -66,7 +66,7 @@ class ViewAllOrdersPage extends Component {
     render() {
         if (this.props.loading) return <PageSpinner />
         const createdOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === "Created" || order.orderNumber === this.state.orderNumber }) : "";
-        if (createdOrders.length === 0) return <h2>No orders to show</h2>
+        if (createdOrders.length === 0) return <h4>No orders to show</h4>
         return (
             <Page
                 title="Inventory"

@@ -38,8 +38,21 @@ const AddCustomerPage = React.lazy(() => import('./pages/Finance/AddCustomerPage
 const AddSupplierPage = React.lazy(() => import('./pages/Finance/AddSupplier'))
 const viewAllCutomersPage = React.lazy(() => import('./pages/Finance/viewAllCutomersPage'));
 const viewAllSuppliersPage = React.lazy(() => import('./pages/Finance/viewAllSuppliersPage'));
+const ViewDelieveredOrdersPage = React.lazy(() => import('./pages/Finance/ViewDelieveredOrders'));
+const ViewSingleDelieveredOrderPage = React.lazy(() => import('./pages/Finance/ViewSingleDelieveredOrder'));
 const SupplierInvoicePage = React.lazy(() => import('./pages/Finance/SupplierInvoicePage'));
+
+// Dashboards
 const FinanceDashboard = React.lazy(() => import('./pages/Finance/DashboardPage'));
+const HRDashboard = React.lazy(() => import('./pages/HR/DashboardPage'));
+const InventoryDashboard = React.lazy(() => import('./pages/Inventory/DashboardPage'));
+const ITDashboard = React.lazy(() => import('./pages/IT/DashboardPage'));
+const LogisticsDashboard = React.lazy(() => import('./pages/Logistics/DashboardPage'));
+const ManufacturingDashboard = React.lazy(() => import('./pages/Manufacturing/DashboardPage'));
+const ProcurmentDashboard = React.lazy(() => import('./pages/Procurment/DashboardPage'));
+const SalesDashboard = React.lazy(() => import('./pages/Sales/DashboardPage'));
+
+
 
 const ViewAllOrdersFinancePage = React.lazy(() => import('./pages/Finance/ViewAllOrdersPage'));
 const AddMasterDataPage = React.lazy(() => import('./pages/Finance/AddMasterDataPage'));
@@ -91,20 +104,24 @@ class App extends React.Component {
                 <Route exact path="/badges" component={BadgePage} />
 
                 {/* HR ROUTES/ */}
+                <Route exact path={routes.HRDashboard} component={HRDashboard} />
                 <Route exact path={routes.allEmployees} component={AllEmployeePage} />
                 <Route exact path={routes.addEmployee} component={AddEmployeePage} />
                 <Route exact path={routes.employeeProfile} component={EmployeeProfilePage} />
 
                 {/* IT ROUTES/ */}
+                <Route exact path={routes.ITDashboard} component={ITDashboard} />
                 <Route exact path={routes.itEmployeePage} component={ITAllEmployeesPage} />
                 <Route exact path={routes.addAccount} component={ITAddaccount} />
 
                 {/* SALES ROUTES */}
+                <Route exact path={routes.SalesDashboard} component={SalesDashboard} />
                 <Route exact path={routes.createOrderPage} component={CreateOrdersPage} />
                 <Route exact path={routes.ViewAllOrdersPage} component={ViewAllOrdersPage} />
                 <Route exact path={routes.ViewSingleOrderPage} component={ViewSingleOrderPage} />
 
                 {/* INVENTORY ROUTES/ */}
+                <Route exact path={routes.InventoryDashboard} component={InventoryDashboard} />
                 <Route exact path={routes.ViewAllItems} component={viewAllItemsPage} />
                 <Route exact path={routes.ViewOrdersInventory} component={ViewAllOrdersInventoryPage} />
                 <Route exact path={routes.CategoriesInventoryPage} component={CategoriesInventoryPage} />
@@ -113,9 +130,8 @@ class App extends React.Component {
                 <Route exact path={routes.GRVPage} component={GRVPage} />
 
                 {/* FINANCE ROUTES/ */}
-                <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
                 <Route exact path={routes.FinanceDashboard} component={FinanceDashboard} />
-
+                <Route exact path={routes.AddCustomer} component={AddCustomerPage} />
                 <Route exact path={routes.viewCustomers} component={viewAllCutomersPage} />
                 <Route exact path={routes.viewSuppliers} component={viewAllSuppliersPage} />
                 <Route exact path={routes.AddSupplier} component={AddSupplierPage} />
@@ -124,22 +140,28 @@ class App extends React.Component {
                 <Route exact path={routes.ViewAllMasterData} component={ViewAllMasterDataPage} />
                 <Route exact path={routes.SupplierInvoice} component={SupplierInvoicePage} />
                 <Route exact path={routes.ViewPurchasedItems} component={ViewPurchasedItemsPage} />
+                <Route exact path={routes.ViewDelieveredOrders} component={ViewDelieveredOrdersPage} />
+                <Route exact path={routes.ViewSingleDelieveredOrder} component={ViewSingleDelieveredOrderPage} />
+
 
                 {/* LOGISTICS ROUTES */}
+                <Route exact path={routes.LogisticsDashboard} component={LogisticsDashboard} />
                 <Route exact path={routes.ViewOrdersLogistics} component={ViewAllOrdersLogisticsPage} />
                 <Route exact path={routes.ViewPurchaseOrdersLogistics} component={ViewPurchaseOrdersLogistics} />
 
                 {/* PROCURMENT ROUTES */}
+                <Route exact path={routes.ProcurmentDashboard} component={ProcurmentDashboard} />
                 <Route exact path={routes.CreatePurchaseOrder} component={CreatePurchaseOrderPage} />
                 <Route exact path={routes.ViewAllPurchaseOrder} component={ViewAllPurchaseOrderPage} />
                 <Route exact path={routes.ViewSinglePurchaseOrder} component={ViewSinglePurchaseOrderPage} />
 
                 {/* MANUFACTURING ROUTES */}
+                <Route exact path={routes.ManufacturingDashboard} component={ManufacturingDashboard} />
                 <Route exact path={routes.CreateOrderManufacturing} component={CreateOrderManufacturingPage} />
                 <Route exact path={routes.ViewAllOrdersManufacturing} component={ViewAllOrdersManufacturingPage} />
                 <Route exact path={routes.ViewSingleOrderManufacturing} component={SingleOrderManufacturingPage} />
 
-                
+
 
                 <Route
                   exact
