@@ -41,7 +41,7 @@ class ViewAllPurchaseOrderPage extends Component {
         if (this.props.loading_orders) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
         return (
-            <Page title="View All Sales Orders" breadcrumbs={[{ name: 'All Sales Orders', active: true }]}>
+            <Page title="Procurment" breadcrumbs={[{ name: 'All Sales Orders', active: true }]}>
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>
                     <CardBody>

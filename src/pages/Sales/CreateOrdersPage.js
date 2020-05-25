@@ -117,7 +117,7 @@ class CreateOrdersPage extends Component {
             shipmentAddress
         } = this.state
         return (
-            <Page title="Create Sales Order" breadcrumbs={[{ name: 'Create Sales Order', active: true }]}>
+            <Page title="Sales" breadcrumbs={[{ name: 'Create Sales Order', active: true }]}>
                 <Row>
                     <Col md={6} sm={12}>
                         <Card>

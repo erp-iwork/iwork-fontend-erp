@@ -124,7 +124,7 @@ class CreatePurchaseOrder extends Component {
             supplier, description
         } = this.state
         return (
-            <Page title="Create Purchase Order" breadcrumbs={[{ name: 'Create Purchase Order', active: true }]}>
+            <Page title="Procurment" breadcrumbs={[{ name: 'Create Purchase Order', active: true }]}>
                 <Row>
                     <Col md={6} sm={12}>
                         <Card>
@@ -226,7 +226,7 @@ class CreatePurchaseOrder extends Component {
                     </Col>
                     <Col md={6} sm={12}>
                         <Card >
-                            <CardHeader>Recent Orders</CardHeader>
+                            <CardHeader>Recent Purchase Orders</CardHeader>
                             <CardBody>
                                 <Table responsive className="scrollTable">
                                     <thead>
@@ -262,7 +262,7 @@ const mapStateToProps = (state) => {
     return {
         loading_orders: state.procurementReducer.loading_orders,
         loading_suppliers: state.procurementReducer.loading_suppliers,
-        loading_masterdata:  state.procurementReducer.loading_masterdata,
+        loading_masterdata: state.procurementReducer.loading_masterdata,
         loading_purchase: state.procurementReducer.loading_purchase,
         errors: state.procurementReducer.errors,
         orders: state.procurementReducer.orders,
