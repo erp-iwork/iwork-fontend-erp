@@ -1,17 +1,13 @@
-import { AnnouncementCard, TodosCard } from '../../components/Card';
 import HorizontalAvatarList from '../../components/HorizontalAvatarList';
 import Page from '../../components/Page';
 import ProductMedia from '../../components/ProductMedia';
-import SupportTicket from '../../components/SupportTicket';
 import UserProgressTable from '../../components/UserProgressTable';
-import { IconWidget, NumberWidget } from '../../components/Widget';
+import { IconWidget } from '../../components/Widget';
 import { getStackLineChart, stackLineChartOptions } from '../../demos/chartjs';
 import {
   avatarsData,
   chartjs,
   productsData,
-  supportTicketsData,
-  todosData,
   userProgressTableData,
 } from '../../demos/dashboardPage';
 import React from 'react';
@@ -26,10 +22,8 @@ import {
   MdShowChart,
   MdThumbUp,
 } from 'react-icons/md';
-import InfiniteCalendar from 'react-infinite-calendar';
 import {
   Badge,
-  Button,
   Card,
   CardBody,
   CardDeck,
@@ -43,12 +37,7 @@ import {
 } from 'reactstrap';
 import { getColor } from '../../utils/colors';
 
-const today = new Date();
-const lastWeek = new Date(
-  today.getFullYear(),
-  today.getMonth(),
-  today.getDate() - 7,
-);
+
 
 class DashboardPage extends React.Component {
   componentDidMount() {
@@ -58,8 +47,6 @@ class DashboardPage extends React.Component {
 
   render() {
     const primaryColor = getColor('primary');
-    const secondaryColor = getColor('secondary');
-    const infoColor = getColor('info');
 
 
     return (

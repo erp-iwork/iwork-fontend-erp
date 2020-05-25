@@ -1,44 +1,23 @@
-import { AnnouncementCard, TodosCard } from '../../components/Card';
-import HorizontalAvatarList from '../../components/HorizontalAvatarList';
+
 import Page from '../../components/Page';
 import ProductMedia from '../../components/ProductMedia';
-import SupportTicket from '../../components/SupportTicket';
 import UserProgressTable from '../../components/UserProgressTable';
-import { IconWidget, NumberWidget } from '../../components/Widget';
-import { getStackLineChart, stackLineChartOptions } from '../../demos/chartjs';
+import { NumberWidget } from '../../components/Widget';
 import {
-  avatarsData,
-  chartjs,
   productsData,
-  supportTicketsData,
-  todosData,
   userProgressTableData,
 } from '../../demos/dashboardPage';
 import React from 'react';
 import { Bar, Pie, Line } from 'react-chartjs-2';
 import {
-  MdBubbleChart,
-  MdInsertChart,
   MdPersonPin,
-  MdPieChart,
-  MdRateReview,
-  MdShare,
-  MdShowChart,
-  MdThumbUp,
 } from 'react-icons/md';
 import InfiniteCalendar from 'react-infinite-calendar';
 import {
-  Badge,
-  Button,
   Card,
   CardBody,
-  CardDeck,
-  CardGroup,
   CardHeader,
-  CardTitle,
   Col,
-  ListGroup,
-  ListGroupItem,
   Row,
 } from 'reactstrap';
 import { getColor } from '../../utils/colors';

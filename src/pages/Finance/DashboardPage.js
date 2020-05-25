@@ -25,62 +25,8 @@ import {
   Row,
 } from 'reactstrap';
 import { getColor } from '../../utils/colors';
-import { randomNum } from '../../utils/demos';
 
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-const genLineData = (moreData = {}, moreData2 = {}) => {
-  return {
-    labels: MONTHS,
-    datasets: [
-      {
-        label: 'This Year',
-        backgroundColor: getColor('primary'),
-        borderColor: getColor('primary'),
-        borderWidth: 2,
-        data: [
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-
-        ],
-        ...moreData,
-      },
-      {
-        label: 'Last Year',
-        backgroundColor: getColor('secondary'),
-        borderColor: getColor('secondary'),
-        borderWidth: 1,
-        data: [
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-
-        ],
-        ...moreData2,
-      },
-    ],
-  };
-};
 
 class DashboardPage extends React.Component {
   componentDidMount() {
