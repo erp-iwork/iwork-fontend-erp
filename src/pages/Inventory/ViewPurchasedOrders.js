@@ -18,7 +18,7 @@ const Order = ({ order, index, handleApprove }) => {
             <td>{order.status_purchase_order[0]['status']}</td>
             <td align="left">
                 {order.status_purchase_order[0]['status'] === "Invoiced" ?
-                    <Link to={{ pathname: routes.SivPage, state: { order: order.purchaseOrderNumber } }}>
+                    <Link to={{ pathname: routes.GRVPage, state: { order: order.purchaseOrderNumber } }}>
                         <Button size='sm' color='primary'>
                             <MdAssignment /> SIV Issued
                     </Button>

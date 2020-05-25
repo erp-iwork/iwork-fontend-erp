@@ -281,3 +281,40 @@ export const updateStatus = (purchaseOrderNumber) => (dispatch) => {
 // siv_item: Array(1)
 // 0: {itemName: "table", quantity: 1}
 
+export const getGRV = (purchaseOrderNumber) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_GRV })
+  return axios.get(API + routes.purchase + purchaseOrderNumber + '/')
+    .then(({ data }) => {
+      const items = data.purchase_item_order.map(item => {
+        return {
+          itemName: item.masterData.productName,
+          quantity: item.purchaseQuantity,
+          price: item.masterData.productPrice
+        }
+      })
+      const payload = {
+        order: data.purchaseOrderNumber,
+        date: data.purchaseOrderDate,
+        GRVID: data.purchaseOrderNumber,
+        GRVStatus: data.status_purchase_order[0]['status'],
+        GRVItems: items
+      }
+      dispatch({ type: inventoryConstant.SUCCESS_GET_GRV, payload })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}

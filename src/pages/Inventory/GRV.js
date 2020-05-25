@@ -4,7 +4,7 @@ import SIVPdf from './Printable_SIV';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import Page from '../../components/Page';
 import { Button, CardBody, Col, Table } from 'reactstrap'
-import { getSiv } from '../../store/Siv/action'
+import { getGRV } from '../../store/inventory/action'
 import { connect } from 'react-redux'
 import PageSpinner from '../../components/PageSpinner'
 
@@ -80,17 +80,18 @@ const classes = {
     fontSize: 12
   },
 };
-class SIV extends React.Component {
+class GRV extends React.Component {
   componentDidMount() {
-    this.props.getSiv(this.props.location.state.order)
+    this.props.getGRV(this.props.location.state.order)
   }
   submit(e) {
     e.preventDefault();
   }
 
   render() {
-    if (this.props.loading) return <PageSpinner />
-    console.log(this.props.sivs)
+    if (this.props.loading_grv) return <PageSpinner />
+    console.log(this.props.grv)
+    const { grv } = this.props
     return (
       <Page
         title="GRV"
@@ -122,9 +123,7 @@ class SIV extends React.Component {
                   {/* <img src={Logo} alt="" style={classes.logo} /> */}
                   <Typography
                     variant="h6"
-
                     style={classes.text}
-
                   >
                     NAZO
                     </Typography>
@@ -136,14 +135,13 @@ class SIV extends React.Component {
                   variant="body2"
                   gutterBottom
                 >
-                  <b>GRV Status : </b> {this.props.sivs.sivStatus}
+                  <b>GRV Status : </b> {grv.GRVStatus}
                 </Typography>
                 <Typography
                   style={classes.text}
                   variant="body2"
                   gutterBottom
                 >
-                  <b>Warehouse Name : </b> {this.props.sivs.warehouseName}
                 </Typography>
                 <Typography
                   style={classes.text}
@@ -157,7 +155,7 @@ class SIV extends React.Component {
                   variant="body2"
                   gutterBottom
                 >
-                  <b>SIV Date :</b> {this.props.sivs.sivDate}
+                  <b>SIV Date :</b> {grv.date}
                 </Typography>
               </div>
             </div>
@@ -175,13 +173,12 @@ class SIV extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.props.sivs.siv_item.map((item, index) => (
+                  {grv.GRVItems.map((item, index) => (
                     <tr>
                       <th scope="row">{index + 1}</th>
                       <td>{item.itemName}</td>
                       <td>{item.quantity}</td>
                       <td>{item.price}</td>
-
                     </tr>
                   ))}
                 </tbody>
@@ -268,12 +265,10 @@ class SIV extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.sivReducer.loading,
-    sivs: state.sivReducer.sivs,
-    siv_item: state.sivReducer.siv_item,
-    success: state.sivReducer.success,
+    loading_grv: state.inventoryReducer.loading_grv,
+    grv: state.inventoryReducer.grv
   }
 }
 
 
-export default connect(mapStateToProps, { getSiv })(SIV)
+export default connect(mapStateToProps, { getGRV })(GRV)
