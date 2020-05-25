@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 const Order = ({ order, index, handleApprove }) => {
     return (
         <tr align="left">
-            <td scope="row">{index + 1}</td>
+            <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
             <td>{order.purchaseOrderDate}</td>

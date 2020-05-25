@@ -23,16 +23,9 @@ class ViewSingleDelieveredOrderPage extends Component {
                                 <Row><Col>Order Date :</Col>
                                     <Col><b>Something</b></Col>
                                 </Row>
-                                <Row>
-                                    <Col>
-                                        Shipment Address :
-                                    </Col>
-                                    <Col>
-                                        <b>Something</b>
-                                    </Col>
-                                </Row>
-                                <b>Description</b>
-                                <Col>Something</Col>
+                                <Row><Col> Shipment Address :</Col>
+                                    <Col><b>Something</b></Col>
+                                </Row><b>Description</b><Col>Something</Col>
                             </CardBody>
                         </Col>
                         <Col md={8}>

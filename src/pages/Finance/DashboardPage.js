@@ -1,65 +1,95 @@
-import { AnnouncementCard, TodosCard } from '../../components/Card';
-import HorizontalAvatarList from '../../components/HorizontalAvatarList';
 import Page from '../../components/Page';
-import ProductMedia from '../../components/ProductMedia';
-import SupportTicket from '../../components/SupportTicket';
-import UserProgressTable from '../../components/UserProgressTable';
-import { IconWidget, NumberWidget } from '../../components/Widget';
+
+import { NumberWidget } from '../../components/Widget';
 import { getStackLineChart, stackLineChartOptions } from '../../demos/chartjs';
 import {
-  avatarsData,
   chartjs,
-  productsData,
-  supportTicketsData,
-  todosData,
-  userProgressTableData,
 } from '../../demos/dashboardPage';
 import React from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import {
   MdBubbleChart,
   MdInsertChart,
-  MdPersonPin,
   MdPieChart,
-  MdRateReview,
-  MdShare,
   MdShowChart,
-  MdThumbUp,
 } from 'react-icons/md';
-import InfiniteCalendar from 'react-infinite-calendar';
 import {
   Badge,
-  Button,
   Card,
   CardBody,
-  CardDeck,
-  CardGroup,
-  CardHeader,
   CardTitle,
+  CardHeader,
   Col,
   ListGroup,
   ListGroupItem,
   Row,
 } from 'reactstrap';
 import { getColor } from '../../utils/colors';
+import { randomNum } from '../../utils/demos';
 
-const today = new Date();
-const lastWeek = new Date(
-  today.getFullYear(),
-  today.getMonth(),
-  today.getDate() - 7,
-);
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+const genLineData = (moreData = {}, moreData2 = {}) => {
+  return {
+    labels: MONTHS,
+    datasets: [
+      {
+        label: 'This Year',
+        backgroundColor: getColor('primary'),
+        borderColor: getColor('primary'),
+        borderWidth: 2,
+        data: [
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+
+        ],
+        ...moreData,
+      },
+      {
+        label: 'Last Year',
+        backgroundColor: getColor('secondary'),
+        borderColor: getColor('secondary'),
+        borderWidth: 1,
+        data: [
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+
+        ],
+        ...moreData2,
+      },
+    ],
+  };
+};
 
 class DashboardPage extends React.Component {
   componentDidMount() {
     // this is needed, because InfiniteCalendar forces window scroll
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }
 
   render() {
     const primaryColor = getColor('primary');
-    const secondaryColor = getColor('secondary');
-    const infoColor = getColor('info');
 
 
     return (
@@ -76,7 +106,7 @@ class DashboardPage extends React.Component {
               number="9.8k"
               color="primary"
               progress={{
-                value: 75,
+                value: 79,
                 label: 'Last month',
               }}
             />
@@ -84,7 +114,7 @@ class DashboardPage extends React.Component {
 
           <Col lg={3} md={6} sm={6} xs={12}>
             <NumberWidget
-              title="Monthly Visitors"
+              title="Monthly Purchases"
               subtitle="This month"
               number="5,400"
               color="primary"
@@ -97,7 +127,7 @@ class DashboardPage extends React.Component {
 
           <Col lg={3} md={6} sm={6} xs={12}>
             <NumberWidget
-              title="New Users"
+              title="Total Revenue"
               subtitle="This month"
               number="3,400"
               color="primary"
@@ -123,7 +153,7 @@ class DashboardPage extends React.Component {
         </Row>
 
         <Row>
-          <Col lg="8" md="12" sm="12" xs="12">
+          <Col md="8" sm="12" xs="12">
             <Card>
               <CardHeader>
                 Total Revenue{' '}
@@ -143,20 +173,24 @@ class DashboardPage extends React.Component {
               </CardBody>
               <ListGroup flush>
                 <ListGroupItem>
-                  <MdInsertChart size={25} color={primaryColor} /> Cost of sales{' '}
-                  <Badge color="secondary">$3000</Badge>
+                  <MdInsertChart size={25} color={primaryColor} /> Cost of Sales{' '}
+                  <Badge color="secondary">3000 ETB</Badge>
                 </ListGroupItem>
                 <ListGroupItem>
                   <MdBubbleChart size={25} color={primaryColor} /> Management
-                  costs <Badge color="secondary">$1200</Badge>
+                  Costs <Badge color="secondary">1200 ETB</Badge>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <MdShowChart size={25} color={primaryColor} /> Financial costs{' '}
-                  <Badge color="secondary">$800</Badge>
+                  <MdShowChart size={25} color={primaryColor} /> Logistics Costs{' '}
+                  <Badge color="secondary">8004 ETB</Badge>
                 </ListGroupItem>
                 <ListGroupItem>
                   <MdPieChart size={25} color={primaryColor} /> Other operating
-                  costs <Badge color="secondary">$2400</Badge>
+                  Costs <Badge color="secondary">2400 ETB</Badge>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <MdPieChart size={25} color={primaryColor} /> Service Operational Costs
+                   <Badge color="secondary">2400 ETB</Badge>
                 </ListGroupItem>
               </ListGroup>
             </Card>
@@ -177,14 +211,20 @@ class DashboardPage extends React.Component {
                     'May',
                     'June',
                     'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+
+
                   ],
-                  data: [0, 13000, 5000, 24000, 16000, 25000, 10000],
+                  data: [0, 13000, 5000, 24000, 16000, 25000, 10000, 10000, 10000, 10000, 10000, 10000,],
                 })}
                 options={stackLineChartOptions}
               />
               <CardBody
-                className="text-primary"
-                style={{ position: 'absolute' }}
+                className="text-secondary"
+                style={{ position: 'absolute', right: 0 }}
               >
                 <CardTitle>
                   <MdInsertChart /> Sales
@@ -205,14 +245,18 @@ class DashboardPage extends React.Component {
                     'May',
                     'June',
                     'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
                   ],
-                  data: [10000, 15000, 5000, 10000, 5000, 10000, 10000],
+                  data: [10000, 15000, 5000, 10000, 5000, 10000, 10000, 10000, 5000, 10000, 10000],
                 })}
                 options={stackLineChartOptions}
               />
               <CardBody
-                className="text-primary"
-                style={{ position: 'absolute' }}
+                className="text-secondary"
+                style={{ position: 'absolute', right: 0 }}
               >
                 <CardTitle>
                   <MdInsertChart /> Revenue
@@ -232,13 +276,18 @@ class DashboardPage extends React.Component {
                     'May',
                     'June',
                     'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
                   ],
-                  data: [0, 13000, 5000, 24000, 16000, 25000, 10000].reverse(),
+                  data: [0, 13000, 5000, 24000, 16000, 25000, 10000, 16000, 25000, 10000, 25000].reverse(),
                 })}
                 options={stackLineChartOptions}
+                title='Sales'
               />
               <CardBody
-                className="text-primary"
+                className="text-secondary"
                 style={{ position: 'absolute', right: 0 }}
               >
                 <CardTitle>
@@ -246,63 +295,6 @@ class DashboardPage extends React.Component {
                 </CardTitle>
               </CardBody>
             </Card>
-          </Col>
-        </Row>
-
-
-        <CardDeck style={{ marginBottom: '1rem' }}>
-          <Card body style={{ overflowX: 'auto', 'paddingBottom': '15px', 'height': 'fit-content', 'paddingTop': 'inherit' }}>
-            <HorizontalAvatarList
-              avatars={avatarsData}
-              avatarProps={{ size: 50 }}
-            />
-          </Card>
-
-          <Card body style={{ overflowX: 'auto', 'paddingBottom': '15px', 'height': 'fit-content', 'paddingTop': 'inherit' }}>
-            <HorizontalAvatarList
-              avatars={avatarsData}
-              avatarProps={{ size: 50 }}
-              reversed
-            />
-          </Card>
-        </CardDeck>
-
-        <Row>
-          <Col lg="4" md="12" sm="12" xs="12">
-            <AnnouncementCard
-              color="gradient-secondary"
-              header="Announcement"
-              avatarSize={60}
-              name="Jamy"
-              date="1 hour ago"
-              text="Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy euismod tinciduntut laoreet doloremagna"
-              buttonProps={{
-                children: 'show',
-              }}
-              style={{ height: 500 }}
-            />
-          </Col>
-
-          <Col lg="4" md="12" sm="12" xs="12">
-            <Card>
-              <CardHeader>
-                <div className="d-flex justify-content-between align-items-center">
-                  <span>Support Tickets</span>
-                  <Button>
-                    <small>View All</small>
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardBody>
-                {supportTicketsData.map(supportTicket => (
-                  <SupportTicket key={supportTicket.id} {...supportTicket} />
-                ))}
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col lg="4" md="12" sm="12" xs="12">
-            <TodosCard todos={todosData} />
           </Col>
         </Row>
       </Page>

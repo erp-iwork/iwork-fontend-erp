@@ -240,7 +240,6 @@ class Sidebar extends React.Component {
                 <NavItem key={index} className={bem.e('nav-item2')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
@@ -285,7 +284,6 @@ class Sidebar extends React.Component {
                 <NavItem key={index} className={bem.e('nav-item3')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
@@ -330,7 +328,6 @@ class Sidebar extends React.Component {
                 <NavItem key={index} className={bem.e('nav-item4')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
@@ -375,7 +372,6 @@ class Sidebar extends React.Component {
                 <NavItem key={index} className={bem.e('nav-item5')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
@@ -420,7 +416,6 @@ class Sidebar extends React.Component {
                 <NavItem key={index} className={bem.e('nav-item6')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
@@ -465,7 +460,6 @@ class Sidebar extends React.Component {
                 <NavItem key={index} className={bem.e('nav-item7')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
@@ -510,7 +504,6 @@ class Sidebar extends React.Component {
                 <NavItem key={index} className={bem.e('nav-item8')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
@@ -554,7 +547,6 @@ class Sidebar extends React.Component {
                 <NavItem key={index} className={bem.e('nav-item9')}>
                   <BSNavLink
                     id={`navItem-${name}-${index}`}
-                    className="text-uppercase"
                     tag={NavLink}
                     to={to}
                     activeClassName="active"
