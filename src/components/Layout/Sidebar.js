@@ -82,20 +82,24 @@ const sidebarBackground = {
 // ];
 
 const HR = [
+  { to: routes.HRDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
   { to: routes.allEmployees, name: 'All Employees', exact: false, Icon: MdWidgets },
   { to: routes.addEmployee, name: 'Add Employee', exact: false, Icon: MdWidgets },
 ]
 
 const IT = [
+  { to: routes.ITDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
   { to: routes.itEmployeePage, name: 'All Employees', exact: false, Icon: MdWidgets },
 ]
 
 const SALES = [
+  { to: routes.SalesDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
   { to: routes.createOrderPage, name: 'Create Order', exact: false, Icon: MdWidgets },
   { to: routes.ViewAllOrdersPage, name: 'View All Orders', exact: false, Icon: MdWidgets },
 ]
 
 const FINANCE = [
+  { to: routes.FinanceDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
   { to: routes.viewSuppliers, name: 'View All Suppliers', exact: false, Icon: MdWidgets },
   { to: routes.AddSupplier, name: 'Add Supplier ', exact: false, Icon: MdWidgets },
   { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },
@@ -104,9 +108,12 @@ const FINANCE = [
   { to: routes.ViewAllMasterData, name: 'All Master Data', exact: false, Icon: MdWidgets },
   { to: routes.ViewOrdersFinance, name: 'All Orders', exact: false, Icon: MdWidgets },
   { to: routes.SupplierInvoice, name: 'Supplier Invoice', exact: false, Icon: MdWidgets },
+  { to: routes.ViewDelieveredOrders, name: 'Delivered Orders', exact: false, Icon: MdWidgets },
+
 ]
 
 const INVENTORY = [
+  { to: routes.InventoryDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
   // { to: routes.ViewAllItems, name: 'View Items', exact: false, Icon: MdWidgets },
   { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
   { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
@@ -116,16 +123,19 @@ const INVENTORY = [
 
 
 const LOGISTICS = [
+  { to: routes.LogisticsDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
   { to: routes.ViewOrdersLogistics, name: 'View Orders', exact: false, Icon: MdWidgets },
   { to: routes.ViewPurchaseOrdersLogistics, name: 'View Purchased Order', exact: false, Icon: MdWidgets },
 ]
 
 const PROCURMENT = [
+  { to: routes.ProcurmentDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
   { to: routes.CreatePurchaseOrder, name: 'Create Purchase Order', exact: false, Icon: MdWidgets },
   { to: routes.ViewAllPurchaseOrder, name: 'All Purchase Order', exact: false, Icon: MdWidgets },
 ]
 
 const MANUFACTURING = [
+  { to: routes.ManufacturingDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
   { to: routes.CreateOrderManufacturing, name: 'Create MO', exact: false, Icon: MdWidgets },
   { to: routes.ViewAllOrdersManufacturing, name: 'All Orders', exact: false, Icon: MdWidgets },
 ]

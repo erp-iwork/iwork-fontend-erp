@@ -163,68 +163,6 @@ class DashboardPage extends React.Component {
           </Col>
         </Row>
 
-        <CardGroup style={{ marginBottom: '1rem' }}>
-          <IconWidget
-            bgColor="white"
-            inverse={false}
-            icon={MdThumbUp}
-            title="50+ Likes"
-            subtitle="People you like"
-          />
-          <IconWidget
-            bgColor="white"
-            inverse={false}
-            icon={MdRateReview}
-            title="10+ Reviews"
-            subtitle="New Reviews"
-          />
-          <IconWidget
-            bgColor="white"
-            inverse={false}
-            icon={MdShare}
-            title="30+ Shares"
-            subtitle="New Shares"
-          />
-        </CardGroup>
-
-        <Row>
-          <Col md="6" sm="12" xs="12">
-            <Card>
-              <CardHeader>New Products</CardHeader>
-              <CardBody>
-                {productsData.map(
-                  ({ id, image, title, description, right }) => (
-                    <ProductMedia
-                      key={id}
-                      image={image}
-                      title={title}
-                      description={description}
-                      right={right}
-                    />
-                  ),
-                )}
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col md="6" sm="12" xs="12">
-            <Card>
-              <CardHeader>New Users</CardHeader>
-              <CardBody>
-                <UserProgressTable
-                  headers={[
-                    <MdPersonPin size={25} />,
-                    'name',
-                    'date',
-                    'participation',
-                    '%',
-                  ]}
-                  usersData={userProgressTableData}
-                />
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
 
         <Row>
           <Col lg={4} md={4} sm={12} xs={12}>
@@ -311,66 +249,16 @@ class DashboardPage extends React.Component {
           </Col>
         </Row>
 
-        <Row>
-          <Col lg="6" md="12" sm="12" xs="12">
-            <InfiniteCalendar
-              selected={today}
-              minDate={lastWeek}
-              width="100%"
-              theme={{
-                accentColor: primaryColor,
-                floatingNav: {
-                  background: primaryColor,
-                  chevron: secondaryColor,
-                  color: '#FFF',
-                },
-                headerColor: primaryColor,
-                selectionColor: primaryColor,
-                textColor: {
-                  active: '#FFF',
-                  default: '#333',
-                },
-                todayColor: infoColor,
-                weekdayColor: primaryColor,
-              }}
-            />
-          </Col>
-
-          <Col lg="6" md="12" sm="12" xs="12">
-            <InfiniteCalendar
-              selected={today}
-              minDate={lastWeek}
-              width="100%"
-              theme={{
-                accentColor: primaryColor,
-                floatingNav: {
-                  background: secondaryColor,
-                  chevron: primaryColor,
-                  color: '#FFF',
-                },
-                headerColor: primaryColor,
-                selectionColor: secondaryColor,
-                textColor: {
-                  active: '#FFF',
-                  default: '#333',
-                },
-                todayColor: secondaryColor,
-                weekdayColor: primaryColor,
-              }}
-            />
-          </Col>
-
-        </Row>
 
         <CardDeck style={{ marginBottom: '1rem' }}>
-          <Card body style={{ overflowX: 'auto','paddingBottom':'15px','height': 'fit-content','paddingTop': 'inherit'}}>
+          <Card body style={{ overflowX: 'auto', 'paddingBottom': '15px', 'height': 'fit-content', 'paddingTop': 'inherit' }}>
             <HorizontalAvatarList
               avatars={avatarsData}
               avatarProps={{ size: 50 }}
             />
           </Card>
 
-          <Card body style={{ overflowX: 'auto','paddingBottom':'15px','height': 'fit-content','paddingTop': 'inherit'}}>
+          <Card body style={{ overflowX: 'auto', 'paddingBottom': '15px', 'height': 'fit-content', 'paddingTop': 'inherit' }}>
             <HorizontalAvatarList
               avatars={avatarsData}
               avatarProps={{ size: 50 }}

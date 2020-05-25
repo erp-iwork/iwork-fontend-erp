@@ -33,7 +33,19 @@ export default {
   CreateOrderManufacturing: '/CreateOrderManufacturing',
   ViewAllOrdersManufacturing: '/ViewAllOrdersManufacturing',
   ViewSingleOrderManufacturing: '/ViewSingleOrderManufacturing',
+  //Dashboards
   FinanceDashboard: '/FinanceDashboard',
+  ITDashboard: '/ITDashboard',
+  HRDashboard: '/HRDashboard',
+  InventoryDashboard: '/InventoryDashboard',
+  LogisticsDashboard: '/LogisticsDashboard',
+  ManufacturingDashboard: '/ManufacturingDashboard',
+  ProcurmentDashboard: '/ProcurmentDashboard',
+  SalesDashboard: '/SalesDashboard',
+  ViewDelieveredOrders: '/ViewDelieveredOrders',
+  ViewSingleDelieveredOrder: '/ViewSingleDelieveredOrder',
+
+
 
 };
 
