@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Col, Row, Card, CardHeader, Table, CardBody, Input, Button } from 'reactstrap';
-import { invoiceOrder } from '../../store/procurement/action'
+import { invoiceOrder, getSingleOrder } from '../../store/procurement/action'
 import { connect } from 'react-redux'
 import Loader from '../../components/loader'
+import status from '../../constant/status'
+import PageSpinner from '../../components/PageSpinner'
 
 class ViewSingleDelieveredOrderPage extends Component {
     constructor(props) {
@@ -25,11 +27,12 @@ class ViewSingleDelieveredOrderPage extends Component {
             }
         })
         this.setState({ orders })
+        this.props.getSingleOrder(this.props.location.state.purchaseOrderNumber)
     }
 
     handleChange = (data) => {
         var orders = this.state.orders
-        orders[data.index][data.name] = data.value
+        orders[data.index][data.name] = parseInt(data.value)
         this.setState({ orders })
     }
 
@@ -40,6 +43,7 @@ class ViewSingleDelieveredOrderPage extends Component {
 
     render() {
         const { order } = this.state
+        if (this.props.loading_single_order) return <PageSpinner />
         return (
             <Page title="Finance" breadcrumbs={[{ name: 'Delivered Order', active: true }]}>
                 <Card className='padding'>
@@ -115,8 +119,10 @@ class ViewSingleDelieveredOrderPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    loading_single_order: state.procurementReducer.loading_single_order,
     loading_invoice: state.procurementReducer.loading_invoice,
-    success: state.procurementReducer.success
+    success: state.procurementReducer.success,
+    order: state.procurementReducer.order
 })
 
-export default connect(mapStateToProps, { invoiceOrder })(ViewSingleDelieveredOrderPage)
+export default connect(mapStateToProps, { invoiceOrder, getSingleOrder })(ViewSingleDelieveredOrderPage)
