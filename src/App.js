@@ -50,21 +50,14 @@ const ViewSingleItemPage = React.lazy(() => import('./pages/Inventory/ViewSingle
 const ViewPurchasedItemsPage = React.lazy(() => import('./pages/Inventory/ViewPurchasedOrders'));
 
 const SivPage = React.lazy(() => import('./pages/Inventory/SIV'));
+const GRVPage = React.lazy(() => import('./pages/Inventory/GRV'));
 const CreatePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/CreatePurchaseOrderPage'));
 const ViewAllPurchaseOrderPage = React.lazy(() => import('./pages/Procurment/ViewAllPurchaseOrder'));
 const ViewSinglePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/ViewSinglePurchaseOrder'));
 
-
 const CreateOrderManufacturingPage = React.lazy(() => import('./pages/Manufacturing/CreateOrderManufacturingPage'));
 const ViewAllOrdersManufacturingPage = React.lazy(() => import('./pages/Manufacturing/ViewAllOrdersPage'));
 const SingleOrderManufacturingPage = React.lazy(() => import('./pages/Manufacturing/SingleOrderPage'));
-
-
-
-
-
-
-
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -116,6 +109,7 @@ class App extends React.Component {
                 <Route exact path={routes.CategoriesInventoryPage} component={CategoriesInventoryPage} />
                 <Route exact path={routes.ViewSingleItemPage} component={ViewSingleItemPage} />
                 <Route exact path={routes.SivPage} component={SivPage} />
+                <Route exact path={routes.GRVPage} component={GRVPage} />
 
                 {/* FINANCE ROUTES/ */}
                 <Route exact path={routes.AddCustomer} component={AddCustomerPage} />

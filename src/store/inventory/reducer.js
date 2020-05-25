@@ -5,7 +5,10 @@ const initialState = {
   success: false,
   loading_categories: true,
   loading_items: true,
+  updating_status: false,
+  update_success: false,
   categories: [],
+  orders: []
 };
 
 export default function inventoryReducer(state = initialState, action) {
@@ -87,8 +90,12 @@ export default function inventoryReducer(state = initialState, action) {
     case inventoryConstant.SUCCESS_GET_PURCHASED_ITEMS:
       return {
         ...state, loading_items: false,
-        items: action.payload
+        orders: action.payload
       }
+    case inventoryConstant.REQUEST_PUT_UPDATE_STATUS:
+      return { ...state, updating_status: true }
+    case inventoryConstant.SUCCESS_PUT_UPDATE_STATUS:
+      return { ...state, updating_status: false, update_success: true }
 
     default:
       return state;

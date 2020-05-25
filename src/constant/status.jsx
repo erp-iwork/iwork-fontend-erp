@@ -1,4 +1,5 @@
 export default {
     received: 'Received',
-    invoiced: 'Invoiced'
+    invoiced: 'Invoiced',
+    created: 'Created'
 }

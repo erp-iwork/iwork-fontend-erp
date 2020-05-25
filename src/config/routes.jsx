@@ -24,6 +24,7 @@ export default {
   AddMasterDataPage: "/AddMasterDataPage",
   ViewAllMasterData: "/ViewAllMasterData",
   SivPage: "/SivPage",
+  GRVPage: '/GRVPage',
   CreatePurchaseOrder: "/CreatePurchaseOrder",
   ViewAllPurchaseOrder: "/ViewAllPurchaseOrder",
   ViewSinglePurchaseOrder: "/ViewSinglePurchaseOrder",

@@ -229,7 +229,8 @@ export const getItemsByCategory = (categoryID) => (dispatch) => {
 export const getPurchasedItems = () => (dispatch) => {
   dispatch({ type: inventoryConstant.REQUEST_GET_PURCHASED_ITEMS })
   return axios.get(API + routes.purchase +
-    `?search1=${status.invoiced}&search2=${status.received}` , headers)
+    `?search1=${status.created}&search2=${status.invoiced}`
+    , headers)
     .then(res => dispatch({ type: inventoryConstant.SUCCESS_GET_PURCHASED_ITEMS, payload: res.data }))
     .catch((err) => {
       if (err.response && err.response.data) {
@@ -248,3 +249,35 @@ export const getPurchasedItems = () => (dispatch) => {
       }
     })
 }
+
+export const updateStatus = (purchaseOrderNumber) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_PUT_UPDATE_STATUS })
+  return axios.put(API + routes.updatePurchaseStatus + purchaseOrderNumber + '/', {
+    status: 'Received'
+  }, headers)
+    .then(res => dispatch({ type: inventoryConstant.SUCCESS_PUT_UPDATE_STATUS }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+// order: 8
+// sivDate: "2020-05-25"
+// sivId: 8
+// sivStatus: "Pending"
+// siv_item: Array(1)
+// 0: {itemName: "table", quantity: 1}
+
