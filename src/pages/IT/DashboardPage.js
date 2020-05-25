@@ -55,9 +55,9 @@ class DashboardPage extends React.Component {
         title="IT"
         breadcrumbs={[{ name: 'Dashboard', active: true }]}
       >
-                <CardDeck style={{ marginBottom: '1rem' }}>
-          <Card body style={{ overflowX: 'auto','paddingBottom':'15px','height': 'fit-content','paddingTop': 'inherit'}}>
-          <CardHeader>Employees That Has Accounts</CardHeader>
+        <CardDeck style={{ marginBottom: '1rem' }}>
+          <Card body style={{ overflowX: 'auto', 'paddingBottom': '15px', 'height': 'fit-content', 'paddingTop': 'inherit' }}>
+            <CardHeader>Employees That Has Accounts</CardHeader>
 
             <HorizontalAvatarList
               avatars={avatarsData}
@@ -65,8 +65,8 @@ class DashboardPage extends React.Component {
             />
           </Card>
 
-          <Card body style={{ overflowX: 'auto','paddingBottom':'15px','height': 'fit-content','paddingTop': 'inherit'}}>
-          <CardHeader>Employees That Has No Accounts</CardHeader>
+          <Card body style={{ overflowX: 'auto', 'paddingBottom': '15px', 'height': 'fit-content', 'paddingTop': 'inherit' }}>
+            <CardHeader>Employees That Has No Accounts</CardHeader>
 
             <HorizontalAvatarList
               avatars={avatarsData}
@@ -263,9 +263,6 @@ class DashboardPage extends React.Component {
             </Card>
           </Col>
         </Row>
-
-
-
 
       </Page>
     );
