@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { Col, Row, Card, CardHeader, Table, CardBody } from 'reactstrap';
+import { Col, Row, Card, CardHeader, Table, CardBody, Input } from 'reactstrap';
 
 
 class ViewSingleDelieveredOrderPage extends Component {
@@ -14,14 +14,12 @@ class ViewSingleDelieveredOrderPage extends Component {
                 <Card className='padding'>
                     <Row sm={12} md={12} >
                         <Col md={4}>
-                            <CardHeader >
-                                Order Information
-        </CardHeader>
+                            <CardHeader>Order Information</CardHeader>
                             <CardBody>
                                 <Row>
                                     <Col>
                                         Order Id:
-                    </Col>
+                                    </Col>
                                     <Col>
                                         <b>Something</b>
                                     </Col>
@@ -29,7 +27,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                                 <Row>
                                     <Col>
                                         Order Date :
-                    </Col>
+                                    </Col>
                                     <Col>
                                         <b>Something</b>
                                     </Col>
@@ -37,7 +35,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                                 <Row>
                                     <Col>
                                         Shipment Address :
-                    </Col>
+                                    </Col>
                                     <Col>
                                         <b>Something</b>
                                     </Col>
@@ -47,31 +45,38 @@ class ViewSingleDelieveredOrderPage extends Component {
                             </CardBody>
                         </Col>
                         <Col md={8}>
-                            <CardHeader >
-                                Item Information
-        </CardHeader>
+                            <CardHeader>Item Information</CardHeader>
                             <CardBody>
-                                <Table responsive className="scrollTableSales">
+                                <Table className="scrollTableSales">
                                     <thead>
                                         <tr>
-                                            <th>Order Id</th>
-                                            <th>Order Name</th>
+                                            <th>Item Id</th>
+                                            <th>Item Name</th>
                                             <th>Quantity</th>
+                                            <th>Old Price</th>
+                                            <th>Update Price</th>
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <tr >
-                                                <th scope="row">Hello</th>
-                                                <td>Hello</td>
-                                                <td>Hello</td>
-                                            </tr>
+                                        <tr >
+                                            <th scope="row">1</th>
+                                            <td>Hello</td>
+                                            <td>Hello</td>
+                                            <td>Hello</td>
+                                            <td md={2}>
+                                                <div class='col-xs-2'>
+                                                    <Input />
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </Table>
                             </CardBody>
                         </Col>
                     </Row>
                 </Card>
-                Delivered Orders
 
 
             </Page>
