@@ -27,6 +27,7 @@ export default {
   GRVPage: '/GRVPage',
   CreatePurchaseOrder: "/CreatePurchaseOrder",
   ViewAllPurchaseOrder: "/ViewAllPurchaseOrder",
+  ViewFinancePurchaseOrders: '/ViewFinancePurchaseOrders',
   ViewSinglePurchaseOrder: "/ViewSinglePurchaseOrder",
   SupplierInvoice: "/SupplierInvoice",
   ViewPurchasedItems: '/ViewPurchasedItems',
@@ -44,8 +45,6 @@ export default {
   SalesDashboard: '/SalesDashboard',
   ViewDelieveredOrders: '/ViewDelieveredOrders',
   ViewSingleDelieveredOrder: '/ViewSingleDelieveredOrder',
-
-
 
 };
 

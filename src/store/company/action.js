@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
 import routes from '../../api/routes'
-import { companyConstant, errorsConstant } from "../../constant/constants";
+import { companyConstant, errorsConstant, inventoryConstant } from "../../constant/constants";
 import headers from './../headers'
 
 // ADD COMPANY
@@ -235,6 +235,7 @@ export const addMasterData = (masterData) => (dispatch) => {
       })
     })
     .catch((err) => {
+      console.log(err)
       try {
         dispatch({
           type: errorsConstant.GET_ERRORS,
@@ -270,7 +271,33 @@ export const getMasterData = () => (dispatch) => {
         icon: "error",
         showConfirmButton: false,
         timer: 1000
-      });
+      })
     }
   })
 }
+
+
+export const updateStatus = (orderNumber, status) => (dispatch) => {
+  dispatch({ type: companyConstant.REQUEST_UPDATE_STATUS })
+  return axios.put(API + `${routes.updatePurchaseStatus}${orderNumber}/`, status, headers)
+    .then((res) => {
+      dispatch({ type: companyConstant.SUCCESS_UPDATE_STATUS })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    });
+};

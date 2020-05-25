@@ -162,7 +162,6 @@ class ViewAllSuppliers extends Component {
 
 const mapStateToProps = (state) => ({
     loading: state.companyReducer.loading,
-
     suppliers: state.companyReducer.suppliers,
     errors: state.companyReducer.errors,
 })

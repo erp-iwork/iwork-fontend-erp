@@ -13,7 +13,8 @@ const initialState = {
     loading_masterdata: false,
     loading_single_order: true,
     success: false,
-    updating_status: false
+    updating_status: false,
+    loading_invoice: false,
 }
 
 const procurementReducer = (state = initialState, action) => {
@@ -85,6 +86,18 @@ const procurementReducer = (state = initialState, action) => {
                 order: state.order,
                 status: action.payload,
             }
+
+        case PUT.REQUEST_PUT_INVOICE:
+            return {
+                ...state, loading_invoice: true
+            }
+
+        case PUT.SUCCESS_PUT_INVOICE:{
+            return {
+                ...state, loading_invoice: false,
+                success: true
+            }
+        }
 
         default:
             return { ...state }

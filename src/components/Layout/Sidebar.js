@@ -109,7 +109,7 @@ const FINANCE = [
   { to: routes.ViewOrdersFinance, name: 'All Orders', exact: false, Icon: MdWidgets },
   { to: routes.SupplierInvoice, name: 'Supplier Invoice', exact: false, Icon: MdWidgets },
   { to: routes.ViewDelieveredOrders, name: 'Delivered Orders', exact: false, Icon: MdWidgets },
-
+  { to: routes.ViewFinancePurchaseOrders, name: 'Purchased Orders', exact: false, Icon: MdWidgets }
 ]
 
 const INVENTORY = [

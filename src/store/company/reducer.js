@@ -4,8 +4,9 @@ const initialState = {
   suppliers: [],
   loading: false,
   masterData: [],
-
+  loading_addMasterdata: false,
   success: false,
+  updating_status: false,
   errors: []
 };
 
@@ -17,6 +18,7 @@ export default function companyReducer(state = initialState, action) {
         errors: action.payload,
         success: false,
         loading: false,
+        loading_addMasterdata: false
       }
     
     case companyConstant.REQUEST_GET_COMANY:
@@ -73,13 +75,13 @@ export default function companyReducer(state = initialState, action) {
     case companyConstant.REQUEST_ADD_MASTERDATA:
       return {
         ...state,
-        loading: action.payload,
+        loading_addMasterdata: true,
       }
 
     case companyConstant.ADD_MASTERDATA:
       return {
         ...state,
-        loading: false,
+        loading_addMasterdata: false,
         success: true
       }
 
@@ -94,6 +96,14 @@ export default function companyReducer(state = initialState, action) {
         ...state,
         loading: false,
         masterData: action.payload
+      }
+
+    case companyConstant.REQUEST_UPDATE_STATUS:
+      return { ...state, updating_status: true }
+    case companyConstant.SUCCESS_UPDATE_STATUS:
+      return {
+        ...state, updating_status: false,
+        success: true
       }
 
     default:

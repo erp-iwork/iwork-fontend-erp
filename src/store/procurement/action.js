@@ -7,13 +7,15 @@ import Swal from 'sweetalert2'
 import API from '../../api/API'
 import routes from '../../api/routes'
 import headers from '../headers'
+import status from '../../constant/status'
+
 const { GET, POST, PUT } = purchaseConstants
 
 export const getOrders = () => (dispatch) => {
     dispatch({ type: GET.REQUEST_GET_ORDER })
-    return Axios.get(API + routes.purchase, headers)
+    return Axios.get(API + routes.purchase +
+      `?search1=${status.approved}&search2=${status.created}`, headers)
         .then(res => {
-          console.log(res.data)
             dispatch({
                 type: GET.SUCCESS_GET_ORDER,
                 payload: res.data
@@ -180,3 +182,34 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
       }
     });
 };
+
+export const invoiceOrder = (purchaseOrderNumber, data) => (dispatch) => {
+  dispatch({ type: PUT.REQUEST_PUT_INVOICE })
+  return Axios.put(API + routes.purchase + purchaseOrderNumber + '/', data)
+    .then(res => {
+      dispatch({ type: PUT.SUCCESS_PUT_INVOICE })
+      Swal.fire({
+        title: "Invoice Success",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1000
+      });
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}

@@ -53,8 +53,8 @@ const ProcurmentDashboard = React.lazy(() => import('./pages/Procurment/Dashboar
 const SalesDashboard = React.lazy(() => import('./pages/Sales/DashboardPage'));
 
 
-
 const ViewAllOrdersFinancePage = React.lazy(() => import('./pages/Finance/ViewAllOrdersPage'));
+const ViewPurchaseOrdersFinancePage = React.lazy(() => import('./pages/Finance/ViewAllPurchaseOrder'))
 const AddMasterDataPage = React.lazy(() => import('./pages/Finance/AddMasterDataPage'));
 const ViewAllMasterDataPage = React.lazy(() => import('./pages/Finance/ViewAllMasterDataPage'));
 const ViewAllOrdersLogisticsPage = React.lazy(() => import('./pages/Logistics/ViewAllOrdersPage'));
@@ -142,6 +142,7 @@ class App extends React.Component {
                 <Route exact path={routes.ViewPurchasedItems} component={ViewPurchasedItemsPage} />
                 <Route exact path={routes.ViewDelieveredOrders} component={ViewDelieveredOrdersPage} />
                 <Route exact path={routes.ViewSingleDelieveredOrder} component={ViewSingleDelieveredOrderPage} />
+                <Route exact path={routes.ViewFinancePurchaseOrders} component={ViewPurchaseOrdersFinancePage} />
 
 
                 {/* LOGISTICS ROUTES */}

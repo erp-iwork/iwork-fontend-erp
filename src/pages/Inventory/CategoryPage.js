@@ -30,6 +30,7 @@ class CategoryPage extends Component {
                 state: this.state.categoryID
             }} />
         }
+        if (this.props.categories.length === 0) return <h2>No Categories have been registered</h2>
         return (
             <Page
                 title="Inventory"

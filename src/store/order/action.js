@@ -5,12 +5,15 @@ import {
   GET_SINGLE_ORDER,
   REQUEST_ORDERS,
   REQUEST_SINGLE_ORDER,
+  orderConstants,
   errorsConstant,
 } from "../../constant/constants";
 import axios from "axios";
 import Swal from "sweetalert2";
 import API from "../../api/API";
 import headers from './../headers'
+import routes from '../../api/routes'
+import status from '../../constant/status'
 
 // GET ORDER
 export const getOrders = () => (dispatch) => {
@@ -138,3 +141,31 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
       }
     });
 };
+
+export const getDeliveredOrders = () => (dispatch) => {
+  const { GET } = orderConstants
+  dispatch({ type: GET.REQUEST_GET_DELIVERED_ORDERS })
+  return axios.get(API + routes.purchase +
+    `?search1=${status.delivered}&search2=${status.invoiced}`)
+    .then(res => {
+      console.log(res.data)
+      dispatch({ type: GET.SUCCESS_GET_DELIVERED_ORDERS, payload: res.data })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        })
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+    })
+}
