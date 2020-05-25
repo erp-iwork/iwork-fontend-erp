@@ -104,7 +104,7 @@ export default function inventoryReducer(state = initialState, action) {
     case inventoryConstant.SUCCESS_GET_GRV:
       return {
         ...state, loading_grv: false,
-        grv: action.payload
+        grv: action.payload, success: true
       }
     
     default:

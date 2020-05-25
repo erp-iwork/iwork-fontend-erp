@@ -104,19 +104,13 @@ class SIVPdf extends Component {
             >
               <View item>
                 <View style={{ height: 5 }} />
-
-                <Text style={styles.text} variant="body2" gutterBottom>
-                  Warehouse Name: {this.props.sivs.warehouseName}
-                </Text>
-                <View style={{ height: 5 }} />
-
                 <Text style={styles.text} variant="body2" gutterBottom>
                   Issued By : {localStorage.getItem("username")}
                 </Text>
                 <View style={{ height: 5 }} />
 
                 <Text style={styles.text} variant="body2" gutterBottom>
-                  SIV Date : {this.props.sivs.sivDate}
+                  SIV Date : {this.props.grv.date}
                 </Text>
               </View>
 
@@ -140,7 +134,7 @@ class SIVPdf extends Component {
             }}
           >
             <Text style={styles.textBody} variant="body2" color="">
-              Order Number : {this.props.sivs.order}
+              Order Number : {this.props.grv.GRVID}
             </Text>
           </View>
 
@@ -161,8 +155,8 @@ class SIVPdf extends Component {
                 <Text style={styles.tableCellHeader}>Quantity</Text>
               </View>
             </View>
-            {this.props.siv_item
-              ? this.props.siv_item.map((item, index) => {
+            {this.props.grv_item
+              ? this.props.grv_item.map((item, index) => {
                   return (
                     <View key={item.itemName} style={styles.tableRow}>
                       <View style={styles.tableCol}>

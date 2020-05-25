@@ -88,10 +88,17 @@ class GRV extends React.Component {
     e.preventDefault();
   }
 
+  calculatePrice (items) {
+    var sum = 0
+    items.forEach(item => sum += item.price)
+    return sum
+  }
+
   render() {
     if (this.props.loading_grv) return <PageSpinner />
-    console.log(this.props.grv)
     const { grv } = this.props
+    console.log(grv)
+    const totalPrice = this.calculatePrice(grv.GRVItems)
     return (
       <Page
         title="GRV"
@@ -118,24 +125,32 @@ class GRV extends React.Component {
                   style={{
                     marginTop: 10,
                     marginLeft: 10,
+                    display: 'flex',
+                    justifyContent: 'center'
                   }}
                 >
                   {/* <img src={Logo} alt="" style={classes.logo} /> */}
                   <Typography
                     variant="h6"
-                    style={classes.text}
+                    style={{
+                      fontSize: 20,
+                      fontWeight: 700,
+                      color: '#fff',
+                      display: 'flex',
+                      justifyContent: 'center'
+                    }}
                   >
-                    NAZO
+                    SPARTA ERP
                     </Typography>
                 </div>
               </div>
               <div >
                 <Typography
-                  style={classes.text}
+                  style={classes.text, { color: '#fff', display: 'flex', justifyContent: 'center' }}
                   variant="body2"
                   gutterBottom
                 >
-                  <b>GRV Status : </b> {grv.GRVStatus}
+                  <b>Goods Received Voucher</b>
                 </Typography>
                 <Typography
                   style={classes.text}
@@ -202,6 +217,20 @@ class GRV extends React.Component {
                 variant="body2"
                 color=""
               >
+                <b>Total Price :</b> {totalPrice}
+                </Typography>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-start',
+              }}
+            >
+              <Typography
+                style={classes.textBody}
+                variant="body2"
+                color=""
+              >
                 <b>Recipient Name :</b> _______________________
                 </Typography>
             </div>
@@ -230,9 +259,9 @@ class GRV extends React.Component {
           {
             this.props.success ? (<PDFDownloadLink
               document={
-                <SIVPdf siv_item={this.props.sivs.siv_item} sivs={this.props.sivs} />
+                <SIVPdf grv_item={this.props.grv.GRVItems} grv={this.props.grv} />
               }
-              fileName={"SIV_" + this.props.sivs.sivId + ".pdf"}
+              fileName={"SIV_" + this.props.grv.GRVID + ".pdf"}
               style={{
                 textDecoration: 'none',
               }}
@@ -266,7 +295,8 @@ class GRV extends React.Component {
 const mapStateToProps = (state) => {
   return {
     loading_grv: state.inventoryReducer.loading_grv,
-    grv: state.inventoryReducer.grv
+    grv: state.inventoryReducer.grv,
+    success: state.inventoryReducer.grv
   }
 }
 
