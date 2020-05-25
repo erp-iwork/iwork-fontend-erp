@@ -82,6 +82,14 @@ export default function inventoryReducer(state = initialState, action) {
         items: action.payload
       }
 
+    case inventoryConstant.REQUEST_GET_PURCHASED_ITEMS:
+      return { ...state, loading_items: true }
+    case inventoryConstant.SUCCESS_GET_PURCHASED_ITEMS:
+      return {
+        ...state, loading_items: false,
+        items: action.payload
+      }
+
     default:
       return state;
   }

@@ -3,6 +3,7 @@ import { manuFacturingConstant, errorsConstant } from '../../constant/constants'
 const initialState = {
     errors: [],
     masterdata: [],
+    orders: [],
     loading_masterdata: true,
     loading_manufacture: false,
     loading_orders: true,

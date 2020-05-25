@@ -242,7 +242,7 @@ class CreateOrderManufacturingPage extends Component {
                                 </Row>
                                 <FormGroup align='center'>
                                     <Button color='primary' type="submit">
-                                        { this.props.loading_manufacture? <Loader /> : "Submit" }
+                                        { this.props.loading_manufacture? <Loader /> : "Add Order" }
                                     </Button>
                                 </FormGroup>
                             </Form>

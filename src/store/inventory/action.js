@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
+import status from '../../constant/status'
 import routes from '../../api/routes'
 import { inventoryConstant, errorsConstant } from "../../constant/constants";
 import headers from "./../headers";
@@ -207,6 +208,29 @@ export const getItemsByCategory = (categoryID) => (dispatch) => {
         payload: res.data
       })
     })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const getPurchasedItems = () => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_PURCHASED_ITEMS })
+  return axios.get(API + routes.purchase +
+    `?search1=${status.invoiced}&search2=${status.received}` , headers)
+    .then(res => dispatch({ type: inventoryConstant.SUCCESS_GET_PURCHASED_ITEMS, payload: res.data }))
     .catch((err) => {
       if (err.response && err.response.data) {
         dispatch({

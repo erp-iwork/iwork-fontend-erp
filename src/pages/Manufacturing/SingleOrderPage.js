@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Col, Row, Card, CardHeader, Table, CardBody } from 'reactstrap';
-import "./Manufacturing.scss";
-
+import "./Manufacturing.scss"
 
 class SingleOrderPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            order: this.props.location.state
+        }
     }
     render() {
+        const { order } = this.state
         return (
             <Page title="Manufacturing" breadcrumbs={[{ name: 'Order', active: true }]}>
-
                 <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
                     <div class="step completed">
                         <div class="step-icon-wrap">
@@ -58,27 +59,27 @@ class SingleOrderPage extends Component {
                                         Order Id:
                                     </Col>
                                     <Col>
-                                        <b>Something</b>
+                                        <b>{order.productId}</b>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
-                                        Order Date :
+                                        Order Name :
                                     </Col>
                                     <Col>
-                                        <b>Something</b>
+                                        <b>{order.productName}</b>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
-                                        Shipment Address :
+                                        Order Price :
                                     </Col>
                                     <Col>
-                                        <b>Something</b>
+                                        <b>{order.productPrice}</b>
                                     </Col>
                                 </Row>
-                                <b>Description</b>
-                                <Col>Something</Col>
+                                <b>Product Type</b>
+                                <Col>{order.productType}</Col>
                             </CardBody>
                         </Col>
                         <Col md={8}>
@@ -89,17 +90,19 @@ class SingleOrderPage extends Component {
                                 <Table responsive className="scrollTableSales">
                                     <thead>
                                         <tr>
-                                            <th>Order Id</th>
-                                            <th>Order Name</th>
+                                            <th>Material Name</th>
+                                            <th>Material Cost</th>
                                             <th>Quantity</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">Something</th>
-                                            <td>Something</td>
-                                            <td>Something</td>
-                                        </tr>
+                                        {order.product_material.map((item, index) => (
+                                            <tr>
+                                                <th scope="row">{item.materialName}</th>
+                                                <td>{item.materialCost}</td>
+                                                <td>{item.materialQuantity}</td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </Table>
                             </CardBody>

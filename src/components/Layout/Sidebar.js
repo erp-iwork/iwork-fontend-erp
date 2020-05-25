@@ -108,10 +108,10 @@ const FINANCE = [
 
 const INVENTORY = [
   // { to: routes.ViewAllItems, name: 'View Items', exact: false, Icon: MdWidgets },
-  // { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
+  { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
   { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
   // { to: routes.ViewSingleItemPage, name: 'Single Item', exact: false, Icon: MdWidgets },
-  // { to: routes.ViewPurchasedItems, name: 'Purchased Items', exact: false, Icon: MdWidgets },
+  { to: routes.ViewPurchasedItems, name: 'Purchased Items', exact: false, Icon: MdWidgets },
 ]
 
 
@@ -126,7 +126,7 @@ const PROCURMENT = [
 ]
 
 const MANUFACTURING = [
-  { to: routes.CreateOrderManufacturing, name: 'Create Order', exact: false, Icon: MdWidgets },
+  { to: routes.CreateOrderManufacturing, name: 'Create MO', exact: false, Icon: MdWidgets },
   { to: routes.ViewAllOrdersManufacturing, name: 'All Orders', exact: false, Icon: MdWidgets },
 ]
 
