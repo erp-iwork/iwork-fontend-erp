@@ -32,8 +32,7 @@ export default {
   CreateOrderManufacturing: '/CreateOrderManufacturing',
   ViewAllOrdersManufacturing: '/ViewAllOrdersManufacturing',
   ViewSingleOrderManufacturing: '/ViewSingleOrderManufacturing',
-
-
+  FinanceDashboard: '/FinanceDashboard',
 
 };
 
