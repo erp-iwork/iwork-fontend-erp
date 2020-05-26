@@ -14,7 +14,7 @@ const { GET, POST, PUT } = purchaseConstants
 export const getOrders = () => (dispatch) => {
     dispatch({ type: GET.REQUEST_GET_ORDER })
     return Axios.get(API + routes.purchase +
-      `?search1=${status.approved}&search2=${status.created}`, headers)
+      `?search1=${status.delivered}&search2=${status.invoiced}`, headers)
         .then(res => {
             dispatch({
                 type: GET.SUCCESS_GET_ORDER,

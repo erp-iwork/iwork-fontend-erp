@@ -60,7 +60,8 @@ const procurementReducer = (state = initialState, action) => {
         
         case POST.REQUEST_POST_PURCHASE:
             return {
-                ...state, loading_purchase: true
+                ...state, loading_purchase: true,
+                loading_orders: false, loading_masterdata: false, loading_suppliers: false
             }
         case POST.SUCCESS_POST_PURCHASE:
             return {

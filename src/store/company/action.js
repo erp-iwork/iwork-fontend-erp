@@ -38,36 +38,31 @@ export const addCompany = (company) => (dispatch) => {
 }
 
 export const addSupplier = (supplier) => (dispatch) => {
+  dispatch({ type: companyConstant.REQUEST_POST_ADD_SUPPLIER })
   return axios.post (API + routes.supplier, supplier, headers)
     .then(res => {
-      Swal.fire({
-        title: 'Success',
-        icon: 'success',
-        showCancelButton: false,
-        timer: 1000
-      })
-      dispatch({
-        type: companyConstant.ADD_SUPPLIER,
-        payload: res.data
-      })
+      dispatch({ type: companyConstant.SUCCESS_POST_ADD_SUPPLIER, payload: res.data })
     })
-    .catch(err => {
+    .catch((err) => {
+      console.log(err)
       try {
         dispatch({
           type: errorsConstant.GET_ERRORS,
-          payload: err.response.data
-        })
+          payload: err.response.data,
+        });
       } catch {
-        console.log("Error occured in adding a supplier")
+        console.log("error");
       }
     })
 }
 
-export const getSupplier = () => (dispatch) => {
-  dispatch({
-    type: companyConstant.REQUEST_GET_SUPPLIER,
-    payload: true
-  })
+export const getSupplier = (noLoading = false) => (dispatch) => {
+  if (!noLoading) {
+    dispatch({
+      type: companyConstant.REQUEST_GET_SUPPLIER,
+      payload: true
+    })
+  }
 
   axios.get(API + routes.supplier, headers)
     .then(res => {

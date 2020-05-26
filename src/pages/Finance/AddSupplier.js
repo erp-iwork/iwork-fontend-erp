@@ -33,19 +33,44 @@ class AddSupplierPage extends Component {
             tinNumber: "",
             companys: [],
             loading: 0,
-            update: false
+            update: false,
+            lockPage: false
         }
         this.submit = this.submit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.updateSuppliers = this.updateSuppliers.bind(this)
     }
 
     componentDidMount() {
         this.props.getSupplier()
     }
 
+    
+    componentDidUpdate(prevProps, prevState) {
+        console.log(this.props.success)
+        console.log(this.props.success)
+        if (this.props.success && !this.state.lockPage) {
+            this.setState({
+              companyName: "",
+              generalManger: "",
+              contactPerson: "",
+              workingField: "",
+              paymentOption: "",
+              email: "",
+              tinNumber: "",
+              lockPage: true
+            })
+          }
+    }
+    
+
     handleChange = event => {
         const { name, value } = event.target
         this.setState({ [name]: value })
+    }
+
+    updateSuppliers(noLoading) {
+        this.props.getSupplier(noLoading)
     }
 
     submit = async (e) => {
@@ -59,28 +84,11 @@ class AddSupplierPage extends Component {
             email: this.state.email,
             tinNumber: this.state.tinNumber
         }
-        this.setState({ loading: 1 })
-
-        this.props.addSupplier(newCompany).then(res => {
-            this.setState({ loading: this.state.loading + 1 })
-        })
-        this.componentDidMount()
-        if (this.props.success) {
-          this.setState({
-            companyName: "",
-            generalManger: "",
-            contactPerson: "",
-            workingField: "",
-            paymentOption: "",
-            email: "",
-            tinNumber: ""
-          })
-        }
+        this.props.addSupplier(newCompany).then(res => this.setState({ lockPage: false }))
     }
 
     render() {
         if (this.props.loading) return <PageSpinner />
-
         return (
             <Page title="Finance" breadcrumbs={[{ name: 'Add Supplier', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
@@ -98,8 +106,8 @@ class AddSupplierPage extends Component {
                                                 <Input placeholder="Enter Supplier Name" name="companyName" onChange={this.handleChange} />
                                                 <Error
                                                     error={
-                                                    this.props.errors.companyName
-                                                        ? this.props.errors.companyName
+                                                    this.props.errors.suplierName
+                                                        ? this.props.errors.suplierName
                                                         : null
                                                     }
                                                 />
@@ -215,7 +223,7 @@ class AddSupplierPage extends Component {
                                 <FormGroup >
                                     <Col align='center'>
                                         <Button color='primary' onClick={this.submit}>
-                                            {this.state.loading === 1 ? <Loader /> : "Add Supplier"}
+                                            {this.props.loading_add_supplier? <Loader /> : "Add Supplier"}
                                         </Button>
                                     </Col>
                                 </FormGroup>
@@ -230,8 +238,8 @@ class AddSupplierPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    loading_add_supplier: state.companyReducer.loading_add_supplier,
     loading: state.companyReducer.loading,
-
     suppliers: state.companyReducer.suppliers,
     errors: state.companyReducer.errors,
     success: state.companyReducer.success
