@@ -42,7 +42,7 @@ class ViewDelieveredOrdersPage extends Component {
     render() {
         if (this.props.loading_delivered_orders) return <PageSpinner />
         return (
-            <Page title="Finance" breadcrumbs={[{ name: 'All Delivered Orders', active: true }]}>
+            <Page title="Delivered Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Row>
                     <Col>
                         <Card className="mb-3">

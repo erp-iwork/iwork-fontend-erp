@@ -76,7 +76,9 @@ class Inventory extends React.Component {
             { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
             // { to: routes.ViewSingleItemPage, name: 'Single Item', exact: false, Icon: MdWidgets },
             { to: routes.ViewPurchasedItems, name: 'Purchased Items', exact: false, Icon: MdWidgets },
-          ]
+            { to: routes.RecordTracking, name: 'Record Tracking', exact: false, Icon: MdWidgets },
+
+        ]
         return (
             <React.Fragment>
                 <NavItem

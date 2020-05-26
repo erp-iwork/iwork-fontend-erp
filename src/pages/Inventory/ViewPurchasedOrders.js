@@ -60,7 +60,7 @@ class ViewPurchasedItems extends Component {
         if (this.props.loading_items) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No Purchased Items</h2>
         return (
-            <Page title="Inventory" breadcrumbs={[{ name: 'Purchased Items', active: true }]}>
+            <Page title="Purchased Products" breadcrumbs={[{ name: 'Inventory', active: true }]}>
                 <Card className="mb-3">
                     <CardHeader>Purchased Items</CardHeader>
                     <CardBody>

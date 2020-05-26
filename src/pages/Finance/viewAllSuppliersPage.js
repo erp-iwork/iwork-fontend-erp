@@ -85,7 +85,7 @@ class ViewAllSuppliers extends Component {
         if (this.props.suppliers.length === 0) return <h2>No suppliers have been registered</h2>
         const { supplier } = this.state
         return (
-            <Page title="Finance" breadcrumbs={[{ name: 'All Supplier', active: true }]}>
+            <Page title="All Suppliers" breadcrumbs={[{ name: 'Finance', active: true }]}>
 
 
                 <Modal

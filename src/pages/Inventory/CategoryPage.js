@@ -33,8 +33,8 @@ class CategoryPage extends Component {
         if (this.props.categories.length === 0) return <h2>No Categories have been registered</h2>
         return (
             <Page
-                title="Inventory"
-                breadcrumbs={[{ name: 'Categories', active: true }]}
+                title="Categories"
+                breadcrumbs={[{ name: 'Inventory', active: true }]}
                 className="CardPage"
             >
                 <Row>

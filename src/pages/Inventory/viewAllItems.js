@@ -40,8 +40,8 @@ class ViewAllItems extends Component {
         } = this.state.item
         return (
             <Page
-                title="Inventory"
-                breadcrumbs={[{ name: 'All Items', active: true }]}
+                title="All Products"
+                breadcrumbs={[{ name: 'Inventory', active: true }]}
                 className="TablePage">
                 <Modal
                     isOpen={this.state.modal}
