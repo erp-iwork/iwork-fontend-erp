@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-<<<<<<< HEAD
-=======
 import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 
->>>>>>> After Yeabsera
 
 class RecordTracking extends Component {
     constructor(props) {
@@ -15,11 +12,6 @@ class RecordTracking extends Component {
         return (
             <Page
                 title="Record Tracking"
-<<<<<<< HEAD
-                breadcrumbs={[{ name: 'GRV', active: true }]}
-            >
-                Record Tracking
-=======
                 breadcrumbs={[{ name: 'Inventory', active: true }]}
             >
                 <Row>
@@ -60,7 +52,6 @@ class RecordTracking extends Component {
                     </Col>
                 </Row>
 
->>>>>>> After Yeabsera
             </Page>
         );
     }
