@@ -11,8 +11,10 @@ const initialState = {
 }
 
 const manuFacturingReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case errorsConstant.GET_ERRORS:
+            console.log(action.payload);
+
             return {
                 ...state, success: false, loading_manufacture: false,
                 errors: action.payload,
@@ -21,13 +23,13 @@ const manuFacturingReducer = (state = initialState, action) => {
             return {
                 ...state, loading_masterdata: true
             }
-        
+
         case manuFacturingConstant.SUCCESS_GET_MASTERDATA:
             return {
                 ...state, loading_masterdata: false,
                 masterdata: action.payload
             }
-        
+
         case manuFacturingConstant.REQUEST_POST_MANUFATURE:
             return { ...state, loading_manufacture: true }
         case manuFacturingConstant.SUCCESS_POST_MANUFATURE:

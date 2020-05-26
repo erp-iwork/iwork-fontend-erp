@@ -30,7 +30,7 @@ export const addCompany = (company) => (dispatch) => {
 
 export const addSupplier = (supplier) => (dispatch) => {
   dispatch({ type: companyConstant.REQUEST_POST_ADD_SUPPLIER })
-  return axios.post (API + routes.supplier, supplier, headers)
+  return axios.post(API + routes.supplier, supplier, headers)
     .then(res => {
       dispatch({ type: companyConstant.SUCCESS_POST_ADD_SUPPLIER, payload: res.data })
     })
@@ -121,7 +121,7 @@ export const deleteSupplier = (supplierID) => (dispatch) => {
             });
           }
         })
-        return res.value
+      return res.value
     }
   })
 }
@@ -238,28 +238,28 @@ export const getMasterData = () => (dispatch) => {
     type: companyConstant.REQUEST_GET_MASTERDATA,
     payload: true
   })
-  return axios.get(API + routes.masterData, headers)
-  .then(res => {
-    dispatch({
-      type: companyConstant.GET_MASTERDATA,
-      payload: res.data
-    })
-  })
-  .catch(err => {
-    if (err.response && err.response.data) {
+  return axios.get(API + routes.itemsToBePurchased, headers)
+    .then(res => {
       dispatch({
-        type: errorsConstant.GET_ERRORS,
-        payload: err.response.data,
-      });
-    } else {
-      Swal.fire({
-        title: "Error", text: "Connection Problem",
-        icon: "error",
-        showConfirmButton: false,
-        timer: 1000
+        type: companyConstant.GET_MASTERDATA,
+        payload: res.data
       })
-    }
-  })
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error", text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+    })
 }
 
 

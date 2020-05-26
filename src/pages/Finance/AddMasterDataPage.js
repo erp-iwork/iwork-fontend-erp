@@ -14,7 +14,6 @@ import {
 } from 'reactstrap';
 import './Finance.scss'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { addMasterData, getMasterData } from '../../store/company/action'
 import { getExistingCategories } from '../../store/inventory/action'
 import PageSpinner from '../../components/PageSpinner'
@@ -68,11 +67,12 @@ class AddMasterDataPage extends Component {
     handleChange = event => {
         const { name, value } = event.target
         this.setState({ [name]: value })
+
     }
 
     ItemNameChange = (evt, idx) => {
         const { value } = evt.target
-        console.log(value)
+
         const neworder_items = this.state.order_items.map((item, sidx) => {
             if (idx !== sidx) return item;
             return {
@@ -130,15 +130,13 @@ class AddMasterDataPage extends Component {
             productPrice, unitOfMeasurement, product_material: order_items,
             cost
         }
-        console.log(data)
+
         this.props.addMasterData(data)
     }
 
     render() {
         if (this.props.loading || this.props.loading_categories) return <PageSpinner />
-        if (this.props.success) {
-            return <Redirect to={routes.ViewAllMasterData} />
-        }
+
         let { can_be_manufactured } = this.state
         return (
             <Page
@@ -154,7 +152,7 @@ class AddMasterDataPage extends Component {
                                     <Label for="productName" sm={2}>Product Name</Label>
                                     <Col sm={12}>
                                         <Input id="productName" placeholder="Product Name" onChange={this.handleChange} name="productName" />
-                                        {this.props.errors.errors?
+                                        {this.props.errors.errors ?
                                             <Error error={this.props.errors.errors.productName} /> : ''
                                         }
                                     </Col>
@@ -174,7 +172,7 @@ class AddMasterDataPage extends Component {
                                             <option value="Stored">Stored</option>
                                             <option value="Service">Service</option>
                                         </Input>
-                                        {this.props.errors.errors?
+                                        {this.props.errors.errors ?
                                             <Error error={this.props.errors.errors.productType} /> : ''
                                         }
                                     </Col>
@@ -188,7 +186,7 @@ class AddMasterDataPage extends Component {
                                                 <option value={item.catagoryId} key={index}>{item.catagory}</option>
                                             ))}
                                         </Input>
-                                        {this.props.errors.errors?
+                                        {this.props.errors.errors ?
                                             <Error error={this.props.errors.errors.productCategory} /> : ''
                                         }
                                     </Col>
@@ -202,7 +200,7 @@ class AddMasterDataPage extends Component {
                                             <option>KM</option>
                                             <option>Kilos</option>
                                         </Input>
-                                        {this.props.errors.errors?
+                                        {this.props.errors.errors ?
                                             <Error error={this.props.errors.errors.unitOfMeasurement} /> : ''
                                         }
                                     </Col>
@@ -219,7 +217,7 @@ class AddMasterDataPage extends Component {
                                             type="number"
                                             onChange={this.handleChange}
                                         />
-                                        {this.props.errors.errors?
+                                        {this.props.errors.errors ?
                                             <Error error={this.props.errors.errors.productPrice} /> : ''
                                         }
                                     </Col>
@@ -269,7 +267,7 @@ class AddMasterDataPage extends Component {
                                                     <Label md={12} for="unit_of_measurement">Unit Of Measurment</Label>
                                                     <Col md={12}>
                                                         <Input type='select' defaultValue={""} id="unit_of_measurement" name="unit_of_measurement" onChange={this.ItemUnitChange(index)}>
-                                                        <option disabled selected></option>
+                                                            <option disabled selected></option>
                                                             <option>Litre</option>
                                                             <option>KM</option>
                                                             <option>Kilos</option>
