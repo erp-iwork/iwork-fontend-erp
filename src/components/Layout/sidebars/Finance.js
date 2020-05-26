@@ -28,12 +28,12 @@ class Finance extends React.Component {
     state = {
         isOpenIT: true,
         isOpenSALES: true,
-        isOpenFINANCE: true,
+        isOpenFINANCE: this.props.isOpen? true : false,
         isOpenINVENTORY: true,
         isOpenLOGISTICS: true,
         isOpenPROCURMENT: true,
         isOpenMANUFACTURING: true
-    };
+    }
 
     handleClick = name => () => {
         this.setState(prevState => {
