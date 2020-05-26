@@ -102,7 +102,7 @@ class DashboardPage extends React.Component {
   }
 
   render() {
-    const primaryColor = getColor('primary');
+    // const primaryColor = getColor('primary');
 
 
     return (

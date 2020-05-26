@@ -1,8 +1,9 @@
-import { AnnouncementCard } from '../../components/Card';
 import HorizontalAvatarList from '../../components/HorizontalAvatarList';
 import Page from '../../components/Page';
 import SupportTicket from '../../components/SupportTicket';
 import UserProgressTable from '../../components/UserProgressTable';
+import { randomNum } from '../../utils/demos';
+
 import {
   avatarsData,
 
@@ -15,7 +16,6 @@ import {
   MdPersonPin,
 
 } from 'react-icons/md';
-import InfiniteCalendar from 'react-infinite-calendar';
 import {
   Button,
   Card,
@@ -26,14 +26,47 @@ import {
 
   Row,
 } from 'reactstrap';
+import {  Pie, Doughnut } from 'react-chartjs-2';
+
 import { getColor } from '../../utils/colors';
 
-const today = new Date();
-const lastWeek = new Date(
-  today.getFullYear(),
-  today.getMonth(),
-  today.getDate() - 7,
-);
+const genPieData = () => {
+  return {
+    datasets: [
+      {
+        data: [randomNum(), randomNum(), randomNum(), randomNum(), randomNum()],
+        backgroundColor: [
+          getColor('primary'),
+          getColor('secondary'),
+          getColor('success'),
+          getColor('info'),
+          getColor('danger'),
+        ],
+        label: 'New',
+      },
+    ],
+    labels: ['New', 'On-Going', 'Hired', 'On-Boarding', 'Rejected'],
+  };
+};
+
+const genPieData1 = () => {
+  return {
+    datasets: [
+      {
+        data: [randomNum(), randomNum(), randomNum(), randomNum(), randomNum()],
+        backgroundColor: [
+          getColor('primary'),
+          getColor('secondary'),
+          getColor('success'),
+          getColor('info'),
+          getColor('danger'),
+        ],
+        label: 'Dataset 1',
+      },
+    ],
+    labels: ['No Career Progression', 'Seeking New Skills', 'Salary', 'Personal/Family Change', 'Work Enviroment'],
+  };
+};
 
 class DashboardPage extends React.Component {
   componentDidMount() {
@@ -42,9 +75,9 @@ class DashboardPage extends React.Component {
   }
 
   render() {
-    const primaryColor = getColor('primary');
-    const secondaryColor = getColor('secondary');
-    const infoColor = getColor('info');
+    // const primaryColor = getColor('primary');
+    // const secondaryColor = getColor('secondary');
+    // const infoColor = getColor('info');
 
 
     return (
@@ -74,6 +107,26 @@ class DashboardPage extends React.Component {
         </CardDeck>
 
         <Row>
+
+          <Col xl={6} lg={12} md={12}>
+            <Card>
+              <CardHeader>Applicant Status</CardHeader>
+              <CardBody>
+                <Pie data={genPieData()} />
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col xl={6} lg={12} md={12}>
+            <Card>
+              <CardHeader>Loss Risk for talent pool</CardHeader>
+              <CardBody>
+                <Doughnut data={genPieData1()} />
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
           <Col md="6" sm="12" xs="12">
             <Card>
               <CardHeader>
@@ -91,7 +144,6 @@ class DashboardPage extends React.Component {
               </CardBody>
             </Card>
           </Col>
-
           <Col md="6" sm="12" xs="12">
             <Card>
               <CardHeader>Attendance <small>for this month</small></CardHeader>
@@ -110,51 +162,6 @@ class DashboardPage extends React.Component {
             </Card>
           </Col>
         </Row>
-
-
-        <Row>
-          <Col md="7" sm="12" xs="12">
-            <InfiniteCalendar
-              selected={today}
-              minDate={lastWeek}
-              width="100%"
-              theme={{
-                accentColor: primaryColor,
-                floatingNav: {
-                  background: primaryColor,
-                  chevron: secondaryColor,
-                  color: '#FFF',
-                },
-                headerColor: primaryColor,
-                selectionColor: primaryColor,
-                textColor: {
-                  active: '#FFF',
-                  default: '#333',
-                },
-                todayColor: infoColor,
-                weekdayColor: primaryColor,
-              }}
-            />
-          </Col>
-          <Col md="5" sm="12" xs="12">
-            <AnnouncementCard
-              color="primary"
-              header="Announcement"
-              avatarSize={60}
-              name="Hermela Solomon"
-              date="1 hour ago"
-              text="All Department Managers are requested to arrive at cinema hall for our weekly Discussions!"
-              buttonProps={{
-                children: 'show',
-              }}
-              style={{ height: 500 }}
-            />
-          </Col>
-
-
-        </Row>
-
-
       </Page>
     );
   }

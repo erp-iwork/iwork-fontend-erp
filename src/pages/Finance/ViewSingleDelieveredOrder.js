@@ -89,34 +89,32 @@ class ViewSingleDelieveredOrderPage extends Component {
                                                 <td>{item.purchaseQuantity}</td>
                                                 <td>{item.masterData.productPrice}</td>
                                                 <td align='right'>
-                                                        <Row>
-                                                            <Col md={3}>
-                                                                <Input type='number' placeholder='New Price' onChange={
-                                                                    (event) => this.handleChange({
-                                                                        value: event.target.value,
-                                                                        name: 'newPrice',
-                                                                        index
-                                                                    })
-                                                                } />
-                                                            </Col>
-                                                            <Col md={3}>
-                                                                <Input type='number' placeholder="Margin" onChange={
-                                                                    (event) => this.handleChange({
-                                                                        value: event.target.value,
-                                                                        name: 'margin',
-                                                                        index
-                                                                    })
-                                                                } /> %
-                                                            </Col>
+                                                    <Col >
+                                                        <Input type='number' placeholder='New Price' onChange={
+                                                            (event) => this.handleChange({
+                                                                value: event.target.value,
+                                                                name: 'newPrice',
+                                                                index
+                                                            })
+                                                        } />
+                                                    </Col>
+                                                    <Col >
+                                                        <Input type='number' placeholder="Margin" onChange={
+                                                            (event) => this.handleChange({
+                                                                value: event.target.value,
+                                                                name: 'margin',
+                                                                index
+                                                            })
+                                                        } />
+                                                    </Col>
 
-                                                        </Row>
 
 
                                                 </td>
                                             </tr>
                                         ))}
                                     </tbody>
-                                    <Button onClick={this.invoice}>
+                                    <Button align='center' color='primary' onClick={this.invoice}>
                                         {this.props.loading_invoice ? <Loader /> : "Invoice Order"}
                                     </Button>
                                 </Table>
