@@ -48,14 +48,14 @@ class AllEmployees extends Component {
         if (this.props.loading) return <PageSpinner />
         if (this.props.employees.length === 0 && this.props.success) 
         return (
-            <Page  title="All Employees" breadcrumbs={[{ name: 'All Employees', active: true }]} className="TablePage">
+            <Page  title="All Employees" breadcrumbs={[{ name: 'Human Resource', active: true }]} className="TablePage">
                 <h1>No Employees Yet.</h1>
             </Page>
         )
         return (
             <Page
-                title="Human Resource"
-                breadcrumbs={[{ name: 'All Employees', active: true }]}
+                title="All Employees"
+                breadcrumbs={[{ name: 'Human Resource', active: true }]}
                 className="TablePage"
             >
                 <Row>

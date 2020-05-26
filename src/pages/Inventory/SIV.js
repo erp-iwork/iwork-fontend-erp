@@ -94,8 +94,8 @@ class SIV extends React.Component {
     console.log(this.props.sivs)
     return (
       <Page
-        title="Inventory"
-        breadcrumbs={[{ name: 'SIV', active: true }]}
+        title="SIV"
+        breadcrumbs={[{ name: 'Inventory', active: true }]}
       >
         <hr />
         <div
@@ -138,28 +138,28 @@ class SIV extends React.Component {
                   gutterBottom
                 >
                   <b>SIV Status : </b> {this.props.sivs.sivStatus}
-                  </Typography>
+                </Typography>
                 <Typography
                   style={classes.text}
                   variant="body2"
                   gutterBottom
                 >
                   <b>Warehouse Name : </b> {this.props.sivs.warehouseName}
-                  </Typography>
+                </Typography>
                 <Typography
                   style={classes.text}
                   variant="body2"
                   gutterBottom
                 >
                   <b>Issued By :</b> {localStorage.getItem('username')}
-                  </Typography>
+                </Typography>
                 <Typography
                   style={classes.text}
                   variant="body2"
                   gutterBottom
                 >
                   <b>SIV Date :</b> {this.props.sivs.sivDate}
-                  </Typography>
+                </Typography>
               </div>
             </div>
           </div>
@@ -240,18 +240,11 @@ class SIV extends React.Component {
               {({ loading }) => (loading ?
                 <Button size='sm' /> :
                 <div >
-                  <Button style={{
-                    marginLeft: 8,
-                    color: '#11669F'
-
-                  }} fontSize='large' />
-                  <Typography style={{
-                    color: '#818181'
-
-                  }}
-                  >
+                  <Button size='sm' color='primary'>
                     Print SIV
-                    </Typography>
+
+                  </Button>
+
                 </div>
               )}
             </PDFDownloadLink>) : null

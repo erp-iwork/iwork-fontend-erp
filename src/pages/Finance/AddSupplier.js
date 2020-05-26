@@ -92,7 +92,7 @@ class AddSupplierPage extends Component {
             tinNumber, workingField
         } = this.state
         return (
-            <Page title="Finance" breadcrumbs={[{ name: 'Add Supplier', active: true }]}>
+            <Page title="Add Supplier" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
                     <Card>
                         <CardHeader>ADD A NEW SUPPLIER TO WORK WITH</CardHeader>

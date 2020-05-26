@@ -144,8 +144,8 @@ class AddMasterDataPage extends Component {
         console.log(this.props.masterData)
         return (
             <Page
-                title="Finance"
-                breadcrumbs={[{ name: 'Add Master Data', active: true }]}
+                title="Add Master Data"
+                breadcrumbs={[{ name: 'Finance', active: true }]}
             >
                 <Col lg={12} md={12}>
                     <Card>
