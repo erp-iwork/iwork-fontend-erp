@@ -6,9 +6,12 @@ import {
   MdDashboard,
 } from 'react-icons/md';
 
+
 import { NavLink } from 'react-router-dom';
 import {
   Nav,
+  NavItem,
+
   Navbar,
   NavLink as BSNavLink,
 } from 'reactstrap';
@@ -33,9 +36,6 @@ const bem = bn.create('sidebar');
 
 const navItems = [
   { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-  { to: '/cards', name: 'cards', exact: false, Icon: MdDashboard },
-  { to: '/charts', name: 'charts', exact: false, Icon: MdDashboard },
-  { to: '/widgets', name: 'widgets', exact: false, Icon: MdDashboard },
 ];
 
 class Sidebar extends React.Component {
@@ -71,7 +71,7 @@ class Sidebar extends React.Component {
           <Inventory isOpen={false} />
           <Procurment isOpen={false} />
           <Manufacturing isOpen={false} />
-          <Logistics isOpen={false}/>
+          <Logistics isOpen={false} />
         </React.Fragment>
 
       )
@@ -99,6 +99,21 @@ class Sidebar extends React.Component {
             </SourceLink>
           </Navbar>
           <Nav vertical>
+            {navItems.map(({ to, name, exact, Icon }, index) => (
+              <NavItem key={index} className={bem.e('nav-item')}>
+                <BSNavLink
+                  id={`navItem-${name}-${index}`}
+                  className="text-uppercase"
+                  tag={NavLink}
+                  to={to}
+                  activeClassName="active"
+                  exact={exact}
+                >
+                  <Icon className={bem.e('nav-item-icon')} />
+                  <span className="">{name}</span>
+                </BSNavLink>
+              </NavItem>
+            ))}
             {this.getContents(user_dept)}
           </Nav>
         </div>
