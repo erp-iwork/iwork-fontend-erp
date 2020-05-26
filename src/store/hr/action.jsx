@@ -19,6 +19,7 @@ function addNewEmployee(data) {
       city: data.city,
       region: data.region,
       birthDate: data.birthDate,
+      gender: data.gender
     };
 
     dispatch({

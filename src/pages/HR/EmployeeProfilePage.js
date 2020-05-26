@@ -14,6 +14,7 @@ class EmployeeProfilePage extends Component {
     }
     render() {
         const employeeInfos = this.props.employee
+        console.log(employeeInfos)
         if (!employeeInfos.firstName) return <PageSpinner />
         return (
             <Page
@@ -119,7 +120,7 @@ class EmployeeProfilePage extends Component {
                                                 Department :
                                         </Col>
                                             <Col>
-                                                <b>{employeeInfos.department}</b>
+                                                <b>{employeeInfos.department.departmentName}</b>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -129,7 +130,7 @@ class EmployeeProfilePage extends Component {
                                                 Role :
                                         </Col>
                                             <Col>
-                                                <b>{employeeInfos.roles}</b>
+                                                <b>{employeeInfos.roles.role}</b>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -141,7 +142,7 @@ class EmployeeProfilePage extends Component {
                                                 Level :
                                         </Col>
                                             <Col>
-                                                <b>{employeeInfos.level}</b>
+                                                <b>{employeeInfos.level.level}</b>
                                             </Col>
                                         </Row>
                                     </Col>
