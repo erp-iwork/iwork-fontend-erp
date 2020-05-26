@@ -40,7 +40,7 @@ class ViewDelieveredOrdersPage extends Component {
     }
 
     render() {
-        if (this.props.loading) return <PageSpinner />
+        if (this.props.loading_delivered_orders) return <PageSpinner />
         return (
             <Page title="Finance" breadcrumbs={[{ name: 'All Delivered Orders', active: true }]}>
                 <Row>
@@ -60,7 +60,7 @@ class ViewDelieveredOrdersPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.orders.map((item, index) => (
+                                        {this.props.orders.slice(0).reverse().map((item, index) => (
                                             <Order key={index} index={index} order={item} />
                                         ))}
                                     </tbody>
@@ -75,7 +75,7 @@ class ViewDelieveredOrdersPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    loading: state.ordersReducer.loading,
+    loading_delivered_orders: state.ordersReducer.loading_delivered_orders,
     orders: state.ordersReducer.orders
 })
 
