@@ -23,7 +23,7 @@ class ViewSinglePurchaseOrderPage extends Component {
     render() {
         if (this.props.loading_single_order === true || this.props.loading_single_order === undefined) return <PageSpinner />
         return (
-            <Page title="Procurment" breadcrumbs={[{ name: 'Single Order', active: true }]}>
+            <Page title="Single Purchase Order" breadcrumbs={[{ name: 'Procurment', active: true }]}>
                 <Card className='padding'>
                     <Row sm={12} md={12} >
                         <Col md={4}>

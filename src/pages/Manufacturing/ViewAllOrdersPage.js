@@ -41,7 +41,7 @@ class ViewAllOrdersManufacturingPage extends Component {
         if (this.props.loading_orders) return <PageSpinner />
         console.log(this.props.orders)
         return (
-            <Page title="Manufacturing" breadcrumbs={[{ name: 'View All Orders', active: true }]}>
+            <Page title="View All Orders" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
 
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>
