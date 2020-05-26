@@ -26,7 +26,7 @@ const Order = ({ order, index, data, handlePrint }) => {
                           fileName={`order_${order.orderNumber}.pdf`}>
                           <Button>Download</Button>
                         </PDFDownloadLink> :
-                          <Button onClick={() => handlePrint(order.orderNumber)}>
+                          <Button size='sm' color='primary' onClick={() => handlePrint(order.orderNumber)}>
                               Generate PDF
                           </Button>
                     }

@@ -1,4 +1,4 @@
-import logo200Image from '../../assets/img/logo/logo_200.png';
+import logo200Image from '../../assets/img/logo/Sparta.svg';
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label, Container } from 'reactstrap';
 import './styles.scss'

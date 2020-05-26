@@ -25,8 +25,8 @@ class ViewSingleOrderPage extends Component {
         const { details } = this.state
         const { order } = this.props
         return (
-            <Page title="Sales" breadcrumbs={[{ name: 'Single Order', active: true }]}>
-{/* 
+            <Page title="View Single Order" breadcrumbs={[{ name: 'Sales', active: true }]}>
+                {/* 
                 <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
                     <div class="step completed">
                         <div class="step-icon-wrap">
