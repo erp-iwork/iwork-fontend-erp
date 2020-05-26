@@ -38,11 +38,13 @@ class ViewSingleDelieveredOrderPage extends Component {
 
     invoice = () => {
         const { order } = this.state
-        this.props.invoiceOrder(order.purchaseOrderNumber, this.state.orders)
+        this.props.invoiceOrder(order.purchaseOrderNumber, this.state.orders).then(res => {
+            this.props.getSingleOrder(order.purchaseOrderNumber)
+        })
     }
 
     render() {
-        const { order } = this.state
+        const { order } = this.props
         if (this.props.loading_single_order) return <PageSpinner />
         return (
             <Page title="Finance" breadcrumbs={[{ name: 'Delivered Order', active: true }]}>
@@ -57,6 +59,9 @@ class ViewSingleDelieveredOrderPage extends Component {
                                 </Row>
                                 <Row><Col>Order Date :</Col>
                                     <Col><b>{order.purchaseOrderDate}</b></Col>
+                                </Row>
+                                <Row><Col>Status :</Col>
+                                    <Col><b>{order.status_purchase_order[0]['status']}</b></Col>
                                 </Row>
                                 <b>Description</b>
                                 <Col>{order.description}</Col>
@@ -122,7 +127,10 @@ const mapStateToProps = (state) => ({
     loading_single_order: state.procurementReducer.loading_single_order,
     loading_invoice: state.procurementReducer.loading_invoice,
     success: state.procurementReducer.success,
-    order: state.procurementReducer.order
+    order: state.procurementReducer.order,
+    loading_orders: state.procurementReducer.loading_orders,
+    orders: state.procurementReducer.orders,
+    status: state.procurementReducer.status,
 })
 
 export default connect(mapStateToProps, { invoiceOrder, getSingleOrder })(ViewSingleDelieveredOrderPage)

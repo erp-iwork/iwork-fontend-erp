@@ -7,22 +7,13 @@ import headers from './../headers'
 
 // ADD COMPANY
 export const addCompany = (company) => (dispatch) => {
-  dispatch({
-    type: companyConstant.REQUEST_GET_COMANY,
-    payload: true
-  })
+  dispatch({ type: companyConstant.REQUEST_GET_COMANY })
   return axios
     .post(API + "customer/", company, headers)
     .then((res) => {
-      Swal.fire({
-        title: "Success",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1000
-      })
       dispatch({
         type: companyConstant.ADD_COMPANY,
-        payload: res.data,
+        payload: res.data
       })
     })
     .catch((err) => {

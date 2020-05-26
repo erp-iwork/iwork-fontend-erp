@@ -47,8 +47,6 @@ class AddSupplierPage extends Component {
 
     
     componentDidUpdate(prevProps, prevState) {
-        console.log(this.props.success)
-        console.log(this.props.success)
         if (this.props.success && !this.state.lockPage) {
             this.setState({
               companyName: "",
@@ -89,6 +87,10 @@ class AddSupplierPage extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
+        const {
+            companyName, generalManger, contactPerson, email, paymentOption,
+            tinNumber, workingField
+        } = this.state
         return (
             <Page title="Finance" breadcrumbs={[{ name: 'Add Supplier', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
@@ -103,7 +105,7 @@ class AddSupplierPage extends Component {
                                                 Supplier Name
                                     </Label>
                                             <Col sm={12}>
-                                                <Input placeholder="Enter Supplier Name" name="companyName" onChange={this.handleChange} />
+                                                <Input placeholder="Enter Supplier Name" name="companyName" onChange={this.handleChange} value={companyName} />
                                                 <Error
                                                     error={
                                                     this.props.errors.suplierName
@@ -119,7 +121,7 @@ class AddSupplierPage extends Component {
                                                 General Manager
                                             </Label>
                                             <Col sm={12}>
-                                                <Input placeholder="General Manager" name="generalManger" onChange={this.handleChange} />
+                                                <Input placeholder="General Manager" name="generalManger" onChange={this.handleChange} value={generalManger} />
                                                 <Error
                                                     error={
                                                     this.props.errors.generalManger
@@ -134,6 +136,7 @@ class AddSupplierPage extends Component {
                                             <Col sm={12}>
                                                 <Input
                                                     placeholder="Contact Person" name="contactPerson" onChange={this.handleChange}
+                                                    value={contactPerson}
                                                 />
                                             </Col>
                                             <Error
@@ -154,6 +157,7 @@ class AddSupplierPage extends Component {
                                                     placeholder="Tin Number"
                                                     name="tinNumber"
                                                     onChange={this.handleChange}
+                                                    value={tinNumber}
                                                 />
                                                 <Error
                                                     error={
@@ -176,6 +180,7 @@ class AddSupplierPage extends Component {
                                                     name="email"
                                                     placeholder="Supplier Email"
                                                     onChange={this.handleChange}
+                                                    value={email}
                                                 />
                                                 <Error
                                                     error={
@@ -187,7 +192,7 @@ class AddSupplierPage extends Component {
                                         <FormGroup>
                                             <Label sm={12} for="exampleSelect">Payment Option</Label>
                                             <Col>
-                                                <Input type="select" name="paymentOption" placeholder="Select payment option" onChange={this.handleChange}>
+                                                <Input type="select" name="paymentOption" placeholder="Select payment option" value={paymentOption} onChange={this.handleChange}>
                                                     <option aria-label="None" value="Select payment option" />
                                                     <option>TOT</option>
                                                     <option>VAT</option>
@@ -208,6 +213,7 @@ class AddSupplierPage extends Component {
                                                     placeholder="Field Of Work"
                                                     name="workingField"
                                                     onChange={this.handleChange}
+                                                    value={workingField}
                                                 />
                                                 <Error
                                                     error={

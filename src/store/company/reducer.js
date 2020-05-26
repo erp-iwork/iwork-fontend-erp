@@ -8,27 +8,37 @@ const initialState = {
   success: false,
   updating_status: false,
   loading_add_supplier: false,
+  loading_add_customer: false,
   errors: []
 };
 
 export default function companyReducer(state = initialState, action) {
   switch (action.type) {
     case errorsConstant.GET_ERRORS:
-      console.log(action.payload)
       return {
         ...state,
         errors: action.payload,
         success: false,
         loading: false,
         loading_addMasterdata: false,
-        loading_add_supplier: false
+        loading_add_supplier: false,
+        loading_add_customer: false
       }
     
     case companyConstant.REQUEST_GET_COMANY:
       return {
         ...state,
-        loading: action.payload
+        loading_add_customer: true
       }
+
+    case companyConstant.ADD_COMPANY:
+      return {
+        ...state,
+        companys: [...state.companys, action.payload],
+        success: true,
+        loading_add_customer: false,
+        errors: [],
+      };
 
     case companyConstant.GET_COMPANYS:
       return {
@@ -36,13 +46,7 @@ export default function companyReducer(state = initialState, action) {
         companys: action.payload,
         loading: false,
       };
-    case companyConstant.ADD_COMPANY:
-      return {
-        ...state,
-        companys: [...state.companys, action.payload],
-        success: true,
-        errors: [],
-      };
+    
     
     case companyConstant.REQUEST_GET_SUPPLIER:
       return {
@@ -66,7 +70,8 @@ export default function companyReducer(state = initialState, action) {
       case companyConstant.SUCCESS_POST_ADD_SUPPLIER:
         return {
           ...state, loading_add_supplier: false, success: true,
-          suppliers: [...state.suppliers, action.payload]
+          suppliers: [...state.suppliers, action.payload],
+          errors: []
         }
 
     case companyConstant.DELETE_COMPANY:

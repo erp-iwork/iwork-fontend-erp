@@ -5,7 +5,7 @@ import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getOrders, updateStatus } from '../../store/procurement/action'
+import { getDeliveredOrders, updateStatus } from '../../store/procurement/action'
 import routes from '../../config/routes' 
 
 const Order = ({ order, index, deliver }) => {
@@ -44,28 +44,24 @@ class ViewAllOrdersPage extends Component {
             lockPage: false
         }
         this.deliver = this.deliver.bind(this)
+        this.updateOrders = this.updateOrders.bind(this)
     }
 
     componentDidMount() {
-        this.props.getOrders()
+        this.props.getDeliveredOrders()
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (!this.state.lockPage) {
-            this.componentDidMount()
-            this.setState({ lockPage: true })
-        }
+    updateOrders () {
+        this.props.getDeliveredOrders()
     }
 
     deliver(order) {
         this.props.updateStatus(order, { status: "Delivered" })
-        this.setState({ lockPage: false })
     }
 
     render() {
         if (this.props.loading_orders) return <PageSpinner />
-        const deliveredOrders = this.props.orders.filter((order) => { return order.status_purchase_order[0]['status'] === "Created" || order.status_purchase_order[0]['status'] === "Delivered" })
-        if (deliveredOrders.length === 0) return <h2>No orders to show</h2>
+        if (this.props.orders.length === 0) return <h2>No orders to show</h2>
         return (
             <Page
                 title="Logistics"
@@ -86,7 +82,7 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {deliveredOrders.map((item, index) => (
+                            {this.props.orders.map((item, index) => (
                                 <Order order={item} key={index} index={index} deliver={this.deliver} />
                             ))}
                         </Table>
@@ -101,8 +97,11 @@ class ViewAllOrdersPage extends Component {
 const mapStateToProps = (state) => {
     return {
         loading_orders: state.procurementReducer.loading_orders,
-        orders: state.procurementReducer.orders
+        orders: state.procurementReducer.orders,
+        success: state.procurementReducer.success,
+        order: state.procurementReducer.order,
+        status: state.procurementReducer.status,
     }
 }
 
-export default connect(mapStateToProps, { getOrders, updateStatus })(ViewAllOrdersPage)
+export default connect(mapStateToProps, { getDeliveredOrders, updateStatus })(ViewAllOrdersPage)

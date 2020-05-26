@@ -14,8 +14,9 @@ const { GET, POST, PUT } = purchaseConstants
 export const getOrders = () => (dispatch) => {
     dispatch({ type: GET.REQUEST_GET_ORDER })
     return Axios.get(API + routes.purchase +
-      `?search1=${status.delivered}&search2=${status.invoiced}`, headers)
+      `?search1=${status.approved}&search2=${status.delivered}`, headers)
         .then(res => {
+          console.log(res.data)
             dispatch({
                 type: GET.SUCCESS_GET_ORDER,
                 payload: res.data
@@ -33,6 +34,79 @@ export const getOrders = () => (dispatch) => {
                 })
             }
         })
+}
+
+export const getCreatedOrders = () => (dispatch) => {
+  dispatch({ type: GET.REQUEST_GET_ORDER })
+  return Axios.get(API + routes.purchase +
+    `?search1=${status.created}`, headers)
+      .then(res => {
+          dispatch({
+              type: GET.SUCCESS_GET_ORDER,
+              payload: res.data
+          })
+      })
+      .catch(err => {
+          if (err.response && err.response.data) {
+            } else {
+              Swal.fire({
+                title: "Error",
+                text: "Connection Problem",
+                icon: "error",
+                showConfirmButton: false,
+                timer: 1000
+              })
+          }
+      })
+}
+
+export const getDeliveredOrders = () => (dispatch) => {
+  dispatch({ type: GET.REQUEST_GET_ORDER })
+  return Axios.get(API + routes.purchase +
+    `?search1=${status.approved}&search2=${status.delivered}`, headers)
+      .then(res => {
+        console.log(res.data)
+          dispatch({
+              type: GET.SUCCESS_GET_ORDER,
+              payload: res.data
+          })
+      })
+      .catch(err => {
+          if (err.response && err.response.data) {
+            } else {
+              Swal.fire({
+                title: "Error",
+                text: "Connection Problem",
+                icon: "error",
+                showConfirmButton: false,
+                timer: 1000
+              })
+          }
+      })
+}
+
+export const getPurchasedOrders = () => (dispatch) => {
+  dispatch({ type: GET.REQUEST_GET_ORDER })
+  return Axios.get(API + routes.purchase +
+    `?search1=${status.approved}&search2=${status.created}`, headers)
+      .then(res => {
+          dispatch({
+              type: GET.SUCCESS_GET_ORDER,
+              payload: res.data
+          })
+      })
+      .catch(err => {
+          if (err.response && err.response.data) {
+            } else {
+              Swal.fire({
+                title: "Error",
+                text: "Connection Problem",
+                icon: "error",
+                showConfirmButton: false,
+                timer: 1000
+              })
+          }
+      })
 }
 
 export const getSuppliers = () => (dispatch) => {
@@ -187,13 +261,14 @@ export const invoiceOrder = (purchaseOrderNumber, data) => (dispatch) => {
   dispatch({ type: PUT.REQUEST_PUT_INVOICE })
   return Axios.put(API + routes.purchase + purchaseOrderNumber + '/', data)
     .then(res => {
+      updateStatus(purchaseOrderNumber, { status: status.received })
       dispatch({ type: PUT.SUCCESS_PUT_INVOICE })
       Swal.fire({
         title: "Invoice Success",
         icon: "success",
         showConfirmButton: false,
         timer: 1000
-      });
+      })
     })
     .catch((err) => {
       if (err.response && err.response.data) {

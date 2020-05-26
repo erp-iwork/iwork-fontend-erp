@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getOrders } from '../../store/procurement/action'
+import { getPurchasedOrders } from '../../store/procurement/action'
 import { updateStatus } from '../../store/company/action'
 import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
@@ -52,7 +52,7 @@ class ViewAllPurchaseOrderPage extends Component {
     }
 
     async updateOrders () {
-        this.props.getOrders()
+        this.props.getPurchasedOrders()
     }
 
     handleApprove (orderNumber) {
@@ -102,4 +102,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getOrders, updateStatus })(ViewAllPurchaseOrderPage)
+export default connect(mapStateToProps, { getPurchasedOrders, updateStatus })(ViewAllPurchaseOrderPage)

@@ -78,7 +78,6 @@ const procurementReducer = (state = initialState, action) => {
             const index = state.orders.findIndex(
                 (item) => item.purchaseOrderNumber === action.payload.order
               )
-              console.log(state.orders[index].status_purchase_order)
               state.orders[index].status_purchase_order[0]['status'] = action.payload.status
             return {
                 ...state,

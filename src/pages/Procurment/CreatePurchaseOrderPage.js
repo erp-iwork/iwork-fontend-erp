@@ -17,7 +17,7 @@ import {
 import "./Procurment.scss";
 import { connect } from 'react-redux'
 import Error from '../../components/error'
-import { getOrders, getSuppliers, getMasterdata, addPurchaseOrder } from '../../store/procurement/action'
+import { getCreatedOrders, getSuppliers, getMasterdata, addPurchaseOrder } from '../../store/procurement/action'
 import PageSpinner from '../../components/PageSpinner'
 import Loader from '../../components/loader'
 
@@ -47,13 +47,13 @@ class CreatePurchaseOrder extends Component {
     }
 
     componentDidMount() {
-        this.props.getOrders()
+        this.props.getCreatedOrders()
         this.props.getSuppliers()
         this.props.getMasterdata()
     }
 
     updateOrders() {
-        this.props.getOrders()
+        this.props.getCreatedOrders()
     }
 
     handleAddItem = () => {
@@ -119,9 +119,6 @@ class CreatePurchaseOrder extends Component {
 
     render() {
         let { order_items: items } = this.state
-        console.log(this.props.loading_orders)
-        console.log(this.props.loading_suppliers)
-        console.log(this.props.loading_masterdata)
         if (this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) return <PageSpinner />
         const {
             supplier, description
@@ -140,7 +137,7 @@ class CreatePurchaseOrder extends Component {
                                             </Label>
                                         <Col sm={12}>
                                             <Input type="select" name="supplier" value={supplier} onChange={this.handleChange}>
-                                                <option aria-label="None" value="">Supplier Name</option>
+                                                <option aria-label="None" value="" disabled>Supplier Name</option>
                                                 {this.props.suppliers.map((supplier, idx) => (
                                                     <option value={supplier.suplierId} key={idx}>
                                                         {supplier.suplierName}
@@ -276,5 +273,5 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    getOrders, getSuppliers, getMasterdata, addPurchaseOrder
+    getCreatedOrders, getSuppliers, getMasterdata, addPurchaseOrder
 })(CreatePurchaseOrder)
