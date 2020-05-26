@@ -19,16 +19,16 @@ const Order = ({ order, index, handleApprove }) => {
                 <td>{order.shipmentAddress}</td>
                 <td>{order.status}</td>
                 <td>
-                {order.status === "Issued"?
-                    <Link to={{ pathname: routes.SivPage, state: { order: order.orderNumber } }}>
-                        <Button size='sm' color='primary'>
-                            <MdAssignment /> SIV Issued
+                    {order.status === "Issued" ?
+                        <Link to={{ pathname: routes.SivPage, state: { order: order.orderNumber } }}>
+                            <Button size='sm' color='primary'>
+                                <MdAssignment /> SIV Issued
                         </Button>
-                    </Link>:
-                    <Button size='sm' color='primary' onClick={() => handleApprove(order.orderNumber)}>
-                        <MdAssignment /> Approve
+                        </Link> :
+                        <Button size='sm' color='primary' onClick={() => handleApprove(order.orderNumber)}>
+                            <MdAssignment /> Approve
                     </Button>
-                }
+                    }
                 </td>
                 <td>
                     <Link to={{ pathname: routes.ViewSingleOrderPage, state: order }}>
@@ -45,7 +45,9 @@ const Order = ({ order, index, handleApprove }) => {
 class ViewAllOrdersPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            orderNumber: null
+        }
         this.handleApprove = this.handleApprove.bind(this)
     }
 
@@ -55,18 +57,19 @@ class ViewAllOrdersPage extends Component {
 
     handleApprove = (order) => {
         this.props.updateSiv(order, {
-          'sivStatus': 'Approved',
+            'sivStatus': 'Approved',
         })
+        this.setState({ orderNumber: order })
         this.props.getSiv(order);
     }
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        const createdOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === "Created" }) : "";
-        if (createdOrders.length === 0) return <h2>No orders to show</h2>
+        const createdOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === "Created" || order.orderNumber === this.state.orderNumber }) : "";
+        if (createdOrders.length === 0) return <h4>No orders to show</h4>
         return (
             <Page
-                title="All Orders"
+                title="Inventory"
                 breadcrumbs={[{ name: 'All Orders', active: true }]}
                 className="TablePage">
                 <Card className="mb-3">
@@ -84,9 +87,9 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                                {createdOrders.map((item, index) => (
-                                    <Order order={item} key={index} index={index} handleApprove={this.handleApprove} />
-                                ))}
+                            {createdOrders.map((item, index) => (
+                                <Order order={item} key={index} index={index} handleApprove={this.handleApprove} />
+                            ))}
                         </Table>
                     </CardBody>
                 </Card>
@@ -98,7 +101,7 @@ class ViewAllOrdersPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading:state.ordersReducer.loading,
+        loading: state.ordersReducer.loading,
         orders: state.ordersReducer.orders,
         status: state.ordersReducer.status,
         sivs: state.invoiceReducer.sivs,

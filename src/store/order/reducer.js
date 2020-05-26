@@ -1,6 +1,6 @@
 import {
   GET_ORDER, UPDATE_ORDER, GET_SINGLE_ORDER, GET_STATUS, UPDATE_STATUS,
-  REQUEST_ORDERS, REQUEST_SINGLE_ORDER, errorsConstant
+  REQUEST_ORDERS, REQUEST_SINGLE_ORDER, orderConstants, errorsConstant
 } from "../../constant/constants";
 const initialState = {
   orders: [],
@@ -11,6 +11,8 @@ const initialState = {
   loading: true,
   loading_single_order: true
 };
+
+const { GET } = orderConstants
 
 export default function ordersReducer(state = initialState, action) {
   switch (action.type) {
@@ -26,7 +28,6 @@ export default function ordersReducer(state = initialState, action) {
       }
     
     case REQUEST_SINGLE_ORDER:
-      console.log("It has been dispatched")
       return {
         loading_single_order: true
       }
@@ -70,6 +71,14 @@ export default function ordersReducer(state = initialState, action) {
         status: action.payload,
       };
     }
+    case GET['REQUEST_GET_DELIVERED_ORDERS']:
+      return { ...state, loading: true }
+    case GET['SUCCESS_GET_DELIVERED_ORDERS']:
+      return {
+        ...state, loading: false,
+        orders: action.payload
+      }
+
     default:
       return state;
   }

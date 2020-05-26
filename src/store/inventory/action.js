@@ -1,10 +1,10 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
+import status from '../../constant/status'
+import routes from '../../api/routes'
 import { inventoryConstant, errorsConstant } from "../../constant/constants";
 import headers from "./../headers";
-
-
 
 // ADD ITEM
 export const addItem = (item) => (dispatch) => {
@@ -171,3 +171,150 @@ export const deleteItem = (InventoryItemId) => (dispatch) => {
     }
   });
 };
+
+export const getExistingCategories = () => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_EXISTING_CATEGORIES })
+  return axios.get(API + routes.category, headers)
+    .then(res => {
+      dispatch({
+        type: inventoryConstant.SUCCESS_GET_EXISTING_CATEGORIES,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const getItemsByCategory = (categoryID) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_CATEGORIES })
+  return axios.get(API + routes.itemByCategory + categoryID + "/")
+    .then(res => {
+      dispatch({
+        type: inventoryConstant.SUCCESS_GET_CATEGORIES,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const getPurchasedItems = () => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_PURCHASED_ITEMS })
+  return axios.get(API + routes.purchase +
+    `?search1=${status.created}&search2=${status.invoiced}`
+    , headers)
+    .then(res => dispatch({ type: inventoryConstant.SUCCESS_GET_PURCHASED_ITEMS, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const updateStatus = (purchaseOrderNumber) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_PUT_UPDATE_STATUS })
+  return axios.put(API + routes.updatePurchaseStatus + purchaseOrderNumber + '/', {
+    status: 'Received'
+  }, headers)
+    .then(res => dispatch({ type: inventoryConstant.SUCCESS_PUT_UPDATE_STATUS }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+// order: 8
+// sivDate: "2020-05-25"
+// sivId: 8
+// sivStatus: "Pending"
+// siv_item: Array(1)
+// 0: {itemName: "table", quantity: 1}
+
+export const getGRV = (purchaseOrderNumber) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_GRV })
+  return axios.get(API + routes.purchase + purchaseOrderNumber + '/')
+    .then(({ data }) => {
+      const items = data.purchase_item_order.map(item => {
+        return {
+          itemName: item.masterData.productName,
+          quantity: item.purchaseQuantity,
+          price: item.masterData.productPrice
+        }
+      })
+      const payload = {
+        order: data.purchaseOrderNumber,
+        date: data.purchaseOrderDate,
+        GRVID: data.purchaseOrderNumber,
+        GRVStatus: data.status_purchase_order[0]['status'],
+        GRVItems: items
+      }
+      dispatch({ type: inventoryConstant.SUCCESS_GET_GRV, payload })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}

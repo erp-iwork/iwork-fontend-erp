@@ -53,7 +53,7 @@ class AllEmployees extends Component {
             <h1>No Employees Yet.</h1></Page>
         return (
             <Page
-                title="All Employees"
+                title="Human Resource"
                 breadcrumbs={[{ name: 'All Employees', active: true }]}
                 className="TablePage"
             >

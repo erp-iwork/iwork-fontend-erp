@@ -40,7 +40,10 @@ const Page = ({
               ))}
           </Breadcrumb>
         )}
+
       </div>
+      <hr></hr>
+
       {children}
     </Tag>
   );

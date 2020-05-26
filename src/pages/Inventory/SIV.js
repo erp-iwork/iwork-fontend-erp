@@ -94,7 +94,7 @@ class SIV extends React.Component {
     console.log(this.props.sivs)
     return (
       <Page
-        title="SIV"
+        title="Inventory"
         breadcrumbs={[{ name: 'SIV', active: true }]}
       >
         <hr />

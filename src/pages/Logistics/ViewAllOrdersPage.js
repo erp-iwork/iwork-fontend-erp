@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getOrders, updateStatus } from '../../store/order/action'
 import routes from '../../config/routes'
+import status from '../../constant/status'
 
 const Order = ({ order, index, deliver }) => {
     return (
@@ -54,11 +55,11 @@ class ViewAllOrdersPage extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        const deliveredOrders = this.props.orders.filter((order) => { return order.status === "Created" || order.status === "Issued" })
+        const deliveredOrders = this.props.orders.filter((order) => { return order.status === "Created" || order.status === status.delivered })
         if (deliveredOrders.length === 0) return <h2>No orders to show</h2>
         return (
             <Page
-                title="All Orders"
+                title="Logistics"
                 breadcrumbs={[{ name: 'All Orders', active: true }]}
                 className="TablePage">
                 <Card className="mb-3">

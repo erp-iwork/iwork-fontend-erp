@@ -33,7 +33,8 @@ class AddCustomerPage extends Component {
             tinNumber: "",
             companys: [],
             loading: 0,
-            update: false
+            update: false,
+            lockPage: false
         }
         this.submit = this.submit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -41,6 +42,21 @@ class AddCustomerPage extends Component {
 
     componentDidMount() {
         this.props.getCompany()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.success && !this.state.lockPage) {
+            this.setState({
+              companyName: "",
+              generalManger: "",
+              contactPerson: "",
+              workingField: "",
+              paymentOption: "",
+              email: "",
+              tinNumber: "",
+              lockPage: true
+            })
+          }
     }
 
     handleChange = event => {
@@ -59,29 +75,16 @@ class AddCustomerPage extends Component {
             email: this.state.email,
             tinNumber: this.state.tinNumber
         }
-        this.setState({ loading: 1 })
         this.props.addCompany(newCompany).then(res => {
-            this.setState({ loading: this.state.loading + 1 })
+            this.setState({ lockPage: false })
         })
-        this.componentDidMount()
-        if (this.props.success) {
-          this.setState({
-            companyName: "",
-            generalManger: "",
-            contactPerson: "",
-            workingField: "",
-            paymentOption: "",
-            email: "",
-            tinNumber: ""
-          })
-        }
     }
 
     render() {
         if (this.props.loading) return <PageSpinner />
         const { companyName, generalManger, contactPerson, workingField, email, tinNumber } = this.state
         return (
-            <Page title="Add Customer" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
+            <Page title="Finance" breadcrumbs={[{ name: 'Add Customer', active: true }]}>
                 <Col lg={12} md={12} className='padding'>
                     <Card>
                         <CardHeader>ADD A NEW CUSTOMER TO WORK WITH</CardHeader>
@@ -215,7 +218,7 @@ class AddCustomerPage extends Component {
                                 <FormGroup >
                                     <Col align='center'>
                                         <Button color='primary' onClick={this.submit}>
-                                            {this.state.loading === 1 ? <Loader /> : "Add Customer"}
+                                            {this.props.loading_add_customer? <Loader /> : "Add Customer"}
                                         </Button>
                                     </Col>
                                 </FormGroup>
@@ -230,6 +233,7 @@ class AddCustomerPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    loading_add_customer: state.companyReducer.loading_add_customer,
     loading: state.companyReducer.loading,
     companys: state.companyReducer.companys,
     errors: state.companyReducer.errors,

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { MdAssignment } from "react-icons/md";
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
@@ -81,7 +80,7 @@ class ViewAllOrdersPage extends Component {
         }) : "" 
         return (
             <Page
-                title="All Orders"
+                title="Finance"
                 breadcrumbs={[{ name: 'All Orders', active: true }]}
                 className="TablePage">
                 <Card className="mb-3">
