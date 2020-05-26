@@ -1,7 +1,8 @@
 import {
   MdFormatAlignJustify,
   MdDirectionsCar,
-  MdStarBorder
+  MdStarBorder,
+  MdSettings
 } from 'react-icons/md';
 
 export const iconWidgetsData = [
@@ -52,6 +53,34 @@ export const iconWidgetsData4 = [
     icon: MdFormatAlignJustify,
     title: 'Pending',
     subtitle: '5',
+  },
+
+];
+
+export const iconWidgetsData5 = [
+  {
+    bgColor: 'primary',
+    icon: MdSettings,
+    title: 'Manufactured Amount',
+    subtitle: '6675 Items',
+  },
+  {
+    bgColor: 'primary',
+    icon: MdSettings,
+    title: 'Rework Quantity',
+    subtitle: '665 Items',
+  },
+  {
+    bgColor: 'primary',
+    icon: MdSettings,
+    title: 'Manufacturing Cost',
+    subtitle: '8,873,778.00 ETB',
+  },
+  {
+    bgColor: 'primary',
+    icon: MdSettings,
+    title: 'Labor Cost',
+    subtitle: '668,876.00 ETB',
   },
 
 ];

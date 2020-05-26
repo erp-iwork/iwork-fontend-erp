@@ -8,7 +8,7 @@ import {
   userProgressTableData,
 } from '../../demos/dashboardPage';
 import React from 'react';
-import {  Pie, Line } from 'react-chartjs-2';
+import { Pie, Line } from 'react-chartjs-2';
 import {
   MdPersonPin,
 } from 'react-icons/md';
@@ -22,7 +22,7 @@ import {
 } from 'reactstrap';
 import { getColor } from '../../utils/colors';
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October' , 'November', 'December'];
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const genLineData = (moreData = {}, moreData2 = {}) => {
   return {
@@ -86,10 +86,10 @@ const genPieData = () => {
           getColor('info'),
           getColor('danger'),
         ],
-        label: 'Dataset 1',
+        label: 'Sales',
       },
     ],
-    labels: ['Data 1', 'Data 2', 'Data 3', 'Data 4', 'Data 5'],
+    labels: ['Sales', 'Finance', 'Logistics', 'Procurment', 'Manufacturing'],
   };
 };
 
@@ -170,47 +170,47 @@ class DashboardPage extends React.Component {
           </Col>
         </Row>
 
-       <Row>
-        <Col xl={6} lg={12} md={12}>
-          <Card>
-            <CardHeader>Active vs Inactive Members</CardHeader>
-            <CardBody>
-              <Line
-                data={genLineData()}
-                options={{
-                  scales: {
-                    xAxes: [
-                      {
-                        scaleLabel: {
-                          display: true,
-                          labelString: 'Month',
+        <Row>
+          <Col xl={6} lg={12} md={12}>
+            <Card>
+              <CardHeader>Active vs Inactive Members</CardHeader>
+              <CardBody>
+                <Line
+                  data={genLineData()}
+                  options={{
+                    scales: {
+                      xAxes: [
+                        {
+                          scaleLabel: {
+                            display: true,
+                            labelString: 'Month',
+                          },
                         },
-                      },
-                    ],
-                    yAxes: [
-                      {
-                        stacked: true,
-                        scaleLabel: {
-                          display: true,
-                          labelString: 'Value',
+                      ],
+                      yAxes: [
+                        {
+                          stacked: true,
+                          scaleLabel: {
+                            display: true,
+                            labelString: 'Value',
+                          },
                         },
-                      },
-                    ],
-                  },
-                }}
-              />
-            </CardBody>
-          </Card>
-        </Col>
+                      ],
+                    },
+                  }}
+                />
+              </CardBody>
+            </Card>
+          </Col>
 
-        <Col xl={6} lg={12} md={12}>
-          <Card>
-            <CardHeader>Pie</CardHeader>
-            <CardBody>
-              <Pie data={genPieData()} />
-            </CardBody>
-          </Card>
-        </Col>
+          <Col xl={6} lg={12} md={12}>
+            <Card>
+              <CardHeader>System Usage by each department <small>this year</small></CardHeader>
+              <CardBody>
+                <Pie data={genPieData()} />
+              </CardBody>
+            </Card>
+          </Col>
         </Row>
       </Page>
     );

@@ -97,7 +97,7 @@ class DashboardPage extends React.Component {
           </Card>
 
           <Card body style={{ overflowX: 'auto', 'paddingBottom': '15px', 'height': 'fit-content', 'paddingTop': 'inherit' }}>
-            <CardHeader>Labor Employees</CardHeader>
+            <CardHeader>Employees</CardHeader>
             <HorizontalAvatarList
               avatars={avatarsData}
               avatarProps={{ size: 50 }}
