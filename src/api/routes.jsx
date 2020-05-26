@@ -8,7 +8,9 @@ const routes = {
     itemByCategory: 'itembycatagory/',
     manufacturing: 'manufactureOrder/',
     itemsToBeManufactured: 'itemstobemanufacured/',
-    itemsToBePurchased: 'itemstobepurchased/'
+    itemsToBePurchased: 'itemstobepurchased/',
+    records: 'inventorytransaction/',
+    recordsByType: 'inventorytransactionytype/'
 }
 
 export default routes 

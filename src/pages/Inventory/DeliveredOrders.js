@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
-import { getRecords, getExistingCategories } from '../../store/inventory/action'
+import { getRecordsByType, getExistingCategories } from '../../store/inventory/action'
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import type from '../../constant/transactions'
 
-class RecordTracking extends Component {
+class DeliveredOrders extends Component {
     constructor(props) {
         super(props);
         this.state = {}
@@ -14,12 +14,12 @@ class RecordTracking extends Component {
 
     componentDidMount() {
         this.props.getExistingCategories()
-        this.props.getRecords()
+        this.props.getRecordsByType(type.out)
     }
 
     render() {
         if (this.props.loading_categories || this.props.loading_records) return <PageSpinner />
-        const receievedOrdes = this.props.records.filter(order => { return order.transactionType === type.in })
+        console.log(this.props.records)
         return (
             <Page
                 title="Record Tracking"
@@ -28,7 +28,7 @@ class RecordTracking extends Component {
                 <Row>
                     <Col>
                         <Card className="mb-3">
-                            <CardHeader>Received Orders</CardHeader>
+                            <CardHeader>Delivered Orders</CardHeader>
                             <CardBody>
                                 <Table responsive>
                                     <thead>
@@ -40,18 +40,17 @@ class RecordTracking extends Component {
                                             <th>Cost</th>
                                             <th>Product Category</th>
                                             <th>Transaction Date</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {receievedOrdes.slice(0).reverse(0).map((item, index) => (
+                                        {this.props.records.slice(0).reverse().map((item, index) => (
                                             <tr>
-                                                <th scope="row">{index + 1}</th>
+                                                <td>{index + 1}</td>
                                                 <td>{item.transactionId}</td>
-                                                <td>{item.purchaseItem.masterData.productId}</td>
-                                                <td>{item.purchaseItem.masterData.productName}</td>
-                                                <td>{item.purchaseItem.masterData.cost}</td>
-                                                <td>{item.purchaseItem.masterData.productCategory}</td>
+                                                <td>{'item.transactionId'}</td>
+                                                <td>{item.orderItem.itemName}</td>
+                                                <td>{'item.transactionId'}</td>
+                                                <td>{'item.transactionId'}</td>
                                                 <td>{item.transactionDate}</td>
                                             </tr>
                                         ))}
@@ -75,4 +74,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getExistingCategories, getRecords })(RecordTracking)
+export default connect(mapStateToProps, { getExistingCategories, getRecordsByType })(DeliveredOrders)

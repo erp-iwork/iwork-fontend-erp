@@ -55,7 +55,6 @@ class Finance extends React.Component {
             { to: routes.AddMasterDataPage, name: 'Add Master Data', exact: false, Icon: MdViewDay },
             { to: routes.ViewAllMasterData, name: 'All Master Data', exact: false, Icon: MdStar },
             { to: routes.ViewOrdersFinance, name: 'All Orders', exact: false, Icon: MdInsertChart },
-            { to: routes.SupplierInvoice, name: 'Supplier Invoice', exact: false, Icon: MdViewList },
             { to: routes.ViewDelieveredOrders, name: 'Delivered Orders', exact: false, Icon: MdTextFields },
             { to: routes.ViewFinancePurchaseOrders, name: 'Purchased Orders', exact: false, Icon: MdViewCarousel }
         ]

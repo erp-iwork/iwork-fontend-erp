@@ -45,5 +45,6 @@ export default {
   SalesDashboard: "/SalesDashboard",
   ViewDelieveredOrders: "/ViewDelieveredOrders",
   ViewSingleDelieveredOrder: "/ViewSingleDelieveredOrder",
-  RecordTracking: "/RecordTracking",
+  RecordTracking: "/records/received",
+  DeliveredOrders: '/records/delivered'
 };
