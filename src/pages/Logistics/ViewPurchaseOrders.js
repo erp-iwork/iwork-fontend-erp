@@ -82,7 +82,7 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {this.props.orders.slice(0).reverse().map((item, index) => (
+                            {this.props.orders.map((item, index) => (
                                 <Order order={item} key={index} index={index} deliver={this.deliver} />
                             ))}
                         </Table>

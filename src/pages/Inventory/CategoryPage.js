@@ -13,7 +13,7 @@ import routes from '../../config/routes'
 class CategoryPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = {   
             categoryID: null
         }
     }
@@ -30,7 +30,6 @@ class CategoryPage extends Component {
                 state: this.state.categoryID
             }} />
         }
-        console.log(this.props.categories)
         if (this.props.categories.length === 0) return <h2>No Categories have been registered</h2>
         return (
             <Page

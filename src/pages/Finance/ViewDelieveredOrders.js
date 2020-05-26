@@ -60,7 +60,7 @@ class ViewDelieveredOrdersPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.orders.slice(0).reverse().map((item, index) => (
+                                        {this.props.orders.map((item, index) => (
                                             <Order key={index} index={index} order={item} />
                                         ))}
                                     </tbody>

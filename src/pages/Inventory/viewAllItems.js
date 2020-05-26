@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {
     Card, CardBody, CardHeader, Col, Table, Button, Modal,
-    ModalBody,
-    ModalFooter,
-    ModalHeader,
+    ModalBody, ModalFooter, ModalHeader, Row
 } from 'reactstrap';
 import Page from '../../components/Page';
 import { getItemsByCategory } from '../../store/inventory/action'
@@ -11,31 +9,24 @@ import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 
 class ViewAllItems extends Component {
-    state = {
-        modal: false,
-        modal_backdrop: false,
-        modal_nested_parent: false,
-        modal_nested: false,
-        backdrop: true,
-    };
-
     constructor(props) {
         super(props)
         this.state = {
             modal: false,
-            modal_backdrop: false,
-            modal_nested_parent: false,
-            modal_nested: false,
-            backdrop: true,
+            item: {
+                itemName: '', quantity: '', retailPrice: '', unitOfMeasurement: '', category: '',
+                productType: ''
+            }
         }
         this.toggle = this.toggle.bind(this)
     }
 
-    toggle = (customer) => {
+    toggle = (item) => {
         return this.setState({
-            modal: !this.state.modal,
+            modal: !this.state.modal, item
         })
     }
+
 
     componentDidMount() {
         this.props.getItemsByCategory(this.props.location.state)
@@ -44,6 +35,9 @@ class ViewAllItems extends Component {
     render() {
         if (this.props.loading_items) return <PageSpinner />
         if (this.props.items.item_catagory.length === 0) return <h2>No items in this Category yet</h2>
+        const {
+            itemName, quantity, retailPrice, category, productType, unitOfMeasurement
+        } = this.state.item
         return (
             <Page
                 title="Inventory"
@@ -51,17 +45,25 @@ class ViewAllItems extends Component {
                 className="TablePage">
                 <Modal
                     isOpen={this.state.modal}
+                    backdrop="static"
                     className={this.props.className}>
-                    <ModalHeader toggle={this.toggle()}>Modal title</ModalHeader>
+                    <ModalHeader>
+                        {this.state.item.itemName}
+                    </ModalHeader>
                     <ModalBody>
-                        Create An Account For <b>Mark</b> as a Something!!
-                  </ModalBody>
+                        <Row>Quantity: {quantity}</Row>
+                        <Row>Retail Price: {retailPrice}</Row>
+                        <Row>Units: {unitOfMeasurement}</Row>
+                        <Row>Product Type: {productType}</Row>
+                        <Row>Category: {category}</Row>
+                    </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={() => this.toggle()}>
+                        <Button color='primary' onClick={() => this.toggle(this.state.item)}>
                             Close
-                    </Button>
+                      </Button>
                     </ModalFooter>
                 </Modal>
+
                 <Col>
                     <Card className="mb-4">
                         <CardHeader>Inventory Status</CardHeader>
@@ -90,7 +92,7 @@ class ViewAllItems extends Component {
                                             <td>{item.productType}</td>
                                             <td>{item.catagory.catagory}</td>
                                             <td>
-                                                <Button size='sm' color='primary' onClick={() => this.toggle()}>
+                                                <Button size='sm' color='primary' onClick={() => this.toggle(item)}>
                                                     See Item
                                                 </Button>
                                             </td>
