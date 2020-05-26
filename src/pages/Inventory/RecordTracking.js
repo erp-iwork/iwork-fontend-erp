@@ -10,11 +10,17 @@ class RecordTracking extends Component {
     constructor(props) {
         super(props);
         this.state = {}
+        this.getCategory = this.getCategory.bind(this)
     }
 
     componentDidMount() {
         this.props.getExistingCategories()
         this.props.getRecords()
+    }
+
+    getCategory = (id) => {
+        const found = this.props.categories.find(item => item.catagoryId === id)
+        return found.catagory
     }
 
     render() {
@@ -28,30 +34,29 @@ class RecordTracking extends Component {
                 <Row>
                     <Col>
                         <Card className="mb-3">
-                            <CardHeader>Received Orders</CardHeader>
+                            <CardHeader>Received Items</CardHeader>
                             <CardBody>
                                 <Table responsive>
                                     <thead>
                                         <tr>
-                                            <th>#</th>
                                             <th>Transaction ID</th>
                                             <th>Product ID</th>
                                             <th>Product Name</th>
                                             <th>Cost</th>
                                             <th>Product Category</th>
+                                            <th>Order ID</th>
                                             <th>Transaction Date</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {receievedOrdes.slice(0).reverse(0).map((item, index) => (
                                             <tr>
-                                                <th scope="row">{index + 1}</th>
                                                 <td>{item.transactionId}</td>
                                                 <td>{item.purchaseItem.masterData.productId}</td>
                                                 <td>{item.purchaseItem.masterData.productName}</td>
                                                 <td>{item.purchaseItem.masterData.cost}</td>
-                                                <td>{item.purchaseItem.masterData.productCategory}</td>
+                                                <td>{this.getCategory(item.purchaseItem.masterData.productCategory)}</td>
+                                                <td>{item.orderId}</td>
                                                 <td>{item.transactionDate}</td>
                                             </tr>
                                         ))}
@@ -71,7 +76,8 @@ const mapStateToProps = (state) => {
     return {
         loading_categories: state.inventoryReducer.loading_categories,
         loading_records: state.inventoryReducer.loading_records,
-        records: state.inventoryReducer.records
+        records: state.inventoryReducer.records,
+        categories: state.inventoryReducer.categories,
     }
 }
 
