@@ -260,8 +260,10 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
 export const invoiceOrder = (purchaseOrderNumber, data) => (dispatch) => {
   dispatch({ type: PUT.REQUEST_PUT_INVOICE })
   return Axios.put(API + routes.purchase + purchaseOrderNumber + '/', data)
-    .then(res => {
-      updateStatus(purchaseOrderNumber, { status: status.received })
+    .then(async res => {
+      await Axios.put(API + `${routes.updatePurchaseStatus}${purchaseOrderNumber}/`, {
+        status: status.invoiced
+      }, headers)
       dispatch({ type: PUT.SUCCESS_PUT_INVOICE })
       Swal.fire({
         title: "Invoice Success",

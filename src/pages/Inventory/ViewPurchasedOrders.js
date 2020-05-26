@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
 import { MdAssignment } from "react-icons/md";
-import { getPurchasedItems, updateStatus } from '../../store/inventory/action'
+import { getInvoicedItems, updateStatus } from '../../store/inventory/action'
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import routes from '../../config/routes'
 import { Link } from 'react-router-dom'
+import status from '../../constant/status'
 
 const Order = ({ order, index, handleApprove }) => {
     return (
@@ -17,7 +18,7 @@ const Order = ({ order, index, handleApprove }) => {
             <td>{order.purchaseOrderDate}</td>
             <td>{order.status_purchase_order[0]['status']}</td>
             <td align="left">
-                {order.status_purchase_order[0]['status'] === "Invoiced" ?
+                {order.status_purchase_order[0]['status'] ===  status.received?
                     <Link to={{ pathname: routes.GRVPage, state: { order: order.purchaseOrderNumber } }}>
                         <Button size='sm' color='primary'>
                             <MdAssignment /> SIV Issued
@@ -47,7 +48,7 @@ class ViewPurchasedItems extends Component {
     }
 
     componentDidMount() {
-        this.props.getPurchasedItems()
+        this.props.getInvoicedItems()
     }
 
     handleApprove = (orderNumber) => {
@@ -96,4 +97,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getPurchasedItems, updateStatus })(ViewPurchasedItems)
+export default connect(mapStateToProps, { getInvoicedItems, updateStatus })(ViewPurchasedItems)

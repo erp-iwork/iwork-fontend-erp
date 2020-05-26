@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import PageSpinner from '../../components/PageSpinner'
 import { Link } from 'react-router-dom'
 import routes from '../../config/routes'
+import status from '../../constant/status'
 
 const Order = ({ order, index }) => {
     return (
@@ -17,7 +18,9 @@ const Order = ({ order, index }) => {
             <td>{order.status_purchase_order[0].status}</td>
             <td>
                 <Link to={{ pathname: routes.ViewSingleDelieveredOrder, state: order }}>
-                    <Button size='sm' color='primary'>
+                    <Button size='sm' color='primary' disabled={
+                        order.status_purchase_order[0]['status'] === status.invoiced
+                    }>
                         Invoice
                     </Button>
                 </Link>

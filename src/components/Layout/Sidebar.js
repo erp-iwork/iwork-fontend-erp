@@ -124,8 +124,8 @@ const INVENTORY = [
 
 const LOGISTICS = [
   { to: routes.LogisticsDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
-  { to: routes.ViewOrdersLogistics, name: 'View Orders', exact: false, Icon: MdWidgets },
-  { to: routes.ViewPurchaseOrdersLogistics, name: 'View Purchased Order', exact: false, Icon: MdWidgets },
+  { to: routes.ViewOrdersLogistics, name: 'View Sales Orders', exact: false, Icon: MdWidgets },
+  { to: routes.ViewPurchaseOrdersLogistics, name: 'View Purchased Orders', exact: false, Icon: MdWidgets },
 ]
 
 const PROCURMENT = [

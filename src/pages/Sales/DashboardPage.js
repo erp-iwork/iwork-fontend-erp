@@ -201,12 +201,15 @@ class DashboardPage extends React.Component {
           </Col>
 
           <Col xl={6} lg={12} md={12}>
+
             <Card>
-              <CardHeader>Yearly Sales By Region</CardHeader>
+              <CardHeader>Daily Sale By Category</CardHeader>
               <CardBody>
-                <Bar data={genLineData({ type: 'line', fill: false })} />
+                <Pie data={genPieData()} />
               </CardBody>
             </Card>
+
+
           </Col>
 
 
@@ -251,42 +254,30 @@ class DashboardPage extends React.Component {
           </Col>
         </Row>
 
-        <Row>
-          <Col lg="6" md="12" sm="12" xs="12">
-            <InfiniteCalendar
-              selected={today}
-              minDate={lastWeek}
-              // eight='310px'
-              width="100%"
-              theme={{
-                accentColor: primaryColor,
-                floatingNav: {
-                  background: primaryColor,
-                  chevron: secondaryColor,
-                  color: '#FFF',
-                },
-                headerColor: primaryColor,
-                selectionColor: primaryColor,
-                textColor: {
-                  active: '#FFF',
-                  default: '#333',
-                },
-                todayColor: infoColor,
-                weekdayColor: primaryColor,
-              }}
-            />
-          </Col>
-          <Col xl={6} lg={12} md={12}>
-            <Card>
-              <CardHeader>Daily Sale By Product</CardHeader>
-              <CardBody>
-                <Pie data={genPieData()} />
-              </CardBody>
-            </Card>
-          </Col>
+        <Col md="12" sm="12" xs="12">
+          <InfiniteCalendar
+            selected={today}
+            minDate={lastWeek}
+            width="100%"
+            theme={{
+              accentColor: primaryColor,
+              floatingNav: {
+                background: primaryColor,
+                chevron: secondaryColor,
+                color: '#FFF',
+              },
+              headerColor: primaryColor,
+              selectionColor: primaryColor,
+              textColor: {
+                active: '#FFF',
+                default: '#333',
+              },
+              todayColor: infoColor,
+              weekdayColor: primaryColor,
+            }}
+          />
+        </Col>
 
-
-        </Row>
       </Page>
     );
   }

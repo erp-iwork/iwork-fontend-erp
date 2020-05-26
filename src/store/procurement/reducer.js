@@ -13,6 +13,7 @@ const initialState = {
     loading_masterdata: false,
     loading_single_order: true,
     success: false,
+    status: null,
     updating_status: false,
     loading_invoice: false,
 }
@@ -25,7 +26,8 @@ const procurementReducer = (state = initialState, action) => {
                 ...state,
                 errors: action.payload,
                 loading_orders: false, loading_suppliers: false, loading_masterdata: false,
-                loading_purchase: false
+                loading_purchase: false,
+                loading_invoice: false
             }
         
         case GET.REQUEST_GET_ORDER:
@@ -95,7 +97,7 @@ const procurementReducer = (state = initialState, action) => {
         case PUT.SUCCESS_PUT_INVOICE:{
             return {
                 ...state, loading_invoice: false,
-                success: true
+                success: true, errors: []
             }
         }
 
