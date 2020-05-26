@@ -24,7 +24,7 @@ const Avatar = ({
       {...restProps}
     />
   );
-};
+}; 
 
 Avatar.propTypes = {
   tag: PropTypes.component,
