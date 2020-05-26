@@ -48,14 +48,14 @@ class Manufacturing extends React.Component {
         // isOpenComponents: true,
         // isOpenContents: true,
         // isOpenPages: true,
-        isOpenHR: false,
-        isOpenIT: false,
-        isOpenSALES: false,
-        isOpenFINANCE: false,
-        isOpenINVENTORY: false,
-        isOpenLOGISTICS: false,
-        isOpenPROCURMENT: false,
-        isOpenMANUFACTURING: false
+        isOpenHR: true,
+        isOpenIT: true,
+        isOpenSALES: true,
+        isOpenFINANCE: true,
+        isOpenINVENTORY: true,
+        isOpenLOGISTICS: true,
+        isOpenPROCURMENT: true,
+        isOpenMANUFACTURING: true
     };
 
     handleClick = name => () => {
@@ -70,7 +70,7 @@ class Manufacturing extends React.Component {
 
     render() {
         const MANUFACTURING = [
-            { to: routes.ManufacturingDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            // { to: routes.ManufacturingDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
             { to: routes.CreateOrderManufacturing, name: 'Create MO', exact: false, Icon: MdWidgets },
             { to: routes.ViewAllOrdersManufacturing, name: 'All Orders', exact: false, Icon: MdWidgets },
           ]

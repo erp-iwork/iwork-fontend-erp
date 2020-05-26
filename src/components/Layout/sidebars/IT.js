@@ -48,14 +48,14 @@ class IT extends React.Component {
         // isOpenComponents: true,
         // isOpenContents: true,
         // isOpenPages: true,
-        isOpenHR: false,
-        isOpenIT: false,
-        isOpenSALES: false,
-        isOpenFINANCE: false,
-        isOpenINVENTORY: false,
-        isOpenLOGISTICS: false,
-        isOpenPROCURMENT: false,
-        isOpenMANUFACTURING: false
+        isOpenHR: true,
+        isOpenIT: true,
+        isOpenSALES: true,
+        isOpenFINANCE: true,
+        isOpenINVENTORY: true,
+        isOpenLOGISTICS: true,
+        isOpenPROCURMENT: true,
+        isOpenMANUFACTURING: true
     };
 
     handleClick = name => () => {
@@ -70,7 +70,7 @@ class IT extends React.Component {
 
     render() {
         const IT = [
-            { to: routes.ITDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            // { to: routes.ITDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
             { to: routes.itEmployeePage, name: 'All Employees', exact: false, Icon: MdWidgets },
         ]
         return (

@@ -48,14 +48,14 @@ class Logistics extends React.Component {
         // isOpenComponents: true,
         // isOpenContents: true,
         // isOpenPages: true,
-        isOpenHR: false,
-        isOpenIT: false,
-        isOpenSALES: false,
-        isOpenFINANCE: false,
-        isOpenINVENTORY: false,
-        isOpenLOGISTICS: false,
-        isOpenPROCURMENT: false,
-        isOpenMANUFACTURING: false
+        isOpenHR: true,
+        isOpenIT: true,
+        isOpenSALES: true,
+        isOpenFINANCE: true,
+        isOpenINVENTORY: true,
+        isOpenLOGISTICS: true,
+        isOpenPROCURMENT: true,
+        isOpenMANUFACTURING: true
     };
 
     handleClick = name => () => {
@@ -70,7 +70,7 @@ class Logistics extends React.Component {
 
     render() {
         const LOGISTICS = [
-            { to: routes.LogisticsDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            // { to: routes.LogisticsDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
             { to: routes.ViewOrdersLogistics, name: 'View Orders', exact: false, Icon: MdWidgets },
             { to: routes.ViewPurchaseOrdersLogistics, name: 'View Purchased Order', exact: false, Icon: MdWidgets },
           ]

@@ -28,7 +28,7 @@ class Finance extends React.Component {
     state = {
         isOpenIT: true,
         isOpenSALES: true,
-        isOpenFINANCE: this.props.isOpen? true : false,
+        isOpenFINANCE: this.props.isOpen ? true : false,
         isOpenINVENTORY: true,
         isOpenLOGISTICS: true,
         isOpenPROCURMENT: true,
@@ -47,7 +47,7 @@ class Finance extends React.Component {
 
     render() {
         const FINANCE = [
-            { to: routes.FinanceDashboard, name: 'Dashboard', exact: false, Icon: MdDashboard },
+            // { to: routes.FinanceDashboard, name: 'Dashboard', exact: false, Icon: MdDashboard },
             { to: routes.viewSuppliers, name: 'View All Suppliers', exact: false, Icon: MdNotificationsActive },
             { to: routes.AddSupplier, name: 'Add Supplier ', exact: false, Icon: MdPages },
             { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },

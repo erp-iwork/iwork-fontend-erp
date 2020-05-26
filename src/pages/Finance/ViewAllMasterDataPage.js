@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Page from '../../components/Page';
 import {
     Card, CardBody, CardHeader, Button, Table, Modal,
-    ModalHeader, ModalBody, ModalFooter, Row
+    ModalHeader, ModalBody, ModalFooter, Row, Col
 } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
@@ -71,17 +71,17 @@ class ViewAllMasterData extends Component {
                     backdrop="static"
                     className={this.props.className}>
                     <ModalHeader>
-                        Item Information
+                        <b>Product Information</b>
                     </ModalHeader>
                     <ModalBody>
-                        <Row>Product Name: {data.productName}</Row>
-                        <Row>Category: {data.productCategory}</Row>
-                        <Row>Type: {data.productType}</Row>
-                        <Row>Price: {data.productPrice}</Row>
-                        <Row>Unit of Measurement: {data.unitOfMeasurement}</Row>
+                        <Row><Col>Product Name:</Col><Col><b>{data.productName}</b></Col></Row>
+                        <Row><Col>Category:</Col><Col><b>{data.productCategory}</b></Col></Row>
+                        <Row><Col>Type:</Col><Col><b>{data.productType}</b></Col></Row>
+                        <Row><Col>Price:</Col><Col><b>{data.productPrice}</b></Col></Row>
+                        <Row><Col>Unit of Measurement:</Col><Col><b>{data.unitOfMeasurement}</b></Col></Row>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={() => this.toggle()}>
+                        <Button color='primary' onClick={() => this.toggle()}>
                             Close
                       </Button>
                     </ModalFooter>

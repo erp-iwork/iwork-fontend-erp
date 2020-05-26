@@ -2,6 +2,9 @@ import logo200Image from '../../assets/img/logo/logo_200.png';
 import sidebarBgImage from '../../assets/img/sidebar/sidebar-4.jpg';
 import SourceLink from '../../components/SourceLink';
 import React from 'react';
+import {
+  MdDashboard,
+} from 'react-icons/md';
 
 import { NavLink } from 'react-router-dom';
 import {
@@ -28,6 +31,13 @@ const sidebarBackground = {
 
 const bem = bn.create('sidebar');
 
+const navItems = [
+  { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
+  { to: '/cards', name: 'cards', exact: false, Icon: MdDashboard },
+  { to: '/charts', name: 'charts', exact: false, Icon: MdDashboard },
+  { to: '/widgets', name: 'widgets', exact: false, Icon: MdDashboard },
+];
+
 class Sidebar extends React.Component {
   state = {
     isOpenHR: false,
@@ -49,6 +59,8 @@ class Sidebar extends React.Component {
       case dept.inventory: return <Inventory isOpen={true} />
       case dept.procurment: return <Procurment isOpen={true} />
       case dept.mrp: return <Manufacturing isOpen={true} />
+      case dept.logistics: return <Logistics isOpen={true} />
+
 
       default: return (
         <React.Fragment>
@@ -59,6 +71,7 @@ class Sidebar extends React.Component {
           <Inventory isOpen={false} />
           <Procurment isOpen={false} />
           <Manufacturing isOpen={false} />
+          <Logistics isOpen={false}/>
         </React.Fragment>
 
       )

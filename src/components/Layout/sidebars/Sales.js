@@ -45,17 +45,14 @@ class Sales extends React.Component {
     }
 
     state = {
-        // isOpenComponents: true,
-        // isOpenContents: true,
-        // isOpenPages: true,
-        isOpenHR: false,
-        isOpenIT: false,
-        isOpenSALES: false,
-        isOpenFINANCE: false,
-        isOpenINVENTORY: false,
-        isOpenLOGISTICS: false,
-        isOpenPROCURMENT: false,
-        isOpenMANUFACTURING: false
+        isOpenHR: this.props.isOpen? true : false,
+        isOpenIT: this.props.isOpen? true : false,
+        isOpenSALES: this.props.isOpen? true : false,
+        isOpenFINANCE: this.props.isOpen? true : false,
+        isOpenINVENTORY: this.props.isOpen? true : false,
+        isOpenLOGISTICS: this.props.isOpen? true : false,
+        isOpenPROCURMENT: this.props.isOpen? true : false,
+        isOpenMANUFACTURING: this.props.isOpen? true : false,
     };
 
     handleClick = name => () => {
@@ -70,7 +67,7 @@ class Sales extends React.Component {
 
     render() {
         const SALES = [
-            { to: routes.SalesDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            // { to: routes.SalesDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
             { to: routes.createOrderPage, name: 'Create Order', exact: false, Icon: MdWidgets },
             { to: routes.ViewAllOrdersPage, name: 'View All Orders', exact: false, Icon: MdWidgets },
         ]
