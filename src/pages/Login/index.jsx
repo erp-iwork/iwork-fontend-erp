@@ -36,7 +36,7 @@ class LoginForm extends React.Component {
     if (this.props.isLogin) return <Redirect to={routes.root} />;
     return (
       <Container className="container">
-        <Form onSubmit={this.handleSubmit} className="form">
+        <Form md={12} onSubmit={this.handleSubmit} className="form">
           <div className="text-center pb-4">
             <img
               src={logo200Image}
