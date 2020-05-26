@@ -1,41 +1,97 @@
 import HorizontalAvatarList from '../../components/HorizontalAvatarList';
 import Page from '../../components/Page';
-import ProductMedia from '../../components/ProductMedia';
 import UserProgressTable from '../../components/UserProgressTable';
-import { IconWidget } from '../../components/Widget';
-import { getStackLineChart, stackLineChartOptions } from '../../demos/chartjs';
+import { randomNum } from '../../utils/demos';
+
 import {
   avatarsData,
-  chartjs,
-  productsData,
   userProgressTableData,
 } from '../../demos/dashboardPage';
 import React from 'react';
-import { Bar, Line } from 'react-chartjs-2';
+import {  Pie, Line } from 'react-chartjs-2';
 import {
-  MdBubbleChart,
-  MdInsertChart,
   MdPersonPin,
-  MdPieChart,
-  MdRateReview,
-  MdShare,
-  MdShowChart,
-  MdThumbUp,
 } from 'react-icons/md';
 import {
-  Badge,
   Card,
   CardBody,
   CardDeck,
-  CardGroup,
   CardHeader,
-  CardTitle,
   Col,
-  ListGroup,
-  ListGroupItem,
   Row,
 } from 'reactstrap';
 import { getColor } from '../../utils/colors';
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October' , 'November', 'December'];
+
+const genLineData = (moreData = {}, moreData2 = {}) => {
+  return {
+    labels: MONTHS,
+    datasets: [
+      {
+        label: 'Active Members',
+        backgroundColor: getColor('primary'),
+        borderColor: getColor('primary'),
+        borderWidth: 1,
+        data: [
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+        ],
+        ...moreData,
+      },
+      {
+        label: 'Inactive Members',
+        backgroundColor: getColor('secondary'),
+        borderColor: getColor('secondary'),
+        borderWidth: 1,
+        data: [
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+        ],
+        ...moreData2,
+      },
+    ],
+  };
+};
+
+const genPieData = () => {
+  return {
+    datasets: [
+      {
+        data: [randomNum(), randomNum(), randomNum(), randomNum(), randomNum()],
+        backgroundColor: [
+          getColor('primary'),
+          getColor('secondary'),
+          getColor('success'),
+          getColor('info'),
+          getColor('danger'),
+        ],
+        label: 'Dataset 1',
+      },
+    ],
+    labels: ['Data 1', 'Data 2', 'Data 3', 'Data 4', 'Data 5'],
+  };
+};
 
 
 
@@ -75,94 +131,11 @@ class DashboardPage extends React.Component {
             />
           </Card>
         </CardDeck>
-        <Row>
-          <Col lg="8" md="12" sm="12" xs="12">
-            <Card>
-              <CardHeader>
-                Total Revenue{' '}
-                <small className="text-muted text-capitalize">This year</small>
-              </CardHeader>
-              <CardBody>
-                <Line data={chartjs.line.data} options={chartjs.line.options} />
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col lg="4" md="12" sm="12" xs="12">
-            <Card>
-              <CardHeader>Total Expense</CardHeader>
-              <CardBody>
-                <Bar data={chartjs.bar.data} options={chartjs.bar.options} />
-              </CardBody>
-              <ListGroup flush>
-                <ListGroupItem>
-                  <MdInsertChart size={25} color={primaryColor} /> Cost of sales{' '}
-                  <Badge color="secondary">$3000</Badge>
-                </ListGroupItem>
-                <ListGroupItem>
-                  <MdBubbleChart size={25} color={primaryColor} /> Management
-                  costs <Badge color="secondary">$1200</Badge>
-                </ListGroupItem>
-                <ListGroupItem>
-                  <MdShowChart size={25} color={primaryColor} /> Financial costs{' '}
-                  <Badge color="secondary">$800</Badge>
-                </ListGroupItem>
-                <ListGroupItem>
-                  <MdPieChart size={25} color={primaryColor} /> Other operating
-                  costs <Badge color="secondary">$2400</Badge>
-                </ListGroupItem>
-              </ListGroup>
-            </Card>
-          </Col>
-        </Row>
-
-        <CardGroup style={{ marginBottom: '1rem' }}>
-          <IconWidget
-            bgColor="white"
-            inverse={false}
-            icon={MdThumbUp}
-            title="50+ Likes"
-            subtitle="People you like"
-          />
-          <IconWidget
-            bgColor="white"
-            inverse={false}
-            icon={MdRateReview}
-            title="10+ Reviews"
-            subtitle="New Reviews"
-          />
-          <IconWidget
-            bgColor="white"
-            inverse={false}
-            icon={MdShare}
-            title="30+ Shares"
-            subtitle="New Shares"
-          />
-        </CardGroup>
 
         <Row>
           <Col md="6" sm="12" xs="12">
             <Card>
-              <CardHeader>New Products</CardHeader>
-              <CardBody>
-                {productsData.map(
-                  ({ id, image, title, description, right }) => (
-                    <ProductMedia
-                      key={id}
-                      image={image}
-                      title={title}
-                      description={description}
-                      right={right}
-                    />
-                  ),
-                )}
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col md="6" sm="12" xs="12">
-            <Card>
-              <CardHeader>New Users</CardHeader>
+              <CardHeader>Top Participants</CardHeader>
               <CardBody>
                 <UserProgressTable
                   headers={[
@@ -177,93 +150,68 @@ class DashboardPage extends React.Component {
               </CardBody>
             </Card>
           </Col>
-        </Row>
 
-        <Row>
-          <Col lg={4} md={4} sm={12} xs={12}>
+          <Col md="6" sm="12" xs="12">
             <Card>
-              <Line
-                data={getStackLineChart({
-                  labels: [
-                    'January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-                    'June',
-                    'July',
-                  ],
-                  data: [0, 13000, 5000, 24000, 16000, 25000, 10000],
-                })}
-                options={stackLineChartOptions}
-              />
-              <CardBody
-                className="text-primary"
-                style={{ position: 'absolute' }}
-              >
-                <CardTitle>
-                  <MdInsertChart /> Sales
-                </CardTitle>
-              </CardBody>
-            </Card>
-          </Col>
-
-          <Col lg={4} md={4} sm={12} xs={12}>
-            <Card>
-              <Line
-                data={getStackLineChart({
-                  labels: [
-                    'January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-                    'June',
-                    'July',
-                  ],
-                  data: [10000, 15000, 5000, 10000, 5000, 10000, 10000],
-                })}
-                options={stackLineChartOptions}
-              />
-              <CardBody
-                className="text-primary"
-                style={{ position: 'absolute' }}
-              >
-                <CardTitle>
-                  <MdInsertChart /> Revenue
-                </CardTitle>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col lg={4} md={4} sm={12} xs={12}>
-            <Card>
-              <Line
-                data={getStackLineChart({
-                  labels: [
-                    'January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-                    'June',
-                    'July',
-                  ],
-                  data: [0, 13000, 5000, 24000, 16000, 25000, 10000].reverse(),
-                })}
-                options={stackLineChartOptions}
-              />
-              <CardBody
-                className="text-primary"
-                style={{ position: 'absolute', right: 0 }}
-              >
-                <CardTitle>
-                  <MdInsertChart /> Profit
-                </CardTitle>
+              <CardHeader>New Accounts</CardHeader>
+              <CardBody>
+                <UserProgressTable
+                  headers={[
+                    <MdPersonPin size={25} />,
+                    'name',
+                    'Created Date',
+                    'participation',
+                    '%',
+                  ]}
+                  usersData={userProgressTableData}
+                />
               </CardBody>
             </Card>
           </Col>
         </Row>
 
+       <Row>
+        <Col xl={6} lg={12} md={12}>
+          <Card>
+            <CardHeader>Active vs Inactive Members</CardHeader>
+            <CardBody>
+              <Line
+                data={genLineData()}
+                options={{
+                  scales: {
+                    xAxes: [
+                      {
+                        scaleLabel: {
+                          display: true,
+                          labelString: 'Month',
+                        },
+                      },
+                    ],
+                    yAxes: [
+                      {
+                        stacked: true,
+                        scaleLabel: {
+                          display: true,
+                          labelString: 'Value',
+                        },
+                      },
+                    ],
+                  },
+                }}
+              />
+            </CardBody>
+          </Card>
+        </Col>
+
+        <Col xl={6} lg={12} md={12}>
+          <Card>
+            <CardHeader>Pie</CardHeader>
+            <CardBody>
+              <Pie data={genPieData()} />
+            </CardBody>
+          </Card>
+        </Col>
+        </Row>
       </Page>
     );
   }

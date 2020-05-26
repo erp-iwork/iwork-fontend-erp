@@ -139,7 +139,7 @@ class AddMasterDataPage extends Component {
         if (this.props.success) {
             return <Redirect to={routes.ViewAllMasterData} />
         }
-        let { order_items: items, can_be_manufactured } = this.state
+        let { can_be_manufactured } = this.state
         return (
             <Page
                 title="Finance"

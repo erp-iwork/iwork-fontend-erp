@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import Loader from '../../components/loader'
 import status from '../../constant/status'
 import PageSpinner from '../../components/PageSpinner'
+import './SingleView.scss'
 
 class ViewSingleDelieveredOrderPage extends Component {
     constructor(props) {
@@ -70,7 +71,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                         <Col md={8}>
                             <CardHeader>Item Information</CardHeader>
                             <CardBody>
-                                <Table className="scrollTableSales">
+                                <Table className="scrollTableSaless">
                                     <thead>
                                         <tr>
                                             <th>Item ID</th>
@@ -83,33 +84,40 @@ class ViewSingleDelieveredOrderPage extends Component {
                                     <tbody>
                                         {order.purchase_item_order.map((item, index) => (
                                             <tr>
-                                            <th scope="row">1</th>
-                                            <td>{item.masterData.productName}</td>
-                                            <td>{item.purchaseQuantity}</td>
-                                            <td>{item.masterData.productPrice}</td>
-                                            <td md={2}>
-                                                <div class='col-xs-2'>
-                                                    <Input type='number' placeholder='New Price' onChange={
-                                                        (event) => this.handleChange({
-                                                            value: event.target.value,
-                                                            name: 'newPrice',
-                                                            index
-                                                        })
-                                                    } />
-                                                    <Input type='number' placeholder="Margin" onChange={
-                                                        (event) => this.handleChange({
-                                                            value: event.target.value,
-                                                            name: 'margin',
-                                                            index
-                                                        })
-                                                    } /> %
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                <th scope="row">1</th>
+                                                <td>{item.masterData.productName}</td>
+                                                <td>{item.purchaseQuantity}</td>
+                                                <td>{item.masterData.productPrice}</td>
+                                                <td align='right'>
+                                                        <Row>
+                                                            <Col md={3}>
+                                                                <Input type='number' placeholder='New Price' onChange={
+                                                                    (event) => this.handleChange({
+                                                                        value: event.target.value,
+                                                                        name: 'newPrice',
+                                                                        index
+                                                                    })
+                                                                } />
+                                                            </Col>
+                                                            <Col md={3}>
+                                                                <Input type='number' placeholder="Margin" onChange={
+                                                                    (event) => this.handleChange({
+                                                                        value: event.target.value,
+                                                                        name: 'margin',
+                                                                        index
+                                                                    })
+                                                                } /> %
+                                                            </Col>
+
+                                                        </Row>
+
+
+                                                </td>
+                                            </tr>
                                         ))}
                                     </tbody>
                                     <Button onClick={this.invoice}>
-                                        {this.props.loading_invoice ? <Loader /> : "Invoice Order" }
+                                        {this.props.loading_invoice ? <Loader /> : "Invoice Order"}
                                     </Button>
                                 </Table>
                             </CardBody>
