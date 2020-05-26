@@ -26,7 +26,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                 margin: ''
             }
         })
-        this.setState({ orders })
+        this.setState({ orders }) 
         this.props.getSingleOrder(this.props.location.state.purchaseOrderNumber)
     }
 
