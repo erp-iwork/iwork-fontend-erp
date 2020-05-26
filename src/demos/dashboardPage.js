@@ -5,6 +5,7 @@ import product4Image from '../assets/img/products/product_640-4.jpg';
 import product5Image from '../assets/img/products/product_640-5.jpg';
 import product6Image from '../assets/img/products/product_640-6.jpg';
 
+
 import user1Image from '../assets/img/users/100_1.jpg';
 import user2Image from '../assets/img/users/100_2.jpg';
 import user3Image from '../assets/img/users/100_3.jpg';
