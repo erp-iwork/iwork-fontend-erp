@@ -143,61 +143,6 @@ export const avatarsData = [
     name: 'Jackson',
     date: '10 month ago',
   },
-  {
-    avatar: user4Image,
-    name: 'JIJI',
-    date: 'a month ago',
-  },
-  {
-    avatar: user5Image,
-    name: 'Bread',
-    date: '6 months ago',
-  },
-  {
-    avatar: user6Image,
-    name: 'Dan',
-    date: '2 years ago',
-  },
-  {
-    avatar: user7Image,
-    name: 'Merry',
-    date: '3 month ago',
-  },
-  {
-    avatar: user8Image,
-    name: 'John',
-    date: '1 month ago',
-  },
-  {
-    avatar: user9Image,
-    name: 'Shane',
-    date: '7 month ago',
-  },
-  {
-    avatar: user10Image,
-    name: 'Star',
-    date: '1 year ago',
-  },
-  {
-    avatar: user11Image,
-    name: 'Jenny',
-    date: '3 month ago',
-  },
-  {
-    avatar: user12Image,
-    name: 'Park',
-    date: '4 month ago',
-  },
-  {
-    avatar: user13Image,
-    name: 'Dave',
-    date: '9 month ago',
-  },
-  {
-    avatar: user14Image,
-    name: 'Jackson',
-    date: '10 month ago',
-  },
 ];
 
 export const userProgressTableData = [

@@ -1,46 +1,16 @@
-import { AnnouncementCard, TodosCard } from '../../components/Card';
-import HorizontalAvatarList from '../../components/HorizontalAvatarList';
 import Page from '../../components/Page';
-import ProductMedia from '../../components/ProductMedia';
-import SupportTicket from '../../components/SupportTicket';
-import UserProgressTable from '../../components/UserProgressTable';
-import { IconWidget, NumberWidget } from '../../components/Widget';
-import { getStackLineChart, stackLineChartOptions } from '../../demos/chartjs';
-import { iconWidgetsData4, numberWidgetsData } from '../../demos/widgetPage';
-
-import {
-  avatarsData,
-  chartjs,
-  productsData,
-  supportTicketsData,
-  todosData,
-  userProgressTableData,
-} from '../../demos/dashboardPage';
+import { IconWidget } from '../../components/Widget';
+import { iconWidgetsData4, iconWidgetsData5 } from '../../demos/widgetPage';
+import { randomNum } from '../../utils/demos';
 import React from 'react';
-import { Bar, Line } from 'react-chartjs-2';
-import {
-  MdBubbleChart,
-  MdInsertChart,
-  MdPersonPin,
-  MdPieChart,
-  MdRateReview,
-  MdShare,
-  MdShowChart,
-  MdThumbUp,
-} from 'react-icons/md';
+import { Bar } from 'react-chartjs-2';
+
 import InfiniteCalendar from 'react-infinite-calendar';
 import {
-  Badge,
-  Button,
   Card,
   CardBody,
-  CardDeck,
-  CardGroup,
   CardHeader,
-  CardTitle,
   Col,
-  ListGroup,
-  ListGroupItem,
   Row,
 } from 'reactstrap';
 import { getColor } from '../../utils/colors';
@@ -51,6 +21,105 @@ const lastWeek = new Date(
   today.getMonth(),
   today.getDate() - 7,
 );
+
+const MONTHS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Fidayr', 'Saturday', 'Sunday'];
+
+const genLineData = (moreData = {}, moreData2 = {}, moreData3 = {}) => {
+  return {
+    labels: MONTHS,
+    datasets: [
+      {
+        label: 'Machine One',
+        backgroundColor: getColor('primary'),
+        borderColor: getColor('primary'),
+        borderWidth: 1,
+        data: [
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+        ],
+        ...moreData,
+      },
+      {
+        label: 'Machine 2',
+        backgroundColor: getColor('secondary'),
+        borderColor: getColor('secondary'),
+        borderWidth: 1,
+        data: [
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+        ],
+        ...moreData2,
+      },
+      {
+        label: 'Machine 3',
+        backgroundColor: getColor('info'),
+        borderColor: getColor('info'),
+        borderWidth: 1,
+        data: [
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+        ],
+        ...moreData3,
+      },
+    ],
+  };
+};
+
+const genLineData2 = (moreData = {}, moreData2 = {}) => {
+  return {
+    labels: MONTHS,
+    datasets: [
+      {
+        label: 'Run Time',
+        backgroundColor: getColor('success'),
+        borderColor: getColor('success'),
+        borderWidth: 1,
+        data: [
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+        ],
+        ...moreData2,
+      },
+      {
+        label: 'Down Time',
+        backgroundColor: getColor('danger'),
+        borderColor: getColor('danger'),
+        borderWidth: 1,
+        data: [
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+        ],
+        ...moreData,
+      },
+
+    ],
+  };
+};
 
 class DashboardPage extends React.Component {
   componentDidMount() {
@@ -75,48 +144,66 @@ class DashboardPage extends React.Component {
         </h4>
         <hr />
 
-      <Row>
-        {iconWidgetsData4.map(
-          ({ bgColor, icon, title, subtitle, ...restProps }, index) => (
-            <Col key={index} lg={4} md={6} sm={6} xs={12} className="mb-3">
-              <IconWidget
-                bgColor={bgColor}
-                icon={icon}
-                title={title}
-                subtitle={subtitle}
-                {...restProps}
-              />
-            </Col>
-          )
-        )}
-      </Row>
-
-      <hr />
-
-
-      <h4>
+        <Row>
+          {iconWidgetsData4.map(
+            ({ bgColor, icon, title, subtitle, ...restProps }, index) => (
+              <Col key={index} lg={4} md={6} sm={6} xs={12} className="mb-3">
+                <IconWidget
+                  bgColor={bgColor}
+                  icon={icon}
+                  title={title}
+                  subtitle={subtitle}
+                  {...restProps}
+                />
+              </Col>
+            )
+          )}
+        </Row>
+        <hr />
+        <h4>
           Financial Informations
+        </h4>
+        <hr />
+        <Row>
+          {iconWidgetsData5.map(
+            ({ bgColor, icon, title, subtitle, ...restProps }, index) => (
+              <Col key={index} lg={3} md={6} sm={6} xs={12} className="mb-3">
+                <IconWidget
+                  bgColor={bgColor}
+                  icon={icon}
+                  title={title}
+                  subtitle={subtitle}
+                  {...restProps}
+                />
+              </Col>
+            )
+          )}
+        </Row>
+        <hr />
+        <h4>
+          Machinary Informations
         </h4>
         <hr />
 
         <Row>
-        {iconWidgetsData4.map(
-          ({ bgColor, icon, title, subtitle, ...restProps }, index) => (
-            <Col key={index} lg={4} md={6} sm={6} xs={12} className="mb-3">
-              <IconWidget
-                bgColor={bgColor}
-                icon={icon}
-                title={title}
-                subtitle={subtitle}
-                {...restProps}
-              />
-            </Col>
-          )
-        )}
-      </Row>
-
-        <Row>
-          <Col lg="6" md="12" sm="12" xs="12">
+          <Col xl={6} lg={12} md={12}>
+            <Card>
+              <CardHeader>Machinary Activity Comparisions</CardHeader>
+              <CardBody>
+                <Bar data={genLineData({ type: 'line', fill: false })} />
+              </CardBody>
+            </Card>
+          </Col>
+          <Col xl={6} lg={12} md={12}>
+            <Card>
+              <CardHeader>Machinary Run Time vs DownTime Coomparisions</CardHeader>
+              <CardBody>
+                <Bar data={genLineData2({ type: 'line', fill: false })} />
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+          <Col md="12" sm="12" xs="12">
             <InfiniteCalendar
               selected={today}
               minDate={lastWeek}
@@ -140,31 +227,6 @@ class DashboardPage extends React.Component {
             />
           </Col>
 
-          <Col lg="6" md="12" sm="12" xs="12">
-            <InfiniteCalendar
-              selected={today}
-              minDate={lastWeek}
-              width="100%"
-              theme={{
-                accentColor: primaryColor,
-                floatingNav: {
-                  background: secondaryColor,
-                  chevron: primaryColor,
-                  color: '#FFF',
-                },
-                headerColor: primaryColor,
-                selectionColor: secondaryColor,
-                textColor: {
-                  active: '#FFF',
-                  default: '#333',
-                },
-                todayColor: secondaryColor,
-                weekdayColor: primaryColor,
-              }}
-            />
-          </Col>
-
-        </Row>
       </Page>
     );
   }
