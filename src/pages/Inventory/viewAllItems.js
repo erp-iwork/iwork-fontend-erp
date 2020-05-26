@@ -19,18 +19,23 @@ class ViewAllItems extends Component {
         backdrop: true,
     };
 
-    toggle = modalType => () => {
-        if (!modalType) {
-            return this.setState({
-                modal: !this.state.modal,
-            });
+    constructor(props) {
+        super(props)
+        this.state = {
+            modal: false,
+            modal_backdrop: false,
+            modal_nested_parent: false,
+            modal_nested: false,
+            backdrop: true,
         }
+        this.toggle = this.toggle.bind(this)
+    }
 
-        this.setState({
-            [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
-        });
-    };
-
+    toggle = (customer) => {
+        return this.setState({
+            modal: !this.state.modal,
+        })
+    }
 
     componentDidMount() {
         this.props.getItemsByCategory(this.props.location.state)
@@ -46,19 +51,17 @@ class ViewAllItems extends Component {
                 className="TablePage">
                 <Modal
                     isOpen={this.state.modal}
-                    toggle={this.toggle()}
                     className={this.props.className}>
                     <ModalHeader toggle={this.toggle()}>Modal title</ModalHeader>
                     <ModalBody>
                         Create An Account For <b>Mark</b> as a Something!!
                   </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.toggle()}>
+                        <Button color="primary" onClick={() => this.toggle()}>
                             Close
                     </Button>
                     </ModalFooter>
                 </Modal>
-
                 <Col>
                     <Card className="mb-4">
                         <CardHeader>Inventory Status</CardHeader>
@@ -87,7 +90,7 @@ class ViewAllItems extends Component {
                                             <td>{item.productType}</td>
                                             <td>{item.catagory.catagory}</td>
                                             <td>
-                                                <Button size='sm' color='primary' onClick={this.toggle()}>
+                                                <Button size='sm' color='primary' onClick={() => this.toggle()}>
                                                     See Item
                                                 </Button>
                                             </td>
