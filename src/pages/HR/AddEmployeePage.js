@@ -37,12 +37,12 @@ class AddEmployee extends Component {
     }
 
     componentDidMount() {
-        console.log("YES HERE")
         this.props.getDepartment()
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.state.lockPage && this.props.success) {
+            console.log("Here")
             this.setState({
                 firstName: "", lastName: "", email: "", telephone: "",
                 termOfEmployment: "", country: "", city: "", region: "",
@@ -52,12 +52,13 @@ class AddEmployee extends Component {
         }
     }
 
-    submit = async () => {
+    submit = () => {
         this.setState({ complete: false })
-        await this.props.addNewEmployee(this.state).then(res => {
+        this.props.addNewEmployee(this.state).then(res => {
             this.setState({ redirect: true })
         })
     }
+
     departmentDropDown(e) {
         this.setState({
             depValue: e.target.value,
@@ -98,7 +99,6 @@ class AddEmployee extends Component {
     }
 
     render() {
-        console.log(this.props.department)
         const {
             country, region, firstName, lastName, email, birthDate, city, telephone,
             termOfEmployment, depValue, levValue, rolValue, hiredDate, gender
@@ -446,7 +446,7 @@ class AddEmployee extends Component {
                             </CardBody>
                         </Card>
                     </Col>
-                    <AllEmployeesPage />
+                    <AllEmployeesPage data={this.props.users} />
                 </Page>
 
             </>

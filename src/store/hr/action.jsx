@@ -299,7 +299,6 @@ function getEmployeDetail(employeId) {
 
 function getDepartment() {
   return (dispatch) => {
-    console.log("It's here")
     dispatch({
       type: appConstants.FETCH_DEPARTMENT_REQUEST,
       payload: true,
@@ -312,7 +311,6 @@ function getDepartment() {
         headers: headers,
       })
       .then((response) => {
-        console.log(response.data)
         dispatch({
           type: appConstants.FETCH_DEPARTMENT_SUCCESS,
           payload: response.data,

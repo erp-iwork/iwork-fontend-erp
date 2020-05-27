@@ -22,6 +22,8 @@ export default function hrReducer(state = initialState, action) {
       return {
         ...state,
         errors: action.payload,
+        loading_dept: false,
+        adding_employee: false,
       };
     }
 
@@ -77,13 +79,14 @@ export default function hrReducer(state = initialState, action) {
         success: true,
         clear: true,
         adding_employee: false,
-        employees: state.employees.concat(action.payload.employe),
+        employees: state.employees.concat([action.payload.employe]),
       };
     }
     case appConstants.REGISTER_FAILURE: {
       return {
         ...state,
         errors: action.payload,
+        adding_employee: false,
         loading: false,
         isLogin: false,
         success: false,
