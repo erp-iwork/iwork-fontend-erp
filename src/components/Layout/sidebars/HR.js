@@ -37,6 +37,8 @@ import {
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
 import dept from '../../../config/departments'
+import './Styles.scss'
+
 const bem = bn.create('sidebar');
 class HR extends React.Component {
     constructor(props) {
@@ -70,7 +72,7 @@ class HR extends React.Component {
 
     render() {
         const HR = [
-            // { to: routes.HRDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            { to: routes.HRDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
             { to: routes.allEmployees, name: 'All Employees', exact: false, Icon: MdWidgets },
             { to: routes.addEmployee, name: 'Add Employee', exact: false, Icon: MdWidgets },
         ]
@@ -99,6 +101,8 @@ class HR extends React.Component {
               </BSNavLink>
             </NavItem>
             <Collapse isOpen={this.state.isOpenHR}>
+            <div className='contents'>
+
               {HR.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item2')}>
                   <BSNavLink
@@ -112,7 +116,7 @@ class HR extends React.Component {
                     <span className="">{name}</span>
                   </BSNavLink>
                 </NavItem>
-              ))}
+              ))}</div>
             </Collapse>
             </React.Fragment>
         )

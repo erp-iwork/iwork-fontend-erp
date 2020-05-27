@@ -37,6 +37,8 @@ import {
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
 import dept from '../../../config/departments'
+import './Styles.scss'
+
 const bem = bn.create('sidebar');
 class Procurment extends React.Component {
     constructor(props) {
@@ -70,7 +72,7 @@ class Procurment extends React.Component {
 
     render() {
         const PROCURMENT = [
-            // { to: routes.ProcurmentDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            { to: routes.ProcurmentDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
             { to: routes.CreatePurchaseOrder, name: 'Create Purchase Order', exact: false, Icon: MdWidgets },
             { to: routes.ViewAllPurchaseOrder, name: 'All Purchase Order', exact: false, Icon: MdWidgets },
           ]
@@ -100,6 +102,9 @@ class Procurment extends React.Component {
             </NavItem>
 
             <Collapse isOpen={this.state.isOpenPROCURMENT}>
+          <div className='contents'>
+
+
               {PROCURMENT.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item8')}>
                   <BSNavLink
@@ -114,6 +119,8 @@ class Procurment extends React.Component {
                   </BSNavLink>
                 </NavItem>
               ))}
+          </div>
+
             </Collapse>
             </React.Fragment>
         )

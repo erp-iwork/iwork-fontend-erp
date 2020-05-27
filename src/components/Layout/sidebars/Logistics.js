@@ -37,6 +37,8 @@ import {
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
 import dept from '../../../config/departments'
+import './Styles.scss'
+
 const bem = bn.create('sidebar');
 class Logistics extends React.Component {
     constructor(props) {
@@ -70,7 +72,7 @@ class Logistics extends React.Component {
 
     render() {
         const LOGISTICS = [
-            // { to: routes.LogisticsDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            { to: routes.LogisticsDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
             { to: routes.ViewOrdersLogistics, name: 'View Orders', exact: false, Icon: MdWidgets },
             { to: routes.ViewPurchaseOrdersLogistics, name: 'View Purchased Order', exact: false, Icon: MdWidgets },
           ]
@@ -100,6 +102,9 @@ class Logistics extends React.Component {
                 </NavItem>
 
                 <Collapse isOpen={this.state.isOpenLOGISTICS}>
+            <div className='contents'>
+
+
                     {LOGISTICS.map(({ to, name, exact, Icon }, index) => (
                         <NavItem key={index} className={bem.e('nav-item7')}>
                             <BSNavLink
@@ -114,6 +119,8 @@ class Logistics extends React.Component {
                             </BSNavLink>
                         </NavItem>
                     ))}
+            </div>
+
                 </Collapse>
             </React.Fragment>
         )

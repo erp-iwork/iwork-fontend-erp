@@ -23,6 +23,8 @@ import {
 } from 'reactstrap';
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
+import './Styles.scss'
+
 const bem = bn.create('sidebar');
 class Finance extends React.Component {
     state = {
@@ -47,7 +49,7 @@ class Finance extends React.Component {
 
     render() {
         const FINANCE = [
-            // { to: routes.FinanceDashboard, name: 'Dashboard', exact: false, Icon: MdDashboard },
+            { to: routes.FinanceDashboard, name: 'Dashboard', exact: false, Icon: MdDashboard },
             { to: routes.viewSuppliers, name: 'View All Suppliers', exact: false, Icon: MdNotificationsActive },
             { to: routes.AddSupplier, name: 'Add Supplier ', exact: false, Icon: MdPages },
             { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },
@@ -84,6 +86,9 @@ class Finance extends React.Component {
                 </NavItem>
 
                 <Collapse isOpen={this.state.isOpenFINANCE}>
+                <div className='contents'>
+
+
                     {FINANCE.map(({ to, name, exact, Icon }, index) => (
                         <NavItem key={index} className={bem.e('nav-item5')}>
                             <BSNavLink
@@ -98,7 +103,10 @@ class Finance extends React.Component {
                             </BSNavLink>
                         </NavItem>
                     ))}
+                </div>
+
                 </Collapse>
+
             </React.Fragment>
         )
     }
