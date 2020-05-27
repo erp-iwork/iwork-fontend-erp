@@ -34,9 +34,6 @@ class EmployeeProfilePage extends Component {
                             />
                             <CardBody className="d-flex justify-content-between align-items-center">
                                 <CardText style={{ paddingTop: 10 }}>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</CardText>
-                                <Button outline color="primary">
-                                    Edit/Delete
-                            </Button>
                             </CardBody>
                         </Card>
                     </Col>

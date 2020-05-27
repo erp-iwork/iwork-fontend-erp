@@ -203,7 +203,7 @@ class DashboardPage extends React.Component {
             </Card>
           </Col>
         </Row>
-          <Col md="12" sm="12" xs="12">
+          <Col md="4" sm="12" xs="12">
             <InfiniteCalendar
               selected={today}
               minDate={lastWeek}
