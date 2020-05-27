@@ -58,7 +58,7 @@ class Finance extends React.Component {
             { to: routes.ViewDelieveredOrders, name: 'Delivered Orders', exact: false, Icon: MdTextFields },
             { to: routes.ViewFinancePurchaseOrders, name: 'Purchased Orders', exact: false, Icon: MdViewCarousel }
         ]
-        return (
+        return ( 
             <React.Fragment>
                 <NavItem
                     className={bem.e('nav-item5')}
