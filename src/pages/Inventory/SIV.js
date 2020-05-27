@@ -174,13 +174,13 @@ class SIV extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.props.sivs.siv_item.map((item, index) => (
+                  {this.props.sivs.siv_item ? this.props.sivs.siv_item.map((item, index) => (
                     <tr>
                       <th scope="row">{index + 1}</th>
                       <td>{item.itemName}</td>
                       <td>{item.quantity}</td>
                     </tr>
-                  ))}
+                  )) : null}
                 </tbody>
               </Table>
             </CardBody>
