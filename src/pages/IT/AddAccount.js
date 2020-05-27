@@ -70,10 +70,10 @@ class AddAccount extends React.Component {
                         <Input type='password' name="password" required onChange={this.handleChange} />
                         {this.state.errorPassword ? <Label style={{ color: "red" }}>Password is required</Label> : ""}
                     </FormGroup>
-                    {/* <FormGroup className="checkbox">
+                    <FormGroup className="checkbox">
                         <Label for="is_admin">Is Admin?</Label>
                         <Input type="checkbox" name="is_admin" onClick={(e) => this.handleChange({ target: { name: 'is_admin', value: e.target.checked } })} />
-                    </FormGroup> */}
+                    </FormGroup>
                     <Error error={this.props.errors.username} />
                     <hr />
                     {this.props.loading ? (
