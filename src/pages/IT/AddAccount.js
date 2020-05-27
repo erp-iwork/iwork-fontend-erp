@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import SpinnerLoader from '../../components/loader'
 import routes from '../../config/routes'
+import Error from '../../components/error'
 
 class AddAccount extends React.Component {
     constructor(props) {
@@ -47,7 +48,7 @@ class AddAccount extends React.Component {
     }
 
     render() {
-        if (this.state.redirect) return <Redirect to={routes.itEmployeePage} />
+        if (this.state.redirect && this.props.success) return <Redirect to={routes.itEmployeePage} />
         return (
             <Container className="container">
                 <Form onSubmit={this.handleSubmit} className="form" noValidate formNoValidate>
@@ -69,10 +70,11 @@ class AddAccount extends React.Component {
                         <Input type='password' name="password" required onChange={this.handleChange} />
                         {this.state.errorPassword ? <Label style={{ color: "red" }}>Password is required</Label> : ""}
                     </FormGroup>
-                    <FormGroup className="checkbox">
+                    {/* <FormGroup className="checkbox">
                         <Label for="is_admin">Is Admin?</Label>
                         <Input type="checkbox" name="is_admin" onClick={(e) => this.handleChange({ target: { name: 'is_admin', value: e.target.checked } })} />
-                    </FormGroup>
+                    </FormGroup> */}
+                    <Error error={this.props.errors.username} />
                     <hr />
                     {this.props.loading ? (
                         <Button size="lg" className="bg-gradient-theme-left border-0" block>
@@ -92,6 +94,8 @@ class AddAccount extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        success: state.hrReducer.success,
+        errors: state.hrReducer.errors,
         loading: state.hrReducer.loading
     }
 }

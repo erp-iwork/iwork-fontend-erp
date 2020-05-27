@@ -1,4 +1,4 @@
-import { appConstants, itConstants } from "../../constant/constants";
+import { appConstants, itConstants, errorsConstant } from "../../constant/constants";
 const initialState = {
   users: [],
   loading: false,
@@ -14,6 +14,12 @@ const initialState = {
 };
 export default function hrReducer(state = initialState, action) {
   switch (action.type) {
+    case errorsConstant.GET_ERRORS: {
+      return {
+        ...state, errors: action.payload
+      }
+    }
+
     case itConstants.REGISTER_REQUEST: {
       return {
         ...state,

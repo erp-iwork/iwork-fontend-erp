@@ -8,18 +8,28 @@ import type from '../../constant/transactions'
 
 class DeliveredOrders extends Component {
     constructor(props) {
-        super(props);
-        this.state = {}
+        super(props)
+        this.state = {
+            records: [],
+            done: false
+        }
     }
 
     componentDidMount() {
-        this.props.getExistingCategories()
         this.props.getRecordsByType(type.out)
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading_records && !this.state.done) {
+            this.setState({
+                records: this.props.records,
+                done: true
+            })
+        }
+    }
+
     render() {
-        if (this.props.loading_categories || this.props.loading_records) return <PageSpinner />
-        console.log(this.props.records)
+        if (!this.state.done) return <PageSpinner />
         return (
             <Page
                 title="Record Tracking"
@@ -38,19 +48,25 @@ class DeliveredOrders extends Component {
                                             <th>Product ID</th>
                                             <th>Product Name</th>
                                             <th>Cost</th>
+                                            <th>Order ID</th>
+                                            <th>Amount</th>
+                                            <th>Quantity</th>
                                             <th>Product Category</th>
                                             <th>Transaction Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.records.slice(0).reverse().map((item, index) => (
+                                        {this.state.records.slice(0).reverse().map((item, index) => (
                                             <tr>
                                                 <td>{index + 1}</td>
                                                 <td>{item.transactionId}</td>
-                                                <td>{'item.transactionId'}</td>
+                                                <td>{item.orderItem.InventoryItem.InventoryItemId}</td>
                                                 <td>{item.orderItem.itemName}</td>
-                                                <td>{'item.transactionId'}</td>
-                                                <td>{'item.transactionId'}</td>
+                                                <td>{item.orderItem.InventoryItem.cost}</td>
+                                                <td>{item.orderId}</td>
+                                                <td>{item.amount}</td>
+                                                <td>{item.orderItem.quantity}</td>
+                                                <td>{item.orderItem.InventoryItem.catagory.catagory}</td>
                                                 <td>{item.transactionDate}</td>
                                             </tr>
                                         ))}
@@ -70,7 +86,8 @@ const mapStateToProps = (state) => {
     return {
         loading_categories: state.inventoryReducer.loading_categories,
         loading_records: state.inventoryReducer.loading_records,
-        records: state.inventoryReducer.records
+        records: state.inventoryReducer.records,
+        categories: state.inventoryReducer.categories,
     }
 }
 
