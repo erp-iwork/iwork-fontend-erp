@@ -9,14 +9,13 @@ import { Link } from 'react-router-dom'
 import status from '../../constant/status'
 
 const Order = ({ order, index, handleDone }) => {
-
-
     return (
         <tr align="left">
             <th scope="row">{index + 1}</th>
             <td>{order.requiredProductName}</td>
             <td>{order.retailPrice}</td>
             <td>{order.cost}</td>
+            <td>{order.orderNumber}</td>
             <td>{order.unitOfMesurement}</td>
             <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status : null}</td>
             <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status === status.created ? 
@@ -36,11 +35,23 @@ const Order = ({ order, index, handleDone }) => {
 class ViewAllOrdersManufacturingPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            orders: [],
+            done: false
+        }
     }
 
     componentDidMount() {
-        this.props.getManufacturedOrders(status.created, status.manuFactured)
+        this.props.getOrders()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading_manufactured_orders && !this.state.done) {
+            this.setState({
+                orders: this.props.orders,
+                done: true
+            })
+        }
     }
 
     handleDone(order, status) {
@@ -48,7 +59,7 @@ class ViewAllOrdersManufacturingPage extends Component {
     }
     
     render() {
-        if (this.props.loading_manufactured_orders) return <PageSpinner />
+        if (!this.state.done) return <PageSpinner />
         return (
             <Page title="View All Orders" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
 
@@ -62,6 +73,7 @@ class ViewAllOrdersManufacturingPage extends Component {
                                     <th>Product Name</th>
                                     <th>Product Price</th>
                                     <th>Product Cost</th>
+                                    <th>Order Number</th>
                                     <th>Unit of Measurement</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -69,7 +81,7 @@ class ViewAllOrdersManufacturingPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.orders.slice(0).reverse().map((item, index) => (
+                                {this.state.orders.slice(0).reverse().map((item, index) => (
                                     <Order index={index} order={item} handleDone={() => this.handleDone(item.orderNumber, "Manufactured")} />
                                 ))}
 

@@ -241,14 +241,6 @@ function addAccount(employe) {
         });
       })
       .catch((error) => {
-        console.log(error);
-        Swal.fire({
-          title: "Error",
-          text: "Something Went Wrong",
-          icon: "error",
-          showConfirmButton: false,
-          timer: 1000,
-        });
         if (error.response && error.response.data) {
           dispatch({
             type: itConstants.REGISTER_FAILURE,
