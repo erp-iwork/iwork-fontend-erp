@@ -1,0 +1,92 @@
+[debug] [2020-05-27T11:41:32.961Z] ----------------------------------------------------------------------
+[debug] [2020-05-27T11:41:32.964Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2020-05-27T11:41:32.965Z] CLI Version:   8.2.0
+[debug] [2020-05-27T11:41:32.965Z] Platform:      darwin
+[debug] [2020-05-27T11:41:32.965Z] Node Version:  v12.16.1
+[debug] [2020-05-27T11:41:32.966Z] Time:          Wed May 27 2020 14:41:32 GMT+0300 (East Africa Time)
+[debug] [2020-05-27T11:41:32.966Z] ----------------------------------------------------------------------
+[debug] [2020-05-27T11:41:32.966Z] 
+[debug] [2020-05-27T11:41:32.981Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-05-27T11:41:32.982Z] > authorizing via signed-in user
+[debug] [2020-05-27T11:41:32.982Z] [iam] checking project sparta-erp for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-05-27T11:41:32.986Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparta-erp:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-05-27T11:41:34.553Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 27 May 2020 11:41:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=749","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-05-27T11:41:34.555Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparta-erp  
+ 
+[debug] [2020-05-27T11:41:35.544Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 27 May 2020 11:41:35 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Deploying to 'sparta-erp'...
+[info] 
+[info] i  deploying hosting
+[debug] [2020-05-27T11:41:35.548Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/sparta-erp/versions  
+ {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2020-05-27T11:41:37.945Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 27 May 2020 11:41:37 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  hosting[sparta-erp]: beginning deploy...
+[info] i  hosting[sparta-erp]: found 502 files in build
+[debug] [2020-05-27T11:41:38.184Z] [hosting] hash cache [YnVpbGQ] stored for 502 files
+[debug] [2020-05-27T11:41:38.184Z] [hosting][hash queue][FINAL] {"max":36,"min":0,"avg":4.8896764385665,"active":0,"complete":502,"success":502,"errored":0,"retried":0,"total":502,"elapsed":126}
+[debug] [2020-05-27T11:41:38.185Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/projects/1025941954455/sites/sparta-erp/versions/62f1497926928ee2:populateFiles  
+ <request body omitted>
+[debug] [2020-05-27T11:41:41.211Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 27 May 2020 11:41:40 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-05-27T11:41:41.232Z] [hosting][populate queue][FINAL] {"max":3032,"min":3032,"avg":3032,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":3051}
+[debug] [2020-05-27T11:41:41.232Z] [hosting] uploads queued: 27
+[debug] [2020-05-27T11:43:17.362Z] [uploadQueue] Retrying task 166b816a0981de2d4bceee5be2eb4fd80cdd65c368f945bcf993786262e036aa
+[debug] [2020-05-27T11:44:11.500Z] [uploadQueue] Retrying task 1f6fed23bdca17d757866bd721644839f6bf9f4441ea62c79027c5d6e7e2776d
+[debug] [2020-05-27T11:44:25.530Z] [uploadQueue] Retrying task 3c9f5d6a2934685ce18501293c441343607188c4da96a125a89afdf35f01e6cb
+[debug] [2020-05-27T11:44:45.318Z] [uploadQueue] Retrying task 4e819eeffc36ce002752c50bc7ab194a9f11efda3fc5359a0867488d3cc587c3
+[debug] [2020-05-27T11:44:47.196Z] [uploadQueue] Retrying task 3769adbc9acfa0a70ebd6a20b632de640822adcb0d6d2542968854b900cc8fd0
+[debug] [2020-05-27T11:44:56.055Z] [uploadQueue] Retrying task def586d57afb607ff943aa86f5a89517ce5f30da8e6b24ca085b9c1c5577a60c
+[debug] [2020-05-27T11:44:56.326Z] [uploadQueue] Retrying task 06c426f9ce0f958ee02e521f681df10909aef034ba998674210920ede7f83c0c
+[debug] [2020-05-27T11:44:56.558Z] [uploadQueue] Retrying task 3d693e7cd074b2a2670c28e4465f9359de64c7ec68b75457561b9bbe704ec28c
+[debug] [2020-05-27T11:45:25.922Z] [uploadQueue] Retrying task 4f68c88021f0bef03a407fc349dd50456856b646e51d2c781f66bbea4300e0d5
+[debug] [2020-05-27T11:45:36.745Z] [uploadQueue] Retrying task 3c9f5d6a2934685ce18501293c441343607188c4da96a125a89afdf35f01e6cb
+[debug] [2020-05-27T11:45:43.518Z] [uploadQueue] Retrying task b55d57afa41ca1fbdb3d55679660beb9eb344c1203b8a9daad6566ba4993f66a
+[debug] [2020-05-27T11:45:56.899Z] [uploadQueue] Retrying task 9f0f8f31eaf10922745fdb56247fa185e4635a32006ed4ee494938bbe64dd4bd
+[debug] [2020-05-27T11:46:07.709Z] [uploadQueue] Retrying task 2937988e3760cfb8884afb178c672072d1f3369993ebaabd165dde8556ccd848
+[debug] [2020-05-27T11:46:19.492Z] [uploadQueue] Retrying task 8bcd42c05faaf0646d1adfed973be7ca328fb2db7a6fd4c7b57ac43c76f38982
+[debug] [2020-05-27T11:46:19.640Z] [uploadQueue] Retrying task ebdede3af873afaaf908304c8b7cd05ece00953656ae1dfa5fd244b87af54a8b
+[debug] [2020-05-27T11:46:35.682Z] [uploadQueue] Retrying task 4e819eeffc36ce002752c50bc7ab194a9f11efda3fc5359a0867488d3cc587c3
+[debug] [2020-05-27T11:46:50.147Z] [uploadQueue] Retrying task 166b816a0981de2d4bceee5be2eb4fd80cdd65c368f945bcf993786262e036aa
+[debug] [2020-05-27T11:46:51.590Z] [uploadQueue] Retrying task d85e7ed283832bcdc1bfafd693ddfb03582fbaa3ff4a3fa6a2d8171b5336c689
+[debug] [2020-05-27T11:47:24.562Z] [uploadQueue] Retrying task 1f6fed23bdca17d757866bd721644839f6bf9f4441ea62c79027c5d6e7e2776d
+[debug] [2020-05-27T11:47:31.454Z] [uploadQueue] Retrying task 3d693e7cd074b2a2670c28e4465f9359de64c7ec68b75457561b9bbe704ec28c
+[debug] [2020-05-27T11:47:39.521Z] [uploadQueue] Retrying task 3c9f5d6a2934685ce18501293c441343607188c4da96a125a89afdf35f01e6cb
+[debug] [2020-05-27T11:47:54.314Z] [uploadQueue] Retrying task ee2eeb473e7f83d66a8173aba1f8afe2e9d63c0946a78bb826564367cc9c00c6
+[debug] [2020-05-27T11:47:56.840Z] [uploadQueue] Retrying task def586d57afb607ff943aa86f5a89517ce5f30da8e6b24ca085b9c1c5577a60c
+[debug] [2020-05-27T11:48:12.114Z] [uploadQueue] Retrying task 3769adbc9acfa0a70ebd6a20b632de640822adcb0d6d2542968854b900cc8fd0
+[debug] [2020-05-27T11:48:40.389Z] [uploadQueue] Retrying task a2d8779e276e9afd67263fe6fa32aada8709127cef5562638b54d06ac007cd3e
+[debug] [2020-05-27T11:49:06.511Z] [uploadQueue] Retrying task 1f6fed23bdca17d757866bd721644839f6bf9f4441ea62c79027c5d6e7e2776d
+[debug] [2020-05-27T11:49:31.136Z] [uploadQueue] Retrying task b55d57afa41ca1fbdb3d55679660beb9eb344c1203b8a9daad6566ba4993f66a
+[debug] [2020-05-27T11:49:40.535Z] [uploadQueue] Retrying task 6d448290294aaf1005b4a2619b9d0865124d5d88042a09cddc3d7699fa6222a0
+[debug] [2020-05-27T11:49:54.582Z] [uploadQueue] Retrying task 9f0f8f31eaf10922745fdb56247fa185e4635a32006ed4ee494938bbe64dd4bd
+[debug] [2020-05-27T11:50:02.756Z] [uploadQueue] Retrying task 4f68c88021f0bef03a407fc349dd50456856b646e51d2c781f66bbea4300e0d5
+[debug] [2020-05-27T11:50:03.656Z] [uploadQueue] Retrying task 3c9f5d6a2934685ce18501293c441343607188c4da96a125a89afdf35f01e6cb
+[debug] [2020-05-27T11:50:25.498Z] [uploadQueue] Retrying task 3d693e7cd074b2a2670c28e4465f9359de64c7ec68b75457561b9bbe704ec28c
+[debug] [2020-05-27T11:50:39.618Z] [uploadQueue] Retrying task 4e819eeffc36ce002752c50bc7ab194a9f11efda3fc5359a0867488d3cc587c3
+[debug] [2020-05-27T11:50:40.109Z] [uploadQueue] Retrying task 2937988e3760cfb8884afb178c672072d1f3369993ebaabd165dde8556ccd848
+[debug] [2020-05-27T11:50:41.855Z] [uploadQueue] Retrying task ebdede3af873afaaf908304c8b7cd05ece00953656ae1dfa5fd244b87af54a8b
+[debug] [2020-05-27T11:50:48.103Z] [uploadQueue] Retrying task 166b816a0981de2d4bceee5be2eb4fd80cdd65c368f945bcf993786262e036aa
+[debug] [2020-05-27T11:50:51.174Z] [uploadQueue] Retrying task def586d57afb607ff943aa86f5a89517ce5f30da8e6b24ca085b9c1c5577a60c
+[debug] [2020-05-27T11:50:58.080Z] [uploadQueue] Retrying task 8bcd42c05faaf0646d1adfed973be7ca328fb2db7a6fd4c7b57ac43c76f38982
+[debug] [2020-05-27T11:52:12.299Z] [uploadQueue] Retrying task c2d7d896375118f814034457982dfcbc05f5aacfb7589cad8059419b29d94eec
+[debug] [2020-05-27T11:52:12.596Z] [uploadQueue] Retrying task 3769adbc9acfa0a70ebd6a20b632de640822adcb0d6d2542968854b900cc8fd0
+[debug] [2020-05-27T11:52:19.824Z] [uploadQueue] Retrying task 1f6fed23bdca17d757866bd721644839f6bf9f4441ea62c79027c5d6e7e2776d
+[debug] [2020-05-27T11:52:20.504Z] [uploadQueue] Retrying task ca0adbf06a46677dd23f4ee31d9203c077276dc84fe776343d72146c5658fd64
+[debug] [2020-05-27T11:52:23.605Z] [uploadQueue] Retrying task 3c9f5d6a2934685ce18501293c441343607188c4da96a125a89afdf35f01e6cb
+[debug] [2020-05-27T11:53:26.551Z] [uploadQueue] Retrying task 4f68c88021f0bef03a407fc349dd50456856b646e51d2c781f66bbea4300e0d5
+[debug] [2020-05-27T11:53:30.018Z] [uploadQueue] Retrying task def586d57afb607ff943aa86f5a89517ce5f30da8e6b24ca085b9c1c5577a60c
+[debug] [2020-05-27T11:53:31.153Z] [uploadQueue] Retrying task d85e7ed283832bcdc1bfafd693ddfb03582fbaa3ff4a3fa6a2d8171b5336c689
+[debug] [2020-05-27T11:53:40.469Z] [uploadQueue] Retrying task 3d693e7cd074b2a2670c28e4465f9359de64c7ec68b75457561b9bbe704ec28c
+[debug] [2020-05-27T11:53:53.897Z] [uploadQueue] Retrying task b55d57afa41ca1fbdb3d55679660beb9eb344c1203b8a9daad6566ba4993f66a
+[debug] [2020-05-27T11:54:01.442Z] [uploadQueue] Retrying task 9f0f8f31eaf10922745fdb56247fa185e4635a32006ed4ee494938bbe64dd4bd
+[debug] [2020-05-27T11:54:11.105Z] [uploadQueue] Retrying task 969e0daa154fac62ccf154d870c40f62910b6632a9bc4a8f73e0dfc4fa2850cb
+[debug] [2020-05-27T11:54:26.155Z] [uploadQueue] Retrying task ee2eeb473e7f83d66a8173aba1f8afe2e9d63c0946a78bb826564367cc9c00c6
+[debug] [2020-05-27T11:54:30.882Z] [uploadQueue] Retrying task 4e819eeffc36ce002752c50bc7ab194a9f11efda3fc5359a0867488d3cc587c3
+[debug] [2020-05-27T11:54:52.542Z] [uploadQueue] Retrying task a2d8779e276e9afd67263fe6fa32aada8709127cef5562638b54d06ac007cd3e
+[debug] [2020-05-27T11:54:53.190Z] [uploadQueue] Retrying task 2937988e3760cfb8884afb178c672072d1f3369993ebaabd165dde8556ccd848
+[debug] [2020-05-27T11:54:55.370Z] [uploadQueue] Retrying task ebdede3af873afaaf908304c8b7cd05ece00953656ae1dfa5fd244b87af54a8b
+[debug] [2020-05-27T11:54:56.575Z] [uploadQueue] Retrying task 166b816a0981de2d4bceee5be2eb4fd80cdd65c368f945bcf993786262e036aa
+[debug] [2020-05-27T11:54:58.740Z] [uploadQueue] Retrying task 8bcd42c05faaf0646d1adfed973be7ca328fb2db7a6fd4c7b57ac43c76f38982
+[debug] [2020-05-27T11:55:10.240Z] [uploadQueue] Retrying task 3769adbc9acfa0a70ebd6a20b632de640822adcb0d6d2542968854b900cc8fd0
+[debug] [2020-05-27T11:55:12.917Z] [uploadQueue] Retrying task 1f6fed23bdca17d757866bd721644839f6bf9f4441ea62c79027c5d6e7e2776d

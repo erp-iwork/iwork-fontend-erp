@@ -95,7 +95,7 @@ class CreatePurchaseOrder extends Component {
         });
 
         this.setState({ order_items: neworder_items });
-    } 
+    }
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value })
@@ -145,12 +145,17 @@ class CreatePurchaseOrder extends Component {
                                                     </option>
                                                 ))}
                                             </Input>
-                                            <Error
-                                                error={
-                                                    this.props.errors.purchaseOrder.suplier_id
-                                                        ? this.props.errors.purchaseOrder.suplier_id
-                                                        : null}
-                                            />
+                                            {
+                                                this.props.errors.purchaseOrder ? (
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.purchaseOrder.suplier_id
+                                                                ? this.props.errors.purchaseOrder.suplier_id
+                                                                : null}
+                                                    />
+                                                ) : null
+                                            }
+
                                         </Col>
                                     </FormGroup>
                                     <FormGroup >
