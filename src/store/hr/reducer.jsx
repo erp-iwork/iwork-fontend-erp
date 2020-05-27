@@ -70,6 +70,8 @@ export default function hrReducer(state = initialState, action) {
       };
     }
     case appConstants.REGISTER_SUCCESS: {
+      const newemploye = state.employees.concat(action.payload.employe);
+
       return {
         ...state,
         users: action.payload,
@@ -79,7 +81,7 @@ export default function hrReducer(state = initialState, action) {
         success: true,
         clear: true,
         adding_employee: false,
-        employees: state.employees.concat([action.payload.employe]),
+        employees: newemploye,
       };
     }
     case appConstants.REGISTER_FAILURE: {
