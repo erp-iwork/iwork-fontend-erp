@@ -1,4 +1,8 @@
-import { appConstants, itConstants, errorsConstant } from "../../constant/constants";
+import {
+  appConstants,
+  itConstants,
+  errorsConstant,
+} from "../../constant/constants";
 const initialState = {
   users: [],
   loading: false,
@@ -10,14 +14,15 @@ const initialState = {
   employee: [],
   department: [],
   adding_employee: false,
-  loading_dept: true
+  loading_dept: true,
 };
 export default function hrReducer(state = initialState, action) {
   switch (action.type) {
     case errorsConstant.GET_ERRORS: {
       return {
-        ...state, errors: action.payload
-      }
+        ...state,
+        errors: action.payload,
+      };
     }
 
     case itConstants.REGISTER_REQUEST: {
@@ -71,7 +76,8 @@ export default function hrReducer(state = initialState, action) {
         isLogin: true,
         success: true,
         clear: true,
-        adding_employee: false
+        adding_employee: false,
+        employees: state.employees.concat(action.payload.employe),
       };
     }
     case appConstants.REGISTER_FAILURE: {
@@ -142,12 +148,11 @@ export default function hrReducer(state = initialState, action) {
     case appConstants.FETCH_DEPARTMENT_REQUEST: {
       return {
         ...state,
-        loading_dept: true
+        loading_dept: true,
       };
     }
 
     case appConstants.FETCH_DEPARTMENT_SUCCESS: {
-      console.log("Here")
       return {
         ...state,
         department: action.payload,
@@ -155,7 +160,7 @@ export default function hrReducer(state = initialState, action) {
         loading: false,
         isLogin: true,
         success: true,
-        loading_dept: false
+        loading_dept: false,
       };
     }
     case appConstants.FETCH_DEPARTMENT_FAILURE: {
@@ -196,7 +201,6 @@ export default function hrReducer(state = initialState, action) {
         success: false,
       };
     }
-
 
     case itConstants.DELETE_SUCCESS: {
       const index = state.employees.findIndex(
