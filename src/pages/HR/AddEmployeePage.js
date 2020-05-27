@@ -21,14 +21,15 @@ class AddEmployee extends Component {
             firstName: "", lastName: "", email: "", telephone: "",
             termOfEmployment: "", country: "", city: "", region: "",
             birthDate: "", hiredDate: "", depValue: "", rolValue: "",
-            levValue: "",
+            levValue: "", gender: "",
             deps: [],
             rol: [],
             lev: [],
             username: "",
             password: "",
             complete: true,
-            redirect: false
+            redirect: false,
+            lockPage: false
         }
         this.submit = this.submit.bind(this);
         this.departmentDropDown = this.departmentDropDown.bind(this);
@@ -37,8 +38,19 @@ class AddEmployee extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    async componentWillMount() {
-        await this.props.getDepartment()
+    componentDidount() {
+        this.props.getDepartment()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.state.lockPage && this.props.success) {
+            this.setState({
+                firstName: "", lastName: "", email: "", telephone: "",
+                termOfEmployment: "", country: "", city: "", region: "",
+                birthDate: "", hiredDate: "", depValue: "", gender: "",
+                rolValue: "", levValue: "", lockPage: true
+            })
+        }
     }
 
     submit = async () => {
@@ -87,12 +99,13 @@ class AddEmployee extends Component {
     }
 
     render() {
-        var depValue = this.state.depValue;
-        var rolValue = this.state.rolValue;
-        const { country, region } = this.state
-        if (!this.props.department[0]) return <PageSpinner />
+        console.log(this.props.department)
+        const {
+            country, region, firstName, lastName, email, birthDate, city, telephone,
+            termOfEmployment, depValue, levValue, rolValue, hiredDate, gender
+        } = this.state
+        if (this.props.loading_dept) return <PageSpinner />
         else if (this.props.department.length === 0) return <h2>No departments. Please add departments. </h2>
-        if (this.state.redirect) return <Redirect to={routes.allEmployees} />
         return (
             <>
                 <Page
@@ -116,6 +129,7 @@ class AddEmployee extends Component {
                                                         name="firstName"
                                                         placeholder="First Name"
                                                         onChange={this.handleChange}
+                                                        value={firstName}
                                                     />
                                                     <Error
                                                         error={
@@ -137,6 +151,7 @@ class AddEmployee extends Component {
                                                         name="lastName"
                                                         placeholder=" Last Name"
                                                         onChange={this.handleChange}
+                                                        value={lastName}
                                                     />
                                                     <Error
                                                         error={
@@ -160,6 +175,7 @@ class AddEmployee extends Component {
                                                         name="email"
                                                         placeholder="Email"
                                                         onChange={this.handleChange}
+                                                        value={email}
                                                     />
                                                     <Error
                                                         error={
@@ -179,6 +195,7 @@ class AddEmployee extends Component {
                                                         name="telephone"
                                                         placeholder="Phone Number"
                                                         onChange={this.handleChange}
+                                                        value={telephone}
                                                     />
                                                     <Error
                                                         error={
@@ -203,6 +220,7 @@ class AddEmployee extends Component {
                                                         name="birthDate"
                                                         placeholder="Birth Date"
                                                         onChange={this.handleChange}
+                                                        value={birthDate}
                                                     />
                                                     <Error
                                                         error={
@@ -220,7 +238,7 @@ class AddEmployee extends Component {
                                                     Gender
                                             </Label>
                                                 <Col sm={12}>
-                                                    <Input type="select" name="gender" onChange={this.handleChange}>
+                                                    <Input type="select" value={gender} name="gender" onChange={this.handleChange}>
                                                         <option aria-label="Gender" selected disabled>Select Gender </option>
                                                         <option>Male</option>
                                                         <option>Female</option>
@@ -238,7 +256,6 @@ class AddEmployee extends Component {
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.departmentDropDown} value={depValue}>
                                                         <option aria-label="None" selected disabled value="" > Select Department </option>
-
                                                         {this.props.department.map((dep, index) => (
                                                             <option value={dep.departmentId} key={index}>
                                                                 {dep.departmentName}
@@ -283,7 +300,7 @@ class AddEmployee extends Component {
                                                     Level
                                             </Label>
                                                 <Col sm={12}>
-                                                    <Input type="select" onChange={this.levelDropDown}>
+                                                    <Input type="select" onChange={this.levelDropDown} value={levValue}>
                                                         <option aria-label="None" disabled selected value="" >Select Level</option>
                                                         {this.state.lev.map((levs) => (
                                                             <option value={levs.levelId} key={levs.levelId}>
@@ -312,6 +329,7 @@ class AddEmployee extends Component {
                                                         name="hiredDate"
                                                         type="date"
                                                         onChange={this.handleChange}
+                                                        value={hiredDate}
                                                     />
                                                     <Error
                                                         error={
@@ -329,7 +347,7 @@ class AddEmployee extends Component {
                                                     Term Of Employment
                                             </Label>
                                                 <Col sm={12}>
-                                                    <Input type="select" name="termOfEmployment" onChange={this.handleChange}>
+                                                    <Input type="select" name="termOfEmployment" value={termOfEmployment} onChange={this.handleChange}>
                                                         <option aria-label="None" selected disabled value="" > Select Term Of Employment</option>
                                                         {termsOfEmployment.map((item, index) => (
                                                             <option key={index} value={item}>{item}</option>
@@ -351,7 +369,7 @@ class AddEmployee extends Component {
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>Country</Label>
                                                 <Col sm={12}>
-                                                    <Input type="select" name="country" onChange={this.handleChange}>
+                                                    <Input type="select" name="country" value={country} onChange={this.handleChange}>
                                                         <option aria-label="None" selected disabled value="" >Select Country</option>
                                                         {countries.map((item, index) => (
                                                             <option key={item} value={item}>{item}</option>
@@ -371,7 +389,7 @@ class AddEmployee extends Component {
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>Region</Label>
                                                 <Col sm={12}>
-                                                    <Input type="select" name="region" onChange={this.handleChange}>
+                                                    <Input type="select" name="region" value={region} onChange={this.handleChange}>
                                                         <option aria-label="None" value="" disabled selected > Select Region</option>
                                                         {this.state.country ?
                                                             regions[this.state.country].map((item, index) => (
@@ -393,7 +411,7 @@ class AddEmployee extends Component {
                                             <FormGroup>
                                                 <Label for="exampleSelect" sm={5}>City</Label>
                                                 <Col sm={12}>
-                                                    <Input type="select" name="city" onChange={this.handleChange}>
+                                                    <Input type="select" name="city" onChange={this.handleChange} value={city}>
                                                         <option aria-label="None" disabled selected value="" >Select City</option>
                                                         {this.state.country ?
                                                             getCity(region, country).map((item, index) => (
@@ -414,7 +432,7 @@ class AddEmployee extends Component {
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button color='primary' onClick={this.submit}>
-                                                {!this.props.loading || this.state.complete ? "Register" : <Spinner />}
+                                                {!this.props.adding_employee? "Add Employee" : <Spinner />}
                                             </Button>
                                         </Col>
                                     </FormGroup>
@@ -433,6 +451,8 @@ class AddEmployee extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        loading_dept: state.hrReducer.loading_dept,
+        adding_employee: state.hrReducer.adding_employee,
         loading: state.hrReducer.loading,
         users: state.hrReducer.users,
         errors: state.hrReducer.errors,

@@ -79,6 +79,7 @@ class AddMasterDataPage extends Component {
                 ...item,
                 product: this.props.masterData[value]['productId'],
                 materialName: this.props.masterData[value]['productName'],
+                materialUnitOfMeasurement: this.props.masterData[value]['unitOfMeasurement']
             };
         });
 
@@ -138,6 +139,7 @@ class AddMasterDataPage extends Component {
         if (this.props.loading || this.props.loading_categories) return <PageSpinner />
 
         let { can_be_manufactured } = this.state
+        console.log(this.props.masterData)
         return (
             <Page
                 title="Finance"
@@ -266,11 +268,7 @@ class AddMasterDataPage extends Component {
                                                 <FormGroup>
                                                     <Label md={12} for="unit_of_measurement">Unit Of Measurment</Label>
                                                     <Col md={12}>
-                                                        <Input type='select' defaultValue={""} id="unit_of_measurement" name="unit_of_measurement" onChange={this.ItemUnitChange(index)}>
-                                                            <option disabled selected></option>
-                                                            <option>Litre</option>
-                                                            <option>KM</option>
-                                                            <option>Kilos</option>
+                                                        <Input disabled value={this.state.order_items[index]['materialUnitOfMeasurement']} defaultValue={""} id="unit_of_measurement" name="unit_of_measurement" onChange={this.ItemUnitChange(index)}>
                                                         </Input>
                                                     </Col>
                                                 </FormGroup>

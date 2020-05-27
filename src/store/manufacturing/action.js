@@ -10,7 +10,7 @@ import headers from '../headers'
 
 export const getMasterdata = () => (dispatch) => {
   dispatch({ type: manuFacturingConstant.REQUEST_GET_MASTERDATA })
-  return Axios.get(API + routes.masterData, headers)
+  return Axios.get(API + routes.itemsToBeManufactured, headers)
     .then(res => {
       dispatch({
         type: manuFacturingConstant.SUCCESS_GET_MASTERDATA,
@@ -91,4 +91,49 @@ export const getOrders = () => (dispatch) => {
       }
     })
 }
+
+
+
+export const updateStatus = (orderNumber, status) => (dispatch) => {
+  const data = {
+    status: status
+  }
+  dispatch({
+    type: manuFacturingConstant.REQUEST_PUT_ORDERS,
+    payload: true
+  });
+  Axios
+    .put(API + `${routes.manufacturestatus}${orderNumber}/`, data, headers)
+    .then((res) => {
+      console.log(res.data);
+
+      dispatch({
+        type: manuFacturingConstant.SUCCESS_PUT_ORDERS,
+        payload: { order: res.data.manufacture_order, status: res.data.status },
+      });
+      Swal.fire({
+        title: "Delivered to Inventory",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1000
+      });
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    });
+};
 

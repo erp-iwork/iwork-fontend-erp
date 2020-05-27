@@ -107,6 +107,9 @@ class CreateOrderManufacturingPage extends Component {
         event.preventDefault()
         const { productID, productMaterial, description, quantity, startDate, endDate } = this.state
         const manufacture_item_set = productMaterial.map((item, index) => {
+
+
+
             return {
                 billOfMaterial: item.materialId,
                 quantity: item.materialQuantity,
@@ -198,8 +201,9 @@ class CreateOrderManufacturingPage extends Component {
                                             quantity={item.materialQuantity}
                                         />
                                     ))}
-
+                                    {<Error error={errors.item ? errors.item : null} />}
                                     {
+
                                         errors.manufacture_item_set ? errors.manufacture_item_set.map((err) => (
                                             <div>
                                                 <Error error={err.price ? err.price : null} />

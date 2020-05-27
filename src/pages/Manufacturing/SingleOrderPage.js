@@ -5,9 +5,11 @@ import "./Manufacturing.scss"
 
 class SingleOrderPage extends Component {
     constructor(props) {
+        console.log(props.location.state);
+
         super(props);
         this.state = {
-            order: this.props.location.state
+            order: props.location.state
         }
     }
     render() {
@@ -27,19 +29,20 @@ class SingleOrderPage extends Component {
                         </div>
                         <h4 class="step-title">Pending</h4>
                     </div>
-                    <div class="step">
+
+                    <div class={order.status_manufacture_order ? order.status_manufacture_order[0].status === "Manufactured" ? ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>
                         <h4 class="step-title">Manufactured</h4>
                     </div>
-                    <div class="step">
+                    <div class={order.status_manufacture_order ? order.status_manufacture_order[0].status === "Finished" ? ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>
                         <h4 class="step-title">Finished</h4>
                     </div>
-                    <div class="step">
+                    <div class={order.status_manufacture_order ? order.status_manufacture_order[0].status === "Recieved" ? ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-home"></i></div>
                         </div>
@@ -96,13 +99,13 @@ class SingleOrderPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {order.product_material.map((item, index) => (
+                                        {order.manufacture_item_set ? order.manufacture_item_set.map((item, index) => (
                                             <tr>
-                                                <th scope="row">{item.materialName}</th>
-                                                <td>{item.materialCost}</td>
-                                                <td>{item.materialQuantity}</td>
+                                                <th scope="row">{item.componentName}</th>
+                                                <td>{item.price}</td>
+                                                <td>{item.quantity}</td>
                                             </tr>
-                                        ))}
+                                        )) : null}
                                     </tbody>
                                 </Table>
                             </CardBody>

@@ -9,6 +9,8 @@ const initialState = {
   employees: [],
   employee: [],
   department: [],
+  adding_employee: false,
+  loading_dept: true
 };
 export default function hrReducer(state = initialState, action) {
   switch (action.type) {
@@ -49,7 +51,8 @@ export default function hrReducer(state = initialState, action) {
     case appConstants.REGISTER_REQUEST: {
       return {
         ...state,
-        loading: true,
+        adding_employee: true,
+        //loading: true,
         success: false,
       };
     }
@@ -62,6 +65,7 @@ export default function hrReducer(state = initialState, action) {
         isLogin: true,
         success: true,
         clear: true,
+        adding_employee: false
       };
     }
     case appConstants.REGISTER_FAILURE: {
@@ -132,7 +136,7 @@ export default function hrReducer(state = initialState, action) {
     case appConstants.FETCH_DEPARTMENT_REQUEST: {
       return {
         ...state,
-        loading: true,
+        loading_dept: true
       };
     }
 
@@ -144,6 +148,7 @@ export default function hrReducer(state = initialState, action) {
         loading: false,
         isLogin: true,
         success: true,
+        loading_dept: false
       };
     }
     case appConstants.FETCH_DEPARTMENT_FAILURE: {

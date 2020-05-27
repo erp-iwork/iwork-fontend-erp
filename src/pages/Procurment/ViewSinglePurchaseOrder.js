@@ -22,7 +22,6 @@ class ViewSinglePurchaseOrderPage extends Component {
 
     render() {
         if (this.props.loading_single_order === true || this.props.loading_single_order === undefined) return <PageSpinner />
-        console.log(this.props.order)
         return (
             <Page title="Procurment" breadcrumbs={[{ name: 'Single Order', active: true }]}>
                 <Card className='padding'>
@@ -38,6 +37,14 @@ class ViewSinglePurchaseOrderPage extends Component {
                                     </Col>
                                     <Col>
                                         <b>{this.props.order.purchaseOrderNumber}</b>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        Supplier Name:
+                                    </Col>
+                                    <Col>
+                                        <b>{this.props.order.suplier.suplierName}</b>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -68,9 +75,10 @@ class ViewSinglePurchaseOrderPage extends Component {
                                 <Table responsive className="scrollTableSales">
                                     <thead>
                                         <tr>
-                                            <th>Order #</th>
-                                            <th>Order Name</th>
+                                            <th>Product #</th>
+                                            <th>Product Name</th>
                                             <th>Price</th>
+                                            <th>Quantity</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,6 +87,7 @@ class ViewSinglePurchaseOrderPage extends Component {
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{item.masterData.productName}</td>
                                                 <td>{item.masterData.productPrice}</td>
+                                                <td>{item.purchaseQuantity}</td>
                                             </tr>
                                         ))}
                                     </tbody>

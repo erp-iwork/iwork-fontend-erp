@@ -7,13 +7,15 @@ import Loader from '../../components/loader'
 import status from '../../constant/status'
 import PageSpinner from '../../components/PageSpinner'
 import './SingleView.scss'
+import Error from '../../components/error'
 
 class ViewSingleDelieveredOrderPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             order: this.props.location.state,
-            orders: []
+            orders: [],
+            lockPage: false
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -31,6 +33,14 @@ class ViewSingleDelieveredOrderPage extends Component {
         this.props.getSingleOrder(this.props.location.state.purchaseOrderNumber)
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.success && !this.state.lockPage) {
+            this.props.getSingleOrder(this.state.order.purchaseOrderNumber).then(res => {
+                this.setState({ lockPage: true })
+            })
+        }
+    }
+
     handleChange = (data) => {
         var orders = this.state.orders
         orders[data.index][data.name] = parseInt(data.value)
@@ -39,9 +49,7 @@ class ViewSingleDelieveredOrderPage extends Component {
 
     invoice = () => {
         const { order } = this.state
-        this.props.invoiceOrder(order.purchaseOrderNumber, this.state.orders).then(res => {
-            this.props.getSingleOrder(order.purchaseOrderNumber)
-        })
+        this.props.invoiceOrder(order.purchaseOrderNumber, this.state.orders)
     }
 
     render() {
@@ -77,8 +85,8 @@ class ViewSingleDelieveredOrderPage extends Component {
                                             <th>Item ID</th>
                                             <th>Item Name</th>
                                             <th>Quantity</th>
-                                            <th>Old Price</th>
-                                            <th>Update Price</th>
+                                            <th>Cost Price</th>
+                                            <th>Sales Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -107,14 +115,14 @@ class ViewSingleDelieveredOrderPage extends Component {
                                                             })
                                                         } />
                                                     </Col>
-
-
-
                                                 </td>
                                             </tr>
                                         ))}
                                     </tbody>
-                                    <Button align='center' color='primary' onClick={this.invoice}>
+                                    <Error error={this.props.errors.error} />
+                                    <Button align='center' color='primary' onClick={this.invoice} disabled={
+                                        order.status_purchase_order[0]['status'] === status.invoiced
+                                    }>
                                         {this.props.loading_invoice ? <Loader /> : "Invoice Order"}
                                     </Button>
                                 </Table>
@@ -122,14 +130,13 @@ class ViewSingleDelieveredOrderPage extends Component {
                         </Col>
                     </Row>
                 </Card>
-
-
             </Page>
-        );
+        )
     }
 }
 
 const mapStateToProps = (state) => ({
+    errors: state.procurementReducer.errors,
     loading_single_order: state.procurementReducer.loading_single_order,
     loading_invoice: state.procurementReducer.loading_invoice,
     success: state.procurementReducer.success,

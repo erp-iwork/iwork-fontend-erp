@@ -37,7 +37,21 @@ const manuFacturingReducer = (state = initialState, action) => {
                 ...state, loading_manufacture: false,
                 success: true
             }
+        case manuFacturingConstant.REQUEST_PUT_ORDERS:
+            return { ...state, loading_manufacture: true }
 
+        case manuFacturingConstant.SUCCESS_PUT_ORDERS:
+            const index = state.orders.findIndex(
+                (emp) => emp.orderNumber === action.payload.order
+            );
+            state.orders[index].status_manufacture_order[0].status = action.payload.status;
+
+            return {
+                ...state, loading_manufacture: false,
+                success: true,
+                orders: state.orders
+
+            }
         case manuFacturingConstant.REQUEST_GET_ORDERS:
             return { ...state, loading_orders: true }
         case manuFacturingConstant.SUCCESS_GET_ORDERS:

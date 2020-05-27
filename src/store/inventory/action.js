@@ -226,10 +226,10 @@ export const getItemsByCategory = (categoryID) => (dispatch) => {
     })
 }
 
-export const getPurchasedItems = () => (dispatch) => {
+export const getInvoicedItems = () => (dispatch) => {
   dispatch({ type: inventoryConstant.REQUEST_GET_PURCHASED_ITEMS })
   return axios.get(API + routes.purchase +
-    `?search1=${status.created}&search2=${status.invoiced}`
+    `?search1=${status.received}&search2=${status.invoiced}`
     , headers)
     .then(res => dispatch({ type: inventoryConstant.SUCCESS_GET_PURCHASED_ITEMS, payload: res.data }))
     .catch((err) => {
@@ -253,7 +253,7 @@ export const getPurchasedItems = () => (dispatch) => {
 export const updateStatus = (purchaseOrderNumber) => (dispatch) => {
   dispatch({ type: inventoryConstant.REQUEST_PUT_UPDATE_STATUS })
   return axios.put(API + routes.updatePurchaseStatus + purchaseOrderNumber + '/', {
-    status: 'Received'
+    status: status.received
   }, headers)
     .then(res => dispatch({ type: inventoryConstant.SUCCESS_PUT_UPDATE_STATUS }))
     .catch((err) => {
@@ -273,13 +273,6 @@ export const updateStatus = (purchaseOrderNumber) => (dispatch) => {
       }
     })
 }
-
-// order: 8
-// sivDate: "2020-05-25"
-// sivId: 8
-// sivStatus: "Pending"
-// siv_item: Array(1)
-// 0: {itemName: "table", quantity: 1}
 
 export const getGRV = (purchaseOrderNumber) => (dispatch) => {
   dispatch({ type: inventoryConstant.REQUEST_GET_GRV })

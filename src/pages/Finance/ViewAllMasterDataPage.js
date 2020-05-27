@@ -7,15 +7,16 @@ import {
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { getMasterData } from '../../store/company/action'
+import { getExistingCategories } from '../../store/inventory/action'
 
-const Data = ({ item, index, toggle }) => {
+const Data = ({ item, index, toggle, category }) => {
     return (
         <tbody>
             <tr>
                 <th scope="row">{index + 1}</th>
                 <td>{item.productName}</td>
                 <td>{item.productType}</td>
-                <td>{item.productCategory}</td>
+                <td>{category(item.productCategory)}</td>
                 <td>{item.productPrice}</td>
                 <td>{item.unitOfMeasurement}</td>
                 <td>
@@ -36,9 +37,11 @@ class ViewAllMasterData extends Component {
             data: { productName: '', productType: '', productCategory: '', productPrice: '', unitOfMeasurement: '' }
         }
         this.toggle = this.toggle.bind(this)
+        this.getCategory = this.getCategory.bind(this)
     }
 
     componentDidMount() {
+        this.props.getExistingCategories()
         this.props.getMasterData()
     }
 
@@ -49,8 +52,13 @@ class ViewAllMasterData extends Component {
         })
     }
 
+    getCategory = (id) => {
+        const found = this.props.categories.find(item => item.catagoryId === id)
+        return found.catagory
+    }
+
     render() {
-        if (this.props.loading) return <PageSpinner />
+        if (this.props.loading || this.props.loading_categories) return <PageSpinner />
         if (this.props.masterData.length === 0) return <h2>No products to show</h2>
         const { data } = this.state
         return (
@@ -94,7 +102,7 @@ class ViewAllMasterData extends Component {
                                 </tr>
                             </thead>
                             {this.props.masterData.slice(0).reverse().map((item, index) => (
-                                <Data item={item} key={index} index={index} toggle={this.toggle} />
+                                <Data item={item} key={index} index={index} toggle={this.toggle} category={this.getCategory} />
                             ))}
                         </Table>
                     </CardBody>
@@ -107,10 +115,12 @@ class ViewAllMasterData extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        categories: state.inventoryReducer.categories,
+        loading_categories: state.inventoryReducer.loading_categories,
         loading: state.companyReducer.loading,
         masterData: state.companyReducer.masterData
     }
 }
-const mapDispatchToProps = { getMasterData }
+const mapDispatchToProps = { getMasterData, getExistingCategories }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewAllMasterData)
