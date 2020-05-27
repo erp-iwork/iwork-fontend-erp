@@ -36,8 +36,7 @@ class AddEmployee extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-        componentDidMount() {
-        console.log("YES HERE")
+    componentDidMount() {
         this.props.getDepartment()
     }
 
@@ -54,10 +53,11 @@ class AddEmployee extends Component {
 
     submit = async () => {
         this.setState({ complete: false })
-        await this.props.addNewEmployee(this.state).then(res => {
+        this.props.addNewEmployee(this.state).then(res => {
             this.setState({ redirect: true })
         })
     }
+
     departmentDropDown(e) {
         this.setState({
             depValue: e.target.value,
@@ -98,7 +98,6 @@ class AddEmployee extends Component {
     }
 
     render() {
-        console.log(this.props.department)
         const {
             country, region, firstName, lastName, email, birthDate, city, telephone,
             termOfEmployment, depValue, levValue, rolValue, hiredDate, gender

@@ -16,7 +16,8 @@ export default function hrReducer(state = initialState, action) {
   switch (action.type) {
     case errorsConstant.GET_ERRORS: {
       return {
-        ...state, errors: action.payload
+        ...state, errors: action.payload,
+        loading_dept: false, adding_employee: false
       }
     }
 
@@ -78,6 +79,7 @@ export default function hrReducer(state = initialState, action) {
       return {
         ...state,
         errors: action.payload,
+        adding_employee: false,
         loading: false,
         isLogin: false,
         success: false,
