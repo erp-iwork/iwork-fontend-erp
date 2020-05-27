@@ -36,7 +36,7 @@ class AddEmployee extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-        componentDidMount() {
+    componentDidMount() {
         console.log("YES HERE")
         this.props.getDepartment()
     }
@@ -238,11 +238,18 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" value={gender} name="gender" onChange={this.handleChange}>
-                                                        <option aria-label="Gender" selected disabled>Select Gender </option>
+                                                        <option value="" selected disabled>Select Gender </option>
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </Input>
                                                 </Col>
+                                                <Error
+                                                    error={
+                                                        this.props.errors.gender
+                                                            ? this.props.errors.gender
+                                                            : null
+                                                    }
+                                                />
                                             </FormGroup>
                                         </Col>
                                     </Row>
@@ -431,7 +438,7 @@ class AddEmployee extends Component {
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button color='primary' onClick={this.submit}>
-                                                {!this.props.adding_employee? "Add Employee" : <Spinner />}
+                                                {!this.props.adding_employee ? "Add Employee" : <Spinner />}
                                             </Button>
                                         </Col>
                                     </FormGroup>
