@@ -99,7 +99,7 @@ class SIVPdf extends Component {
               <View item>
                 <View style={{ height: 5 }} />
                 <Text style={styles.text} variant="body2" gutterBottom>
-                  Issued By : {localStorage.getItem("username")}
+                  Received By : {localStorage.getItem("username")}
                 </Text>
                 <View style={{ height: 5 }} />
 

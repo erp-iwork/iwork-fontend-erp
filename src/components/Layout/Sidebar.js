@@ -72,7 +72,6 @@ class Sidebar extends React.Component {
           <Inventory isOpen={false} />
           <Procurment isOpen={false} />
           <Manufacturing isOpen={false} />
-          <Logistics isOpen={false} />
         </React.Fragment>
 
       )

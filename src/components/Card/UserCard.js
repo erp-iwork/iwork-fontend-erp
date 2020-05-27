@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import { Card, CardTitle, CardSubtitle, CardText, CardBody } from 'reactstrap';
 
 import Avatar from '../Avatar';
+import Avatarr from '../Avatarr';
+
 
 const UserCard = ({
   avatar,
@@ -22,7 +24,22 @@ const UserCard = ({
   return (
     <Card inverse className={classes} {...restProps}>
       <CardBody className="d-flex justify-content-center align-items-center flex-column">
-        <Avatar src={avatar} size={avatarSize} className="mb-2" />
+
+      {localStorage.getItem('gender') === 'Female'?
+                <Avatarr
+                  // onClick={this.toggleUserCardPopover}
+                  className="can-click"
+                  size={avatarSize} className="mb-2"
+                />  :
+                <Avatar
+                  // onClick={this.toggleUserCardPopover}
+                  className="can-click"
+                  size={avatarSize} className="mb-2"
+                />
+              }
+        {/* <Avatar src={avatar} size={avatarSize} className="mb-2" /> */}
+
+
         <CardTitle>{title}</CardTitle>
         <CardSubtitle>{subtitle}</CardSubtitle>
         <CardText>
