@@ -1,5 +1,7 @@
 import React from 'react';
 import Avatar from '../../components/Avatar';
+import Avatarr from '../../components/Avatarr';
+
 import { UserCard } from '../../components/Card';
 import Notifications from '../../components/Notifications';
 import SearchInput from '../../components/SearchInput';
@@ -80,7 +82,7 @@ class Header extends React.Component {
   render() {
     const { isNotificationConfirmed } = this.state;
     return (
-      <Navbar light expand className={bem.b('bg-white')}> 
+      <Navbar light expand className={bem.b('bg-white')}>
         <Nav navbar className="mr-2">
           <Button color="primary" outline onClick={this.handleSidebarControlButton}>
             <MdClearAll size={25} />
@@ -121,11 +123,16 @@ class Header extends React.Component {
           <NavItem>
 
             <NavLink id="Popover2">
-
-              <Avatar
-                onClick={this.toggleUserCardPopover}
-                className="can-click"
-              />
+              {localStorage.getItem('gender') === 'Female' ?
+                <Avatarr
+                  onClick={this.toggleUserCardPopover}
+                  className="can-click"
+                /> :
+                <Avatar
+                  onClick={this.toggleUserCardPopover}
+                  className="can-click"
+                />
+              }
             </NavLink>
 
             <Popover
@@ -142,6 +149,7 @@ class Header extends React.Component {
                   subtitle={localStorage.getItem('email')}
                   className="border-light"
                 >
+
                   <ListGroup flush>
                     <ListGroupItem tag="button" action className="border-light">
                       <MdPersonPin /> Profile

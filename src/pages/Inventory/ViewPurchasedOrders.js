@@ -79,10 +79,10 @@ class ViewPurchasedItems extends Component {
                         <Table responsive>
                             <thead>
                                 <tr>
-                                    <th>Order #</th>
+                                    <th>#</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
-                                    <th>Ordered Number</th>
+                                    <th>Order ID</th>
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th>Generate GRV</th>

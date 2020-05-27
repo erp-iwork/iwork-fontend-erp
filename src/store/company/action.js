@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
 import routes from '../../api/routes'
-import { companyConstant, errorsConstant, inventoryConstant } from "../../constant/constants";
+import { companyConstant, errorsConstant} from "../../constant/constants";
 import headers from './../headers'
 import statusTypes from '../../constant/status'
 

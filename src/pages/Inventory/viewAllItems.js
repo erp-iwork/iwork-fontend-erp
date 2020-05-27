@@ -45,7 +45,7 @@ class ViewAllItems extends Component {
     render() {
         if (!this.state.done) return <PageSpinner />
         const {
-            itemName, quantity, retailPrice, category, productType, unitOfMeasurement
+             quantity, retailPrice, category, productType, unitOfMeasurement
         } = this.state.item
 
         if (this.props.items.item_catagory.length === 0 || this.props.items.item_catagory === null) return <h2>No items in this Category yet</h2>

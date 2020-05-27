@@ -1,6 +1,3 @@
-import logo200Image from '../../../assets/img/logo/logo_200.png';
-import sidebarBgImage from '../../../assets/img/sidebar/sidebar-4.jpg';
-import SourceLink from '../../../components/SourceLink';
 import React from 'react';
 import {
   // MdAccountCircle,
@@ -8,10 +5,10 @@ import {
   // MdBorderAll,
   // MdBrush,
   // MdChromeReaderMode,
-  MdDashboard,
+  // MdDashboard,
   MdExtension,
   // MdGroupWork,
-  MdInsertChart,
+  // MdInsertChart,
   MdKeyboardArrowDown,
   // MdNotificationsActive,
   // MdPages,
@@ -29,14 +26,11 @@ import { NavLink } from 'react-router-dom';
 import {
   // UncontrolledTooltip,
   Collapse,
-  Nav,
-  Navbar,
   NavItem,
   NavLink as BSNavLink,
 } from 'reactstrap';
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
-import dept from '../../../config/departments'
 import './Styles.scss'
 
 const bem = bn.create('sidebar');

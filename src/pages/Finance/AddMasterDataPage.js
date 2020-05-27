@@ -19,7 +19,6 @@ import { getExistingCategories } from '../../store/inventory/action'
 import PageSpinner from '../../components/PageSpinner'
 import Error from '../../components/error'
 import Loader from '../../components/loader'
-import routes from '../../config/routes'
 
 class AddMasterDataPage extends Component {
     constructor(props) {
