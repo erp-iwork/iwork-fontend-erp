@@ -15,6 +15,7 @@ const Order = ({ order, index, handleApprove }) => {
             <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
+            <td>{order.purchaseOrderNumber}</td>
             <td>{order.purchaseOrderDate}</td>
             <td>{order.status_purchase_order[0]['status']}</td>
             <td align="left">
@@ -70,6 +71,7 @@ class ViewPurchasedItems extends Component {
                                     <th>Order #</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
+                                    <th>Ordered Number</th>
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th>Generate GRV</th>
@@ -77,7 +79,7 @@ class ViewPurchasedItems extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.orders.map((item, index) => (
+                                {this.props.orders.slice(0).reverse().map((item, index) => (
                                     <Order key={index} index={index} order={item} handleApprove={this.handleApprove} />
                                 ))}
                             </tbody>

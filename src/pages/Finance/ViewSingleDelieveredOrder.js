@@ -92,7 +92,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                                     <tbody>
                                         {order.purchase_item_order.map((item, index) => (
                                             <tr>
-                                                <th scope="row">1</th>
+                                                <th scope="row">{item.masterData.productId}</th>
                                                 <td>{item.masterData.productName}</td>
                                                 <td>{item.purchaseQuantity}</td>
                                                 <td>{item.itemCost}</td>
