@@ -95,7 +95,7 @@ class CreatePurchaseOrder extends Component {
         });
 
         this.setState({ order_items: neworder_items });
-    }
+    } 
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value })
