@@ -37,6 +37,7 @@ import {
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
 import dept from '../../../config/departments'
+import './Styles.scss'
 const bem = bn.create('sidebar');
 class Inventory extends React.Component {
     constructor(props) {
@@ -70,13 +71,15 @@ class Inventory extends React.Component {
 
     render() {
         const INVENTORY = [
-            // { to: routes.InventoryDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            { to: routes.InventoryDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
             // { to: routes.ViewAllItems, name: 'View Items', exact: false, Icon: MdWidgets },
             { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
             { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
             // { to: routes.ViewSingleItemPage, name: 'Single Item', exact: false, Icon: MdWidgets },
             { to: routes.ViewPurchasedItems, name: 'Purchased Items', exact: false, Icon: MdWidgets },
-            { to: routes.RecordTracking, name: 'Record Tracking', exact: false, Icon: MdWidgets },
+            { to: routes.RecordTracking, name: 'Received Orders Tracking', exact: false, Icon: MdWidgets },
+            { to: routes.DeliveredOrders, name: 'Delivered Orders Tracking', exact: false, Icon: MdWidgets },
+
 
         ]
         return (
@@ -105,6 +108,8 @@ class Inventory extends React.Component {
                 </NavItem>
 
                 <Collapse isOpen={this.state.isOpenINVENTORY}>
+                    <div className='contents'>
+
                     {INVENTORY.map(({ to, name, exact, Icon }, index) => (
                         <NavItem key={index} className={bem.e('nav-item6')}>
                             <BSNavLink
@@ -119,6 +124,8 @@ class Inventory extends React.Component {
                             </BSNavLink>
                         </NavItem>
                     ))}
+                    </div>
+
                 </Collapse>
             </React.Fragment>
         )

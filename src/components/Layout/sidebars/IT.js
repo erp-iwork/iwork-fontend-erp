@@ -37,6 +37,8 @@ import {
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
 import dept from '../../../config/departments'
+import './Styles.scss'
+
 const bem = bn.create('sidebar');
 class IT extends React.Component {
     constructor(props) {
@@ -70,7 +72,7 @@ class IT extends React.Component {
 
     render() {
         const IT = [
-            // { to: routes.ITDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            { to: routes.ITDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
             { to: routes.itEmployeePage, name: 'All Employees', exact: false, Icon: MdWidgets },
         ]
         return (
@@ -99,6 +101,8 @@ class IT extends React.Component {
                 </NavItem>
 
                 <Collapse isOpen={this.state.isOpenIT}>
+            <div className='contents'>
+
                     {IT.map(({ to, name, exact, Icon }, index) => (
                         <NavItem key={index} className={bem.e('nav-item3')}>
                             <BSNavLink
@@ -113,6 +117,7 @@ class IT extends React.Component {
                             </BSNavLink>
                         </NavItem>
                     ))}
+                    </div>
                 </Collapse>
             </React.Fragment>
         )
