@@ -70,7 +70,6 @@ class ViewAllPurchaseOrderPage extends Component {
     render() {
         if (!this.state.done) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
-        console.log(this.props.orders)
         return (
             <Page title="Purchase Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Card className="mb-3">

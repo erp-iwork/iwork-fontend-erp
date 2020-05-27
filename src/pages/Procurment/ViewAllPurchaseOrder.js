@@ -29,16 +29,32 @@ const Order = ({ order, index }) => {
 class ViewAllPurchaseOrderPage extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            orders: [],
+            done: false
+        }
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.props.getOrders()
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading_orders && !this.state.done) {
+            this.setState({
+                orders: this.props.orders,
+                done: true
+            })
+        }
+    }
+
+    reverse(orders) {
+        return orders.slice(0).reverse()
+    }
+
     render() {
-        if (this.props.loading_orders) return <PageSpinner />
-        if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
+        if (!this.state.done) return <PageSpinner />
+        if (this.state.orders.length === 0) return <h2>No orders created yet.</h2>
         return (
             <Page title="All Purchase Orders" breadcrumbs={[{ name: 'Procurment', active: true }]}>
                 <Card className="mb-3">
@@ -47,7 +63,7 @@ class ViewAllPurchaseOrderPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='center'>
-                                    <th>Order #</th>
+                                    <th>#</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
                                     <th>Order Date</th>
@@ -56,7 +72,7 @@ class ViewAllPurchaseOrderPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.orders.map((order, index) => (
+                                {this.reverse(this.state.orders).map((order, index) => (
                                     <Order order={order} index={index} />
                                 ))}
                             </tbody>

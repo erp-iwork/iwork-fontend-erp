@@ -5,8 +5,9 @@ import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getDeliveredOrders, updateStatus } from '../../store/procurement/action'
-import routes from '../../config/routes' 
+import { getCustomOrders, updateStatus } from '../../store/procurement/action'
+import routes from '../../config/routes'
+import status from '../../constant/status'
 
 const Order = ({ order, index, deliver }) => {
     return (
@@ -41,22 +42,18 @@ class ViewAllOrdersPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lockPage: false
+            orders: [],
+            done: false
         }
         this.deliver = this.deliver.bind(this)
-        this.updateOrders = this.updateOrders.bind(this)
     }
 
     componentDidMount() {
-        this.props.getDeliveredOrders()
-    }
-
-    updateOrders () {
-        this.props.getDeliveredOrders()
+        this.props.getCustomOrders(status.delivered, status.approved)
     }
 
     deliver(order) {
-        this.props.updateStatus(order, { status: "Delivered" })
+        this.props.updateStatus(order, { status: "Delivered" }, "Purchase Order Delivered")
     }
 
     render() {
@@ -100,8 +97,8 @@ const mapStateToProps = (state) => {
         orders: state.procurementReducer.orders,
         success: state.procurementReducer.success,
         order: state.procurementReducer.order,
-        status: state.procurementReducer.status,
+        status: state.procurementReducer.status
     }
 }
 
-export default connect(mapStateToProps, { getDeliveredOrders, updateStatus })(ViewAllOrdersPage)
+export default connect(mapStateToProps, { getCustomOrders, updateStatus })(ViewAllOrdersPage)

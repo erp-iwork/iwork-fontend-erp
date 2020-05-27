@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Card, CardBody, CardHeader, Col, Row, Table, Button } from 'reactstrap';
-import { getDeliveredOrders } from '../../store/order/action'
+import { getCustomOrders } from '../../store/procurement/action'
 import { connect } from 'react-redux'
 import PageSpinner from '../../components/PageSpinner'
 import { Link } from 'react-router-dom'
@@ -33,15 +33,27 @@ const Order = ({ order, index }) => {
 class ViewDelieveredOrdersPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            orders: [],
+            done: false
+        }
     }
 
     componentDidMount() {
-        this.props.getDeliveredOrders()
+        this.props.getCustomOrders(status.delivered, status.invoiced)
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading_orders && !this.state.done) {
+            this.setState({
+                orders: this.props.orders,
+                done: true
+            })
+        }
     }
 
     render() {
-        if (this.props.loading_delivered_orders) return <PageSpinner />
+        if (!this.state.done) return <PageSpinner />
         return (
             <Page title="Delivered Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Row>
@@ -77,8 +89,8 @@ class ViewDelieveredOrdersPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    loading_delivered_orders: state.ordersReducer.loading_delivered_orders,
-    orders: state.ordersReducer.orders
+    loading_orders: state.procurementReducer.loading_orders,
+    orders: state.procurementReducer.orders
 })
 
-export default connect(mapStateToProps, { getDeliveredOrders })(ViewDelieveredOrdersPage)
+export default connect(mapStateToProps, { getCustomOrders })(ViewDelieveredOrdersPage)
