@@ -22,7 +22,7 @@ const Order = ({ order, index, handleApprove }) => {
                 {order.status_purchase_order[0]['status'] ===  status.received?
                     <Link to={{ pathname: routes.GRVPage, state: { order: order.purchaseOrderNumber } }}>
                         <Button size='sm' color='primary'>
-                            <MdAssignment /> SIV Issued
+                            <MdAssignment /> GRV Issued
                     </Button>
                     </Link> :
                     <Button size='sm' color='primary' onClick={() => handleApprove(order.purchaseOrderNumber)}>

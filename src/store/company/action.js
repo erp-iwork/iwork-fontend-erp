@@ -4,6 +4,7 @@ import API from "../../api/API";
 import routes from '../../api/routes'
 import { companyConstant, errorsConstant, inventoryConstant } from "../../constant/constants";
 import headers from './../headers'
+import statusTypes from '../../constant/status'
 
 // ADD COMPANY
 export const addCompany = (company) => (dispatch) => {
@@ -288,10 +289,10 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
     });
 };
 
-export const getManufacturedOrders = (status) => (dispatch) => {
+export const getManufacturedOrders = (status1, status2 = statusTypes.finished) => (dispatch) => {
   dispatch({ type: companyConstant.REQUEST_GET_MANUFACTURED_ORDERS })
   return axios.get(API + routes.manufacturing +
-    `?search=${status}`, headers)
+    `?search1=${status1}&search2=${status2}`, headers)
     .then(res => dispatch({ type: companyConstant.SUCCESS_GET_MANUFACTURED_ORDERS, payload: res.data }))
     .catch((err) => {
       if (err.response && err.response.data) {
