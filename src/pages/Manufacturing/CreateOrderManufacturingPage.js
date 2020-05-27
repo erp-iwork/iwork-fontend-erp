@@ -17,8 +17,7 @@ import { getMasterdata, addManufacturingOrder } from '../../store/manufacturing/
 import PageSpinner from '../../components/PageSpinner'
 import Error from '../../components/error'
 import Loader from '../../components/loader'
-import routes from '../../config/routes'
-import { Redirect } from 'react-router-dom'
+
 
 const BOM = ({ index, materialName, unitOfMeasurement, quantity, cost }) => {
     return (
@@ -104,14 +103,18 @@ class CreateOrderManufacturingPage extends Component {
     }
 
     submit = event => {
+
         event.preventDefault()
         const { productID, productMaterial, description, quantity, startDate, endDate } = this.state
         const manufacture_item_set = productMaterial.map((item, index) => {
+
+
+
             return {
                 billOfMaterial: item.materialId,
                 quantity: item.materialQuantity,
-                price: item.cost * quantity,
-                unitOfMeasurement: item.materialUnitOfMeasurement
+                price: item.materialCost * quantity,
+                unitOfMesurement: item.materialUnitOfMeasurement
             }
         })
         this.props.addManufacturingOrder({
@@ -120,13 +123,13 @@ class CreateOrderManufacturingPage extends Component {
             description,
             manufatureStartDate: startDate, manufatureEndDate: endDate,
             requiredProductQuantity: quantity,
-            manufacture_item_set
+            manufacture_item_set: manufacture_item_set
         })
     }
 
     render() {
         let { dropdown } = this.state
-        if (this.props.success) return <Redirect to={routes.ViewAllOrdersManufacturing} />
+
         if (this.props.loading_masterdata) return <PageSpinner />
         const canBeManudactured = this.props.masterdata.filter((data) => { return data.isManufactured })
         this.setProducts(canBeManudactured)
@@ -134,7 +137,7 @@ class CreateOrderManufacturingPage extends Component {
         if (this.props.errors.errors) {
             errors = this.props.errors.errors
         }
-        console.log(errors)
+
         return (
             <Page title="Create Order" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
                 <Col md={12}>
@@ -155,7 +158,7 @@ class CreateOrderManufacturingPage extends Component {
                                                         <option value={index}>{item.productName}</option>
                                                     ))}
                                                 </Input>
-                                                <Error error={errors.requiredProduct} />
+                                                <Error error={errors.requiredProduct ? errors.requiredProduct : null} />
                                             </Col>
                                         </FormGroup>
                                     </Col>
@@ -168,7 +171,7 @@ class CreateOrderManufacturingPage extends Component {
                                                     placeholder="The Person Requesting The Order"
                                                     value={localStorage.getItem('username')}
                                                 />
-                                                <Error error={errors.manufacturePerson} />
+                                                <Error error={errors.manufacturePerson ? errors.manufacturePerson : null} />
                                             </Col>
                                         </FormGroup>
                                     </Col>
@@ -179,7 +182,7 @@ class CreateOrderManufacturingPage extends Component {
                                             </Label>
                                             <Col sm={12}>
                                                 <Input type="number" name='quantity' id="quantity" onChange={this.handleChange} />
-                                                <Error error={errors.requiredProductQuantity} />
+                                                <Error error={errors.requiredProductQuantity ? errors.requiredProductQuantity : null} />
                                             </Col>
                                         </FormGroup>
                                     </Col>
@@ -190,16 +193,31 @@ class CreateOrderManufacturingPage extends Component {
                                     </Col>
                                     <h4>Bill Of Materials</h4>
                                     <hr />
-                                        {this.state.productMaterial.map((item, index) => (
-                                            <BOM key={index}
-                                                materialName={item.materialName}
-                                                unitOfMeasurement={item.materialUnitOfMeasurement}
-                                                cost={item.cost}
-                                                quantity={item.materialQuantity}
-                                            />
-                                        ))}
-                                        {/* <Error error={errors.manufacture_item_set} /> */}
-                                    <hr />
+                                    {this.state.productMaterial.map((item, index) => (
+                                        <BOM key={index}
+                                            materialName={item.materialName}
+                                            unitOfMeasurement={item.materialUnitOfMeasurement}
+                                            cost={item.materialCost}
+                                            quantity={item.materialQuantity}
+                                        />
+                                    ))}
+                                    {<Error error={errors.item ? errors.item : null} />}
+                                    {
+
+                                        errors.manufacture_item_set ? errors.manufacture_item_set.map((err) => (
+                                            <div>
+                                                <Error error={err.price ? err.price : null} />
+                                                <Error error={err.billOfMaterial ? err.billOfMaterial : null} />
+                                                <Error error={err.quantity ? err.quantity : null} />
+                                                <Error error={err.unitOfMesurement ? err.unitOfMesurement : null} />
+                                                <hr />
+                                            </div>
+
+                                        )
+                                        ) : null
+                                    }
+
+
                                 </div>
                                 <FormGroup >
                                     <Label for="description" sm={12}>
@@ -213,7 +231,7 @@ class CreateOrderManufacturingPage extends Component {
                                             placeholder="Description"
                                             onChange={this.handleChange}
                                         />
-                                        <Error error={errors.description} />
+                                        <Error error={errors.description ? errors.description : null} />
                                     </Col>
                                 </FormGroup>
                                 <Row>
@@ -224,7 +242,7 @@ class CreateOrderManufacturingPage extends Component {
                                             </Label>
                                             <Col sm={12}>
                                                 <Input type="date" name="startDate" id="startDate" onChange={this.handleChange} />
-                                                <Error error={errors.manufatureStartDate} />
+                                                <Error error={errors.manufatureStartDate ? errors.manufatureStartDate : null} />
                                             </Col>
                                         </FormGroup>
                                     </Col>
@@ -235,14 +253,14 @@ class CreateOrderManufacturingPage extends Component {
                                             </Label>
                                             <Col sm={12}>
                                                 <Input type="date" name="endDate" id="endDate" onChange={this.handleChange} />
-                                                <Error error={errors.manufatureEndDate} />
+                                                <Error error={errors.manufatureEndDate ? errors.manufatureEndDate : null} />
                                             </Col>
                                         </FormGroup>
                                     </Col>
                                 </Row>
                                 <FormGroup align='center'>
                                     <Button color='primary' type="submit">
-                                        { this.props.loading_manufacture? <Loader /> : "Add Order" }
+                                        {this.props.loading_manufacture ? <Loader /> : "Add Order"}
                                     </Button>
                                 </FormGroup>
                             </Form>

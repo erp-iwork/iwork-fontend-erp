@@ -68,6 +68,7 @@ class Sidebar extends React.Component {
           <Finance isOpen={false} />
           <Sales isOpen={false} />
           <IT isOpen={false} />
+          <Logistics isOpen={false} />
           <Inventory isOpen={false} />
           <Procurment isOpen={false} />
           <Manufacturing isOpen={false} />

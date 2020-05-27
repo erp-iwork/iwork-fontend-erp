@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import Page from '../../components/Page';
 import {
@@ -146,8 +145,8 @@ class CreatePurchaseOrder extends Component {
                                             </Input>
                                             <Error
                                                 error={
-                                                    this.props.errors.purchaseOrder.suplier
-                                                        ? this.props.errors.purchaseOrder.suplier
+                                                    this.props.errors.purchaseOrder.suplier_id
+                                                        ? this.props.errors.purchaseOrder.suplier_id
                                                         : null}
                                             />
                                         </Col>
@@ -198,13 +197,28 @@ class CreatePurchaseOrder extends Component {
                                         );
                                     })}
                                     <FormGroup>
-                                        <Error
-                                            error={
-                                                this.props.errors.purchaseOrder.purchase_item_order
-                                                    ? this.props.errors.purchaseOrder.purchase_item_order
-                                                    : null
-                                            }
-                                        />
+                                        {
+                                            this.props.errors.purchaseOrder.purchase_item_order
+                                                ? this.props.errors.purchaseOrder.purchase_item_order.map(err => (
+                                                    <div>
+                                                        <Error
+                                                            error={
+                                                                err.masterData_id
+                                                                    ? err.masterData_id
+                                                                    : null} />
+                                                        <Error
+                                                            error={
+                                                                err.purchaseQuantity
+                                                                    ? err.purchaseQuantity
+                                                                    : null} />
+                                                    </div>
+
+
+                                                ))
+                                                : null}
+
+
+
                                     </FormGroup>
                                     <FormGroup>
                                         <Button

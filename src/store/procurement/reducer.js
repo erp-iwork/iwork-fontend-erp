@@ -1,8 +1,10 @@
 import { purchaseConstants, errorsConstant } from '../../constant/constants'
 const initialState = {
-    errors: { purchaseOrder: {
-        suplier: [], orderdBy: [], purchase_item_order: [] 
-    }},
+    errors: {
+        purchaseOrder: {
+            suplier: [], orderdBy: [], purchase_item_order: []
+        }
+    },
     orders: [],
     order: {},
     suppliers: [],
@@ -20,7 +22,7 @@ const initialState = {
 
 const procurementReducer = (state = initialState, action) => {
     const { GET, POST, PUT } = purchaseConstants
-    switch(action.type) {
+    switch (action.type) {
         case errorsConstant.GET_ERRORS:
             return {
                 ...state,
@@ -29,18 +31,21 @@ const procurementReducer = (state = initialState, action) => {
                 loading_purchase: false,
                 loading_invoice: false
             }
-        
+
         case GET.REQUEST_GET_ORDER:
-            return { ...state, loading_orders: true }
+            return {
+                ...state,
+                loading_orders: true
+            }
         case GET.REQUEST_GET_SUPPLIERS:
             return { ...state, loading_suppliers: true }
         case GET.REQUEST_GET_MASTERDATA:
             return { ...state, loading_suppliers: true }
         case GET.REQUEST_GET_SINGLE_ORDER:
-            return { ...state, loading_single_order: true } 
-        
+            return { ...state, loading_single_order: true }
+
         case GET.SUCCESS_GET_ORDER:
-            return { 
+            return {
                 ...state, loading_orders: false,
                 orders: action.payload
             }
@@ -59,7 +64,7 @@ const procurementReducer = (state = initialState, action) => {
                 ...state, loading_single_order: false,
                 order: action.payload
             }
-        
+
         case POST.REQUEST_POST_PURCHASE:
             return {
                 ...state, loading_purchase: true,
@@ -70,17 +75,17 @@ const procurementReducer = (state = initialState, action) => {
                 ...state,
                 loading_purchase: false,
                 success: true,
-                orders: [ ...state.orders, action.payload.purchaseOrder]
+                orders: [...state.orders, action.payload.purchaseOrder]
             }
-        
+
         case PUT.REQUEST_POST_UPDATE_STATUS:
             return { ...state, updating_status: true }
-        
+
         case PUT.SUCCESS_POST_UPDATE_STATUS:
             const index = state.orders.findIndex(
                 (item) => item.purchaseOrderNumber === action.payload.order
-              )
-              state.orders[index].status_purchase_order[0]['status'] = action.payload.status
+            )
+            state.orders[index].status_purchase_order[0]['status'] = action.payload.status
             return {
                 ...state,
                 success: true,
@@ -94,7 +99,7 @@ const procurementReducer = (state = initialState, action) => {
                 ...state, loading_invoice: true
             }
 
-        case PUT.SUCCESS_PUT_INVOICE:{
+        case PUT.SUCCESS_PUT_INVOICE: {
             return {
                 ...state, loading_invoice: false,
                 success: true, errors: []

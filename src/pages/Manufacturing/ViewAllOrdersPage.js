@@ -2,20 +2,39 @@ import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Card, CardBody, CardHeader, Table, Button } from 'reactstrap';
 import { connect } from 'react-redux'
-import { getOrders } from '../../store/manufacturing/action'
+import { getOrders, updateStatus } from '../../store/manufacturing/action'
 import PageSpinner from '../../components/PageSpinner'
 import routes from '../../config/routes'
 import { Link } from 'react-router-dom'
 
-const Order = ({ order, index }) => {
+const Order = ({ order, index, handleDone }) => {
+
+
     return (
         <tr align="left">
             <th scope="row">{index + 1}</th>
-            <td>{order.productName}</td>
-            <td>{order.productType}</td>
-            <td>{order.productPrice}</td>
+            <td>{order.requiredProductName}</td>
+            <td>{order.retailPrice}</td>
             <td>{order.cost}</td>
-            <td>{order.unitOfMeasurement}</td>
+            <td>{order.unitOfMesurement}</td>
+            <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status : null}</td>
+            <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status === "Created" ? (
+                <Link onClick={handleDone}>
+                    <Button size='sm' color='primary'>
+                        Done
+     </Button>
+                </Link>
+            ) : (
+                    (
+                        <Link onClick={handleDone}>
+                            <Button size='sm' color='primary' disabled>
+                                Done
+         </Button>
+                        </Link>
+                    )
+                ) : null}</td>
+
+
             <td>
                 <Link to={{ pathname: routes.ViewSingleOrderManufacturing, state: order }}>
                     <Button size='sm' color='primary'>
@@ -35,11 +54,17 @@ class ViewAllOrdersManufacturingPage extends Component {
 
     componentDidMount() {
         this.props.getOrders()
-    }
+        console.log(this.props.orders);
 
+
+    }
+    handleDone(order, status) {
+
+        this.props.updateStatus(order, status)
+    }
     render() {
         if (this.props.loading_orders) return <PageSpinner />
-        console.log(this.props.orders)
+
         return (
             <Page title="View All Orders" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
 
@@ -51,18 +76,22 @@ class ViewAllOrdersManufacturingPage extends Component {
                                 <tr>
                                     <th>#</th>
                                     <th>Product Name</th>
-                                    <th>Prodcut Type</th>
-                                    <th>Prodcut Price</th>
-                                    <th>Prodcut Cost</th>
+                                    <th>Product Price</th>
+                                    <th>Product Cost</th>
                                     <th>Unit of Measurement</th>
+                                    <th>Status</th>
                                     <th>Actions</th>
+                                    <th>See More</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {this.props.orders.slice(0).reverse().map((item, index) => (
-                                    <Order index={index} order={item} />
+                                    <Order index={index} order={item} handleDone={() => this.handleDone(item.orderNumber, "Manufactured")} />
+
                                 ))}
+
                             </tbody>
+
                         </Table>
                     </CardBody>
                 </Card>
@@ -80,4 +109,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getOrders })(ViewAllOrdersManufacturingPage)
+export default connect(mapStateToProps, { getOrders, updateStatus })(ViewAllOrdersManufacturingPage)
