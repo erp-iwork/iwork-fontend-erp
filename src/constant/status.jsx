@@ -3,5 +3,6 @@ export default {
     invoiced: 'Invoiced',
     created: 'Created',
     delivered: 'Delivered',
-    approved: 'Approved'
+    approved: 'Approved',
+    manuFactured: 'Manufactured'
 }

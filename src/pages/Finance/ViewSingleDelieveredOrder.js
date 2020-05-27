@@ -95,7 +95,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                                                 <th scope="row">1</th>
                                                 <td>{item.masterData.productName}</td>
                                                 <td>{item.purchaseQuantity}</td>
-                                                <td>{item.masterData.productPrice}</td>
+                                                <td>{item.itemCost}</td>
                                                 <td align='right'>
                                                     <Col >
                                                         <Input type='number' placeholder='New Price' onChange={
