@@ -2,15 +2,17 @@ import { companyConstant, errorsConstant } from "../../constant/constants";
 const initialState = {
   companys: [],
   suppliers: [],
-  loading: false,
+  orders: [],
+  errors: [],
   masterData: [],
+  loading: false,
   loading_addMasterdata: false,
   success: false,
   updating_status: false,
   loading_add_supplier: false,
   loading_add_customer: false,
-  errors: []
-};
+  loading_manufactured_orders: true
+}
 
 export default function companyReducer(state = initialState, action) {
   switch (action.type) {
@@ -115,6 +117,14 @@ export default function companyReducer(state = initialState, action) {
       return {
         ...state, updating_status: false,
         success: true
+      }
+    
+    case companyConstant.REQUEST_GET_MANUFACTURED_ORDERS:
+      return { ...state, loading_manufactured_orders: true }
+    case companyConstant.SUCCESS_GET_MANUFACTURED_ORDERS:
+      return {
+        ...state, loading_manufactured_orders: false,
+        orders: action.payload
       }
 
     default:

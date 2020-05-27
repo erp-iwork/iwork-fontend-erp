@@ -287,3 +287,27 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
       }
     });
 };
+
+export const getManufacturedOrders = (status) => (dispatch) => {
+  dispatch({ type: companyConstant.REQUEST_GET_MANUFACTURED_ORDERS })
+  return axios.get(API + routes.manufacturing +
+    `?search=${status}`, headers)
+    .then(res => dispatch({ type: companyConstant.SUCCESS_GET_MANUFACTURED_ORDERS, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
