@@ -86,6 +86,7 @@ const procurementReducer = (state = initialState, action) => {
                 (item) => item.purchaseOrderNumber === action.payload.order
             )
             state.orders[index].status_purchase_order[0]['status'] = action.payload.status
+            console.log(state.orders)
             return {
                 ...state,
                 success: true,

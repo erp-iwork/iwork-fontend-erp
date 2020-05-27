@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getPurchasedOrders } from '../../store/procurement/action'
-import { updateStatus } from '../../store/company/action'
+import { getCustomOrders, updateStatus } from '../../store/procurement/action'
 import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
@@ -43,28 +42,34 @@ const Order = ({ order, index, handleApprove }) => {
 class ViewAllPurchaseOrderPage extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
-        this.updateOrders = this.updateOrders.bind(this)
+        this.state = {
+            orders: [],
+            done: false
+        }
         this.handleApprove = this.handleApprove.bind(this)
     }
 
-    async componentDidMount() {
-        this.updateOrders()
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading_orders && !this.state.done) {
+            this.setState({
+                orders: this.props.orders,
+                done: true
+            })
+        }
     }
 
-    async updateOrders () {
-        this.props.getPurchasedOrders()
+    componentDidMount() {
+        this.props.getCustomOrders(status.created, status.approved)
     }
 
     handleApprove (orderNumber) {
-        this.props.updateStatus(orderNumber, {
-            'status': 'Approved'
-        }).then(res => this.updateOrders())
+        this.props.updateStatus(orderNumber, { status: status.approved })
     }
 
     render() {
-        if (this.props.loading_orders) return <PageSpinner />
+        if (!this.state.done) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
+        console.log(this.props.orders)
         return (
             <Page title="Purchase Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Card className="mb-3">
@@ -83,7 +88,7 @@ class ViewAllPurchaseOrderPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.orders.slice(0).reverse().map((order, index) => (
+                                {this.state.orders.slice(0).reverse().map((order, index) => (
                                     <Order key={index} order={order} index={index} handleApprove={this.handleApprove} />
                                 ))}
                             </tbody>
@@ -104,4 +109,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getPurchasedOrders, updateStatus })(ViewAllPurchaseOrderPage)
+export default connect(mapStateToProps, { getCustomOrders, updateStatus })(ViewAllPurchaseOrderPage)

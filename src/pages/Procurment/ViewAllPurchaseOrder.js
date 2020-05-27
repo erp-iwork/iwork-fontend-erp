@@ -26,7 +26,6 @@ const Order = ({ order, index }) => {
     )
 }
 
-
 class ViewAllPurchaseOrderPage extends Component {
     constructor(props) {
         super(props)

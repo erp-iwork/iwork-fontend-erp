@@ -36,6 +36,30 @@ export const getOrders = () => (dispatch) => {
     })
 }
 
+export const getCustomOrders = (status1, status2) => (dispatch) => {
+  dispatch({ type: GET.REQUEST_GET_ORDER })
+  return Axios.get(API + routes.purchase +
+    `?search1=${status1}&search2=${status2}`, headers)
+    .then(res => {
+      dispatch({
+        type: GET.SUCCESS_GET_ORDER,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+    })
+}
+
 export const getCreatedOrders = () => (dispatch) => {
   dispatch({ type: GET.REQUEST_GET_ORDER })
   return Axios.get(API + routes.purchase +
