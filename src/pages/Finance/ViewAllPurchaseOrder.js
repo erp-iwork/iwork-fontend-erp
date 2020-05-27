@@ -15,6 +15,7 @@ const Order = ({ order, index, handleApprove }) => {
             <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
+            <td>{order.purchaseOrderNumber}</td>
             <td>{order.purchaseOrderDate}</td>
             <td>{order.status_purchase_order[0].status}</td>
             <td>
@@ -72,16 +73,17 @@ class ViewAllPurchaseOrderPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='center'>
-                                    <th>Order #</th>
+                                    <th>#</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
+                                    <th>Ordered Number</th>
                                     <th>Order Date</th>
                                     <th>Status</th>
                                     <th colSpan={2} >Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.orders.map((order, index) => (
+                                {this.props.orders.slice(0).reverse().map((order, index) => (
                                     <Order key={index} order={order} index={index} handleApprove={this.handleApprove} />
                                 ))}
                             </tbody>

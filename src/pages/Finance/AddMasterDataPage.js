@@ -120,6 +120,8 @@ class AddMasterDataPage extends Component {
         var cost = 1
         if (this.state.can_be_manufactured) {
             cost = this.calculateCost()
+        } else {
+            cost = this.state.productPrice
         }
         const {
             productName, productCategory, can_be_manufactured, can_be_purchased, can_be_sold,
@@ -171,7 +173,7 @@ class AddMasterDataPage extends Component {
                                         >
                                             <option disabled></option>
                                             <option value="Consumable">Consumable</option>
-                                            <option value="Stored">Stored</option>
+                                            <option value="Storable">Storable</option>
                                             <option value="Service">Service</option>
                                         </Input>
                                         {this.props.errors.errors ?

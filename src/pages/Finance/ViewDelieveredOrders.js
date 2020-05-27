@@ -14,6 +14,7 @@ const Order = ({ order, index }) => {
             <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
+            <td>{order.purchaseOrderNumber}</td>
             <td>{order.purchaseOrderDate}</td>
             <td>{order.status_purchase_order[0].status}</td>
             <td>
@@ -54,6 +55,7 @@ class ViewDelieveredOrdersPage extends Component {
                                             <th>Order #</th>
                                             <th>Supplier</th>
                                             <th>Ordered By</th>
+                                            <th>Order Number</th>
                                             <th>Ordered Date</th>
                                             <th>Status</th>
                                             <th>Actions</th>
