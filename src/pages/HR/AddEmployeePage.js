@@ -38,7 +38,8 @@ class AddEmployee extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentDidount() {
+        componentDidMount() {
+        console.log("YES HERE")
         this.props.getDepartment()
     }
 
@@ -466,7 +467,4 @@ const mapDispatchToProps = {
     getDepartment: actions.getDepartment
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AddEmployee)
+export default connect(mapStateToProps, mapDispatchToProps)(AddEmployee)

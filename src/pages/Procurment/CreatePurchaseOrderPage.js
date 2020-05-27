@@ -46,6 +46,7 @@ class CreatePurchaseOrder extends Component {
     }
 
     componentDidMount() {
+        this.setState({ lockPage: true })
         this.props.getCreatedOrders()
         this.props.getSuppliers()
         this.props.getMasterdata()
@@ -82,8 +83,8 @@ class CreatePurchaseOrder extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.success && !this.state.lockPage) {
-            this.setState({ company: "", description: "", shipmentAddress: "", lockPage: true })
+        if (this.props.success && this.state.lockPage) {
+            this.setState({ company: "", description: "", shipmentAddress: "", lockPage: false })
         }
     }
 
@@ -118,7 +119,8 @@ class CreatePurchaseOrder extends Component {
 
     render() {
         let { order_items: items } = this.state
-        if (this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) return <PageSpinner />
+        console.log(this.state.lockPage)
+        if ((this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) && this.state.lockPage) return <PageSpinner />
         const {
             supplier, description
         } = this.state
