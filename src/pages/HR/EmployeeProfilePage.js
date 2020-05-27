@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { Col, Row, Card, CardImg, CardBody, CardText, Button, CardTitle } from 'reactstrap';
+import { Col, Row, Card, CardImg, CardBody, CardText, CardTitle } from 'reactstrap';
 import './HR.scss'
 import bg11Image from '../../assets/img/bg/background_1920-11.jpg';
 import { connect } from "react-redux"

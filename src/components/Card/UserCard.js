@@ -29,12 +29,12 @@ const UserCard = ({
                 <Avatarr
                   // onClick={this.toggleUserCardPopover}
                   className="can-click"
-                  size={avatarSize} className="mb-2"
+                  size={avatarSize} 
                 />  :
                 <Avatar
                   // onClick={this.toggleUserCardPopover}
                   className="can-click"
-                  size={avatarSize} className="mb-2"
+                  size={avatarSize} 
                 />
               }
         {/* <Avatar src={avatar} size={avatarSize} className="mb-2" /> */}

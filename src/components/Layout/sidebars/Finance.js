@@ -10,7 +10,6 @@ import {
     MdTextFields,
     MdViewCarousel,
     MdViewDay,
-    MdViewList,
     MdWeb,
     MdWidgets,
 } from 'react-icons/md';

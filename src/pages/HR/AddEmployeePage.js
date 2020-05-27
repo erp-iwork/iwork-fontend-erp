@@ -9,8 +9,6 @@ import { connect } from "react-redux"
 import actions from '../../store/hr/action'
 import { countries, regions, termsOfEmployment, getCity } from './data'
 import Spinner from '../../components/loader'
-import { Redirect } from 'react-router-dom'
-import routes from '../../config/routes'
 import AllEmployeesPage from "./AllEmployeesPage";
 import PageSpinner from '../../components/PageSpinner'
 
