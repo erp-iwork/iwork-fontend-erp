@@ -10,9 +10,8 @@ const routes = {
   manufacturestatus: "manufacturestatus/",
   itemsToBeManufactured: "itemstobemanufacured/",
   itemsToBePurchased: "itemstobepurchased/",
-  records: 'inventorytransaction/',
-  recordsByType: 'inventorytransactionytype/'
-}
-
+  records: "inventorytransaction/",
+  recordsByType: "inventorytransactionytype/",
+};
 
 export default routes;

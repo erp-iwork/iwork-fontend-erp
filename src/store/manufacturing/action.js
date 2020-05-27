@@ -70,7 +70,7 @@ export const addManufacturingOrder = (data) => (dispatch) => {
 
 export const getOrders = () => (dispatch) => {
   dispatch({ type: manuFacturingConstant.REQUEST_GET_ORDERS })
-  return Axios.get(API + routes.manufacturing, headers)
+  return Axios.get(API + routes.itemstobepurchased, headers)
     .then(res => {
       dispatch({ type: manuFacturingConstant.SUCCESS_GET_ORDERS, payload: res.data })
     })

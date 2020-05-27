@@ -63,11 +63,11 @@ class ViewAllPurchaseOrderPage extends Component {
     }
 
     render() {
+        console.log(this.props.orders)
         if (this.props.loading_manufactured_orders) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
-        console.log(this.props.orders)
         return (
-            <Page title="Purchase Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
+            <Page title="Manufactured Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>
                     <CardBody>

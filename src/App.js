@@ -150,7 +150,7 @@ class App extends React.Component {
                 <Route exact path={routes.ViewDelieveredOrders} component={ViewDelieveredOrdersPage} />
                 <Route exact path={routes.ViewSingleDelieveredOrder} component={ViewSingleDelieveredOrderPage} />
                 <Route exact path={routes.ViewFinancePurchaseOrders} component={ViewPurchaseOrdersFinancePage} />
-                <Route exact path={routes.ViewAllManufacturedOrders} component={ViewAllManufacturedOrders} />
+                <Route exact path={routes.ViewFinaceManufacturedOrders} component={ViewAllManufacturedOrders} />
 
 
                 {/* LOGISTICS ROUTES */}
