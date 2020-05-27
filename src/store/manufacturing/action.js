@@ -67,11 +67,10 @@ export const addManufacturingOrder = (data) => (dispatch) => {
 }
 
 export const getOrders = () => (dispatch) => {
-  dispatch({ type: manuFacturingConstant.REQUEST_GET_ORDERS })
-  return Axios.get(API + routes.manufacturing +
-    `?search1=${"Created"}&search2=${"Manufactured"}`, headers)
+  dispatch({ type: manuFacturingConstant.REQUEST_GET_MANUFACTURED_ORDERS })
+  return Axios.get(API + routes.manufacturing, headers)
     .then(res => {
-      dispatch({ type: manuFacturingConstant.SUCCESS_GET_ORDERS, payload: res.data })
+      dispatch({ type: manuFacturingConstant.SUCCESS_GET_MANUFACTURED_ORDERS, payload: res.data })
     })
     .catch(err => {
       if (err.response && err.response.data) {

@@ -16,7 +16,9 @@ class ViewAllItems extends Component {
             item: {
                 itemName: '', quantity: '', retailPrice: '', unitOfMeasurement: '', category: '',
                 productType: ''
-            }
+            },
+            items: [],
+            done: false
         }
         this.toggle = this.toggle.bind(this)
     }
@@ -27,15 +29,21 @@ class ViewAllItems extends Component {
         })
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading_items && !this.state.done) {
+            this.setState({
+                items: this.props.items,
+                done: true
+            })
+        }
+    }
 
     componentDidMount() {
         this.props.getItemsByCategory(this.props.location.state)
     }
 
     render() {
-        if (this.props.loading_items) return <PageSpinner />
-
-     
+        if (!this.state.done) return <PageSpinner />
         const {
             itemName, quantity, retailPrice, category, productType, unitOfMeasurement
         } = this.state.item
