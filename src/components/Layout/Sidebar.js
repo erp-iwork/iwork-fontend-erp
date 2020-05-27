@@ -1,11 +1,17 @@
-import logo200Image from '../../assets/img/logo/logo_200.png';
+import logo200Image from '../../assets/img/logo/Sparta2.svg';
 import sidebarBgImage from '../../assets/img/sidebar/sidebar-4.jpg';
 import SourceLink from '../../components/SourceLink';
 import React from 'react';
+import {
+  MdDashboard,
+} from 'react-icons/md';
+
 
 import { NavLink } from 'react-router-dom';
 import {
   Nav,
+  NavItem,
+
   Navbar,
   NavLink as BSNavLink,
 } from 'reactstrap';
@@ -28,6 +34,10 @@ const sidebarBackground = {
 
 const bem = bn.create('sidebar');
 
+const navItems = [
+  { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
+];
+
 class Sidebar extends React.Component {
   state = {
     isOpenHR: false,
@@ -49,6 +59,8 @@ class Sidebar extends React.Component {
       case dept.inventory: return <Inventory isOpen={true} />
       case dept.procurment: return <Procurment isOpen={true} />
       case dept.mrp: return <Manufacturing isOpen={true} />
+      case dept.logistics: return <Logistics isOpen={true} />
+
 
       default: return (
         <React.Fragment>
@@ -60,6 +72,7 @@ class Sidebar extends React.Component {
           <Inventory isOpen={false} />
           <Procurment isOpen={false} />
           <Manufacturing isOpen={false} />
+          <Logistics isOpen={false} />
         </React.Fragment>
 
       )
@@ -87,6 +100,21 @@ class Sidebar extends React.Component {
             </SourceLink>
           </Navbar>
           <Nav vertical>
+            {navItems.map(({ to, name, exact, Icon }, index) => (
+              <NavItem key={index} className={bem.e('nav-item')}>
+                <BSNavLink
+                  id={`navItem-${name}-${index}`}
+                  className="text-uppercase"
+                  tag={NavLink}
+                  to={to}
+                  activeClassName="active"
+                  exact={exact}
+                >
+                  <Icon className={bem.e('nav-item-icon')} />
+                  <span className="">{name}</span>
+                </BSNavLink>
+              </NavItem>
+            ))}
             {this.getContents(user_dept)}
           </Nav>
         </div>

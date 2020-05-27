@@ -26,7 +26,7 @@ const Order = ({ order, index, data, handlePrint }) => {
                           fileName={`order_${order.orderNumber}.pdf`}>
                           <Button>Download</Button>
                         </PDFDownloadLink> :
-                          <Button onClick={() => handlePrint(order.orderNumber)}>
+                          <Button size='sm' color='primary' onClick={() => handlePrint(order.orderNumber)}>
                               Generate PDF
                           </Button>
                     }
@@ -80,8 +80,8 @@ class ViewAllOrdersPage extends Component {
         }) : "" 
         return (
             <Page
-                title="Finance"
-                breadcrumbs={[{ name: 'All Orders', active: true }]}
+                title="All Orders"
+                breadcrumbs={[{ name: 'Finance', active: true }]}
                 className="TablePage">
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>

@@ -65,6 +65,9 @@ const ViewPurchasedItemsPage = React.lazy(() => import('./pages/Inventory/ViewPu
 
 const SivPage = React.lazy(() => import('./pages/Inventory/SIV'));
 const GRVPage = React.lazy(() => import('./pages/Inventory/GRV'));
+const RecordTrackingPage = React.lazy(() => import('./pages/Inventory/RecordTracking'));
+const RecordDeliveredOrders = React.lazy(() => import('./pages/Inventory/DeliveredOrders'));
+
 const CreatePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/CreatePurchaseOrderPage'));
 const ViewAllPurchaseOrderPage = React.lazy(() => import('./pages/Procurment/ViewAllPurchaseOrder'));
 const ViewSinglePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/ViewSinglePurchaseOrder'));
@@ -128,6 +131,9 @@ class App extends React.Component {
                 <Route exact path={routes.ViewSingleItemPage} component={ViewSingleItemPage} />
                 <Route exact path={routes.SivPage} component={SivPage} />
                 <Route exact path={routes.GRVPage} component={GRVPage} />
+                <Route exact path={routes.RecordTracking} component={RecordTrackingPage} />
+                <Route exact path={routes.DeliveredOrders} component={RecordDeliveredOrders} />
+
 
                 {/* FINANCE ROUTES/ */}
                 <Route exact path={routes.FinanceDashboard} component={FinanceDashboard} />

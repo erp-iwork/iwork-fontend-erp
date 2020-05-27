@@ -9,6 +9,7 @@ const initialState = {
   items: [],
   success: false,
   loading: true,
+  loading_delivered_orders: true,
   loading_single_order: true
 };
 
@@ -72,10 +73,10 @@ export default function ordersReducer(state = initialState, action) {
       };
     }
     case GET['REQUEST_GET_DELIVERED_ORDERS']:
-      return { ...state, loading: true }
+      return { ...state, loading_delivered_orders: true }
     case GET['SUCCESS_GET_DELIVERED_ORDERS']:
       return {
-        ...state, loading: false,
+        ...state, loading_delivered_orders: false,
         orders: action.payload
       }
 

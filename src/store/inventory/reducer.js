@@ -8,6 +8,8 @@ const initialState = {
   updating_status: false,
   update_success: false,
   loading_grv: true,
+  loading_records: true,
+  records: [],
   grv: {},
   categories: [],
   orders: []
@@ -105,6 +107,14 @@ export default function inventoryReducer(state = initialState, action) {
       return {
         ...state, loading_grv: false,
         grv: action.payload, success: true
+      }
+
+    case inventoryConstant.REQUEST_GET_RECORDS:
+      return { ...state, loading_records: true }
+    case inventoryConstant.SUCCESS_GET_RECORDS:
+      return {
+        ...state, loading_records: false,
+        records: action.payload
       }
     
     default:

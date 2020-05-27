@@ -109,8 +109,8 @@ class AddEmployee extends Component {
         return (
             <>
                 <Page
-                    title="Human Resource"
-                    breadcrumbs={[{ name: 'Add Employee', active: true }]}
+                    title="Add Employee"
+                    breadcrumbs={[{ name: 'Human Resource', active: true }]}
                     className="FormPage"
                 >
                     <Col lg={12} md={24}>

@@ -48,14 +48,14 @@ class Inventory extends React.Component {
         // isOpenComponents: true,
         // isOpenContents: true,
         // isOpenPages: true,
-        isOpenHR: false,
-        isOpenIT: false,
-        isOpenSALES: false,
-        isOpenFINANCE: false,
-        isOpenINVENTORY: false,
-        isOpenLOGISTICS: false,
-        isOpenPROCURMENT: false,
-        isOpenMANUFACTURING: false
+        isOpenHR: true,
+        isOpenIT: true,
+        isOpenSALES: true,
+        isOpenFINANCE: true,
+        isOpenINVENTORY: true,
+        isOpenLOGISTICS: true,
+        isOpenPROCURMENT: true,
+        isOpenMANUFACTURING: true
     };
 
     handleClick = name => () => {
@@ -70,13 +70,15 @@ class Inventory extends React.Component {
 
     render() {
         const INVENTORY = [
-            { to: routes.InventoryDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            // { to: routes.InventoryDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
             // { to: routes.ViewAllItems, name: 'View Items', exact: false, Icon: MdWidgets },
             { to: routes.ViewOrdersInventory, name: 'View All Orders', exact: false, Icon: MdWidgets },
             { to: routes.CategoriesInventoryPage, name: 'Categories', exact: false, Icon: MdWidgets },
             // { to: routes.ViewSingleItemPage, name: 'Single Item', exact: false, Icon: MdWidgets },
             { to: routes.ViewPurchasedItems, name: 'Purchased Items', exact: false, Icon: MdWidgets },
-          ]
+            { to: routes.RecordTracking, name: 'Record Tracking', exact: false, Icon: MdWidgets },
+
+        ]
         return (
             <React.Fragment>
                 <NavItem

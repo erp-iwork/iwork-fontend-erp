@@ -29,7 +29,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                 margin: ''
             }
         })
-        this.setState({ orders }) 
+        this.setState({ orders })
         this.props.getSingleOrder(this.props.location.state.purchaseOrderNumber)
     }
 
@@ -56,7 +56,7 @@ class ViewSingleDelieveredOrderPage extends Component {
         const { order } = this.props
         if (this.props.loading_single_order) return <PageSpinner />
         return (
-            <Page title="Finance" breadcrumbs={[{ name: 'Delivered Order', active: true }]}>
+            <Page title="Delivered Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Card className='padding'>
                     <Row sm={12} md={12} >
                         <Col md={4}>

@@ -88,7 +88,7 @@ class GRV extends React.Component {
     e.preventDefault();
   }
 
-  calculatePrice (items) {
+  calculatePrice(items) {
     var sum = 0
     items.forEach(item => sum += item.price)
     return sum
@@ -102,7 +102,7 @@ class GRV extends React.Component {
     return (
       <Page
         title="GRV"
-        breadcrumbs={[{ name: 'GRV', active: true }]}
+        breadcrumbs={[{ name: 'Inventory', active: true }]}
       >
         <hr />
         <div
@@ -218,7 +218,7 @@ class GRV extends React.Component {
                 color=""
               >
                 <b>Total Price :</b> {totalPrice}
-                </Typography>
+              </Typography>
             </div>
             <div
               style={{
@@ -261,7 +261,7 @@ class GRV extends React.Component {
               document={
                 <SIVPdf grv_item={this.props.grv.GRVItems} grv={this.props.grv} />
               }
-              fileName={"SIV_" + this.props.grv.GRVID + ".pdf"}
+              fileName={"GRV_" + this.props.grv.GRVID + ".pdf"}
               style={{
                 textDecoration: 'none',
               }}
@@ -269,18 +269,11 @@ class GRV extends React.Component {
               {({ loading }) => (loading ?
                 <Button size='sm' /> :
                 <div >
-                  <Button style={{
-                    marginLeft: 8,
-                    color: '#11669F'
+                  <Button color='primary' size='sm' >
+                      Print GRV
+                  </Button>
 
-                  }} fontSize='large' />
-                  <Typography style={{
-                    color: '#818181'
 
-                  }}
-                  >
-                    Print SIV
-                    </Typography>
                 </div>
               )}
             </PDFDownloadLink>) : null

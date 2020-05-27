@@ -123,7 +123,7 @@ class CreatePurchaseOrder extends Component {
             supplier, description
         } = this.state
         return (
-            <Page title="Procurment" breadcrumbs={[{ name: 'Create Purchase Order', active: true }]}>
+            <Page title="Create Purchase Order" breadcrumbs={[{ name: 'Procurment', active: true }]}>
                 <Row>
                     <Col md={6} sm={12}>
                         <Card>

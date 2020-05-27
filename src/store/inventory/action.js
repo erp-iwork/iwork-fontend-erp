@@ -311,3 +311,48 @@ export const getGRV = (purchaseOrderNumber) => (dispatch) => {
       }
     })
 }
+
+export const getRecords = () => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_RECORDS })
+  return axios.get(API + routes.records, headers)
+    .then(res => dispatch({ type: inventoryConstant.SUCCESS_GET_RECORDS, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const getRecordsByType = (type) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_RECORDS })
+  return axios.get(API + routes.recordsByType +
+    `?transactionType=${type}`, headers)
+    .then(res => dispatch({ type: inventoryConstant.SUCCESS_GET_RECORDS, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}

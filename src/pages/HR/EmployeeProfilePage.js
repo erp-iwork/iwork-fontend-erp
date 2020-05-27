@@ -19,8 +19,8 @@ class EmployeeProfilePage extends Component {
         if (!employeeInfos.firstName) return <PageSpinner />
         return (
             <Page
-                title="Human Resource"
-                breadcrumbs={[{ name: 'Employee Profile', active: true }]}
+                title="Employee Profile"
+                breadcrumbs={[{ name: 'Human Resource', active: true }]}
                 className="TablePage"
             >
                 <hr></hr>

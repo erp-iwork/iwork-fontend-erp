@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {
     Card, CardBody, CardHeader, Col, Table, Button, Modal,
-    ModalBody,
-    ModalFooter,
-    ModalHeader,
+    ModalBody, ModalFooter, ModalHeader, Row
 } from 'reactstrap';
 import Page from '../../components/Page';
 import { getItemsByCategory } from '../../store/inventory/action'
@@ -11,25 +9,23 @@ import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 
 class ViewAllItems extends Component {
-    state = {
-        modal: false,
-        modal_backdrop: false,
-        modal_nested_parent: false,
-        modal_nested: false,
-        backdrop: true,
-    };
-
-    toggle = modalType => () => {
-        if (!modalType) {
-            return this.setState({
-                modal: !this.state.modal,
-            });
+    constructor(props) {
+        super(props)
+        this.state = {
+            modal: false,
+            item: {
+                itemName: '', quantity: '', retailPrice: '', unitOfMeasurement: '', category: '',
+                productType: ''
+            }
         }
+        this.toggle = this.toggle.bind(this)
+    }
 
-        this.setState({
-            [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
-        });
-    };
+    toggle = (item) => {
+        return this.setState({
+            modal: !this.state.modal, item
+        })
+    }
 
 
     componentDidMount() {
@@ -38,24 +34,36 @@ class ViewAllItems extends Component {
 
     render() {
         if (this.props.loading_items) return <PageSpinner />
+
+     
+        const {
+            itemName, quantity, retailPrice, category, productType, unitOfMeasurement
+        } = this.state.item
+
         if (this.props.items.item_catagory.length === 0 || this.props.items.item_catagory === null) return <h2>No items in this Category yet</h2>
         return (
             <Page
-                title="Inventory"
-                breadcrumbs={[{ name: 'All Items', active: true }]}
+                title="All Products"
+                breadcrumbs={[{ name: 'Inventory', active: true }]}
                 className="TablePage">
                 <Modal
                     isOpen={this.state.modal}
-                    toggle={this.toggle()}
+                    backdrop="static"
                     className={this.props.className}>
-                    <ModalHeader toggle={this.toggle()}>Modal title</ModalHeader>
+                    <ModalHeader>
+                        {this.state.item.itemName}
+                    </ModalHeader>
                     <ModalBody>
-                        Create An Account For <b>Mark</b> as a Something!!
-                  </ModalBody>
+                        <Row>Quantity: {quantity}</Row>
+                        <Row>Retail Price: {retailPrice}</Row>
+                        <Row>Units: {unitOfMeasurement}</Row>
+                        <Row>Product Type: {productType}</Row>
+                        <Row>Category: {category}</Row>
+                    </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.toggle()}>
+                        <Button color='primary' onClick={() => this.toggle(this.state.item)}>
                             Close
-                    </Button>
+                      </Button>
                     </ModalFooter>
                 </Modal>
 
@@ -87,7 +95,7 @@ class ViewAllItems extends Component {
                                             <td>{item.productType}</td>
                                             <td>{item.catagory.catagory}</td>
                                             <td>
-                                                <Button size='sm' color='primary' onClick={this.toggle()}>
+                                                <Button size='sm' color='primary' onClick={() => this.toggle(item)}>
                                                     See Item
                                                 </Button>
                                             </td>

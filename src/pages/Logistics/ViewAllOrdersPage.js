@@ -59,8 +59,8 @@ class ViewAllOrdersPage extends Component {
         if (deliveredOrders.length === 0) return <h2>No orders to show</h2>
         return (
             <Page
-                title="Logistics"
-                breadcrumbs={[{ name: 'All Orders', active: true }]}
+                title="All Orders"
+                breadcrumbs={[{ name: 'Logistics', active: true }]}
                 className="TablePage">
                 <Card className="mb-3">
                     <CardHeader>All Created & Delivered Orders</CardHeader>

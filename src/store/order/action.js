@@ -148,7 +148,6 @@ export const getDeliveredOrders = () => (dispatch) => {
   return axios.get(API + routes.purchase +
     `?search1=${status.delivered}&search2=${status.invoiced}`)
     .then(res => {
-      console.log(res.data)
       dispatch({ type: GET.SUCCESS_GET_DELIVERED_ORDERS, payload: res.data })
     })
     .catch((err) => {

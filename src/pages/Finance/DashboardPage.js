@@ -86,7 +86,7 @@ class DashboardPage extends React.Component {
 
           <Col lg={3} md={6} sm={6} xs={12}>
             <NumberWidget
-              title="Bounce Rate"
+              title="Cash Flow"
               subtitle="This month"
               number="38%"
               color="primary"
@@ -161,8 +161,6 @@ class DashboardPage extends React.Component {
                     'September',
                     'October',
                     'November',
-
-
                   ],
                   data: [0, 13000, 5000, 24000, 16000, 25000, 10000, 10000, 10000, 10000, 10000, 10000,],
                 })}

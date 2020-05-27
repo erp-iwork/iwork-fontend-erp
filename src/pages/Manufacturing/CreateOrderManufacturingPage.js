@@ -139,7 +139,7 @@ class CreateOrderManufacturingPage extends Component {
         }
 
         return (
-            <Page title="Manufacturing" breadcrumbs={[{ name: 'Create Order', active: true }]}>
+            <Page title="Create Order" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
                 <Col md={12}>
                     <Card>
                         <CardHeader>Order Information</CardHeader>

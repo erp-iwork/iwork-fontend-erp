@@ -28,7 +28,7 @@ class Finance extends React.Component {
     state = {
         isOpenIT: true,
         isOpenSALES: true,
-        isOpenFINANCE: this.props.isOpen? true : false,
+        isOpenFINANCE: this.props.isOpen ? true : false,
         isOpenINVENTORY: true,
         isOpenLOGISTICS: true,
         isOpenPROCURMENT: true,
@@ -47,7 +47,7 @@ class Finance extends React.Component {
 
     render() {
         const FINANCE = [
-            { to: routes.FinanceDashboard, name: 'Dashboard', exact: false, Icon: MdDashboard },
+            // { to: routes.FinanceDashboard, name: 'Dashboard', exact: false, Icon: MdDashboard },
             { to: routes.viewSuppliers, name: 'View All Suppliers', exact: false, Icon: MdNotificationsActive },
             { to: routes.AddSupplier, name: 'Add Supplier ', exact: false, Icon: MdPages },
             { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },
@@ -55,7 +55,6 @@ class Finance extends React.Component {
             { to: routes.AddMasterDataPage, name: 'Add Master Data', exact: false, Icon: MdViewDay },
             { to: routes.ViewAllMasterData, name: 'All Master Data', exact: false, Icon: MdStar },
             { to: routes.ViewOrdersFinance, name: 'All Orders', exact: false, Icon: MdInsertChart },
-            { to: routes.SupplierInvoice, name: 'Supplier Invoice', exact: false, Icon: MdViewList },
             { to: routes.ViewDelieveredOrders, name: 'Delivered Orders', exact: false, Icon: MdTextFields },
             { to: routes.ViewFinancePurchaseOrders, name: 'Purchased Orders', exact: false, Icon: MdViewCarousel }
         ]
