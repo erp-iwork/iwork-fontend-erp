@@ -149,7 +149,6 @@ export default function hrReducer(state = initialState, action) {
     }
 
     case appConstants.FETCH_DEPARTMENT_SUCCESS: {
-      console.log("Here")
       return {
         ...state,
         department: action.payload,

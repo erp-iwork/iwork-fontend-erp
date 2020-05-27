@@ -13,12 +13,28 @@ class AllEmployees extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            employeeInfo: []
+            employeeInfo: [],
+            done: false
         }
     }
 
     componentDidMount() {
         this.props.getEmploye()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.data.length > 0 && !this.state.done) {
+            console.log(this.props.data)
+            this.setState({
+                employeeInfo: this.props.data,
+                done: true
+            })
+        } else if (!this.props.loading && !this.state.done) {
+            this.setState({
+                employeeInfo: this.props.employees,
+                done: true
+            })
+        }
     }
 
     deleteFun(employeId) {
@@ -45,7 +61,7 @@ class AllEmployees extends Component {
     }
 
     render() {
-        if (this.props.loading) return <PageSpinner />
+        if (!this.state.done) return <PageSpinner />
         if (this.props.employees.length === 0 && this.props.success) 
         return (
             <Page  title="All Employees" breadcrumbs={[{ name: 'Human Resource', active: true }]} className="TablePage">
@@ -76,7 +92,7 @@ class AllEmployees extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.employees.map((employeeInfos, index) => (
+                                        {this.state.employeeInfo.map((employeeInfos, index) => (
                                             <tr align='left' key={index}>
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>

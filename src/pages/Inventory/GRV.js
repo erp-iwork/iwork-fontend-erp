@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import Typography from '../../components/Typography'
 import SIVPdf from './Printable_SIV';
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -107,7 +107,7 @@ class GRV extends React.Component {
         <hr />
         <div
           style={{
-            height: 100,
+            height: 100
           }}
         ></div>
         <div style={classes.pdf}>
@@ -270,7 +270,7 @@ class GRV extends React.Component {
                 <Button size='sm' /> :
                 <div >
                   <Button color='primary' size='sm' >
-                      Print GRV
+                    Print GRV
                   </Button>
 
 

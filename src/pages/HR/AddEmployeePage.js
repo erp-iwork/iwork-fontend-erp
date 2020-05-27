@@ -42,6 +42,7 @@ class AddEmployee extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.state.lockPage && this.props.success) {
+            console.log("Here")
             this.setState({
                 firstName: "", lastName: "", email: "", telephone: "",
                 termOfEmployment: "", country: "", city: "", region: "",
@@ -51,7 +52,7 @@ class AddEmployee extends Component {
         }
     }
 
-    submit = async () => {
+    submit = () => {
         this.setState({ complete: false })
         this.props.addNewEmployee(this.state).then(res => {
             this.setState({ redirect: true })
@@ -237,11 +238,18 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" value={gender} name="gender" onChange={this.handleChange}>
-                                                        <option aria-label="Gender" selected disabled>Select Gender </option>
+                                                        <option value="" selected disabled>Select Gender </option>
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </Input>
                                                 </Col>
+                                                <Error
+                                                    error={
+                                                        this.props.errors.gender
+                                                            ? this.props.errors.gender
+                                                            : null
+                                                    }
+                                                />
                                             </FormGroup>
                                         </Col>
                                     </Row>
@@ -430,7 +438,7 @@ class AddEmployee extends Component {
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button color='primary' onClick={this.submit}>
-                                                {!this.props.adding_employee? "Add Employee" : <Spinner />}
+                                                {!this.props.adding_employee ? "Add Employee" : <Spinner />}
                                             </Button>
                                         </Col>
                                     </FormGroup>
@@ -438,7 +446,7 @@ class AddEmployee extends Component {
                             </CardBody>
                         </Card>
                     </Col>
-                    <AllEmployeesPage />
+                    <AllEmployeesPage data={this.props.users} />
                 </Page>
 
             </>
