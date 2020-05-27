@@ -34,7 +34,9 @@ export default {
   CreateOrderManufacturing: "/CreateOrderManufacturing",
   ViewAllOrdersManufacturing: "/ViewAllOrdersManufacturing",
   ViewSingleOrderManufacturing: "/ViewSingleOrderManufacturing",
-  ViewFinaceManufacturedOrders: '/ViewFinaceManufacturedOrders',
+  ViewFinaceManufacturedOrders: '/ViewFinanceManufacturedOrders',
+  ViewFinanceSingleManufacturedOrder: '/ViewFinanceSingleManufacturedOrder',
+  ViewInventoryManufacturedOrders: '/ViewInventoryManufacturedOrders',
   //Dashboards
   FinanceDashboard: "/FinanceDashboard",
   ITDashboard: "/ITDashboard",

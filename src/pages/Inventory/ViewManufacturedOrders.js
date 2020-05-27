@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getManufacturedOrders } from '../../store/company/action'
-import { updateStatus } from '../../store/manufacturing/action'
+import { updateStatus, getManufacturedOrders } from '../../store/manufacturing/action'
 import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
 import status from '../../constant/status'
 
-const Order = ({ order, index }) => {
+const Order = ({ order, index, handleReceive }) => {
     return (
         <tr align="center">
             <th scope="row">{index + 1}</th>
@@ -21,17 +20,12 @@ const Order = ({ order, index }) => {
             <td>{order.status_manufacture_order[0]['date']}</td>
             <td>{order.status_manufacture_order[0]['status']}</td>
             <td>
-                {order.status_manufacture_order[0]['status'] === status.manuFactured?
-                <Link to={{
-                    pathname: routes.ViewFinanceSingleManufacturedOrder,
-                    state: order
-                }}>
-                    <Button size='sm' color='primary'>
-                        Finish
-                    </Button>
-                </Link> :
+                {order.status_manufacture_order[0]['status'] === status.finished?
+                <Button size='sm' color='primary' onClick={() => handleReceive(order.orderNumber)}>
+                        Receieve
+                </Button> :
                 <Button size='sm' color='primary' disabled>
-                    Finished
+                    Receieved
                 </Button> 
             }
             </td>
@@ -51,12 +45,14 @@ class ViewAllPurchaseOrderPage extends Component {
         super(props)
         this.state = {
             done: false,
-            orders: []
+            orders: [],
+            lockPage: false
         }
+        this.handleReceive = this.handleReceive.bind(this)
     }
 
     componentDidMount() {
-        this.props.getManufacturedOrders(status.manuFactured, status.finished)
+        this.props.getManufacturedOrders(status.finished, status.received)
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -66,6 +62,11 @@ class ViewAllPurchaseOrderPage extends Component {
                 done: true
             })
         }
+    }
+
+    handleReceive = (orderNumber) => {
+        this.setState({ lockPage: false })
+        this.props.updateStatus(orderNumber, status.received)
     }
 
     render() {
@@ -92,7 +93,7 @@ class ViewAllPurchaseOrderPage extends Component {
                             </thead>
                             <tbody>
                                 {this.state.done? this.state.orders.slice(0).reverse().map((item, index) => (
-                                    <Order key={index} index={index} order={item} handleApprove={() => null} />
+                                    <Order key={index} index={index} order={item} handleReceive={this.handleReceive} />
                                 )) : ''}
                             </tbody>
                         </Table>
@@ -105,11 +106,10 @@ class ViewAllPurchaseOrderPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading_manufactured_orders: state.companyReducer.loading_manufactured_orders,
-        orders: state.companyReducer.orders,
+        loading_manufactured_orders: state.manuFacturingReducer.loading_manufactured_orders,
+        orders: state.manuFacturingReducer.orders,
         loading_manufacture: state.manuFacturingReducer.loading_manufacture,
-        success: state.manuFacturingReducer.success,
-        updatedOrders: state.manuFacturingReducer.orders
+        success: state.manuFacturingReducer.success
     }
 }
 
