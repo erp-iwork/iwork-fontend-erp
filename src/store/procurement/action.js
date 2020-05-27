@@ -16,7 +16,6 @@ export const getOrders = () => (dispatch) => {
   return Axios.get(API + routes.purchase +
     `?search1=${status.approved}&search2=${status.delivered}`, headers)
     .then(res => {
-      console.log(res.data)
       dispatch({
         type: GET.SUCCESS_GET_ORDER,
         payload: res.data
@@ -247,7 +246,7 @@ export const getSingleOrder = (orderID) => (dispatch) => {
     })
 }
 
-export const updateStatus = (orderNumber, status) => (dispatch) => {
+export const updateStatus = (orderNumber, status, message = 'Delivered to Inventory') => (dispatch) => {
   Axios
     .put(API + `${routes.updatePurchaseStatus}${orderNumber}/`, status, headers)
     .then((res) => {
@@ -256,7 +255,7 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
         payload: { order: orderNumber, status: res.data.status },
       });
       Swal.fire({
-        title: "Delivered to Inventory",
+        title: message,
         icon: "success",
         showConfirmButton: false,
         timer: 1000

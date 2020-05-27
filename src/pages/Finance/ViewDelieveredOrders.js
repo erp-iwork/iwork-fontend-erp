@@ -9,8 +9,6 @@ import routes from '../../config/routes'
 import status from '../../constant/status'
 
 const Order = ({ order, index }) => {
-
-
     return (
         <tr align="left">
             <th scope="row">{index + 1}</th>

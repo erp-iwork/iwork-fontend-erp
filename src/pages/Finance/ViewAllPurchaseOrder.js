@@ -44,7 +44,8 @@ class ViewAllPurchaseOrderPage extends Component {
         super(props)
         this.state = {
             orders: [],
-            done: false
+            done: false,
+            lockPage: false
         }
         this.handleApprove = this.handleApprove.bind(this)
     }
@@ -59,7 +60,7 @@ class ViewAllPurchaseOrderPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getCustomOrders(status.created, status.approved)
+        this.props.getCustomOrders(status.created, status.approved, "Approved")
     }
 
     handleApprove (orderNumber) {
@@ -102,10 +103,11 @@ class ViewAllPurchaseOrderPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        updating_status: state.companyReducer.updating_status,
-        success: state.companyReducer.success,
         loading_orders: state.procurementReducer.loading_orders,
-        orders: state.procurementReducer.orders
+        orders: state.procurementReducer.orders,
+        success: state.procurementReducer.success,
+        order: state.procurementReducer.order,
+        status: state.procurementReducer.status
     }
 }
 
