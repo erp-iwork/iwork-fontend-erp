@@ -64,7 +64,7 @@ class ViewDelieveredOrdersPage extends Component {
                                 <Table responsive>
                                     <thead>
                                         <tr>
-                                            <th>Order #</th>
+                                            <th>PO#</th>
                                             <th>Supplier</th>
                                             <th>Ordered By</th>
                                             <th>Order Number</th>

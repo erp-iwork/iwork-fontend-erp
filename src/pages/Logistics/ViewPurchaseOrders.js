@@ -16,6 +16,7 @@ const Order = ({ order, index, deliver }) => {
                 <th scope="row">{index + 1}</th>
                 <td>{order.suplier.suplierName}</td>
                 <td>{order.orderdBy}</td>
+                <td>{order.purchaseOrderNumber}</td>
                 <td>{order.purchaseOrderDate}</td>
                 <td>{order.status_purchase_order[0]['status']}</td>
                 <td align='left'>
@@ -70,9 +71,10 @@ class ViewAllOrdersPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='left'>
-                                    <th>Order #</th>
+                                    <th>PO#</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
+                                    <th>Order Number</th>
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th style={{ margin: "auto" }}>Approve</th>
