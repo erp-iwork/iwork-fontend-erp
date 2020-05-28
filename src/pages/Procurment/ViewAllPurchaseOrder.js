@@ -9,7 +9,7 @@ import PageSpinner from '../../components/PageSpinner'
 
 const Order = ({ order, index }) => {
     return (
-        <tr align="center">
+        <tr>
             <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
@@ -63,7 +63,7 @@ class ViewAllPurchaseOrderPage extends Component {
                     <CardBody>
                         <Table responsive >
                             <thead>
-                                <tr align='center'>
+                                <tr>
                                     <th>#</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>

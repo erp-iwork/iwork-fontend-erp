@@ -10,7 +10,7 @@ import status from '../../constant/status'
 
 const Order = ({ order, index, handleDone }) => {
     return (
-        <tr align="left">
+        <tr>
             <th scope="row">{index + 1}</th>
             <td>{order.requiredProductName}</td>
             <td>{order.retailPrice}</td>
@@ -20,7 +20,7 @@ const Order = ({ order, index, handleDone }) => {
             <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status : null}</td>
             <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status === status.created ? 
                 <Button size='sm' color='primary' onClick={handleDone}>Done</Button>
-                : ( ( <Button size='sm' color='primary' disabled>Done</Button> ) ) : null}</td>
+                : ( ( <Button size='sm' color='success' disabled>Done</Button> ) ) : null}</td>
             <td>
                 <Link to={{ pathname: routes.ViewSingleOrderManufacturing, state: order }}>
                     <Button size='sm' color='primary'>
