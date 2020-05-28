@@ -19,11 +19,9 @@ class SuccessModal extends React.Component {
     onShow() {
         setTimeout(this.props.okFun, 1500)
     }
-
     render() {
 
         return (
-
             <Modal
                 isOpen={this.props.show}
             >
