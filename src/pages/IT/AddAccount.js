@@ -77,11 +77,11 @@ class AddAccount extends React.Component {
 
                     <hr />
                     {this.props.loading ? (
-                        <Button size="lg" className="bg-gradient-theme-left border-0" block>
+                        <Button size="lg" color='primary' block>
                             <SpinnerLoader />
                         </Button>
                     ) : (
-                            <Button size="lg" className="bg-gradient-theme-left border-0" block onClick={this.handleSubmit}>
+                            <Button size="lg" color='primary' block onClick={this.handleSubmit}>
                                 Register Account
                             </Button>
                         )

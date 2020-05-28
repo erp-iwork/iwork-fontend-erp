@@ -42,6 +42,7 @@ function addNewEmployee(data) {
         return Swal.fire({
           title: "Created",
           icon: "success",
+          position: 'top-end',
           showConfirmButton: false,
           timer: 1000,
         }).then((res) => {

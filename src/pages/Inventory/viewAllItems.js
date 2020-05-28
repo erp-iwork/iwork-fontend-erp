@@ -63,11 +63,13 @@ class ViewAllItems extends Component {
                         {this.state.item.itemName}
                     </ModalHeader>
                     <ModalBody>
-                        <Row>Quantity: {quantity}</Row>
-                        <Row>Retail Price: {retailPrice}</Row>
-                        <Row>Units: {unitOfMeasurement}</Row>
-                        <Row>Product Type: {productType}</Row>
-                        <Row>Category: {catagory.catagory}</Row>
+                        <Row><Col >Quantity: </Col><Col>{quantity}</Col></Row>
+                        <Row><Col >Retail Price: </Col><Col>{retailPrice}</Col></Row>
+                        <Row><Col >Category: </Col><Col>{category}</Col></Row>
+
+
+                        <Row><Col >Units: </Col><Col>{unitOfMeasurement}</Col></Row>
+                        <Row><Col >Product Type: </Col><Col>{productType}</Col></Row>
                     </ModalBody>
                     <ModalFooter>
                         <Button color='primary' onClick={() => this.toggle(this.state.item)}>
