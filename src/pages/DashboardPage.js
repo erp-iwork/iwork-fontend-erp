@@ -1,6 +1,5 @@
 
 import React from 'react';
-
 import Finance from './Finance/DashboardPage'
 import IT from './IT/DashboardPage'
 import Sales from './Sales/DashboardPage'
@@ -10,7 +9,6 @@ import Manufacturing from './Manufacturing/DashboardPage'
 import Inventory from './Inventory/DashboardPage'
 import HR from './HR/DashboardPage'
 import dept from '../config/departments'
-
 
 class DashboardPage extends React.Component {
   componentDidMount() {
