@@ -5,13 +5,10 @@ import React from 'react';
 import {
   MdDashboard,
 } from 'react-icons/md';
-
-
 import { NavLink } from 'react-router-dom';
 import {
   Nav,
   NavItem,
-
   Navbar,
   NavLink as BSNavLink,
 } from 'reactstrap';
@@ -61,10 +58,9 @@ class Sidebar extends React.Component {
       case dept.mrp: return <Manufacturing isOpen={true} />
       case dept.logistics: return <Logistics isOpen={true} />
 
-
       default: return (
         <React.Fragment>
-          <HR />
+          <HR isOpen={false} />
           <Finance isOpen={false} />
           <Sales isOpen={false} />
           <IT isOpen={false} />
