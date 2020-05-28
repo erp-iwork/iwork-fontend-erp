@@ -19,6 +19,8 @@ class AllEmployees extends Component {
             done: false,
             modelShow: false,
             okModal: false,
+            isConfirmed: false
+
         }
     }
 
@@ -34,11 +36,11 @@ class AllEmployees extends Component {
 
         })
     }
-    doSomething(employeId) {
-        this.props.deleteEmploye(employeId);
+    doSomething() {
         this.setState({
             okModal: true,
-            modelShow: false
+            modelShow: false,
+            isConfirmed: true
 
         })
     }
@@ -47,10 +49,23 @@ class AllEmployees extends Component {
             modelShow: false
         })
     }
-    deleteFun() {
+    deleteFun(employeId) {
         this.setState({
             modelShow: true
         })
+        if (this.state.isConfirmed) {
+
+            this.setState({
+                modelShow: false
+            })
+            // this.props.deleteEmploye(employeId);
+
+            this.setState({
+                modelShow: false,
+                isConfirmed: false
+            })
+        }
+
 
 
     }
@@ -58,7 +73,7 @@ class AllEmployees extends Component {
     render() {
         const employeeInfo = this.props.employees;
 
-        if (this.props.fetch_loader) return <PageSpinner />
+        if (this.props.employee_fetch_loader) return <PageSpinner />
 
         if (this.props.employees === null && this.props.success)
             return (
@@ -100,11 +115,9 @@ class AllEmployees extends Component {
                                                     <td>{employeeInfos.telephone}</td>
                                                     <td>{employeeInfos.termOfEmployment}</td>
                                                     <td>
-                                                        <Button size='sm' color='danger' onClick={() => this.deleteFun()}>
+                                                        <Button size='sm' color='danger' onClick={() => this.deleteFun(employeeInfos.employeId)}>
                                                             <MdDelete />
                                                         </Button>
-                                                        {this.state.modelShow ? (<CustomModal doSomething={() => this.doSomething(employeeInfos.employeId)} cancel={() => this.cancel()} />) : null}
-                                                        {this.props.okModal ? (<SuccessModal type="" title="Unable to delete" message="Unable to delete the data" okFun={() => this.okFun()} />) : null}
                                                     </td>
                                                     <td>
                                                         <Link to={{
@@ -116,7 +129,9 @@ class AllEmployees extends Component {
                                                         </Button>
                                                         </Link>
                                                     </td>
+
                                                 </tr>
+
                                             )) : null}
                                     </tbody>
                                 </Table>
@@ -124,6 +139,8 @@ class AllEmployees extends Component {
                         </Card>
                     </Col>
                 </Row>
+                {this.state.modelShow ? (<CustomModal doSomething={() => this.doSomething()} cancel={() => this.cancel()} />) : null}
+                {this.state.okModal ? (<SuccessModal type="Deleted" title="Deleted" message="Your data deleted successfully" okFun={() => this.okFun()} />) : null}
 
             </Page>
 
@@ -136,7 +153,7 @@ const mapStateToProps = (state) => {
     return {
         success: state.hrReducer.success,
         loading: state.hrReducer.loading,
-        fetch_loader: state.hrReducer.fetch_loader,
+        employee_fetch_loader: state.hrReducer.employee_fetch_loader,
         users: state.hrReducer.users,
         employees: state.hrReducer.employees,
         errors: state.hrReducer.errors

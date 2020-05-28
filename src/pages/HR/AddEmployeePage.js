@@ -11,6 +11,7 @@ import { countries, regions, termsOfEmployment, getCity } from './data'
 import Spinner from '../../components/loader'
 import AllEmployeesPage from "./AllEmployeesPage";
 import PageSpinner from '../../components/PageSpinner'
+import SuccessModal from '../popupNotification/success'
 
 class AddEmployee extends Component {
     constructor(props) {
@@ -27,7 +28,9 @@ class AddEmployee extends Component {
             password: "",
             complete: true,
             redirect: false,
-            lockPage: false
+            lockPage: false,
+            okModal: false,
+
         }
         this.submit = this.submit.bind(this);
         this.departmentDropDown = this.departmentDropDown.bind(this);
@@ -40,23 +43,20 @@ class AddEmployee extends Component {
         this.props.getDepartment()
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (!this.state.lockPage && this.props.success) {
-            console.log("Here")
-            this.setState({
-                firstName: "", lastName: "", email: "", telephone: "",
-                termOfEmployment: "", country: "", city: "", region: "",
-                birthDate: "", hiredDate: "", depValue: "", gender: "",
-                rolValue: "", levValue: "", lockPage: true
-            })
-        }
-    }
+
 
     submit = () => {
         this.setState({ complete: false })
         this.props.addNewEmployee(this.state).then(res => {
             this.setState({ redirect: true })
         })
+        if (this.props.success) {
+            this.setState({
+                okModal: true
+            })
+
+
+        }
     }
 
     departmentDropDown(e) {
@@ -97,6 +97,11 @@ class AddEmployee extends Component {
             [e.target.name]: e.target.value,
         });
     }
+    okFun() {
+        this.setState({
+            okModal: false
+        })
+    }
 
     render() {
         const {
@@ -104,7 +109,7 @@ class AddEmployee extends Component {
             termOfEmployment, depValue, levValue, rolValue, hiredDate, gender
         } = this.state
         if (this.props.loading_dept) return <PageSpinner />
-        else if (this.props.department.length === 0) return <h2>No departments. Please add departments. </h2>
+        else if (this.props.department === null) return <h2>No departments. Please add departments. </h2>
         return (
             <>
                 <Page
@@ -438,7 +443,7 @@ class AddEmployee extends Component {
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button color='primary' onClick={this.submit}>
-                                                {!this.props.adding_employee ? "Add Employee" : <Spinner />}
+                                                {this.props.employee_register_loader ? <Spinner /> : "Add Employee"}
                                             </Button>
                                         </Col>
                                     </FormGroup>
@@ -446,6 +451,8 @@ class AddEmployee extends Component {
                             </CardBody>
                         </Card>
                     </Col>
+                    {this.props.success ? (<SuccessModal type="success" show={this.state.okModal} title="Congratulations!!" message="Your data added successfully" okFun={() => this.okFun()} />) : null}
+
                     <AllEmployeesPage data={this.props.users} />
                 </Page>
 
@@ -459,6 +466,9 @@ const mapStateToProps = (state) => {
     return {
         loading_dept: state.hrReducer.loading_dept,
         adding_employee: state.hrReducer.adding_employee,
+        employee_register_loader: state.hrReducer.employee_register_loader,
+        employee_fetch_loader: state.hrReducer.employee_fetch_loader,
+        employee_delete_loader: state.hrReducer.employee_delete_loader,
         loading: state.hrReducer.loading,
         users: state.hrReducer.users,
         errors: state.hrReducer.errors,

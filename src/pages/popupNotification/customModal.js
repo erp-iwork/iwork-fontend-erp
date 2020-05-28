@@ -6,15 +6,11 @@ import {
     ModalBody,
     ModalFooter,
     ModalHeader,
+    Spinner,
 
 } from 'reactstrap';
 
 class ModelCusttom extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
 
     render() {
         return (
@@ -34,6 +30,7 @@ class ModelCusttom extends React.Component {
                         Cancel
 </Button>
                 </ModalFooter>
+                <Spinner />
             </Modal>
 
 
