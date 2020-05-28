@@ -85,8 +85,7 @@ class AllEmployees extends Component {
             <Page
                 title="All Employees"
                 breadcrumbs={[{ name: 'Human Resource', active: true }]}
-                className="TablePage"
-            >
+                className="TablePage">
                 <Row>
                     <Col>
                         <Card className="mb-3">
@@ -129,9 +128,7 @@ class AllEmployees extends Component {
                                                         </Button>
                                                         </Link>
                                                     </td>
-
                                                 </tr>
-
                                             )) : null}
                                     </tbody>
                                 </Table>
