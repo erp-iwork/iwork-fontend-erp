@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Col, Row, Table, Button } from 'reactstrap'
+import { Card, CardBody, CardHeader, Col, Row, Table, Button, Spinner } from 'reactstrap'
 import Page from '../../components/Page';
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2"
@@ -18,8 +18,10 @@ class AllEmployees extends Component {
             employeeInfo: [],
             done: false,
             modelShow: false,
-            okModal: false,
-            isConfirmed: false
+            okModal: true,
+            isConfirmed: false,
+            employeId: '',
+
 
         }
     }
@@ -38,40 +40,33 @@ class AllEmployees extends Component {
     }
     doSomething() {
         this.setState({
-            okModal: true,
             modelShow: false,
-            isConfirmed: true
-
         })
+        const employe = this.state.employeId;
+        // this.props.deleteEmploye(employe);
+
     }
     cancel() {
         this.setState({
             modelShow: false
         })
     }
+
     deleteFun(employeId) {
         this.setState({
-            modelShow: true
+            modelShow: true,
+            employeId: employeId
+
         })
-        if (this.state.isConfirmed) {
-
-            this.setState({
-                modelShow: false
-            })
-            // this.props.deleteEmploye(employeId);
-
-            this.setState({
-                modelShow: false,
-                isConfirmed: false
-            })
-        }
-
-
-
     }
 
     render() {
         const employeeInfo = this.props.employees;
+        const deleteSuccess = this.props.employee_delete_success;
+        const deleteLoader = this.props.employee_delete_loader;
+        console.log(deleteLoader);
+
+
 
         if (this.props.employee_fetch_loader) return <PageSpinner />
 
@@ -116,8 +111,15 @@ class AllEmployees extends Component {
                                                     <td>{employeeInfos.termOfEmployment}</td>
                                                     <td>
                                                         <Button size='sm' color='danger' onClick={() => this.deleteFun(employeeInfos.employeId)}>
-                                                            <MdDelete />
+                                                            {
+                                                                deleteLoader ? (
+                                                                    console.log(employeeInfos.firstName),
+
+                                                                    <Spinner />
+                                                                ) : <MdDelete />
+                                                            }
                                                         </Button>
+
                                                     </td>
                                                     <td>
                                                         <Link to={{
@@ -139,8 +141,8 @@ class AllEmployees extends Component {
                         </Card>
                     </Col>
                 </Row>
+                {deleteSuccess ? (<SuccessModal show={this.state.okModal} type="Deleted" title="Deleted" message="Your data deleted successfully" okFun={() => this.okFun()} />) : null}
                 {this.state.modelShow ? (<CustomModal doSomething={() => this.doSomething()} cancel={() => this.cancel()} />) : null}
-                {this.state.okModal ? (<SuccessModal type="Deleted" title="Deleted" message="Your data deleted successfully" okFun={() => this.okFun()} />) : null}
 
             </Page>
 
@@ -154,6 +156,9 @@ const mapStateToProps = (state) => {
         success: state.hrReducer.success,
         loading: state.hrReducer.loading,
         employee_fetch_loader: state.hrReducer.employee_fetch_loader,
+        employee_fetch_success: state.hrReducer.employee_fetch_success,
+        employee_delete_loader: state.hrReducer.employee_delete_loader,
+        employee_delete_success: state.hrReducer.employee_delete_success,
         users: state.hrReducer.users,
         employees: state.hrReducer.employees,
         errors: state.hrReducer.errors

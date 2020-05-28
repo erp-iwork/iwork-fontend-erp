@@ -12,7 +12,11 @@ const initialState = {
 
   employee_register_loader: false,
   employee_fetch_loader: false,
+
   employee_delete_loader: false,
+  employee_delete_success: false,
+  employee_fetch_success: false,
+  employee_register_success: false,
 
   errors: [],
   employees: [],
@@ -32,6 +36,9 @@ export default function hrReducer(state = initialState, action) {
         adding_employee: false,
         loading: false,
         employee_register_loader: false,
+        employee_fetch_loader: false,
+        employee_delete_loader: false,
+        employee_delete_success: false,
       };
     }
 
@@ -39,6 +46,7 @@ export default function hrReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        employee_delete_success: false,
       };
     }
     case itConstants.REGISTER_SUCCESS: {
@@ -77,6 +85,7 @@ export default function hrReducer(state = initialState, action) {
         loading: true,
         success: false,
         employee_register_loader: true,
+        employee_delete_success: false,
       };
     }
     case appConstants.REGISTER_SUCCESS: {
@@ -99,7 +108,8 @@ export default function hrReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        fetch_loader: true,
+        employee_fetch_loader: true,
+        employee_delete_success: false,
       };
     }
 
@@ -111,17 +121,7 @@ export default function hrReducer(state = initialState, action) {
         loading: false,
         isLogin: true,
         success: true,
-        fetch_loader: false,
-      };
-    }
-    case appConstants.FETCH_FAILURE: {
-      return {
-        ...state,
-        errors: action.payload,
-        loading: false,
-        isLogin: false,
-        success: false,
-        fetch_loader: false,
+        employee_fetch_loader: false,
       };
     }
 
@@ -156,6 +156,7 @@ export default function hrReducer(state = initialState, action) {
       return {
         ...state,
         loading_dept: true,
+        employee_delete_success: false,
       };
     }
 
@@ -184,6 +185,8 @@ export default function hrReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        employee_delete_success: false,
+        employee_delete_loader: true,
       };
     }
 
@@ -197,15 +200,8 @@ export default function hrReducer(state = initialState, action) {
         loading: false,
         isLogin: true,
         success: true,
-      };
-    }
-    case appConstants.DELETE_FAILURE: {
-      return {
-        ...state,
-        errors: action.payload,
-        loading: false,
-        isLogin: false,
-        success: false,
+        employee_delete_success: true,
+        employee_delete_loader: false,
       };
     }
 
@@ -238,6 +234,7 @@ export default function hrReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        employee_delete_success: false,
       };
     }
     case itConstants.GETALL_SUCCESS: {

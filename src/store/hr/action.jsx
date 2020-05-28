@@ -104,7 +104,7 @@ function getEmploye() {
 function deleteEmploye(employeId) {
   return (dispatch) => {
     dispatch({
-      type: appConstants.DELETE_REQUEST,
+      type: appConstants.REGISTER_REQUEST,
       payload: true,
     });
     axios
@@ -130,7 +130,7 @@ function deleteEmploye(employeId) {
         });
         if (error.response && error.response.data) {
           dispatch({
-            type: appConstants.DELETE_FAILURE,
+            type: errorsConstant.GET_ERRORS,
             payload: error.response.data.errors,
           });
         } else {

@@ -15,9 +15,11 @@ class ModelCusttom extends React.Component {
     render() {
         return (
 
+
             <Modal
                 isOpen={true}
             >
+
                 <ModalHeader >Are you sure to delete?</ModalHeader>
                 <ModalBody>
                     You won't revert this action
@@ -30,7 +32,7 @@ class ModelCusttom extends React.Component {
                         Cancel
 </Button>
                 </ModalFooter>
-                <Spinner />
+
             </Modal>
 
 
