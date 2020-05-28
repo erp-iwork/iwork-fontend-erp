@@ -108,12 +108,11 @@ function getEmploye() {
   };
 }
 
-function deleteEmploye(employeId) {
-  return (dispatch) => {
-    dispatch({
-      type: appConstants.DELETE_REQUEST,
-      payload: true,
-    });
+const deleteEmploye = (employeId) => (dispatch) => {
+    // dispatch({
+    //   type: appConstants.DELETE_REQUEST,
+    //   payload: true,
+    // })
     return Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -136,10 +135,10 @@ function deleteEmploye(employeId) {
             showConfirmButton: false,
             timer: 1000
           })
-          dispatch({
-            type: appConstants.DELETE_SUCCESS,
-            payload: employeId,
-          });
+          // dispatch({
+          //   type: appConstants.DELETE_SUCCESS,
+          //   payload: employeId,
+          // });
         })
         .catch((error) => {
           Swal.fire({
@@ -165,8 +164,8 @@ function deleteEmploye(employeId) {
           }
         })
       }
+      return result.value
     })
-  };
 }
 
 function deleteAccount(email) {
