@@ -196,10 +196,10 @@ class AddCustomerPage extends Component {
                                             </Col>
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label for="examplePassword" sm={12}>Field Of Work</Label>
+                                            <Label for="examplePassword" sm={12}>Industry</Label>
                                             <Col sm={12}>
                                                 <Input
-                                                    placeholder="Field Of Work"
+                                                    placeholder="Industry"
                                                     name="workingField"
                                                     onChange={this.handleChange}
                                                     value={workingField}
