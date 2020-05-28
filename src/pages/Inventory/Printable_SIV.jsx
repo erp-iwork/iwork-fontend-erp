@@ -161,6 +161,12 @@ class SIVPdf extends Component {
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>Quantity</Text>
               </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Unit</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Amount</Text>
+              </View>
             </View>
             {this.props.siv_item
               ? this.props.siv_item.map((item, index) => {
@@ -174,6 +180,12 @@ class SIVPdf extends Component {
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>{item.quantity}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{item.price}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{item.amount}</Text>
                       </View>
                     </View>
                   );

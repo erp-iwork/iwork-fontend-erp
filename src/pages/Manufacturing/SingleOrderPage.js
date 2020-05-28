@@ -11,10 +11,21 @@ class SingleOrderPage extends Component {
         this.state = {
             order: props.location.state
         }
+        this.calculateTotalPrice = this.calculateTotalPrice.bind(this)
     }
+
+    calculateTotalPrice () {
+        var price = 0
+        var quantity = 0
+        this.state.order.manufacture_item_set.forEach(item => {
+            price += item.price
+            quantity += item.quantity
+        })
+        return { price, quantity }
+    }
+
     render() {
         const { order } = this.state
-        console.log(order)
         return (
             <Page title="Single Order" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
                 <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
@@ -84,6 +95,22 @@ class SingleOrderPage extends Component {
                                     </Col>
                                     <Col>
                                         <b>{order.retailPrice}</b>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        Total Price :
+                                    </Col>
+                                    <Col>
+                                        <b>{this.calculateTotalPrice().price}</b>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        Total Quantity :
+                                    </Col>
+                                    <Col>
+                                        <b>{this.calculateTotalPrice().quantity}</b>
                                     </Col>
                                 </Row>
                                 <b>Quantity</b>

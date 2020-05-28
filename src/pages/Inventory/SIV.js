@@ -144,6 +144,8 @@ class SIV extends React.Component {
                     <th>#</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Amount</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -152,6 +154,8 @@ class SIV extends React.Component {
                       <th scope="row">{index + 1}</th>
                       <td>{item.itemName}</td>
                       <td>{item.quantity}</td>
+                      <td>{item.cost}</td>
+                      <td>{item.amount}</td>
                     </tr>
                   )) : null}
                 </tbody>
