@@ -18,7 +18,6 @@ class SuccessModal extends React.Component {
                     <Button color="primary" onClick={this.props.okFun}>
                         OK
               </Button>{' '}
-
                 </ModalFooter>
             </Modal>
         )

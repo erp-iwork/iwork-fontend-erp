@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  Image,
+  StyleSheet,
+} from "@react-pdf/renderer";
+import Logo from "../../assets/img/logo/Logo.jpg";
 
 const styles = StyleSheet.create({
   root: {
@@ -17,7 +25,7 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   logo: {
-    height: 50,
+    height: 80,
     width: 80,
     marginTop: 10,
   },
@@ -35,17 +43,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   tableColHeader: {
-    width: "33.34%",
+    margin: "auto",
+    width: "20%",
     borderStyle: "solid",
     borderColor: "#686868",
-    borderBottomColor: "#000",
+    borderBottomColor: "#686868",
     backgroundColor: "#11669F",
     borderWidth: 1,
-    borderLeftWidth: 0,
     borderTopWidth: 0,
   },
   tableCol: {
-    width: "33.34%",
+    margin: "auto",
+    width: "20%",
     borderStyle: "solid",
     borderColor: "#686868",
     borderWidth: 1,
@@ -53,13 +62,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   tableCellHeader: {
-    margin: "auto",
     fontSize: 12,
-    // fontWeight: 500,
     color: "#FFFFFF",
   },
   tableCell: {
-    // margin: "auto",
     color: "#686868",
     fontSize: 10,
   },
@@ -90,12 +96,21 @@ class SIVPdf extends Component {
         >
           <View container xs={12} display="flex" style={styles.Header}>
             <View
-              container
               style={{
                 flexDirection: "row",
                 marginTop: 100,
+                justifyContent: "space-between",
+                display: "flex",
               }}
             >
+              <View item>
+                <Image source={Logo} alt="" style={styles.logo} />
+
+                <Text style={styles.text} variant="body2">
+                  Sparta ERP
+                </Text>
+              </View>
+
               <View item>
                 <View style={{ height: 5 }} />
                 <Text style={styles.text} variant="body2" gutterBottom>
@@ -106,15 +121,6 @@ class SIVPdf extends Component {
                 <Text style={styles.text} variant="body2" gutterBottom>
                   GRV Date : {this.props.grv.date}
                 </Text>
-              </View>
-
-              <View
-                item
-                style={{
-                  marginLeft: 160,
-                }}
-              >
-                {/* <Image source={Logo} alt="" style={styles.logo} /> */}
               </View>
             </View>
           </View>
