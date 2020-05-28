@@ -6,6 +6,7 @@ import { getOrders } from '../../store/procurement/action'
 import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
+import { reverse } from '../../useCases'
 
 const Order = ({ order, index }) => {
     return (
@@ -49,10 +50,6 @@ class ViewAllPurchaseOrderPage extends Component {
         }
     }
 
-    reverse(orders) {
-        return orders.slice(0).reverse()
-    }
-
     render() {
         if (!this.state.done) return <PageSpinner />
         if (this.state.orders.length === 0) return <h2>No orders created yet.</h2>
@@ -64,7 +61,7 @@ class ViewAllPurchaseOrderPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='center'>
-                                    <th>#</th>
+                                    <th>PO#</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
                                     <th>Order Number</th>
@@ -74,7 +71,7 @@ class ViewAllPurchaseOrderPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.reverse(this.state.orders).map((order, index) => (
+                                {reverse(this.state.orders).map((order, index) => (
                                     <Order order={order} index={index} />
                                 ))}
                             </tbody>

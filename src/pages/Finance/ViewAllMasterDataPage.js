@@ -77,7 +77,8 @@ class ViewAllMasterData extends Component {
                         <Row><Col>Product Name:</Col><Col><b>{data.productName}</b></Col></Row>
                         <Row><Col>Category:</Col><Col><b>{data.productCategory}</b></Col></Row>
                         <Row><Col>Type:</Col><Col><b>{data.productType}</b></Col></Row>
-                        <Row><Col>Price:</Col><Col><b>{data.productPrice}</b></Col></Row>
+                        <Row><Col>Sales Price:</Col><Col><b>{data.productPrice}</b></Col></Row>
+                        <Row><Col>Cost Price:</Col><Col><b>{data.cost}</b></Col></Row>
                         <Row><Col>Unit of Measurement:</Col><Col><b>{data.unitOfMeasurement}</b></Col></Row>
                     </ModalBody>
                     <ModalFooter>

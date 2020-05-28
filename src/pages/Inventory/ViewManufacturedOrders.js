@@ -7,6 +7,7 @@ import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
 import status from '../../constant/status'
+import { reverse } from '../../useCases'
 
 const Order = ({ order, index, handleReceive }) => {
     return (
@@ -81,10 +82,10 @@ class ViewAllPurchaseOrderPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='center'>
-                                    <th>#</th>
+                                    <th>MO#</th>
                                     <th>Product Name</th>
                                     <th>Manufacture Personnel</th>
-                                    <th>Ordered Number</th>
+                                    <th>Order Number</th>
                                     <th>Cost</th>
                                     <th>Quantity</th>
                                     <th>End Date</th>
@@ -93,7 +94,7 @@ class ViewAllPurchaseOrderPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.done? this.state.orders.slice(0).reverse().map((item, index) => (
+                                {this.state.done? reverse(this.state.orders).map((item, index) => (
                                     <Order key={index} index={index} order={item} handleReceive={this.handleReceive} />
                                 )) : ''}
                             </tbody>

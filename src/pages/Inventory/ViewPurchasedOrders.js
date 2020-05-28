@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import routes from '../../config/routes'
 import { Link } from 'react-router-dom'
 import status from '../../constant/status'
+import { reverse } from '../../useCases'
 
 const Order = ({ order, index, handleApprove }) => {
     return (
@@ -79,7 +80,7 @@ class ViewPurchasedItems extends Component {
                         <Table responsive>
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>PO#</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
                                     <th>Order ID</th>
@@ -90,7 +91,7 @@ class ViewPurchasedItems extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.orders.slice(0).reverse().map((item, index) => (
+                                {reverse(this.state.orders).map((item, index) => (
                                     <Order key={index} index={index} order={item} handleApprove={this.handleApprove} />
                                 ))}
                             </tbody>

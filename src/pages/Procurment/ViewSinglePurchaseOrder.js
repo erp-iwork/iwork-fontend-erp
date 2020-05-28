@@ -45,7 +45,7 @@ class ViewSinglePurchaseOrderPage extends Component {
                             <CardBody>
                                 <Row>
                                     <Col>
-                                        Order Id:
+                                        Order ID:
                                     </Col>
                                     <Col>
                                         <b>{order.purchaseOrderNumber}</b>
@@ -89,7 +89,7 @@ class ViewSinglePurchaseOrderPage extends Component {
                                         <tr>
                                             <th>Product #</th>
                                             <th>Product Name</th>
-                                            <th>Price</th>
+                                            <th>Unit Price</th>
                                             <th>Quantity</th>
                                         </tr>
                                     </thead>
