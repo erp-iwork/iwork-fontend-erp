@@ -280,6 +280,7 @@ export const getGRV = (purchaseOrderNumber) => (dispatch) => {
     .then(({ data }) => {
       const items = data.purchase_item_order.map(item => {
         return {
+          itemID: item.masterData.productId,
           itemName: item.masterData.productName,
           quantity: item.purchaseQuantity,
           price: item.masterData.productPrice

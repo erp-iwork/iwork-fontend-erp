@@ -170,7 +170,7 @@ class GRV extends React.Component {
                   variant="body2"
                   gutterBottom
                 >
-                  <b>SIV Date :</b> {grv.date}
+                  <b>GRV Date :</b> {grv.date}
                 </Typography>
               </div>
             </div>
@@ -181,9 +181,10 @@ class GRV extends React.Component {
                 <thead>
                   <tr>
                     <th>#</th>
+                    <th>Item ID</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
-                    <th>Price</th>
+                    <th>Unit Price</th>
 
                   </tr>
                 </thead>
@@ -191,6 +192,7 @@ class GRV extends React.Component {
                   {grv.GRVItems.map((item, index) => (
                     <tr>
                       <th scope="row">{index + 1}</th>
+                      <th>{item.itemID}</th>
                       <td>{item.itemName}</td>
                       <td>{item.quantity}</td>
                       <td>{item.price}</td>
