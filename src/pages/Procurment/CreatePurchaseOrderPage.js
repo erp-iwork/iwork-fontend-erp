@@ -35,7 +35,11 @@ class CreatePurchaseOrder extends Component {
             shipmentAddress: "",
             submitted: false,
             lockPage: false,
-            order_items: [{ masterData_id: "", purchaseQuantity: 1 }]
+            order_items: [{ masterData_id: "", purchaseQuantity: 1 }],
+            done: false,
+            suppliers: [],
+            masterdata: [],
+            orders: []
         }
         this.handleAddItem = this.handleAddItem.bind(this)
         this.handleRemoveItem = this.handleRemoveItem.bind(this)
@@ -83,6 +87,16 @@ class CreatePurchaseOrder extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        const { done } = this.state
+        if (!(this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) && !done) {
+            this.setState({
+                orders: this.props.orders,
+                suppliers: this.props.suppliers,
+                masterdata: this.props.masterdata,
+                done: true
+            })
+        }
+
         if (this.props.success && this.state.lockPage) {
             this.setState({ company: "", description: "", shipmentAddress: "", lockPage: false })
         }
@@ -119,7 +133,6 @@ class CreatePurchaseOrder extends Component {
 
     render() {
         let { order_items: items } = this.state
-        console.log(this.state.lockPage)
         if ((this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) && this.state.lockPage) return <PageSpinner />
         const {
             supplier, description
@@ -139,7 +152,7 @@ class CreatePurchaseOrder extends Component {
                                         <Col sm={12}>
                                             <Input type="select" name="supplier" value={supplier} onChange={this.handleChange}>
                                                 <option aria-label="None" value="" disabled>Supplier Name</option>
-                                                {this.props.suppliers.map((supplier, idx) => (
+                                                {this.state.suppliers.map((supplier, idx) => (
                                                     <option value={supplier.suplierId} key={idx}>
                                                         {supplier.suplierName}
                                                     </option>
@@ -181,7 +194,7 @@ class CreatePurchaseOrder extends Component {
                                                 <Col md={6}>
                                                     <Input onChange={this.ItemNameChange(i)} value={v.InventoryItemId} type="select">
                                                         <option aria-label="None" value="" disabled selected></option>
-                                                        {this.props.masterdata.map((_item, idx) => (
+                                                        {this.state.masterdata.map((_item, idx) => (
                                                             <option value={_item.productId} key={idx}>
                                                                 {_item.productName}
                                                             </option>
@@ -259,7 +272,7 @@ class CreatePurchaseOrder extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.orders ? this.props.orders.slice(0)
+                                        {this.state.orders ? this.props.orders.slice(0)
                                             .reverse().slice(0, 9).map((order, index) => (
                                                 <tr key={index}>
                                                     <th scope="row">{index + 1}</th>

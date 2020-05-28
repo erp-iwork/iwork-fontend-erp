@@ -36,7 +36,7 @@ class RecordTracking extends Component {
     }
 
     render() {
-        if (!this.state.done) return <PageSpinner />
+        if (this.props.loading_records) return <PageSpinner />
         return (
             <Page
                 title="Record Tracking"

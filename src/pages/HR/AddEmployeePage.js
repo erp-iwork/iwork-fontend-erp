@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import Page from '../../components/Page';
+import React, { Component } from 'react'
+import Page from '../../components/Page'
 import {
     Button, Card, CardBody, CardHeader, Col, Form,
     FormGroup, Input, Label, Row
-} from 'reactstrap';
+} from 'reactstrap'
 import Error from '../../components/error'
 import { connect } from "react-redux"
 import actions from '../../store/hr/action'
 import { countries, regions, termsOfEmployment, getCity } from './data'
 import Spinner from '../../components/loader'
-import AllEmployeesPage from "./AllEmployeesPage";
+import AllEmployeesPage from "./AllEmployeesPage"
 import PageSpinner from '../../components/PageSpinner'
 
 class AddEmployee extends Component {
@@ -29,11 +29,11 @@ class AddEmployee extends Component {
             redirect: false,
             lockPage: false
         }
-        this.submit = this.submit.bind(this);
-        this.departmentDropDown = this.departmentDropDown.bind(this);
-        this.levelDropDown = this.levelDropDown.bind(this);
-        this.roleDropDown = this.roleDropDown.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.submit = this.submit.bind(this)
+        this.departmentDropDown = this.departmentDropDown.bind(this)
+        this.levelDropDown = this.levelDropDown.bind(this)
+        this.roleDropDown = this.roleDropDown.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
 
     componentDidMount() {
@@ -42,7 +42,6 @@ class AddEmployee extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.state.lockPage && this.props.success) {
-            console.log("Here")
             this.setState({
                 firstName: "", lastName: "", email: "", telephone: "",
                 termOfEmployment: "", country: "", city: "", region: "",
@@ -434,7 +433,6 @@ class AddEmployee extends Component {
                                             </FormGroup>
                                         </Col>
                                     </Row>
-
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button color='primary' onClick={this.submit}>
@@ -448,10 +446,8 @@ class AddEmployee extends Component {
                     </Col>
                     <AllEmployeesPage data={this.props.users} />
                 </Page>
-
             </>
-
-        );
+        )
     }
 }
 
