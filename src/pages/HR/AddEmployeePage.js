@@ -41,7 +41,7 @@ class AddEmployee extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (!this.state.lockPage && this.props.success) {
+        if (!this.state.lockPage && this.props.adding_employee) {
             this.setState({
                 firstName: "", lastName: "", email: "", telephone: "",
                 termOfEmployment: "", country: "", city: "", region: "",
@@ -52,10 +52,8 @@ class AddEmployee extends Component {
     }
 
     submit = () => {
-        this.setState({ complete: false })
-        this.props.addNewEmployee(this.state).then(res => {
-            this.setState({ redirect: true })
-        })
+        this.setState({ complete: false, lockPage: false })
+        this.props.addNewEmployee(this.state)
     }
 
     departmentDropDown(e) {
