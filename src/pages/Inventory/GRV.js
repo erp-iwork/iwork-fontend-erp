@@ -1,6 +1,6 @@
 import React from 'react'
 import Typography from '../../components/Typography'
-import SIVPdf from './Printable_SIV';
+import SIVPdf from './Printable_GRV';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import Page from '../../components/Page';
 import { Button, CardBody, Col, Table, Row } from 'reactstrap'
@@ -87,7 +87,7 @@ class GRV extends React.Component {
     this.props.getGRV(this.props.location.state.order)
   }
   submit(e) {
-    e.preventDefault();
+    e.preventDefault()
   }
 
   calculatePrice(items) {
@@ -138,7 +138,7 @@ class GRV extends React.Component {
                 <Typography
                   style={classes.text}
                 >
-                  <b>PO # :</b> Purchase Order Number Goes Here
+                  <b>PO # :</b> {grv.GRVID}
                 </Typography>
 
                 <Typography
@@ -239,7 +239,7 @@ class GRV extends React.Component {
           {
             this.props.success ? (<PDFDownloadLink
               document={
-                <SIVPdf grv_item={this.props.grv.GRVItems} grv={this.props.grv} />
+                <SIVPdf grv_item={this.props.grv.GRVItems} grv={this.props.grv} totalPrice={totalPrice} />
               }
               fileName={"GRV_" + this.props.grv.GRVID + ".pdf"}
               style={{

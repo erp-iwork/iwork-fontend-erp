@@ -142,10 +142,16 @@ class SIVPdf extends Component {
                 <Text style={styles.tableCellHeader}>#</Text>
               </View>
               <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Item ID</Text>
+              </View>
+              <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>ItemName</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>Quantity</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Unit Price</Text>
               </View>
             </View>
             {this.props.grv_item
@@ -156,10 +162,16 @@ class SIVPdf extends Component {
                         <Text style={styles.tableCell}>{index + 1}</Text>
                       </View>
                       <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{item.itemID}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>{item.itemName}</Text>
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>{item.quantity}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{item.price}</Text>
                       </View>
                     </View>
                   );
@@ -178,6 +190,16 @@ class SIVPdf extends Component {
               paddingLeft: 20,
             }}
           >
+            <View
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              <Text style={styles.textBody} variant="body2" color="">
+                Total Price : {this.props.totalPrice}
+              </Text>
+            </View>
             <View
               style={{
                 display: "flex",
