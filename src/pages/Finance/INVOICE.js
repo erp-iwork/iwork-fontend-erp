@@ -174,7 +174,7 @@ function PdfDocument({ data }) {
                                             fontSize: 12
                                         }}>Company name : </Text>
                                     </View>
-                                    <View style={{width: 10}}></View>
+                                    <View style={{ width: 10 }}></View>
                                     <View item>
                                         <Text align='right' style={styles.textBody}>{customer.customerName}</Text>
                                     </View>
@@ -547,7 +547,7 @@ function PdfDocument({ data }) {
                                     fontSize: 12
                                 }}>Total :</Text>
                             </View>
-                            <View style={{width: 10}}></View>
+                            <View style={{ width: 10 }}></View>
                             <View item>
                                 <Text align='right' style={styles.textBody} >
                                     {data.Total}
