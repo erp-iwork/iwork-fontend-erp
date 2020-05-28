@@ -5,5 +5,6 @@ export default {
     delivered: 'Delivered',
     approved: 'Approved',
     manuFactured: 'Manufactured',
-    finished: 'Finished'
+    finished: 'Finished',
+    issued: 'Issued'
 }

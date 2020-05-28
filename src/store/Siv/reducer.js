@@ -29,6 +29,7 @@ export default function sivReducer(state = initialState, action) {
         loading: false
       };
     case UPDATE_SIV: {
+      console.log("Here")
       state.sivs.sivStatus = action.payload.status;
       return {
         ...state,

@@ -1,4 +1,4 @@
-import { GET_SIV, REQUEST_SIV, errorsConstant, UPDATE_STATUS } from "../../constant/constants";
+import { GET_SIV, REQUEST_SIV, errorsConstant, UPDATE_SIV } from "../../constant/constants";
 import axios from "axios";
 import Swal from "sweetalert2";
 import API from "../../api/API";
@@ -42,7 +42,7 @@ export const updateSiv = (orderNumber, status) => (dispatch) => {
     .put(API + `generatesiv/${orderNumber}/`, status, headers)
     .then((res) => {
       dispatch({
-        type: UPDATE_STATUS,
+        type: UPDATE_SIV,
         payload: { order: orderNumber, status: "Issued" },
       });
       // dispatch({

@@ -8,8 +8,10 @@ import { Link } from 'react-router-dom'
 import { getStatus, getOrders } from '../../store/order/action'
 import { getSiv, updateSiv } from '../../store/Siv/action'
 import routes from '../../config/routes'
+import status from '../../constant/status'
+import { reverse } from '../../useCases/'
 
-const Order = ({ order, index, handleApprove }) => {
+const Order = ({ order, index, handleApprove, currentOrder, success }) => {
     return (
         <tbody>
             <tr>
@@ -17,19 +19,32 @@ const Order = ({ order, index, handleApprove }) => {
                 <td>{order.customer}</td>
                 <td>{order.salesPerson}</td>
                 <td>{order.shipmentAddress}</td>
-                <td>{order.status}</td>
-                <td>
-                    {order.status === "Issued" ?
+                <td>{order.orderNumber}</td>
+                <td>{success? status.issued : order.status}</td>
+                {currentOrder.orderNumber === order.orderNumber && success?
+                (
+                    <td>
                         <Link to={{ pathname: routes.SivPage, state: { order: order.orderNumber } }}>
                             <Button size='sm' color='primary'>
                                 <MdAssignment /> SIV Issued
                         </Button>
-                        </Link> :
-                        <Button size='sm' color='primary' onClick={() => handleApprove(order.orderNumber)}>
-                            <MdAssignment /> Approve
-                    </Button>
-                    }
-                </td>
+                        </Link>
+                    </td>
+                ):(
+                    <td>
+                        {order.status === "Issued" ?
+                            <Link to={{ pathname: routes.SivPage, state: { order: order.orderNumber } }}>
+                                <Button size='sm' color='primary'>
+                                    <MdAssignment /> SIV Issued
+                            </Button>
+                            </Link> :
+                            <Button size='sm' color='primary' onClick={() => handleApprove(order)}>
+                                <MdAssignment /> Approve
+                        </Button>
+                        }
+                    </td>
+                )
+                }
                 <td>
                     <Link to={{ pathname: routes.ViewSingleOrderPage, state: order }}>
                         <Button size='sm' color='primary'>
@@ -46,7 +61,11 @@ class ViewAllOrdersPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            orderNumber: null
+            order: {},
+            orderNumber: null,
+            done: false,
+            orders: [],
+            lockPage: false
         }
         this.handleApprove = this.handleApprove.bind(this)
     }
@@ -55,17 +74,26 @@ class ViewAllOrdersPage extends Component {
         this.props.getOrders()
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading && !this.state.done) {
+            this.setState({
+                orders: this.props.orders,
+                done: true
+            })
+        }
+    }
+
     handleApprove = (order) => {
-        this.props.updateSiv(order, {
+        this.props.updateSiv(order.orderNumber, {
             'sivStatus': 'Approved',
-        })
-        this.setState({ orderNumber: order })
-        this.props.getSiv(order);
+          })
+        this.setState({ order })
+        this.props.getSiv(order.orderNumber)
     }
 
     render() {
-        if (this.props.loading) return <PageSpinner />
-        const createdOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === "Created" || order.orderNumber === this.state.orderNumber }) : "";
+        if (!this.state.done) return <PageSpinner />
+        const createdOrders = this.state.orders ? this.state.orders.filter((order) => { return order.status === status.created || order.status === status.issued }) : "";
         if (createdOrders.length === 0) return <h4>No orders to show</h4>
         return (
             <Page
@@ -78,17 +106,18 @@ class ViewAllOrdersPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='left'>
-                                    <th>Order #</th>
+                                    <th>#</th>
                                     <th>Customer</th>
                                     <th>Sales Person</th>
                                     <th>Shipment Address</th>
+                                    <th>Order Number</th>
                                     <th>Status</th>
                                     <th>Generate SIV</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {createdOrders.map((item, index) => (
-                                <Order order={item} key={index} index={index} handleApprove={this.handleApprove} />
+                            {reverse(createdOrders).map((item, index) => (
+                                <Order order={item} key={index} index={index} handleApprove={this.handleApprove} currentOrder={this.state.order} success={this.props.success} />
                             ))}
                         </Table>
                     </CardBody>
@@ -103,8 +132,9 @@ const mapStateToProps = (state) => {
     return {
         loading: state.ordersReducer.loading,
         orders: state.ordersReducer.orders,
-        status: state.ordersReducer.status,
-        sivs: state.invoiceReducer.sivs,
+        status: state.sivReducer.status,
+        sivs: state.sivReducer.sivs,
+        success: state.sivReducer.success,
         siv_item: state.invoiceReducer.siv_item,
     }
 }

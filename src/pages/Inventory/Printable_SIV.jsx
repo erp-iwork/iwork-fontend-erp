@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  Image,
+} from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
   root: {
@@ -32,6 +39,7 @@ const styles = StyleSheet.create({
     color: "#686868",
   },
   tableRow: {
+    // margin: "auto",
     flexDirection: "row",
   },
   tableColHeader: {
@@ -98,13 +106,19 @@ class SIVPdf extends Component {
             >
               <View item>
                 <View style={{ height: 5 }} />
+
                 <Text style={styles.text} variant="body2" gutterBottom>
-                  Received By : {localStorage.getItem("username")}
+                  Warehouse Name: {this.props.sivs.warehouseName}
                 </Text>
                 <View style={{ height: 5 }} />
 
                 <Text style={styles.text} variant="body2" gutterBottom>
-                  SIV Date : {this.props.grv.date}
+                  Issued By : {localStorage.getItem("username")}
+                </Text>
+                <View style={{ height: 5 }} />
+
+                <Text style={styles.text} variant="body2" gutterBottom>
+                  SIV Date : {this.props.sivs.sivDate}
                 </Text>
               </View>
 
@@ -114,7 +128,6 @@ class SIVPdf extends Component {
                   marginLeft: 160,
                 }}
               >
-                {/* <Image source={Logo} alt="" style={styles.logo} /> */}
               </View>
             </View>
           </View>
@@ -128,7 +141,7 @@ class SIVPdf extends Component {
             }}
           >
             <Text style={styles.textBody} variant="body2" color="">
-              Order Number : {this.props.grv.GRVID}
+              Order Number : {this.props.sivs.order}
             </Text>
           </View>
 
@@ -149,8 +162,8 @@ class SIVPdf extends Component {
                 <Text style={styles.tableCellHeader}>Quantity</Text>
               </View>
             </View>
-            {this.props.grv_item
-              ? this.props.grv_item.map((item, index) => {
+            {this.props.siv_item
+              ? this.props.siv_item.map((item, index) => {
                   return (
                     <View key={item.itemName} style={styles.tableRow}>
                       <View style={styles.tableCol}>

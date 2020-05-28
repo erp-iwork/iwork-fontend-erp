@@ -6,6 +6,7 @@ import actions from '../../store/sales/action'
 import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
+import { reverse } from '../../useCases'
 
 const Order = ({ order, id }) => {
     return (
@@ -68,9 +69,9 @@ class ViewAllOrdersPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.lists ? this.props.lists.map((order, index) => (
+                                {this.props.lists ? reverse(this.props.lists).map((order, index) => (
                                     <Order order={order} id={index + 1} />
-                                )) : this.props.orders.map((order, index) => (
+                                )) : reverse(this.props.orders).map((order, index) => (
                                     <Order order={order} id={index + 1} />
                                 ))}
                             </tbody>

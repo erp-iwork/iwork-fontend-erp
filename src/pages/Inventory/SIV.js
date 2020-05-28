@@ -242,9 +242,7 @@ class SIV extends React.Component {
                 <div >
                   <Button size='sm' color='primary'>
                     Print SIV
-
                   </Button>
-
                 </div>
               )}
             </PDFDownloadLink>) : null

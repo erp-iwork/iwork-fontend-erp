@@ -67,8 +67,8 @@ class Logistics extends React.Component {
     render() {
         const LOGISTICS = [
             { to: routes.LogisticsDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
-            { to: routes.ViewOrdersLogistics, name: 'View Orders', exact: false, Icon: MdWidgets },
-            { to: routes.ViewPurchaseOrdersLogistics, name: 'View Purchased Order', exact: false, Icon: MdWidgets },
+            { to: routes.ViewOrdersLogistics, name: 'Sales Orders', exact: false, Icon: MdWidgets },
+            { to: routes.ViewPurchaseOrdersLogistics, name: 'Purchased Orders', exact: false, Icon: MdWidgets },
           ]
         return (
             <React.Fragment>
