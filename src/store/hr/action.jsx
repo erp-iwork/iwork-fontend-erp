@@ -1,7 +1,11 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
-import { appConstants, itConstants } from "../../constant/constants";
+import {
+  appConstants,
+  itConstants,
+  errorsConstant,
+} from "../../constant/constants";
 import headers from "./../headers";
 function addNewEmployee(data) {
   return (dispatch) => {
@@ -19,7 +23,7 @@ function addNewEmployee(data) {
       city: data.city,
       region: data.region,
       birthDate: data.birthDate,
-      gender: data.gender
+      gender: data.gender,
     };
 
     dispatch({
@@ -50,7 +54,7 @@ function addNewEmployee(data) {
       .catch((error) => {
         if (error.response && error.response.data) {
           dispatch({
-            type: appConstants.REGISTER_FAILURE,
+            type: errorsConstant.GET_ERRORS,
             payload: error.response.data.errors,
           });
         } else {
@@ -118,12 +122,6 @@ function deleteEmploye(employeId) {
         headers: headers,
       })
       .then((response) => {
-        Swal.fire({
-          title: "Deleted",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1000,
-        });
         dispatch({
           type: appConstants.DELETE_SUCCESS,
           payload: employeId,

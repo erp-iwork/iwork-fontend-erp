@@ -14,6 +14,7 @@ const initialState = {
   employee: [],
   department: [],
   adding_employee: false,
+  fetch_loader: false,
   loading_dept: true,
 };
 export default function hrReducer(state = initialState, action) {
@@ -24,6 +25,8 @@ export default function hrReducer(state = initialState, action) {
         errors: action.payload,
         loading_dept: false,
         adding_employee: false,
+        adding_employee: false,
+        loading: false,
       };
     }
 
@@ -65,7 +68,7 @@ export default function hrReducer(state = initialState, action) {
       return {
         ...state,
         adding_employee: true,
-        //loading: true,
+        loading: true,
         success: false,
       };
     }
@@ -100,6 +103,7 @@ export default function hrReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        fetch_loader: true,
       };
     }
 
@@ -111,6 +115,7 @@ export default function hrReducer(state = initialState, action) {
         loading: false,
         isLogin: true,
         success: true,
+        fetch_loader: false,
       };
     }
     case appConstants.FETCH_FAILURE: {
@@ -120,6 +125,7 @@ export default function hrReducer(state = initialState, action) {
         loading: false,
         isLogin: false,
         success: false,
+        fetch_loader: false,
       };
     }
 

@@ -14,7 +14,7 @@ class ViewAllItems extends Component {
         this.state = {
             modal: false,
             item: {
-                itemName: '', quantity: '', retailPrice: '', unitOfMeasurement: '', category: '',
+                itemName: '', quantity: '', retailPrice: '', unitOfMeasurement: '', catagory: {},
                 productType: ''
             },
             items: [],
@@ -24,6 +24,7 @@ class ViewAllItems extends Component {
     }
 
     toggle = (item) => {
+        console.log(item)
         return this.setState({
             modal: !this.state.modal, item
         })
@@ -45,7 +46,7 @@ class ViewAllItems extends Component {
     render() {
         if (!this.state.done) return <PageSpinner />
         const {
-             quantity, retailPrice, category, productType, unitOfMeasurement
+             quantity, retailPrice, catagory, productType, unitOfMeasurement
         } = this.state.item
 
         if (this.props.items.item_catagory.length === 0 || this.props.items.item_catagory === null) return <h2>No items in this Category yet</h2>
@@ -66,7 +67,7 @@ class ViewAllItems extends Component {
                         <Row>Retail Price: {retailPrice}</Row>
                         <Row>Units: {unitOfMeasurement}</Row>
                         <Row>Product Type: {productType}</Row>
-                        <Row>Category: {category}</Row>
+                        <Row>Category: {catagory.catagory}</Row>
                     </ModalBody>
                     <ModalFooter>
                         <Button color='primary' onClick={() => this.toggle(this.state.item)}>
