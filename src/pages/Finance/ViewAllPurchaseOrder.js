@@ -10,7 +10,7 @@ import status from '../../constant/status'
 
 const Order = ({ order, index, handleApprove }) => {
     return (
-        <tr align="center">
+        <tr>
             <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
@@ -18,16 +18,14 @@ const Order = ({ order, index, handleApprove }) => {
             <td>{order.purchaseOrderDate}</td>
             <td>{order.status_purchase_order[0].status}</td>
             <td>
-                {order.status_purchase_order[0]['status'] === status.created?
-                <Button size='sm' color='primary' onClick={() => handleApprove(order.purchaseOrderNumber)}>
-                    Approve
+                {order.status_purchase_order[0]['status'] === status.created ?
+                    <Button size='sm' color='primary' onClick={() => handleApprove(order.purchaseOrderNumber)}>
+                        Approve
                 </Button> :
-                <Button size='sm' color='primary' disabled>
-                    Approved
-                </Button> 
-            }
-            </td>
-            <td>
+                    <Button size='sm' color='success' disabled>
+                        Approved
+                </Button>
+                }
                 <Link to={{ pathname: routes.ViewSinglePurchaseOrder, state: order }}>
                     <Button size='sm' color='primary'>
                         See Order
@@ -58,15 +56,12 @@ class ViewAllPurchaseOrderPage extends Component {
             })
         }
     }
-
     componentDidMount() {
         this.props.getCustomOrders(status.created, status.approved, "Approved")
     }
-
-    handleApprove (orderNumber) {
+    handleApprove(orderNumber) {
         this.props.updateStatus(orderNumber, { status: status.approved })
     }
-
     render() {
         if (!this.state.done) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
@@ -77,14 +72,14 @@ class ViewAllPurchaseOrderPage extends Component {
                     <CardBody>
                         <Table responsive >
                             <thead>
-                                <tr align='center'>
+                                <tr>
                                     <th>#</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
                                     <th>Ordered Number</th>
                                     <th>Order Date</th>
                                     <th>Status</th>
-                                    <th colSpan={2} >Actions</th>
+                                    <th >Actions</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -9,7 +9,7 @@ import PageSpinner from '../../components/PageSpinner'
 
 const Order = ({ order, id }) => {
     return (
-        <tr align="center">
+        <tr>
             <th scope="row">{id}</th>
             <td>{order.customer}</td>
             <td>{order.salesPerson}</td>
@@ -56,7 +56,7 @@ class ViewAllOrdersPage extends Component {
                     <CardBody>
                         <Table responsive >
                             <thead>
-                                <tr align='center'>
+                                <tr>
                                     <th>Order #</th>
                                     <th>Customer</th>
                                     <th>Sales Person</th>
