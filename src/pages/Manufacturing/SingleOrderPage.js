@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { Col, Row, Card, CardHeader, Table, CardBody } from 'reactstrap';
 import "./Manufacturing.scss"
+import status from '../../constant/status'
 
 class SingleOrderPage extends Component {
     constructor(props) {
@@ -30,19 +31,23 @@ class SingleOrderPage extends Component {
                         <h4 class="step-title">Pending</h4>
                     </div>
 
-                    <div class={order.status_manufacture_order ? order.status_manufacture_order[0].status === "Manufactured" ? ("step completed") : ("step") : null}>
+                    <div class={order.status_manufacture_order ?
+                        order.status_manufacture_order[0].status === status.manuFactured || order.status_manufacture_order[0].status === status.finished ?
+                        ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>
                         <h4 class="step-title">Manufactured</h4>
                     </div>
-                    <div class={order.status_manufacture_order ? order.status_manufacture_order[0].status === "Finished" ? ("step completed") : ("step") : null}>
+                    <div class={order.status_manufacture_order ?
+                    order.status_manufacture_order[0].status === status.finished ||  order.status_manufacture_order[0].status === status.received ? 
+                        ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>
                         <h4 class="step-title">Finished</h4>
                     </div>
-                    <div class={order.status_manufacture_order ? order.status_manufacture_order[0].status === "Recieved" ? ("step completed") : ("step") : null}>
+                    <div class={order.status_manufacture_order ? order.status_manufacture_order[0].status === status.received ? ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-home"></i></div>
                         </div>

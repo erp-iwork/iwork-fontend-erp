@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Page from '../../components/Page';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getCustomOrders, updateStatus } from '../../store/procurement/action'
+import { getCustomOrders, updateStatus, getOrders } from '../../store/procurement/action'
 import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
@@ -60,7 +60,7 @@ class ViewAllPurchaseOrderPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getCustomOrders(status.created, status.approved, "Approved")
+        this.props.getOrders()
     }
 
     handleApprove (orderNumber) {
@@ -110,4 +110,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getCustomOrders, updateStatus })(ViewAllPurchaseOrderPage)
+export default connect(mapStateToProps, { getCustomOrders, updateStatus, getOrders })(ViewAllPurchaseOrderPage)

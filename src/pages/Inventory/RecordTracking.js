@@ -36,7 +36,7 @@ class RecordTracking extends Component {
     }
 
     render() {
-        if (this.props.loading_records) return <PageSpinner />
+        if (!this.state.done) return <PageSpinner />
         return (
             <Page
                 title="Record Tracking"
@@ -67,7 +67,7 @@ class RecordTracking extends Component {
                                                 <td>{item.transactionId}</td>
                                                 <td>{item.purchaseItem.masterData.productId}</td>
                                                 <td>{item.purchaseItem.masterData.productName}</td>
-                                                <td>{item.purchaseItem.masterData.cost}</td>
+                                                <td>{item.purchaseItem.itemCost}</td>
                                                 <td>{this.getCategory(item.purchaseItem.masterData.productCategory)}</td>
                                                 <td>{item.orderId}</td>
                                                 <td>{item.amount}</td>

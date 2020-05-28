@@ -18,7 +18,9 @@ class ViewSingleDelieveredOrderPage extends Component {
             lockPage: false,
             done: false,
             singleOrder: {},
-            status: ''
+            status: '',
+            newPrice: '',
+            margin: ''
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -45,8 +47,8 @@ class ViewSingleDelieveredOrderPage extends Component {
             })
         }
 
-        if (this.props.success && !this.state.lockPage) {
-            this.setState({ status: status.invoiced, lockPage: true })
+        if (!this.props.loading_invoice && !this.state.lockPage) {
+            this.setState({ status: status.invoiced, lockPage: true, newPrice: '', margin: '' })
         }
     }
 
@@ -58,6 +60,7 @@ class ViewSingleDelieveredOrderPage extends Component {
 
     invoice = () => {
         const { order } = this.state
+        this.setState({ lockPage: false })
         this.props.invoiceOrder(order.purchaseOrderNumber, this.state.orders)
     }
 

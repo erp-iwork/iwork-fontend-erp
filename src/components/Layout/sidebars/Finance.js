@@ -55,7 +55,7 @@ class Finance extends React.Component {
             { to: routes.AddCustomer, name: 'Add Customer', exact: false, Icon: MdWeb },
             { to: routes.AddMasterDataPage, name: 'Add Master Data', exact: false, Icon: MdViewDay },
             { to: routes.ViewAllMasterData, name: 'All Master Data', exact: false, Icon: MdStar },
-            { to: routes.ViewOrdersFinance, name: 'All Orders', exact: false, Icon: MdInsertChart },
+            { to: routes.ViewOrdersFinance, name: 'Sales Orders', exact: false, Icon: MdInsertChart },
             { to: routes.ViewDelieveredOrders, name: 'Delivered Orders', exact: false, Icon: MdTextFields },
             { to: routes.ViewFinancePurchaseOrders, name: 'Purchased Orders', exact: false, Icon: MdViewCarousel },
             { to: routes.ViewFinaceManufacturedOrders, name: 'Manufactured Orders', exact: false, Icon: MdViewCarousel }

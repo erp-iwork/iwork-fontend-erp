@@ -29,7 +29,7 @@ class DeliveredOrders extends Component {
     }
 
     render() {
-        if (this.props.loading_records) return <PageSpinner />
+        if (!this.state.done) return <PageSpinner />
         return (
             <Page
                 title="Record Tracking"
@@ -62,7 +62,7 @@ class DeliveredOrders extends Component {
                                                 <td>{item.transactionId}</td>
                                                 <td>{item.orderItem.InventoryItem.InventoryItemId}</td>
                                                 <td>{item.orderItem.itemName}</td>
-                                                <td>-{item.orderItem.InventoryItem.cost}</td>
+                                                <td>-{item.orderItem.itemCost}</td>
                                                 <td>{item.orderId}</td>
                                                 <td>-{item.amount}</td>
                                                 <td>{item.orderItem.quantity}</td>
