@@ -1,30 +1,13 @@
 import React from 'react';
 import {
-    // MdAccountCircle,
-    // MdArrowDropDownCircle,
-    // MdBorderAll,
-    // MdBrush,
-    // MdChromeReaderMode,
-    // MdDashboard,
     MdExtension,
-    // MdGroupWork,
-    // MdInsertChart,
     MdKeyboardArrowDown,
-    // MdNotificationsActive,
-    // MdPages,
-    // MdRadioButtonChecked,
-    // MdSend,
-    // MdStar,
-    // MdTextFields,
-    // MdViewCarousel,
-    // MdViewDay,
-    // MdViewList,
-    // MdWeb,
+    MdRadioButtonChecked,
+    MdTextFields,
     MdWidgets,
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
-    // UncontrolledTooltip,
     Collapse,
     NavItem,
     NavLink as BSNavLink,
@@ -41,9 +24,6 @@ class Logistics extends React.Component {
     }
 
     state = {
-        // isOpenComponents: true,
-        // isOpenContents: true,
-        // isOpenPages: true,
         isOpenHR: true,
         isOpenIT: true,
         isOpenSALES: true,
@@ -67,8 +47,8 @@ class Logistics extends React.Component {
     render() {
         const LOGISTICS = [
             { to: routes.LogisticsDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
-            { to: routes.ViewOrdersLogistics, name: 'Sales Orders', exact: false, Icon: MdWidgets },
-            { to: routes.ViewPurchaseOrdersLogistics, name: 'Purchased Orders', exact: false, Icon: MdWidgets },
+            { to: routes.ViewOrdersLogistics, name: 'Sales Orders', exact: false, Icon: MdRadioButtonChecked },
+            { to: routes.ViewPurchaseOrdersLogistics, name: 'Purchased Orders', exact: false, Icon: MdTextFields },
         ]
         return (
             <React.Fragment>

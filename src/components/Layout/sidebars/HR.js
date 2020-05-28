@@ -1,15 +1,14 @@
 import React from 'react';
 import {
 
-    // MdDashboard,
+    MdDashboard,
     MdExtension,
-    // MdInsertChart,
+    MdInsertChart,
     MdKeyboardArrowDown,
     MdWidgets,
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
-    // UncontrolledTooltip,
     Collapse,
     NavItem,
     NavLink as BSNavLink,
@@ -52,8 +51,8 @@ class HR extends React.Component {
     render() {
         const HR = [
             { to: routes.HRDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
-            { to: routes.allEmployees, name: 'All Employees', exact: false, Icon: MdWidgets },
-            { to: routes.addEmployee, name: 'Add Employee', exact: false, Icon: MdWidgets },
+            { to: routes.allEmployees, name: 'All Employees', exact: false, Icon: MdInsertChart },
+            { to: routes.addEmployee, name: 'Add Employee', exact: false, Icon: MdDashboard },
         ]
         return (
             <React.Fragment>
