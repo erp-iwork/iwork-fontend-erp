@@ -1,6 +1,13 @@
 import React, { Component } from "react";
-import { Page, Text, View, Document, Image ,StyleSheet } from "@react-pdf/renderer";
-import Logo from '../../assets/img/logo/Logo.jpg'
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  Image,
+  StyleSheet,
+} from "@react-pdf/renderer";
+import Logo from "../../assets/img/logo/Logo.jpg";
 
 const styles = StyleSheet.create({
   root: {
@@ -36,16 +43,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   tableColHeader: {
+    margin: "auto",
     width: "20%",
     borderStyle: "solid",
     borderColor: "#686868",
-    borderBottomColor: "#000",
+    borderBottomColor: "#686868",
     backgroundColor: "#11669F",
     borderWidth: 1,
-    borderLeftWidth: 0,
     borderTopWidth: 0,
   },
   tableCol: {
+    margin: "auto",
     width: "20%",
     borderStyle: "solid",
     borderColor: "#686868",
@@ -54,13 +62,10 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   tableCellHeader: {
-    margin: "auto",
     fontSize: 12,
-    // fontWeight: 500,
     color: "#FFFFFF",
   },
   tableCell: {
-    // margin: "auto",
     color: "#686868",
     fontSize: 10,
   },
@@ -98,16 +103,14 @@ class SIVPdf extends Component {
                 display: "flex",
               }}
             >
-              <View
-                item
-              >
+              <View item>
                 <Image source={Logo} alt="" style={styles.logo} />
 
                 <Text style={styles.text} variant="body2">
                   Sparta ERP
                 </Text>
               </View>
-              
+
               <View item>
                 <View style={{ height: 5 }} />
                 <Text style={styles.text} variant="body2" gutterBottom>
