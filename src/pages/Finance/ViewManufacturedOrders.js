@@ -11,7 +11,7 @@ import status from '../../constant/status'
 
 const Order = ({ order, index }) => {
     return (
-        <tr align="center">
+        <tr>
             <th scope="row">{index + 1}</th>
             <td>{order.requiredProductName}</td>
             <td>{order.manufacturePerson}</td>
@@ -78,7 +78,7 @@ class ViewAllPurchaseOrderPage extends Component {
                     <CardBody>
                         <Table responsive >
                             <thead>
-                                <tr align='center'>
+                                <tr>
                                     <th>#</th>
                                     <th>Product Name</th>
                                     <th>Manufacture Personnel</th>

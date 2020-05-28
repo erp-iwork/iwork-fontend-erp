@@ -172,11 +172,7 @@ function PdfDocument({ data }) {
                                         <Text align='right' style={{
                                             color: '#11669F',
                                             fontSize: 12
-                                        }}>Company name : </Text>
-                                    </View>
-                                    <View style={{width: 10}}></View>
-                                    <View item>
-                                        <Text align='right' style={styles.textBody}>{customer.customerName}</Text>
+                                        }}>Company name : <Text style={styles.textBody} >{customer.customerName} </Text> </Text>
                                     </View>
                                 </View>
                                 <View style={{
@@ -187,24 +183,11 @@ function PdfDocument({ data }) {
                                     display: 'flex',
                                     justifyContent: 'space-between'
                                 }}>
-                                    <View item >
-                                        <Text align='right' style={{
-                                            color: '#11669F',
-                                            fontSize: 12
-                                        }} >
-                                            Working field: </Text>
-                                    </View>
-                                    <View style={{
-                                        width: 10
-                                    }}>
-
-                                    </View>
-                                    <View item>
-
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.workingField}
-                                        </Text>
-                                    </View>
+                                    <Text align='right' style={{
+                                        color: '#11669F',
+                                        fontSize: 12
+                                    }} >
+                                        Working field: <Text style={styles.textBody} >{customer.workingField} </Text> </Text>
                                 </View>
 
                                 <View style={{
@@ -215,26 +198,29 @@ function PdfDocument({ data }) {
                                     display: 'flex',
                                     justifyContent: 'space-between'
                                 }}>
-                                    <View item >
 
-                                        <Text align='right' style={{
-                                            color: '#11669F',
-                                            fontSize: 12
-                                        }} >
-                                            General manager :
-                                                </Text>
-                                    </View>
-                                    <View style={{
-                                        width: 10
-                                    }}>
+                                    <Text align='right' style={{
+                                        color: '#11669F',
+                                        fontSize: 12
+                                    }} >
+                                        General manager : <Text style={styles.textBody} >{customer.generalManger} </Text>
+                                    </Text>
+                                </View>
+                                <View style={{
+                                    height: 10
+                                }} />
+                                <View container style={{
+                                    flexDirection: 'row',
+                                    display: 'flex',
+                                    justifyContent: 'space-between'
+                                }}>
 
-                                    </View>
-                                    <View item>
-
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.generalManger}
-                                        </Text>
-                                    </View>
+                                    <Text align='right' style={{
+                                        color: '#11669F',
+                                        fontSize: 12
+                                    }} >
+                                        Contact person : <Text style={styles.textBody} >{customer.contactPerson} </Text>
+                                    </Text>
                                 </View>
                                 <View style={{
                                     height: 10
@@ -250,47 +236,7 @@ function PdfDocument({ data }) {
                                             color: '#11669F',
                                             fontSize: 12
                                         }} >
-                                            Contact person :
-                                                </Text>
-                                    </View>
-                                    <View style={{
-                                        width: 10
-                                    }}>
-
-                                    </View>
-                                    <View item>
-
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.contactPerson}
-                                        </Text>
-                                    </View>
-                                </View>
-                                <View style={{
-                                    height: 10
-                                }} />
-                                <View container style={{
-                                    flexDirection: 'row',
-                                    display: 'flex',
-                                    justifyContent: 'space-between'
-                                }}>
-                                    <View item >
-
-                                        <Text align='right' style={{
-                                            color: '#11669F',
-                                            fontSize: 12
-                                        }} >
-                                            E-mail Address :
-                                                </Text>
-                                    </View>
-                                    <View style={{
-                                        width: 10
-                                    }}>
-
-                                    </View>
-                                    <View item>
-
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.email}
+                                            E-mail Address : <Text style={styles.textBody} >{customer.email} </Text>
                                         </Text>
                                     </View>
                                 </View>
@@ -306,14 +252,7 @@ function PdfDocument({ data }) {
                                         <Text align='right' style={{
                                             color: '#11669F',
                                             fontSize: 12
-                                        }}>Tin number : </Text>
-                                    </View>
-                                    <View style={{ width: 10 }}>
-                                    </View>
-                                    <View item>
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.tinNumber}
-                                        </Text>
+                                        }}>Tin number : <Text style={styles.textBody} >{customer.tinNumber} </Text> </Text>
                                     </View>
                                 </View>
                                 <View style={{
@@ -328,13 +267,7 @@ function PdfDocument({ data }) {
                                         <Text align='right' style={{
                                             color: '#11669F',
                                             fontSize: 12
-                                        }}>Payment option :</Text>
-                                    </View>
-                                    <View style={{ width: 10 }}></View>
-                                    <View item>
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.paymentOption}
-                                        </Text>
+                                        }}>Payment option : <Text style={styles.textBody} >{customer.paymentOption} </Text></Text>
                                     </View>
                                 </View>
                                 <View style={{ height: 10 }} /></View>
@@ -362,6 +295,9 @@ function PdfDocument({ data }) {
                                     </Text>
                                 </View>
                             </View>
+                            <View style={{
+                                height: 10
+                            }} />
                             <View container style={{
                                 flexDirection: 'row',
                                 display: 'flex',
@@ -547,7 +483,7 @@ function PdfDocument({ data }) {
                                     fontSize: 12
                                 }}>Total :</Text>
                             </View>
-                            <View style={{width: 10}}></View>
+                            <View style={{ width: 10 }}></View>
                             <View item>
                                 <Text align='right' style={styles.textBody} >
                                     {data.Total}
