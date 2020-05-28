@@ -11,7 +11,7 @@ import { reverse } from '../../useCases'
 
 const Order = ({ order, index, handleReceive }) => {
     return (
-        <tr align="center">
+        <tr>
             <th scope="row">{index + 1}</th>
             <td>{order.requiredProductName}</td>
             <td>{order.manufacturePerson}</td>
@@ -81,7 +81,7 @@ class ViewAllPurchaseOrderPage extends Component {
                     <CardBody>
                         <Table responsive >
                             <thead>
-                                <tr align='center'>
+                                <tr>
                                     <th>MO#</th>
                                     <th>Product Name</th>
                                     <th>Manufacture Personnel</th>
@@ -90,7 +90,7 @@ class ViewAllPurchaseOrderPage extends Component {
                                     <th>Quantity</th>
                                     <th>End Date</th>
                                     <th>Status</th>
-                                    <th colSpan={2} >Actions</th>
+                                    <th colSpan={2} align="center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>

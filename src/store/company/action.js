@@ -234,6 +234,35 @@ export const addMasterData = (masterData) => (dispatch) => {
     })
 }
 
+export const getAllMasterData = () => (dispatch) => {
+  dispatch({
+    type: companyConstant.REQUEST_GET_MASTERDATA,
+    payload: true
+  })
+  return axios.get(API + routes.masterData, headers)
+    .then(res => {
+      dispatch({
+        type: companyConstant.GET_MASTERDATA,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error", text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+    })
+}
+
 export const getMasterData = () => (dispatch) => {
   dispatch({
     type: companyConstant.REQUEST_GET_MASTERDATA,

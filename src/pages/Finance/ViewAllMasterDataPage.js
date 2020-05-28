@@ -6,8 +6,9 @@ import {
 } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
-import { getMasterData } from '../../store/company/action'
+import { getAllMasterData } from '../../store/company/action'
 import { getExistingCategories } from '../../store/inventory/action'
+import { reverse } from '../../useCases'
 
 const Data = ({ item, index, toggle, category }) => {
     return (
@@ -42,7 +43,7 @@ class ViewAllMasterData extends Component {
 
     componentDidMount() {
         this.props.getExistingCategories()
-        this.props.getMasterData()
+        this.props.getAllMasterData()
     }
 
     toggle = (data) => {
@@ -77,7 +78,7 @@ class ViewAllMasterData extends Component {
                         <Row><Col>Product Name:</Col><Col><b>{data.productName}</b></Col></Row>
                         <Row><Col>Category:</Col><Col><b>{data.productCategory}</b></Col></Row>
                         <Row><Col>Type:</Col><Col><b>{data.productType}</b></Col></Row>
-                        <Row><Col>Sales Price:</Col><Col><b>{data.productPrice}</b></Col></Row>
+                        <Row><Col>Unit Price:</Col><Col><b>{data.productPrice}</b></Col></Row>
                         <Row><Col>Cost Price:</Col><Col><b>{data.cost}</b></Col></Row>
                         <Row><Col>Unit of Measurement:</Col><Col><b>{data.unitOfMeasurement}</b></Col></Row>
                     </ModalBody>
@@ -97,12 +98,12 @@ class ViewAllMasterData extends Component {
                                     <th>Product Name</th>
                                     <th>Product Type</th>
                                     <th>Product Category</th>
-                                    <th>Product Price</th>
-                                    <th>Unit of Measurement</th>
+                                    <th>Unit Price</th>
+                                    <th>UoM</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {this.props.masterData.slice(0).reverse().map((item, index) => (
+                            {reverse(this.props.masterData).map((item, index) => (
                                 <Data item={item} key={index} index={index} toggle={this.toggle} category={this.getCategory} />
                             ))}
                         </Table>
@@ -122,6 +123,6 @@ const mapStateToProps = (state) => {
         masterData: state.companyReducer.masterData
     }
 }
-const mapDispatchToProps = { getMasterData, getExistingCategories }
+const mapDispatchToProps = { getAllMasterData, getExistingCategories }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewAllMasterData)

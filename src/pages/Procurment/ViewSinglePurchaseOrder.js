@@ -98,7 +98,7 @@ class ViewSinglePurchaseOrderPage extends Component {
                                             <tr key={index}>
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{item.masterData.productName}</td>
-                                                <td>{item.masterData.productPrice}</td>
+                                                <td>{item.itemCost}</td>
                                                 <td>{item.purchaseQuantity}</td>
                                             </tr>
                                         ))}

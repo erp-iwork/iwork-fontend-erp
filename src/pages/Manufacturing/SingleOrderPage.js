@@ -7,7 +7,6 @@ import status from '../../constant/status'
 class SingleOrderPage extends Component {
     constructor(props) {
         console.log(props.location.state);
-
         super(props);
         this.state = {
             order: props.location.state
@@ -15,6 +14,7 @@ class SingleOrderPage extends Component {
     }
     render() {
         const { order } = this.state
+        console.log(order)
         return (
             <Page title="Single Order" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
                 <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
@@ -64,30 +64,30 @@ class SingleOrderPage extends Component {
                             <CardBody>
                                 <Row>
                                     <Col>
-                                        Order Id:
+                                        Order ID:
                                     </Col>
                                     <Col>
-                                        <b>{order.productId}</b>
+                                        <b>{order.orderNumber}</b>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
-                                        Order Name :
+                                        Product Name :
                                     </Col>
                                     <Col>
-                                        <b>{order.productName}</b>
+                                        <b>{order.requiredProductName}</b>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col>
-                                        Order Price :
+                                        Unit Price :
                                     </Col>
                                     <Col>
-                                        <b>{order.productPrice}</b>
+                                        <b>{order.retailPrice}</b>
                                     </Col>
                                 </Row>
-                                <b>Product Type</b>
-                                <Col>{order.productType}</Col>
+                                <b>Quantity</b>
+                                <Col>{order.requiredProductQuantity}</Col>
                             </CardBody>
                         </Col>
                         <Col md={8}>
@@ -98,6 +98,7 @@ class SingleOrderPage extends Component {
                                 <Table responsive className="scrollTableSales">
                                     <thead>
                                         <tr>
+                                            <th>MO#</th>
                                             <th>Material Name</th>
                                             <th>Material Cost</th>
                                             <th>Quantity</th>
@@ -106,7 +107,8 @@ class SingleOrderPage extends Component {
                                     <tbody>
                                         {order.manufacture_item_set ? order.manufacture_item_set.map((item, index) => (
                                             <tr>
-                                                <th scope="row">{item.componentName}</th>
+                                                <td>{index + 1}</td>
+                                                <td>{item.componentName}</td>
                                                 <td>{item.price}</td>
                                                 <td>{item.quantity}</td>
                                             </tr>

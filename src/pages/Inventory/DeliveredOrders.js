@@ -5,6 +5,7 @@ import { getRecordsByType, getExistingCategories } from '../../store/inventory/a
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import type from '../../constant/transactions'
+import { reverse } from '../../useCases'
 
 class DeliveredOrders extends Component {
     constructor(props) {
@@ -48,24 +49,24 @@ class DeliveredOrders extends Component {
                                             <th>Product ID</th>
                                             <th>Product Name</th>
                                             <th>Unit Price</th>
-                                            <th>Order ID</th>
-                                            <th>Amount</th>
                                             <th>Quantity</th>
+                                            <th>Amount</th>
+                                            <th>Order ID</th>
                                             <th>Product Category</th>
                                             <th>Transaction Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.records.slice(0).reverse().map((item, index) => (
+                                        {reverse(this.state.records).map((item, index) => (
                                             <tr>
                                                 <td>{index + 1}</td>
                                                 <td>{item.transactionId}</td>
                                                 <td>{item.orderItem.InventoryItem.InventoryItemId}</td>
                                                 <td>{item.orderItem.itemName}</td>
-                                                <td>-{item.orderItem.itemCost}</td>
-                                                <td>{item.orderId}</td>
-                                                <td>-{item.amount}</td>
+                                                <td>-{item.orderItem.InventoryItem.retailPrice}</td>
                                                 <td>{item.orderItem.quantity}</td>
+                                                <td>-{item.amount}</td>
+                                                <td>{item.orderId}</td>
                                                 <td>{item.orderItem.InventoryItem.catagory.catagory}</td>
                                                 <td>{item.transactionDate}</td>
                                             </tr>
