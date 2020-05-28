@@ -42,7 +42,6 @@ function addNewEmployee(data) {
         return Swal.fire({
           title: "Created",
           icon: "success",
-          position: 'top-end',
           showConfirmButton: false,
           timer: 1000,
         }).then((res) => {
@@ -115,42 +114,58 @@ function deleteEmploye(employeId) {
       type: appConstants.DELETE_REQUEST,
       payload: true,
     });
-    axios
-      .request({
-        method: "DELETE",
-        url: API + "employe/" + employeId,
-        responseType: "json",
-        headers: headers,
-      })
-      .then((response) => {
-        dispatch({
-          type: appConstants.DELETE_SUCCESS,
-          payload: employeId,
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: "Error",
-          text: "Something Went Wrong",
-          icon: "error",
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        if (error.response && error.response.data) {
+    return Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        axios.request({
+          method: "DELETE",
+          url: API + "employe/" + employeId,
+          responseType: "json",
+          headers: headers,
+        }).then((response) => {
+          Swal.fire({
+            title: "Deleted",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1000
+          })
           dispatch({
-            type: appConstants.DELETE_FAILURE,
-            payload: error.response.data.errors,
+            type: appConstants.DELETE_SUCCESS,
+            payload: employeId,
           });
-        } else {
+        })
+        .catch((error) => {
           Swal.fire({
             title: "Error",
-            text: "Connection Problem",
+            text: "Something Went Wrong",
             icon: "error",
             showConfirmButton: false,
             timer: 1000,
           });
-        }
-      });
+          if (error.response && error.response.data) {
+            dispatch({
+              type: appConstants.DELETE_FAILURE,
+              payload: error.response.data.errors,
+            });
+          } else {
+            Swal.fire({
+              title: "Error",
+              text: "Connection Problem",
+              icon: "error",
+              showConfirmButton: false,
+              timer: 1000,
+            });
+          }
+        })
+      }
+    })
   };
 }
 

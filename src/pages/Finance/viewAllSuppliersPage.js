@@ -69,7 +69,7 @@ class ViewAllSuppliers extends Component {
         this.props.deleteSupplier(id).then(res => {
             if (res) {
                 Swal.fire({
-                    title: "Delteing Account...",
+                    title: "Deleting Account...",
                     icon: "warning",
                     showCancelButton: false,
                     allowOutsideClick: false,
