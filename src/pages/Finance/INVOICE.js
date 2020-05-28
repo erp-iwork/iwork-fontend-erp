@@ -106,7 +106,7 @@ function PdfDocument({ data }) {
                     <View container style={styles.header}>
                         <View item xs={6}>
                             <Text style={styles.textBody}  >
-                                NAZO PLC
+                                Your Company
                                 </Text>
                             <View style={{
                                 height: 10
@@ -114,7 +114,7 @@ function PdfDocument({ data }) {
 
                             </View>
                             <Text style={styles.textBody}  >
-                                Haile garment, Addis Ababa
+                                Your Location
                                 </Text>
                             <View style={{
                                 height: 10
@@ -129,7 +129,7 @@ function PdfDocument({ data }) {
 
                             </View>
                             <Text style={styles.textBody} >
-                                Website : nazoplcethio.com
+                                Website : YourWebsite.com
                                 </Text>
                         </View>
 
@@ -172,11 +172,7 @@ function PdfDocument({ data }) {
                                         <Text align='right' style={{
                                             color: '#11669F',
                                             fontSize: 12
-                                        }}>Company name : </Text>
-                                    </View>
-                                    <View style={{ width: 10 }}></View>
-                                    <View item>
-                                        <Text align='right' style={styles.textBody}>{customer.customerName}</Text>
+                                        }}>Company name : <Text style={styles.textBody} >{customer.customerName} </Text> </Text>
                                     </View>
                                 </View>
                                 <View style={{
@@ -187,24 +183,11 @@ function PdfDocument({ data }) {
                                     display: 'flex',
                                     justifyContent: 'space-between'
                                 }}>
-                                    <View item >
-                                        <Text align='right' style={{
-                                            color: '#11669F',
-                                            fontSize: 12
-                                        }} >
-                                            Working field: </Text>
-                                    </View>
-                                    <View style={{
-                                        width: 10
-                                    }}>
-
-                                    </View>
-                                    <View item>
-
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.workingField}
-                                        </Text>
-                                    </View>
+                                    <Text align='right' style={{
+                                        color: '#11669F',
+                                        fontSize: 12
+                                    }} >
+                                        Working field: <Text style={styles.textBody} >{customer.workingField} </Text> </Text>
                                 </View>
 
                                 <View style={{
@@ -215,26 +198,29 @@ function PdfDocument({ data }) {
                                     display: 'flex',
                                     justifyContent: 'space-between'
                                 }}>
-                                    <View item >
 
-                                        <Text align='right' style={{
-                                            color: '#11669F',
-                                            fontSize: 12
-                                        }} >
-                                            General manager :
-                                                </Text>
-                                    </View>
-                                    <View style={{
-                                        width: 10
-                                    }}>
+                                    <Text align='right' style={{
+                                        color: '#11669F',
+                                        fontSize: 12
+                                    }} >
+                                        General manager : <Text style={styles.textBody} >{customer.generalManger} </Text>
+                                    </Text>
+                                </View>
+                                <View style={{
+                                    height: 10
+                                }} />
+                                <View container style={{
+                                    flexDirection: 'row',
+                                    display: 'flex',
+                                    justifyContent: 'space-between'
+                                }}>
 
-                                    </View>
-                                    <View item>
-
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.generalManger}
-                                        </Text>
-                                    </View>
+                                    <Text align='right' style={{
+                                        color: '#11669F',
+                                        fontSize: 12
+                                    }} >
+                                        Contact person : <Text style={styles.textBody} >{customer.contactPerson} </Text>
+                                    </Text>
                                 </View>
                                 <View style={{
                                     height: 10
@@ -250,47 +236,7 @@ function PdfDocument({ data }) {
                                             color: '#11669F',
                                             fontSize: 12
                                         }} >
-                                            Contact person :
-                                                </Text>
-                                    </View>
-                                    <View style={{
-                                        width: 10
-                                    }}>
-
-                                    </View>
-                                    <View item>
-
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.contactPerson}
-                                        </Text>
-                                    </View>
-                                </View>
-                                <View style={{
-                                    height: 10
-                                }} />
-                                <View container style={{
-                                    flexDirection: 'row',
-                                    display: 'flex',
-                                    justifyContent: 'space-between'
-                                }}>
-                                    <View item >
-
-                                        <Text align='right' style={{
-                                            color: '#11669F',
-                                            fontSize: 12
-                                        }} >
-                                            E-mail Address :
-                                                </Text>
-                                    </View>
-                                    <View style={{
-                                        width: 10
-                                    }}>
-
-                                    </View>
-                                    <View item>
-
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.email}
+                                            E-mail Address : <Text style={styles.textBody} >{customer.email} </Text>
                                         </Text>
                                     </View>
                                 </View>
@@ -306,14 +252,7 @@ function PdfDocument({ data }) {
                                         <Text align='right' style={{
                                             color: '#11669F',
                                             fontSize: 12
-                                        }}>Tin number : </Text>
-                                    </View>
-                                    <View style={{ width: 10 }}>
-                                    </View>
-                                    <View item>
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.tinNumber}
-                                        </Text>
+                                        }}>Tin number : <Text style={styles.textBody} >{customer.tinNumber} </Text> </Text>
                                     </View>
                                 </View>
                                 <View style={{
@@ -328,13 +267,7 @@ function PdfDocument({ data }) {
                                         <Text align='right' style={{
                                             color: '#11669F',
                                             fontSize: 12
-                                        }}>Payment option :</Text>
-                                    </View>
-                                    <View style={{ width: 10 }}></View>
-                                    <View item>
-                                        <Text align='right' style={styles.textBody} >
-                                            {customer.paymentOption}
-                                        </Text>
+                                        }}>Payment option : <Text style={styles.textBody} >{customer.paymentOption} </Text></Text>
                                     </View>
                                 </View>
                                 <View style={{ height: 10 }} /></View>
@@ -352,33 +285,28 @@ function PdfDocument({ data }) {
                                     <Text align='right' style={{
                                         color: '#11669F',
                                         fontSize: 12
-                                    }}>Order no: </Text>
+                                    }}>Order no: <Text style={styles.textBody} >
+                                            {data.order}
+                                        </Text> </Text>
                                 </View>
                                 <View style={{ width: 10 }}>
                                 </View>
-                                <View item >
-                                    <Text align='right' style={styles.textBody} >
-                                        {data.order}
-                                    </Text>
-                                </View>
                             </View>
+                            <View style={{
+                                height: 10
+                            }} />
                             <View container style={{
                                 flexDirection: 'row',
                                 display: 'flex',
                                 justifyContent: 'space-between'
                             }}>
                                 <View item >
-                                    <Text align='right' style={{
+                                    <Text style={{
                                         color: '#11669F',
                                         fontSize: 12
-                                    }}>Invoice No:</Text>
-                                </View>
-                                <View style={{ width: 10 }}>
-                                </View>
-                                <View item>
-                                    <Text align='right' style={styles.textBody} >
-                                        {data.invoiceId}
-                                    </Text>
+                                    }}>Invoice No: <Text style={styles.textBody} >
+                                            {data.invoiceId}
+                                        </Text></Text>
                                 </View>
                             </View>
                             <View style={{
@@ -391,19 +319,12 @@ function PdfDocument({ data }) {
                                 justifyContent: 'space-between'
                             }}>
                                 <View item >
-                                    <Text align='right' style={{
+                                    <Text style={{
                                         color: '#11669F',
                                         fontSize: 12
-                                    }}>Invoice Date :</Text>
-                                </View>
-                                <View style={{
-                                    width: 10
-                                }}>
-                                </View>
-                                <View item>
-                                    <Text align='right' style={styles.textBody} >
-                                        {data.date}
-                                    </Text>
+                                    }}>Invoice Date :<Text style={styles.textBody} >
+                                            {data.date}
+                                        </Text></Text>
                                 </View>
                             </View>
                         </View>
@@ -412,9 +333,6 @@ function PdfDocument({ data }) {
                                 height: 10
                             }}>
                             </View>
-                            <View style={{
-                                width: 10
-                            }} />
                             <View container style={{
                                 flexDirection: 'row',
                                 display: 'flex',
@@ -564,8 +482,8 @@ function PdfDocument({ data }) {
                         justifyContent: 'space-between'
                     }}>
                         <Text variant='caption' style={styles.textBody}>Phone : +2519 1234 56 77</Text>
-                        <Text style={styles.textBody}>Website : EastAfrican.com</Text>
-                        <Text style={styles.textBody}>Email : EastAfrican@gmail.com</Text>
+                        <Text style={styles.textBody}>Website : YourWebsite.com</Text>
+                        <Text style={styles.textBody}>Email : YourEmail@gmail.com</Text>
                     </View>
                 </>
 
