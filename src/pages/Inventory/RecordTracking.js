@@ -53,7 +53,7 @@ class RecordTracking extends Component {
                                             <th>Transaction ID</th>
                                             <th>Product ID</th>
                                             <th>Product Name</th>
-                                            <th>Cost</th>
+                                            <th>Unit Price</th>
                                             <th>Product Category</th>
                                             <th>Order ID</th>
                                             <th>Amount</th>

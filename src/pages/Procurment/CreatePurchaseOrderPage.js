@@ -77,12 +77,8 @@ class CreatePurchaseOrder extends Component {
     ItemNameChange = (idx) => (evt) => {
         const neworder_items = this.state.order_items.map((item, sidx) => {
             if (idx !== sidx) return item;
-            return {
-                ...item,
-                masterData_id: evt.target.value,
-            };
-        });
-
+            return { ...item, masterData_id: evt.target.value }
+        })
         this.setState({ order_items: neworder_items })
     }
 
@@ -98,7 +94,7 @@ class CreatePurchaseOrder extends Component {
         }
 
         if (this.props.success && this.state.lockPage) {
-            this.setState({ company: "", description: "", shipmentAddress: "", lockPage: false })
+            this.setState({ supplier: "", description: "", shipmentAddress: "", lockPage: false })
         }
     }
 
@@ -121,14 +117,8 @@ class CreatePurchaseOrder extends Component {
             "orderdBy": localStorage.getItem('username'),
             "description": this.state.description,
             suplier_id: this.state.supplier
-        });
-        this.setState({ lockPage: false })
-        if (this.props.success) {
-            this.setState({
-                supplier: "", description: ""
-            })
-            this.updateOrders()
-        }
+        })
+        this.setState({ lockPage: true })
     }
 
     render() {
