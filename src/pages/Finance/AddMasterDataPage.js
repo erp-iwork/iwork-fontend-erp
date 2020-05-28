@@ -36,7 +36,6 @@ class AddMasterDataPage extends Component {
         this.ItemUnitChange = this.ItemUnitChange.bind(this)
         this.ItemQuantityChange = this.ItemQuantityChange.bind(this)
         this.submit = this.submit.bind(this)
-        this.checkIfOneIsSelected= this.checkIfOneIsSelected.bind(this)
     }
 
     handleAddItem = () => {
@@ -45,17 +44,6 @@ class AddMasterDataPage extends Component {
                 { product: 0, materialName: "", materialQuantity: 1, materialUnitOfMeasurement: "" },
             ])
         })
-    }
-
-    checkIfOneIsSelected = () => {
-        const { can_be_manufactured, can_be_purchased, can_be_sold } = this.state
-        if (!(can_be_manufactured || can_be_purchased || can_be_sold)) {
-            this.setState({ noneSelected: true })
-            return true
-        } else {
-            this.setState({ noneSelected: false })
-            return false
-        }
     }
 
     componentDidMount() {
@@ -153,7 +141,6 @@ class AddMasterDataPage extends Component {
 
     render() {
         if (this.props.loading || this.props.loading_categories) return <PageSpinner />
-
         let { can_be_manufactured } = this.state
         return (
             <Page
@@ -311,7 +298,7 @@ class AddMasterDataPage extends Component {
                                 <FormGroup align='center'>
                                     <Col >
                                         <Button onClick={this.submit} color='primary'>
-                                            {this.props.loading_addMasterdata ? <Loader /> : "Add to Product"}
+                                            {this.props.loading_addMasterdata ? <Loader /> : "Add Product"}
                                         </Button>
                                     </Col>
                                 </FormGroup>

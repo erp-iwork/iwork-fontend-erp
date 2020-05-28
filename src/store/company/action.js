@@ -210,6 +210,7 @@ export const addMasterData = (masterData) => (dispatch) => {
   return axios
     .post(API + routes.masterData, masterData, headers)
     .then((res) => {
+      console.log(res.data)
       Swal.fire({
         title: "Added Product",
         icon: "success",

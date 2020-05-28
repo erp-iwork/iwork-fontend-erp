@@ -15,7 +15,7 @@ export const getSiv = (order) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: GET_SIV,
-        payload: res.data,
+        payload: res.data
       });
     })
     .catch((err) => {

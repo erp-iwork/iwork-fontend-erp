@@ -1,23 +1,14 @@
-import React, { Component } from 'react';
-import Page from "../../components/Page";
+import React, { Component } from 'react'
+import Page from "../../components/Page"
 import {
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Col,
-    Form,
-    FormGroup,
-    Input,
-    Label,
-    Row,
-} from 'reactstrap';
+    Button, Card, CardBody, CardHeader, Col,
+    Form, FormGroup, Input, Label, Row
+} from 'reactstrap'
 import { connect } from 'react-redux'
 import { getMasterdata, addManufacturingOrder } from '../../store/manufacturing/action'
 import PageSpinner from '../../components/PageSpinner'
 import Error from '../../components/error'
 import Loader from '../../components/loader'
-
 
 const BOM = ({ index, materialName, unitOfMeasurement, quantity, cost }) => {
     return (
@@ -64,7 +55,7 @@ const BOM = ({ index, materialName, unitOfMeasurement, quantity, cost }) => {
 
 class CreateOrderManufacturingPage extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             order_items: [],
             dropdown: false,
