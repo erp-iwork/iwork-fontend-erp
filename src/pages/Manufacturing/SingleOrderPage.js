@@ -80,7 +80,7 @@ class SingleOrderPage extends Component {
                                 </Row>
                                 <Row>
                                     <Col>
-                                        Unit Price :
+                                        Sales Price :
                                     </Col>
                                     <Col>
                                         <b>{order.retailPrice}</b>

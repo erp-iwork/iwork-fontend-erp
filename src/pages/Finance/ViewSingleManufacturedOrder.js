@@ -106,7 +106,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                                             <Button align='center' color='primary' onClick={this.invoice} disabled={
                                                 order.status_manufacture_order[0]['status'] === status.finished
                                             }>
-                                                {this.props.loading_invoice ? <Loader /> : "Invoice Order"}
+                                                {this.props.loading_invoice ? <Loader /> : "Update Price"}
                                             </Button>
                                         </Col>
                                         {
