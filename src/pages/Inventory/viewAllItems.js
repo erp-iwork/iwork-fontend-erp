@@ -46,7 +46,7 @@ class ViewAllItems extends Component {
     render() {
         if (!this.state.done) return <PageSpinner />
         const {
-             quantity, retailPrice, catagory, productType, unitOfMeasurement
+            quantity, retailPrice, catagory, productType, unitOfMeasurement
         } = this.state.item
 
         if (this.props.items.item_catagory.length === 0 || this.props.items.item_catagory === null) return <h2>No items in this Category yet</h2>
@@ -66,8 +66,6 @@ class ViewAllItems extends Component {
                         <Row><Col >Quantity: </Col><Col>{quantity}</Col></Row>
                         <Row><Col >Retail Price: </Col><Col>{retailPrice}</Col></Row>
                         <Row><Col >Category: </Col><Col>{catagory.catagory}</Col></Row>
-
-
                         <Row><Col >Units: </Col><Col>{unitOfMeasurement}</Col></Row>
                         <Row><Col >Product Type: </Col><Col>{productType}</Col></Row>
                     </ModalBody>
@@ -77,7 +75,6 @@ class ViewAllItems extends Component {
                       </Button>
                     </ModalFooter>
                 </Modal>
-
                 <Col>
                     <Card className="mb-4">
                         <CardHeader>Inventory Status</CardHeader>
