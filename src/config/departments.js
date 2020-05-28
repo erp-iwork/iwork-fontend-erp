@@ -4,7 +4,7 @@ export default {
     logistics: 'Logistics',
     sales: 'Sales', 
     procurment: 'Procurement',
-    mrp: 'MRP',
+    mrp: 'Manufacturing',
     it: 'IT', 
     inventory: 'Inventory', 
 

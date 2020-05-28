@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     Button,
-
     Modal,
     ModalBody,
     ModalFooter,
@@ -10,18 +9,9 @@ import {
 } from 'reactstrap';
 
 class SuccessModal extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
-
     render() {
         return (
-
-            <Modal
-                isOpen={true}
-            >
+            <Modal isOpen={true}>
                 <ModalHeader>{this.props.title}</ModalHeader>
                 <ModalBody color="primary" >{this.props.message} </ModalBody>
                 <ModalFooter>
@@ -31,8 +21,6 @@ class SuccessModal extends React.Component {
 
                 </ModalFooter>
             </Modal>
-
-
         )
     }
 

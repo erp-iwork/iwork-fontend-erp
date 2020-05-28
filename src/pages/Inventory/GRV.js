@@ -3,7 +3,7 @@ import Typography from '../../components/Typography'
 import SIVPdf from './Printable_SIV';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import Page from '../../components/Page';
-import { Button, CardBody, Col, Table } from 'reactstrap'
+import { Button, CardBody, Col, Table, Row } from 'reactstrap'
 import { getGRV } from '../../store/inventory/action'
 import { connect } from 'react-redux'
 import PageSpinner from '../../components/PageSpinner'
@@ -26,7 +26,9 @@ const classes = {
     color: '#FFFFFF',
   },
   Header: {
-    padding: 30,
+    padding: 10,
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   logo: {
     height: 50,
@@ -105,75 +107,53 @@ class GRV extends React.Component {
         breadcrumbs={[{ name: 'Inventory', active: true }]}
       >
         <hr />
-        <div
-          style={{
-            height: 100
-          }}
-        ></div>
+        <div style={{
+          height: 100
+        }}></div>
         <div style={classes.pdf}>
           <div style={classes.Card}>
-            <div
-              container
-              xs={12}
-              display="flex"
-              justify="space-between"
-              style={classes.Header}
-            >
-              <div>
-                <div
-                  container
+            <Row
+              style={classes.Header}>
+              <Col
+                style={{
+                  marginTop: 10,
+                  marginLeft: 10,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center'
+                }}>
+                <Typography
+                  variant="h6"
                   style={{
-                    marginTop: 10,
-                    marginLeft: 10,
+                    fontSize: 20,
+                    fontWeight: 700,
+                    color: '#fff',
                     display: 'flex',
                     justifyContent: 'center'
-                  }}
-                >
-                  {/* <img src={Logo} alt="" style={classes.logo} /> */}
-                  <Typography
-                    variant="h6"
-                    style={{
-                      fontSize: 20,
-                      fontWeight: 700,
-                      color: '#fff',
-                      display: 'flex',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    SPARTA ERP
+                  }}>
+                  SPARTA ERP
                     </Typography>
-                </div>
-              </div>
-              <div >
-                <Typography
-                  style={classes.text, { color: '#fff', display: 'flex', justifyContent: 'center' }}
-                  variant="body2"
-                  gutterBottom
-                >
-                  <b>Goods Received Voucher</b>
-                </Typography>
+              </Col>
+              <Col >
                 <Typography
                   style={classes.text}
-                  variant="body2"
-                  gutterBottom
                 >
+                  <b>PO # :</b> Purchase Order Number Goes Here
                 </Typography>
+
                 <Typography
                   style={classes.text}
-                  variant="body2"
-                  gutterBottom
                 >
                   <b>Recieved By :</b> {localStorage.getItem('username')}
                 </Typography>
                 <Typography
                   style={classes.text}
-                  variant="body2"
-                  gutterBottom
                 >
                   <b>GRV Date :</b> {grv.date}
                 </Typography>
-              </div>
-            </div>
+
+              </Col>
+            </Row>
           </div>
           <Col>
             <CardBody>
@@ -202,7 +182,6 @@ class GRV extends React.Component {
               </Table>
             </CardBody>
           </Col>
-
           <div
             style={{
               paddingLeft: 20,
@@ -252,7 +231,6 @@ class GRV extends React.Component {
                 </Typography>
             </div>
           </div>
-
         </div>
         <div style={{
           marginLeft: 400,
@@ -274,8 +252,6 @@ class GRV extends React.Component {
                   <Button color='primary' size='sm' >
                     Print GRV
                   </Button>
-
-
                 </div>
               )}
             </PDFDownloadLink>) : null
