@@ -6,6 +6,8 @@ import Page from '../../components/Page';
 import { Button, CardBody, Col, Table, Row } from 'reactstrap'
 import { getGRV } from '../../store/inventory/action'
 import { connect } from 'react-redux'
+import Logo from '../../assets/img/logo/Sparta2.svg'
+
 import PageSpinner from '../../components/PageSpinner'
 
 const classes = {
@@ -114,6 +116,8 @@ class GRV extends React.Component {
           <div style={classes.Card}>
             <Row
               style={classes.Header}>
+
+                
               <Col
                 style={{
                   marginTop: 10,
@@ -122,6 +126,9 @@ class GRV extends React.Component {
                   flexDirection: 'row',
                   justifyContent: 'center'
                 }}>
+                <img src={Logo} alt="" style={classes.logo} />
+
+
                 <Typography
                   variant="h6"
                   style={{
