@@ -66,7 +66,7 @@ export default function inventoryReducer(state = initialState, action) {
         ),
         loading: false,
       };
-    
+
     case inventoryConstant.REQUEST_GET_EXISTING_CATEGORIES:
       return {
         ...state, loading_categories: true
@@ -100,7 +100,7 @@ export default function inventoryReducer(state = initialState, action) {
       return { ...state, updating_status: true }
     case inventoryConstant.SUCCESS_PUT_UPDATE_STATUS:
       return { ...state, updating_status: false, update_success: true }
-    
+
     case inventoryConstant.REQUEST_GET_GRV:
       return { ...state, loading_grv: true }
     case inventoryConstant.SUCCESS_GET_GRV:
@@ -116,7 +116,7 @@ export default function inventoryReducer(state = initialState, action) {
         ...state, loading_records: false,
         records: action.payload
       }
-    
+
     default:
       return state;
   }
