@@ -33,15 +33,15 @@ class SingleOrderPage extends Component {
 
                     <div class={order.status_manufacture_order ?
                         order.status_manufacture_order[0].status === status.manuFactured || order.status_manufacture_order[0].status === status.finished ?
-                        ("step completed") : ("step") : null}>
+                            ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>
                         <h4 class="step-title">Manufactured</h4>
                     </div>
                     <div class={order.status_manufacture_order ?
-                    order.status_manufacture_order[0].status === status.finished ||  order.status_manufacture_order[0].status === status.received ? 
-                        ("step completed") : ("step") : null}>
+                        order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
+                            ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>

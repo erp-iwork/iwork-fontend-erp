@@ -1,30 +1,13 @@
 import React from 'react';
 import {
-    // MdAccountCircle,
-    // MdArrowDropDownCircle,
-    // MdBorderAll,
-    // MdBrush,
-    // MdChromeReaderMode,
-    // MdDashboard,
     MdExtension,
-    // MdGroupWork,
-    // MdInsertChart,
     MdKeyboardArrowDown,
-    // MdNotificationsActive,
-    // MdPages,
-    // MdRadioButtonChecked,
-    // MdSend,
-    // MdStar,
-    // MdTextFields,
-    // MdViewCarousel,
-    // MdViewDay,
-    // MdViewList,
-    // MdWeb,
+    MdRadioButtonChecked,
+    MdTextFields,
     MdWidgets,
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
-    // UncontrolledTooltip,
     Collapse,
     NavItem,
     NavLink as BSNavLink,
@@ -41,9 +24,6 @@ class Logistics extends React.Component {
     }
 
     state = {
-        // isOpenComponents: true,
-        // isOpenContents: true,
-        // isOpenPages: true,
         isOpenHR: true,
         isOpenIT: true,
         isOpenSALES: true,
@@ -67,13 +47,13 @@ class Logistics extends React.Component {
     render() {
         const LOGISTICS = [
             { to: routes.LogisticsDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
-            { to: routes.ViewOrdersLogistics, name: 'Sales Orders', exact: false, Icon: MdWidgets },
-            { to: routes.ViewPurchaseOrdersLogistics, name: 'Purchased Orders', exact: false, Icon: MdWidgets },
-          ]
+            { to: routes.ViewOrdersLogistics, name: 'Sales Orders', exact: false, Icon: MdRadioButtonChecked },
+            { to: routes.ViewPurchaseOrdersLogistics, name: 'Purchased Orders', exact: false, Icon: MdTextFields },
+        ]
         return (
             <React.Fragment>
                 <NavItem
-                    className={bem.e('nav-item7')}
+                    className={bem.e('nav-item9')}
                     onClick={this.handleClick('LOGISTICS')}
                 >
                     <BSNavLink className={bem.e('nav-item-collapse')}>
@@ -82,7 +62,7 @@ class Logistics extends React.Component {
                             <span className=" align-self-start">Logistics</span>
                         </div>
                         <MdKeyboardArrowDown
-                            className={bem.e('nav-item-icon7')}
+                            className={bem.e('nav-item-icon')}
                             style={{
                                 padding: 0,
                                 transform: this.state.isOpenLOGISTICS
@@ -96,24 +76,22 @@ class Logistics extends React.Component {
                 </NavItem>
 
                 <Collapse isOpen={this.state.isOpenLOGISTICS}>
-            <div className='contents'>
-
-
-                    {LOGISTICS.map(({ to, name, exact, Icon }, index) => (
-                        <NavItem key={index} className={bem.e('nav-item7')}>
-                            <BSNavLink
-                                id={`navItem-${name}-${index}`}
-                                tag={NavLink}
-                                to={to}
-                                activeClassName="active"
-                                exact={exact}
-                            >
-                                <Icon className={bem.e('nav-item-icon')} />
-                                <span className="">{name}</span>
-                            </BSNavLink>
-                        </NavItem>
-                    ))}
-            </div>
+                    <div className='contents'>
+                        {LOGISTICS.map(({ to, name, exact, Icon }, index) => (
+                            <NavItem key={index} className={bem.e('nav-item7')}>
+                                <BSNavLink
+                                    id={`navItem-${name}-${index}`}
+                                    tag={NavLink}
+                                    to={to}
+                                    activeClassName="active"
+                                    exact={exact}
+                                >
+                                    <Icon className={bem.e('nav-item-icon')} />
+                                    <span className="">{name}</span>
+                                </BSNavLink>
+                            </NavItem>
+                        ))}
+                    </div>
 
                 </Collapse>
             </React.Fragment>
