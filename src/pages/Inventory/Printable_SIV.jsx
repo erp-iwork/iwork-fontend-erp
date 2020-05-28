@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
+import Logo from "../../assets/img/logo/Logo.jpg";
 
 const styles = StyleSheet.create({
   root: {
@@ -14,6 +15,9 @@ const styles = StyleSheet.create({
     height: "100vh",
     backgroundColor: "#d1d1d1",
     padding: 10,
+  },
+  title: {
+    fontWeight: 600,
   },
 
   text: {
@@ -24,7 +28,7 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   logo: {
-    height: 50,
+    height: 80,
     width: 80,
     marginTop: 10,
   },
@@ -61,7 +65,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   tableCellHeader: {
-    margin: "auto",
+    // margin: "auto",
     fontSize: 12,
     // fontWeight: 500,
     color: "#FFFFFF",
@@ -96,7 +100,7 @@ class SIVPdf extends Component {
             padding: 30,
           }}
         >
-          <View container xs={12} display="flex" style={styles.Header}>
+          {/* <View container xs={12} display="flex" style={styles.Header}>
             <View
               container
               style={{
@@ -130,7 +134,40 @@ class SIVPdf extends Component {
               >
               </View>
             </View>
+          </View> */}
+
+          <View container xs={12} display="flex" style={styles.Header}>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 100,
+                justifyContent: "space-between",
+                display: "flex",
+              }}
+            >
+              <View item>
+                <Image source={Logo} alt="" style={styles.logo} />
+                <Text style={styles.text} variant="body2">
+                  Sparta ERP
+                </Text>
+              </View>
+
+              <View item>
+                <View style={{ height: 5 }} />
+                <Text style={styles.text} variant="body2" gutterBottom>
+                  Issued By : {localStorage.getItem("username")}
+                </Text>
+                <View style={{ height: 5 }} />
+
+                <Text style={styles.text} variant="body2" gutterBottom>
+                  SIV Date : {this.props.sivs.sivDate}
+                </Text>
+              </View>
+            </View>
           </View>
+          <Text style={styles.title} align="center">
+            Store Issue Voucher
+          </Text>
           <View style={styles.line}></View>
 
           <View

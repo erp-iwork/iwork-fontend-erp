@@ -10,6 +10,9 @@ import {
 import Logo from "../../assets/img/logo/Logo.jpg";
 
 const styles = StyleSheet.create({
+  title: {
+    fontWeight: 600,
+  },
   root: {
     width: "100vh",
     height: "100vh",
@@ -105,7 +108,6 @@ class SIVPdf extends Component {
             >
               <View item>
                 <Image source={Logo} alt="" style={styles.logo} />
-
                 <Text style={styles.text} variant="body2">
                   Sparta ERP
                 </Text>
@@ -119,11 +121,14 @@ class SIVPdf extends Component {
                 <View style={{ height: 5 }} />
 
                 <Text style={styles.text} variant="body2" gutterBottom>
-                  GRV Date : {this.props.grv.date}
+                  Date : {this.props.grv.date}
                 </Text>
               </View>
             </View>
           </View>
+          <Text style={styles.title} align="center">
+            Goods Return Voucher
+          </Text>
           <View style={styles.line}></View>
           <View
             style={{
@@ -228,8 +233,6 @@ class SIVPdf extends Component {
               </Text>
             </View>
           </View>
-
-          {/* </View> */}
         </Page>
       </Document>
     );
