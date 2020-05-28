@@ -131,8 +131,6 @@ class AddMasterDataPage extends Component {
     }
 
     submit = () => {
-        const check = this.checkIfOneIsSelected()
-        if (check) return null
         var cost = 1
         if (this.state.can_be_manufactured) {
             cost = this.calculateCost()
@@ -260,8 +258,8 @@ class AddMasterDataPage extends Component {
                                             <Label for="checkbox3">Can Be Purchased</Label>
                                         </Col>
                                     </Row>
-                                    {this.state.noneSelected?
-                                        <Error error={["At least one should be selected"]} /> : ''
+                                    {this.props.errors.errors?
+                                        <Error error={this.props.errors.errors.choices} /> : ''
                                     }
                                 </FormGroup>
                                 <hr></hr>

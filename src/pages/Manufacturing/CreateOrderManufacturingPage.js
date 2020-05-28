@@ -103,17 +103,13 @@ class CreateOrderManufacturingPage extends Component {
     }
 
     submit = event => {
-
         event.preventDefault()
         const { productID, productMaterial, description, quantity, startDate, endDate } = this.state
         const manufacture_item_set = productMaterial.map((item, index) => {
-
-
-
             return {
                 billOfMaterial: item.materialId,
-                quantity: item.materialQuantity,
-                price: item.materialCost * quantity,
+                quantity: item.materialQuantity * quantity,
+                price: item.materialCost * quantity * item.materialQuantity,
                 unitOfMesurement: item.materialUnitOfMeasurement
             }
         })
@@ -129,7 +125,6 @@ class CreateOrderManufacturingPage extends Component {
 
     render() {
         let { dropdown } = this.state
-
         if (this.props.loading_masterdata) return <PageSpinner />
         const canBeManudactured = this.props.masterdata.filter((data) => { return data.isManufactured })
         this.setProducts(canBeManudactured)
