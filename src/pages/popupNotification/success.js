@@ -17,7 +17,7 @@ class SuccessModal extends React.Component {
         this.onShow()
     }
     onShow() {
-        setTimeout(this.props.okFun, 1500)
+        setTimeout(this.props.okFun, 1000)
     }
     render() {
 
@@ -27,12 +27,6 @@ class SuccessModal extends React.Component {
             >
                 <ModalHeader>{this.props.title}</ModalHeader>
                 <ModalBody color="primary" >{this.props.message} </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={this.props.okFun}>
-                        OK
-              </Button>{' '}
-
-                </ModalFooter>
             </Modal>
 
 

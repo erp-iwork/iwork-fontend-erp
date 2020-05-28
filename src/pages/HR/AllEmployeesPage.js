@@ -106,7 +106,7 @@ class AllEmployees extends Component {
                                     </thead>
                                     <tbody>
                                         {employeeInfo ?
-                                            employeeInfo.map((employeeInfos, index) => (
+                                            employeeInfo.splice(0).reverse().map((employeeInfos, index) => (
                                                 <tr align='left' key={index}>
                                                     <th scope="row">{index + 1}</th>
                                                     <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
