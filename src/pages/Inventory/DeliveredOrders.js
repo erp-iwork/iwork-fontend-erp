@@ -5,21 +5,32 @@ import { getRecordsByType, getExistingCategories } from '../../store/inventory/a
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import type from '../../constant/transactions'
+import { reverse } from '../../useCases'
 
 class DeliveredOrders extends Component {
     constructor(props) {
-        super(props);
-        this.state = {}
+        super(props)
+        this.state = {
+            records: [],
+            done: false
+        }
     }
 
     componentDidMount() {
-        this.props.getExistingCategories()
         this.props.getRecordsByType(type.out)
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading_records && !this.state.done) {
+            this.setState({
+                records: this.props.records,
+                done: true
+            })
+        }
+    }
+
     render() {
-        if (this.props.loading_categories || this.props.loading_records) return <PageSpinner />
-        console.log(this.props.records)
+        if (!this.state.done) return <PageSpinner />
         return (
             <Page
                 title="Record Tracking"
@@ -37,20 +48,26 @@ class DeliveredOrders extends Component {
                                             <th>Transaction ID</th>
                                             <th>Product ID</th>
                                             <th>Product Name</th>
-                                            <th>Cost</th>
+                                            <th>Unit Price</th>
+                                            <th>Quantity</th>
+                                            <th>Amount</th>
+                                            <th>Order ID</th>
                                             <th>Product Category</th>
                                             <th>Transaction Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.records.slice(0).reverse().map((item, index) => (
+                                        {reverse(this.state.records).map((item, index) => (
                                             <tr>
                                                 <td>{index + 1}</td>
                                                 <td>{item.transactionId}</td>
-                                                <td>{'item.transactionId'}</td>
+                                                <td>{item.orderItem.InventoryItem.InventoryItemId}</td>
                                                 <td>{item.orderItem.itemName}</td>
-                                                <td>{'item.transactionId'}</td>
-                                                <td>{'item.transactionId'}</td>
+                                                <td>-{item.orderItem.InventoryItem.retailPrice}</td>
+                                                <td>{item.orderItem.quantity}</td>
+                                                <td>-{item.amount}</td>
+                                                <td>{item.orderId}</td>
+                                                <td>{item.orderItem.InventoryItem.catagory.catagory}</td>
                                                 <td>{item.transactionDate}</td>
                                             </tr>
                                         ))}
@@ -70,7 +87,8 @@ const mapStateToProps = (state) => {
     return {
         loading_categories: state.inventoryReducer.loading_categories,
         loading_records: state.inventoryReducer.loading_records,
-        records: state.inventoryReducer.records
+        records: state.inventoryReducer.records,
+        categories: state.inventoryReducer.categories,
     }
 }
 

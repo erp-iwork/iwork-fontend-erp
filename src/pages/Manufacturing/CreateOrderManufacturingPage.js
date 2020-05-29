@@ -1,23 +1,14 @@
-import React, { Component } from 'react';
-import Page from "../../components/Page";
+import React, { Component } from 'react'
+import Page from "../../components/Page"
 import {
-    Button,
-    Card,
-    CardBody,
-    CardHeader,
-    Col,
-    Form,
-    FormGroup,
-    Input,
-    Label,
-    Row,
-} from 'reactstrap';
+    Button, Card, CardBody, CardHeader, Col,
+    Form, FormGroup, Input, Label, Row
+} from 'reactstrap'
 import { connect } from 'react-redux'
 import { getMasterdata, addManufacturingOrder } from '../../store/manufacturing/action'
 import PageSpinner from '../../components/PageSpinner'
 import Error from '../../components/error'
 import Loader from '../../components/loader'
-
 
 const BOM = ({ index, materialName, unitOfMeasurement, quantity, cost }) => {
     return (
@@ -64,7 +55,7 @@ const BOM = ({ index, materialName, unitOfMeasurement, quantity, cost }) => {
 
 class CreateOrderManufacturingPage extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             order_items: [],
             dropdown: false,
@@ -103,17 +94,13 @@ class CreateOrderManufacturingPage extends Component {
     }
 
     submit = event => {
-
         event.preventDefault()
         const { productID, productMaterial, description, quantity, startDate, endDate } = this.state
         const manufacture_item_set = productMaterial.map((item, index) => {
-
-
-
             return {
                 billOfMaterial: item.materialId,
-                quantity: item.materialQuantity,
-                price: item.materialCost * quantity,
+                quantity: item.materialQuantity * quantity,
+                price: item.materialCost * quantity * item.materialQuantity,
                 unitOfMesurement: item.materialUnitOfMeasurement
             }
         })
@@ -129,7 +116,6 @@ class CreateOrderManufacturingPage extends Component {
 
     render() {
         let { dropdown } = this.state
-
         if (this.props.loading_masterdata) return <PageSpinner />
         const canBeManudactured = this.props.masterdata.filter((data) => { return data.isManufactured })
         this.setProducts(canBeManudactured)

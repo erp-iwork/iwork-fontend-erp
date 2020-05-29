@@ -1,7 +1,11 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
-import { appConstants, itConstants } from "../../constant/constants";
+import {
+  appConstants,
+  itConstants,
+  errorsConstant,
+} from "../../constant/constants";
 import headers from "./../headers";
 function addNewEmployee(data) {
   return (dispatch) => {
@@ -19,7 +23,7 @@ function addNewEmployee(data) {
       city: data.city,
       region: data.region,
       birthDate: data.birthDate,
-      gender: data.gender
+      gender: data.gender,
     };
 
     dispatch({
@@ -50,7 +54,7 @@ function addNewEmployee(data) {
       .catch((error) => {
         if (error.response && error.response.data) {
           dispatch({
-            type: appConstants.REGISTER_FAILURE,
+            type: errorsConstant.GET_ERRORS,
             payload: error.response.data.errors,
           });
         } else {
@@ -104,55 +108,64 @@ function getEmploye() {
   };
 }
 
-function deleteEmploye(employeId) {
-  return (dispatch) => {
-    dispatch({
-      type: appConstants.DELETE_REQUEST,
-      payload: true,
-    });
-    axios
-      .request({
-        method: "DELETE",
-        url: API + "employe/" + employeId,
-        responseType: "json",
-        headers: headers,
-      })
-      .then((response) => {
-        Swal.fire({
-          title: "Deleted",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        dispatch({
-          type: appConstants.DELETE_SUCCESS,
-          payload: employeId,
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: "Error",
-          text: "Something Went Wrong",
-          icon: "error",
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        if (error.response && error.response.data) {
-          dispatch({
-            type: appConstants.DELETE_FAILURE,
-            payload: error.response.data.errors,
-          });
-        } else {
+const deleteEmploye = (employeId) => (dispatch) => {
+    // dispatch({
+    //   type: appConstants.DELETE_REQUEST,
+    //   payload: true,
+    // })
+    return Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        axios.request({
+          method: "DELETE",
+          url: API + "employe/" + employeId,
+          responseType: "json",
+          headers: headers,
+        }).then((response) => {
+          Swal.fire({
+            title: "Deleted",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1000
+          })
+          // dispatch({
+          //   type: appConstants.DELETE_SUCCESS,
+          //   payload: employeId,
+          // });
+        })
+        .catch((error) => {
           Swal.fire({
             title: "Error",
-            text: "Connection Problem",
+            text: "Something Went Wrong",
             icon: "error",
             showConfirmButton: false,
             timer: 1000,
           });
-        }
-      });
-  };
+          if (error.response && error.response.data) {
+            dispatch({
+              type: appConstants.DELETE_FAILURE,
+              payload: error.response.data.errors,
+            });
+          } else {
+            Swal.fire({
+              title: "Error",
+              text: "Connection Problem",
+              icon: "error",
+              showConfirmButton: false,
+              timer: 1000,
+            });
+          }
+        })
+      }
+      return result.value
+    })
 }
 
 function deleteAccount(email) {
@@ -241,14 +254,6 @@ function addAccount(employe) {
         });
       })
       .catch((error) => {
-        console.log(error);
-        Swal.fire({
-          title: "Error",
-          text: "Something Went Wrong",
-          icon: "error",
-          showConfirmButton: false,
-          timer: 1000,
-        });
         if (error.response && error.response.data) {
           dispatch({
             type: itConstants.REGISTER_FAILURE,

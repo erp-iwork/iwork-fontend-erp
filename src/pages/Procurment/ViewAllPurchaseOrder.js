@@ -6,13 +6,15 @@ import { getOrders } from '../../store/procurement/action'
 import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
+import { reverse } from '../../useCases'
 
 const Order = ({ order, index }) => {
     return (
-        <tr align="center">
+        <tr>
             <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
+            <td>{order.purchaseOrderNumber}</td>
             <td>{order.purchaseOrderDate}</td>
             <td>{order.status_purchase_order[0].status}</td>
             <td>
@@ -26,20 +28,31 @@ const Order = ({ order, index }) => {
     )
 }
 
-
 class ViewAllPurchaseOrderPage extends Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            orders: [],
+            done: false
+        }
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.props.getOrders()
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading_orders && !this.state.done) {
+            this.setState({
+                orders: this.props.orders,
+                done: true
+            })
+        }
+    }
+
     render() {
-        if (this.props.loading_orders) return <PageSpinner />
-        if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
+        if (!this.state.done) return <PageSpinner />
+        if (this.state.orders.length === 0) return <h2>No orders created yet.</h2>
         return (
             <Page title="All Purchase Orders" breadcrumbs={[{ name: 'Procurment', active: true }]}>
                 <Card className="mb-3">
@@ -47,17 +60,18 @@ class ViewAllPurchaseOrderPage extends Component {
                     <CardBody>
                         <Table responsive >
                             <thead>
-                                <tr align='center'>
-                                    <th>Order #</th>
+                                <tr>
+                                    <th>PO#</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
+                                    <th>Order Number</th>
                                     <th>Order Date</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.orders.map((order, index) => (
+                                {reverse(this.state.orders).map((order, index) => (
                                     <Order order={order} index={index} />
                                 ))}
                             </tbody>

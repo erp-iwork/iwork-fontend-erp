@@ -13,7 +13,10 @@ class AllEmployees extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            employeeInfo: []
+            employeeInfo: [],
+            done: false,
+            modelShow: false,
+            okModal: false,
         }
     }
 
@@ -21,37 +24,46 @@ class AllEmployees extends Component {
         this.props.getEmploye()
     }
 
+
+    okFun() {
+        this.setState({
+            modelShow: false,
+            okModal: false,
+
+        })
+    }
+
+    cancel() {
+        this.setState({
+            modelShow: false
+        })
+    }
     deleteFun(employeId) {
-        Swal.fire({
-          title: "Are you sure?",
-          text: "You won't be able to revert this Action!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-          if (result.value) {
-            Swal.fire({
-                title: "Delteing Account...",
-                icon: "warning",
-                showCancelButton: false,
-                allowOutsideClick: false,
-                showConfirmButton: false
-            })
-            this.props.deleteEmploye(employeId);
-          }
+        this.props.deleteEmploye(employeId).then(res => {
+            if (res) {
+                Swal.fire({
+                    title: "Deleting Account...",
+                    icon: "warning",
+                    showCancelButton: false,
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    onDestroy: () => this.componentDidMount()
+                })
+            }
         })
     }
 
     render() {
-        if (this.props.loading) return <PageSpinner />
-        if (this.props.employees.length === 0 && this.props.success) 
-        return (
-            <Page  title="All Employees" breadcrumbs={[{ name: 'Human Resource', active: true }]} className="TablePage">
-                <h1>No Employees Yet.</h1>
-            </Page>
-        )
+        const employeeInfo = this.props.employees;
+
+        if (this.props.fetch_loader) return <PageSpinner />
+
+        if (this.props.employees === null && this.props.success)
+            return (
+                <Page title="All Employees" breadcrumbs={[{ name: 'Human Resource', active: true }]} className="TablePage">
+                    <h1>No Employees Yet.</h1>
+                </Page>
+            )
         return (
             <Page
                 title="All Employees"
@@ -76,37 +88,39 @@ class AllEmployees extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.employees.map((employeeInfos, index) => (
-                                            <tr align='left' key={index}>
-                                                <th scope="row">{index + 1}</th>
-                                                <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
-                                                <td >{employeeInfos.email}</td>
-                                                <td>{employeeInfos.hiredDate}</td>
-                                                <td>{employeeInfos.telephone}</td>
-                                                <td>{employeeInfos.termOfEmployment}</td>
-                                                <td>
-                                                    <Button size='sm' color='danger' onClick={() => this.deleteFun(employeeInfos.employeId)}>
-                                                        <MdDelete />
-                                                    </Button>
-                                                </td>
-                                                <td>
-                                                    <Link to={{
-                                                        pathname: routes.employeeProfile,
-                                                        state: employeeInfos.employeId
-                                                    }}>
-                                                        <Button size='sm' color='primary'>
-                                                            See Profile
+                                        {employeeInfo ?
+                                            employeeInfo.splice(0).reverse().map((employeeInfos, index) => (
+                                                <tr align='left' key={index}>
+                                                    <th scope="row">{index + 1}</th>
+                                                    <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
+                                                    <td >{employeeInfos.email}</td>
+                                                    <td>{employeeInfos.hiredDate}</td>
+                                                    <td>{employeeInfos.telephone}</td>
+                                                    <td>{employeeInfos.termOfEmployment}</td>
+                                                    <td>
+                                                        <Button size='sm' color='danger' onClick={() => this.deleteFun(employeeInfos.employeId)}>
+                                                            <MdDelete />
                                                         </Button>
-                                                    </Link>
-                                                </td>
-                                            </tr>
-                                        ))}
+                                                 </td>
+                                                    <td>
+                                                        <Link to={{
+                                                            pathname: routes.employeeProfile,
+                                                            state: employeeInfos.employeId
+                                                        }}>
+                                                            <Button size='sm' color='primary'>
+                                                                See Profile
+                                                        </Button>
+                                                        </Link>
+                                                    </td>
+                                                </tr>
+                                            )) : null}
                                     </tbody>
                                 </Table>
                             </CardBody>
                         </Card>
                     </Col>
                 </Row>
+
             </Page>
 
 
@@ -118,6 +132,7 @@ const mapStateToProps = (state) => {
     return {
         success: state.hrReducer.success,
         loading: state.hrReducer.loading,
+        fetch_loader: state.hrReducer.fetch_loader,
         users: state.hrReducer.users,
         employees: state.hrReducer.employees,
         errors: state.hrReducer.errors

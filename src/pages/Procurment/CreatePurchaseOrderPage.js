@@ -35,7 +35,11 @@ class CreatePurchaseOrder extends Component {
             shipmentAddress: "",
             submitted: false,
             lockPage: false,
-            order_items: [{ masterData_id: "", purchaseQuantity: 1 }]
+            order_items: [{ masterData_id: "", purchaseQuantity: 1 }],
+            done: false,
+            suppliers: [],
+            masterdata: [],
+            orders: []
         }
         this.handleAddItem = this.handleAddItem.bind(this)
         this.handleRemoveItem = this.handleRemoveItem.bind(this)
@@ -46,6 +50,7 @@ class CreatePurchaseOrder extends Component {
     }
 
     componentDidMount() {
+        this.setState({ lockPage: true })
         this.props.getCreatedOrders()
         this.props.getSuppliers()
         this.props.getMasterdata()
@@ -72,18 +77,24 @@ class CreatePurchaseOrder extends Component {
     ItemNameChange = (idx) => (evt) => {
         const neworder_items = this.state.order_items.map((item, sidx) => {
             if (idx !== sidx) return item;
-            return {
-                ...item,
-                masterData_id: evt.target.value,
-            };
-        });
-
+            return { ...item, masterData_id: evt.target.value }
+        })
         this.setState({ order_items: neworder_items })
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.success && !this.state.lockPage) {
-            this.setState({ company: "", description: "", shipmentAddress: "", lockPage: true })
+        const { done } = this.state
+        if (!(this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) && !done) {
+            this.setState({
+                orders: this.props.orders,
+                suppliers: this.props.suppliers,
+                masterdata: this.props.masterdata,
+                done: true
+            })
+        }
+
+        if (this.props.success && this.state.lockPage) {
+            this.setState({ supplier: "", description: "", shipmentAddress: "", lockPage: false })
         }
     }
 
@@ -106,19 +117,13 @@ class CreatePurchaseOrder extends Component {
             "orderdBy": localStorage.getItem('username'),
             "description": this.state.description,
             suplier_id: this.state.supplier
-        });
-        this.setState({ lockPage: false })
-        if (this.props.success) {
-            this.setState({
-                supplier: "", description: ""
-            })
-            this.updateOrders()
-        }
+        })
+        this.setState({ lockPage: true })
     }
 
     render() {
         let { order_items: items } = this.state
-        if (this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) return <PageSpinner />
+        if ((this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) && this.state.lockPage) return <PageSpinner />
         const {
             supplier, description
         } = this.state
@@ -137,18 +142,23 @@ class CreatePurchaseOrder extends Component {
                                         <Col sm={12}>
                                             <Input type="select" name="supplier" value={supplier} onChange={this.handleChange}>
                                                 <option aria-label="None" value="" disabled>Supplier Name</option>
-                                                {this.props.suppliers.map((supplier, idx) => (
+                                                {this.state.suppliers.map((supplier, idx) => (
                                                     <option value={supplier.suplierId} key={idx}>
                                                         {supplier.suplierName}
                                                     </option>
                                                 ))}
                                             </Input>
-                                            <Error
-                                                error={
-                                                    this.props.errors.purchaseOrder.suplier_id
-                                                        ? this.props.errors.purchaseOrder.suplier_id
-                                                        : null}
-                                            />
+                                            {
+                                                this.props.errors.purchaseOrder ? (
+                                                    <Error
+                                                        error={
+                                                            this.props.errors.purchaseOrder.suplier_id
+                                                                ? this.props.errors.purchaseOrder.suplier_id
+                                                                : null}
+                                                    />
+                                                ) : null
+                                            }
+
                                         </Col>
                                     </FormGroup>
                                     <FormGroup >
@@ -174,7 +184,7 @@ class CreatePurchaseOrder extends Component {
                                                 <Col md={6}>
                                                     <Input onChange={this.ItemNameChange(i)} value={v.InventoryItemId} type="select">
                                                         <option aria-label="None" value="" disabled selected></option>
-                                                        {this.props.masterdata.map((_item, idx) => (
+                                                        {this.state.masterdata.map((_item, idx) => (
                                                             <option value={_item.productId} key={idx}>
                                                                 {_item.productName}
                                                             </option>
@@ -252,7 +262,7 @@ class CreatePurchaseOrder extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.orders ? this.props.orders.slice(0)
+                                        {this.state.orders ? this.props.orders.slice(0)
                                             .reverse().slice(0, 9).map((order, index) => (
                                                 <tr key={index}>
                                                     <th scope="row">{index + 1}</th>

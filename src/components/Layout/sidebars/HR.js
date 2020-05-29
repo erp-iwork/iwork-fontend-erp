@@ -1,42 +1,22 @@
-import logo200Image from '../../../assets/img/logo/logo_200.png';
-import sidebarBgImage from '../../../assets/img/sidebar/sidebar-4.jpg';
-import SourceLink from '../../../components/SourceLink';
 import React from 'react';
 import {
-    // MdAccountCircle,
-    // MdArrowDropDownCircle,
-    // MdBorderAll,
-    // MdBrush,
-    // MdChromeReaderMode,
+
     MdDashboard,
     MdExtension,
-    // MdGroupWork,
     MdInsertChart,
     MdKeyboardArrowDown,
-    // MdNotificationsActive,
-    // MdPages,
-    // MdRadioButtonChecked,
-    // MdSend,
-    // MdStar,
-    // MdTextFields,
-    // MdViewCarousel,
-    // MdViewDay,
-    // MdViewList,
-    // MdWeb,
     MdWidgets,
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
-    // UncontrolledTooltip,
     Collapse,
-    Nav,
-    Navbar,
     NavItem,
     NavLink as BSNavLink,
 } from 'reactstrap';
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
-import dept from '../../../config/departments'
+import './Styles.scss'
+
 const bem = bn.create('sidebar');
 class HR extends React.Component {
     constructor(props) {
@@ -70,9 +50,9 @@ class HR extends React.Component {
 
     render() {
         const HR = [
-            // { to: routes.HRDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
-            { to: routes.allEmployees, name: 'All Employees', exact: false, Icon: MdWidgets },
-            { to: routes.addEmployee, name: 'Add Employee', exact: false, Icon: MdWidgets },
+            { to: routes.HRDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
+            { to: routes.allEmployees, name: 'All Employees', exact: false, Icon: MdInsertChart },
+            { to: routes.addEmployee, name: 'Add Employee', exact: false, Icon: MdDashboard },
         ]
         return (
             <React.Fragment>
@@ -99,6 +79,8 @@ class HR extends React.Component {
               </BSNavLink>
             </NavItem>
             <Collapse isOpen={this.state.isOpenHR}>
+            <div className='contents'>
+
               {HR.map(({ to, name, exact, Icon }, index) => (
                 <NavItem key={index} className={bem.e('nav-item2')}>
                   <BSNavLink
@@ -112,7 +94,7 @@ class HR extends React.Component {
                     <span className="">{name}</span>
                   </BSNavLink>
                 </NavItem>
-              ))}
+              ))}</div>
             </Collapse>
             </React.Fragment>
         )

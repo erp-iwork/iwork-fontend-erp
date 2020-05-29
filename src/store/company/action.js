@@ -2,8 +2,9 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
 import routes from '../../api/routes'
-import { companyConstant, errorsConstant, inventoryConstant } from "../../constant/constants";
+import { companyConstant, errorsConstant} from "../../constant/constants";
 import headers from './../headers'
+import statusTypes from '../../constant/status'
 
 // ADD COMPANY
 export const addCompany = (company) => (dispatch) => {
@@ -209,6 +210,7 @@ export const addMasterData = (masterData) => (dispatch) => {
   return axios
     .post(API + routes.masterData, masterData, headers)
     .then((res) => {
+      console.log(res.data)
       Swal.fire({
         title: "Added Product",
         icon: "success",
@@ -229,6 +231,35 @@ export const addMasterData = (masterData) => (dispatch) => {
         });
       } catch {
         console.log("Error occured in adding master data")
+      }
+    })
+}
+
+export const getAllMasterData = () => (dispatch) => {
+  dispatch({
+    type: companyConstant.REQUEST_GET_MASTERDATA,
+    payload: true
+  })
+  return axios.get(API + routes.masterData, headers)
+    .then(res => {
+      dispatch({
+        type: companyConstant.GET_MASTERDATA,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error", text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
       }
     })
 }
@@ -287,3 +318,27 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
       }
     });
 };
+
+export const getManufacturedOrders = (status1, status2 = statusTypes.finished) => (dispatch) => {
+  dispatch({ type: companyConstant.REQUEST_GET_MANUFACTURED_ORDERS })
+  return axios.get(API + routes.manufacturing +
+    `?search1=${status1}&search2=${status2}`, headers)
+    .then(res => dispatch({ type: companyConstant.SUCCESS_GET_MANUFACTURED_ORDERS, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}

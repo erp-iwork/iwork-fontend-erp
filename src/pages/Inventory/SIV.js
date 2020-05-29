@@ -3,10 +3,12 @@ import Typography from '../../components/Typography'
 import SIVPdf from './Printable_SIV';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import Page from '../../components/Page';
-import { Button, CardBody, Col, Table } from 'reactstrap'
+import { Button, CardBody, Row, Col, Table } from 'reactstrap'
 import { getSiv } from '../../store/Siv/action'
 import { connect } from 'react-redux'
 import PageSpinner from '../../components/PageSpinner'
+import Logo from "../../assets/img/logo/Logo.jpg";
+
 
 const classes = {
   pdf: {
@@ -26,10 +28,10 @@ const classes = {
     color: '#FFFFFF',
   },
   Header: {
-    padding: 30,
+    padding: 10,
   },
   logo: {
-    height: 50,
+    height: 80,
     width: 80,
     marginTop: 10,
   },
@@ -76,7 +78,6 @@ const classes = {
     color: '#FFFFFF'
   },
   tableCell: {
-    margin: "auto",
     color: '#686868',
     fontSize: 12
   },
@@ -98,70 +99,42 @@ class SIV extends React.Component {
         breadcrumbs={[{ name: 'Inventory', active: true }]}
       >
         <hr />
-        <div
-          style={{
-            height: 100,
-          }}
-        ></div>
         <div style={classes.pdf}>
           <div style={classes.Card}>
-            <div
-              container
-              xs={12}
-              display="flex"
-              justify="space-between"
-              style={classes.Header}
-            >
-              <div>
-                <div
-                  container
-                  style={{
-                    marginTop: 10,
-                    marginLeft: 10,
-                  }}
-                >
-                  {/* <img src={Logo} alt="" style={classes.logo} /> */}
-                  <Typography
-                    variant="h6"
+            <Row>
+              <Col>
 
-                    style={classes.text}
-
-                  >
-                    NAZO
-                    </Typography>
-                </div>
-              </div>
-              <div >
+                <img src={Logo} alt="" style={classes.logo} />
                 <Typography
                   style={classes.text}
-                  variant="body2"
-                  gutterBottom
+
+                >
+                  <b>Your Company Name</b>
+                </Typography>
+              </Col>
+              <Col >
+                <Typography
+                  style={classes.text}
                 >
                   <b>SIV Status : </b> {this.props.sivs.sivStatus}
                 </Typography>
                 <Typography
                   style={classes.text}
-                  variant="body2"
-                  gutterBottom
                 >
                   <b>Warehouse Name : </b> {this.props.sivs.warehouseName}
                 </Typography>
                 <Typography
                   style={classes.text}
-                  variant="body2"
-                  gutterBottom
                 >
                   <b>Issued By :</b> {localStorage.getItem('username')}
                 </Typography>
                 <Typography
                   style={classes.text}
-                  variant="body2"
-                  gutterBottom
                 >
                   <b>SIV Date :</b> {this.props.sivs.sivDate}
                 </Typography>
-              </div>
-            </div>
+              </Col>
+            </Row>
           </div>
           <Col>
             <CardBody>
@@ -171,16 +144,20 @@ class SIV extends React.Component {
                     <th>#</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Amount</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {this.props.sivs.siv_item.map((item, index) => (
+                  {this.props.sivs.siv_item ? this.props.sivs.siv_item.map((item, index) => (
                     <tr>
                       <th scope="row">{index + 1}</th>
                       <td>{item.itemName}</td>
                       <td>{item.quantity}</td>
+                      <td>{item.cost}</td>
+                      <td>{item.amount}</td>
                     </tr>
-                  ))}
+                  )) : null}
                 </tbody>
               </Table>
             </CardBody>
@@ -242,9 +219,7 @@ class SIV extends React.Component {
                 <div >
                   <Button size='sm' color='primary'>
                     Print SIV
-
                   </Button>
-
                 </div>
               )}
             </PDFDownloadLink>) : null

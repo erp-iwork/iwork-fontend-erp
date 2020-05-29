@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import API from '../../api/API'
 import routes from '../../api/routes'
 import headers from '../headers'
+import statusTypes from '../../constant/status'
 
 export const getMasterdata = () => (dispatch) => {
   dispatch({ type: manuFacturingConstant.REQUEST_GET_MASTERDATA })
@@ -36,12 +37,9 @@ export const getMasterdata = () => (dispatch) => {
 }
 
 export const addManufacturingOrder = (data) => (dispatch) => {
-  console.log(data);
-
   dispatch({ type: manuFacturingConstant.REQUEST_POST_MANUFATURE })
   return Axios.post(API + routes.manufacturing, data, headers)
     .then(res => {
-
       dispatch({ type: manuFacturingConstant.SUCCESS_POST_MANUFATURE, payload: res.data })
       Swal.fire({
         title: 'Added Manufacture Order',
@@ -69,10 +67,10 @@ export const addManufacturingOrder = (data) => (dispatch) => {
 }
 
 export const getOrders = () => (dispatch) => {
-  dispatch({ type: manuFacturingConstant.REQUEST_GET_ORDERS })
+  dispatch({ type: manuFacturingConstant.REQUEST_GET_MANUFACTURED_ORDERS })
   return Axios.get(API + routes.manufacturing, headers)
     .then(res => {
-      dispatch({ type: manuFacturingConstant.SUCCESS_GET_ORDERS, payload: res.data })
+      dispatch({ type: manuFacturingConstant.SUCCESS_GET_MANUFACTURED_ORDERS, payload: res.data })
     })
     .catch(err => {
       if (err.response && err.response.data) {
@@ -92,25 +90,38 @@ export const getOrders = () => (dispatch) => {
     })
 }
 
-
+export const getManufacturedOrders = (status1, status2 = statusTypes.finished) => (dispatch) => {
+  dispatch({ type: manuFacturingConstant.REQUEST_GET_MANUFACTURED_ORDERS })
+  return Axios.get(API + routes.manufacturing +
+    `?search1=${status1}&search2=${status2}`, headers)
+    .then(res => dispatch({ type: manuFacturingConstant.SUCCESS_GET_MANUFACTURED_ORDERS, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
 
 export const updateStatus = (orderNumber, status) => (dispatch) => {
-  const data = {
-    status: status
-  }
-  dispatch({
-    type: manuFacturingConstant.REQUEST_PUT_ORDERS,
-    payload: true
-  });
-  Axios
-    .put(API + `${routes.manufacturestatus}${orderNumber}/`, data, headers)
+  dispatch({ type: manuFacturingConstant.REQUEST_PUT_ORDERS, payload: true })
+  Axios.put(API + `${routes.manufacturestatus}${orderNumber}/`, { status }, headers)
     .then((res) => {
-      console.log(res.data);
-
       dispatch({
         type: manuFacturingConstant.SUCCESS_PUT_ORDERS,
         payload: { order: res.data.manufacture_order, status: res.data.status },
-      });
+      })
       Swal.fire({
         title: "Delivered to Inventory",
         icon: "success",
@@ -119,6 +130,7 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
       });
     })
     .catch((err) => {
+      console.log(err.response)
       if (err.response && err.response.data) {
         dispatch({
           type: errorsConstant.GET_ERRORS,
@@ -137,3 +149,48 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
     });
 };
 
+export const getSingleManufacturedOrder = (orderNumber) => (dispatch) => {
+  dispatch({ type: manuFacturingConstant.REQUEST_GET_SINGLE_ORDER })
+  return Axios.get(API + routes.manufacturing + orderNumber + '/')
+    .then(res => dispatch({ type: manuFacturingConstant.SUCCESS_GET_SINGLE_ORDER, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    });
+}
+
+export const invoiceProduct = (orderNumber, status) => (dispatch) => {
+  dispatch({ type: manuFacturingConstant.REQUEST_PUT_INVOICE_ORDER })
+  return Axios.put(API + routes.manufacturestatus + orderNumber + '/', status, headers)
+    .then(res => dispatch({ type: manuFacturingConstant.SUCCESS_PUT_INVOICE_ORDER }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}

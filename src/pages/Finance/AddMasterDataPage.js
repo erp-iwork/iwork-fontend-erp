@@ -19,7 +19,7 @@ import { getExistingCategories } from '../../store/inventory/action'
 import PageSpinner from '../../components/PageSpinner'
 import Error from '../../components/error'
 import Loader from '../../components/loader'
-import routes from '../../config/routes'
+import { UoM } from '../../useCases'
 
 class AddMasterDataPage extends Component {
     constructor(props) {
@@ -28,7 +28,8 @@ class AddMasterDataPage extends Component {
             order_items: [],
             items: '', lockPage: false,
             can_be_manufactured: false, can_be_sold: false, can_be_purchased: false,
-            productName: '', productType: '', productCategory: '', productPrice: '', unitOfMeasurement: ''
+            productName: '', productType: '', productCategory: '', productPrice: '', unitOfMeasurement: '',
+            noneSelected: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.ItemNameChange = this.ItemNameChange.bind(this)
@@ -67,7 +68,6 @@ class AddMasterDataPage extends Component {
     handleChange = event => {
         const { name, value } = event.target
         this.setState({ [name]: value })
-
     }
 
     ItemNameChange = (evt, idx) => {
@@ -109,6 +109,8 @@ class AddMasterDataPage extends Component {
             var found = this.props.masterData.find(data => data.productId === item.product)
             if (found) {
                 return found.productPrice
+            } else {
+                return 0
             }
         })
         var sum = 0
@@ -120,6 +122,8 @@ class AddMasterDataPage extends Component {
         var cost = 1
         if (this.state.can_be_manufactured) {
             cost = this.calculateCost()
+        } else {
+            cost = this.state.productPrice
         }
         const {
             productName, productCategory, can_be_manufactured, can_be_purchased, can_be_sold,
@@ -137,9 +141,7 @@ class AddMasterDataPage extends Component {
 
     render() {
         if (this.props.loading || this.props.loading_categories) return <PageSpinner />
-
         let { can_be_manufactured } = this.state
-        console.log(this.props.masterData)
         return (
             <Page
                 title="Add Master Data"
@@ -171,7 +173,7 @@ class AddMasterDataPage extends Component {
                                         >
                                             <option disabled></option>
                                             <option value="Consumable">Consumable</option>
-                                            <option value="Stored">Stored</option>
+                                            <option value="Storable">Storable</option>
                                             <option value="Service">Service</option>
                                         </Input>
                                         {this.props.errors.errors ?
@@ -198,9 +200,7 @@ class AddMasterDataPage extends Component {
                                     <Col sm={12}>
                                         <Input type='select' defaultValue={""} id="unitOfMeasurement" name="unitOfMeasurement" onChange={this.handleChange}>
                                             <option disabled selected></option>
-                                            <option>Litre</option>
-                                            <option>KM</option>
-                                            <option>Kilos</option>
+                                            <UoM />
                                         </Input>
                                         {this.props.errors.errors ?
                                             <Error error={this.props.errors.errors.unitOfMeasurement} /> : ''
@@ -245,6 +245,9 @@ class AddMasterDataPage extends Component {
                                             <Label for="checkbox3">Can Be Purchased</Label>
                                         </Col>
                                     </Row>
+                                    {this.props.errors.errors?
+                                        <Error error={this.props.errors.errors.choices} /> : ''
+                                    }
                                 </FormGroup>
                                 <hr></hr>
                                 <FormGroup>
@@ -295,7 +298,7 @@ class AddMasterDataPage extends Component {
                                 <FormGroup align='center'>
                                     <Col >
                                         <Button onClick={this.submit} color='primary'>
-                                            {this.props.loading_addMasterdata ? <Loader /> : "Add to Product"}
+                                            {this.props.loading_addMasterdata ? <Loader /> : "Add Product"}
                                         </Button>
                                     </Col>
                                 </FormGroup>

@@ -41,6 +41,7 @@ const viewAllSuppliersPage = React.lazy(() => import('./pages/Finance/viewAllSup
 const ViewDelieveredOrdersPage = React.lazy(() => import('./pages/Finance/ViewDelieveredOrders'));
 const ViewSingleDelieveredOrderPage = React.lazy(() => import('./pages/Finance/ViewSingleDelieveredOrder'));
 const SupplierInvoicePage = React.lazy(() => import('./pages/Finance/SupplierInvoicePage'));
+const ViewInventoryManufacturedOrders = React.lazy(() => import('./pages/Inventory/ViewManufacturedOrders'));
 
 // Dashboards
 const FinanceDashboard = React.lazy(() => import('./pages/Finance/DashboardPage'));
@@ -62,6 +63,8 @@ const ViewPurchaseOrdersLogistics = React.lazy(() => import('./pages/Logistics/V
 const CategoriesInventoryPage = React.lazy(() => import('./pages/Inventory/CategoryPage'));
 const ViewSingleItemPage = React.lazy(() => import('./pages/Inventory/ViewSingleItemPage'));
 const ViewPurchasedItemsPage = React.lazy(() => import('./pages/Inventory/ViewPurchasedOrders'));
+const ViewAllManufacturedOrders = React.lazy(() => import('./pages/Finance/ViewManufacturedOrders'));
+const ViewFinanceSingleManucturedOrder = React.lazy(() => import('./pages/Finance/ViewSingleManufacturedOrder'));
 
 const SivPage = React.lazy(() => import('./pages/Inventory/SIV'));
 const GRVPage = React.lazy(() => import('./pages/Inventory/GRV'));
@@ -133,7 +136,7 @@ class App extends React.Component {
                 <Route exact path={routes.GRVPage} component={GRVPage} />
                 <Route exact path={routes.RecordTracking} component={RecordTrackingPage} />
                 <Route exact path={routes.DeliveredOrders} component={RecordDeliveredOrders} />
-
+                <Route exact path={routes.ViewInventoryManufacturedOrders} component={ViewInventoryManufacturedOrders} />
 
                 {/* FINANCE ROUTES/ */}
                 <Route exact path={routes.FinanceDashboard} component={FinanceDashboard} />
@@ -149,7 +152,8 @@ class App extends React.Component {
                 <Route exact path={routes.ViewDelieveredOrders} component={ViewDelieveredOrdersPage} />
                 <Route exact path={routes.ViewSingleDelieveredOrder} component={ViewSingleDelieveredOrderPage} />
                 <Route exact path={routes.ViewFinancePurchaseOrders} component={ViewPurchaseOrdersFinancePage} />
-
+                <Route exact path={routes.ViewFinaceManufacturedOrders} component={ViewAllManufacturedOrders} />
+                <Route exact path={routes.ViewFinanceSingleManufacturedOrder} component={ViewFinanceSingleManucturedOrder} />
 
                 {/* LOGISTICS ROUTES */}
                 <Route exact path={routes.LogisticsDashboard} component={LogisticsDashboard} />
@@ -167,8 +171,6 @@ class App extends React.Component {
                 <Route exact path={routes.CreateOrderManufacturing} component={CreateOrderManufacturingPage} />
                 <Route exact path={routes.ViewAllOrdersManufacturing} component={ViewAllOrdersManufacturingPage} />
                 <Route exact path={routes.ViewSingleOrderManufacturing} component={SingleOrderManufacturingPage} />
-
-
 
                 <Route
                   exact

@@ -81,16 +81,11 @@ class LoginForm extends React.Component {
           />
           <hr />
           {this.props.loading ? (
-            <Button size="lg" className="bg-gradient-theme-left border-0" block>
+            <Button color="primary" size="lg" block>
               <SpinnerLoader />
             </Button>
           ) : (
-            <Button
-              size="lg"
-              className="bg-gradient-theme-left border-0"
-              block
-              onClick={this.handleSubmit}
-            >
+            <Button size="lg" color="primary" block onClick={this.handleSubmit}>
               Login
             </Button>
           )}

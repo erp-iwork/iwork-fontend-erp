@@ -10,7 +10,6 @@ import {
     MdTextFields,
     MdViewCarousel,
     MdViewDay,
-    MdViewList,
     MdWeb,
     MdWidgets,
 } from 'react-icons/md';
@@ -23,6 +22,8 @@ import {
 } from 'reactstrap';
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
+import './Styles.scss'
+
 const bem = bn.create('sidebar');
 class Finance extends React.Component {
     state = {
@@ -47,16 +48,17 @@ class Finance extends React.Component {
 
     render() {
         const FINANCE = [
-            // { to: routes.FinanceDashboard, name: 'Dashboard', exact: false, Icon: MdDashboard },
+            { to: routes.FinanceDashboard, name: 'Dashboard', exact: false, Icon: MdDashboard },
             { to: routes.viewSuppliers, name: 'View All Suppliers', exact: false, Icon: MdNotificationsActive },
             { to: routes.AddSupplier, name: 'Add Supplier ', exact: false, Icon: MdPages },
             { to: routes.viewCustomers, name: 'View Customers', exact: false, Icon: MdWidgets },
             { to: routes.AddCustomer, name: 'Add Customer', exact: false, Icon: MdWeb },
             { to: routes.AddMasterDataPage, name: 'Add Master Data', exact: false, Icon: MdViewDay },
             { to: routes.ViewAllMasterData, name: 'All Master Data', exact: false, Icon: MdStar },
-            { to: routes.ViewOrdersFinance, name: 'All Orders', exact: false, Icon: MdInsertChart },
+            { to: routes.ViewOrdersFinance, name: 'Sales Orders', exact: false, Icon: MdInsertChart },
             { to: routes.ViewDelieveredOrders, name: 'Delivered Orders', exact: false, Icon: MdTextFields },
-            { to: routes.ViewFinancePurchaseOrders, name: 'Purchased Orders', exact: false, Icon: MdViewCarousel }
+            { to: routes.ViewFinancePurchaseOrders, name: 'Purchased Orders', exact: false, Icon: MdViewCarousel },
+            { to: routes.ViewFinaceManufacturedOrders, name: 'Manufactured Orders', exact: false, Icon: MdViewCarousel }
         ]
         return (
             <React.Fragment>
@@ -84,6 +86,9 @@ class Finance extends React.Component {
                 </NavItem>
 
                 <Collapse isOpen={this.state.isOpenFINANCE}>
+                <div className='contents'>
+
+
                     {FINANCE.map(({ to, name, exact, Icon }, index) => (
                         <NavItem key={index} className={bem.e('nav-item5')}>
                             <BSNavLink
@@ -98,7 +103,10 @@ class Finance extends React.Component {
                             </BSNavLink>
                         </NavItem>
                     ))}
+                </div>
+
                 </Collapse>
+
             </React.Fragment>
         )
     }

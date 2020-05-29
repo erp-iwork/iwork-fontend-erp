@@ -1,11 +1,13 @@
-import React from 'react';
+import React from 'react'
 import Typography from '../../components/Typography'
-import SIVPdf from './Printable_SIV';
+import SIVPdf from './Printable_GRV';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import Page from '../../components/Page';
-import { Button, CardBody, Col, Table } from 'reactstrap'
+import { Button, CardBody, Col, Table, Row } from 'reactstrap'
 import { getGRV } from '../../store/inventory/action'
 import { connect } from 'react-redux'
+import Logo from '../../assets/img/logo/Sparta2.svg'
+
 import PageSpinner from '../../components/PageSpinner'
 
 const classes = {
@@ -18,15 +20,13 @@ const classes = {
   },
   Card: {
     backgroundColor: '#4083B0',
-    height: 130,
+    minHeight: 130,
+    maxHeight: 'auto',
     borderRadius: 0,
     padding: 10,
   },
   text: {
     color: '#FFFFFF',
-  },
-  Header: {
-    padding: 30,
   },
   logo: {
     height: 50,
@@ -85,7 +85,7 @@ class GRV extends React.Component {
     this.props.getGRV(this.props.location.state.order)
   }
   submit(e) {
-    e.preventDefault();
+    e.preventDefault()
   }
 
   calculatePrice(items) {
@@ -105,75 +105,58 @@ class GRV extends React.Component {
         breadcrumbs={[{ name: 'Inventory', active: true }]}
       >
         <hr />
-        <div
-          style={{
-            height: 100,
-          }}
-        ></div>
+        <div style={{
+          height: 100
+        }}></div>
         <div style={classes.pdf}>
           <div style={classes.Card}>
-            <div
-              container
-              xs={12}
-              display="flex"
-              justify="space-between"
-              style={classes.Header}
+            <Row className="d-flex justify-content-between align-items-center"
             >
-              <div>
-                <div
-                  container
+
+
+              <Col
+                style={{
+                  marginTop: 10,
+                  marginLeft: 10,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center'
+                }}>
+                <img src={Logo} alt="" style={classes.logo} />
+
+
+                <Typography
+                  variant="h6"
                   style={{
-                    marginTop: 10,
-                    marginLeft: 10,
+                    fontSize: 20,
+                    fontWeight: 700,
+                    color: '#fff',
                     display: 'flex',
                     justifyContent: 'center'
-                  }}
-                >
-                  {/* <img src={Logo} alt="" style={classes.logo} /> */}
-                  <Typography
-                    variant="h6"
-                    style={{
-                      fontSize: 20,
-                      fontWeight: 700,
-                      color: '#fff',
-                      display: 'flex',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    SPARTA ERP
+                  }}>
+                  SPARTA ERP
                     </Typography>
-                </div>
-              </div>
-              <div >
-                <Typography
-                  style={classes.text, { color: '#fff', display: 'flex', justifyContent: 'center' }}
-                  variant="body2"
-                  gutterBottom
-                >
-                  <b>Goods Received Voucher</b>
-                </Typography>
+              </Col>
+              <Col >
                 <Typography
                   style={classes.text}
-                  variant="body2"
-                  gutterBottom
                 >
+                  <b>PO # :</b> {grv.GRVID}
                 </Typography>
+
                 <Typography
                   style={classes.text}
-                  variant="body2"
-                  gutterBottom
                 >
                   <b>Recieved By :</b> {localStorage.getItem('username')}
                 </Typography>
                 <Typography
                   style={classes.text}
-                  variant="body2"
-                  gutterBottom
                 >
-                  <b>SIV Date :</b> {grv.date}
+                  <b>GRV Date :</b> {grv.date}
                 </Typography>
-              </div>
-            </div>
+
+              </Col>
+            </Row>
           </div>
           <Col>
             <CardBody>
@@ -181,9 +164,10 @@ class GRV extends React.Component {
                 <thead>
                   <tr>
                     <th>#</th>
+                    <th>Item ID</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
-                    <th>Price</th>
+                    <th>Unit Price</th>
 
                   </tr>
                 </thead>
@@ -191,6 +175,7 @@ class GRV extends React.Component {
                   {grv.GRVItems.map((item, index) => (
                     <tr>
                       <th scope="row">{index + 1}</th>
+                      <th>{item.itemID}</th>
                       <td>{item.itemName}</td>
                       <td>{item.quantity}</td>
                       <td>{item.price}</td>
@@ -200,7 +185,6 @@ class GRV extends React.Component {
               </Table>
             </CardBody>
           </Col>
-
           <div
             style={{
               paddingLeft: 20,
@@ -250,7 +234,6 @@ class GRV extends React.Component {
                 </Typography>
             </div>
           </div>
-
         </div>
         <div style={{
           marginLeft: 400,
@@ -259,7 +242,7 @@ class GRV extends React.Component {
           {
             this.props.success ? (<PDFDownloadLink
               document={
-                <SIVPdf grv_item={this.props.grv.GRVItems} grv={this.props.grv} />
+                <SIVPdf grv_item={this.props.grv.GRVItems} grv={this.props.grv} totalPrice={totalPrice} />
               }
               fileName={"GRV_" + this.props.grv.GRVID + ".pdf"}
               style={{
@@ -270,10 +253,8 @@ class GRV extends React.Component {
                 <Button size='sm' /> :
                 <div >
                   <Button color='primary' size='sm' >
-                      Print GRV
+                    Print GRV
                   </Button>
-
-
                 </div>
               )}
             </PDFDownloadLink>) : null

@@ -5,8 +5,9 @@ import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getDeliveredOrders, updateStatus } from '../../store/procurement/action'
-import routes from '../../config/routes' 
+import { getCustomOrders, updateStatus } from '../../store/procurement/action'
+import routes from '../../config/routes'
+import status from '../../constant/status'
 
 const Order = ({ order, index, deliver }) => {
     return (
@@ -15,6 +16,7 @@ const Order = ({ order, index, deliver }) => {
                 <th scope="row">{index + 1}</th>
                 <td>{order.suplier.suplierName}</td>
                 <td>{order.orderdBy}</td>
+                <td>{order.purchaseOrderNumber}</td>
                 <td>{order.purchaseOrderDate}</td>
                 <td>{order.status_purchase_order[0]['status']}</td>
                 <td align='left'>
@@ -41,22 +43,18 @@ class ViewAllOrdersPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lockPage: false
+            orders: [],
+            done: false
         }
         this.deliver = this.deliver.bind(this)
-        this.updateOrders = this.updateOrders.bind(this)
     }
 
     componentDidMount() {
-        this.props.getDeliveredOrders()
-    }
-
-    updateOrders () {
-        this.props.getDeliveredOrders()
+        this.props.getCustomOrders(status.delivered, status.approved)
     }
 
     deliver(order) {
-        this.props.updateStatus(order, { status: "Delivered" })
+        this.props.updateStatus(order, { status: "Delivered" }, "Purchase Order Delivered")
     }
 
     render() {
@@ -73,16 +71,17 @@ class ViewAllOrdersPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='left'>
-                                    <th>Order #</th>
+                                    <th>PO#</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
+                                    <th>Order Number</th>
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th style={{ margin: "auto" }}>Approve</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {this.props.orders.map((item, index) => (
+                            {this.props.orders.slice(0).reverse().map((item, index) => (
                                 <Order order={item} key={index} index={index} deliver={this.deliver} />
                             ))}
                         </Table>
@@ -100,8 +99,8 @@ const mapStateToProps = (state) => {
         orders: state.procurementReducer.orders,
         success: state.procurementReducer.success,
         order: state.procurementReducer.order,
-        status: state.procurementReducer.status,
+        status: state.procurementReducer.status
     }
 }
 
-export default connect(mapStateToProps, { getDeliveredOrders, updateStatus })(ViewAllOrdersPage)
+export default connect(mapStateToProps, { getCustomOrders, updateStatus })(ViewAllOrdersPage)

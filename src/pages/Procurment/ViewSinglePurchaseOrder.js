@@ -10,7 +10,18 @@ class ViewSinglePurchaseOrderPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            details: this.props.location.state 
+            details: this.props.location.state,
+            order: {},
+            done: false
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!(this.props.loading_single_order === true || this.props.loading_single_order === undefined) && !this.state.done) {
+            this.setState({
+                order: this.props.order,
+                done: true
+            })
         }
     }
 
@@ -21,7 +32,8 @@ class ViewSinglePurchaseOrderPage extends Component {
     }
 
     render() {
-        if (this.props.loading_single_order === true || this.props.loading_single_order === undefined) return <PageSpinner />
+        if (!this.state.done) return <PageSpinner />
+        const { order } = this.state
         return (
             <Page title="Single Purchase Order" breadcrumbs={[{ name: 'Procurment', active: true }]}>
                 <Card className='padding'>
@@ -33,10 +45,10 @@ class ViewSinglePurchaseOrderPage extends Component {
                             <CardBody>
                                 <Row>
                                     <Col>
-                                        Order Id:
+                                        Order ID:
                                     </Col>
                                     <Col>
-                                        <b>{this.props.order.purchaseOrderNumber}</b>
+                                        <b>{order.purchaseOrderNumber}</b>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -44,7 +56,7 @@ class ViewSinglePurchaseOrderPage extends Component {
                                         Supplier Name:
                                     </Col>
                                     <Col>
-                                        <b>{this.props.order.suplier.suplierName}</b>
+                                        <b>{order.suplier.suplierName}</b>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -52,7 +64,7 @@ class ViewSinglePurchaseOrderPage extends Component {
                                         Order Date :
                                     </Col>
                                     <Col>
-                                        <b>{this.props.order.purchaseOrderDate}</b>
+                                        <b>{order.purchaseOrderDate}</b>
                                     </Col>
                                 </Row>
                                 <Row>
@@ -60,11 +72,11 @@ class ViewSinglePurchaseOrderPage extends Component {
                                         Status :
                                     </Col>
                                     <Col>
-                                        <b>{this.props.order.status_purchase_order[0]['status']}</b>
+                                        <b>{order.status_purchase_order[0]['status']}</b>
                                     </Col>
                                 </Row>
                                 <b>Description</b>
-                                <Col>{this.props.order.description}</Col>
+                                <Col>{order.description}</Col>
                             </CardBody>
                         </Col>
                         <Col md={8}>
@@ -77,16 +89,16 @@ class ViewSinglePurchaseOrderPage extends Component {
                                         <tr>
                                             <th>Product #</th>
                                             <th>Product Name</th>
-                                            <th>Price</th>
+                                            <th>Unit Price</th>
                                             <th>Quantity</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.order.purchase_item_order.map((item, index) => (
+                                        {order.purchase_item_order.map((item, index) => (
                                             <tr key={index}>
                                                 <th scope="row">{index + 1}</th>
                                                 <td>{item.masterData.productName}</td>
-                                                <td>{item.masterData.productPrice}</td>
+                                                <td>{item.itemCost}</td>
                                                 <td>{item.purchaseQuantity}</td>
                                             </tr>
                                         ))}

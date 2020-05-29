@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import SpinnerLoader from '../../components/loader'
 import routes from '../../config/routes'
+import Error from '../../components/error'
 
 class AddAccount extends React.Component {
     constructor(props) {
@@ -47,7 +48,7 @@ class AddAccount extends React.Component {
     }
 
     render() {
-        if (this.state.redirect) return <Redirect to={routes.itEmployeePage} />
+        if (this.state.redirect && this.props.success) return <Redirect to={routes.itEmployeePage} />
         return (
             <Container className="container">
                 <Form onSubmit={this.handleSubmit} className="form" noValidate formNoValidate>
@@ -62,24 +63,25 @@ class AddAccount extends React.Component {
                     <FormGroup>
                         <Label for='username'>Username</Label>
                         <Input type='text' id="username" required name='username' onChange={this.handleChange} />
-                        {this.state.errorUsername ? <Label style={{ color: "red" }}>Username is required</Label> : ""}
+                        <Error error={this.props.errors.username ? this.props.errors.username : null} />
                     </FormGroup>
                     <FormGroup>
                         <Label for='password'>Password</Label>
                         <Input type='password' name="password" required onChange={this.handleChange} />
-                        {this.state.errorPassword ? <Label style={{ color: "red" }}>Password is required</Label> : ""}
+                        <Error error={this.props.errors.password ? this.props.errors.password : null} />
                     </FormGroup>
                     <FormGroup className="checkbox">
                         <Label for="is_admin">Is Admin?</Label>
                         <Input type="checkbox" name="is_admin" onClick={(e) => this.handleChange({ target: { name: 'is_admin', value: e.target.checked } })} />
                     </FormGroup>
+
                     <hr />
                     {this.props.loading ? (
-                        <Button size="lg" className="bg-gradient-theme-left border-0" block>
+                        <Button size="lg" color='primary' block>
                             <SpinnerLoader />
                         </Button>
                     ) : (
-                            <Button size="lg" className="bg-gradient-theme-left border-0" block onClick={this.handleSubmit}>
+                            <Button size="lg" color='primary' block onClick={this.handleSubmit}>
                                 Register Account
                             </Button>
                         )
@@ -92,6 +94,8 @@ class AddAccount extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        success: state.hrReducer.success,
+        errors: state.hrReducer.errors,
         loading: state.hrReducer.loading
     }
 }

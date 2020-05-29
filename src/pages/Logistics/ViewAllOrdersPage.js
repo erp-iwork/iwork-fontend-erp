@@ -17,6 +17,7 @@ const Order = ({ order, index, deliver }) => {
                 <td>{order.customer}</td>
                 <td>{order.salesPerson}</td>
                 <td>{order.shipmentAddress}</td>
+                <td>{order.orderNumber}</td>
                 <td>{order.status}</td>
                 <td align='left'>
                     <Button size='sm' color='primary'
@@ -55,7 +56,7 @@ class ViewAllOrdersPage extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        const deliveredOrders = this.props.orders.filter((order) => { return order.status === "Created" || order.status === status.delivered })
+        const deliveredOrders = this.props.orders.filter((order) => { return order.status === status.delivered || order.status === status.issued })
         if (deliveredOrders.length === 0) return <h2>No orders to show</h2>
         return (
             <Page
@@ -68,10 +69,11 @@ class ViewAllOrdersPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='left'>
-                                    <th>Order #</th>
+                                    <th>SO#</th>
                                     <th>Customer</th>
                                     <th>Sales Person</th>
                                     <th>Shipment Address</th>
+                                    <th>Order Number</th>
                                     <th>Status</th>
                                     <th style={{ margin: "auto" }}>Approve</th>
                                     <th>Actions</th>

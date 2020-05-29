@@ -2,7 +2,7 @@ import { purchaseConstants, errorsConstant } from '../../constant/constants'
 const initialState = {
     errors: {
         purchaseOrder: {
-            suplier: [], orderdBy: [], purchase_item_order: []
+            suplier: [], orderdBy: [], purchase_item_order: [], description: []
         }
     },
     orders: [],

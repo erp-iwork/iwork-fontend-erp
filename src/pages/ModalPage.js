@@ -187,6 +187,7 @@ class ModalPage extends React.Component {
                     </Button>
                   </ModalFooter>
                 </Modal>
+
               </CardBody>
             </Card>
           </Col>

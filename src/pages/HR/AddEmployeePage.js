@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import Page from '../../components/Page';
+import React, { Component } from 'react'
+import Page from '../../components/Page'
 import {
     Button, Card, CardBody, CardHeader, Col, Form,
     FormGroup, Input, Label, Row
-} from 'reactstrap';
+} from 'reactstrap'
 import Error from '../../components/error'
 import { connect } from "react-redux"
 import actions from '../../store/hr/action'
 import { countries, regions, termsOfEmployment, getCity } from './data'
 import Spinner from '../../components/loader'
-import { Redirect } from 'react-router-dom'
-import routes from '../../config/routes'
-import AllEmployeesPage from "./AllEmployeesPage";
+import AllEmployeesPage from "./AllEmployeesPage"
 import PageSpinner from '../../components/PageSpinner'
 
 class AddEmployee extends Component {
@@ -31,19 +29,19 @@ class AddEmployee extends Component {
             redirect: false,
             lockPage: false
         }
-        this.submit = this.submit.bind(this);
-        this.departmentDropDown = this.departmentDropDown.bind(this);
-        this.levelDropDown = this.levelDropDown.bind(this);
-        this.roleDropDown = this.roleDropDown.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.submit = this.submit.bind(this)
+        this.departmentDropDown = this.departmentDropDown.bind(this)
+        this.levelDropDown = this.levelDropDown.bind(this)
+        this.roleDropDown = this.roleDropDown.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
 
-    componentDidount() {
+    componentDidMount() {
         this.props.getDepartment()
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (!this.state.lockPage && this.props.success) {
+        if (!this.state.lockPage && this.props.adding_employee) {
             this.setState({
                 firstName: "", lastName: "", email: "", telephone: "",
                 termOfEmployment: "", country: "", city: "", region: "",
@@ -53,12 +51,11 @@ class AddEmployee extends Component {
         }
     }
 
-    submit = async () => {
-        this.setState({ complete: false })
-        await this.props.addNewEmployee(this.state).then(res => {
-            this.setState({ redirect: true })
-        })
+    submit = () => {
+        this.setState({ complete: false, lockPage: false })
+        this.props.addNewEmployee(this.state)
     }
+
     departmentDropDown(e) {
         this.setState({
             depValue: e.target.value,
@@ -99,7 +96,6 @@ class AddEmployee extends Component {
     }
 
     render() {
-        console.log(this.props.department)
         const {
             country, region, firstName, lastName, email, birthDate, city, telephone,
             termOfEmployment, depValue, levValue, rolValue, hiredDate, gender
@@ -239,11 +235,18 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" value={gender} name="gender" onChange={this.handleChange}>
-                                                        <option aria-label="Gender" selected disabled>Select Gender </option>
+                                                        <option value="" selected disabled>Select Gender </option>
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </Input>
                                                 </Col>
+                                                <Error
+                                                    error={
+                                                        this.props.errors.gender
+                                                            ? this.props.errors.gender
+                                                            : null
+                                                    }
+                                                />
                                             </FormGroup>
                                         </Col>
                                     </Row>
@@ -428,11 +431,10 @@ class AddEmployee extends Component {
                                             </FormGroup>
                                         </Col>
                                     </Row>
-
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button color='primary' onClick={this.submit}>
-                                                {!this.props.adding_employee? "Add Employee" : <Spinner />}
+                                                {!this.props.adding_employee ? "Add Employee" : <Spinner />}
                                             </Button>
                                         </Col>
                                     </FormGroup>
@@ -440,12 +442,10 @@ class AddEmployee extends Component {
                             </CardBody>
                         </Card>
                     </Col>
-                    <AllEmployeesPage />
+                    <AllEmployeesPage data={this.props.users} />
                 </Page>
-
             </>
-
-        );
+        )
     }
 }
 
@@ -466,7 +466,4 @@ const mapDispatchToProps = {
     getDepartment: actions.getDepartment
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AddEmployee)
+export default connect(mapStateToProps, mapDispatchToProps)(AddEmployee)

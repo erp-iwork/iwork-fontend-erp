@@ -20,14 +20,14 @@ const Order = ({ order, index, data, handlePrint }) => {
                 <td>{order.shipmentAddress}</td>
                 <td>{order.status}</td>
                 <td>
-                    {order.orderNumber === data.currentOrder && data.success?
+                    {order.orderNumber === data.currentOrder && data.success ?
                         <PDFDownloadLink
-                          document={<Invoice data={data.invoices} invoice_item={data.invoice_item} />}
-                          fileName={`order_${order.orderNumber}.pdf`}>
-                          <Button>Download</Button>
+                            document={<Invoice data={data.invoices} invoice_item={data.invoice_item} />}
+                            fileName={`Invoice_${order.orderNumber}.pdf`}>
+                            <Button size='sm' color='success'>Download</Button>
                         </PDFDownloadLink> :
-                          <Button size='sm' color='primary' onClick={() => handlePrint(order.orderNumber)}>
-                              Generate PDF
+                        <Button size='sm' color='primary' onClick={() => handlePrint(order.orderNumber)}>
+                            Generate PDF
                           </Button>
                     }
                 </td>
@@ -75,9 +75,9 @@ class ViewAllOrdersPage extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        const deliveredOrders =  this.state.orders ? this.state.orders.filter((order) => {
+        const deliveredOrders = this.state.orders ? this.state.orders.filter((order) => {
             return (order.status === "Delivered") || (order.status === "Invoiced")
-        }) : "" 
+        }) : ""
         return (
             <Page
                 title="All Orders"
@@ -89,7 +89,7 @@ class ViewAllOrdersPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='left'>
-                                    <th>Order #</th>
+                                    <th>SO#</th>
                                     <th>Customer</th>
                                     <th>Sales Person</th>
                                     <th>Shipment Address</th>

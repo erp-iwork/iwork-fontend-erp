@@ -3,6 +3,7 @@ const initialState = {
   invoices: [],
   invoice_item: [],
   success: false,
+  loading: false,
 };
 export default function invoiceReducer(state = initialState, action) {
 
@@ -10,6 +11,8 @@ export default function invoiceReducer(state = initialState, action) {
     case errorsConstant.GET_ERRORS:
       return {
         ...state,
+        loading: false,
+        success: false,
         errors: action.payload,
       };
 
@@ -21,6 +24,7 @@ export default function invoiceReducer(state = initialState, action) {
     case GET_INVOICE:
       return {
         ...state,
+        loading: false,
         invoices: action.payload,
         invoice_item: action.payload.invoice_item,
         success: true,

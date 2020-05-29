@@ -85,22 +85,6 @@ const genLineData2 = (moreData = {}, moreData2 = {}) => {
     labels: MONTHS,
     datasets: [
       {
-        label: 'Run Time',
-        backgroundColor: getColor('success'),
-        borderColor: getColor('success'),
-        borderWidth: 1,
-        data: [
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-          randomNum(),
-        ],
-        ...moreData2,
-      },
-      {
         label: 'Down Time',
         backgroundColor: getColor('danger'),
         borderColor: getColor('danger'),
@@ -115,6 +99,22 @@ const genLineData2 = (moreData = {}, moreData2 = {}) => {
           randomNum(),
         ],
         ...moreData,
+      },
+      {
+        label: 'Run Time',
+        backgroundColor: getColor('success'),
+        borderColor: getColor('success'),
+        borderWidth: 1,
+        data: [
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+          randomNum(),
+        ],
+        ...moreData2,
       },
 
     ],
@@ -203,29 +203,29 @@ class DashboardPage extends React.Component {
             </Card>
           </Col>
         </Row>
-          <Col md="12" sm="12" xs="12">
-            <InfiniteCalendar
-              selected={today}
-              minDate={lastWeek}
-              width="100%"
-              theme={{
-                accentColor: primaryColor,
-                floatingNav: {
-                  background: primaryColor,
-                  chevron: secondaryColor,
-                  color: '#FFF',
-                },
-                headerColor: primaryColor,
-                selectionColor: primaryColor,
-                textColor: {
-                  active: '#FFF',
-                  default: '#333',
-                },
-                todayColor: infoColor,
-                weekdayColor: primaryColor,
-              }}
-            />
-          </Col>
+        <Col md="4" sm="12" xs="12">
+          <InfiniteCalendar
+            selected={today}
+            minDate={lastWeek}
+            width="100%"
+            theme={{
+              accentColor: primaryColor,
+              floatingNav: {
+                background: primaryColor,
+                chevron: secondaryColor,
+                color: '#FFF',
+              },
+              headerColor: primaryColor,
+              selectionColor: primaryColor,
+              textColor: {
+                active: '#FFF',
+                default: '#333',
+              },
+              todayColor: infoColor,
+              weekdayColor: primaryColor,
+            }}
+          />
+        </Col>
 
       </Page>
     );

@@ -14,30 +14,39 @@ class ViewAllItems extends Component {
         this.state = {
             modal: false,
             item: {
-                itemName: '', quantity: '', retailPrice: '', unitOfMeasurement: '', category: '',
+                itemName: '', quantity: '', retailPrice: '', unitOfMeasurement: '', catagory: {},
                 productType: ''
-            }
+            },
+            items: [],
+            done: false
         }
         this.toggle = this.toggle.bind(this)
     }
 
     toggle = (item) => {
+        console.log(item)
         return this.setState({
             modal: !this.state.modal, item
         })
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.loading_items && !this.state.done) {
+            this.setState({
+                items: this.props.items,
+                done: true
+            })
+        }
+    }
 
     componentDidMount() {
         this.props.getItemsByCategory(this.props.location.state)
     }
 
     render() {
-        if (this.props.loading_items) return <PageSpinner />
-
-     
+        if (!this.state.done) return <PageSpinner />
         const {
-            itemName, quantity, retailPrice, category, productType, unitOfMeasurement
+            retailPrice, catagory, productType, unitOfMeasurement, quantity
         } = this.state.item
 
         if (this.props.items.item_catagory.length === 0 || this.props.items.item_catagory === null) return <h2>No items in this Category yet</h2>
@@ -54,11 +63,12 @@ class ViewAllItems extends Component {
                         {this.state.item.itemName}
                     </ModalHeader>
                     <ModalBody>
-                        <Row>Quantity: {quantity}</Row>
-                        <Row>Retail Price: {retailPrice}</Row>
-                        <Row>Units: {unitOfMeasurement}</Row>
-                        <Row>Product Type: {productType}</Row>
-                        <Row>Category: {category}</Row>
+                        <Row><Col>Quantity: </Col><Col>{quantity}</Col></Row>
+                        <Row><Col>Unit Price: </Col><Col>{retailPrice}</Col></Row>
+                        <Row><Col>Category: </Col><Col>{catagory.catagory}</Col></Row>
+                        <Row><Col>UoM: </Col><Col>{unitOfMeasurement}</Col></Row>
+                        <Row><Col>Product Type: </Col><Col>{productType}</Col></Row>
+                        <Row><Col>Quantity: </Col><Col>{quantity}</Col></Row>
                     </ModalBody>
                     <ModalFooter>
                         <Button color='primary' onClick={() => this.toggle(this.state.item)}>
@@ -66,7 +76,6 @@ class ViewAllItems extends Component {
                       </Button>
                     </ModalFooter>
                 </Modal>
-
                 <Col>
                     <Card className="mb-4">
                         <CardHeader>Inventory Status</CardHeader>

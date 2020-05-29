@@ -15,7 +15,12 @@ class ViewSingleDelieveredOrderPage extends Component {
         this.state = {
             order: this.props.location.state,
             orders: [],
-            lockPage: false
+            lockPage: false,
+            done: false,
+            singleOrder: {},
+            status: '',
+            newPrice: '',
+            margin: ''
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -34,10 +39,16 @@ class ViewSingleDelieveredOrderPage extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.success && !this.state.lockPage) {
-            this.props.getSingleOrder(this.state.order.purchaseOrderNumber).then(res => {
-                this.setState({ lockPage: true })
+        if (!this.props.loading_single_order && !this.state.done) {
+            this.setState({
+                done: true,
+                singleOrder: this.props.order,
+                status: this.props.order.status_purchase_order[0]['status']
             })
+        }
+
+        if (!this.props.loading_invoice && !this.state.lockPage) {
+            this.setState({ status: status.invoiced, lockPage: true, newPrice: '', margin: '' })
         }
     }
 
@@ -49,12 +60,13 @@ class ViewSingleDelieveredOrderPage extends Component {
 
     invoice = () => {
         const { order } = this.state
+        this.setState({ lockPage: false })
         this.props.invoiceOrder(order.purchaseOrderNumber, this.state.orders)
     }
 
     render() {
         const { order } = this.props
-        if (this.props.loading_single_order) return <PageSpinner />
+        if (!this.state.done) return <PageSpinner />
         return (
             <Page title="Delivered Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Card className='padding'>
@@ -70,7 +82,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                                     <Col><b>{order.purchaseOrderDate}</b></Col>
                                 </Row>
                                 <Row><Col>Status :</Col>
-                                    <Col><b>{order.status_purchase_order[0]['status']}</b></Col>
+                                    <Col><b>{this.state.status}</b></Col>
                                 </Row>
                                 <b>Description</b>
                                 <Col>{order.description}</Col>
@@ -92,10 +104,10 @@ class ViewSingleDelieveredOrderPage extends Component {
                                     <tbody>
                                         {order.purchase_item_order.map((item, index) => (
                                             <tr>
-                                                <th scope="row">1</th>
+                                                <th scope="row">{item.masterData.productId}</th>
                                                 <td>{item.masterData.productName}</td>
                                                 <td>{item.purchaseQuantity}</td>
-                                                <td>{item.masterData.productPrice}</td>
+                                                <td>{item.itemCost}</td>
                                                 <td align='right'>
                                                     <Col >
                                                         <Input type='number' placeholder='New Price' onChange={
@@ -121,7 +133,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                                     </tbody>
                                     <Error error={this.props.errors.error} />
                                     <Button align='center' color='primary' onClick={this.invoice} disabled={
-                                        order.status_purchase_order[0]['status'] === status.invoiced
+                                        this.state.status === status.invoiced
                                     }>
                                         {this.props.loading_invoice ? <Loader /> : "Invoice Order"}
                                     </Button>

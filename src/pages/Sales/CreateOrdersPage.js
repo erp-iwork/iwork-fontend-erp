@@ -21,6 +21,7 @@ import Error from '../../components/error'
 import actions from '../../store/sales/action'
 import PageSpinner from '../../components/PageSpinner'
 import Loader from '../../components/loader'
+import { reverse } from '../../useCases'
 
 class CreateOrdersPage extends Component {
     constructor() {
@@ -262,8 +263,8 @@ class CreateOrdersPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.orders ? this.props.orders.slice(0)
-                                            .reverse().slice(0, 9).map((order, index) => (
+                                        {this.props.orders ? reverse(this.props.orders)
+                                            .slice(0, 9).map((order, index) => (
                                                 <tr key={index}>
                                                     <th scope="row">{index + 1}</th>
                                                     <td>{order.customer}</td>

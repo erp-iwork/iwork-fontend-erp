@@ -5,7 +5,9 @@ import {
   View,
   Document,
   StyleSheet,
+  Image,
 } from "@react-pdf/renderer";
+import Logo from "../../assets/img/logo/Logo.jpg";
 
 const styles = StyleSheet.create({
   root: {
@@ -13,6 +15,9 @@ const styles = StyleSheet.create({
     height: "100vh",
     backgroundColor: "#d1d1d1",
     padding: 10,
+  },
+  title: {
+    fontWeight: 600,
   },
 
   text: {
@@ -23,7 +28,7 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   logo: {
-    height: 50,
+    height: 80,
     width: 80,
     marginTop: 10,
   },
@@ -38,6 +43,7 @@ const styles = StyleSheet.create({
     color: "#686868",
   },
   tableRow: {
+    // margin: "auto",
     flexDirection: "row",
   },
   tableColHeader: {
@@ -59,7 +65,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   tableCellHeader: {
-    margin: "auto",
+    // margin: "auto",
     fontSize: 12,
     // fontWeight: 500,
     color: "#FFFFFF",
@@ -94,7 +100,7 @@ class SIVPdf extends Component {
             padding: 30,
           }}
         >
-          <View container xs={12} display="flex" style={styles.Header}>
+          {/* <View container xs={12} display="flex" style={styles.Header}>
             <View
               container
               style={{
@@ -104,13 +110,19 @@ class SIVPdf extends Component {
             >
               <View item>
                 <View style={{ height: 5 }} />
+
+                <Text style={styles.text} variant="body2" gutterBottom>
+                  Warehouse Name: {this.props.sivs.warehouseName}
+                </Text>
+                <View style={{ height: 5 }} />
+
                 <Text style={styles.text} variant="body2" gutterBottom>
                   Issued By : {localStorage.getItem("username")}
                 </Text>
                 <View style={{ height: 5 }} />
 
                 <Text style={styles.text} variant="body2" gutterBottom>
-                  SIV Date : {this.props.grv.date}
+                  SIV Date : {this.props.sivs.sivDate}
                 </Text>
               </View>
 
@@ -120,10 +132,42 @@ class SIVPdf extends Component {
                   marginLeft: 160,
                 }}
               >
-                {/* <Image source={Logo} alt="" style={styles.logo} /> */}
+              </View>
+            </View>
+          </View> */}
+
+          <View container xs={12} display="flex" style={styles.Header}>
+            <View
+              style={{
+                flexDirection: "row",
+                marginTop: 100,
+                justifyContent: "space-between",
+                display: "flex",
+              }}
+            >
+              <View item>
+                <Image source={Logo} alt="" style={styles.logo} />
+                <Text style={styles.text} variant="body2">
+                  Sparta ERP
+                </Text>
+              </View>
+
+              <View item>
+                <View style={{ height: 5 }} />
+                <Text style={styles.text} variant="body2" gutterBottom>
+                  Issued By : {localStorage.getItem("username")}
+                </Text>
+                <View style={{ height: 5 }} />
+
+                <Text style={styles.text} variant="body2" gutterBottom>
+                  SIV Date : {this.props.sivs.sivDate}
+                </Text>
               </View>
             </View>
           </View>
+          <Text style={styles.title} align="center">
+            Store Issue Voucher
+          </Text>
           <View style={styles.line}></View>
 
           <View
@@ -134,7 +178,7 @@ class SIVPdf extends Component {
             }}
           >
             <Text style={styles.textBody} variant="body2" color="">
-              Order Number : {this.props.grv.GRVID}
+              Order Number : {this.props.sivs.order}
             </Text>
           </View>
 
@@ -154,9 +198,15 @@ class SIVPdf extends Component {
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>Quantity</Text>
               </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Unit</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Amount</Text>
+              </View>
             </View>
-            {this.props.grv_item
-              ? this.props.grv_item.map((item, index) => {
+            {this.props.siv_item
+              ? this.props.siv_item.map((item, index) => {
                   return (
                     <View key={item.itemName} style={styles.tableRow}>
                       <View style={styles.tableCol}>
@@ -167,6 +217,12 @@ class SIVPdf extends Component {
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>{item.quantity}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{item.price}</Text>
+                      </View>
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{item.amount}</Text>
                       </View>
                     </View>
                   );
