@@ -56,6 +56,7 @@ class AllEmployees extends Component {
     render() {
         const employeeInfo = this.props.employees;
 
+
         if (this.props.fetch_loader) return <PageSpinner />
 
         if (this.props.employees === null && this.props.success)
@@ -101,7 +102,7 @@ class AllEmployees extends Component {
                                                         <Button size='sm' color='danger' onClick={() => this.deleteFun(employeeInfos.employeId)}>
                                                             <MdDelete />
                                                         </Button>
-                                                 </td>
+                                                    </td>
                                                     <td>
                                                         <Link to={{
                                                             pathname: routes.employeeProfile,

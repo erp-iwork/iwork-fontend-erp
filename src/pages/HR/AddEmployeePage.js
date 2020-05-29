@@ -42,12 +42,12 @@ class AddEmployee extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.state.lockPage && this.props.adding_employee) {
-            this.setState({
-                firstName: "", lastName: "", email: "", telephone: "",
-                termOfEmployment: "", country: "", city: "", region: "",
-                birthDate: "", hiredDate: "", depValue: "", gender: "",
-                rolValue: "", levValue: "", lockPage: true
-            })
+            // this.setState({
+            //     firstName: "", lastName: "", email: "", telephone: "",
+            //     termOfEmployment: "", country: "", city: "", region: "",
+            //     birthDate: "", hiredDate: "", depValue: "", gender: "",
+            //     rolValue: "", levValue: "", lockPage: true
+            // })
         }
     }
 
@@ -442,7 +442,7 @@ class AddEmployee extends Component {
                             </CardBody>
                         </Card>
                     </Col>
-                    <AllEmployeesPage data={this.props.users} />
+                    <AllEmployeesPage data={this.props.employees} />
                 </Page>
             </>
         )
@@ -455,6 +455,7 @@ const mapStateToProps = (state) => {
         adding_employee: state.hrReducer.adding_employee,
         loading: state.hrReducer.loading,
         users: state.hrReducer.users,
+        employees: state.hrReducer.employees,
         errors: state.hrReducer.errors,
         success: state.hrReducer.success,
         department: state.hrReducer.department,

@@ -30,24 +30,26 @@ class AddAccount extends React.Component {
     handleSubmit = async event => {
         event.preventDefault()
         const { username, password, is_admin, account } = this.state
-        if (username.length <= 0) this.setState({ errorUsername: true })
-        if (password.length <= 0) this.setState({ errorPassword: true })
-        if (!this.state.errorUsername && !this.state.errorPassword) {
-            var user = {}
-            user['username'] = username
-            user['password'] = password
-            user['email'] = account.email
-            user['employe'] = account.employeId
-            user['department'] = account.department.departmentId
-            user['role'] = account.roles.roleId
-            user['claim'] = account.level.levelId
-            user['is_admin'] = is_admin
-            await this.props.addAccount(user)
-            this.setState({ redirect: true })
-        }
+
+        var user = {}
+        user['username'] = username
+        user['password'] = password
+        user['email'] = account.email
+        user['employe'] = account.employeId
+        user['department'] = account.department.departmentId
+        user['role'] = account.roles.roleId
+        user['claim'] = account.level.levelId
+        user['is_admin'] = is_admin
+
+        this.props.addAccount(user)
+
     }
 
+
     render() {
+        if (this.props.it_register_success) {
+            return <Redirect to={routes.itEmployeePage} />
+        }
         if (this.state.redirect && this.props.success) return <Redirect to={routes.itEmployeePage} />
         return (
             <Container className="container">
@@ -64,6 +66,7 @@ class AddAccount extends React.Component {
                         <Label for='username'>Username</Label>
                         <Input type='text' id="username" required name='username' onChange={this.handleChange} />
                         <Error error={this.props.errors.username ? this.props.errors.username : null} />
+                        <Error error={this.props.errors.email ? this.props.errors.email : null} />
                     </FormGroup>
                     <FormGroup>
                         <Label for='password'>Password</Label>
@@ -96,7 +99,8 @@ const mapStateToProps = (state) => {
     return {
         success: state.hrReducer.success,
         errors: state.hrReducer.errors,
-        loading: state.hrReducer.loading
+        loading: state.hrReducer.loading,
+        it_register_success: state.hrReducer.it_register_success
     }
 }
 

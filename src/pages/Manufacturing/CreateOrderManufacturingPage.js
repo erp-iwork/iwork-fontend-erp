@@ -75,8 +75,8 @@ class CreateOrderManufacturingPage extends Component {
         const { name, value } = event.target
         if (name === "productMaterial") {
             this.setState({
-                productMaterial: this.state.canBeManudactured[value]['product_material'], dropdown: true,
-                productID: this.state.canBeManudactured[value]['productId']
+                productMaterial: this.state.canBeManudactured[value]['product_material'] ? this.state.canBeManudactured[value]['product_material'] : null, dropdown: true,
+                productID: this.state.canBeManudactured[value]['productId'] ? this.state.canBeManudactured[value]['productId'] : null
             })
         } else {
             this.setState({ [name]: value })
@@ -100,7 +100,7 @@ class CreateOrderManufacturingPage extends Component {
             return {
                 billOfMaterial: item.materialId,
                 quantity: item.materialQuantity * quantity,
-                price: item.materialCost * quantity * item.materialQuantity,
+                price: item.materialCost * quantity,
                 unitOfMesurement: item.materialUnitOfMeasurement
             }
         })

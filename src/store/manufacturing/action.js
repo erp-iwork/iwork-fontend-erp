@@ -175,7 +175,11 @@ export const getSingleManufacturedOrder = (orderNumber) => (dispatch) => {
 export const invoiceProduct = (orderNumber, status) => (dispatch) => {
   dispatch({ type: manuFacturingConstant.REQUEST_PUT_INVOICE_ORDER })
   return Axios.put(API + routes.manufacturestatus + orderNumber + '/', status, headers)
-    .then(res => dispatch({ type: manuFacturingConstant.SUCCESS_PUT_INVOICE_ORDER }))
+    .then(res => {
+      dispatch({ type: manuFacturingConstant.SUCCESS_PUT_INVOICE_ORDER })
+      window.location.reload()
+    }
+    )
     .catch((err) => {
       if (err.response && err.response.data) {
         dispatch({

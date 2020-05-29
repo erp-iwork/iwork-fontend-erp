@@ -42,6 +42,9 @@ class ViewSingleDelieveredOrderPage extends Component {
 
     render() {
         const { order } = this.props
+        if (!this.props.location.state.orderNumber) {
+            return <PageSpinner />
+        }
         if (this.props.loading_single_order) return <PageSpinner />
         return (
             <Page title="Delivered Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
@@ -59,13 +62,13 @@ class ViewSingleDelieveredOrderPage extends Component {
                                     <Col><b>{order.requiredProductName}</b></Col>
                                 </Row>
                                 <Row><Col>Order Date :</Col>
-                                    <Col><b>{order.status_manufacture_order[0]['date']}</b></Col>
+                                    <Col><b>{order.status_manufacture_order ? order.status_manufacture_order[0]['date'] : null}</b></Col>
                                 </Row>
                                 <Row><Col>Cost :</Col>
                                     <Col><b>{order.cost}</b></Col>
                                 </Row>
                                 <Row><Col>Status :</Col>
-                                    <Col><b>{order.status_manufacture_order[0]['status']}</b></Col>
+                                    <Col><b>{order.status_manufacture_order ? order.status_manufacture_order[0]['status'] : null}</b></Col>
                                 </Row>
                                 <b>Description</b>
                                 <Col>{order.description}</Col>
@@ -95,12 +98,12 @@ class ViewSingleDelieveredOrderPage extends Component {
                                     </tbody>
                                     <Row style={{ marginTop: 15 }}>
                                         <Col style={{
-                                            display: order.status_manufacture_order[0]['status'] === status.finished? 'none' : 'flex', flexDirection: 'row', alignItems: 'center'
+                                            display: order.status_manufacture_order[0]['status'] === status.finished ? 'none' : 'flex', flexDirection: 'row', alignItems: 'center'
                                         }}>
-                                            Margin: 
+                                            Margin:
                                             <Input onChange={event => this.setState({
-                                                margin: event.target.value
-                                            })} type="number" />
+                                            margin: event.target.value
+                                        })} type="number" />
                                         </Col>
                                         <Col>
                                             <Button align='center' color='primary' onClick={this.invoice} disabled={
@@ -110,7 +113,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                                             </Button>
                                         </Col>
                                         {
-                                            this.props.errors.errors? <Error error={[this.props.errors.errors.margin]} /> : ""
+                                            this.props.errors.errors ? <Error error={[this.props.errors.errors.margin]} /> : ""
                                         }
                                     </Row>
                                 </Table>

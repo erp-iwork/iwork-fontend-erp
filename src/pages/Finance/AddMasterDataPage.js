@@ -177,7 +177,7 @@ class AddMasterDataPage extends Component {
                                             <option value="Service">Service</option>
                                         </Input>
                                         {this.props.errors.errors ?
-                                            <Error error={this.props.errors.errors.productType} /> : ''
+                                            <Error error={this.props.errors.errors.productType ? this.props.errors.errors.productType : null} /> : ''
                                         }
                                     </Col>
                                 </FormGroup>
@@ -191,7 +191,7 @@ class AddMasterDataPage extends Component {
                                             ))}
                                         </Input>
                                         {this.props.errors.errors ?
-                                            <Error error={this.props.errors.errors.productCategory} /> : ''
+                                            <Error error={this.props.errors.errors.productCategory ? this.props.errors.errors.productCategory : null} /> : ''
                                         }
                                     </Col>
                                 </FormGroup>
@@ -203,7 +203,7 @@ class AddMasterDataPage extends Component {
                                             <UoM />
                                         </Input>
                                         {this.props.errors.errors ?
-                                            <Error error={this.props.errors.errors.unitOfMeasurement} /> : ''
+                                            <Error error={this.props.errors.errors.unitOfMeasurement ? this.props.errors.errors.unitOfMeasurement : null} /> : ''
                                         }
                                     </Col>
                                 </FormGroup>
@@ -245,7 +245,7 @@ class AddMasterDataPage extends Component {
                                             <Label for="checkbox3">Can Be Purchased</Label>
                                         </Col>
                                     </Row>
-                                    {this.props.errors.errors?
+                                    {this.props.errors.errors ?
                                         <Error error={this.props.errors.errors.choices} /> : ''
                                     }
                                 </FormGroup>

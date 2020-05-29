@@ -49,7 +49,8 @@ class Sidebar extends React.Component {
 
   getContents = (user_dept) => {
     switch (user_dept) {
-      case dept.finance: return <Finance isOpen={true} />
+      case dept.finance:
+        return <Finance isOpen={true} />
       case dept.hr: return <HR isOpen={true} />
       case dept.sales: return <Sales isOpen={true} />
       case dept.it: return <IT isOpen={true} />
