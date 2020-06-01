@@ -25,7 +25,6 @@ export default function hrReducer(state = initialState, action) {
         errors: action.payload,
         loading_dept: false,
         adding_employee: false,
-        adding_employee: false,
         loading: false,
       };
     }

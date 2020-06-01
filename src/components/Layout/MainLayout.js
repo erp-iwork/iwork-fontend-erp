@@ -6,8 +6,8 @@ import {
   MdLoyalty,
 } from 'react-icons/md';
 import { TiSupport } from "react-icons/ti";
-// import NotificationSystem from 'react-notification-system';
-// import { NOTIFICATION_SYSTEM_STYLE } from '../../utils/constants';
+import NotificationSystem from 'react-notification-system';
+import { NOTIFICATION_SYSTEM_STYLE } from '../../utils/constants';
 import { Redirect } from 'react-router-dom'
 import getToken from '../../auth/token'
 import routes from '../../config/routes'
@@ -25,10 +25,7 @@ class MainLayout extends React.Component {
       this.checkBreakpoint(breakpoint);
     }
   }
-
   componentDidMount() {
-    this.checkBreakpoint(this.props.breakpoint);
-
     setTimeout(() => {
       if (!this.notificationSystem) {
         return;
@@ -36,7 +33,7 @@ class MainLayout extends React.Component {
 
       this.notificationSystem.addNotification({
         title: <TiSupport />,
-        message: 'Welome to Reduction Admin!',
+        message: this.state.data.message,
         level: 'info',
       });
     }, 1500);
@@ -102,13 +99,13 @@ class MainLayout extends React.Component {
           <Footer />
         </Content>
 
-        {/* <NotificationSystem
+        <NotificationSystem
           dismissible={false}
           ref={notificationSystem =>
             (this.notificationSystem = notificationSystem)
           }
           style={NOTIFICATION_SYSTEM_STYLE}
-        /> */}
+        />
       </main>
     );
   }
