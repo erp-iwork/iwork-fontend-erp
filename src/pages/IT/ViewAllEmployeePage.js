@@ -56,6 +56,9 @@ class AllEmployees extends Component {
     }
 
     doSomething() {
+        this.setState({
+            showModal: false
+        })
         this.props.deleteAccount(this.state.email);
 
     }

@@ -248,10 +248,10 @@ class AddMasterDataPage extends Component {
                                             <Label for="checkbox3">Can Be Purchased</Label>
                                         </Col>
                                         <Col sm={12} md={3}>
-                                            <Input name="non_stock_material" type="checkbox" id="checkbox3" onChange={
+                                            <Input name="non_stock_material" type="checkbox" id="checkbox4" onChange={
                                                 (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
                                             } />
-                                            <Label for="checkbox3">Non stock material</Label>
+                                            <Label for="checkbox4">Non stock material</Label>
                                         </Col>
                                     </Row>
                                     {this.props.errors ?
