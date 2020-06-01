@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   tableColHeader: {
-    width: "33.34%",
+    width: "20%",
     borderStyle: "solid",
     borderColor: "#686868",
     borderBottomColor: "#000",
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   tableCol: {
-    width: "33.34%",
+    width: "20%",
     borderStyle: "solid",
     borderColor: "#686868",
     borderWidth: 1,
@@ -199,7 +199,7 @@ class SIVPdf extends Component {
                 <Text style={styles.tableCellHeader}>Quantity</Text>
               </View>
               <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>Unit</Text>
+                <Text style={styles.tableCellHeader}>Unit Price</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>Amount</Text>
@@ -219,7 +219,7 @@ class SIVPdf extends Component {
                         <Text style={styles.tableCell}>{item.quantity}</Text>
                       </View>
                       <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{item.price}</Text>
+                        <Text style={styles.tableCell}>{item.cost}</Text>
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>{item.amount}</Text>

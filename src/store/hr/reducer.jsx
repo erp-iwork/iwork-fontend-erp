@@ -3,6 +3,7 @@ import {
   itConstants,
   errorsConstant,
 } from "../../constant/constants";
+
 const initialState = {
   users: [],
   loading: false,
@@ -24,7 +25,6 @@ export default function hrReducer(state = initialState, action) {
         ...state,
         errors: action.payload,
         loading_dept: false,
-        adding_employee: false,
         adding_employee: false,
         loading: false,
       };
