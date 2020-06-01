@@ -5,6 +5,10 @@ import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
+import './styles/Animate.scss';
+import './styles/toast.scss';
+
+
 import routes from './config/routes'
 import LoginPage from './pages/Login'
 
