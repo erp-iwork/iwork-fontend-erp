@@ -22,9 +22,9 @@ const Order = ({ order, index, deliver }) => {
                 <td align='left'>
                     <Button size='sm' color='primary'
                         onClick={() => deliver(order.orderNumber)}
-                        disabled={order.status === "Delivered"? true : false}
+                        disabled={order.status === "Delivered" ? true : false}
                     >
-                        <MdAssignment /> {order.status === "Delivered"? "Delivered" : "Deliever"}
+                        <MdAssignment /> {order.status === "Delivered" ? "Delivered" : "Deliever"}
                     </Button>
                 </td>
                 <td>
@@ -56,8 +56,8 @@ class ViewAllOrdersPage extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        const deliveredOrders = this.props.orders.filter((order) => { return order.status === status.delivered || order.status === status.issued })
-        if (deliveredOrders.length === 0) return <h2>No orders to show</h2>
+        const deliveredOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === status.delivered || order.status === status.issued }) : null
+        if (deliveredOrders === null) return <h2>No orders to show</h2>
         return (
             <Page
                 title="All Orders"

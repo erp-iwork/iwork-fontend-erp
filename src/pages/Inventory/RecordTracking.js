@@ -4,7 +4,6 @@ import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 import { getRecords, getExistingCategories, getRecordsByType } from '../../store/inventory/action'
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
-import type from '../../constant/transactions'
 
 class RecordTracking extends Component {
     constructor(props) {
@@ -13,30 +12,17 @@ class RecordTracking extends Component {
             records: [],
             done: false
         }
-        this.getCategory = this.getCategory.bind(this)
     }
 
     componentDidMount() {
-        this.props.getExistingCategories()
-        this.props.getRecordsByType(type.in)
+        this.props.getRecords()
+
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (!(this.props.loading_categories || this.props.loading_records) && !this.state.done) {
-            this.setState({
-                records: this.props.records,
-                done: true
-            })
-        }
-    }
 
-    getCategory = (id) => {
-        const found = this.props.categories.find(item => item.catagoryId === id)
-        return found.catagory
-    }
 
     render() {
-        if (!this.state.done) return <PageSpinner />
+        if (this.props.loading_records) return <PageSpinner />
         return (
             <Page
                 title="Record Tracking"
@@ -62,19 +48,19 @@ class RecordTracking extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.records.slice(0).reverse(0).map((item, index) => (
+                                        {this.props.records ? this.props.records.map((item, index) => (
                                             <tr>
                                                 <td>{item.transactionId}</td>
-                                                <td>{item.purchaseItem.masterData.productId}</td>
-                                                <td>{item.purchaseItem.masterData.productName}</td>
-                                                <td>{item.purchaseItem.itemCost}</td>
-                                                <td>{this.getCategory(item.purchaseItem.masterData.productCategory)}</td>
+                                                <td>{item.productId}</td>
+                                                <td>{item.productName}</td>
+                                                <td>{item.itemCost}</td>
+                                                <td>{item.productCategory}</td>
                                                 <td>{item.orderId}</td>
                                                 <td>{item.amount}</td>
-                                                <td>{item.purchaseItem.purchaseQuantity}</td>
+                                                <td>{item.purchaseQuantity}</td>
                                                 <td>{item.transactionDate}</td>
                                             </tr>
-                                        ))}
+                                        )) : null}
                                     </tbody>
                                 </Table>
                             </CardBody>

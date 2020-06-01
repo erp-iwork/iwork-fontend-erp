@@ -122,6 +122,7 @@ class CreatePurchaseOrder extends Component {
     }
 
     render() {
+        const orders = this.props.orders;
         let { order_items: items } = this.state
         if ((this.props.loading_orders || this.props.loading_suppliers || this.props.loading_masterdata) && this.state.lockPage) return <PageSpinner />
         const {
@@ -172,9 +173,9 @@ class CreatePurchaseOrder extends Component {
                                                 value={description} />
                                             <Error
                                                 error={
-                                                    this.props.errors.purchaseOrder.description
+                                                    this.props.errors.purchaseOrder ? this.props.errors.purchaseOrder.description
                                                         ? this.props.errors.purchaseOrder.description
-                                                        : null} />
+                                                        : null : null} />
                                         </Col>
                                     </FormGroup>
                                     <CardHeader>Item Information</CardHeader>
@@ -208,7 +209,7 @@ class CreatePurchaseOrder extends Component {
                                     })}
                                     <FormGroup>
                                         {
-                                            this.props.errors.purchaseOrder.purchase_item_order
+                                            this.props.errors.purchaseOrder ? this.props.errors.purchaseOrder.purchase_item_order
                                                 ? this.props.errors.purchaseOrder.purchase_item_order.map(err => (
                                                     <div>
                                                         <Error
@@ -225,7 +226,9 @@ class CreatePurchaseOrder extends Component {
 
 
                                                 ))
-                                                : null}
+                                                : null
+                                                : null
+                                        }
 
 
 
@@ -262,7 +265,7 @@ class CreatePurchaseOrder extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.orders ? this.props.orders.slice(0)
+                                        {orders ? orders.slice(0)
                                             .reverse().slice(0, 9).map((order, index) => (
                                                 <tr key={index}>
                                                     <th scope="row">{index + 1}</th>

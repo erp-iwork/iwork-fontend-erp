@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Card, CardBody, CardHeader, Col, Row, Table, Button } from 'reactstrap'
 import Page from '../../components/Page';
 import { MdDelete } from "react-icons/md";
-import Swal from "sweetalert2"
 import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
 import actions from '../../store/hr/action'
 import routes from '../../config/routes'
 import PageSpinner from '../../components/PageSpinner'
+import ModelCusttom from '../popupNotification/customModal'
+import SuccessModal from '../popupNotification/success'
 
 class AllEmployees extends Component {
     constructor(props) {
@@ -15,9 +16,45 @@ class AllEmployees extends Component {
         this.state = {
             employeeInfo: [],
             done: false,
-            modelShow: false,
-            okModal: false,
+            showModal: false,
+            showSuccess: true,
+            email: '',
         }
+        this.cancel = this.cancel.bind(this)
+        this.doSomething = this.doSomething.bind(this)
+        this.okFun = this.okFun.bind(this)
+        this.deleteFun = this.deleteFun.bind(this)
+    }
+
+
+    deleteFun(email) {
+
+        this.setState({
+            showModal: true
+        })
+
+        this.setState({
+            email: email
+        })
+
+    }
+
+    doSomething() {
+        this.setState({
+            showModal: false
+        })
+        this.props.deleteEmploye(this.state.email);
+
+    }
+    cancel() {
+        this.setState({
+            showModal: false
+        })
+    }
+    okFun() {
+        this.setState({
+            showSuccess: false,
+        })
     }
 
     componentDidMount() {
@@ -25,38 +62,12 @@ class AllEmployees extends Component {
     }
 
 
-    okFun() {
-        this.setState({
-            modelShow: false,
-            okModal: false,
-
-        })
-    }
-
-    cancel() {
-        this.setState({
-            modelShow: false
-        })
-    }
-    deleteFun(employeId) {
-        this.props.deleteEmploye(employeId).then(res => {
-            if (res) {
-                Swal.fire({
-                    title: "Deleting Account...",
-                    icon: "warning",
-                    showCancelButton: false,
-                    allowOutsideClick: false,
-                    showConfirmButton: false,
-                    onDestroy: () => this.componentDidMount()
-                })
-            }
-        })
-    }
 
     render() {
+
         const employeeInfo = this.props.employees;
 
-        if (this.props.fetch_loader) return <PageSpinner />
+        if (this.props.fetch_employee_loading) return <PageSpinner />
 
         if (this.props.employees === null && this.props.success)
             return (
@@ -85,14 +96,16 @@ class AllEmployees extends Component {
                                             <th>Phone Number</th>
                                             <th>Term Of Employment</th>
                                             <th colSpan={2} align="center">Account</th>
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {employeeInfo ?
-                                            employeeInfo.splice(0).reverse().map((employeeInfos, index) => (
+                                        {
+                                            employeeInfo ? employeeInfo.map((employeeInfos, index) => (
                                                 <tr align='left' key={index}>
                                                     <th scope="row">{index + 1}</th>
-                                                    <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
+                                                    <td >{employeeInfos.firstName + " " + employeeInfos.lastName}</td>
                                                     <td >{employeeInfos.email}</td>
                                                     <td>{employeeInfos.hiredDate}</td>
                                                     <td>{employeeInfos.telephone}</td>
@@ -101,7 +114,7 @@ class AllEmployees extends Component {
                                                         <Button size='sm' color='danger' onClick={() => this.deleteFun(employeeInfos.employeId)}>
                                                             <MdDelete />
                                                         </Button>
-                                                 </td>
+                                                    </td>
                                                     <td>
                                                         <Link to={{
                                                             pathname: routes.employeeProfile,
@@ -109,18 +122,21 @@ class AllEmployees extends Component {
                                                         }}>
                                                             <Button size='sm' color='primary'>
                                                                 See Profile
-                                                        </Button>
+                                                                    </Button>
                                                         </Link>
                                                     </td>
                                                 </tr>
-                                            )) : null}
+
+                                            )) : null
+                                        }
                                     </tbody>
                                 </Table>
                             </CardBody>
                         </Card>
                     </Col>
                 </Row>
-
+                {this.props.delete_empoyee_success ? (<SuccessModal title={"Congratulations!"} message={"Employe deleted successfully"} show={this.state.showSuccess} okFun={this.okFun} />) : null}
+                {this.state.showModal && !this.props.delete_empoyee_success ? (<ModelCusttom doSomething={this.doSomething} cancel={this.cancel} />) : null}
             </Page>
 
 
@@ -132,7 +148,10 @@ const mapStateToProps = (state) => {
     return {
         success: state.hrReducer.success,
         loading: state.hrReducer.loading,
-        fetch_loader: state.hrReducer.fetch_loader,
+        delete_empoyee_loading: state.hrReducer.delete_empoyee_loading,
+        fetch_employee_loading: state.hrReducer.fetch_employee_loading,
+
+        delete_empoyee_success: state.hrReducer.delete_empoyee_success,
         users: state.hrReducer.users,
         employees: state.hrReducer.employees,
         errors: state.hrReducer.errors

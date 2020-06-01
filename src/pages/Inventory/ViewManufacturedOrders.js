@@ -21,14 +21,14 @@ const Order = ({ order, index, handleReceive }) => {
             <td>{order.status_manufacture_order[0]['date']}</td>
             <td>{order.status_manufacture_order[0]['status']}</td>
             <td>
-                {order.status_manufacture_order[0]['status'] === status.finished?
-                <Button size='sm' color='primary' onClick={() => handleReceive(order.orderNumber)}>
+                {order.status_manufacture_order[0]['status'] === status.finished ?
+                    <Button size='sm' color='primary' onClick={() => handleReceive(order.orderNumber)}>
                         Receieve
                 </Button> :
-                <Button size='sm' color='primary' disabled>
-                    Receieved
-                </Button> 
-            }
+                    <Button size='sm' color='primary' disabled>
+                        Receieved
+                </Button>
+                }
             </td>
             <td>
                 <Link to={{ pathname: routes.ViewSingleOrderManufacturing, state: order }}>
@@ -73,7 +73,7 @@ class ViewAllPurchaseOrderPage extends Component {
     render() {
         if (!this.state.done) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
-        console.log(this.props.orders)
+
         return (
             <Page title="Manufactured Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Card className="mb-3">
@@ -94,7 +94,7 @@ class ViewAllPurchaseOrderPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.done? reverse(this.state.orders).map((item, index) => (
+                                {this.state.done ? reverse(this.state.orders).map((item, index) => (
                                     <Order key={index} index={index} order={item} handleReceive={this.handleReceive} />
                                 )) : ''}
                             </tbody>

@@ -7,8 +7,9 @@ import invoiceReducer from "./Invoice/reducer";
 import sivReducer from "./Siv/reducer";
 import salesReducer from "./sales/reducer";
 import ordersReducer from "./order/reducer";
-import procurementReducer from './procurement/reducer'
-import manuFacturingReducer from './manufacturing/reducer'
+import procurementReducer from "./procurement/reducer";
+import manuFacturingReducer from "./manufacturing/reducer";
+import itReducer from "./it/reducer";
 
 export default combineReducers({
   loginReducer,
@@ -20,5 +21,6 @@ export default combineReducers({
   salesReducer,
   ordersReducer,
   procurementReducer,
-  manuFacturingReducer
-})
+  manuFacturingReducer,
+  itReducer,
+});

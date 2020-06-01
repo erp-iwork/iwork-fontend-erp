@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
 import routes from '../../api/routes'
-import { companyConstant, errorsConstant} from "../../constant/constants";
+import { companyConstant, errorsConstant } from "../../constant/constants";
 import headers from './../headers'
 import statusTypes from '../../constant/status'
 
@@ -210,7 +210,7 @@ export const addMasterData = (masterData) => (dispatch) => {
   return axios
     .post(API + routes.masterData, masterData, headers)
     .then((res) => {
-      console.log(res.data)
+
       Swal.fire({
         title: "Added Product",
         icon: "success",
@@ -223,16 +223,14 @@ export const addMasterData = (masterData) => (dispatch) => {
       })
     })
     .catch((err) => {
-      console.log(err)
-      try {
-        dispatch({
-          type: errorsConstant.GET_ERRORS,
-          payload: err.response.data,
-        });
-      } catch {
-        console.log("Error occured in adding master data")
-      }
-    })
+      console.log(err.response.data);
+
+      dispatch({
+        type: errorsConstant.GET_ERRORS,
+        payload: err.response.data.errors,
+      });
+
+    });
 }
 
 export const getAllMasterData = () => (dispatch) => {
@@ -269,7 +267,7 @@ export const getMasterData = () => (dispatch) => {
     type: companyConstant.REQUEST_GET_MASTERDATA,
     payload: true
   })
-  return axios.get(API + routes.itemsToBePurchased, headers)
+  return axios.get(API + routes.rawmaterial, headers)
     .then(res => {
       dispatch({
         type: companyConstant.GET_MASTERDATA,

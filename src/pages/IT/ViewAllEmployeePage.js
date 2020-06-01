@@ -9,20 +9,30 @@ import Page from '../../components/Page'
 import { MdLibraryAdd } from "react-icons/md"
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux"
-import Swal from "sweetalert2"
-import actions from '../../store/hr/action'
+import actions from '../../store/it/action'
 import routes from '../../config/routes'
 import PageSpinner from '../../components/PageSpinner'
+import ModelCusttom from '../popupNotification/customModal'
+import SuccessModal from '../popupNotification/success'
 
 class AllEmployees extends Component {
-    state = {
-        modal: false,
-        modal_backdrop: false,
-        modal_nested_parent: false,
-        modal_nested: false,
-        backdrop: true,
-    };
+    constructor(props) {
+        super(props)
+        this.state = {
+            modal: false,
+            modal_backdrop: false,
+            modal_nested_parent: false,
+            modal_nested: false,
+            backdrop: true,
+            showModal: false,
+            showSuccess: true,
+            email: '',
+        };
+        this.cancel = this.cancel.bind(this)
+        this.doSomething = this.doSomething.bind(this)
+        this.okFun = this.okFun.bind(this)
 
+    }
     toggle = modalType => () => {
         if (!modalType) {
             return this.setState({
@@ -34,29 +44,42 @@ class AllEmployees extends Component {
             [`modal_${modalType}`]: !this.state[`modal_${modalType}`],
         });
     };
+
     deleteFun(email) {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "This user will be deleted Permamently!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-            if (result.value) {
-                this.props.deleteAccount(email);
-            }
-        });
+        this.setState({
+            showModal: true
+        })
+        this.setState({
+            email: email
+        })
+
+    }
+
+    doSomething() {
+        this.setState({
+            showModal: false
+        })
+        this.props.deleteAccount(this.state.email);
+
+    }
+    cancel() {
+        this.setState({
+            showModal: false
+        })
+    }
+    okFun() {
+        this.setState({
+            showSuccess: false,
+        })
     }
 
     componentDidMount() {
-        this.props.getEmploye()
+        this.props.getUsers()
     }
 
     render() {
-        if (this.props.loading) return <PageSpinner />
-        if (this.props.employees.length === 0) return <h2>No employees yet.</h2>
+        if (this.props.get_user_loading) return <PageSpinner />
+        if (this.props.users.length === 0) return <h2>No employees yet.</h2>
         return (
             <Page
                 title="All Employees"
@@ -98,7 +121,7 @@ class AllEmployees extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.props.employees.map((employeeInfos, index) => (
+                                    {this.props.users.map((employeeInfos, index) => (
                                         <tr key={index}>
                                             <th scope="row">{index + 1}</th>
                                             <td>{employeeInfos.firstName + ' ' + employeeInfos.lastName}</td>
@@ -133,6 +156,8 @@ class AllEmployees extends Component {
                         </CardBody>
                     </Card>
                 </Col>
+                {this.props.delete_user_success ? (<SuccessModal title={"Congratulations!"} message={"Account deleted successfully"} show={this.state.showSuccess} okFun={this.okFun} />) : null}
+                {this.state.showModal && !this.props.delete_user_success ? (<ModelCusttom doSomething={this.doSomething} cancel={this.cancel} />) : null}
             </Page>
         );
     }
@@ -140,16 +165,19 @@ class AllEmployees extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading: state.hrReducer.loading,
-        users: state.hrReducer.users,
-        employees: state.hrReducer.employees,
-        errors: state.hrReducer.errors,
+        errors: state.itReducer.errors,
+        users: state.itReducer.users,
+        delete_user_loading: state.itReducer.delete_user_loading,
+        get_user_loading: state.itReducer.get_user_loading,
+
+        delete_user_success: state.itReducer.delete_user_success,
+        get_user_success: state.itReducer.get_user_success
     };
 }
 
 const mapDispatchToProps = {
     addAccount: actions.addAccount,
-    getEmploye: actions.getEmploye,
+    getUsers: actions.getUsers,
     deleteAccount: actions.deleteAccount,
 }
 

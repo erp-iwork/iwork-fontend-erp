@@ -1,10 +1,10 @@
 import React from "react";
-
+import { Col } from "reactstrap";
 export default function Error({ error }) {
   return (
-    <div className="text-danger" style={{ color: "red" }}>
+    <Col className="text-danger" style={{ color: "red" }}>
       {" "}
       {error}{" "}
-    </div>
+    </Col>
   );
 }

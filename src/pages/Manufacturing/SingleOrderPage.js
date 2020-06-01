@@ -6,7 +6,7 @@ import status from '../../constant/status'
 
 class SingleOrderPage extends Component {
     constructor(props) {
-        console.log(props.location.state);
+
         super(props);
         this.state = {
             order: props.location.state
@@ -14,7 +14,7 @@ class SingleOrderPage extends Component {
         this.calculateTotalPrice = this.calculateTotalPrice.bind(this)
     }
 
-    calculateTotalPrice () {
+    calculateTotalPrice() {
         var price = 0
         var quantity = 0
         this.state.order.manufacture_item_set.forEach(item => {
@@ -26,6 +26,8 @@ class SingleOrderPage extends Component {
 
     render() {
         const { order } = this.state
+        console.log(order);
+
         return (
             <Page title="Single Order" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
                 <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
@@ -43,7 +45,7 @@ class SingleOrderPage extends Component {
                     </div>
 
                     <div class={order.status_manufacture_order ?
-                        order.status_manufacture_order[0].status === status.manuFactured || order.status_manufacture_order[0].status === status.finished ?
+                        order.status_manufacture_order[0].status === status.manuFactured || order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
                             ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>

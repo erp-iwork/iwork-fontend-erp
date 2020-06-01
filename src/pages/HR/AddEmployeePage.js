@@ -5,11 +5,12 @@ import {
     FormGroup, Input, Label, Row
 } from 'reactstrap'
 import Error from '../../components/error'
+import CustomAlert from '../../components/error/Alert'
 import { connect } from "react-redux"
 import actions from '../../store/hr/action'
 import { countries, regions, termsOfEmployment, getCity } from './data'
 import Spinner from '../../components/loader'
-import AllEmployeesPage from "./AllEmployeesPage"
+import AllEmployees from './AllEmployeesPage'
 import PageSpinner from '../../components/PageSpinner'
 
 class AddEmployee extends Component {
@@ -34,22 +35,15 @@ class AddEmployee extends Component {
         this.levelDropDown = this.levelDropDown.bind(this)
         this.roleDropDown = this.roleDropDown.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.deleteFun = this.deleteFun.bind(this)
     }
 
     componentDidMount() {
         this.props.getDepartment()
+        this.props.getEmploye()
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (!this.state.lockPage && this.props.adding_employee) {
-            this.setState({
-                firstName: "", lastName: "", email: "", telephone: "",
-                termOfEmployment: "", country: "", city: "", region: "",
-                birthDate: "", hiredDate: "", depValue: "", gender: "",
-                rolValue: "", levValue: "", lockPage: true
-            })
-        }
-    }
+
 
     submit = () => {
         this.setState({ complete: false, lockPage: false })
@@ -94,14 +88,19 @@ class AddEmployee extends Component {
             [e.target.name]: e.target.value,
         });
     }
-
+    deleteFun(employeId) {
+        this.props.deleteEmploye(employeId)
+    }
     render() {
         const {
             country, region, firstName, lastName, email, birthDate, city, telephone,
             termOfEmployment, depValue, levValue, rolValue, hiredDate, gender
         } = this.state
-        if (this.props.loading_dept) return <PageSpinner />
+
+
+        if (this.props.fetch_department_loading) return <PageSpinner />
         else if (this.props.department.length === 0) return <h2>No departments. Please add departments. </h2>
+
         return (
             <>
                 <Page
@@ -109,6 +108,13 @@ class AddEmployee extends Component {
                     breadcrumbs={[{ name: 'Human Resource', active: true }]}
                     className="FormPage"
                 >
+                    {
+                        this.props.post_employee_success ? (
+                            <CustomAlert type={"success"} msg={"Congratulations! your data registered successfully!"}
+                            />
+                        ) : null
+
+                    }
                     <Col lg={12} md={24}>
                         <Card>
                             <CardHeader>Add employee</CardHeader>
@@ -434,7 +440,7 @@ class AddEmployee extends Component {
                                     <FormGroup row align='center'>
                                         <Col>
                                             <Button color='primary' onClick={this.submit}>
-                                                {!this.props.adding_employee ? "Add Employee" : <Spinner />}
+                                                {this.props.post_employee_loading ? <Spinner /> : "Add Employee"}
                                             </Button>
                                         </Col>
                                     </FormGroup>
@@ -442,7 +448,8 @@ class AddEmployee extends Component {
                             </CardBody>
                         </Card>
                     </Col>
-                    <AllEmployeesPage data={this.props.users} />
+                    <AllEmployees />
+
                 </Page>
             </>
         )
@@ -451,19 +458,29 @@ class AddEmployee extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading_dept: state.hrReducer.loading_dept,
-        adding_employee: state.hrReducer.adding_employee,
-        loading: state.hrReducer.loading,
-        users: state.hrReducer.users,
+        employees: state.hrReducer.employees,
         errors: state.hrReducer.errors,
-        success: state.hrReducer.success,
         department: state.hrReducer.department,
+
+        delete_empoyee_success: state.hrReducer.delete_empoyee_success,
+        fetch_employee_success: state.hrReducer.fetch_employee_success,
+        fetch_department_success: state.hrReducer.fetch_department_success,
+        post_employee_success: state.hrReducer.post_employee_success,
+        fetch_single_employee_success: state.hrReducer.fetch_single_employee_success,
+
+        delete_empoyee_loading: state.hrReducer.delete_empoyee_loading,
+        fetch_employee_loading: state.hrReducer.fetch_employee_loading,
+        fetch_department_loading: state.hrReducer.fetch_department_loading,
+        post_employee_loading: state.hrReducer.post_employee_loading,
+        fetch_single_employee_loading: state.hrReducer.fetch_single_employee_loading,
     };
 }
 
 const mapDispatchToProps = {
     addNewEmployee: actions.addNewEmployee,
-    getDepartment: actions.getDepartment
+    getEmploye: actions.getEmploye,
+    getDepartment: actions.getDepartment,
+    deleteEmploye: actions.deleteEmploye
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddEmployee)
