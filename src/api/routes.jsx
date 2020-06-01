@@ -10,6 +10,8 @@ const routes = {
   manufacturestatus: "manufacturestatus/",
   itemsToBeManufactured: "itemstobemanufacured/",
   itemsToBePurchased: "itemstobepurchased/",
+  rawmaterial: "rawmaterial/",
+  itemTobeSold: "itemstobesold/",
   records: "inventorytransaction/",
   recordsByType: "inventorytransactionytype/",
 };

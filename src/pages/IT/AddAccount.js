@@ -2,7 +2,7 @@ import logo200Image from '../../assets/img/logo/Sparta.svg';
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label, Container } from 'reactstrap';
 import './styles.scss'
-import actions from '../../store/hr/action'
+import actions from '../../store/it/action'
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import SpinnerLoader from '../../components/loader'
@@ -47,10 +47,10 @@ class AddAccount extends React.Component {
 
 
     render() {
-        if (this.props.it_register_success) {
+        if (this.props.post_user_success) {
             return <Redirect to={routes.itEmployeePage} />
         }
-        if (this.state.redirect && this.props.success) return <Redirect to={routes.itEmployeePage} />
+
         return (
             <Container className="container">
                 <Form onSubmit={this.handleSubmit} className="form" noValidate formNoValidate>
@@ -97,10 +97,12 @@ class AddAccount extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        success: state.hrReducer.success,
-        errors: state.hrReducer.errors,
-        loading: state.hrReducer.loading,
-        it_register_success: state.hrReducer.it_register_success
+        errors: state.itReducer.errors,
+        users: state.itReducer.users,
+        post_user_loading: state.itReducer.post_user_loading,
+        post_user_success: state.itReducer.post_user_success,
+
+
     }
 }
 

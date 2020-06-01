@@ -1,11 +1,13 @@
 import Swal from "sweetalert2";
 import axios from "axios";
+import routes from "../../api/routes";
 import API from "../../api/API";
 import { salesConstants } from "../../constant/constants";
 const headers = {
   "Content-Type": "application/json",
   Authorization: "Bearer" + localStorage.getItem("token"),
 };
+
 function createOrder(data) {
   var params = {
     orderNumber: data.orderNumber,
@@ -126,7 +128,7 @@ function getAllItem() {
     axios
       .request({
         method: "GET",
-        url: API + "items/",
+        url: API + routes.itemTobeSold,
         responseType: "json",
         headers: {
           "Content-Type": "application/json",

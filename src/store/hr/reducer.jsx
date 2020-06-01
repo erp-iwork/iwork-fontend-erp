@@ -1,113 +1,155 @@
-import {
-  appConstants,
-  itConstants,
-  errorsConstant,
-} from "../../constant/constants";
+import { appConstants } from "../../constant/constants";
 const initialState = {
-  users: [],
   loading: false,
-  isLogin: false,
   success: false,
-  clear: false,
+  delete_empoyee_loading: false,
+  fetch_employee_loading: false,
+  fetch_department_loading: false,
+  post_employee_loading: false,
+  fetch_single_employee_loading: false,
+
+  delete_empoyee_success: false,
+  fetch_employee_success: false,
+  fetch_department_success: false,
+  post_employee_success: false,
+  fetch_single_employee_success: false,
+
   errors: [],
   employees: [],
   employee: [],
   department: [],
-  adding_employee: false,
-  fetch_loader: false,
-  loading_dept: true,
-  it_register_success: false,
 };
 export default function hrReducer(state = initialState, action) {
   switch (action.type) {
-    case errorsConstant.GET_ERRORS: {
-      return {
-        ...state,
-        errors: action.payload,
-        loading_dept: false,
-        adding_employee: false,
-        adding_employee: false,
-        loading: false,
-        it_register_success: false,
-      };
-    }
-
-    case itConstants.REGISTER_REQUEST: {
-      return {
-        ...state,
-        loading: true,
-        it_register_success: false,
-      };
-    }
-    case itConstants.REGISTER_SUCCESS: {
-      const index = state.employees.findIndex(
-        (emp) => emp.email === action.payload
-      );
-      const employees = state.employees[index];
-      employees.has_account = true;
-
-      return {
-        ...state,
-        users: employees,
-        errors: [],
-        loading: false,
-        isLogin: true,
-        success: true,
-        clear: true,
-        it_register_success: true,
-      };
-    }
-    case itConstants.REGISTER_FAILURE: {
-      return {
-        ...state,
-        errors: action.payload,
-        loading: false,
-        isLogin: false,
-        success: false,
-        clear: false,
-      };
-    }
-
+    // All employe api pre-request
     case appConstants.REGISTER_REQUEST: {
       return {
         ...state,
-        adding_employee: true,
-        loading: true,
-        success: false,
-      };
-    }
-    case appConstants.REGISTER_SUCCESS: {
-      const newemploye = state.employees.concat(action.payload.employe);
-
-      return {
-        ...state,
-        users: newemploye,
         errors: [],
-        loading: false,
-        isLogin: true,
-        success: true,
-        clear: true,
-        adding_employee: false,
-        employees: newemploye,
-      };
-    }
-    case appConstants.REGISTER_FAILURE: {
-      return {
-        ...state,
-        errors: action.payload,
-        adding_employee: false,
-        loading: false,
-        isLogin: false,
-        success: false,
-        clear: false,
+        loading: true,
+        post_employee_loading: true,
+        delete_empoyee_success: false,
+        fetch_employee_success: false,
+        fetch_department_success: false,
+        post_employee_success: false,
+        fetch_single_employee_success: false,
       };
     }
 
     case appConstants.FETCH_REQUEST: {
       return {
         ...state,
+        errors: [],
         loading: true,
-        fetch_loader: true,
+        fetch_employee_loading: true,
+        delete_empoyee_success: false,
+        fetch_employee_success: false,
+        fetch_department_success: false,
+        post_employee_success: false,
+        fetch_single_employee_success: false,
+      };
+    }
+    case appConstants.DELETE_REQUEST: {
+      return {
+        ...state,
+        errors: [],
+        loading: true,
+        delete_empoyee_loading: true,
+        delete_empoyee_success: false,
+        fetch_employee_success: false,
+        fetch_department_success: false,
+        post_employee_success: false,
+        fetch_single_employee_success: false,
+      };
+    }
+    case appConstants.FETCH_SINGLE_REQUEST: {
+      return {
+        ...state,
+        errors: [],
+        fetch_single_employee_loading: true,
+        delete_empoyee_success: false,
+        fetch_employee_success: false,
+        fetch_department_success: false,
+        post_employee_success: false,
+        fetch_single_employee_success: false,
+      };
+    }
+    case appConstants.FETCH_DEPARTMENT_REQUEST: {
+      return {
+        ...state,
+        errors: [],
+        loading: true,
+        fetch_department_loading: true,
+        delete_empoyee_success: false,
+        fetch_employee_success: false,
+        fetch_department_success: false,
+        post_employee_success: false,
+        fetch_single_employee_success: false,
+      };
+    }
+
+    // All employe api call failure
+    case appConstants.REGISTER_FAILURE: {
+      return {
+        ...state,
+        errors: action.payload.errors,
+        loading: true,
+        post_employee_loading: false,
+        post_employee_success: false,
+        success: false,
+      };
+    }
+
+    case appConstants.FETCH_FAILURE: {
+      return {
+        ...state,
+        errors: [],
+        loading: true,
+        fetch_employee_loading: false,
+        fetch_employee_success: false,
+        success: false,
+      };
+    }
+    case appConstants.DELETE_FAILURE: {
+      return {
+        ...state,
+        errors: [],
+        loading: true,
+        delete_empoyee_loading: false,
+        delete_empoyee_success: false,
+        success: false,
+      };
+    }
+    case appConstants.FETCH_SINGLE_FAILURE: {
+      return {
+        ...state,
+        errors: [],
+        loading: true,
+        fetch_single_employee_loading: false,
+        fetch_single_employee_success: false,
+      };
+    }
+    case appConstants.FETCH_DEPARTMENT_FAILURE: {
+      return {
+        ...state,
+        errors: [],
+        loading: true,
+        fetch_department_loading: false,
+        fetch_department_success: false,
+        success: false,
+      };
+    }
+
+    // All employe api call success results
+    case appConstants.REGISTER_SUCCESS: {
+      return {
+        ...state,
+        errors: [],
+        loading: false,
+        post_employee_loading: false,
+        post_employee_success: true,
+        isLogin: true,
+        employees: [action.payload.employe, ...state.employees],
       };
     }
 
@@ -117,26 +159,9 @@ export default function hrReducer(state = initialState, action) {
         employees: action.payload,
         errors: [],
         loading: false,
-        isLogin: true,
         success: true,
-        fetch_loader: false,
-      };
-    }
-    case appConstants.FETCH_FAILURE: {
-      return {
-        ...state,
-        errors: action.payload,
-        loading: false,
-        isLogin: false,
-        success: false,
-        fetch_loader: false,
-      };
-    }
-
-    case appConstants.FETCH_SINGLE_REQUEST: {
-      return {
-        ...state,
-        loading: true,
+        fetch_employee_loading: false,
+        fetch_employee_success: true,
       };
     }
 
@@ -148,22 +173,8 @@ export default function hrReducer(state = initialState, action) {
         loading: false,
         isLogin: true,
         success: true,
-      };
-    }
-    case appConstants.FETCH_SINGLE_FAILURE: {
-      return {
-        ...state,
-        errors: action.payload,
-        loading: false,
-        isLogin: false,
-        success: false,
-      };
-    }
-
-    case appConstants.FETCH_DEPARTMENT_REQUEST: {
-      return {
-        ...state,
-        loading_dept: true,
+        fetch_single_employee_loading: false,
+        fetch_single_employee_success: true,
       };
     }
 
@@ -175,23 +186,8 @@ export default function hrReducer(state = initialState, action) {
         loading: false,
         isLogin: true,
         success: true,
-        loading_dept: false,
-      };
-    }
-    case appConstants.FETCH_DEPARTMENT_FAILURE: {
-      return {
-        ...state,
-        errors: action.payload,
-        loading: false,
-        isLogin: false,
-        success: false,
-      };
-    }
-
-    case appConstants.DELETE_REQUEST: {
-      return {
-        ...state,
-        loading: true,
+        fetch_department_success: true,
+        fetch_department_loading: false,
       };
     }
 
@@ -205,70 +201,11 @@ export default function hrReducer(state = initialState, action) {
         loading: false,
         isLogin: true,
         success: true,
-      };
-    }
-    case appConstants.DELETE_FAILURE: {
-      return {
-        ...state,
-        errors: action.payload,
-        loading: false,
-        isLogin: false,
-        success: false,
+        delete_empoyee_loading: false,
+        delete_empoyee_success: true,
       };
     }
 
-    case itConstants.DELETE_SUCCESS: {
-      const index = state.employees.findIndex(
-        (emp) => emp.email === action.payload
-      );
-      state.employees[index].has_account = false;
-
-      return {
-        ...state,
-        employees: state.employees,
-        errors: [],
-        loading: false,
-        isLogin: true,
-        success: true,
-      };
-    }
-    case itConstants.DELETE_FAILURE: {
-      return {
-        ...state,
-        errors: action.payload,
-        loading: false,
-        isLogin: false,
-        success: false,
-      };
-    }
-
-    case itConstants.GETALL_REQUEST: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
-    case itConstants.GETALL_SUCCESS: {
-      return {
-        ...state,
-        employees: action.payload.filter(
-          (emp) => emp.email !== localStorage.getItem("email")
-        ),
-        errors: [],
-        loading: false,
-        isLogin: true,
-        success: true,
-      };
-    }
-    case itConstants.GETALL_FAILURE: {
-      return {
-        ...state,
-        errors: action.payload,
-        loading: false,
-        isLogin: false,
-        success: false,
-      };
-    }
     default:
       // ALWAYS have a default case in a reducer
       return state;

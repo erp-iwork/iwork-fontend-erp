@@ -1,12 +1,9 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 import API from "../../api/API";
-import {
-  appConstants,
-  itConstants,
-  errorsConstant,
-} from "../../constant/constants";
+import { appConstants } from "../../constant/constants";
 import headers from "./../headers";
+
 function addNewEmployee(data) {
   return (dispatch) => {
     var param = {
@@ -30,7 +27,8 @@ function addNewEmployee(data) {
       type: appConstants.REGISTER_REQUEST,
       payload: true,
     });
-    return axios
+
+    axios
       .request({
         method: "POST",
         url: API + "employe/",
@@ -39,23 +37,16 @@ function addNewEmployee(data) {
         data: param,
       })
       .then((response) => {
-        return Swal.fire({
-          title: "Created",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1000,
-        }).then((res) => {
-          dispatch({
-            type: appConstants.REGISTER_SUCCESS,
-            payload: response.data,
-          });
+        dispatch({
+          type: appConstants.REGISTER_SUCCESS,
+          payload: response.data,
         });
       })
       .catch((error) => {
         if (error.response && error.response.data) {
           dispatch({
-            type: errorsConstant.GET_ERRORS,
-            payload: error.response.data.errors,
+            type: appConstants.REGISTER_FAILURE,
+            payload: error.response.data,
           });
         } else {
           Swal.fire({
@@ -73,7 +64,7 @@ function addNewEmployee(data) {
 function getEmploye() {
   return (dispatch) => {
     dispatch({
-      type: itConstants.GETALL_REQUEST,
+      type: appConstants.FETCH_REQUEST,
       payload: true,
     });
     axios
@@ -85,14 +76,14 @@ function getEmploye() {
       })
       .then((response) => {
         dispatch({
-          type: itConstants.GETALL_SUCCESS,
+          type: appConstants.FETCH_SUCCESS,
           payload: response.data,
         });
       })
       .catch((error) => {
         if (error.response && error.response.data) {
           dispatch({
-            type: itConstants.GETALL_FAILURE,
+            type: appConstants.FETCH_FAILURE,
             payload: error.response.data.errors,
           });
         } else {
@@ -109,168 +100,41 @@ function getEmploye() {
 }
 
 const deleteEmploye = (employeId) => (dispatch) => {
-    // dispatch({
-    //   type: appConstants.DELETE_REQUEST,
-    //   payload: true,
-    // })
-    return Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.value) {
-        axios.request({
-          method: "DELETE",
-          url: API + "employe/" + employeId,
-          responseType: "json",
-          headers: headers,
-        }).then((response) => {
-          Swal.fire({
-            title: "Deleted",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1000
-          })
-          // dispatch({
-          //   type: appConstants.DELETE_SUCCESS,
-          //   payload: employeId,
-          // });
-        })
-        .catch((error) => {
-          Swal.fire({
-            title: "Error",
-            text: "Something Went Wrong",
-            icon: "error",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-          if (error.response && error.response.data) {
-            dispatch({
-              type: appConstants.DELETE_FAILURE,
-              payload: error.response.data.errors,
-            });
-          } else {
-            Swal.fire({
-              title: "Error",
-              text: "Connection Problem",
-              icon: "error",
-              showConfirmButton: false,
-              timer: 1000,
-            });
-          }
-        })
-      }
-      return result.value
+  dispatch({
+    type: appConstants.DELETE_REQUEST,
+    payload: true,
+  });
+
+  return axios
+    .request({
+      method: "DELETE",
+      url: API + "employe/" + employeId,
+      responseType: "json",
+      headers: headers,
     })
-}
-
-function deleteAccount(email) {
-  return (dispatch) => {
-    dispatch({
-      type: itConstants.DELETE_REQUEST,
-      payload: true,
-    });
-    axios
-      .request({
-        method: "DELETE",
-        url: API + "account",
-        responseType: "json",
-        headers: headers,
-        data: {
-          email: email,
-        },
-      })
-      .then((response) => {
+    .then((response) => {
+      dispatch({
+        type: appConstants.DELETE_SUCCESS,
+        payload: employeId,
+      });
+    })
+    .catch((error) => {
+      if (error.response && error.response.data) {
         dispatch({
-          type: itConstants.DELETE_SUCCESS,
-          payload: email,
+          type: appConstants.DELETE_FAILURE,
+          payload: error.response.data,
         });
+      } else {
         Swal.fire({
-          title: "Deleted",
-          text: "Account Has Been Deleted",
-          icon: "success",
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
           showConfirmButton: false,
           timer: 1000,
         });
-      })
-
-      .catch((error) => {
-        if (error.response && error.response.data) {
-          dispatch({
-            type: itConstants.DELETE_FAILURE,
-            payload: error.response.data.errors,
-          });
-        } else {
-          Swal.fire({
-            title: "Error",
-            text: "Connection Problem",
-            icon: "error",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-        }
-      });
-  };
-}
-
-function addAccount(employe) {
-  return (dispatch) => {
-    dispatch({
-      type: itConstants.REGISTER_REQUEST,
-      payload: true,
+      }
     });
-    return axios
-      .request({
-        method: "POST",
-        url: API + "account/",
-        responseType: "json",
-        headers: headers,
-        data: {
-          username: employe.username,
-          password: employe.password,
-          email: employe.email,
-          employe: employe.employe,
-          department: employe.department,
-          roles: employe.role,
-          claim: employe.claim,
-          is_admin: employe.is_admin,
-        },
-      })
-      .then((response) => {
-        Swal.fire({
-          title: "Created",
-          text: "Account Has Been Created",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        dispatch({
-          type: itConstants.REGISTER_SUCCESS,
-          payload: response.data.email,
-        });
-      })
-      .catch((error) => {
-        if (error.response && error.response.data) {
-          dispatch({
-            type: itConstants.REGISTER_FAILURE,
-            payload: error.response.data.errors,
-          });
-        } else {
-          Swal.fire({
-            title: "Error",
-            text: "Connection Problem",
-            icon: "error",
-            showConfirmButton: false,
-            timer: 1000,
-          });
-        }
-      });
-  };
-}
+};
 
 function getEmployeDetail(employeId) {
   return (dispatch) => {
@@ -295,7 +159,7 @@ function getEmployeDetail(employeId) {
         if (error.response && error.response.data) {
           dispatch({
             type: appConstants.FETCH_SINGLE_FAILURE,
-            payload: error.response.data.errors,
+            payload: error.response.data,
           });
         } else {
           Swal.fire({
@@ -333,7 +197,7 @@ function getDepartment() {
         if (error.response && error.response.data) {
           dispatch({
             type: appConstants.FETCH_DEPARTMENT_FAILURE,
-            payload: error.response.data.errors,
+            payload: error.response.data,
           });
         } else {
           Swal.fire({
@@ -350,8 +214,6 @@ function getDepartment() {
 
 const actions = {
   addNewEmployee,
-  addAccount,
-  deleteAccount,
   deleteEmploye,
   getEmploye,
   getEmployeDetail,

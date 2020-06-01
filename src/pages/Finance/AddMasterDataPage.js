@@ -27,7 +27,7 @@ class AddMasterDataPage extends Component {
         this.state = {
             order_items: [],
             items: '', lockPage: false,
-            can_be_manufactured: false, can_be_sold: false, can_be_purchased: false,
+            can_be_manufactured: false, can_be_sold: false, can_be_purchased: false, non_stock_material: false,
             productName: '', productType: '', productCategory: '', productPrice: '', unitOfMeasurement: '',
             noneSelected: false
         }
@@ -41,7 +41,7 @@ class AddMasterDataPage extends Component {
     handleAddItem = () => {
         this.setState({
             order_items: this.state.order_items.concat([
-                { product: 0, materialName: "", materialQuantity: 1, materialUnitOfMeasurement: "" },
+                { product: 0, materialName: "", materialQuantity: 0, materialUnitOfMeasurement: "" },
             ])
         })
     }
@@ -49,6 +49,7 @@ class AddMasterDataPage extends Component {
     componentDidMount() {
         this.props.getMasterData()
         this.props.getExistingCategories()
+
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -127,11 +128,11 @@ class AddMasterDataPage extends Component {
         }
         const {
             productName, productCategory, can_be_manufactured, can_be_purchased, can_be_sold,
-            order_items, productType, productPrice, unitOfMeasurement
+            order_items, productType, productPrice, unitOfMeasurement, non_stock_material
         } = this.state
         const data = {
             productName, productCategory, isManufactured: can_be_manufactured,
-            canBePurchased: can_be_purchased, canBeSold: can_be_sold, productType,
+            canBePurchased: can_be_purchased, canBeSold: can_be_sold, non_stock_material: non_stock_material, productType,
             productPrice, unitOfMeasurement, product_material: order_items,
             cost
         }
@@ -142,6 +143,8 @@ class AddMasterDataPage extends Component {
     render() {
         if (this.props.loading || this.props.loading_categories) return <PageSpinner />
         let { can_be_manufactured } = this.state
+
+
         return (
             <Page
                 title="Add Master Data"
@@ -156,9 +159,9 @@ class AddMasterDataPage extends Component {
                                     <Label for="productName" sm={2}>Product Name</Label>
                                     <Col sm={12}>
                                         <Input id="productName" placeholder="Product Name" onChange={this.handleChange} name="productName" />
-                                        {this.props.errors.errors ?
-                                            <Error error={this.props.errors.errors.productName} /> : ''
-                                        }
+
+                                        <Error error={this.props.errors.productName ? this.props.errors.productName : null} />
+
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
@@ -176,9 +179,9 @@ class AddMasterDataPage extends Component {
                                             <option value="Storable">Storable</option>
                                             <option value="Service">Service</option>
                                         </Input>
-                                        {this.props.errors.errors ?
-                                            <Error error={this.props.errors.errors.productType ? this.props.errors.errors.productType : null} /> : ''
-                                        }
+
+                                        <Error error={this.props.errors.productType ? this.props.errors.productType : null} />
+
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
@@ -190,9 +193,9 @@ class AddMasterDataPage extends Component {
                                                 <option value={item.catagoryId} key={index}>{item.catagory}</option>
                                             ))}
                                         </Input>
-                                        {this.props.errors.errors ?
-                                            <Error error={this.props.errors.errors.productCategory ? this.props.errors.errors.productCategory : null} /> : ''
-                                        }
+
+                                        <Error error={this.props.errors.productCategory ? this.props.errors.productCategory : null} />
+
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
@@ -202,9 +205,9 @@ class AddMasterDataPage extends Component {
                                             <option disabled selected></option>
                                             <UoM />
                                         </Input>
-                                        {this.props.errors.errors ?
-                                            <Error error={this.props.errors.errors.unitOfMeasurement ? this.props.errors.errors.unitOfMeasurement : null} /> : ''
-                                        }
+
+                                        <Error error={this.props.errors.unitOfMeasurement ? this.props.errors.unitOfMeasurement : null} />
+
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
@@ -219,35 +222,42 @@ class AddMasterDataPage extends Component {
                                             type="number"
                                             onChange={this.handleChange}
                                         />
-                                        {this.props.errors.errors ?
-                                            <Error error={this.props.errors.errors.productPrice} /> : ''
-                                        }
+
+                                        <Error error={this.props.errors.productPrice ? this.props.errors.productPrice : null} />
+
                                     </Col>
                                 </FormGroup>
                                 <FormGroup>
                                     <Row className='isManufactured'>
-                                        <Col sm={12} md={4}>
+                                        <Col sm={12} md={3}>
                                             <Input name="can_be_manufactured" type="checkbox" id="checkbox1" onChange={
                                                 (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
                                             } />
                                             <Label for="checkbox1">Can Be Manufactured</Label>
                                         </Col>
-                                        <Col sm={4} md={4}>
+                                        <Col sm={4} md={3}>
                                             <Input name="can_be_sold" type="checkbox" id="checkbox2" onChange={
                                                 (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
                                             } />
                                             <Label for="checkbox2">Can Be Sold</Label>
                                         </Col>
-                                        <Col sm={12} md={4}>
+                                        <Col sm={12} md={3}>
                                             <Input name="can_be_purchased" type="checkbox" id="checkbox3" onChange={
                                                 (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
                                             } />
                                             <Label for="checkbox3">Can Be Purchased</Label>
                                         </Col>
+                                        <Col sm={12} md={3}>
+                                            <Input name="non_stock_material" type="checkbox" id="checkbox3" onChange={
+                                                (event) => this.handleChange({ target: { name: event.target.name, value: event.target.checked } })
+                                            } />
+                                            <Label for="checkbox3">Non stock material</Label>
+                                        </Col>
                                     </Row>
-                                    {this.props.errors.errors ?
-                                        <Error error={this.props.errors.errors.choices} /> : ''
+                                    {this.props.errors ?
+                                        <Error error={this.props.errors.choices ? this.props.errors.choices : null} /> : ''
                                     }
+
                                 </FormGroup>
                                 <hr></hr>
                                 <FormGroup>
@@ -289,9 +299,26 @@ class AddMasterDataPage extends Component {
                                                     <Button onClick={() => this.handleRemoveItem(index)}>-</Button>
                                                 </FormGroup>
                                             </Col>
+                                            {
+                                                this.props.errors.product_material ? this.props.errors.product_material.map(error => (
+                                                    <Row>
+
+                                                        <Error error={error.product ? error.product : null} />
+
+                                                        <Error error={error.materialUnitOfMeasurement ? error.materialUnitOfMeasurement : null} />
+                                                        <Error error={error.materialQuantity ? error.materialQuantity : null} />
+                                                    </Row>
+                                                )
+                                                ) : null
+                                            }
+                                            <Error error={this.props.errors.item ? this.props.errors.item : null} />
                                         </Row>
+
+
                                     ))}
-                                    <Button onClick={() => this.handleAddItem()} color='primary'
+
+
+                                    < Button onClick={() => this.handleAddItem()} color='primary'
                                         style={{ display: can_be_manufactured ? "flex" : "none", marginLeft: "1%" }}
                                     >Add Another One</Button>
                                 </FormGroup>
@@ -306,7 +333,7 @@ class AddMasterDataPage extends Component {
                         </CardBody>
                     </Card>
                 </Col>
-            </Page>
+            </Page >
         )
     }
 }

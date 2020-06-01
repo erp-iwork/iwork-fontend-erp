@@ -2,56 +2,18 @@ import React, { Component } from 'react'
 import Page from "../../components/Page"
 import {
     Button, Card, CardBody, CardHeader, Col,
-    Form, FormGroup, Input, Label, Row
+    Form, FormGroup, Input, Label, Row, Alert,
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { getMasterdata, addManufacturingOrder } from '../../store/manufacturing/action'
 import PageSpinner from '../../components/PageSpinner'
-import Error from '../../components/error'
-import Loader from '../../components/loader'
+import Error from '../../components/error/index'
+import CustomAlert from '../../components/error/Alert'
 
-const BOM = ({ index, materialName, unitOfMeasurement, quantity, cost }) => {
-    return (
-        <Row>
-            <Col sm={12} md={3}>
-                <FormGroup >
-                    <Label for="exampleSelect" sm={12}>
-                        Material Name
-                </Label>
-                    <Col sm={12}>
-                        <Input disabled type="text" value={materialName} placeholder='Material Name' name="select" />
-                    </Col>
-                </FormGroup>
-            </Col>
-            <Col sm={12} md={3}>
-                <FormGroup >
-                    <Label for="exampleSelect" sm={12}>
-                        Unit Of Measurment
-                </Label>
-                    <Col sm={12}>
-                        <Input type="text" disabled value={unitOfMeasurement} />
-                    </Col>
-                </FormGroup>
-            </Col>
-            <Col sm={12} md={3}>
-                <FormGroup >
-                    <Label for="exampleSelect" sm={12}>Cost</Label>
-                    <Col sm={12}>
-                        <Input type="text" disabled value={cost} />
-                    </Col>
-                </FormGroup>
-            </Col>
-            <Col sm={12} md={3}>
-                <FormGroup>
-                    <Label for="exampleSelect" sm={12}>Quantity</Label>
-                    <Col sm={12}>
-                        <Input type="text" disabled value={quantity} />
-                    </Col>
-                </FormGroup>
-            </Col>
-        </Row>
-    )
-}
+import Loader from '../../components/loader'
+import BOM from './billOfMaterial'
+
+
 
 class CreateOrderManufacturingPage extends Component {
     constructor(props) {
@@ -120,12 +82,32 @@ class CreateOrderManufacturingPage extends Component {
         const canBeManudactured = this.props.masterdata.filter((data) => { return data.isManufactured })
         this.setProducts(canBeManudactured)
         var errors = {}
-        if (this.props.errors.errors) {
-            errors = this.props.errors.errors
+        if (this.props.errors) {
+            errors = this.props.errors
+
         }
+
+
 
         return (
             <Page title="Create Order" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
+                {/* This alert is applicable for only backend problem with error type <error> */}
+                {errors.error ? (
+                    <CustomAlert
+                        msg={errors.error}
+                        type="danger"
+                    />
+
+
+                ) : null}
+
+                {this.props.success ? (<CustomAlert
+                    type="success"
+                    msg=" Congratulation!  Your data registered successfully"
+                />
+                )
+                    : null
+                }
                 <Col md={12}>
                     <Card>
                         <CardHeader>Order Information</CardHeader>
@@ -145,6 +127,7 @@ class CreateOrderManufacturingPage extends Component {
                                                     ))}
                                                 </Input>
                                                 <Error error={errors.requiredProduct ? errors.requiredProduct : null} />
+
                                             </Col>
                                         </FormGroup>
                                     </Col>
@@ -187,7 +170,9 @@ class CreateOrderManufacturingPage extends Component {
                                             quantity={item.materialQuantity}
                                         />
                                     ))}
-                                    {<Error error={errors.item ? errors.item : null} />}
+
+
+
                                     {
 
                                         errors.manufacture_item_set ? errors.manufacture_item_set.map((err) => (
@@ -197,12 +182,22 @@ class CreateOrderManufacturingPage extends Component {
                                                 <Error error={err.quantity ? err.quantity : null} />
                                                 <Error error={err.unitOfMesurement ? err.unitOfMesurement : null} />
                                                 <hr />
+
                                             </div>
 
                                         )
                                         ) : null
+
                                     }
 
+                                    {errors.item ? (
+                                        <Col>
+                                            <Alert color="danger">
+                                                {errors.item}
+                                            </Alert>
+                                        </Col>
+
+                                    ) : null}
 
                                 </div>
                                 <FormGroup >
@@ -253,7 +248,8 @@ class CreateOrderManufacturingPage extends Component {
                         </CardBody>
                     </Card>
                 </Col>
-            </Page>
+
+            </Page >
         );
     }
 }

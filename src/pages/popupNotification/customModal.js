@@ -1,20 +1,13 @@
 import React from 'react';
 import {
     Button,
-
     Modal,
     ModalBody,
     ModalFooter,
     ModalHeader,
-
 } from 'reactstrap';
 
 class ModelCusttom extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
-
 
     render() {
         return (
