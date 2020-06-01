@@ -153,16 +153,16 @@ class SIVPdf extends Component {
                 <Text style={styles.tableCellHeader}>#</Text>
               </View>
               <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>Item ID</Text>
+                <Text style={styles.tableCellHeader}>Batch Number</Text>
               </View>
               <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>ItemName</Text>
+                <Text style={styles.tableCellHeader}>Item Name</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>Quantity</Text>
               </View>
               <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>Unit Price</Text>
+                <Text style={styles.tableCellHeader}>Unit Cost</Text>
               </View>
             </View>
             {this.props.grv_item
