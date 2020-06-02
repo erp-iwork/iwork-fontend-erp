@@ -156,7 +156,6 @@ class CreateOrderManufacturingPage extends Component {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-
                                 <div style={{ display: dropdown ? "" : "none" }}>
                                     <Col>
                                     </Col>
@@ -170,11 +169,7 @@ class CreateOrderManufacturingPage extends Component {
                                             quantity={item.materialQuantity}
                                         />
                                     ))}
-
-
-
                                     {
-
                                         errors.manufacture_item_set ? errors.manufacture_item_set.map((err) => (
                                             <div>
                                                 <Error error={err.price ? err.price : null} />
@@ -184,12 +179,9 @@ class CreateOrderManufacturingPage extends Component {
                                                 <hr />
 
                                             </div>
-
                                         )
                                         ) : null
-
                                     }
-
                                     {errors.item ? (
                                         <Col>
                                             <Alert color="danger">

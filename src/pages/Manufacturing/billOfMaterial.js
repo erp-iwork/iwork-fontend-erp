@@ -4,7 +4,7 @@ import {
     FormGroup, Input, Label, Row
 } from 'reactstrap'
 
-const BOM = ({ index, materialName, unitOfMeasurement, quantity, cost }) => {
+const BOM = ({ index , materialName, unitOfMeasurement, quantity, cost }) => {
     return (
         <Row >
             <Col sm={12} md={3}>
