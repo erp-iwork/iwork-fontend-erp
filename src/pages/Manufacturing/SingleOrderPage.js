@@ -182,7 +182,7 @@ class SingleOrderPage extends Component {
                         </Col>
                     </Row>
                     {order.status_manufacture_order[0].status === status.manuFactured ?
-                        <Button size='sm' onClick = {this.handleDone(13, "Quality Checked")}> 
+                        <Button size='sm' onClick={this.handleDone(13, "Quality Checked")}>
                             Quality Approved
                         </Button> : null}
                     {order.status_manufacture_order[0].status === status.qualityCheck ?
@@ -207,4 +207,4 @@ const mapStateToProps = (state) => {
 }
 
 // export default SingleOrderPage;
-export default connect(mapStateToProps, {updateStatus })(SingleOrderPage)
+export default connect(mapStateToProps, { updateStatus })(SingleOrderPage)

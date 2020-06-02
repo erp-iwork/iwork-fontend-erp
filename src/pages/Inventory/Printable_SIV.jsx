@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 600,
+    paddingLeft: 180,
+    paddingBottom: 10,
   },
 
   text: {
@@ -190,7 +192,7 @@ class SIVPdf extends Component {
           <View style={styles.table}>
             <View style={styles.tableRow}>
               <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>#</Text>
+                <Text style={styles.tableCellHeader}>Serial No</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>ItemName</Text>

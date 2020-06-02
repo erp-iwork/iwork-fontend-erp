@@ -12,6 +12,8 @@ import Logo from "../../assets/img/logo/Logo.jpg";
 const styles = StyleSheet.create({
   title: {
     fontWeight: 600,
+    paddingLeft: 180,
+    paddingBottom: 10,
   },
   root: {
     width: "100vh",
@@ -149,7 +151,7 @@ class SIVPdf extends Component {
           <View style={styles.table}>
             <View style={styles.tableRow}>
               <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>#</Text>
+                <Text style={styles.tableCellHeader}>Serial</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>Batch Number</Text>
@@ -194,22 +196,16 @@ class SIVPdf extends Component {
               paddingTop: 20,
               marginLeft: 450,
             }}
-          ></View>
+          >
+            <Text style={styles.textBody} variant="body2" color="">
+              Total Price : {this.props.totalPrice}
+            </Text>
+          </View>
           <View
             style={{
               paddingLeft: 20,
             }}
           >
-            <View
-              style={{
-                display: "flex",
-                justifyContent: "flex-start",
-              }}
-            >
-              <Text style={styles.textBody} variant="body2" color="">
-                Total Price : {this.props.totalPrice}
-              </Text>
-            </View>
             <View
               style={{
                 display: "flex",

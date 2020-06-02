@@ -83,6 +83,8 @@ const CreateOrderManufacturingPage = React.lazy(() => import('./pages/Manufactur
 const ViewAllOrdersManufacturingPage = React.lazy(() => import('./pages/Manufacturing/ViewAllOrdersPage'));
 const SingleOrderManufacturingPage = React.lazy(() => import('./pages/Manufacturing/SingleOrderPage'));
 
+const ViewAllFinishedOrdersPage = React.lazy(() => import('./pages/Manufacturing/ViewAllFinishedOrders'));
+
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
 };
@@ -179,7 +181,10 @@ class App extends React.Component {
                 {/* MANUFACTURING ROUTES */}
                 <Route exact path={routes.ManufacturingDashboard} component={ManufacturingDashboard} />
                 <Route exact path={routes.CreateOrderManufacturing} component={CreateOrderManufacturingPage} />
+                <Route exact path={routes.ViewAllFinishedOrders} component={ViewAllFinishedOrdersPage} />
+
                 <Route exact path={routes.ViewAllOrdersManufacturing} component={ViewAllOrdersManufacturingPage} />
+                {/* <Route exact path={routes.ViewAllFinishedOrders} component={ViewAllFinishedOrdersPage} /> */}
                 <Route exact path={routes.ViewSingleOrderManufacturing} component={SingleOrderManufacturingPage} />
 
                 <Route
