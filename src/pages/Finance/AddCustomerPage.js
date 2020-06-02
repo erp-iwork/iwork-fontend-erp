@@ -28,7 +28,7 @@ class AddCustomerPage extends Component {
             generalManger: "",
             contactPerson: "",
             workingField: "",
-            paymentOption: "",
+            paymentOption: "VAT 15% Sales",
             email: "",
             tinNumber: "",
             companys: [],
@@ -51,7 +51,7 @@ class AddCustomerPage extends Component {
               generalManger: "",
               contactPerson: "",
               workingField: "",
-              paymentOption: "",
+              paymentOption: "VAT 15% Sales",
               email: "",
               tinNumber: "",
               lockPage: true
@@ -181,11 +181,7 @@ class AddCustomerPage extends Component {
                                         <FormGroup>
                                             <Label sm={12} for="exampleSelect">Payment Option</Label>
                                             <Col>
-                                                <Input type="select" name="paymentOption" placeholder="Select payment option" onChange={this.handleChange}>
-                                                    <option aria-label="None" value="Select payment option" />
-                                                    <option>TOT</option>
-                                                    <option>VAT</option>
-                                                </Input>
+                                                <Input value={this.state.paymentOption} disabled />
                                                 <Error
                                                     error={
                                                         this.props.errors.paymentOption

@@ -1,10 +1,11 @@
-import Swal from "sweetalert2";
-import axios from "axios";
-import API from "../../api/API";
+import Swal from "sweetalert2"
+import axios from "axios"
+import API from "../../api/API"
 import status from '../../constant/status'
 import routes from '../../api/routes'
-import { inventoryConstant, errorsConstant } from "../../constant/constants";
-import headers from "./../headers";
+import { inventoryConstant, errorsConstant } from "../../constant/constants"
+import headers from "./../headers"
+import { Alert } from '../../App'
 
 // ADD ITEM
 export const addItem = (item) => (dispatch) => {
@@ -356,4 +357,8 @@ export const getRecordsByType = (type) => (dispatch) => {
         });
       }
     })
+}
+
+export const checkToast = () => {
+  Alert.success("Hello There")
 }

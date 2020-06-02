@@ -111,17 +111,9 @@ class GRV extends React.Component {
         <div style={classes.pdf}>
           <div style={classes.Card}>
             <Row className="d-flex justify-content-between align-items-center"
+
             >
-
-
-              <Col
-                style={{
-                  marginTop: 10,
-                  marginLeft: 10,
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center'
-                }}>
+              <Col>
                 <img src={Logo} alt="" style={classes.logo} />
 
 
@@ -131,30 +123,23 @@ class GRV extends React.Component {
                     fontSize: 20,
                     fontWeight: 700,
                     color: '#fff',
-                    display: 'flex',
-                    justifyContent: 'center'
+                    paddingTop: 20
+
                   }}>
                   SPARTA ERP
                     </Typography>
               </Col>
               <Col >
-                <Typography
-                  style={classes.text}
-                >
+                <Typography style={classes.text}>
                   <b>PO # :</b> {grv.GRVID}
                 </Typography>
 
-                <Typography
-                  style={classes.text}
-                >
+                <Typography style={classes.text}>
                   <b>Recieved By :</b> {localStorage.getItem('username')}
                 </Typography>
-                <Typography
-                  style={classes.text}
-                >
+                <Typography style={classes.text}>
                   <b>GRV Date :</b> {grv.date}
                 </Typography>
-
               </Col>
             </Row>
           </div>
@@ -164,19 +149,20 @@ class GRV extends React.Component {
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Item ID</th>
+                    <th>Batch Number</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
-                    <th>Unit Price</th>
-
+                    <th>Unit</th>
+                    <th>Unit Cost</th>
                   </tr>
                 </thead>
                 <tbody>
                   {grv.GRVItems.map((item, index) => (
                     <tr>
                       <th scope="row">{index + 1}</th>
-                      <th>{item.itemID}</th>
+                      <td>{item.itemID}</td>
                       <td>{item.itemName}</td>
+                      <td>Unit Goes Here</td>
                       <td>{item.quantity}</td>
                       <td>{item.price}</td>
                     </tr>

@@ -5,6 +5,10 @@ import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
+import './styles/Animate.scss';
+import './styles/toast.scss';
+import { ToastContainer } from "react-toastr";
+
 import routes from './config/routes'
 import LoginPage from './pages/Login'
 
@@ -83,6 +87,8 @@ const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
 };
 
+let container
+
 class App extends React.Component {
   render() {
     return (
@@ -98,6 +104,10 @@ class App extends React.Component {
               )}
             />
             <MainLayout breakpoint={this.props.breakpoint}>
+                <ToastContainer
+                    ref={ref => container = ref}
+                    className="toast-top-right"
+                />
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" component={DashboardPage} />
                 <Route exact path="/login-modal" component={AuthModalPage} />
@@ -191,6 +201,12 @@ class App extends React.Component {
       </BrowserRouter>
     );
   }
+}
+
+export const Alert = {
+  success: (message) => container.success(message, `Alert`, {
+    closeButton: true
+  })
 }
 
 const query = ({ width }) => {
