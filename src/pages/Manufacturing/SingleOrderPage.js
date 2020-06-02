@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { Col, Row, Card, CardHeader, Table, CardBody } from 'reactstrap';
+import { Col, Row, Card, CardHeader, Table, Button, CardBody, Input } from 'reactstrap';
 import "./Manufacturing.scss"
 import status from '../../constant/status'
+import Typography from '../../components/Typography';
+import { updateStatus } from '../../store/manufacturing/action'
+import { connect } from 'react-redux'
+
+
 
 class SingleOrderPage extends Component {
     constructor(props) {
@@ -12,6 +17,7 @@ class SingleOrderPage extends Component {
             order: props.location.state
         }
         this.calculateTotalPrice = this.calculateTotalPrice.bind(this)
+        // this.handleDone = this.handleDone.bind(this)
     }
 
     calculateTotalPrice() {
@@ -22,6 +28,9 @@ class SingleOrderPage extends Component {
             quantity += item.quantity
         })
         return { price, quantity }
+    }
+    handleDone(order, status) {
+        this.props.updateStatus(order, status)
     }
 
     render() {
@@ -41,17 +50,28 @@ class SingleOrderPage extends Component {
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>
-                        <h4 class="step-title">Pending</h4>
+                        <h4 class="step-title">Work in Progress</h4>
                     </div>
 
                     <div class={order.status_manufacture_order ?
-                        order.status_manufacture_order[0].status === status.manuFactured || order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
+                        order.status_manufacture_order[0].status === status.manuFactured || order.status_manufacture_order[0].status === status.qualityCheck || order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
                             ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>
                         <h4 class="step-title">Manufactured</h4>
                     </div>
+
+                    <div class={order.status_manufacture_order ?
+                        order.status_manufacture_order[0].status === status.qualityCheck || order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
+                            ("step completed") : ("step") : null}>
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="pe-7s-config"></i></div>
+                        </div>
+                        <h4 class="step-title">Quality Checked</h4>
+                    </div>
+
+
                     <div class={order.status_manufacture_order ?
                         order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
                             ("step completed") : ("step") : null}>
@@ -130,7 +150,16 @@ class SingleOrderPage extends Component {
                                             <th>MO#</th>
                                             <th>Material Name</th>
                                             <th>Material Cost</th>
-                                            <th>Quantity</th>
+                                            <th> Estimated Quantity</th>
+                                            <th>
+
+                                                {
+                                                    order.status_manufacture_order[0].status === status.qualityCheck ?
+                                                        "Used Quantity"
+                                                        : null}
+                                            </th>
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -140,6 +169,11 @@ class SingleOrderPage extends Component {
                                                 <td>{item.componentName}</td>
                                                 <td>{item.price}</td>
                                                 <td>{item.quantity}</td>
+                                                <td>
+                                                    {
+                                                        order.status_manufacture_order[0].status === status.qualityCheck ?
+                                                            <Input type='number' max={item.quantity} /> : null}
+                                                </td>
                                             </tr>
                                         )) : null}
                                     </tbody>
@@ -147,10 +181,30 @@ class SingleOrderPage extends Component {
                             </CardBody>
                         </Col>
                     </Row>
+                    {order.status_manufacture_order[0].status === status.manuFactured ?
+                        <Button size='sm' onClick = {this.handleDone(13, "Quality Checked")}> 
+                            Quality Approved
+                        </Button> : null}
+                    {order.status_manufacture_order[0].status === status.qualityCheck ?
+                        <Button size='sm'>
+                            BOM Confirmed
+                    </Button> : null}
                 </Card>
             </Page>
         );
     }
 }
 
-export default SingleOrderPage;
+const mapStateToProps = (state) => {
+    return {
+        errors: state.manuFacturingReducer.errors,
+        loading_manufactured_orders: state.manuFacturingReducer.loading_manufactured_orders,
+        orders: state.manuFacturingReducer.orders,
+        loading_manufacture: state.manuFacturingReducer.loading_manufacture,
+        success: state.manuFacturingReducer.success,
+        updatedOrders: state.manuFacturingReducer.orders
+    }
+}
+
+// export default SingleOrderPage;
+export default connect(mapStateToProps, {updateStatus })(SingleOrderPage)

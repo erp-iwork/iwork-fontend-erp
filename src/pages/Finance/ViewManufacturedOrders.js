@@ -36,7 +36,7 @@ const Order = ({ order, index }) => {
             }
             </td>
             <td>
-                <Link to={{ pathname: routes.ViewSingleOrderManufacturing, state: order }}>
+                <Link to={{ pathname: routes.ViewFinanceSingleManufacturedOrder, state: order }}>
                     <Button size='sm' color='primary'>
                         See Order
                     </Button>

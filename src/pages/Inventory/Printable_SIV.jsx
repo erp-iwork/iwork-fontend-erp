@@ -233,9 +233,13 @@ class SIVPdf extends Component {
             style={{
               display: "flex",
               paddingTop: 20,
-              marginLeft: 450,
+              marginLeft: 400,
             }}
-          ></View>
+          >
+            <Text style={styles.textBody} variant="body2" color="">
+              Total Price : {this.props.sivs.order}
+            </Text>
+          </View>
           <View
             style={{
               paddingLeft: 20,

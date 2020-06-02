@@ -144,8 +144,11 @@ class SIV extends React.Component {
                     <th>#</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
+                    <th>UoM</th>
                     <th>Unit Price</th>
                     <th>Amount</th>
+
+
                   </tr>
                 </thead>
                 <tbody>
@@ -154,8 +157,10 @@ class SIV extends React.Component {
                       <th scope="row">{index + 1}</th>
                       <td>{item.itemName}</td>
                       <td>{item.quantity}</td>
+                      <td>UoM</td>
                       <td>{item.cost}</td>
                       <td>{item.amount}</td>
+
                     </tr>
                   )) : null}
                 </tbody>
@@ -163,11 +168,20 @@ class SIV extends React.Component {
             </CardBody>
           </Col>
 
+          <Typography>
+            <b>Total Cost</b> {this.props.sivs.cost}
+          </Typography>
+
           <div
             style={{
               paddingLeft: 20,
             }}
           >
+            <Typography style={{
+              paddingLeft: 500
+            }}>
+              {/* <b>Total Price :</b> {item.itemName} */}
+            </Typography>
             <div
               style={{
                 display: 'flex',
@@ -215,12 +229,12 @@ class SIV extends React.Component {
               }}
             >
               {({ loading }) => (loading ?
-                <Button size='sm' /> :
-                <div >
-                  <Button size='sm' color='primary'>
-                    Print SIV
+                <Button size='sm' color='primary'>
+                  loading ...
+                </Button> :
+                <Button size='sm' color='primary'>
+                  Print SIV
                   </Button>
-                </div>
               )}
             </PDFDownloadLink>) : null
           }

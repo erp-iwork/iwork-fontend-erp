@@ -108,13 +108,6 @@ class AddEmployee extends Component {
                     breadcrumbs={[{ name: 'Human Resource', active: true }]}
                     className="FormPage"
                 >
-                    {
-                        this.props.post_employee_success ? (
-                            <CustomAlert type={"success"} msg={"Congratulations! your data registered successfully!"}
-                            />
-                        ) : null
-
-                    }
                     <Col lg={12} md={24}>
                         <Card>
                             <CardHeader>Add employee</CardHeader>
@@ -447,7 +440,15 @@ class AddEmployee extends Component {
                                 </Form>
                             </CardBody>
                         </Card>
+                        {
+                            this.props.post_employee_success ? (
+                                <CustomAlert type={"success"} msg={"Congratulations! your data registered successfully!"}
+                                />
+                            ) : null
+
+                        }
                     </Col>
+
                     <AllEmployees />
 
                 </Page>

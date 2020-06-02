@@ -46,6 +46,7 @@ export const addItem = (item) => (dispatch) => {
       }
     });
 };
+
 // GET ITEM
 export const getItems = () => (dispatch) => {
   axios
