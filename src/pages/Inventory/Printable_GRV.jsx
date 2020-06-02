@@ -95,8 +95,12 @@ class SIVPdf extends Component {
           size="A4"
           style={{
             padding: 30,
+<<<<<<< HEAD
           }}
         >
+=======
+          }}>
+>>>>>>> After Develop
           <View container xs={12} display="flex" style={styles.Header}>
             <View
               style={{
@@ -104,15 +108,22 @@ class SIVPdf extends Component {
                 marginTop: 100,
                 justifyContent: "space-between",
                 display: "flex",
+<<<<<<< HEAD
               }}
             >
+=======
+              }}>
+>>>>>>> After Develop
               <View item>
                 <Image source={Logo} alt="" style={styles.logo} />
                 <Text style={styles.text} variant="body2">
                   Sparta ERP
                 </Text>
               </View>
+<<<<<<< HEAD
 
+=======
+>>>>>>> After Develop
               <View item>
                 <View style={{ height: 5 }} />
                 <Text style={styles.text} variant="body2" gutterBottom>
@@ -127,7 +138,11 @@ class SIVPdf extends Component {
             </View>
           </View>
           <Text style={styles.title} align="center">
+<<<<<<< HEAD
             Goods Return Voucher
+=======
+            Goods Receiving Voucher
+>>>>>>> After Develop
           </Text>
           <View style={styles.line}></View>
           <View
@@ -153,16 +168,27 @@ class SIVPdf extends Component {
                 <Text style={styles.tableCellHeader}>#</Text>
               </View>
               <View style={styles.tableColHeader}>
+<<<<<<< HEAD
                 <Text style={styles.tableCellHeader}>Item ID</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>ItemName</Text>
+=======
+                <Text style={styles.tableCellHeader}>Batch Number</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Item Name</Text>
+>>>>>>> After Develop
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>Quantity</Text>
               </View>
               <View style={styles.tableColHeader}>
+<<<<<<< HEAD
                 <Text style={styles.tableCellHeader}>Unit Price</Text>
+=======
+                <Text style={styles.tableCellHeader}>Unit Cost</Text>
+>>>>>>> After Develop
               </View>
             </View>
             {this.props.grv_item
