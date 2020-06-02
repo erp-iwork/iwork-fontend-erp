@@ -5,9 +5,9 @@ import {
   // MdCardGiftcard,
   MdLoyalty,
 } from 'react-icons/md';
-import { TiSupport } from "react-icons/ti";
-import NotificationSystem from 'react-notification-system';
-import { NOTIFICATION_SYSTEM_STYLE } from '../../utils/constants';
+// import { TiSupport } from "react-icons/ti";
+// import NotificationSystem from 'react-notification-system';
+// import { NOTIFICATION_SYSTEM_STYLE } from '../../utils/constants';
 import { Redirect } from 'react-router-dom'
 import getToken from '../../auth/token'
 import routes from '../../config/routes'
@@ -26,17 +26,17 @@ class MainLayout extends React.Component {
     }
   }
   componentDidMount() {
-    setTimeout(() => {
-      if (!this.notificationSystem) {
-        return;
-      }
 
-      this.notificationSystem.addNotification({
-        title: <TiSupport />,
-        message: this.state.data.message,
-        level: 'info',
-      });
-    }, 1500);
+    // setTimeout(() => {
+    //   if (!this.notificationSystem) {
+    //     return;
+    //   }
+    //   this.notificationSystem.addNotification({
+    //     title: <TiSupport />,
+    //     message: this.state.data.message,
+    //     level: 'info',
+    //   });
+    // }, 1500);
 
     setTimeout(() => {
       if (!this.notificationSystem) {
@@ -70,12 +70,12 @@ class MainLayout extends React.Component {
       case 'xs':
       case 'sm':
       case 'md':
-        return this.openSidebar('close');
+        return this.openSidebar('open');
 
       case 'lg':
       case 'xl':
       default:
-        return this.openSidebar('open');
+        return this.openSidebar('opcloseen');
     }
   }
 
@@ -99,13 +99,13 @@ class MainLayout extends React.Component {
           <Footer />
         </Content>
 
-        <NotificationSystem
+        {/* <NotificationSystem
           dismissible={false}
           ref={notificationSystem =>
             (this.notificationSystem = notificationSystem)
           }
           style={NOTIFICATION_SYSTEM_STYLE}
-        />
+        /> */}
       </main>
     );
   }

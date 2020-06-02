@@ -95,8 +95,7 @@ class SIVPdf extends Component {
           size="A4"
           style={{
             padding: 30,
-          }}
-        >
+          }}>
           <View container xs={12} display="flex" style={styles.Header}>
             <View
               style={{
@@ -104,15 +103,13 @@ class SIVPdf extends Component {
                 marginTop: 100,
                 justifyContent: "space-between",
                 display: "flex",
-              }}
-            >
+              }}>
               <View item>
                 <Image source={Logo} alt="" style={styles.logo} />
                 <Text style={styles.text} variant="body2">
                   Sparta ERP
                 </Text>
               </View>
-
               <View item>
                 <View style={{ height: 5 }} />
                 <Text style={styles.text} variant="body2" gutterBottom>
@@ -127,7 +124,7 @@ class SIVPdf extends Component {
             </View>
           </View>
           <Text style={styles.title} align="center">
-            Goods Return Voucher
+            Goods Receiving Voucher
           </Text>
           <View style={styles.line}></View>
           <View
