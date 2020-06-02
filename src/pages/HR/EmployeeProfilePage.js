@@ -14,9 +14,9 @@ class EmployeeProfilePage extends Component {
     }
     render() {
         const employeeInfos = this.props.employee
-        console.log(employeeInfos)
-        console.log(employeeInfos)
-        if (!employeeInfos.firstName) return <PageSpinner />
+        console.log(employeeInfos);
+
+        if (!employeeInfos) return <PageSpinner />
         return (
             <Page
                 title="Employee Profile"
@@ -118,7 +118,7 @@ class EmployeeProfilePage extends Component {
                                                 Department :
                                         </Col>
                                             <Col>
-                                                <b>{employeeInfos.department.departmentName}</b>
+                                                <b>{employeeInfos.department ? employeeInfos.department.departmentName : null}</b>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -128,7 +128,7 @@ class EmployeeProfilePage extends Component {
                                                 Role :
                                         </Col>
                                             <Col>
-                                                <b>{employeeInfos.roles.role}</b>
+                                                <b>{employeeInfos.roles ? employeeInfos.roles.role : null}</b>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -140,7 +140,7 @@ class EmployeeProfilePage extends Component {
                                                 Level :
                                         </Col>
                                             <Col>
-                                                <b>{employeeInfos.level.level}</b>
+                                                <b>{employeeInfos.level ? employeeInfos.level.level : null}</b>
                                             </Col>
                                         </Row>
                                     </Col>

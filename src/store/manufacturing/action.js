@@ -119,12 +119,12 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
         type: manuFacturingConstant.SUCCESS_PUT_ORDERS,
         payload: { order: res.data.manufacture_order, status: res.data.status },
       })
-      Swal.fire({
-        title: "Delivered to Inventory",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1000
-      });
+      // Swal.fire({
+      //   title: "Delivered to Inventory",
+      //   icon: "success",
+      //   showConfirmButton: false,
+      //   timer: 1000
+      // });
     })
     .catch((err) => {
       console.log(err.response)

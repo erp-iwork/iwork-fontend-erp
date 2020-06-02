@@ -4,6 +4,7 @@ import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
 import { getRecords, getExistingCategories, getRecordsByType } from '../../store/inventory/action'
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
+import type from '../../constant/transactions'
 
 class RecordTracking extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class RecordTracking extends Component {
     }
 
     componentDidMount() {
-        this.props.getRecords()
+        this.props.getRecordsByType(type.in)
 
     }
 
@@ -36,6 +37,7 @@ class RecordTracking extends Component {
                                 <Table responsive>
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Transaction ID</th>
                                             <th>Product ID</th>
                                             <th>Product Name</th>
@@ -50,6 +52,7 @@ class RecordTracking extends Component {
                                     <tbody>
                                         {this.props.records ? this.props.records.map((item, index) => (
                                             <tr>
+                                                <td>{index + 1}</td>
                                                 <td>{item.transactionId}</td>
                                                 <td>{item.productId}</td>
                                                 <td>{item.productName}</td>

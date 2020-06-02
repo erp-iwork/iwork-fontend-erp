@@ -116,12 +116,12 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
         type: UPDATE_STATUS,
         payload: { order: orderNumber, status: res.data.status },
       });
-      Swal.fire({
-        title: "Delivered",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1000
-      });
+      // Swal.fire({
+      //   title: "Delivered",
+      //   icon: "success",
+      //   showConfirmButton: false,
+      //   timer: 1000
+      // });
     })
     .catch((err) => {
       if (err.response && err.response.data) {

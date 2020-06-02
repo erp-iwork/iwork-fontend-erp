@@ -86,7 +86,7 @@ class ViewAllItems extends Component {
                                         <th>#</th>
                                         <th>Item Name</th>
                                         <th>Quantity</th>
-                                        <th>Retail Price</th>
+                                        <th>Cost</th>
                                         <th>Unit</th>
                                         <th>Product Type</th>
                                         <th>Category</th>
@@ -99,7 +99,7 @@ class ViewAllItems extends Component {
                                             <th scope="row">{index + 1}</th>
                                             <td>{item.itemName}</td>
                                             <td>{item.quantity}</td>
-                                            <td>{item.retailPrice}</td>
+                                            <td>{item.cost}</td>
                                             <td>{item.unitOfMeasurement}</td>
                                             <td>{item.productType}</td>
                                             <td>{item.catagory.catagory}</td>

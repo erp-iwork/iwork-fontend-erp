@@ -5,7 +5,6 @@ import { getRecordsByType, getExistingCategories } from '../../store/inventory/a
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import type from '../../constant/transactions'
-import { reverse } from '../../useCases'
 
 class DeliveredOrders extends Component {
     constructor(props) {
@@ -56,8 +55,25 @@ class DeliveredOrders extends Component {
                                             <th>Transaction Date</th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
-                                        {reverse(this.state.records).map((item, index) => (
+                                        {this.props.records ? this.props.records.map((item, index) => (
+                                            <tr>
+                                                <td>{index + 1}</td>
+                                                <td>{item.transactionId}</td>
+                                                <td>{item.productId}</td>
+                                                <td>{item.productName}</td>
+                                                <td>{item.itemCost}</td>
+                                                <td>{item.productCategory}</td>
+                                                <td>{item.orderId}</td>
+                                                <td>{item.amount}</td>
+                                                <td>{item.purchaseQuantity}</td>
+                                                <td>{item.transactionDate}</td>
+                                            </tr>
+                                        )) : null}
+                                    </tbody>
+
+                                    {/* {reverse(this.state.records).map((item, index) => (
                                             <tr>
                                                 <td>{index + 1}</td>
                                                 <td>{item.transactionId}</td>
@@ -70,8 +86,8 @@ class DeliveredOrders extends Component {
                                                 <td>{item.orderItem.InventoryItem.catagory.catagory}</td>
                                                 <td>{item.transactionDate}</td>
                                             </tr>
-                                        ))}
-                                    </tbody>
+                                        ))} */}
+
                                 </Table>
                             </CardBody>
                         </Card>

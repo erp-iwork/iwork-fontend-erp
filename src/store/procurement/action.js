@@ -253,12 +253,12 @@ export const updateStatus = (orderNumber, status, message = 'Delivered to Invent
         type: PUT.SUCCESS_POST_UPDATE_STATUS,
         payload: { order: orderNumber, status: res.data.status },
       });
-      Swal.fire({
-        title: message,
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1000
-      });
+      // Swal.fire({
+      //   title: message,
+      //   icon: "success",
+      //   showConfirmButton: false,
+      //   timer: 1000
+      // });
     })
     .catch((err) => {
       if (err.response && err.response.data) {

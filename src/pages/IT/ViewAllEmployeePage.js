@@ -46,6 +46,7 @@ class AllEmployees extends Component {
     };
 
     deleteFun(email) {
+
         this.setState({
             showModal: true
         })
@@ -157,7 +158,7 @@ class AllEmployees extends Component {
                     </Card>
                 </Col>
                 {this.props.delete_user_success ? (<SuccessModal title={"Congratulations!"} message={"Account deleted successfully"} show={this.state.showSuccess} okFun={this.okFun} />) : null}
-                {this.state.showModal && !this.props.delete_user_success ? (<ModelCusttom doSomething={this.doSomething} cancel={this.cancel} />) : null}
+                {this.state.showModal ? (<ModelCusttom doSomething={this.doSomething} cancel={this.cancel} />) : null}
             </Page>
         );
     }
