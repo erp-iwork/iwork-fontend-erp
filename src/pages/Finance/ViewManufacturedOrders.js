@@ -21,19 +21,19 @@ const Order = ({ order, index }) => {
             <td>{order.status_manufacture_order[0]['date']}</td>
             <td>{order.status_manufacture_order[0]['status']}</td>
             <td>
-                {order.status_manufacture_order[0]['status'] === status.manuFactured?
-                <Link to={{
-                    pathname: routes.ViewFinanceSingleManufacturedOrder,
-                    state: order
-                }}>
-                    <Button size='sm' color='primary'>
-                        Finish
-                    </Button>
-                </Link> :
-                <Button size='sm' color='primary' disabled>
-                    Finished
-                </Button> 
-            }
+                {order.status_manufacture_order[0]['status'] === status.confirmed ?
+                    <Link to={{
+                        pathname: routes.ViewFinanceSingleManufacturedOrder,
+                        state: order
+                    }}>
+                        <Button size='sm' color='primary'>
+                            Finish
+                        </Button>
+                        </Link> :
+                    <Button size='sm' color='success' disabled>
+                        Finished
+                         </Button>
+                }
             </td>
             <td>
                 <Link to={{ pathname: routes.ViewFinanceSingleManufacturedOrder, state: order }}>
@@ -56,7 +56,7 @@ class ViewAllPurchaseOrderPage extends Component {
     }
 
     componentDidMount() {
-        this.props.getManufacturedOrders(status.manuFactured, status.finished)
+        this.props.getManufacturedOrders(status.manuFactured, status.confirmed)
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -70,7 +70,10 @@ class ViewAllPurchaseOrderPage extends Component {
 
     render() {
         if (!this.state.done) return <PageSpinner />
-        if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
+        if (this.props.orders.length === 0)
+            return <Page title="Manufactured Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
+                No orders created yet.
+        </Page>
         return (
             <Page title="Manufactured Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Card className="mb-3">
@@ -91,7 +94,7 @@ class ViewAllPurchaseOrderPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.done? this.state.orders.slice(0).reverse().map((item, index) => (
+                                {this.state.done ? this.state.orders.slice(0).reverse().map((item, index) => (
                                     <Order key={index} index={index} order={item} handleApprove={() => null} />
                                 )) : ''}
                             </tbody>

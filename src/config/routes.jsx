@@ -36,6 +36,7 @@ export default {
   ViewSingleOrderManufacturing: "/ViewSingleOrderManufacturing",
   ViewFinaceManufacturedOrders: '/ViewFinanceManufacturedOrders',
   ViewFinanceSingleManufacturedOrder: '/ViewFinanceSingleManufacturedOrder',
+  ViewAllFinishedOrders: '/ViewAllFinishedOrders',
   ViewInventoryManufacturedOrders: '/ViewInventoryManufacturedOrders',
   //Dashboards
   FinanceDashboard: "/FinanceDashboard",

@@ -19,7 +19,7 @@ import { addSupplier, getSupplier } from '../../store/company/action'
 import Loader from '../../components/loader'
 import PageSpinner from '../../components/PageSpinner'
 import ViewAllSuppliers from './viewAllSuppliersPage'
-import { changeMessage } from '../../components/Layout/MainLayout'
+// import { changeMessage } from '../../components/Layout/MainLayout'
 class AddSupplierPage extends Component {
     constructor(props) {
         super(props);
@@ -89,7 +89,7 @@ class AddSupplierPage extends Component {
     render() {
         if (this.props.loading) return <PageSpinner />
         const {
-            companyName, generalManger, contactPerson, email, paymentOption,
+            companyName, generalManger, contactPerson, email,
             tinNumber, workingField
         } = this.state
         return (

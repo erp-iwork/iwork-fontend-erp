@@ -8,7 +8,7 @@ import routes from '../../config/routes'
 import { Link } from 'react-router-dom'
 import status from '../../constant/status'
 
-const Order = ({ order, index, handleDone }) => {
+const Order = ({ order, index, handleQualityCheck }) => {
     return (
         <tr>
             <th scope="row">{index + 1}</th>
@@ -18,9 +18,9 @@ const Order = ({ order, index, handleDone }) => {
             <td>{order.orderNumber}</td>
             <td>{order.unitOfMesurement}</td>
             <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status : null}</td>
-            <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status === status.created ?
-                <Button size='sm' color='primary' onClick={handleDone}>Done</Button>
-                : ((<Button size='sm' color='success' disabled>Done</Button>)) : null}</td>
+            <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status === status.manuFactured ?
+                <Button size='sm' color='primary' onClick={handleQualityCheck}>Quantity Checked</Button>
+                : ((<Button size='sm' color='success' disabled>Quantity Checked</Button>)) : null}</td>
             <td>
                 <Link to={{ pathname: routes.ViewSingleOrderManufacturing, state: order }}>
                     <Button size='sm' color='primary'>
@@ -37,7 +37,7 @@ class ViewAllFinishedOrdersPage extends Component {
         super(props);
         this.state = {
             orders: [],
-            done: false
+            quantityCheck: false
         }
     }
 
@@ -45,23 +45,26 @@ class ViewAllFinishedOrdersPage extends Component {
         this.props.getOrders()
     }
 
+
     componentDidUpdate(prevProps, prevState) {
-        if (!this.props.loading_manufactured_orders && !this.state.done) {
+        if (!this.props.loading_manufactured_orders && !this.state.qualitychecked) {
             this.setState({
                 orders: this.props.orders,
-                done: true
+                qualitychecked: true
             })
         }
     }
 
-    handleDone(order, status) {
+    
+
+    handleQualityCheck(order, status) {
         this.props.updateStatus(order, status)
     }
 
     render() {
-        if (!this.state.done) return <PageSpinner />
+        if (!this.state.qualitychecked) return <PageSpinner />
         return (
-            <Page title="View All Orders" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
+            <Page title="View Finished Orders" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
 
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>
@@ -81,12 +84,11 @@ class ViewAllFinishedOrdersPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.orders.slice(0).reverse().map((item, index) => (
-                                    <Order key={index} index={index} order={item} handleDone={() => this.handleDone(item.orderNumber, "Manufactured")} />
+                                {this.state.orders.filter(o => o.status_manufacture_order[0].status === "Manufactured" || o.status_manufacture_order[0].status === "Quantity Checked" || o.status_manufacture_order[0].status === "Confirmed").slice(0).reverse().map((item, index) => (
+                                    <Order key={index} index={index} order={item} handleQualityCheck={() => this.handleQualityCheck(item.orderNumber, "Quantity Checked")} />
                                 ))}
 
                             </tbody>
-
                         </Table>
                     </CardBody>
                 </Card>

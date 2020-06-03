@@ -46,6 +46,8 @@ const ViewDelieveredOrdersPage = React.lazy(() => import('./pages/Finance/ViewDe
 const ViewSingleDelieveredOrderPage = React.lazy(() => import('./pages/Finance/ViewSingleDelieveredOrder'));
 const SupplierInvoicePage = React.lazy(() => import('./pages/Finance/SupplierInvoicePage'));
 const ViewInventoryManufacturedOrders = React.lazy(() => import('./pages/Inventory/ViewManufacturedOrders'));
+const ViewAllFinishedOrdersPage = React.lazy(() => import('./pages/Manufacturing/ViewAllFinishedOrders'));
+
 
 // Dashboards
 const FinanceDashboard = React.lazy(() => import('./pages/Finance/DashboardPage'));
@@ -82,8 +84,6 @@ const ViewSinglePurchaseOrderPage = React.lazy(() => import('./pages/Procurment/
 const CreateOrderManufacturingPage = React.lazy(() => import('./pages/Manufacturing/CreateOrderManufacturingPage'));
 const ViewAllOrdersManufacturingPage = React.lazy(() => import('./pages/Manufacturing/ViewAllOrdersPage'));
 const SingleOrderManufacturingPage = React.lazy(() => import('./pages/Manufacturing/SingleOrderPage'));
-
-const ViewAllFinishedOrdersPage = React.lazy(() => import('./pages/Manufacturing/ViewAllFinishedOrders'));
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
@@ -183,8 +183,10 @@ class App extends React.Component {
                 <Route exact path={routes.CreateOrderManufacturing} component={CreateOrderManufacturingPage} />
                 <Route exact path={routes.ViewAllFinishedOrders} component={ViewAllFinishedOrdersPage} />
 
-                <Route exact path={routes.ViewAllOrdersManufacturing} component={ViewAllOrdersManufacturingPage} />
+                
                 {/* <Route exact path={routes.ViewAllFinishedOrders} component={ViewAllFinishedOrdersPage} /> */}
+
+                <Route exact path={routes.ViewAllOrdersManufacturing} component={ViewAllOrdersManufacturingPage} />
                 <Route exact path={routes.ViewSingleOrderManufacturing} component={SingleOrderManufacturingPage} />
 
                 <Route

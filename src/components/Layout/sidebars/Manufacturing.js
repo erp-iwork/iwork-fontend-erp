@@ -69,7 +69,7 @@ class Manufacturing extends React.Component {
       { to: routes.ManufacturingDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
       { to: routes.CreateOrderManufacturing, name: 'Create MO', exact: false, Icon: MdWidgets },
       { to: routes.ViewAllOrdersManufacturing, name: 'All Orders', exact: false, Icon: MdWidgets },
-      // { to: routes.ViewAllFinishedOrders, name: 'All Finished Orders', exact: false, Icon: MdWidgets },
+      { to: routes.ViewAllFinishedOrders, name: 'All Finished Orders', exact: false, Icon: MdWidgets },
 
     ]
     return (

@@ -3,8 +3,7 @@ import Page from '../../components/Page';
 import { Col, Row, Card, CardHeader, Table, Button, CardBody, Input } from 'reactstrap';
 import "./Manufacturing.scss"
 import status from '../../constant/status'
-import Typography from '../../components/Typography';
-import { updateStatus } from '../../store/manufacturing/action'
+import { updateQuantity } from '../../store/manufacturing/action'
 import { connect } from 'react-redux'
 
 
@@ -16,8 +15,19 @@ class SingleOrderPage extends Component {
         this.state = {
             order: props.location.state
         }
-        this.calculateTotalPrice = this.calculateTotalPrice.bind(this)
-        // this.handleDone = this.handleDone.bind(this)
+        this.calculateTotalPrice = this.calculateTotalPrice.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidMount() {
+        const orders = this.props.location.state.manufacture_item_set.map((item, index) => {
+            return {
+                componentId: item.componentId,
+                newQuantity: ''
+            }
+        })
+        this.setState({ orders });
+        // this.props.getSingleOrder(this.props.location.state.purchaseOrderNumber)
     }
 
     calculateTotalPrice() {
@@ -29,9 +39,20 @@ class SingleOrderPage extends Component {
         })
         return { price, quantity }
     }
-    handleDone(order, status) {
-        this.props.updateStatus(order, status)
+
+    handleChange = (data) => {
+        var orders = this.state.orders
+        orders[data.index][data.name] = parseInt(data.value)
+        this.setState({ orders })
     }
+
+    updateBomQuantity = () => {
+        const { order } = this.state
+        this.setState({ lockPage: false });
+        this.props.updateQuantity(order.orderNumber, this.state.orders)
+    }
+
+
 
     render() {
         const { order } = this.state
@@ -54,7 +75,10 @@ class SingleOrderPage extends Component {
                     </div>
 
                     <div class={order.status_manufacture_order ?
-                        order.status_manufacture_order[0].status === status.manuFactured || order.status_manufacture_order[0].status === status.qualityCheck || order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
+                        order.status_manufacture_order[0].status === status.manuFactured ||
+                            order.status_manufacture_order[0].status === status.quantityCheck ||
+                            order.status_manufacture_order[0].status === status.finished ||
+                            order.status_manufacture_order[0].status === status.received || order.status_manufacture_order[0].status === status.confirmed ?
                             ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
@@ -63,12 +87,15 @@ class SingleOrderPage extends Component {
                     </div>
 
                     <div class={order.status_manufacture_order ?
-                        order.status_manufacture_order[0].status === status.qualityCheck || order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
+                        order.status_manufacture_order[0].status === status.quantityCheck ||
+                            order.status_manufacture_order[0].status === status.finished ||
+                            order.status_manufacture_order[0].status === status.received
+                            || order.status_manufacture_order[0].status === status.confirmed ?
                             ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>
-                        <h4 class="step-title">Quality Checked</h4>
+                        <h4 class="step-title">Quantity Checked</h4>
                     </div>
 
 
@@ -154,7 +181,7 @@ class SingleOrderPage extends Component {
                                             <th>
 
                                                 {
-                                                    order.status_manufacture_order[0].status === status.qualityCheck ?
+                                                    order.status_manufacture_order[0].status === status.quantityCheck ?
                                                         "Used Quantity"
                                                         : null}
                                             </th>
@@ -171,8 +198,13 @@ class SingleOrderPage extends Component {
                                                 <td>{item.quantity}</td>
                                                 <td>
                                                     {
-                                                        order.status_manufacture_order[0].status === status.qualityCheck ?
-                                                            <Input type='number' max={item.quantity} /> : null}
+                                                        order.status_manufacture_order[0].status === status.quantityCheck ?
+                                                            <Input type='number' placeholder="Used Quantity" max={item.quantity} onChange={
+                                                                (event) => this.handleChange({
+                                                                    value: event.target.value,
+                                                                    name: 'newQuantity',
+                                                                    index
+                                                     })} /> : null}
                                                 </td>
                                             </tr>
                                         )) : null}
@@ -181,13 +213,10 @@ class SingleOrderPage extends Component {
                             </CardBody>
                         </Col>
                     </Row>
-                    {order.status_manufacture_order[0].status === status.manuFactured ?
-                        <Button size='sm' onClick={this.handleDone(13, "Quality Checked")}>
-                            Quality Approved
-                        </Button> : null}
-                    {order.status_manufacture_order[0].status === status.qualityCheck ?
-                        <Button size='sm'>
-                            BOM Confirmed
+                    {order.status_manufacture_order[0].status === status.quantityCheck ?
+                        <Button size='sm' onClick={this.updateBomQuantity} disabled={
+                            order.status_manufacture_order[0].status === status.confirmed}>
+                            Confirm BOM
                     </Button> : null}
                 </Card>
             </Page>
@@ -206,5 +235,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-// export default SingleOrderPage;
-export default connect(mapStateToProps, { updateStatus })(SingleOrderPage)
+export default connect(mapStateToProps, { updateQuantity })(SingleOrderPage)

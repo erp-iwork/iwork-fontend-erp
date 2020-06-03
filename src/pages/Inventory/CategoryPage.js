@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { Card, Row, Col, CardBody, Button } from 'reactstrap';
+import { Card, Row, Col, CardBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareAlt } from '@fortawesome/free-solid-svg-icons'
 import './Inventory.scss'
@@ -9,7 +9,7 @@ import { getExistingCategories, checkToast } from '../../store/inventory/action'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import routes from '../../config/routes'
-import { ToastContainer } from "react-toastr";
+// import { ToastContainer } from "react-toastr";
 import './Inventory.scss'
 
 class CategoryPage extends Component {
@@ -39,9 +39,9 @@ class CategoryPage extends Component {
                 className="CardPage"
             >
                 
-                <Button onClick={() => checkToast()}>
+                {/* <Button onClick={() => checkToast()}>
                     Alert
-                </Button>
+                </Button> */}
 
                 <Row>
                     {this.props.categories.map((item, index) => (
