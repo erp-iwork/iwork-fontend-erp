@@ -349,7 +349,7 @@ class AddMasterDataPage extends Component {
                                 </FormGroup>
                                 <FormGroup align='center'>
                                     <Col >
-                                        <Button type='submit' onClick={this.submit} color='primary'>
+                                        <Button onClick={this.submit} color='primary'>
                                             {this.props.loading_addMasterdata ? <Loader /> : "Add Product"}
                                         </Button>
                                     </Col>
