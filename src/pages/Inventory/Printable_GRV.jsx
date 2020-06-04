@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     paddingLeft: 180,
     paddingBottom: 10,
   },
+
   root: {
     width: "100vh",
     height: "100vh",
@@ -25,31 +26,37 @@ const styles = StyleSheet.create({
   text: {
     color: "#686868",
   },
+
   Header: {
     fontSize: 13,
     padding: 30,
   },
+
   logo: {
     height: 80,
     width: 80,
     marginTop: 10,
   },
+
   SIVStyling: {
     padding: 30,
   },
+
   table: {
     padding: 10,
   },
+
   textBody: {
     fontSize: 12,
     color: "#686868",
   },
+
   tableRow: {
     flexDirection: "row",
   },
+
   tableColHeader: {
-    margin: "auto",
-    width: "20%",
+    width: "23%",
     borderStyle: "solid",
     borderColor: "#686868",
     borderBottomColor: "#686868",
@@ -57,19 +64,40 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderTopWidth: 0,
   },
+
+  tableColHeader1: {
+    width: "10%",
+    borderStyle: "solid",
+    borderColor: "#686868",
+    borderBottomColor: "#686868",
+    backgroundColor: "#11669F",
+    borderWidth: 1,
+    borderTopWidth: 0,
+  },
+
   tableCol: {
-    margin: "auto",
-    width: "20%",
+    width: "23%",
     borderStyle: "solid",
     borderColor: "#686868",
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
+
+  tableCol1: {
+    width: "10%",
+    borderStyle: "solid",
+    borderColor: "#686868",
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+
   tableCellHeader: {
     fontSize: 12,
     color: "#FFFFFF",
   },
+  
   tableCell: {
     color: "#686868",
     fontSize: 10,
@@ -150,8 +178,8 @@ class SIVPdf extends Component {
           ></View>
           <View style={styles.table}>
             <View style={styles.tableRow}>
-              <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>Serial</Text>
+              <View style={styles.tableColHeader1}>
+                <Text style={styles.tableCellHeader}>Serial No</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>Batch Number</Text>
@@ -170,7 +198,7 @@ class SIVPdf extends Component {
               ? this.props.grv_item.map((item, index) => {
                   return (
                     <View key={item.itemName} style={styles.tableRow}>
-                      <View style={styles.tableCol}>
+                      <View style={styles.tableCol1}>
                         <Text style={styles.tableCell}>{index + 1}</Text>
                       </View>
                       <View style={styles.tableCol}>

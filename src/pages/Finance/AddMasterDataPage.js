@@ -150,12 +150,14 @@ class AddMasterDataPage extends Component {
     }
 
 
+
     submitCustomCategory = async () => {
         await this.props.addCategory(this.state.newproductCategory)
         if (this.props.add_category_success) {
             this.setState({ customCategory: false })
 
         }
+
     }
 
     render() {
@@ -220,6 +222,7 @@ class AddMasterDataPage extends Component {
                                                     <Input type='text' name="newproductCategory" placeholder='type your custom Category' onChange={this.handleChange} />
                                                 </Col>
                                                 <Col md={2}>
+
                                                     <Button size='sm' color='primary' onClick={this.submitCustomCategory}>
                                                         Add Category
                                                     </Button>
@@ -239,9 +242,7 @@ class AddMasterDataPage extends Component {
                                             <option disabled selected></option>
                                             <UoM />
                                         </Input>
-
                                         <Error error={this.props.errors.unitOfMeasurement ? this.props.errors.unitOfMeasurement : null} />
-
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
