@@ -1,7 +1,7 @@
 import {
   appConstants,
-  itConstants,
-  errorsConstant,
+  // itConstants,
+  // errorsConstant,
 } from "../../constant/constants";
 
 const initialState = {

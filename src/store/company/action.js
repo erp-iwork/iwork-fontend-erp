@@ -48,6 +48,31 @@ export const addSupplier = (supplier) => (dispatch) => {
     })
 }
 
+export const addCategory = (catagory) => (dispatch) => {
+  var data = {
+    catagory: catagory
+  }
+  dispatch({ type: companyConstant.REQUEST_POST_CATEGORY })
+  return axios.post(API + routes.category, data, headers)
+    .then(res => {
+      console.log(res.data);
+
+      dispatch({ type: companyConstant.SUCCESS_POST_CATEGORY, payload: res.data })
+    })
+    .catch((err) => {
+      console.log(err.response)
+      try {
+        dispatch({
+          type: companyConstant.FAILED_POST_CATEGORY,
+          payload: err.response.data,
+        });
+      } catch {
+        console.log("error");
+      }
+    })
+}
+
+
 export const getSupplier = (noLoading = false) => (dispatch) => {
   if (!noLoading) {
     dispatch({

@@ -142,6 +142,8 @@ export default function companyReducer(state = initialState, action) {
         errors: [],
       }
 
+     
+
     default:
       return state;
   }

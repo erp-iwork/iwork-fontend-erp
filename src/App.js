@@ -46,6 +46,8 @@ const ViewDelieveredOrdersPage = React.lazy(() => import('./pages/Finance/ViewDe
 const ViewSingleDelieveredOrderPage = React.lazy(() => import('./pages/Finance/ViewSingleDelieveredOrder'));
 const SupplierInvoicePage = React.lazy(() => import('./pages/Finance/SupplierInvoicePage'));
 const ViewInventoryManufacturedOrders = React.lazy(() => import('./pages/Inventory/ViewManufacturedOrders'));
+const ViewAllFinishedOrdersPage = React.lazy(() => import('./pages/Manufacturing/ViewAllFinishedOrders'));
+
 
 // Dashboards
 const FinanceDashboard = React.lazy(() => import('./pages/Finance/DashboardPage'));
@@ -179,6 +181,11 @@ class App extends React.Component {
                 {/* MANUFACTURING ROUTES */}
                 <Route exact path={routes.ManufacturingDashboard} component={ManufacturingDashboard} />
                 <Route exact path={routes.CreateOrderManufacturing} component={CreateOrderManufacturingPage} />
+                <Route exact path={routes.ViewAllFinishedOrders} component={ViewAllFinishedOrdersPage} />
+
+                
+                {/* <Route exact path={routes.ViewAllFinishedOrders} component={ViewAllFinishedOrdersPage} /> */}
+
                 <Route exact path={routes.ViewAllOrdersManufacturing} component={ViewAllOrdersManufacturingPage} />
                 <Route exact path={routes.ViewSingleOrderManufacturing} component={SingleOrderManufacturingPage} />
 

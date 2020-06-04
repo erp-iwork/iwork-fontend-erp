@@ -28,7 +28,9 @@ class CreateOrderManufacturingPage extends Component {
             quantity: null,
             description: '',
             startDate: '',
-            endDate: ''
+            endDate: '',
+            customCategory: '',
+
         }
         this.handleChange = this.handleChange.bind(this)
         this.setProducts = this.setProducts.bind(this)
@@ -84,30 +86,10 @@ class CreateOrderManufacturingPage extends Component {
         var errors = {}
         if (this.props.errors) {
             errors = this.props.errors
-
         }
-
-
-
         return (
             <Page title="Create Order" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
-                {/* This alert is applicable for only backend problem with error type <error> */}
-                {errors.error ? (
-                    <CustomAlert
-                        msg={errors.error}
-                        type="danger"
-                    />
 
-
-                ) : null}
-
-                {this.props.success ? (<CustomAlert
-                    type="success"
-                    msg=" Congratulation!  Your data registered successfully"
-                />
-                )
-                    : null
-                }
                 <Col md={12}>
                     <Card>
                         <CardHeader>Order Information</CardHeader>
@@ -188,9 +170,7 @@ class CreateOrderManufacturingPage extends Component {
                                                 {errors.item}
                                             </Alert>
                                         </Col>
-
                                     ) : null}
-
                                 </div>
                                 <FormGroup >
                                     <Label for="description" sm={12}>
@@ -211,7 +191,7 @@ class CreateOrderManufacturingPage extends Component {
                                     <Col sm={12} md={6}>
                                         <FormGroup >
                                             <Label for="startDate" sm={12}>
-                                                Manufactuting Start Date
+                                                Manufacturing Start Date
                                             </Label>
                                             <Col sm={12}>
                                                 <Input type="date" name="startDate" id="startDate" onChange={this.handleChange} />
@@ -240,6 +220,25 @@ class CreateOrderManufacturingPage extends Component {
                         </CardBody>
                     </Card>
                 </Col>
+
+                {/* This alert is applicable for only backend problem with error type <error> */}
+
+                {errors.error ? (
+                    <CustomAlert
+                        msg={errors.error}
+                        type="danger"
+                    />
+
+
+                ) : null}
+
+                {this.props.success ? (<CustomAlert
+                    type="success"
+                    msg=" Congratulation!  Your data registered successfully"
+                />
+                )
+                    : null
+                }
 
             </Page >
         );

@@ -83,12 +83,21 @@ const classes = {
   },
 };
 class SIV extends React.Component {
+  constructor(){
+    super();
+    this.state={
+      total:''
+    }
+  }
   componentDidMount() {
-    this.props.getSiv(this.props.location.state.order)
+    this.props.getSiv(this.props.location.state.order);
+
   }
   submit(e) {
     e.preventDefault();
   }
+
+
 
   render() {
     if (this.props.loading) return <PageSpinner />
@@ -144,8 +153,11 @@ class SIV extends React.Component {
                     <th>#</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
+                    <th>UoM</th>
                     <th>Unit Price</th>
                     <th>Amount</th>
+
+
                   </tr>
                 </thead>
                 <tbody>
@@ -154,8 +166,10 @@ class SIV extends React.Component {
                       <th scope="row">{index + 1}</th>
                       <td>{item.itemName}</td>
                       <td>{item.quantity}</td>
+                      <td>{item.unitOfMeasurement}</td>
                       <td>{item.cost}</td>
                       <td>{item.amount}</td>
+
                     </tr>
                   )) : null}
                 </tbody>
@@ -168,6 +182,11 @@ class SIV extends React.Component {
               paddingLeft: 20,
             }}
           >
+            <Typography style={{
+              paddingLeft: 500
+            }}>
+              <b>Total  Price :</b> {this.props.sivs.totalCost}
+            </Typography>
             <div
               style={{
                 display: 'flex',
@@ -179,7 +198,7 @@ class SIV extends React.Component {
                 variant="body2"
                 color=""
               >
-                <b>Recipient Name :</b> _______________________
+                <b>Issued By :</b> _______________________
                 </Typography>
             </div>
             <div
@@ -194,7 +213,7 @@ class SIV extends React.Component {
                 variant="body2"
                 color=""
               >
-                <b>Recipient Signature :</b> _______________________
+                <b>Signature :</b> _______________________
                 </Typography>
             </div>
           </div>
@@ -215,12 +234,12 @@ class SIV extends React.Component {
               }}
             >
               {({ loading }) => (loading ?
-                <Button size='sm' /> :
-                <div >
-                  <Button size='sm' color='primary'>
-                    Print SIV
+                <Button size='sm' color='primary'>
+                  loading ...
+                </Button> :
+                <Button size='sm' color='primary'>
+                  Print SIV
                   </Button>
-                </div>
               )}
             </PDFDownloadLink>) : null
           }

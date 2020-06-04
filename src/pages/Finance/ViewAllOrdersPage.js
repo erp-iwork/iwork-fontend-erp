@@ -80,7 +80,7 @@ class ViewAllOrdersPage extends Component {
         }) : ""
         return (
             <Page
-                title="All Orders"
+                title="All Sales Orders"
                 breadcrumbs={[{ name: 'Finance', active: true }]}
                 className="TablePage">
                 <Card className="mb-3">

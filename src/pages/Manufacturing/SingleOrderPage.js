@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { Col, Row, Card, CardHeader, Table, CardBody } from 'reactstrap';
+import { Col, Row, Card, CardHeader, Table, Button, CardBody, Input } from 'reactstrap';
 import "./Manufacturing.scss"
 import status from '../../constant/status'
+import { updateQuantity } from '../../store/manufacturing/action'
+import { connect } from 'react-redux'
+
+
 
 class SingleOrderPage extends Component {
     constructor(props) {
@@ -11,7 +15,19 @@ class SingleOrderPage extends Component {
         this.state = {
             order: props.location.state
         }
-        this.calculateTotalPrice = this.calculateTotalPrice.bind(this)
+        this.calculateTotalPrice = this.calculateTotalPrice.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidMount() {
+        const orders = this.props.location.state.manufacture_item_set.map((item, index) => {
+            return {
+                componentId: item.componentId,
+                newQuantity: ''
+            }
+        })
+        this.setState({ orders });
+        // this.props.getSingleOrder(this.props.location.state.purchaseOrderNumber)
     }
 
     calculateTotalPrice() {
@@ -23,6 +39,20 @@ class SingleOrderPage extends Component {
         })
         return { price, quantity }
     }
+
+    handleChange = (data) => {
+        var orders = this.state.orders
+        orders[data.index][data.name] = parseInt(data.value)
+        this.setState({ orders })
+    }
+
+    updateBomQuantity = () => {
+        const { order } = this.state
+        this.setState({ lockPage: false });
+        this.props.updateQuantity(order.orderNumber, this.state.orders)
+    }
+
+
 
     render() {
         const { order } = this.state
@@ -41,17 +71,34 @@ class SingleOrderPage extends Component {
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>
-                        <h4 class="step-title">Pending</h4>
+                        <h4 class="step-title">Work in Progress</h4>
                     </div>
 
                     <div class={order.status_manufacture_order ?
-                        order.status_manufacture_order[0].status === status.manuFactured || order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
+                        order.status_manufacture_order[0].status === status.manuFactured ||
+                            order.status_manufacture_order[0].status === status.quantityCheck ||
+                            order.status_manufacture_order[0].status === status.finished ||
+                            order.status_manufacture_order[0].status === status.received || order.status_manufacture_order[0].status === status.confirmed ?
                             ("step completed") : ("step") : null}>
                         <div class="step-icon-wrap">
                             <div class="step-icon"><i class="pe-7s-config"></i></div>
                         </div>
                         <h4 class="step-title">Manufactured</h4>
                     </div>
+
+                    <div class={order.status_manufacture_order ?
+                        order.status_manufacture_order[0].status === status.quantityCheck ||
+                            order.status_manufacture_order[0].status === status.finished ||
+                            order.status_manufacture_order[0].status === status.received
+                            || order.status_manufacture_order[0].status === status.confirmed ?
+                            ("step completed") : ("step") : null}>
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="pe-7s-config"></i></div>
+                        </div>
+                        <h4 class="step-title">Quantity Checked</h4>
+                    </div>
+
+
                     <div class={order.status_manufacture_order ?
                         order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
                             ("step completed") : ("step") : null}>
@@ -130,7 +177,16 @@ class SingleOrderPage extends Component {
                                             <th>MO#</th>
                                             <th>Material Name</th>
                                             <th>Material Cost</th>
-                                            <th>Quantity</th>
+                                            <th> Estimated Quantity</th>
+                                            <th>
+
+                                                {
+                                                    order.status_manufacture_order[0].status === status.quantityCheck ?
+                                                        "Used Quantity"
+                                                        : null}
+                                            </th>
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -140,6 +196,16 @@ class SingleOrderPage extends Component {
                                                 <td>{item.componentName}</td>
                                                 <td>{item.price}</td>
                                                 <td>{item.quantity}</td>
+                                                <td>
+                                                    {
+                                                        order.status_manufacture_order[0].status === status.quantityCheck ?
+                                                            <Input type='number' placeholder="Used Quantity" max={item.quantity} onChange={
+                                                                (event) => this.handleChange({
+                                                                    value: event.target.value,
+                                                                    name: 'newQuantity',
+                                                                    index
+                                                     })} /> : null}
+                                                </td>
                                             </tr>
                                         )) : null}
                                     </tbody>
@@ -147,10 +213,26 @@ class SingleOrderPage extends Component {
                             </CardBody>
                         </Col>
                     </Row>
+                    {order.status_manufacture_order[0].status === status.quantityCheck ?
+                        <Button size='sm' onClick={this.updateBomQuantity} disabled={
+                            order.status_manufacture_order[0].status === status.confirmed}>
+                            Confirm BOM
+                    </Button> : null}
                 </Card>
             </Page>
         );
     }
 }
 
-export default SingleOrderPage;
+const mapStateToProps = (state) => {
+    return {
+        errors: state.manuFacturingReducer.errors,
+        loading_manufactured_orders: state.manuFacturingReducer.loading_manufactured_orders,
+        orders: state.manuFacturingReducer.orders,
+        loading_manufacture: state.manuFacturingReducer.loading_manufacture,
+        success: state.manuFacturingReducer.success,
+        updatedOrders: state.manuFacturingReducer.orders
+    }
+}
+
+export default connect(mapStateToProps, { updateQuantity })(SingleOrderPage)

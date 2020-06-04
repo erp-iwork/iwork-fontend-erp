@@ -48,7 +48,7 @@ class RecordTracking extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.records ? this.props.records.map((item, index) => (
+                                        {this.props.records ? this.props.records.splice(0).reverse().map((item, index) => (
                                             <tr>
                                                 <td>{item.transactionId}</td>
                                                 <td>{item.productId}</td>

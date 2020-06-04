@@ -25,7 +25,7 @@ const Order = ({ order, index, handleReceive }) => {
                     <Button size='sm' color='primary' onClick={() => handleReceive(order.orderNumber)}>
                         Receieve
                 </Button> :
-                    <Button size='sm' color='primary' disabled>
+                    <Button size='sm' color='success' disabled>
                         Receieved
                 </Button>
                 }
@@ -72,7 +72,8 @@ class ViewAllPurchaseOrderPage extends Component {
 
     render() {
         if (!this.state.done) return <PageSpinner />
-        if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
+        if (this.props.orders.length === 0) return             <Page title="Manufactured Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
+        No orders created yet.</Page>
 
         return (
             <Page title="Manufactured Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
