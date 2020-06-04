@@ -119,12 +119,21 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
         type: manuFacturingConstant.SUCCESS_PUT_ORDERS,
         payload: { order: res.data.manufacture_order, status: res.data.status },
       })
+      if(status === "Quantity Checked"){
+        Swal.fire({
+          title: "Quality Passed",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }else {
       Swal.fire({
         title: "Delivered to Inventory",
         icon: "success",
         showConfirmButton: false,
         timer: 1000
       });
+    }
     })
     .catch((err) => {
       console.log(err.response)
@@ -194,3 +203,37 @@ export const invoiceProduct = (orderNumber, status) => (dispatch) => {
       }
     })
 }
+
+export const updateQuantity = ( orderNumber,  data) => (dispatch) => {
+    dispatch({ type: manuFacturingConstant.REQUEST_POST_UPDATE_COMPONENT_QUANTITY })
+  return Axios.put(API + routes.componentQualityUpdate, data)
+    .then(async res => {
+      dispatch({ type: manuFacturingConstant.REQUEST_PUT_ORDERS, payload: true })
+    Axios.put(API + `${routes.manufacturestatus}${orderNumber}/`, { status: "Confirmed" }, headers)
+    .then((res) => {
+        Swal.fire({
+          title: "Quantity Updated",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      
+    })})
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+    }

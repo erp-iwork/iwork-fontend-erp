@@ -67,7 +67,7 @@ class IT extends React.Component {
     render() {
         const IT = [
             { to: routes.ITDashboard, name: 'Dashboard', exact: false, Icon: MdWidgets },
-            { to: routes.itEmployeePage, name: 'All Employees', exact: false, Icon: MdWidgets },
+            { to: routes.itEmployeePage, name: 'Manage Accounts', exact: false, Icon: MdWidgets },
         ]
         return (
             <React.Fragment>

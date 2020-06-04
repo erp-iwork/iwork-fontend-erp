@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 600,
+    paddingLeft: 180,
+    paddingBottom: 10,
   },
 
   text: {
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   tableColHeader: {
-    width: "33.34%",
+    width: "16.67%",
     borderStyle: "solid",
     borderColor: "#686868",
     borderBottomColor: "#000",
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   tableCol: {
-    width: "33.34%",
+    width: "16.67%",
     borderStyle: "solid",
     borderColor: "#686868",
     borderWidth: 1,
@@ -190,7 +192,7 @@ class SIVPdf extends Component {
           <View style={styles.table}>
             <View style={styles.tableRow}>
               <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>#</Text>
+                <Text style={styles.tableCellHeader}>Serial No</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>ItemName</Text>
@@ -199,7 +201,10 @@ class SIVPdf extends Component {
                 <Text style={styles.tableCellHeader}>Quantity</Text>
               </View>
               <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>Unit</Text>
+                <Text style={styles.tableCellHeader}>UoM</Text>
+              </View>
+              <View style={styles.tableColHeader}>
+                <Text style={styles.tableCellHeader}>Unit Price</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>Amount</Text>
@@ -219,7 +224,13 @@ class SIVPdf extends Component {
                         <Text style={styles.tableCell}>{item.quantity}</Text>
                       </View>
                       <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{item.price}</Text>
+                        <Text style={styles.tableCell}>
+                          {item.unitOfMeasurement}
+                        </Text>
+                      </View>
+
+                      <View style={styles.tableCol}>
+                        <Text style={styles.tableCell}>{item.cost}</Text>
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>{item.amount}</Text>
@@ -233,9 +244,13 @@ class SIVPdf extends Component {
             style={{
               display: "flex",
               paddingTop: 20,
-              marginLeft: 450,
+              marginLeft: 400,
             }}
-          ></View>
+          >
+            <Text style={styles.textBody} variant="body2" color="">
+              Total Price : {this.props.sivs.totalCost}
+            </Text>
+          </View>
           <View
             style={{
               paddingLeft: 20,
@@ -248,7 +263,7 @@ class SIVPdf extends Component {
               }}
             >
               <Text style={styles.textBody} variant="body2" color="">
-                Recipient Name : _______________________
+                Issued By : {localStorage.getItem("username")}
               </Text>
             </View>
             <View
@@ -259,7 +274,7 @@ class SIVPdf extends Component {
               }}
             >
               <Text style={styles.textBody} variant="body2" color="">
-                Recipient Signature : _______________________
+                Signature : _______________________
               </Text>
             </View>
           </View>

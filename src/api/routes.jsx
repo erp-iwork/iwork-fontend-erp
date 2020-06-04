@@ -14,6 +14,7 @@ const routes = {
   itemTobeSold: "itemstobesold/",
   records: "inventorytransaction/",
   recordsByType: "inventorytransactionytype/",
+  componentQualityUpdate: "componentqualityupdate/",
 };
 
 export default routes;

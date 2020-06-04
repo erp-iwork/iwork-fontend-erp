@@ -108,13 +108,6 @@ class AddEmployee extends Component {
                     breadcrumbs={[{ name: 'Human Resource', active: true }]}
                     className="FormPage"
                 >
-                    {
-                        this.props.post_employee_success ? (
-                            <CustomAlert type={"success"} msg={"Congratulations! your data registered successfully!"}
-                            />
-                        ) : null
-
-                    }
                     <Col lg={12} md={24}>
                         <Card>
                             <CardHeader>Add employee</CardHeader>
@@ -264,7 +257,7 @@ class AddEmployee extends Component {
                                             </Label>
                                                 <Col sm={12}>
                                                     <Input type="select" onChange={this.departmentDropDown} value={depValue}>
-                                                        <option aria-label="None" selected disabled value="" > Select Department </option>
+                                                        <option aria-label="dep" selected disabled value="" > Select Department </option>
                                                         {this.props.department.map((dep, index) => (
                                                             <option value={dep.departmentId} key={index}>
                                                                 {dep.departmentName}
@@ -275,8 +268,7 @@ class AddEmployee extends Component {
                                                         error={
                                                             this.props.errors.department
                                                                 ? this.props.errors.department
-                                                                : null
-                                                        }
+                                                                : null}
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -287,8 +279,8 @@ class AddEmployee extends Component {
                                                     Role
                                             </Label>
                                                 <Col sm={12}>
-                                                    <Input type="select" onChange={this.roleDropDown} value={rolValue}>
-                                                        <option aria-label="None" disabled selected value="" > Select Role</option>
+                                                    <Input type="select" id='test' onChange={this.roleDropDown} value={rolValue}>
+                                                        <option aria-label="None" disabled selected > Select Role</option>
                                                         {this.state.rol.map((rols) => (
                                                             <option value={rols.roleId} key={rols.roleId}>
                                                                 {rols.role}
@@ -297,8 +289,7 @@ class AddEmployee extends Component {
                                                     </Input>
                                                     <Error
                                                         error={
-                                                            this.props.errors.roles ? this.props.errors.roles : null
-                                                        }
+                                                            this.props.errors.roles ? this.props.errors.roles : null}
                                                     />
                                                 </Col>
                                             </FormGroup>
@@ -309,7 +300,7 @@ class AddEmployee extends Component {
                                                     Level
                                             </Label>
                                                 <Col sm={12}>
-                                                    <Input type="select" onChange={this.levelDropDown} value={levValue}>
+                                                    <Input type="select" id='test1' onChange={this.levelDropDown} value={levValue}>
                                                         <option aria-label="None" disabled selected value="" >Select Level</option>
                                                         {this.state.lev.map((levs) => (
                                                             <option value={levs.levelId} key={levs.levelId}>
@@ -447,7 +438,15 @@ class AddEmployee extends Component {
                                 </Form>
                             </CardBody>
                         </Card>
+                        {
+                            this.props.post_employee_success ? (
+                                <CustomAlert type={"success"} msg={"Congratulations! your data registered successfully!"}
+                                />
+                            ) : null
+
+                        }
                     </Col>
+
                     <AllEmployees />
 
                 </Page>

@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0
     },
     tableRow: {
-        // margin: "auto",
         flexDirection: "row"
     },
     tableColHeader: {
@@ -70,12 +69,10 @@ const styles = StyleSheet.create({
         borderTopWidth: 0
     },
     tableCellHeader: {
-        margin: "auto",
         fontSize: 12,
         color: '#FFFFFF'
     },
     tableCell: {
-        margin: "auto",
         color: '#686868',
         fontSize: 12
     },

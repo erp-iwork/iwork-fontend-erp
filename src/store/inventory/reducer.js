@@ -1,4 +1,4 @@
-import { inventoryConstant, errorsConstant } from "../../constant/constants";
+import { inventoryConstant, errorsConstant ,companyConstant} from "../../constant/constants";
 const initialState = {
   items: [],
   errors: [],
@@ -116,7 +116,10 @@ export default function inventoryReducer(state = initialState, action) {
         ...state, loading_records: false,
         records: action.payload
       }
-
+      case companyConstant.SUCCESS_POST_CATEGORY:
+        return{
+          categories:[...state.categories,action.payload]
+        }
     default:
       return state;
   }

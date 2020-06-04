@@ -15,3 +15,10 @@ export const UoM = () => {
         <option key={index}>{item}</option>
     ))
 }
+
+export const getCount = (count) => {
+    var number = count + ""
+    var zeros = ""
+    Array(4 - number.length).fill("0").forEach(item => zeros += item)
+    return zeros + number
+}

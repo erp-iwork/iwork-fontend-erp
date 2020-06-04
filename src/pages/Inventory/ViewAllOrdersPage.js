@@ -9,13 +9,19 @@ import { getStatus, getOrders } from '../../store/order/action'
 import { getSiv, updateSiv } from '../../store/Siv/action'
 import routes from '../../config/routes'
 import status from '../../constant/status'
-import { reverse } from '../../useCases/'
+import { reverse, getCount } from '../../useCases/'
 
 const Order = ({ order, index, handleApprove, currentOrder, success }) => {
+    const [loading, setLoading] = React.useState(false)
+    const approve = (order) => {
+        setLoading(true)
+        handleApprove(order)
+    }
+
     return (
         <tbody>
             <tr>
-                <th scope="row">{index + 1}</th>
+                <th scope="row">{getCount(index + 1)}</th>
                 <td>{order.customer}</td>
                 <td>{order.salesPerson}</td>
                 <td>{order.shipmentAddress}</td>
@@ -36,11 +42,11 @@ const Order = ({ order, index, handleApprove, currentOrder, success }) => {
                             <Link to={{ pathname: routes.SivPage, state: { order: order.orderNumber } }}>
                                 <Button size='sm' color='primary'>
                                     <MdAssignment /> SIV Issued
-                            </Button>
+                                </Button>
                             </Link> :
-                            <Button size='sm' color='primary' onClick={() => handleApprove(order)}>
-                                <MdAssignment /> Approve
-                        </Button>
+                            <Button size='sm' color='primary' onClick={() => approve(order)}>
+                                 {loading? "Loading..." : <div><MdAssignment />Approve</div>}
+                            </Button>
                         }
                     </td>
                 )

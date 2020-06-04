@@ -7,4 +7,8 @@ export default {
   manuFactured: "Manufactured",
   finished: "Finished",
   issued: "Issued",
+  quantityCheck: "Quantity Checked",
+  confirmed: "Confirmed",
+
+
 };

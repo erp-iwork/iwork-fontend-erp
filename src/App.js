@@ -5,6 +5,10 @@ import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
+import './styles/Animate.scss';
+import './styles/toast.scss';
+import { ToastContainer } from "react-toastr";
+
 import routes from './config/routes'
 import LoginPage from './pages/Login'
 
@@ -42,6 +46,8 @@ const ViewDelieveredOrdersPage = React.lazy(() => import('./pages/Finance/ViewDe
 const ViewSingleDelieveredOrderPage = React.lazy(() => import('./pages/Finance/ViewSingleDelieveredOrder'));
 const SupplierInvoicePage = React.lazy(() => import('./pages/Finance/SupplierInvoicePage'));
 const ViewInventoryManufacturedOrders = React.lazy(() => import('./pages/Inventory/ViewManufacturedOrders'));
+const ViewAllFinishedOrdersPage = React.lazy(() => import('./pages/Manufacturing/ViewAllFinishedOrders'));
+
 
 // Dashboards
 const FinanceDashboard = React.lazy(() => import('./pages/Finance/DashboardPage'));
@@ -83,6 +89,8 @@ const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`;
 };
 
+let container
+
 class App extends React.Component {
   render() {
     return (
@@ -98,6 +106,10 @@ class App extends React.Component {
               )}
             />
             <MainLayout breakpoint={this.props.breakpoint}>
+                <ToastContainer
+                    ref={ref => container = ref}
+                    className="toast-top-right"
+                />
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" component={DashboardPage} />
                 <Route exact path="/login-modal" component={AuthModalPage} />
@@ -169,6 +181,11 @@ class App extends React.Component {
                 {/* MANUFACTURING ROUTES */}
                 <Route exact path={routes.ManufacturingDashboard} component={ManufacturingDashboard} />
                 <Route exact path={routes.CreateOrderManufacturing} component={CreateOrderManufacturingPage} />
+                <Route exact path={routes.ViewAllFinishedOrders} component={ViewAllFinishedOrdersPage} />
+
+                
+                {/* <Route exact path={routes.ViewAllFinishedOrders} component={ViewAllFinishedOrdersPage} /> */}
+
                 <Route exact path={routes.ViewAllOrdersManufacturing} component={ViewAllOrdersManufacturingPage} />
                 <Route exact path={routes.ViewSingleOrderManufacturing} component={SingleOrderManufacturingPage} />
 
@@ -191,6 +208,12 @@ class App extends React.Component {
       </BrowserRouter>
     );
   }
+}
+
+export const Alert = {
+  success: (message) => container.success(message, `Alert`, {
+    closeButton: true
+  })
 }
 
 const query = ({ width }) => {

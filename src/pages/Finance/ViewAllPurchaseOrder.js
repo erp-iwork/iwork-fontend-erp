@@ -22,7 +22,7 @@ const Order = ({ order, index, handleApprove }) => {
                 <Button size='sm' color='primary' onClick={() => handleApprove(order.purchaseOrderNumber)}>
                     Approve
                 </Button> :
-                <Button size='sm' color='primary' disabled>
+                <Button size='sm' color='success' disabled>
                     Approved
                 </Button> 
             }

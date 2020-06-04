@@ -19,7 +19,7 @@ import { addSupplier, getSupplier } from '../../store/company/action'
 import Loader from '../../components/loader'
 import PageSpinner from '../../components/PageSpinner'
 import ViewAllSuppliers from './viewAllSuppliersPage'
-
+// import { changeMessage } from '../../components/Layout/MainLayout'
 class AddSupplierPage extends Component {
     constructor(props) {
         super(props);
@@ -28,17 +28,19 @@ class AddSupplierPage extends Component {
             generalManger: "",
             contactPerson: "",
             workingField: "",
-            paymentOption: "",
+            paymentOption: "VAT 15% purchase",
             email: "",
             tinNumber: "",
             companys: [],
             loading: 0,
             update: false,
-            lockPage: false
+            lockPage: false,
+            show: false,
         }
         this.submit = this.submit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.updateSuppliers = this.updateSuppliers.bind(this)
+        this.toggle = this.toggle.bind(this)
     }
     componentDidMount() {
         this.props.getSupplier()
@@ -51,9 +53,10 @@ class AddSupplierPage extends Component {
                 generalManger: "",
                 contactPerson: "",
                 workingField: "",
-                paymentOption: "",
+                paymentOption: "VAT 15% purchase",
                 email: "",
                 tinNumber: "",
+                show: false,
                 lockPage: true
             })
         }
@@ -80,10 +83,13 @@ class AddSupplierPage extends Component {
         this.props.addSupplier(newCompany).then(res => this.setState({ lockPage: false }))
     }
 
+    toggle = () => this.setState({ show: !this.state.show })
+
+
     render() {
         if (this.props.loading) return <PageSpinner />
         const {
-            companyName, generalManger, contactPerson, email, paymentOption,
+            companyName, generalManger, contactPerson, email,
             tinNumber, workingField
         } = this.state
         return (
@@ -187,11 +193,7 @@ class AddSupplierPage extends Component {
                                         <FormGroup>
                                             <Label sm={12} for="exampleSelect">Payment Option</Label>
                                             <Col>
-                                                <Input type="select" name="paymentOption" placeholder="Select payment option" value={paymentOption} onChange={this.handleChange}>
-                                                    <option aria-label="None" value="Select payment option" />
-                                                    <option>TOT</option>
-                                                    <option>VAT</option>
-                                                </Input>
+                                                <Input value={this.state.paymentOption} disabled />
                                                 <Error
                                                     error={
                                                         this.props.errors.paymentOption
@@ -223,7 +225,7 @@ class AddSupplierPage extends Component {
                                 </Row>
                                 <FormGroup >
                                     <Col align='center'>
-                                        <Button color='primary' onClick={this.submit}>
+                                        <Button color='primary' type='submit' onClick={this.submit}>
                                             {this.props.loading_add_supplier ? <Loader /> : "Add Supplier"}
                                         </Button>
                                     </Col>
