@@ -90,7 +90,7 @@ class GRV extends React.Component {
 
   calculatePrice(items) {
     var sum = 0
-    items.forEach(item => sum += item.price)
+    items.forEach(item => sum += item.cost)
     return sum
   }
 
@@ -105,9 +105,6 @@ class GRV extends React.Component {
         breadcrumbs={[{ name: 'Inventory', active: true }]}
       >
         <hr />
-        <div style={{
-          height: 100
-        }}></div>
         <div style={classes.pdf}>
           <div style={classes.Card}>
             <Row className="d-flex justify-content-between align-items-center"

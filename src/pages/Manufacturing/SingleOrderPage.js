@@ -204,7 +204,7 @@ class SingleOrderPage extends Component {
                                                                     value: event.target.value,
                                                                     name: 'newQuantity',
                                                                     index
-                                                     })} /> : null}
+                                                                })} /> : null}
                                                 </td>
                                             </tr>
                                         )) : null}
@@ -214,7 +214,7 @@ class SingleOrderPage extends Component {
                         </Col>
                     </Row>
                     {order.status_manufacture_order[0].status === status.quantityCheck ?
-                        <Button size='sm' onClick={this.updateBomQuantity} disabled={
+                        <Button type='submit' size='sm' onClick={this.updateBomQuantity} disabled={
                             order.status_manufacture_order[0].status === status.confirmed}>
                             Confirm BOM
                     </Button> : null}

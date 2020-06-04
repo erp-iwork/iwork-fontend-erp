@@ -11,9 +11,9 @@ import Logo from "../../assets/img/logo/Logo.jpg";
 
 const styles = StyleSheet.create({
   title: {
-    fontWeight: 600,
-    paddingLeft: 180,
+    paddingLeft: 100,
     paddingBottom: 10,
+    fontSize: 16,
   },
 
   root: {
@@ -33,9 +33,8 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    height: 80,
-    width: 80,
-    marginTop: 10,
+    height: 40,
+    width: 40,
   },
 
   SIVStyling: {
@@ -48,6 +47,10 @@ const styles = StyleSheet.create({
 
   textBody: {
     fontSize: 12,
+    color: "#686868",
+  },
+  textBody2: {
+    fontSize: 8,
     color: "#686868",
   },
 
@@ -94,10 +97,10 @@ const styles = StyleSheet.create({
   },
 
   tableCellHeader: {
-    fontSize: 12,
+    fontSize: 10,
     color: "#FFFFFF",
   },
-  
+
   tableCell: {
     color: "#686868",
     fontSize: 10,
@@ -117,21 +120,20 @@ const styles = StyleSheet.create({
   },
 });
 
-class SIVPdf extends Component {
+class GRVpdf extends Component {
   render() {
     return (
       <Document>
         <Page
-          size="A4"
+          size="A5"
           style={{
-            padding: 30,
+            padding: 10,
           }}
         >
           <View container xs={12} display="flex" style={styles.Header}>
             <View
               style={{
                 flexDirection: "row",
-                marginTop: 100,
                 justifyContent: "space-between",
                 display: "flex",
               }}
@@ -142,22 +144,41 @@ class SIVPdf extends Component {
                   Sparta ERP
                 </Text>
               </View>
-              <View item>
-                <View style={{ height: 5 }} />
-                <Text style={styles.text} variant="body2" gutterBottom>
-                  Received By : {localStorage.getItem("username")}
-                </Text>
-                <View style={{ height: 5 }} />
+              <View>
+                <Text style={styles.textBody}>Your Company</Text>
+                <View
+                  style={{
+                    height: 3,
+                  }}
+                />
 
-                <Text style={styles.text} variant="body2" gutterBottom>
-                  Date : {this.props.grv.date}
-                </Text>
+                <Text style={styles.textBody}>Your Location</Text>
+                <View
+                  style={{
+                    height: 3,
+                  }}
+                />
+                <Text style={styles.textBody}>Mobile : +251 91 147 5672</Text>
+                <View
+                  style={{
+                    height: 3,
+                  }}
+                />
+                <Text style={styles.textBody}>Website : YourWebsite.com</Text>
               </View>
             </View>
           </View>
-          <Text style={styles.title} align="center">
-            Goods Receiving Voucher
-          </Text>
+          <View
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={styles.title} align="center">
+              Goods Receiving Voucher
+            </Text>
+          </View>
+
           <View style={styles.line}></View>
           <View
             style={{
@@ -169,17 +190,18 @@ class SIVPdf extends Component {
             <Text style={styles.textBody} variant="body2" color="">
               Order Number : {this.props.grv.GRVID}
             </Text>
+            <Text style={styles.textBody} variant="body2" gutterBottom>
+              Received By : {localStorage.getItem("username")}
+            </Text>
+            <Text style={styles.textBody} variant="body2" gutterBottom>
+              Date : {this.props.grv.date}
+            </Text>
           </View>
-
-          <View
-            style={{
-              height: 20,
-            }}
-          ></View>
+          <View style={{ height: 20 }} />
           <View style={styles.table}>
             <View style={styles.tableRow}>
               <View style={styles.tableColHeader1}>
-                <Text style={styles.tableCellHeader}>Serial No</Text>
+                <Text style={styles.tableCellHeader}>S-#</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>Batch Number</Text>
@@ -232,6 +254,7 @@ class SIVPdf extends Component {
           <View
             style={{
               paddingLeft: 20,
+              paddingBottom: 100,
             }}
           >
             <View
@@ -241,7 +264,7 @@ class SIVPdf extends Component {
               }}
             >
               <Text style={styles.textBody} variant="body2" color="">
-                Recipient Name : _______________________
+                Recipient Name : {localStorage.getItem("username")}
               </Text>
             </View>
             <View
@@ -256,10 +279,26 @@ class SIVPdf extends Component {
               </Text>
             </View>
           </View>
+          <View style={styles.line} />
+
+          <View
+            container
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text variant="caption" style={styles.textBody2}>
+              Phone : +2519 1234 56 77
+            </Text>
+            <Text style={styles.textBody2}>Website : YourWebsite.com</Text>
+            <Text style={styles.textBody2}>Email : YourEmail@gmail.com</Text>
+          </View>
         </Page>
       </Document>
     );
   }
 }
 
-export default SIVPdf;
+export default GRVpdf;

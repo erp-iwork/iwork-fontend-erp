@@ -37,10 +37,7 @@ class AddMasterDataPage extends Component {
         this.ItemQuantityChange = this.ItemQuantityChange.bind(this)
         this.submit = this.submit.bind(this)
         this.submitCustomCategory = this.submitCustomCategory.bind(this)
-
-
     }
-
     handleAddItem = () => {
         this.setState({
             order_items: this.state.order_items.concat([
@@ -52,7 +49,6 @@ class AddMasterDataPage extends Component {
     componentDidMount() {
         this.props.getMasterData()
         this.props.getExistingCategories()
-
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -340,17 +336,12 @@ class AddMasterDataPage extends Component {
                                                         <Error error={error.materialUnitOfMeasurement ? error.materialUnitOfMeasurement : null} />
                                                         <Error error={error.materialQuantity ? error.materialQuantity : null} />
                                                     </Row>
-                                                )
-                                                ) : null
+                                                )) : null
                                             }
                                             <Error error={this.props.errors.item ? this.props.errors.item : null} />
                                         </Row>
-
-
                                     ))}
-
-
-                                    < Button onClick={() => this.handleAddItem()} color='primary'
+                                    <Button onClick={() => this.handleAddItem()} color='primary'
                                         style={{ display: can_be_manufactured ? "flex" : "none", marginLeft: "1%" }}
                                     >Add Another One</Button>
                                 </FormGroup>
