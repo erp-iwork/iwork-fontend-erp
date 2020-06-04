@@ -239,9 +239,7 @@ class AddMasterDataPage extends Component {
                                             <option disabled selected></option>
                                             <UoM />
                                         </Input>
-
                                         <Error error={this.props.errors.unitOfMeasurement ? this.props.errors.unitOfMeasurement : null} />
-
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >

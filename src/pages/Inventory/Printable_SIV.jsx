@@ -58,8 +58,26 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
+  tableColHeader1: {
+    width: "10%",
+    borderStyle: "solid",
+    borderColor: "#686868",
+    borderBottomColor: "#000",
+    backgroundColor: "#11669F",
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
   tableCol: {
     width: "16.67%",
+    borderStyle: "solid",
+    borderColor: "#686868",
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+  tableCol1: {
+    width: "10%",
     borderStyle: "solid",
     borderColor: "#686868",
     borderWidth: 1,
@@ -102,41 +120,6 @@ class SIVPdf extends Component {
             padding: 30,
           }}
         >
-          {/* <View container xs={12} display="flex" style={styles.Header}>
-            <View
-              container
-              style={{
-                flexDirection: "row",
-                marginTop: 100,
-              }}
-            >
-              <View item>
-                <View style={{ height: 5 }} />
-
-                <Text style={styles.text} variant="body2" gutterBottom>
-                  Warehouse Name: {this.props.sivs.warehouseName}
-                </Text>
-                <View style={{ height: 5 }} />
-
-                <Text style={styles.text} variant="body2" gutterBottom>
-                  Issued By : {localStorage.getItem("username")}
-                </Text>
-                <View style={{ height: 5 }} />
-
-                <Text style={styles.text} variant="body2" gutterBottom>
-                  SIV Date : {this.props.sivs.sivDate}
-                </Text>
-              </View>
-
-              <View
-                item
-                style={{
-                  marginLeft: 160,
-                }}
-              >
-              </View>
-            </View>
-          </View> */}
 
           <View container xs={12} display="flex" style={styles.Header}>
             <View
@@ -191,7 +174,7 @@ class SIVPdf extends Component {
           ></View>
           <View style={styles.table}>
             <View style={styles.tableRow}>
-              <View style={styles.tableColHeader}>
+              <View style={styles.tableColHeader1}>
                 <Text style={styles.tableCellHeader}>Serial No</Text>
               </View>
               <View style={styles.tableColHeader}>
@@ -214,7 +197,7 @@ class SIVPdf extends Component {
               ? this.props.siv_item.map((item, index) => {
                   return (
                     <View key={item.itemName} style={styles.tableRow}>
-                      <View style={styles.tableCol}>
+                      <View style={styles.tableCol1}>
                         <Text style={styles.tableCell}>{index + 1}</Text>
                       </View>
                       <View style={styles.tableCol}>
