@@ -224,7 +224,9 @@ class SIVPdf extends Component {
                         <Text style={styles.tableCell}>{item.quantity}</Text>
                       </View>
                       <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{item.unitOfMeasurement}</Text>
+                        <Text style={styles.tableCell}>
+                          {item.unitOfMeasurement}
+                        </Text>
                       </View>
 
                       <View style={styles.tableCol}>
@@ -247,7 +249,6 @@ class SIVPdf extends Component {
           >
             <Text style={styles.textBody} variant="body2" color="">
               Total Price : {this.props.sivs.totalCost}
-
             </Text>
           </View>
           <View
@@ -262,7 +263,7 @@ class SIVPdf extends Component {
               }}
             >
               <Text style={styles.textBody} variant="body2" color="">
-                Recipient Name : _______________________
+                Issued By : {localStorage.getItem("username")}
               </Text>
             </View>
             <View
@@ -273,7 +274,7 @@ class SIVPdf extends Component {
               }}
             >
               <Text style={styles.textBody} variant="body2" color="">
-                Recipient Signature : _______________________
+                Signature : _______________________
               </Text>
             </View>
           </View>

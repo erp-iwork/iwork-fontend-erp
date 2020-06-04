@@ -198,7 +198,7 @@ class SIV extends React.Component {
                 variant="body2"
                 color=""
               >
-                <b>Recipient Name :</b> _______________________
+                <b>Issued By :</b> _______________________
                 </Typography>
             </div>
             <div
@@ -213,7 +213,7 @@ class SIV extends React.Component {
                 variant="body2"
                 color=""
               >
-                <b>Recipient Signature :</b> _______________________
+                <b>Signature :</b> _______________________
                 </Typography>
             </div>
           </div>
