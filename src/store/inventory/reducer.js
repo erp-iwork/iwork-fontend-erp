@@ -1,8 +1,18 @@
-import { inventoryConstant, errorsConstant } from "../../constant/constants";
+import { inventoryConstant, errorsConstant ,companyConstant} from "../../constant/constants";
 const initialState = {
   items: [],
   errors: [],
   success: false,
+  loading_categories: true,
+  loading_items: true,
+  updating_status: false,
+  update_success: false,
+  loading_grv: true,
+  loading_records: true,
+  records: [],
+  grv: {},
+  categories: [],
+  orders: []
 };
 
 export default function inventoryReducer(state = initialState, action) {
@@ -57,6 +67,59 @@ export default function inventoryReducer(state = initialState, action) {
         loading: false,
       };
 
+    case inventoryConstant.REQUEST_GET_EXISTING_CATEGORIES:
+      return {
+        ...state, loading_categories: true
+      }
+
+    case inventoryConstant.SUCCESS_GET_EXISTING_CATEGORIES:
+      return {
+        ...state, loading_categories: false, success: true,
+        categories: action.payload
+      }
+
+    case inventoryConstant.REQUEST_GET_CATEGORIES:
+      return {
+        ...state, loading_items: true
+      }
+
+    case inventoryConstant.SUCCESS_GET_CATEGORIES:
+      return {
+        ...state, loading_items: false, success: true,
+        items: action.payload
+      }
+
+    case inventoryConstant.REQUEST_GET_PURCHASED_ITEMS:
+      return { ...state, loading_items: true }
+    case inventoryConstant.SUCCESS_GET_PURCHASED_ITEMS:
+      return {
+        ...state, loading_items: false,
+        orders: action.payload
+      }
+    case inventoryConstant.REQUEST_PUT_UPDATE_STATUS:
+      return { ...state, updating_status: true }
+    case inventoryConstant.SUCCESS_PUT_UPDATE_STATUS:
+      return { ...state, updating_status: false, update_success: true }
+
+    case inventoryConstant.REQUEST_GET_GRV:
+      return { ...state, loading_grv: true }
+    case inventoryConstant.SUCCESS_GET_GRV:
+      return {
+        ...state, loading_grv: false,
+        grv: action.payload, success: true
+      }
+
+    case inventoryConstant.REQUEST_GET_RECORDS:
+      return { ...state, loading_records: true }
+    case inventoryConstant.SUCCESS_GET_RECORDS:
+      return {
+        ...state, loading_records: false,
+        records: action.payload
+      }
+      case companyConstant.SUCCESS_POST_CATEGORY:
+        return{
+          categories:[...state.categories,action.payload]
+        }
     default:
       return state;
   }

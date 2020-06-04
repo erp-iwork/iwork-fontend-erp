@@ -14,18 +14,51 @@ class ViewSingleOrderPage extends Component {
         }
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         if (this.props.location.state) {
-            await this.props.getSingleOrder(this.state.details.orderNumber)
+            this.props.getSingleOrder(this.state.details.orderNumber)
         }
     }
 
     render() {
-        if (!this.props.order.orderNumber) return <PageSpinner />
+        if (this.props.loading_single_order === true || this.props.loading_single_order === undefined) return <PageSpinner />
         const { details } = this.state
         const { order } = this.props
         return (
-            <Page title="View Single Order" breadcrumbs={[{ name: 'Single Order', active: true }]}>
+            <Page title="View Single Order" breadcrumbs={[{ name: 'Sales', active: true }]}>
+                {/* 
+                <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+                    <div class="step completed">
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="pe-7s-cart"></i></div>
+                        </div>
+                        <h4 class="step-title">Created</h4>
+                    </div>
+                    <div class="step completed">
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="pe-7s-config"></i></div>
+                        </div>
+                        <h4 class="step-title">Pending</h4>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="pe-7s-config"></i></div>
+                        </div>
+                        <h4 class="step-title">Manufactured</h4>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="pe-7s-config"></i></div>
+                        </div>
+                        <h4 class="step-title">Finished</h4>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon-wrap">
+                            <div class="step-icon"><i class="pe-7s-home"></i></div>
+                        </div>
+                        <h4 class="step-title">Recieved</h4>
+                    </div>
+                </div> */}
                 <Card className='padding'>
                     <Row sm={12} md={12} >
                         <Col md={4}>
@@ -95,6 +128,7 @@ class ViewSingleOrderPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        loading_single_order: state.ordersReducer.loading_single_order,
         order: state.ordersReducer.order,
         items: state.ordersReducer.items,
     }

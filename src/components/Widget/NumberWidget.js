@@ -26,7 +26,8 @@ const NumberWidget = ({
       <Progress value={value} color={color} style={{ height: '8px' }} />
       <CardText tag="div" className="d-flex justify-content-between">
         <Typography tag="span" className="text-left text-muted small">
-          {label}
+          {/* {label} */}
+          Achieved Percentage of the Yearly Goal
         </Typography>
         <Typography tag="span" className="text-right text-muted small">
           {value}%

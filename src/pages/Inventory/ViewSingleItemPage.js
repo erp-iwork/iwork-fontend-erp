@@ -10,8 +10,8 @@ class ViewSingleItemPage extends Component {
     render() {
         return (
             <Page
-                title="Single Item Page"
-                breadcrumbs={[{ name: 'Single Item Page', active: true }]}
+                title="Single Item View"
+                breadcrumbs={[{ name: 'Inventory', active: true }]}
                 className=""
             >
                 <Card>

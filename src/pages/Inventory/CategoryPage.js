@@ -1,67 +1,65 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { Card, CardTitle, Row, Col, CardSubtitle, CardText, CardBody, CardHeader } from 'reactstrap';
+import { Card, Row, Col, CardBody } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBox, faScrewdriver, faShareAlt } from '@fortawesome/free-solid-svg-icons'
+import { faShareAlt } from '@fortawesome/free-solid-svg-icons'
 import './Inventory.scss'
-
+import PageSpinner from '../../components/PageSpinner'
+import { getExistingCategories, checkToast } from '../../store/inventory/action'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import routes from '../../config/routes'
+// import { ToastContainer } from "react-toastr";
+import './Inventory.scss'
 
 class CategoryPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            categoryID: null
+        }
+    }
+    componentDidMount() {
+        this.props.getExistingCategories()
     }
     render() {
+        if (this.props.loading_categories) return <PageSpinner />
+        if (this.props.success && this.state.categoryID !== null) {
+            return <Redirect to={{
+                pathname: routes.ViewAllItems,
+                state: this.state.categoryID
+            }} />
+        }
+        if (this.props.categories.length === 0) return <h2>No Categories have been registered</h2>
         return (
+
             <Page
                 title="Categories"
-                breadcrumbs={[{ name: 'Categories', active: true }]}
+                breadcrumbs={[{ name: 'Inventory', active: true }]}
                 className="CardPage"
             >
-                <Row>
-                    <Col md={4} sm={12} xs={12}>
-                        <Card className='box' >
-                            <CardBody>
-                                <Row >
-                                    <Col className='icons' md={3} sm={12} xs={12}>
-                                        <FontAwesomeIcon icon={faShareAlt} size="5x" color="#7D7D7D"  transform={{ rotate: 42 }} />
-                                    </Col>
-                                    <Col >
-                                        <h4>Consumable Goods</h4>
-                                    </Col>
-                                </Row>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col md={4} sm={12} xs={12}>
-                        <Card className='box' >
-                            <CardBody>
-                                <Row >
-                                    <Col className='icons' md={3}>
-                                        <FontAwesomeIcon color='primary' icon={faBox} size="5x" color="#7D7D7D" transform={{ rotate: -42 }} />
-                                    </Col>
-                                    <Col size='lg' >
-                                        <h4>Stored Goods</h4>
-                                    </Col>
-                                </Row>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                    <Col md={4} sm={12} xs={12}>
-                        <Card className='box' >
-                            <CardBody>
-                                <Row >
-                                    <Col className='icons' md={3} xs={12} sm={12}>
-                                        <FontAwesomeIcon icon={faScrewdriver} color='primary' color="#7D7D7D" size="5x" transform={{ rotate: -2 }} />
-                                    </Col>
-                                    <Col size='lg'>
-                                        <h4>Services</h4>
-                                    </Col>
-                                </Row>
-                            </CardBody>
-                        </Card>
-                    </Col>
+                
+                {/* <Button onClick={() => checkToast()}>
+                    Alert
+                </Button> */}
 
+                <Row>
+                    {this.props.categories.map((item, index) => (
+                        <Col md={4} sm={12} xs={12} onClick={() => this.setState({ categoryID: item.catagoryId })}>
+                            <Card className='box' >
+                                <CardBody>
+                                    <Row>
+                                        <Col className='icons' md={3} sm={12} xs={12}>
+                                            <FontAwesomeIcon icon={faShareAlt} size="5x" color="#7D7D7D" transform={{ rotate: 42 }} />
+                                        </Col>
+                                        <Col >
+                                            <h4>{item.catagory}</h4>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    ))}
                 </Row>
             </Page>
 
@@ -69,4 +67,12 @@ class CategoryPage extends Component {
     }
 }
 
-export default CategoryPage;
+const mapStateToProps = (state) => {
+    return {
+        loading_categories: state.inventoryReducer.loading_categories,
+        categories: state.inventoryReducer.categories,
+        success: state.inventoryReducer.success
+    }
+}
+
+export default connect(mapStateToProps, { getExistingCategories, checkToast })(CategoryPage)

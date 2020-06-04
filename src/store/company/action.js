@@ -4,21 +4,17 @@ import API from "../../api/API";
 import routes from '../../api/routes'
 import { companyConstant, errorsConstant } from "../../constant/constants";
 import headers from './../headers'
+import statusTypes from '../../constant/status'
 
 // ADD COMPANY
 export const addCompany = (company) => (dispatch) => {
+  dispatch({ type: companyConstant.REQUEST_GET_COMANY })
   return axios
     .post(API + "customer/", company, headers)
     .then((res) => {
-      Swal.fire({
-        title: "Success",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1000
-      })
       dispatch({
         type: companyConstant.ADD_COMPANY,
-        payload: res.data,
+        payload: res.data
       })
     })
     .catch((err) => {
@@ -34,32 +30,57 @@ export const addCompany = (company) => (dispatch) => {
 }
 
 export const addSupplier = (supplier) => (dispatch) => {
-  return axios.post (API + routes.supplier, supplier, headers)
+  dispatch({ type: companyConstant.REQUEST_POST_ADD_SUPPLIER })
+  return axios.post(API + routes.supplier, supplier, headers)
     .then(res => {
-      Swal.fire({
-        title: 'Success',
-        icon: 'success',
-        showCancelButton: false,
-        timer: 1000
-      })
-      dispatch({
-        type: companyConstant.ADD_SUPPLIER,
-        payload: res.data
-      })
+      dispatch({ type: companyConstant.SUCCESS_POST_ADD_SUPPLIER, payload: res.data })
     })
-    .catch(err => {
+    .catch((err) => {
+      console.log(err)
       try {
         dispatch({
           type: errorsConstant.GET_ERRORS,
-          payload: err.response.data
-        })
+          payload: err.response.data,
+        });
       } catch {
-        console.log("Error occured in adding a supplier")
+        console.log("error");
       }
     })
 }
 
-export const getSupplier = () => (dispatch) => {
+export const addCategory = (catagory) => (dispatch) => {
+  var data = {
+    catagory: catagory
+  }
+  dispatch({ type: companyConstant.REQUEST_POST_CATEGORY })
+  return axios.post(API + routes.category, data, headers)
+    .then(res => {
+      console.log(res.data);
+
+      dispatch({ type: companyConstant.SUCCESS_POST_CATEGORY, payload: res.data })
+    })
+    .catch((err) => {
+      console.log(err.response)
+      try {
+        dispatch({
+          type: companyConstant.FAILED_POST_CATEGORY,
+          payload: err.response.data,
+        });
+      } catch {
+        console.log("error");
+      }
+    })
+}
+
+
+export const getSupplier = (noLoading = false) => (dispatch) => {
+  if (!noLoading) {
+    dispatch({
+      type: companyConstant.REQUEST_GET_SUPPLIER,
+      payload: true
+    })
+  }
+
   axios.get(API + routes.supplier, headers)
     .then(res => {
       dispatch({
@@ -126,7 +147,7 @@ export const deleteSupplier = (supplierID) => (dispatch) => {
             });
           }
         })
-        return res.value
+      return res.value
     }
   })
 }
@@ -205,3 +226,142 @@ export const deleteCompany = (companyId) => (dispatch) => {
     return result.value
   });
 };
+
+export const addMasterData = (masterData) => (dispatch) => {
+  dispatch({
+    type: companyConstant.REQUEST_ADD_MASTERDATA,
+    payload: true
+  })
+  return axios
+    .post(API + routes.masterData, masterData, headers)
+    .then((res) => {
+
+      Swal.fire({
+        title: "Added Product",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1000
+      })
+      dispatch({
+        type: companyConstant.ADD_MASTERDATA,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+
+      dispatch({
+        type: errorsConstant.GET_ERRORS,
+        payload: err.response.data.errors,
+      });
+
+    });
+}
+
+export const getAllMasterData = () => (dispatch) => {
+  dispatch({
+    type: companyConstant.REQUEST_GET_MASTERDATA,
+    payload: true
+  })
+  return axios.get(API + routes.masterData, headers)
+    .then(res => {
+      dispatch({
+        type: companyConstant.GET_MASTERDATA,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error", text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+    })
+}
+
+export const getMasterData = () => (dispatch) => {
+  dispatch({
+    type: companyConstant.REQUEST_GET_MASTERDATA,
+    payload: true
+  })
+  return axios.get(API + routes.rawmaterial, headers)
+    .then(res => {
+      dispatch({
+        type: companyConstant.GET_MASTERDATA,
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error", text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+    })
+}
+
+
+export const updateStatus = (orderNumber, status) => (dispatch) => {
+  dispatch({ type: companyConstant.REQUEST_UPDATE_STATUS })
+  return axios.put(API + `${routes.updatePurchaseStatus}${orderNumber}/`, status, headers)
+    .then((res) => {
+      dispatch({ type: companyConstant.SUCCESS_UPDATE_STATUS })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    });
+};
+
+export const getManufacturedOrders = (status1, status2 = statusTypes.finished) => (dispatch) => {
+  dispatch({ type: companyConstant.REQUEST_GET_MANUFACTURED_ORDERS })
+  return axios.get(API + routes.manufacturing +
+    `?search1=${status1}&search2=${status2}`, headers)
+    .then(res => dispatch({ type: companyConstant.SUCCESS_GET_MANUFACTURED_ORDERS, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        console.log(err)
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}

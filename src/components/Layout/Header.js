@@ -1,16 +1,16 @@
-import Avatar from  '../../components/Avatar';
+import React from 'react';
+import Avatar from '../../components/Avatar';
+import Avatarr from '../../components/Avatarr';
+
 import { UserCard } from '../../components/Card';
 import Notifications from '../../components/Notifications';
 import SearchInput from '../../components/SearchInput';
 import { notificationsData } from '../../demos/header';
 import withBadge from '../../hocs/withBadge';
-import React from 'react';
 import {
   MdClearAll,
   MdExitToApp,
   MdHelp,
-  MdInsertChart,
-  MdMessage,
   MdNotificationsActive,
   MdNotificationsNone,
   MdPersonPin,
@@ -20,7 +20,6 @@ import {
   Button,
   ListGroup,
   ListGroupItem,
-  // NavbarToggler,
   Nav,
   Navbar,
   NavItem,
@@ -32,7 +31,6 @@ import bn from '../../utils/bemnames';
 import routes from '../../config/routes'
 
 const bem = bn.create('header');
-
 const MdNotificationsActiveWithBadge = withBadge({
   size: 'md',
   color: 'primary',
@@ -83,19 +81,16 @@ class Header extends React.Component {
 
   render() {
     const { isNotificationConfirmed } = this.state;
-
     return (
       <Navbar light expand className={bem.b('bg-white')}>
-
-        <Nav navbar  className="mr-2">
+        <Nav navbar className="mr-2">
           <Button color="primary" outline onClick={this.handleSidebarControlButton}>
-            <MdClearAll  size={25} />
+            <MdClearAll size={25} />
           </Button>
         </Nav>
         <Nav navbar>
           <SearchInput />
         </Nav>
-
         <Nav navbar className={bem.e('nav-right')}>
           <NavItem className="d-inline-flex">
             <NavLink id="Popover1" className="position-relative">
@@ -106,17 +101,17 @@ class Header extends React.Component {
                   onClick={this.toggleNotificationPopover}
                 />
               ) : (
-                <MdNotificationsActiveWithBadge
-                  size={25}
-                  className="text-primary can-click animated swing infinite"
-                  onClick={this.toggleNotificationPopover}
-                />
-              )}
+                  <MdNotificationsActiveWithBadge
+                    size={25}
+                    className="text-primary can-click animated swing infinite"
+                    onClick={this.toggleNotificationPopover}
+                  />
+                )}
             </NavLink>
             <Popover
               placement="bottom"
-              isOpen={this.state.isOpenNotificationPopover}
-              toggle={this.toggleNotificationPopover}
+              // isOpen={this.state.isOpenNotificationPopover}
+              // toggle={this.toggleNotificationPopover}
               target="Popover1"
             >
               <PopoverBody>
@@ -126,12 +121,20 @@ class Header extends React.Component {
           </NavItem>
 
           <NavItem>
+
             <NavLink id="Popover2">
-              <Avatar
-                onClick={this.toggleUserCardPopover}
-                className="can-click"
-              />
+              {localStorage.getItem('gender') === 'Female' ?
+                <Avatarr
+                  onClick={this.toggleUserCardPopover}
+                  className="can-click"
+                /> :
+                <Avatar
+                  onClick={this.toggleUserCardPopover}
+                  className="can-click"
+                />
+              }
             </NavLink>
+
             <Popover
               placement="bottom-end"
               isOpen={this.state.isOpenUserCardPopover}
@@ -142,20 +145,14 @@ class Header extends React.Component {
             >
               <PopoverBody className="p-0 border-light">
                 <UserCard
-                  title="Jane"
-                  subtitle="jane@jane.com"
-                  text="Last updated 3 mins ago"
+                  title={localStorage.getItem('username')}
+                  subtitle={localStorage.getItem('email')}
                   className="border-light"
                 >
+
                   <ListGroup flush>
                     <ListGroupItem tag="button" action className="border-light">
                       <MdPersonPin /> Profile
-                    </ListGroupItem>
-                    <ListGroupItem tag="button" action className="border-light">
-                      <MdInsertChart /> Stats
-                    </ListGroupItem>
-                    <ListGroupItem tag="button" action className="border-light">
-                      <MdMessage /> Messages
                     </ListGroupItem>
                     <ListGroupItem tag="button" action className="border-light">
                       <MdSettingsApplications /> Settings
@@ -171,6 +168,7 @@ class Header extends React.Component {
               </PopoverBody>
             </Popover>
           </NavItem>
+
         </Nav>
       </Navbar>
     );

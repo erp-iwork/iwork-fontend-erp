@@ -1,9 +1,10 @@
-import product1Image from  '../assets/img/products/product_640-1.jpg';
+import product1Image from '../assets/img/products/product_640-1.jpg';
 import product2Image from '../assets/img/products/product_640-2.jpg';
 import product3Image from '../assets/img/products/product_640-3.jpg';
 import product4Image from '../assets/img/products/product_640-4.jpg';
 import product5Image from '../assets/img/products/product_640-5.jpg';
 import product6Image from '../assets/img/products/product_640-6.jpg';
+
 
 import user1Image from '../assets/img/users/100_1.jpg';
 import user2Image from '../assets/img/users/100_2.jpg';
@@ -20,70 +21,76 @@ import user12Image from '../assets/img/users/100_12.jpg';
 import user13Image from '../assets/img/users/100_13.jpg';
 import user14Image from '../assets/img/users/100_14.jpg';
 
+
+
 export const productsData = [
   {
     id: 1,
     image: product1Image,
-    title: 'Admin Template',
-    description: 'Responsive admin template...',
-    right: '$36',
+    title: 'Mitin Shiro',
+    description: 'New in Stock',
+    right: '26 ETB',
   },
   {
     id: 2,
     image: product2Image,
-    title: 'Schedule App',
-    description: 'Manage your schedule...',
-    right: '$9',
+    title: 'Mitin Berbere',
+    description: 'New in Stock',
+    right: '45 ETB',
   },
   {
     id: 3,
     image: product3Image,
-    title: 'Chat App',
-    description: 'Realtime chat application...',
-    right: '$12',
+    title: 'Soft Drinks',
+    description: 'New in Stock',
+    right: '15 ETB',
+
   },
   {
     id: 4,
     image: product4Image,
-    title: 'Wordpress Business Theme',
-    description: 'Over 100+ templates and pages...',
-    right: '$24',
+    title: 'Furnitures',
+    description: 'New in Stock',
+    right: '2500 ETB',
+
   },
   {
     id: 5,
     image: product5Image,
-    title: 'Camera App',
-    description: 'Over 30+ filter...',
-    right: '$6.99',
+    title: 'Camera',
+    description: 'New in Stock',
+    right: '67,000 ETB',
+
   },
   {
     id: 6,
     image: product6Image,
-    title: 'Calendar App',
-    description: 'Organize your schedule...',
-    right: '$0.99',
+    title: 'Pasta',
+    description: 'New in Stock',
+    right: '34 ETB',
+
   },
 ];
 
 export const avatarsData = [
   {
     avatar: user1Image,
-    name: 'Tom',
+    name: 'Yohannes',
     date: '3 month ago',
   },
   {
     avatar: user2Image,
-    name: 'Jenny',
+    name: 'Alemitu',
     date: '1 year ago',
   },
   {
     avatar: user3Image,
-    name: 'Sim',
+    name: 'Alemneh',
     date: '2 hour ago',
   },
   {
     avatar: user4Image,
-    name: 'Christine',
+    name: 'JIJI',
     date: 'a month ago',
   },
   {
@@ -141,37 +148,37 @@ export const avatarsData = [
 export const userProgressTableData = [
   {
     avatar: user1Image,
-    name: 'Tom',
+    name: 'Yelekal Solomon',
     date: '3 month ago',
     progress: 75,
   },
   {
     avatar: user2Image,
-    name: 'Jenny',
+    name: 'Endalkachew Amberbir',
     date: '1 year ago',
     progress: 60,
   },
   {
     avatar: user3Image,
-    name: 'Sim',
+    name: 'Yabsera Debebe',
     date: '2 hour ago',
     progress: 50,
   },
   {
     avatar: user4Image,
-    name: 'Christine',
+    name: 'Hermella Kidus',
     date: 'a month ago',
     progress: 40,
   },
   {
     avatar: user5Image,
-    name: 'Bread',
+    name: 'Abenezer Legesse',
     date: '6 months ago',
     progress: 30,
   },
   {
     avatar: user6Image,
-    name: 'Dan',
+    name: 'Samuel Kassa',
     date: '2 years ago',
     progress: 25,
   },
@@ -181,29 +188,38 @@ export const supportTicketsData = [
   {
     id: 1,
     avatar: user1Image,
-    name: 'Sim',
+    name: 'Bruk Yoseph',
     date: '30 mins ago',
     text:
-      'Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy nibh euismod tinciduntut laoreet doloremagna aliquam erat volutpat.',
+      'You Are Requested To Give Bruk An Account as soon as possible.',
+    status: 'pending',
+  },
+  {
+    id: 4,
+    avatar: user1Image,
+    name: 'Anteneh Berhanu',
+    date: '30 mins ago',
+    text:
+      'You Are Requested To Give Bruk An Account as soon as possible.',
     status: 'pending',
   },
   {
     id: 2,
     avatar: user2Image,
-    name: 'Jane',
+    name: 'Berhanu Assefie',
     date: '1 hour ago',
     text:
-      'Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy nibh euismod tinciduntut laoreet doloremagna aliquam erat volutpat.',
-    status: 'open',
+      'The Employee Berhanu Assefe has an account',
+    status: 'Has Account',
   },
   {
     id: 3,
     avatar: user3Image,
-    name: 'Tom',
+    name: 'Abebe Bikila',
     date: 'yesterday',
     text:
-      'Lorem ipsum dolor sit amet,consectetuer edipiscing elit,sed diam nonummy nibh euismod tinciduntut laoreet doloremagna aliquam erat volutpat.',
-    status: 'closed',
+      'You Are Requested To Give Bruk An Account as soon as possible.',
+    status: 'pending',
   },
 ];
 
@@ -222,7 +238,7 @@ export const chartjs = {
       datasets: [
         {
           label: 'Expense for this year',
-          backgroundColor: '#6a82fb',
+          backgroundColor: '#11669F',
           stack: 'Expense',
           data: [10000, 30000, 50000, 80000, 60000, 20000, 10000],
         },
@@ -269,7 +285,7 @@ export const chartjs = {
         {
           data: [20, 30, 40, 50, 60],
           backgroundColor: [
-            '#6a82fb',
+            '#11669F',
             '#fc5c7d',
             '#45b649',
             '#00c9ff',
@@ -301,8 +317,8 @@ export const chartjs = {
       datasets: [
         {
           label: 'Revenue for this year',
-          borderColor: '#6a82fb',
-          backgroundColor: '#6a82fb',
+          borderColor: '#11669F',
+          backgroundColor: '#11669F',
           data: [0, 1300, 2200, 3400, 4600, 3500, 3000],
         },
 

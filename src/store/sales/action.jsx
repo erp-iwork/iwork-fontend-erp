@@ -1,11 +1,13 @@
 import Swal from "sweetalert2";
 import axios from "axios";
+import routes from "../../api/routes";
 import API from "../../api/API";
 import { salesConstants } from "../../constant/constants";
 const headers = {
   "Content-Type": "application/json",
   Authorization: "Bearer" + localStorage.getItem("token"),
 };
+
 function createOrder(data) {
   var params = {
     orderNumber: data.orderNumber,
@@ -47,7 +49,7 @@ function createOrder(data) {
         if (error.response && error.response.data) {
           if (error.response.status === 404) {
             Swal.fire({
-              title: "<strong>Error <u>info</u></strong><p>",
+              title: "<strong>Error</strong><p>",
               icon: "error",
               html:
                 "<p>" +
@@ -126,7 +128,7 @@ function getAllItem() {
     axios
       .request({
         method: "GET",
-        url: API + "items/",
+        url: API + routes.itemTobeSold,
         responseType: "json",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +163,7 @@ function getAllItem() {
 function getAllOrder() {
   return (dispatch) => {
     dispatch({
-      type: salesConstants.ITEM_GETALL_REQUEST,
+      type: salesConstants.ORDER_REQUEST,
       payload: true,
     });
     axios

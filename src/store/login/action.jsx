@@ -26,6 +26,7 @@ function login(username, password) {
         localStorage.setItem("token", user.data.user.token);
         localStorage.setItem("id", user.data.user.id);
         localStorage.setItem("email", user.data.user.email);
+        localStorage.setItem("gender", user.data.user.gender);
         localStorage.setItem("username", user.data.user.username);
         localStorage.setItem("is_superuser", user.data.user.is_superuser);
         localStorage.setItem(

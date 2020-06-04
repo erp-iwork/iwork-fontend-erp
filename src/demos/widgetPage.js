@@ -1,66 +1,143 @@
 import {
-  MdLanguage,
-  MdLightbulbOutline,
-  MdMailOutline,
-  MdPlayCircleOutline,
-  MdRadio,
-  MdSnooze,
-  MdThumbsUpDown,
-  MdThumbUp,
+  MdFormatAlignJustify,
+  MdDirectionsCar,
+  MdStarBorder,
+  MdSettings
 } from 'react-icons/md';
 
 export const iconWidgetsData = [
   {
     bgColor: 'primary',
-    icon: MdThumbUp,
-    title: 'Primary',
-    subtitle: 'widget subtitle',
+    icon: MdFormatAlignJustify,
+    title: 'To be Packed',
+    subtitle: '26',
   },
   {
     bgColor: 'secondary',
-    icon: MdThumbsUpDown,
-    title: 'Secondary',
-    subtitle: 'widget subtitle',
+    icon: MdFormatAlignJustify,
+    title: 'To Be Delivered',
+    subtitle: '12',
   },
   {
     bgColor: 'success',
-    icon: MdLanguage,
-    title: 'Success',
-    subtitle: 'widget subtitle',
+    icon: MdFormatAlignJustify,
+    title: 'To Be Shipped',
+    subtitle: '5',
   },
   {
     bgColor: 'danger',
-    icon: MdLightbulbOutline,
-    title: 'Danger',
-    subtitle: 'widget subtitle',
+    icon: MdFormatAlignJustify,
+    title: 'To Be Recieved',
+    subtitle: '9',
   },
-  {
-    bgColor: 'warning',
-    icon: MdPlayCircleOutline,
-    title: 'Warning',
-    subtitle: 'widget subtitle',
-  },
-  {
-    bgColor: 'info',
-    icon: MdRadio,
-    title: 'Info',
-    subtitle: 'widget subtitle',
-  },
-  {
-    bgColor: 'light',
-    icon: MdSnooze,
-    title: 'Light',
-    subtitle: 'widget subtitle',
-    inverse: false,
-  },
-  {
-    bgColor: 'dark',
-    icon: MdMailOutline,
-    title: 'Dark',
-    subtitle: 'widget subtitle',
-  },
+
 ];
 
+export const iconWidgetsData4 = [
+  {
+    bgColor: 'primary',
+    icon: MdFormatAlignJustify,
+    title: 'Manufactured',
+    subtitle: '26',
+  },
+  {
+    bgColor: 'success',
+
+    icon: MdFormatAlignJustify,
+    title: 'OnGoing',
+    subtitle: '12',
+  },
+  {
+    bgColor: 'secondary',
+
+    icon: MdFormatAlignJustify,
+    title: 'Pending',
+    subtitle: '5',
+  },
+
+];
+
+export const iconWidgetsData5 = [
+  {
+    bgColor: 'primary',
+    icon: MdSettings,
+    title: 'Manufactured Amount',
+    subtitle: '6675 Items',
+  },
+  {
+    bgColor: 'primary',
+    icon: MdSettings,
+    title: 'Rework Quantity',
+    subtitle: '665 Items',
+  },
+  {
+    bgColor: 'primary',
+    icon: MdSettings,
+    title: 'Manufacturing Cost',
+    subtitle: '8,873,778.00 ETB',
+  },
+  {
+    bgColor: 'primary',
+    icon: MdSettings,
+    title: 'Labor Cost',
+    subtitle: '668,876.00 ETB',
+  },
+
+];
+
+export const iconWidgetsData3 = [
+  {
+    bgColor: 'success',
+
+    icon: MdStarBorder,
+    title: 'NaZo Plastics PLC',
+    subtitle: '#1',
+  },
+  {
+    bgColor: 'primary',
+
+    icon: MdStarBorder,
+    title: 'East AFrican Trading House',
+    subtitle: '#2',
+  },
+  {
+    bgColor: 'secondary',
+
+    icon: MdStarBorder,
+    title: 'Mesfin Auto Maintenance',
+    subtitle: '#3',
+  },
+
+];
+
+
+export const iconWidgetsData1 = [
+  {
+    bgColor: 'primary',
+    icon: MdDirectionsCar,
+    title: 'Active Transport Vehicles',
+    subtitle: '67',
+  },
+  {
+    bgColor: 'success',
+    icon: MdDirectionsCar,
+    title: 'Active Rides',
+    subtitle: '12',
+  },
+  {
+    bgColor: 'secondary',
+    icon: MdDirectionsCar,
+    title: 'Vehicles That Need Repair',
+    subtitle: '5',
+  },
+  {
+    bgColor: 'danger',
+    icon: MdDirectionsCar,
+    title: 'Deliveries in Progress',
+    subtitle: '9',
+  },
+
+];
 export const numberWidgetsData = [
   { color: 'primary' },
   { color: 'secondary' },

@@ -9,7 +9,7 @@ import withBadge from '../hocs/withBadge';
 
 const AvatarWithBadge = withBadge({
   position: 'bottom-right',
-  color: 'success',
+  color: 'primary',
 })(Avatar);
 
 const UserProgressTable = ({ headers, usersData, ...restProps }) => {

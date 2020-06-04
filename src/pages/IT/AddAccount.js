@@ -1,12 +1,13 @@
-import logo200Image from '../../assets/img/logo/logo_200.png';
+import logo200Image from '../../assets/img/logo/Sparta.svg';
 import React from 'react';
 import { Button, Form, FormGroup, Input, Label, Container } from 'reactstrap';
 import './styles.scss'
-import actions from '../../store/hr/action'
+import actions from '../../store/it/action'
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import SpinnerLoader from '../../components/loader'
 import routes from '../../config/routes'
+import Error from '../../components/error'
 
 class AddAccount extends React.Component {
     constructor(props) {
@@ -29,25 +30,27 @@ class AddAccount extends React.Component {
     handleSubmit = async event => {
         event.preventDefault()
         const { username, password, is_admin, account } = this.state
-        if (username.length <= 0) this.setState({ errorUsername: true })
-        if (password.length <= 0) this.setState({ errorPassword: true })
-        if (!this.state.errorUsername && !this.state.errorPassword) {
-            var user = {}
-            user['username'] = username
-            user['password'] = password
-            user['email'] = account.email
-            user['employe'] = account.employeId
-            user['department'] = account.department.departmentId
-            user['role'] = account.roles.roleId
-            user['claim'] = account.level.levelId
-            user['is_admin'] = is_admin
-            await this.props.addAccount(user)
-            this.setState({ redirect: true })
-        }
+
+        var user = {}
+        user['username'] = username
+        user['password'] = password
+        user['email'] = account.email
+        user['employe'] = account.employeId
+        user['department'] = account.department.departmentId
+        user['role'] = account.roles.roleId
+        user['claim'] = account.level.levelId
+        user['is_admin'] = is_admin
+
+        this.props.addAccount(user)
+
     }
 
+
     render() {
-        if (this.state.redirect) return <Redirect to={routes.itEmployeePage} />
+        if (this.props.post_user_success) {
+            return <Redirect to={routes.itEmployeePage} />
+        }
+
         return (
             <Container className="container">
                 <Form onSubmit={this.handleSubmit} className="form" noValidate formNoValidate>
@@ -62,24 +65,26 @@ class AddAccount extends React.Component {
                     <FormGroup>
                         <Label for='username'>Username</Label>
                         <Input type='text' id="username" required name='username' onChange={this.handleChange} />
-                        {this.state.errorUsername ? <Label style={{ color: "red" }}>Username is required</Label> : ""}
+                        <Error error={this.props.errors.username ? this.props.errors.username : null} />
+                        <Error error={this.props.errors.email ? this.props.errors.email : null} />
                     </FormGroup>
                     <FormGroup>
                         <Label for='password'>Password</Label>
                         <Input type='password' name="password" required onChange={this.handleChange} />
-                        {this.state.errorPassword ? <Label style={{ color: "red" }}>Password is required</Label> : ""}
+                        <Error error={this.props.errors.password ? this.props.errors.password : null} />
                     </FormGroup>
                     <FormGroup className="checkbox">
                         <Label for="is_admin">Is Admin?</Label>
                         <Input type="checkbox" name="is_admin" onClick={(e) => this.handleChange({ target: { name: 'is_admin', value: e.target.checked } })} />
                     </FormGroup>
+
                     <hr />
                     {this.props.loading ? (
-                        <Button size="lg" className="bg-gradient-theme-left border-0" block>
+                        <Button size="lg" color='primary' block>
                             <SpinnerLoader />
                         </Button>
                     ) : (
-                            <Button size="lg" className="bg-gradient-theme-left border-0" block onClick={this.handleSubmit}>
+                            <Button size="lg" color='primary' block onClick={this.handleSubmit}>
                                 Register Account
                             </Button>
                         )
@@ -92,7 +97,12 @@ class AddAccount extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        loading: state.hrReducer.loading
+        errors: state.itReducer.errors,
+        users: state.itReducer.users,
+        post_user_loading: state.itReducer.post_user_loading,
+        post_user_success: state.itReducer.post_user_success,
+
+
     }
 }
 

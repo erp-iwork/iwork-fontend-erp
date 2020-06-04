@@ -1,10 +1,11 @@
-import Swal from "sweetalert2";
-import axios from "axios";
-import API from "../../api/API";
-import { inventoryConstant, errorsConstant } from "../../constant/constants";
-import headers from "./../headers";
-
-
+import Swal from "sweetalert2"
+import axios from "axios"
+import API from "../../api/API"
+import status from '../../constant/status'
+import routes from '../../api/routes'
+import { inventoryConstant, errorsConstant } from "../../constant/constants"
+import headers from "./../headers"
+import { Alert } from '../../App'
 
 // ADD ITEM
 export const addItem = (item) => (dispatch) => {
@@ -45,6 +46,7 @@ export const addItem = (item) => (dispatch) => {
       }
     });
 };
+
 // GET ITEM
 export const getItems = () => (dispatch) => {
   axios
@@ -171,3 +173,193 @@ export const deleteItem = (InventoryItemId) => (dispatch) => {
     }
   });
 };
+
+export const getExistingCategories = () => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_EXISTING_CATEGORIES })
+  return axios.get(API + routes.category, headers)
+    .then(res => {
+      dispatch({
+        type: inventoryConstant.SUCCESS_GET_EXISTING_CATEGORIES,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const getItemsByCategory = (categoryID) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_CATEGORIES })
+  return axios.get(API + routes.itemByCategory + categoryID + "/")
+    .then(res => {
+      dispatch({
+        type: inventoryConstant.SUCCESS_GET_CATEGORIES,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const getInvoicedItems = () => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_PURCHASED_ITEMS })
+  return axios.get(API + routes.purchase +
+    `?search1=${status.received}&search2=${status.invoiced}`
+    , headers)
+    .then(res => dispatch({ type: inventoryConstant.SUCCESS_GET_PURCHASED_ITEMS, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const updateStatus = (purchaseOrderNumber) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_PUT_UPDATE_STATUS })
+  return axios.put(API + routes.updatePurchaseStatus + purchaseOrderNumber + '/', {
+    status: status.received
+  }, headers)
+    .then(res => dispatch({ type: inventoryConstant.SUCCESS_PUT_UPDATE_STATUS }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const getGRV = (purchaseOrderNumber) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_GRV })
+  return axios.get(API + routes.purchase + purchaseOrderNumber + '/')
+    .then(({ data }) => {
+      const items = data.purchase_item_order.map(item => {
+        return {
+          itemID: item.masterData.productId,
+          itemName: item.masterData.productName,
+          quantity: item.purchaseQuantity,
+          price: item.masterData.productPrice
+        }
+      })
+      const payload = {
+        order: data.purchaseOrderNumber,
+        date: data.purchaseOrderDate,
+        GRVID: data.purchaseOrderNumber,
+        GRVStatus: data.status_purchase_order[0]['status'],
+        GRVItems: items
+      }
+      dispatch({ type: inventoryConstant.SUCCESS_GET_GRV, payload })
+    })
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const getRecords = () => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_RECORDS })
+  return axios.get(API + routes.records, headers)
+    .then(res => dispatch({ type: inventoryConstant.SUCCESS_GET_RECORDS, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const getRecordsByType = (type) => (dispatch) => {
+  dispatch({ type: inventoryConstant.REQUEST_GET_RECORDS })
+  return axios.get(API + routes.recordsByType +
+    `?transactionType=${type}`, headers)
+    .then(res => dispatch({ type: inventoryConstant.SUCCESS_GET_RECORDS, payload: res.data }))
+    .catch((err) => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Connection Problem",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    })
+}
+
+export const checkToast = () => {
+  Alert.success("Hello There")
+}

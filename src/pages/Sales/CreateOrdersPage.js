@@ -21,6 +21,7 @@ import Error from '../../components/error'
 import actions from '../../store/sales/action'
 import PageSpinner from '../../components/PageSpinner'
 import Loader from '../../components/loader'
+import { reverse } from '../../useCases'
 
 class CreateOrdersPage extends Component {
     constructor() {
@@ -35,6 +36,8 @@ class CreateOrdersPage extends Component {
             itemQuantity: 0,
             InventoryItem: "",
             shipmentAddress: "",
+            submitted: false,
+            lockPage: false,
             order_items: [{ InventoryItem: "", quantity: 1 }]
         }
         this.handleAddItem = this.handleAddItem.bind(this)
@@ -48,6 +51,10 @@ class CreateOrdersPage extends Component {
     componentDidMount() {
         this.props.getAllCompany()
         this.props.getAllItem()
+        this.props.getAllOrder()
+    }
+
+    updateOrders() {
         this.props.getAllOrder()
     }
 
@@ -77,6 +84,13 @@ class CreateOrdersPage extends Component {
         this.setState({ order_items: neworder_items })
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.success && !this.state.lockPage) {
+            this.setState({ company: "", description: "", shipmentAddress: "", lockPage: true })
+            this.componentDidMount()
+        }
+    }
+
     ItemQuantityChange = (idx) => (evt) => {
         const neworder_items = this.state.order_items.map((item, sidx) => {
             if (idx !== sidx) return item;
@@ -92,27 +106,19 @@ class CreateOrdersPage extends Component {
 
     submit = () => {
         this.props.createOrder(this.state);
-        this.componentDidMount();
-        if (this.props.success) {
-            this.setState({
-                fieldName: "",
-                orderNumber: "",
-                orderName: "",
-                company: "",
-                description: "",
-                discount: "",
-                itemQuantity: 0,
-                InventoryItem: "",
-                shipmentAddress: "",
-            })
-        }
+        this.setState({ submitted: true, lockPage: false })
+        this.updateOrders()
     }
 
     render() {
-        let { order_items: items } = this.state;
-        if (!this.props.customers[0]) return <PageSpinner />
+        let { order_items: items, submitted } = this.state
+        if ((this.props.loading_companies || this.props.loading_orders || this.props.loading_items) && !submitted) return <PageSpinner />
+        const {
+            company, description,
+            shipmentAddress
+        } = this.state
         return (
-            <Page title="Create Sales Order" breadcrumbs={[{ name: 'Create Sales Order', active: true }]}>
+            <Page title="Create Sales Order" breadcrumbs={[{ name: 'Sales', active: true }]}>
                 <Row>
                     <Col md={6} sm={12}>
                         <Card>
@@ -124,7 +130,7 @@ class CreateOrdersPage extends Component {
                                             Customer
                                             </Label>
                                         <Col sm={12}>
-                                            <Input type="select" name="company" onChange={this.handleChange}>
+                                            <Input type="select" name="company" value={company} onChange={this.handleChange}>
                                                 <option aria-label="None" value="">Customer Name</option>
                                                 {this.props.customers.map((comp, idx) => (
                                                     <option value={comp.customerId} key={idx}>
@@ -134,8 +140,8 @@ class CreateOrdersPage extends Component {
                                             </Input>
                                             <Error
                                                 error={
-                                                    this.props.errors.company
-                                                        ? this.props.errors.company
+                                                    this.props.errors.customer
+                                                        ? this.props.errors.customer
                                                         : null
                                                 }
                                             />
@@ -150,6 +156,7 @@ class CreateOrdersPage extends Component {
                                                 name="shipmentAddress"
                                                 placeholder=" Shipment Address"
                                                 onChange={this.handleChange}
+                                                value={shipmentAddress}
                                             />
                                             <Error
                                                 error={
@@ -168,6 +175,7 @@ class CreateOrdersPage extends Component {
                                             <Input placeholder=" Description About the Order" type="textarea"
                                                 name="description"
                                                 onChange={this.handleChange}
+                                                value={description}
                                             />
                                             <Error
                                                 error={
@@ -178,14 +186,13 @@ class CreateOrdersPage extends Component {
                                             />
                                         </Col>
                                     </FormGroup>
-
                                     <CardHeader>Item Information</CardHeader>
                                     {items.map((v, i) => {
                                         return (
                                             <Row className='duplicatedForm' key={i}>
                                                 <Col md={6}>
                                                     <Input onChange={this.ItemNameChange(i)} value={v.InventoryItemId} type="select">
-                                                        <option aria-label="None" value="">Item Name</option>
+                                                        <option aria-label="None" value="" disabled selected></option>
                                                         {this.props.items.map((_item, idx) => (
                                                             <option value={_item.InventoryItemId} key={idx}>
                                                                 {_item.itemName}
@@ -256,11 +263,11 @@ class CreateOrdersPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.orders ? this.props.orders.slice(0)
-                                            .reverse().slice(0, 9).map((order, index) => (
+                                        {this.props.orders ? reverse(this.props.orders)
+                                            .slice(0, 9).map((order, index) => (
                                                 <tr key={index}>
                                                     <th scope="row">{index + 1}</th>
-                                                    <td>{order.company}</td>
+                                                    <td>{order.customer}</td>
                                                     <td>{order.salesPerson}</td>
                                                     <td>{order.status}</td>
                                                 </tr>
@@ -273,12 +280,15 @@ class CreateOrdersPage extends Component {
                 </Row>
                 <ViewAllOrdersPage lists={this.props.orders} />
             </Page>
-        );
+        )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
+        loading_orders: state.salesReducer.loading_orders,
+        loading_companies: state.salesReducer.loading_companies,
+        loading_items: state.salesReducer.loading_items,
         loading: state.salesReducer.loading,
         errors: state.salesReducer.errors,
         items: state.salesReducer.items,
