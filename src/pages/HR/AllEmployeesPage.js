@@ -118,7 +118,7 @@ class AllEmployees extends Component {
                                                     <td>
                                                         <Link to={{
                                                             pathname: routes.employeeProfile,
-                                                            state: employeeInfos.employeId
+                                                            state: employeeInfos
                                                         }}>
                                                             <Button size='sm' color='primary'>
                                                                 See Profile
