@@ -3,7 +3,7 @@ import axios from "axios"
 import API from "../../api/API"
 import status from '../../constant/status'
 import routes from '../../api/routes'
-import { inventoryConstant, errorsConstant } from "../../constant/constants"
+import { inventoryConstant, errorsConstant, companyConstant } from "../../constant/constants"
 import headers from "./../headers"
 import { Alert } from '../../App'
 
@@ -224,6 +224,26 @@ export const getItemsByCategory = (categoryID) => (dispatch) => {
           showConfirmButton: false,
           timer: 1000
         });
+      }
+    })
+}
+export const addCategory = (catagory) => (dispatch) => {
+  var data = {
+    catagory: catagory
+  }
+  dispatch({ type: companyConstant.REQUEST_POST_CATEGORY })
+  return axios.post(API + routes.category, data, headers)
+    .then(res => {
+      dispatch({ type: companyConstant.SUCCESS_POST_CATEGORY, payload: res.data })
+    })
+    .catch((err) => {
+      try {
+        dispatch({
+          type: companyConstant.FAILED_POST_CATEGORY,
+          payload: err.response.data,
+        });
+      } catch {
+        console.log("error");
       }
     })
 }
