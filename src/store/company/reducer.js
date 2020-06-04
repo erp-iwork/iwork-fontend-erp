@@ -18,8 +18,7 @@ const initialState = {
 export default function companyReducer(state = initialState, action) {
   switch (action.type) {
     case errorsConstant.GET_ERRORS:
-      console.log("state.errors");
-      console.log(action.payload);
+
 
 
       return {
@@ -125,7 +124,10 @@ export default function companyReducer(state = initialState, action) {
       }
 
     case companyConstant.REQUEST_UPDATE_STATUS:
-      return { ...state, updating_status: true }
+      return {
+        ...state,
+        updating_status: true
+      }
     case companyConstant.SUCCESS_UPDATE_STATUS:
       return {
         ...state, updating_status: false,
@@ -134,15 +136,20 @@ export default function companyReducer(state = initialState, action) {
       }
 
     case companyConstant.REQUEST_GET_MANUFACTURED_ORDERS:
-      return { ...state, loading_manufactured_orders: true, errors: [], }
+      return {
+        ...state,
+        loading_manufactured_orders: true,
+        errors: [],
+      }
     case companyConstant.SUCCESS_GET_MANUFACTURED_ORDERS:
       return {
-        ...state, loading_manufactured_orders: false,
+        ...state,
+        loading_manufactured_orders: false,
         orders: action.payload,
         errors: [],
       }
 
-     
+
 
     default:
       return state;

@@ -1,4 +1,4 @@
-import { inventoryConstant, errorsConstant ,companyConstant} from "../../constant/constants";
+import { inventoryConstant, errorsConstant, companyConstant } from "../../constant/constants";
 const initialState = {
   items: [],
   errors: [],
@@ -12,7 +12,9 @@ const initialState = {
   records: [],
   grv: {},
   categories: [],
-  orders: []
+  orders: [],
+
+  add_category_success: false
 };
 
 export default function inventoryReducer(state = initialState, action) {
@@ -111,15 +113,31 @@ export default function inventoryReducer(state = initialState, action) {
 
     case inventoryConstant.REQUEST_GET_RECORDS:
       return { ...state, loading_records: true }
+
     case inventoryConstant.SUCCESS_GET_RECORDS:
       return {
         ...state, loading_records: false,
         records: action.payload
       }
-      case companyConstant.SUCCESS_POST_CATEGORY:
-        return{
-          categories:[...state.categories,action.payload]
-        }
+    case companyConstant.REQUEST_POST_CATEGORY:
+      return {
+        ...state,
+        add_category_success: false,
+      }
+
+    case companyConstant.SUCCESS_POST_CATEGORY:
+      return {
+        ...state,
+        add_category_success: true,
+        categories: [...state.categories, action.payload]
+      }
+
+    case companyConstant.FAILED_POST_CATEGORY:
+      return {
+        ...state,
+        add_category_success: false,
+
+      }
     default:
       return state;
   }
