@@ -14,8 +14,8 @@ import {
 } from 'reactstrap';
 import './Finance.scss'
 import { connect } from 'react-redux'
-import { addMasterData, getMasterData, addCategory } from '../../store/company/action'
-import { getExistingCategories } from '../../store/inventory/action'
+import { addMasterData, getMasterData } from '../../store/company/action'
+import { getExistingCategories, addCategory } from '../../store/inventory/action'
 import PageSpinner from '../../components/PageSpinner'
 import Error from '../../components/error'
 import Loader from '../../components/loader'
@@ -36,6 +36,9 @@ class AddMasterDataPage extends Component {
         this.ItemUnitChange = this.ItemUnitChange.bind(this)
         this.ItemQuantityChange = this.ItemQuantityChange.bind(this)
         this.submit = this.submit.bind(this)
+        this.submitCustomCategory = this.submitCustomCategory.bind(this)
+
+
     }
 
     handleAddItem = () => {
@@ -67,6 +70,12 @@ class AddMasterDataPage extends Component {
     }
 
     handleChange = event => {
+        if (event.target.value === "custom" || event.target.name === "newproductCategory") {
+            this.setState({ customCategory: true })
+        }
+        else {
+            this.setState({ customCategory: false })
+        }
         const { name, value } = event.target
         this.setState({ [name]: value })
     }
@@ -140,13 +149,15 @@ class AddMasterDataPage extends Component {
         this.props.addMasterData(data)
     }
 
-    customCategoryFun = () => {
-        this.setState({ customCategory: true })
-    }
 
-    submitCustomCategory = () => {
-        alert(this.state.newproductCategory)
-        // this.props.addCategory(this.state.newproductCategory)
+
+    submitCustomCategory = async () => {
+        await this.props.addCategory(this.state.newproductCategory)
+        if (this.props.add_category_success) {
+            this.setState({ customCategory: false })
+
+        }
+
     }
 
     render() {
@@ -201,8 +212,8 @@ class AddMasterDataPage extends Component {
                                             {this.props.categories.map((item, index) => (
                                                 <option value={item.catagoryId} key={index}>{item.catagory}</option>
                                             ))}
-                                            <option></option>
-                                            <option onClick={() => this.customCategoryFun()}>Custom ...</option>
+
+                                            <option onClick={this.customCategoryFun} value="custom" >Custom ...</option>
 
                                         </Input>
                                         {this.state.customCategory ? (
@@ -211,13 +222,13 @@ class AddMasterDataPage extends Component {
                                                     <Input type='text' name="newproductCategory" placeholder='type your custom Category' onChange={this.handleChange} />
                                                 </Col>
                                                 <Col md={2}>
-                                                    <Button size='sm' color='primary' onClick={() => this.submitCustomCategory()}>
+
+                                                    <Button size='sm' color='primary' onClick={this.submitCustomCategory}>
                                                         Add Category
                                                     </Button>
                                                 </Col>
                                             </Row>
                                         )
-
                                             : null}
 
                                         <Error error={this.props.errors.productCategory ? this.props.errors.productCategory : null} />
@@ -369,7 +380,8 @@ const mapStateToProps = (state) => ({
     loading: state.companyReducer.loading,
     masterData: state.companyReducer.masterData,
     success: state.companyReducer.success,
-    errors: state.companyReducer.errors
+    errors: state.companyReducer.errors,
+    add_category_success: state.inventoryReducer.add_category_success
 })
 
 export default connect(mapStateToProps, { addMasterData, getMasterData, getExistingCategories, addCategory })(AddMasterDataPage)
