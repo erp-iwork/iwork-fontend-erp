@@ -28,7 +28,7 @@ class AddCustomerPage extends Component {
             generalManger: "",
             contactPerson: "",
             workingField: "",
-            paymentOption: "VAT 15% Sales",
+            paymentOption: "VAT 15% sales",
             email: "",
             tinNumber: "",
             companys: [],
@@ -51,7 +51,7 @@ class AddCustomerPage extends Component {
               generalManger: "",
               contactPerson: "",
               workingField: "",
-              paymentOption: "VAT 15% Sales",
+              paymentOption: "VAT 15% sales",
               email: "",
               tinNumber: "",
               lockPage: true

@@ -268,8 +268,7 @@ class AddEmployee extends Component {
                                                         error={
                                                             this.props.errors.department
                                                                 ? this.props.errors.department
-                                                                : null
-                                                        }
+                                                                : null}
                                                     />
                                                 </Col>
                                             </FormGroup>

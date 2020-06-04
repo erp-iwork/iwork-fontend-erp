@@ -28,7 +28,7 @@ class AddSupplierPage extends Component {
             generalManger: "",
             contactPerson: "",
             workingField: "",
-            paymentOption: "VAT 15% Purchase",
+            paymentOption: "VAT 15% purchase",
             email: "",
             tinNumber: "",
             companys: [],
@@ -53,7 +53,7 @@ class AddSupplierPage extends Component {
                 generalManger: "",
                 contactPerson: "",
                 workingField: "",
-                paymentOption: "VAT 15% Purchase",
+                paymentOption: "VAT 15% purchase",
                 email: "",
                 tinNumber: "",
                 show: false,
@@ -225,7 +225,7 @@ class AddSupplierPage extends Component {
                                 </Row>
                                 <FormGroup >
                                     <Col align='center'>
-                                        <Button color='primary' onClick={this.submit}>
+                                        <Button color='primary' type='submit' onClick={this.submit}>
                                             {this.props.loading_add_supplier ? <Loader /> : "Add Supplier"}
                                         </Button>
                                     </Col>

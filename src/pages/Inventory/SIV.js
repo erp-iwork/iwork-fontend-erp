@@ -83,12 +83,21 @@ const classes = {
   },
 };
 class SIV extends React.Component {
+  constructor(){
+    super();
+    this.state={
+      total:''
+    }
+  }
   componentDidMount() {
-    this.props.getSiv(this.props.location.state.order)
+    this.props.getSiv(this.props.location.state.order);
+
   }
   submit(e) {
     e.preventDefault();
   }
+
+
 
   render() {
     if (this.props.loading) return <PageSpinner />
@@ -157,7 +166,7 @@ class SIV extends React.Component {
                       <th scope="row">{index + 1}</th>
                       <td>{item.itemName}</td>
                       <td>{item.quantity}</td>
-                      <td>UoM</td>
+                      <td>{item.unitOfMeasurement}</td>
                       <td>{item.cost}</td>
                       <td>{item.amount}</td>
 
@@ -168,10 +177,6 @@ class SIV extends React.Component {
             </CardBody>
           </Col>
 
-          <Typography>
-            <b>Total Cost</b> {this.props.sivs.cost}
-          </Typography>
-
           <div
             style={{
               paddingLeft: 20,
@@ -180,7 +185,7 @@ class SIV extends React.Component {
             <Typography style={{
               paddingLeft: 500
             }}>
-              {/* <b>Total Price :</b> {item.itemName} */}
+              <b>Total  Price :</b> {this.props.sivs.totalCost}
             </Typography>
             <div
               style={{
