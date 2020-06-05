@@ -245,19 +245,13 @@ export const getSingleOrder = (orderID) => (dispatch) => {
     })
 }
 
-export const updateStatus = (orderNumber, status, message = 'Delivered to Inventory') => (dispatch) => {
+export const updateStatus = (orderNumber, status, message = '') => (dispatch) => {
   Axios
     .put(API + `${routes.updatePurchaseStatus}${orderNumber}/`, status, headers)
     .then((res) => {
       dispatch({
         type: PUT.SUCCESS_POST_UPDATE_STATUS,
         payload: { order: orderNumber, status: res.data.status },
-      });
-      Swal.fire({
-        title: message,
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1000
       });
     })
     .catch((err) => {

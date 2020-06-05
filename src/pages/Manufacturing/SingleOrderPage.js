@@ -214,7 +214,7 @@ class SingleOrderPage extends Component {
                         </Col>
                     </Row>
                     {order.status_manufacture_order[0].status === status.quantityCheck ?
-                        <Button type='submit' size='sm' onClick={this.updateBomQuantity} disabled={
+                        <Button color='primary' size='sm' onClick={this.updateBomQuantity} disabled={
                             order.status_manufacture_order[0].status === status.confirmed}>
                             Confirm BOM
                     </Button> : null}
