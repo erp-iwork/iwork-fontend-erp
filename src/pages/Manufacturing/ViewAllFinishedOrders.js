@@ -55,7 +55,7 @@ class ViewAllFinishedOrdersPage extends Component {
         }
     }
 
-    
+
 
     handleQualityCheck(order, status) {
         this.props.updateStatus(order, status)

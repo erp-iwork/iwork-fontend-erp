@@ -1,30 +1,12 @@
 import React from 'react';
 import {
-  // MdAccountCircle,
-  // MdArrowDropDownCircle,
-  // MdBorderAll,
-  // MdBrush,
-  // MdChromeReaderMode,
-  // MdDashboard,
   MdExtension,
-  // MdGroupWork,
-  // MdInsertChart,
   MdKeyboardArrowDown,
-  // MdNotificationsActive,
-  // MdPages,
-  // MdRadioButtonChecked,
-  // MdSend,
-  // MdStar,
-  // MdTextFields,
-  // MdViewCarousel,
-  // MdViewDay,
-  // MdViewList,
-  // MdWeb,
+
   MdWidgets,
 } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 import {
-  // UncontrolledTooltip,
   Collapse,
   NavItem,
   NavLink as BSNavLink,
@@ -32,6 +14,10 @@ import {
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
 import './Styles.scss'
+
+import { connect } from 'react-redux'
+
+import sideBarOpenController from '../../../store/sidebar/action'
 
 const bem = bn.create('sidebar');
 class Sales extends React.Component {
@@ -52,6 +38,9 @@ class Sales extends React.Component {
   };
 
   handleClick = name => () => {
+
+    this.props.sideBarOpenController("SALES")
+
     this.setState(prevState => {
       const isOpen = prevState[`isOpen${name}`];
 
@@ -82,7 +71,7 @@ class Sales extends React.Component {
               className={bem.e('nav-item-icon')}
               style={{
                 padding: 0,
-                transform: this.state.isOpenSALES
+                transform: this.props.sidebar
                   ? 'rotate(0deg)'
                   : 'rotate(-90deg)',
                 transitionDuration: '0.3s',
@@ -92,7 +81,7 @@ class Sales extends React.Component {
           </BSNavLink>
         </NavItem>
 
-        <Collapse isOpen={this.state.isOpenSALES}>
+        <Collapse isOpen={this.props.sidebar}>
           <div className='contents'>
 
 
@@ -118,4 +107,11 @@ class Sales extends React.Component {
   }
 }
 
-export default Sales
+
+const mapStateToProps = (state) => {
+  return {
+    sidebar: state.sidebarControllerReducer.isOpenSALES,
+  }
+}
+
+export default connect(mapStateToProps, { sideBarOpenController })(Sales)

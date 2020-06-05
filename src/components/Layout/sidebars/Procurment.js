@@ -34,6 +34,10 @@ import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
 import './Styles.scss'
 
+import { connect } from 'react-redux'
+
+import sideBarOpenController from '../../../store/sidebar/action'
+
 const bem = bn.create('sidebar');
 class Procurment extends React.Component {
     constructor(props) {
@@ -56,6 +60,8 @@ class Procurment extends React.Component {
     };
 
     handleClick = name => () => {
+    this.props.sideBarOpenController("PROCURMENT")
+
         this.setState(prevState => {
             const isOpen = prevState[`isOpen${name}`];
 
@@ -86,7 +92,7 @@ class Procurment extends React.Component {
                   className={bem.e('nav-item-icon')}
                   style={{
                     padding: 0,
-                    transform: this.state.isOpenPROCURMENT
+                    transform: this.props.sidebar
                       ? 'rotate(0deg)'
                       : 'rotate(-90deg)',
                     transitionDuration: '0.3s',
@@ -96,7 +102,7 @@ class Procurment extends React.Component {
               </BSNavLink>
             </NavItem>
 
-            <Collapse isOpen={this.state.isOpenPROCURMENT}>
+            <Collapse isOpen={this.props.sidebar}>
           <div className='contents'>
 
 
@@ -122,4 +128,11 @@ class Procurment extends React.Component {
     }
 }
 
-export default Procurment
+
+const mapStateToProps = (state) => {
+  return {
+    sidebar: state.sidebarControllerReducer.isOpenPROCURMENT,
+  }
+}
+
+export default connect(mapStateToProps, { sideBarOpenController })(Procurment)
