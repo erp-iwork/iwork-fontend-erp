@@ -53,6 +53,8 @@ function addNewEmployee(data) {
             title: "Error",
             text: "Connection Problem",
             icon: "error",
+            position: 'top-right',
+
             showConfirmButton: false,
             timer: 1000,
           });
@@ -90,6 +92,8 @@ function getEmploye() {
           Swal.fire({
             title: "Error",
             text: "Connection Problem",
+            position: 'top-right',
+
             icon: "error",
             showConfirmButton: false,
             timer: 1000,
@@ -129,6 +133,8 @@ const deleteEmploye = (employeId) => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
+
           showConfirmButton: false,
           timer: 1000,
         });
@@ -166,6 +172,8 @@ function getEmployeDetail(employeId) {
             title: "Error",
             text: "Connection Problem",
             icon: "error",
+            position: 'top-right',
+
             showConfirmButton: false,
             timer: 1000,
           });
@@ -204,6 +212,8 @@ function getDepartment() {
             title: "Error",
             text: "Connection Problem",
             icon: "error",
+            position: 'top-right',
+
             showConfirmButton: false,
             timer: 1000,
           });

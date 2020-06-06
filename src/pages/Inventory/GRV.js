@@ -90,7 +90,7 @@ class GRV extends React.Component {
 
   calculatePrice(items) {
     var sum = 0
-    items.forEach(item => sum += item.cost)
+    items.forEach(item => sum += item.price)
     return sum
   }
 
@@ -149,7 +149,7 @@ class GRV extends React.Component {
                     <th>Batch Number</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
-                    <th>Unit</th>
+                    <th>UoM</th>
                     <th>Unit Cost</th>
                   </tr>
                 </thead>
@@ -159,8 +159,8 @@ class GRV extends React.Component {
                       <th scope="row">{index + 1}</th>
                       <td>{item.itemID}</td>
                       <td>{item.itemName}</td>
-                      <td>Unit Goes Here</td>
                       <td>{item.quantity}</td>
+                      <td>{item.unitOfMeasurement}</td>
                       <td>{item.price}</td>
                     </tr>
                   ))}

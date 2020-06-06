@@ -53,6 +53,7 @@ function login(username, password) {
             title: "Error",
             text: "Connection Problem",
             icon: "error",
+            position: 'top-right',
             showConfirmButton: false,
             timer: 1000,
           });
@@ -70,6 +71,7 @@ function logout() {
     Swal.fire({
       title: "Logging Out?",
       icon: "warning",
+      position: 'top-right',
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",

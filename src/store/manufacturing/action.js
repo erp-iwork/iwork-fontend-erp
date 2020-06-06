@@ -30,6 +30,7 @@ export const getMasterdata = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
@@ -55,6 +56,7 @@ export const addManufacturingOrder = (data) => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
           icon: "error",
           showConfirmButton: false,
           timer: 1000
@@ -79,6 +81,7 @@ export const getOrders = () => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
           icon: "error",
           showConfirmButton: false,
           timer: 1000
@@ -103,6 +106,7 @@ export const getManufacturedOrders = (status1, status2 = statusTypes.finished) =
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
           icon: "error",
           showConfirmButton: false,
           timer: 1000
@@ -132,6 +136,7 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
           icon: "error",
           showConfirmButton: false,
           timer: 1000
@@ -154,6 +159,7 @@ export const getSingleManufacturedOrder = (orderNumber) => (dispatch) => {
         console.log(err)
         Swal.fire({
           title: "Error",
+          position: 'top-right',
           text: "Connection Problem",
           icon: "error",
           showConfirmButton: false,
@@ -180,6 +186,7 @@ export const invoiceProduct = (orderNumber, status) => (dispatch) => {
       } else {
         Swal.fire({
           title: "Error",
+          position: 'top-right',
           text: "Connection Problem",
           icon: "error",
           showConfirmButton: false,
@@ -198,6 +205,7 @@ export const updateQuantity = (orderNumber, data) => (dispatch) => {
         .then((res) => {
           Swal.fire({
             title: "Quantity Updated",
+            position: 'top-right',
             icon: "success",
             showConfirmButton: false,
             timer: 1000
@@ -216,6 +224,7 @@ export const updateQuantity = (orderNumber, data) => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
           icon: "error",
           showConfirmButton: false,
           timer: 1000

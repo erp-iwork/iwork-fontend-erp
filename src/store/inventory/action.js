@@ -23,6 +23,8 @@ export const addItem = (item) => (dispatch) => {
     }).then((res) => {
       Swal.fire({
         title: "Item Created",
+        position: 'top-right',
+
         icon: "success",
         showConfirmButton: false,
         timer: 1000
@@ -42,6 +44,8 @@ export const addItem = (item) => (dispatch) => {
         Swal.fire({
           title: "Error", text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
+
         });
       }
     });
@@ -67,6 +71,8 @@ export const getItems = () => (dispatch) => {
         Swal.fire({
           title: "Error", text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
+
           showConfirmButton: false,
           timer: 1000
         });
@@ -92,6 +98,8 @@ export const updateItemQuantity = (itemId, quantity) => (dispatch) => {
       Swal.fire({
         title: "Item Created",
         icon: "success",
+        position: 'top-right',
+
         showConfirmButton: false,
         timer: 1000
       });
@@ -111,6 +119,8 @@ export const updateItemQuantity = (itemId, quantity) => (dispatch) => {
             title: "Error",
             text: "Please Select an item to be updated.",
             icon: "error",
+            position: 'top-right',
+
             showConfirmButton: false,
             timer: 1000
           });
@@ -120,6 +130,8 @@ export const updateItemQuantity = (itemId, quantity) => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
+
           icon: "error",
           showConfirmButton: false,
           timer: 1000
@@ -133,6 +145,8 @@ export const deleteItem = (InventoryItemId) => (dispatch) => {
     title: "Are you sure?",
     text: "You can not revert this Action!",
     icon: "warning",
+    position: 'top-right',
+
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
@@ -145,6 +159,8 @@ export const deleteItem = (InventoryItemId) => (dispatch) => {
         .then((res) => {
           Swal.fire({
             title: "Success",
+            position: 'top-right',
+
             icon: "success",
             showConfirmButton: false,
             timer: 1000
@@ -163,6 +179,8 @@ export const deleteItem = (InventoryItemId) => (dispatch) => {
           } else {
             Swal.fire({
               title: "Error",
+            position: 'top-right',
+
               text: "Connection Problem",
               icon: "error",
               showConfirmButton: false,
@@ -194,6 +212,8 @@ export const getExistingCategories = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
+
           showConfirmButton: false,
           timer: 1000
         });
@@ -220,6 +240,8 @@ export const getItemsByCategory = (categoryID) => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
+
           icon: "error",
           showConfirmButton: false,
           timer: 1000
@@ -264,6 +286,8 @@ export const getInvoicedItems = () => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
+
           icon: "error",
           showConfirmButton: false,
           timer: 1000
@@ -288,6 +312,8 @@ export const updateStatus = (purchaseOrderNumber) => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
+
           icon: "error",
           showConfirmButton: false,
           timer: 1000
@@ -305,6 +331,7 @@ export const getGRV = (purchaseOrderNumber) => (dispatch) => {
           itemID: item.masterData.productId,
           itemName: item.masterData.productName,
           quantity: item.purchaseQuantity,
+          unitOfMeasurement: item.masterData.unitOfMeasurement,
           price: item.masterData.productPrice
         }
       })
@@ -328,6 +355,8 @@ export const getGRV = (purchaseOrderNumber) => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
+
           showConfirmButton: false,
           timer: 1000
         });
@@ -350,6 +379,8 @@ export const getRecords = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
+
           showConfirmButton: false,
           timer: 1000
         });
@@ -372,6 +403,8 @@ export const getRecordsByType = (type) => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
+
           icon: "error",
           showConfirmButton: false,
           timer: 1000

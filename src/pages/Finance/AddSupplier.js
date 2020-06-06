@@ -94,7 +94,7 @@ class AddSupplierPage extends Component {
         } = this.state
         return (
             <Page title="Add Supplier" breadcrumbs={[{ name: 'Finance', active: true }]}>
-                <Col lg={12} md={12} className='padding'>
+                <Col md={12} className='padding'>
                     <Card>
                         <CardHeader>ADD A NEW SUPPLIER TO WORK WITH</CardHeader>
                         <CardBody>
@@ -191,7 +191,7 @@ class AddSupplierPage extends Component {
                                             </Col>
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label sm={12} for="exampleSelect">Payment Option</Label>
+                                            <Label sm={12} for="exampleSelect">Tax</Label>
                                             <Col>
                                                 <Input value={this.state.paymentOption} disabled />
                                                 <Error

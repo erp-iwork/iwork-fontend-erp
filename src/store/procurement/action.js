@@ -8,6 +8,7 @@ import API from '../../api/API'
 import routes from '../../api/routes'
 import headers from '../headers'
 import status from '../../constant/status'
+// import alertingNotifications from '../alertingNotifications'
 
 const { GET, POST, PUT } = purchaseConstants
 
@@ -27,6 +28,7 @@ export const getOrders = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
@@ -51,6 +53,7 @@ export const getCustomOrders = (status1, status2) => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
@@ -75,6 +78,7 @@ export const getCreatedOrders = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
@@ -100,6 +104,7 @@ export const getDeliveredOrders = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
@@ -124,6 +129,7 @@ export const getPurchasedOrders = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
@@ -151,6 +157,7 @@ export const getSuppliers = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
@@ -178,6 +185,7 @@ export const getMasterdata = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
@@ -193,9 +201,11 @@ export const addPurchaseOrder = (order) => (dispatch) => {
         type: POST.SUCCESS_POST_PURCHASE,
         payload: res.data
       })
+      // alertingNotifications("success", "Order Created Successfully", "");
       Swal.fire({
         title: "Added Order",
         icon: "success",
+        position: 'top-right',
         showConfirmButton: false,
         timer: 1000
       })
@@ -211,6 +221,7 @@ export const addPurchaseOrder = (order) => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
@@ -238,6 +249,7 @@ export const getSingleOrder = (orderID) => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
@@ -266,6 +278,7 @@ export const updateStatus = (orderNumber, status, message = '') => (dispatch) =>
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         });
@@ -284,6 +297,7 @@ export const invoiceOrder = (purchaseOrderNumber, data) => (dispatch) => {
       Swal.fire({
         title: "Invoice Success",
         icon: "success",
+        position: 'top-right',
         showConfirmButton: false,
         timer: 1000
       })
@@ -300,6 +314,7 @@ export const invoiceOrder = (purchaseOrderNumber, data) => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         });

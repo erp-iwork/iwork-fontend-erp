@@ -36,6 +36,8 @@ function deleteAccount(email) {
           Swal.fire({
             title: "Error",
             text: "Connection Problem",
+            position: 'top-right',
+
             icon: "error",
             showConfirmButton: false,
             timer: 1000,
@@ -84,6 +86,8 @@ function addAccount(employe) {
           Swal.fire({
             title: "Error",
             text: "Connection Problem",
+            position: 'top-right',
+
             icon: "error",
             showConfirmButton: false,
             timer: 1000,
@@ -123,6 +127,7 @@ function getUsers() {
             title: "Error",
             text: "Connection Problem",
             icon: "error",
+            position: 'top-right',
             showConfirmButton: false,
             timer: 1000,
           });
