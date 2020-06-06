@@ -30,15 +30,19 @@ class CreateOrderManufacturingPage extends Component {
             startDate: '',
             endDate: '',
             customCategory: '',
+            showalert:false,
 
         }
         this.handleChange = this.handleChange.bind(this)
         this.setProducts = this.setProducts.bind(this)
     }
     handleChange = event => {
+   
         const { name, value } = event.target
         if (name === "productMaterial") {
+          
             this.setState({
+                showalert:!this.state.showalert,
                 productMaterial: this.state.canBeManudactured[value]['product_material'] ? this.state.canBeManudactured[value]['product_material'] : null, dropdown: true,
                 productID: this.state.canBeManudactured[value]['productId'] ? this.state.canBeManudactured[value]['productId'] : null
             })
@@ -48,6 +52,8 @@ class CreateOrderManufacturingPage extends Component {
     }
 
     componentDidMount() {
+        console.log('hello');
+        
         this.props.getMasterdata()
     }
 
@@ -222,8 +228,10 @@ class CreateOrderManufacturingPage extends Component {
                 </Col>
 
                 {/* This alert is applicable for only backend problem with error type <error> */}
-
-                {errors.error ? (
+{/* 
+                {errors.error && this.state.showalert? (
+                    console.log("xxxxxxxxxxxxxx"),
+                    
                     <CustomAlert
                         msg={errors.error}
                         type="danger"
@@ -232,13 +240,13 @@ class CreateOrderManufacturingPage extends Component {
 
                 ) : null}
 
-                {this.props.success ? (<CustomAlert
+                {this.props.success && this.state.showalert? (<CustomAlert
                     type="success"
                     msg=" Congratulation!  Your data registered successfully"
                 />
                 )
                     : null
-                }
+                } */}
 
             </Page >
         );
