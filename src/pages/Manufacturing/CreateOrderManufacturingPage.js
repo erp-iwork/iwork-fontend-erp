@@ -236,7 +236,7 @@ class CreateOrderManufacturingPage extends Component {
 
                 ) : null}
 
-                {this.props.success && this.state.showalert ? (<CustomAlert
+                {this.props.success ? (<CustomAlert
                     type="success"
                     msg=" Congratulation!  Your data registered successfully"
                 />
