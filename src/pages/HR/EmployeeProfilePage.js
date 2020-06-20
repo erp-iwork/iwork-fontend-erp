@@ -14,8 +14,6 @@ class EmployeeProfilePage extends Component {
     }
     render() {
         const employeeInfos = this.props.employee
-        console.log(employeeInfos)
-        console.log(employeeInfos)
         if (!employeeInfos.firstName) return <PageSpinner />
         return (
             <Page

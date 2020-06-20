@@ -12,7 +12,6 @@ export const termsOfEmployment = [
     'Permanent', 'Contract', 'Hourly'
 ]
 
-
 export const cities = {
     [countries[0]]: {
         [regions[countries[0]][0]]: [ "Addis Ababa", ],

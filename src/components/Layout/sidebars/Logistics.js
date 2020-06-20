@@ -41,7 +41,7 @@ class Logistics extends React.Component {
 
     handleClick = name => () => {
 
-    this.props.sideBarOpenController("LOGISTICS")
+        this.props.sideBarOpenController("LOGISTICS")
 
         this.setState(prevState => {
             const isOpen = prevState[`isOpen${name}`];
@@ -110,8 +110,8 @@ class Logistics extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-      sidebar: state.sidebarControllerReducer.isOpenLOGISTICS,
+        sidebar: state.sidebarControllerReducer.isOpenLOGISTICS,
     }
-  }
-  
-  export default connect(mapStateToProps, { sideBarOpenController })(Logistics)
+}
+
+export default connect(mapStateToProps, { sideBarOpenController })(Logistics)

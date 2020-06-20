@@ -106,10 +106,10 @@ class App extends React.Component {
               )}
             />
             <MainLayout breakpoint={this.props.breakpoint}>
-                <ToastContainer
-                    ref={ref => container = ref}
-                    className="toast-top-right"
-                />
+              <ToastContainer
+                ref={ref => container = ref}
+                className="toast-top-right"
+              />
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" component={DashboardPage} />
                 <Route exact path="/login-modal" component={AuthModalPage} />
@@ -183,7 +183,7 @@ class App extends React.Component {
                 <Route exact path={routes.CreateOrderManufacturing} component={CreateOrderManufacturingPage} />
                 <Route exact path={routes.ViewAllFinishedOrders} component={ViewAllFinishedOrdersPage} />
 
-                
+
                 {/* <Route exact path={routes.ViewAllFinishedOrders} component={ViewAllFinishedOrdersPage} /> */}
 
                 <Route exact path={routes.ViewAllOrdersManufacturing} component={ViewAllOrdersManufacturingPage} />

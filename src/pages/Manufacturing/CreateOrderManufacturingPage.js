@@ -51,8 +51,6 @@ class CreateOrderManufacturingPage extends Component {
     }
 
     componentDidMount() {
-        console.log('hello');
-
         this.props.getMasterdata()
     }
 
