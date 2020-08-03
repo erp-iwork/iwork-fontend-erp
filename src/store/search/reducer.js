@@ -1,7 +1,10 @@
 import constants from './constants'
 
 const initalState = {
-    value: ""
+    value: "",
+    filter: {
+
+    }
 }
 
 const searchData = (state = initalState, action) => {
@@ -9,6 +12,15 @@ const searchData = (state = initalState, action) => {
         case constants.UPDATE_SEARCH_VALUE: {
             return {
                 ...state, value: action.payload
+            }
+        }
+
+        case constants.UPDATE_FILTER_VALUE: {
+            return {
+                ...state, filter: {
+                    ...state.filter,
+                    [action.payload.key]: action.payload.value
+                }
             }
         }
 

@@ -1,37 +1,50 @@
 import React, { useState } from 'react';
 import { DropdownToggle, DropdownMenu, DropdownItem, ButtonDropdown, Input, FormGroup } from 'reactstrap';
+import { connect } from 'react-redux'
+import { updateFilter } from '../store/search/action'
 
-const FilterOptions = () => {
-    const [dropdownOpen, setOpen] = useState(false);
-
-    const toggle = () => setOpen(!dropdownOpen);
-
+const FilterOptions = ({ type, data, filter, updateFilter }) => {
+    const [dropdownOpen, setOpen] = useState(false)
+    const toggle = () => setOpen(!dropdownOpen)
     const dropStyle = {
-
         justifyContent: 'flex-end',
         alignItems: 'end',
         padding: '20px',
         marginLeft: '30px'
+    }
 
-    };
+    const [checked, setChecked] = useState(() => data.map(_ => false))
 
     return (
         <ButtonDropdown style={dropStyle} isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle caret color="primary"  >
-                Search options
-        </DropdownToggle>
+                {type}
+            </DropdownToggle>
             <DropdownMenu>
                 <FormGroup >
-
-                    <DropdownItem  >  <Input type="checkbox" /> Checkbox1 </DropdownItem>
-                    <DropdownItem >  <Input type="checkbox" /> Checkbox2 </DropdownItem>
-                    <DropdownItem >  <Input type="checkbox" /> Checkbox3 </DropdownItem>
-                    <DropdownItem >  <Input type="checkbox" /> Checkbox4 </DropdownItem>
+                    <DropdownItem onClick={() => updateFilter(type, null)}>
+                        <Input type="checkbox" checked={!filter[type]} />
+                        All {type}s
+                    </DropdownItem>
+                    {data.map((item, index) => (
+                        <DropdownItem key={index} onClick={event => {
+                            if (!checked[index]) updateFilter(type, item)
+                            else updateFilter(type, null)
+                            var updatedCheck = checked.map(item => false)
+                            updatedCheck[index] = !checked[index]
+                            setChecked(updatedCheck)
+                        }}>
+                            <Input type="checkbox" checked={filter[type] === item} /> {item}
+                        </DropdownItem>
+                    ))}
                 </FormGroup>
             </DropdownMenu>
         </ButtonDropdown>
-    );
+    )
+}
 
-};
+const mapStateToProps = state => ({
+    filter: state.searchData.filter
+})
 
-export default FilterOptions;
+export default connect(mapStateToProps, { updateFilter })(FilterOptions)
