@@ -7,6 +7,7 @@ import { deleteCompany, getCompany } from '../../store/company/action'
 import PageSpinner from '../../components/PageSpinner'
 import Swal from "sweetalert2"
 import './Finance.scss'
+import { filter } from '../../useCases'
 
 const Customer = ({ company, index, deleteCompany, toggle }) => {
     return (
@@ -81,6 +82,16 @@ class ViewAllCustomersPage extends Component {
         if (this.props.loading) return <PageSpinner />
         if (this.props.companys.length === 0) return <h2>No Customers have been registered</h2>
         const { customer } = this.state
+        var filtered = []
+        if (this.props.lists) {
+            filtered = filter({
+                name: { value: this.props.searchValue, tag: 'customerName' }
+            }, this.props.lists)
+        } else {
+            filtered = filter({
+                name: { value: this.props.searchValue, tag: 'customerName' }
+            }, this.props.companys)
+        }
         return (
             <Page title="All Customers" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Modal
@@ -138,9 +149,7 @@ class ViewAllCustomersPage extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.props.lists ? this.props.lists.slice(0).reverse().map((item, index) => (
-                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteCustomer} toggle={this.toggle} />
-                                    )) : this.props.companys.slice(0).reverse().map((item, index) => (
+                                    {filtered.slice(0).reverse().map((item, index) => (
                                         <Customer key={index} company={item} index={index} deleteCompany={this.deleteCustomer} toggle={this.toggle} />
                                     ))}
                                 </tbody>
@@ -157,6 +166,7 @@ const mapStateToProps = (state) => ({
     loading: state.companyReducer.loading,
     companys: state.companyReducer.companys,
     errors: state.companyReducer.errors,
+    searchValue: state.searchData.value
 })
 
 export default connect(mapStateToProps, { getCompany, deleteCompany })(ViewAllCustomersPage)

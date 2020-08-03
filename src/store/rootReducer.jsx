@@ -11,6 +11,7 @@ import procurementReducer from "./procurement/reducer";
 import manuFacturingReducer from "./manufacturing/reducer";
 import itReducer from "./it/reducer";
 import sidebarControllerReducer from './sidebar/reducer'
+import searchData from './search/reducer'
 
 export default combineReducers({
   loginReducer,
@@ -24,5 +25,6 @@ export default combineReducers({
   procurementReducer,
   manuFacturingReducer,
   itReducer,
-  sidebarControllerReducer
+  sidebarControllerReducer,
+  searchData
 });

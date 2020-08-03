@@ -22,3 +22,12 @@ export const getCount = (count) => {
     Array(4 - number.length).fill("0").forEach(item => zeros += item)
     return zeros + number
 }
+
+export const filter = (options, data) => {
+    var updatedName = []
+    if (options.name.value !== null || options.name.value !== "") {
+        const exp = new RegExp("^" + options.name.value, "gi")
+        updatedName = data.filter(item => item[options.name.tag].match(exp))
+    } else updatedName = data
+    return updatedName
+}

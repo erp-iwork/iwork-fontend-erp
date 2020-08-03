@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
-import Page from '../../components/Page';
+import React, { Component } from 'react'
+import Page from '../../components/Page'
 import {
     Card, CardBody, Modal, ModalFooter, ModalHeader,
     ModalBody, CardHeader, Col, Table, Button, Row
-} from 'reactstrap';
-import { MdDelete, MdRemoveRedEye } from "react-icons/md";
-
+} from 'reactstrap'
+import { MdDelete, MdRemoveRedEye } from "react-icons/md"
 import { connect } from 'react-redux'
 import { deleteSupplier, getSupplier } from '../../store/company/action'
 import PageSpinner from '../../components/PageSpinner'
 import Swal from "sweetalert2"
 import './Finance.scss'
-
+import { filter } from '../../useCases'
 
 const Customer = ({ company, index, deleteCompany, toggle }) => {
-
     return (
         <tr>
             <th scope="row">{index + 1}</th>
@@ -42,7 +40,7 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
 
 class ViewAllSuppliers extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             companies: [],
             modal: false,
@@ -85,10 +83,19 @@ class ViewAllSuppliers extends Component {
         if (this.props.loading) return <PageSpinner />
         if (this.props.suppliers.length === 0) return <Page title="All Suppliers" breadcrumbs={[{ name: 'Finance', active: true }]}>No Suppliers have been registered></Page>
         const { supplier } = this.state
+
+        var filtered = []
+        if (this.props.lists) {
+            filtered = filter({
+                name: { value: this.props.searchValue, tag: 'suplierName' }
+            }, this.props.lists)
+        } else {
+            filtered = filter({
+                name: { value: this.props.searchValue, tag: 'suplierName' }
+            }, this.props.suppliers)
+        }
         return (
             <Page title="All Suppliers" breadcrumbs={[{ name: 'Finance', active: true }]}>
-
-
                 <Modal
                     isOpen={this.state.modal}
                     backdrop="static"
@@ -144,11 +151,8 @@ class ViewAllSuppliers extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.props.lists ? this.props.lists.slice(0).reverse().map((item, index) => (
+                                    {filtered.slice(0).reverse().map((item, index) => (
                                         <Customer key={index} company={item} index={index} deleteCompany={this.deleteSupplier} toggle={this.toggle} />
-                                    )) : this.props.suppliers.slice(0).reverse().map((item, index) => (
-                                        <Customer key={index} company={item} index={index} deleteCompany={this.deleteSupplier} toggle={this.toggle} />
-
                                     ))}
                                 </tbody>
                             </Table>
@@ -165,6 +169,7 @@ const mapStateToProps = (state) => ({
     loading: state.companyReducer.loading,
     suppliers: state.companyReducer.suppliers,
     errors: state.companyReducer.errors,
+    searchValue: state.searchData.value
 })
 
 export default connect(mapStateToProps, { getSupplier, deleteSupplier })(ViewAllSuppliers)
