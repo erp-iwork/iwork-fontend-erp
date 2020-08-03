@@ -13,12 +13,9 @@ const initialState = {
 
 };
 export default function sidebarControllerReducer(state = initialState, action) {
-    console.log(action.payload);
-
     switch (action.payload) {
         // All employe api pre-request
         case "HR": {
-
             return {
                 ...state,
                 isOpenHR: !state.isOpenHR,

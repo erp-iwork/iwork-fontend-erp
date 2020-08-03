@@ -9,6 +9,7 @@ import routes from '../../config/routes'
 import PageSpinner from '../../components/PageSpinner'
 import ModelCusttom from '../popupNotification/customModal'
 import SuccessModal from '../popupNotification/success'
+import { filter } from '../../useCases'
 
 class AllEmployees extends Component {
     constructor(props) {
@@ -61,20 +62,18 @@ class AllEmployees extends Component {
         this.props.getEmploye()
     }
 
-
-
     render() {
-
         const employeeInfo = this.props.employees;
-
         if (this.props.fetch_employee_loading) return <PageSpinner />
-
         if (this.props.employees === null && this.props.success)
             return (
                 <Page title="All Employees" breadcrumbs={[{ name: 'Human Resource', active: true }]} className="TablePage">
                     <h1>No Employees Yet.</h1>
                 </Page>
             )
+        var filtered = filter({
+            name: { value: this.props.searchValue, tag: 'firstName' }
+        }, employeeInfo)
         return (
             <Page
                 title="All Employees"
@@ -88,7 +87,7 @@ class AllEmployees extends Component {
                             <CardBody>
                                 <Table responsive>
                                     <thead>
-                                        <tr  >
+                                        <tr>
                                             <th>#</th>
                                             <th  >First Name</th>
                                             <th>Email</th>
@@ -102,7 +101,7 @@ class AllEmployees extends Component {
                                     </thead>
                                     <tbody>
                                         {
-                                            employeeInfo ? employeeInfo.map((employeeInfos, index) => (
+                                            filtered ? filtered.map((employeeInfos, index) => (
                                                 <tr align='left' key={index}>
                                                     <th scope="row">{index + 1}</th>
                                                     <td >{employeeInfos.firstName + " " + employeeInfos.lastName}</td>
@@ -150,11 +149,11 @@ const mapStateToProps = (state) => {
         loading: state.hrReducer.loading,
         delete_empoyee_loading: state.hrReducer.delete_empoyee_loading,
         fetch_employee_loading: state.hrReducer.fetch_employee_loading,
-
         delete_empoyee_success: state.hrReducer.delete_empoyee_success,
         users: state.hrReducer.users,
         employees: state.hrReducer.employees,
-        errors: state.hrReducer.errors
+        errors: state.hrReducer.errors,
+        searchValue: state.searchData.value
     }
 }
 

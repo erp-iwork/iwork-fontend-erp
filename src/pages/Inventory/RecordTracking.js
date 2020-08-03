@@ -36,15 +36,14 @@ class RecordTracking extends Component {
                                 <Table responsive>
                                     <thead>
                                         <tr>
-                                            <th>TID</th>
-                                            <th>SKU</th>
+                                            <th>Transaction ID</th>
+                                            <th>Product ID</th>
                                             <th>Product Name</th>
-                                            <th>Quantity</th>
                                             <th>Unit Price</th>
                                             <th>Product Category</th>
                                             <th>PO#</th>
                                             <th>Amount</th>
-                                            
+                                            <th>Quantity</th>
                                             <th>Transaction Date</th>
                                         </tr>
                                     </thead>
@@ -54,12 +53,11 @@ class RecordTracking extends Component {
                                                 <td>{item.transactionId}</td>
                                                 <td>{item.productId}</td>
                                                 <td>{item.productName}</td>
-                                                <td>{item.purchaseQuantity}</td>
                                                 <td>{item.itemCost}</td>
                                                 <td>{item.productCategory}</td>
                                                 <td>{item.orderId}</td>
                                                 <td>{item.amount}</td>
-                                               
+                                                <td>{item.purchaseQuantity}</td>
                                                 <td>{item.transactionDate}</td>
                                             </tr>
                                         )) : null}

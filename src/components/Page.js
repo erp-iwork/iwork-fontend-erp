@@ -6,21 +6,18 @@ import bn from '../utils/bemnames';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import Typography from './Typography';
-import FilterOptions from './filterOptions';
 
 const bem = bn.create('page');
 
 const Page = ({
   title,
-  breadcrumbs,
+  breadcrumbs, 
   tag: Tag,
   className,
   children,
   ...restProps
 }) => {
   const classes = bem.b('px-3', className);
-
-  
 
   return (
     <Tag className={classes} {...restProps}>
@@ -44,14 +41,7 @@ const Page = ({
           </Breadcrumb>
         )}
 
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <FilterOptions />
-          <FilterOptions/>
-          <FilterOptions/>
-        </div>
-
       </div>
-
       <hr></hr>
 
       {children}

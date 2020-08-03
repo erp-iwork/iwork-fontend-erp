@@ -8,7 +8,7 @@ import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { getAllMasterData } from '../../store/company/action'
 import { getExistingCategories } from '../../store/inventory/action'
-import { reverse } from '../../useCases'
+import { reverse, filter } from '../../useCases'
 
 const Data = ({ item, index, toggle, category }) => {
     return (
@@ -17,7 +17,7 @@ const Data = ({ item, index, toggle, category }) => {
                 <th scope="row">{index + 1}</th>
                 <td>{item.productName}</td>
                 <td>{item.productType}</td>
-                <td>{category(item.productCategory)}</td>
+                <td>{item.productCategory}</td>
                 <td>{item.productPrice}</td>
                 <td>{item.unitOfMeasurement}</td>
                 <td>
@@ -56,12 +56,13 @@ class ViewAllMasterData extends Component {
     getCategory = (id) => {
         const found = this.props.categories.find(item => item.catagoryId === id)
         return found.catagory
-    }
+    } 
 
     render() {
         if (this.props.loading || this.props.loading_categories) return <PageSpinner />
         if (this.props.masterData.length === 0) return <h2>No products to show</h2>
         const { data } = this.state
+        
         return (
             <Page
                 title="All Master Data"
@@ -104,7 +105,7 @@ class ViewAllMasterData extends Component {
                                 </tr>
                             </thead>
                             {reverse(this.props.masterData).map((item, index) => (
-                                <Data item={item} key={index} index={index} toggle={this.toggle} category={this.getCategory} />
+                                <Data item={item} key={index} index={index} toggle={this.toggle} />
                             ))}
                         </Table>
                     </CardBody>
@@ -120,7 +121,8 @@ const mapStateToProps = (state) => {
         categories: state.inventoryReducer.categories,
         loading_categories: state.inventoryReducer.loading_categories,
         loading: state.companyReducer.loading,
-        masterData: state.companyReducer.masterData
+        masterData: state.companyReducer.masterData,
+        searchValue: state.searchData.value
     }
 }
 const mapDispatchToProps = { getAllMasterData, getExistingCategories }
