@@ -32,6 +32,9 @@ import {
 import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
 import './Styles.scss'
+import { connect } from 'react-redux'
+
+import sideBarOpenController from '../../../store/sidebar/action'
 
 const bem = bn.create('sidebar');
 class IT extends React.Component {
@@ -41,9 +44,7 @@ class IT extends React.Component {
     }
 
     state = {
-        // isOpenComponents: true,
-        // isOpenContents: true,
-        // isOpenPages: true,
+
         isOpenHR: true,
         isOpenIT: true,
         isOpenSALES: true,
@@ -55,6 +56,8 @@ class IT extends React.Component {
     };
 
     handleClick = name => () => {
+        this.props.sideBarOpenController("IT")
+
         this.setState(prevState => {
             const isOpen = prevState[`isOpen${name}`];
 
@@ -84,7 +87,7 @@ class IT extends React.Component {
                             className={bem.e('nav-item-icon')}
                             style={{
                                 padding: 0,
-                                transform: this.state.isOpenIT
+                                transform: this.props.sidebar
                                     ? 'rotate(0deg)'
                                     : 'rotate(-90deg)',
                                 transitionDuration: '0.3s',
@@ -94,23 +97,23 @@ class IT extends React.Component {
                     </BSNavLink>
                 </NavItem>
 
-                <Collapse isOpen={this.state.isOpenIT}>
-            <div className='contents'>
+                <Collapse isOpen={this.props.sidebar}>
+                    <div className='contents'>
 
-                    {IT.map(({ to, name, exact, Icon }, index) => (
-                        <NavItem key={index} className={bem.e('nav-item3')}>
-                            <BSNavLink
-                                id={`navItem-${name}-${index}`}
-                                tag={NavLink}
-                                to={to}
-                                activeClassName="active"
-                                exact={exact}
-                            >
-                                <Icon className={bem.e('nav-item-icon')} />
-                                <span className="">{name}</span>
-                            </BSNavLink>
-                        </NavItem>
-                    ))}
+                        {IT.map(({ to, name, exact, Icon }, index) => (
+                            <NavItem key={index} className={bem.e('nav-item3')}>
+                                <BSNavLink
+                                    id={`navItem-${name}-${index}`}
+                                    tag={NavLink}
+                                    to={to}
+                                    activeClassName="active"
+                                    exact={exact}
+                                >
+                                    <Icon className={bem.e('nav-item-icon')} />
+                                    <span className="">{name}</span>
+                                </BSNavLink>
+                            </NavItem>
+                        ))}
                     </div>
                 </Collapse>
             </React.Fragment>
@@ -118,4 +121,11 @@ class IT extends React.Component {
     }
 }
 
-export default IT
+
+const mapStateToProps = (state) => {
+    return {
+        sidebar: state.sidebarControllerReducer.isOpenIT,
+    }
+}
+
+export default connect(mapStateToProps, { sideBarOpenController })(IT)

@@ -47,16 +47,16 @@ class AddCustomerPage extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (this.props.success && !this.state.lockPage) {
             this.setState({
-              companyName: "",
-              generalManger: "",
-              contactPerson: "",
-              workingField: "",
-              paymentOption: "VAT 15% sales",
-              email: "",
-              tinNumber: "",
-              lockPage: true
+                companyName: "",
+                generalManger: "",
+                contactPerson: "",
+                workingField: "",
+                paymentOption: "VAT 15% sales",
+                email: "",
+                tinNumber: "",
+                lockPage: true
             })
-          }
+        }
     }
 
     handleChange = event => {
@@ -98,9 +98,9 @@ class AddCustomerPage extends Component {
                                                 <Input placeholder="Enter Customer Name" value={companyName} name="companyName" onChange={this.handleChange} />
                                                 <Error
                                                     error={
-                                                    this.props.errors.customerName
-                                                        ? this.props.errors.customerName
-                                                        : null
+                                                        this.props.errors.customerName
+                                                            ? this.props.errors.customerName
+                                                            : null
                                                     }
                                                 />
                                             </Col>
@@ -114,9 +114,9 @@ class AddCustomerPage extends Component {
                                                 <Input placeholder="General Manager" value={generalManger} name="generalManger" onChange={this.handleChange} />
                                                 <Error
                                                     error={
-                                                    this.props.errors.generalManger
-                                                        ? this.props.errors.generalManger
-                                                        : null
+                                                        this.props.errors.generalManger
+                                                            ? this.props.errors.generalManger
+                                                            : null
                                                     }
                                                 />
                                             </Col>
@@ -130,9 +130,9 @@ class AddCustomerPage extends Component {
                                             </Col>
                                             <Error
                                                 error={
-                                                this.props.errors.contactPerson
-                                                    ? this.props.errors.contactPerson
-                                                    : null
+                                                    this.props.errors.contactPerson
+                                                        ? this.props.errors.contactPerson
+                                                        : null
                                                 }
                                             />
                                         </FormGroup>
@@ -151,8 +151,8 @@ class AddCustomerPage extends Component {
                                                 <Error
                                                     error={
                                                         this.props.errors.tinNumber
-                                                        ? this.props.errors.tinNumber
-                                                        : null
+                                                            ? this.props.errors.tinNumber
+                                                            : null
                                                     }
                                                 />
                                             </Col>
@@ -173,20 +173,20 @@ class AddCustomerPage extends Component {
                                                 />
                                                 <Error
                                                     error={
-                                                    this.props.errors.email ? this.props.errors.email : null
+                                                        this.props.errors.email ? this.props.errors.email : null
                                                     }
                                                 />
                                             </Col>
                                         </FormGroup>
                                         <FormGroup>
-                                            <Label sm={12} for="exampleSelect">Payment Option</Label>
+                                            <Label sm={12} for="exampleSelect">Tax</Label>
                                             <Col>
                                                 <Input value={this.state.paymentOption} disabled />
                                                 <Error
                                                     error={
                                                         this.props.errors.paymentOption
-                                                        ? this.props.errors.paymentOption
-                                                        : null
+                                                            ? this.props.errors.paymentOption
+                                                            : null
                                                     }
                                                 />
                                             </Col>
@@ -202,9 +202,9 @@ class AddCustomerPage extends Component {
                                                 />
                                                 <Error
                                                     error={
-                                                    this.props.errors.workingField
-                                                        ? this.props.errors.workingField
-                                                        : null
+                                                        this.props.errors.workingField
+                                                            ? this.props.errors.workingField
+                                                            : null
                                                     }
                                                 />
                                             </Col>
@@ -214,7 +214,7 @@ class AddCustomerPage extends Component {
                                 <FormGroup >
                                     <Col align='center'>
                                         <Button color='primary' onClick={this.submit}>
-                                            {this.props.loading_add_customer? <Loader /> : "Add Customer"}
+                                            {this.props.loading_add_customer ? <Loader /> : "Add Customer"}
                                         </Button>
                                     </Col>
                                 </FormGroup>

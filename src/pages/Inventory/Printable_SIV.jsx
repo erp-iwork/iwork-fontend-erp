@@ -10,70 +10,98 @@ import {
 import Logo from "../../assets/img/logo/Logo.jpg";
 
 const styles = StyleSheet.create({
+  title: {
+    paddingLeft: 100,
+    paddingBottom: 10,
+    fontSize: 16,
+  },
+
   root: {
     width: "100vh",
     height: "100vh",
     backgroundColor: "#d1d1d1",
     padding: 10,
   },
-  title: {
-    fontWeight: 600,
-    paddingLeft: 180,
-    paddingBottom: 10,
-  },
 
   text: {
     color: "#686868",
   },
+
   Header: {
     fontSize: 13,
     padding: 30,
   },
+
   logo: {
-    height: 80,
-    width: 80,
-    marginTop: 10,
+    height: 40,
+    width: 40,
   },
+
   SIVStyling: {
     padding: 30,
   },
+
   table: {
     padding: 10,
   },
+
   textBody: {
     fontSize: 12,
     color: "#686868",
   },
+  textBody2: {
+    fontSize: 8,
+    color: "#686868",
+  },
+
   tableRow: {
-    // margin: "auto",
     flexDirection: "row",
   },
+
   tableColHeader: {
-    width: "16.67%",
+    width: "17%",
     borderStyle: "solid",
     borderColor: "#686868",
-    borderBottomColor: "#000",
+    borderBottomColor: "#686868",
     backgroundColor: "#11669F",
     borderWidth: 1,
-    borderLeftWidth: 0,
     borderTopWidth: 0,
   },
+
+  tableColHeader1: {
+    width: "10%",
+    borderStyle: "solid",
+    borderColor: "#686868",
+    borderBottomColor: "#686868",
+    backgroundColor: "#11669F",
+    borderWidth: 1,
+    borderTopWidth: 0,
+  },
+
   tableCol: {
-    width: "16.67%",
+    width: "17%",
     borderStyle: "solid",
     borderColor: "#686868",
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
+
+  tableCol1: {
+    width: "10%",
+    borderStyle: "solid",
+    borderColor: "#686868",
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+
   tableCellHeader: {
-    // margin: "auto",
-    fontSize: 12,
-    // fontWeight: 500,
+    fontSize: 10,
     color: "#FFFFFF",
   },
+
   tableCell: {
-    // margin: "auto",
     color: "#686868",
     fontSize: 10,
   },
@@ -97,48 +125,12 @@ class SIVPdf extends Component {
     return (
       <Document>
         <Page
-          size="A4"
+          size="A5"
           style={{
-            padding: 30,
+            padding: 10,
           }}
         >
           {/* <View container xs={12} display="flex" style={styles.Header}>
-            <View
-              container
-              style={{
-                flexDirection: "row",
-                marginTop: 100,
-              }}
-            >
-              <View item>
-                <View style={{ height: 5 }} />
-
-                <Text style={styles.text} variant="body2" gutterBottom>
-                  Warehouse Name: {this.props.sivs.warehouseName}
-                </Text>
-                <View style={{ height: 5 }} />
-
-                <Text style={styles.text} variant="body2" gutterBottom>
-                  Issued By : {localStorage.getItem("username")}
-                </Text>
-                <View style={{ height: 5 }} />
-
-                <Text style={styles.text} variant="body2" gutterBottom>
-                  SIV Date : {this.props.sivs.sivDate}
-                </Text>
-              </View>
-
-              <View
-                item
-                style={{
-                  marginLeft: 160,
-                }}
-              >
-              </View>
-            </View>
-          </View> */}
-
-          <View container xs={12} display="flex" style={styles.Header}>
             <View
               style={{
                 flexDirection: "row",
@@ -166,6 +158,44 @@ class SIVPdf extends Component {
                 </Text>
               </View>
             </View>
+          </View> */}
+          <View container xs={12} display="flex" style={styles.Header}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                display: "flex",
+              }}
+            >
+              <View item>
+                <Image source={Logo} alt="" style={styles.logo} />
+                <Text style={styles.text} variant="body2">
+                  Sparta ERP
+                </Text>
+              </View>
+              <View>
+                <Text style={styles.textBody}>Your Company</Text>
+                <View
+                  style={{
+                    height: 3,
+                  }}
+                />
+
+                <Text style={styles.textBody}>Your Location</Text>
+                <View
+                  style={{
+                    height: 3,
+                  }}
+                />
+                <Text style={styles.textBody}>Mobile : +251 91 147 5672</Text>
+                <View
+                  style={{
+                    height: 3,
+                  }}
+                />
+                <Text style={styles.textBody}>Website : YourWebsite.com</Text>
+              </View>
+            </View>
           </View>
           <Text style={styles.title} align="center">
             Store Issue Voucher
@@ -182,6 +212,14 @@ class SIVPdf extends Component {
             <Text style={styles.textBody} variant="body2" color="">
               Order Number : {this.props.sivs.order}
             </Text>
+            <Text style={styles.textBody} variant="body2" gutterBottom>
+              Issued By : {localStorage.getItem("username")}
+            </Text>
+            <View style={{ height: 5 }} />
+
+            <Text style={styles.textBody} variant="body2" gutterBottom>
+              SIV Date : {this.props.sivs.sivDate}
+            </Text>
           </View>
 
           <View
@@ -191,8 +229,8 @@ class SIVPdf extends Component {
           ></View>
           <View style={styles.table}>
             <View style={styles.tableRow}>
-              <View style={styles.tableColHeader}>
-                <Text style={styles.tableCellHeader}>Serial No</Text>
+              <View style={styles.tableColHeader1}>
+                <Text style={styles.tableCellHeader}>S-#</Text>
               </View>
               <View style={styles.tableColHeader}>
                 <Text style={styles.tableCellHeader}>ItemName</Text>
@@ -214,7 +252,7 @@ class SIVPdf extends Component {
               ? this.props.siv_item.map((item, index) => {
                   return (
                     <View key={item.itemName} style={styles.tableRow}>
-                      <View style={styles.tableCol}>
+                      <View style={styles.tableCol1}>
                         <Text style={styles.tableCell}>{index + 1}</Text>
                       </View>
                       <View style={styles.tableCol}>
@@ -242,18 +280,8 @@ class SIVPdf extends Component {
           </View>
           <View
             style={{
-              display: "flex",
-              paddingTop: 20,
-              marginLeft: 400,
-            }}
-          >
-            <Text style={styles.textBody} variant="body2" color="">
-              Total Price : {this.props.sivs.totalCost}
-            </Text>
-          </View>
-          <View
-            style={{
               paddingLeft: 20,
+              paddingBottom: 100,
             }}
           >
             <View
@@ -279,7 +307,22 @@ class SIVPdf extends Component {
             </View>
           </View>
 
-          {/* </View> */}
+          <View style={styles.line} />
+
+          <View
+            container
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text variant="caption" style={styles.textBody2}>
+              Phone : +2519 1234 56 77
+            </Text>
+            <Text style={styles.textBody2}>Website : YourWebsite.com</Text>
+            <Text style={styles.textBody2}>Email : YourEmail@gmail.com</Text>
+          </View>
         </Page>
       </Document>
     );

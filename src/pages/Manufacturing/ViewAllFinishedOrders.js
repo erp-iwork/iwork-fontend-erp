@@ -20,7 +20,7 @@ const Order = ({ order, index, handleQualityCheck }) => {
             <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status : null}</td>
             <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status === status.manuFactured ?
                 <Button size='sm' color='primary' onClick={handleQualityCheck}>Quantity Checked</Button>
-                : ((<Button size='sm' color='success' disabled>Quantity Checked</Button>)) : null}</td>
+                : ((<Button size='sm' type='submit' color='success' disabled>Quantity Checked</Button>)) : null}</td>
             <td>
                 <Link to={{ pathname: routes.ViewSingleOrderManufacturing, state: order }}>
                     <Button size='sm' color='primary'>
@@ -55,7 +55,7 @@ class ViewAllFinishedOrdersPage extends Component {
         }
     }
 
-    
+
 
     handleQualityCheck(order, status) {
         this.props.updateStatus(order, status)

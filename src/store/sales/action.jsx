@@ -74,6 +74,7 @@ function createOrder(data) {
             title: "Error",
             text: "Connection Problem",
             icon: "error",
+            position: 'top-right',
             showConfirmButton: false,
             timer: 1000,
           });
@@ -112,6 +113,7 @@ function getAllCompany() {
             title: "Error",
             text: "Connection Problem",
             icon: "error",
+            position: 'top-right',
             showConfirmButton: false,
             timer: 1000,
           });
@@ -152,6 +154,7 @@ function getAllItem() {
             title: "Error",
             text: "Connection Problem",
             icon: "error",
+            position: 'top-right',
             showConfirmButton: false,
             timer: 1000,
           });
@@ -193,6 +196,7 @@ function getAllOrder() {
             title: "Error",
             text: "Connection Problem",
             icon: "error",
+            position: 'top-right',
             showConfirmButton: false,
             timer: 1000,
           });

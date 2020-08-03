@@ -67,6 +67,7 @@ class ViewAllCustomersPage extends Component {
                 Swal.fire({
                     title: "Delteing Account...",
                     icon: "warning",
+                    position: 'top-right',
                     showCancelButton: false,
                     allowOutsideClick: false,
                     showConfirmButton: false,
@@ -78,7 +79,7 @@ class ViewAllCustomersPage extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        if (this.props.companys.length === 0) return <h2>No customers have been registered</h2>
+        if (this.props.companys.length === 0) return <h2>No Customers have been registered</h2>
         const { customer } = this.state
         return (
             <Page title="All Customers" breadcrumbs={[{ name: 'Finance', active: true }]}>

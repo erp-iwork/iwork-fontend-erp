@@ -29,6 +29,7 @@ export const getSiv = (order) => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000,
         });
@@ -60,6 +61,7 @@ export const updateSiv = (orderNumber, status) => (dispatch) => {
       } else {
         Swal.fire({
           title: "Error",
+          position: 'top-right',
           text: "Connection Problem",
           icon: "error",
           showConfirmButton: false,

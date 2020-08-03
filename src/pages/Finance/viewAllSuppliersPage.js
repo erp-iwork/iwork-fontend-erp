@@ -16,7 +16,7 @@ import './Finance.scss'
 const Customer = ({ company, index, deleteCompany, toggle }) => {
 
     return (
-        <tr align='left'>
+        <tr>
             <th scope="row">{index + 1}</th>
             <td>{company.suplierName}</td>
             <td>{company.generalManger}</td>
@@ -26,7 +26,7 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
             <td>{company.paymentOption}</td>
             <td>{company.tinNumber}</td>
             <td>
-                <Col>
+                <Row>
                     <Button color='danger' size='sm' onClick={() => deleteCompany(company.suplierId)} className='spacing'>
                         <MdDelete />
                     </Button>
@@ -34,7 +34,7 @@ const Customer = ({ company, index, deleteCompany, toggle }) => {
                         <MdRemoveRedEye />
                     </Button>
 
-                </Col>
+                </Row>
             </td>
         </tr>
     )
@@ -71,6 +71,7 @@ class ViewAllSuppliers extends Component {
                 Swal.fire({
                     title: "Deleting Account...",
                     icon: "warning",
+                    position: 'top-right',
                     showCancelButton: false,
                     allowOutsideClick: false,
                     showConfirmButton: false,
@@ -82,7 +83,7 @@ class ViewAllSuppliers extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        if (this.props.suppliers.length === 0) return <h2>No suppliers have been registered</h2>
+        if (this.props.suppliers.length === 0) return <Page title="All Suppliers" breadcrumbs={[{ name: 'Finance', active: true }]}>No Suppliers have been registered></Page>
         const { supplier } = this.state
         return (
             <Page title="All Suppliers" breadcrumbs={[{ name: 'Finance', active: true }]}>
@@ -124,10 +125,9 @@ class ViewAllSuppliers extends Component {
                       </Button>
                     </ModalFooter>
                 </Modal>
-
                 <Col>
                     <Card className="mb-3">
-                        <CardHeader>All Customers</CardHeader>
+                        <CardHeader>All Suppliers</CardHeader>
                         <CardBody>
                             <Table responsive>
                                 <thead>
@@ -155,6 +155,7 @@ class ViewAllSuppliers extends Component {
                         </CardBody>
                     </Card>
                 </Col>
+
             </Page>
         )
     }

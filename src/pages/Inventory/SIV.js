@@ -83,10 +83,10 @@ const classes = {
   },
 };
 class SIV extends React.Component {
-  constructor(){
+  constructor() {
     super();
-    this.state={
-      total:''
+    this.state = {
+      total: ''
     }
   }
   componentDidMount() {
@@ -99,9 +99,13 @@ class SIV extends React.Component {
 
 
 
+
+
   render() {
     if (this.props.loading) return <PageSpinner />
     console.log(this.props.sivs)
+
+
     return (
       <Page
         title="SIV"
@@ -198,8 +202,8 @@ class SIV extends React.Component {
                 variant="body2"
                 color=""
               >
-                <b>Issued By :</b> _______________________
-                </Typography>
+                <b>Issued By :</b> {localStorage.getItem('username')}
+              </Typography>
             </div>
             <div
               style={{

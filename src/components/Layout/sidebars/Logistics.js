@@ -16,6 +16,11 @@ import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
 import './Styles.scss'
 
+
+import { connect } from 'react-redux'
+
+import sideBarOpenController from '../../../store/sidebar/action'
+
 const bem = bn.create('sidebar');
 class Logistics extends React.Component {
     constructor(props) {
@@ -35,6 +40,9 @@ class Logistics extends React.Component {
     };
 
     handleClick = name => () => {
+
+        this.props.sideBarOpenController("LOGISTICS")
+
         this.setState(prevState => {
             const isOpen = prevState[`isOpen${name}`];
 
@@ -65,7 +73,7 @@ class Logistics extends React.Component {
                             className={bem.e('nav-item-icon')}
                             style={{
                                 padding: 0,
-                                transform: this.state.isOpenLOGISTICS
+                                transform: this.props.sidebar
                                     ? 'rotate(0deg)'
                                     : 'rotate(-90deg)',
                                 transitionDuration: '0.3s',
@@ -75,7 +83,7 @@ class Logistics extends React.Component {
                     </BSNavLink>
                 </NavItem>
 
-                <Collapse isOpen={this.state.isOpenLOGISTICS}>
+                <Collapse isOpen={this.props.sidebar}>
                     <div className='contents'>
                         {LOGISTICS.map(({ to, name, exact, Icon }, index) => (
                             <NavItem key={index} className={bem.e('nav-item7')}>
@@ -99,4 +107,11 @@ class Logistics extends React.Component {
     }
 }
 
-export default Logistics
+
+const mapStateToProps = (state) => {
+    return {
+        sidebar: state.sidebarControllerReducer.isOpenLOGISTICS,
+    }
+}
+
+export default connect(mapStateToProps, { sideBarOpenController })(Logistics)

@@ -24,19 +24,19 @@ import bn from '../../../utils/bemnames';
 import routes from '../../../config/routes'
 import './Styles.scss'
 
+import { connect } from 'react-redux'
+
+import sideBarOpenController from '../../../store/sidebar/action'
+
 const bem = bn.create('sidebar');
 class Finance extends React.Component {
     state = {
-        isOpenIT: true,
-        isOpenSALES: true,
-        isOpenFINANCE: this.props.isOpen ? true : false,
-        isOpenINVENTORY: true,
-        isOpenLOGISTICS: true,
-        isOpenPROCURMENT: true,
-        isOpenMANUFACTURING: true
+        isOpenFINANCE: this.props.isOpen ? false : true ,
     }
 
     handleClick = name => () => {
+   this.props.sideBarOpenController("FINANCE")
+
         this.setState(prevState => {
             const isOpen = prevState[`isOpen${name}`];
 
@@ -75,7 +75,7 @@ class Finance extends React.Component {
                             className={bem.e('nav-item-icon')}
                             style={{
                                 padding: 0,
-                                transform: this.state.isOpenFINANCE
+                                transform: this.props.sidebar
                                     ? 'rotate(0deg)'
                                     : 'rotate(-90deg)',
                                 transitionDuration: '0.3s',
@@ -85,7 +85,7 @@ class Finance extends React.Component {
                     </BSNavLink>
                 </NavItem>
 
-                <Collapse isOpen={this.state.isOpenFINANCE}>
+                <Collapse isOpen={this.props.sidebar}>
                 <div className='contents'>
 
 
@@ -112,4 +112,10 @@ class Finance extends React.Component {
     }
 }
 
-export default Finance
+const mapStateToProps = (state) => {
+    return {
+      sidebar: state.sidebarControllerReducer.isOpenFINANCE,
+    }
+  }
+  
+  export default connect(mapStateToProps, { sideBarOpenController })(Finance)

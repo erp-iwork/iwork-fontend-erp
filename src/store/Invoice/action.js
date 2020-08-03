@@ -32,6 +32,8 @@ export const getInvoice = (order) => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
+
           icon: "error",
           showConfirmButton: false,
           timer: 1000

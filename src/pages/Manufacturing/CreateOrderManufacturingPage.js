@@ -30,15 +30,18 @@ class CreateOrderManufacturingPage extends Component {
             startDate: '',
             endDate: '',
             customCategory: '',
+            showalert: false,
 
         }
         this.handleChange = this.handleChange.bind(this)
         this.setProducts = this.setProducts.bind(this)
     }
     handleChange = event => {
+
         const { name, value } = event.target
         if (name === "productMaterial") {
             this.setState({
+                showalert: !this.state.showalert,
                 productMaterial: this.state.canBeManudactured[value]['product_material'] ? this.state.canBeManudactured[value]['product_material'] : null, dropdown: true,
                 productID: this.state.canBeManudactured[value]['productId'] ? this.state.canBeManudactured[value]['productId'] : null
             })
@@ -119,7 +122,6 @@ class CreateOrderManufacturingPage extends Component {
                                             <Col sm={12}>
                                                 <Input
                                                     disabled
-                                                    placeholder="The Person Requesting The Order"
                                                     value={localStorage.getItem('username')}
                                                 />
                                                 <Error error={errors.manufacturePerson ? errors.manufacturePerson : null} />
@@ -223,7 +225,7 @@ class CreateOrderManufacturingPage extends Component {
 
                 {/* This alert is applicable for only backend problem with error type <error> */}
 
-                {errors.error ? (
+                {errors.error && this.state.showalert ? (
                     <CustomAlert
                         msg={errors.error}
                         type="danger"

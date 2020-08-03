@@ -49,7 +49,8 @@ class ViewAllItems extends Component {
             retailPrice, catagory, productType, unitOfMeasurement, quantity
         } = this.state.item
 
-        if (this.props.items.item_catagory.length === 0 || this.props.items.item_catagory === null) return <h2>No items in this Category yet</h2>
+        if (this.props.items.item_catagory.length === 0 || this.props.items.item_catagory === null) return <Page title="All Products"
+        breadcrumbs={[{ name: 'Inventory', active: true }]}> No Items have been registered in this Category</Page>
         return (
             <Page
                 title="All Products"

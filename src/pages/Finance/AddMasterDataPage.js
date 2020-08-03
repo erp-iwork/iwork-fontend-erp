@@ -37,10 +37,7 @@ class AddMasterDataPage extends Component {
         this.ItemQuantityChange = this.ItemQuantityChange.bind(this)
         this.submit = this.submit.bind(this)
         this.submitCustomCategory = this.submitCustomCategory.bind(this)
-
-
     }
-
     handleAddItem = () => {
         this.setState({
             order_items: this.state.order_items.concat([
@@ -52,7 +49,6 @@ class AddMasterDataPage extends Component {
     componentDidMount() {
         this.props.getMasterData()
         this.props.getExistingCategories()
-
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -197,9 +193,7 @@ class AddMasterDataPage extends Component {
                                             <option value="Storable">Storable</option>
                                             <option value="Service">Service</option>
                                         </Input>
-
                                         <Error error={this.props.errors.productType ? this.props.errors.productType : null} />
-
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
@@ -210,9 +204,7 @@ class AddMasterDataPage extends Component {
                                             {this.props.categories.map((item, index) => (
                                                 <option value={item.catagoryId} key={index}>{item.catagory}</option>
                                             ))}
-
                                             <option onClick={this.customCategoryFun} value="custom" >Custom ...</option>
-
                                         </Input>
                                         {this.state.customCategory ? (
                                             <Row>
@@ -227,9 +219,7 @@ class AddMasterDataPage extends Component {
                                             </Row>
                                         )
                                             : null}
-
                                         <Error error={this.props.errors.productCategory ? this.props.errors.productCategory : null} />
-
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
@@ -239,9 +229,7 @@ class AddMasterDataPage extends Component {
                                             <option disabled selected></option>
                                             <UoM />
                                         </Input>
-
                                         <Error error={this.props.errors.unitOfMeasurement ? this.props.errors.unitOfMeasurement : null} />
-
                                     </Col>
                                 </FormGroup>
                                 <FormGroup >
@@ -256,9 +244,7 @@ class AddMasterDataPage extends Component {
                                             type="number"
                                             onChange={this.handleChange}
                                         />
-
                                         <Error error={this.props.errors.productPrice ? this.props.errors.productPrice : null} />
-
                                     </Col>
                                 </FormGroup>
                                 <FormGroup>
@@ -291,7 +277,6 @@ class AddMasterDataPage extends Component {
                                     {this.props.errors ?
                                         <Error error={this.props.errors.choices ? this.props.errors.choices : null} /> : ''
                                     }
-
                                 </FormGroup>
                                 <hr></hr>
                                 <FormGroup>
@@ -315,7 +300,9 @@ class AddMasterDataPage extends Component {
                                                 <FormGroup>
                                                     <Label md={12} for="unit_of_measurement">Unit Of Measurment</Label>
                                                     <Col md={12}>
-                                                        <Input disabled value={this.state.order_items[index]['materialUnitOfMeasurement']} defaultValue={""} id="unit_of_measurement" name="unit_of_measurement" onChange={this.ItemUnitChange(index)}>
+                                                        <Input disabled value={this.state.order_items[index]['materialUnitOfMeasurement']} 
+                                                        defaultValue={""} id="unit_of_measurement" name="unit_of_measurement" 
+                                                        onChange={this.ItemUnitChange(index)}>
                                                         </Input>
                                                     </Col>
                                                 </FormGroup>
@@ -342,17 +329,12 @@ class AddMasterDataPage extends Component {
                                                         <Error error={error.materialUnitOfMeasurement ? error.materialUnitOfMeasurement : null} />
                                                         <Error error={error.materialQuantity ? error.materialQuantity : null} />
                                                     </Row>
-                                                )
-                                                ) : null
+                                                )) : null
                                             }
                                             <Error error={this.props.errors.item ? this.props.errors.item : null} />
                                         </Row>
-
-
                                     ))}
-
-
-                                    < Button onClick={() => this.handleAddItem()} color='primary'
+                                    <Button onClick={() => this.handleAddItem()} color='primary'
                                         style={{ display: can_be_manufactured ? "flex" : "none", marginLeft: "1%" }}
                                     >Add Another One</Button>
                                 </FormGroup>

@@ -76,6 +76,8 @@ export const getSupplier = (noLoading = false) => (dispatch) => {
         Swal.fire({
           title: "Error", text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
+
           showConfirmButton: false,
           timer: 1000
         })
@@ -88,6 +90,8 @@ export const deleteSupplier = (supplierID) => (dispatch) => {
     title: "Are you sure?",
     text: "Are you not revert this action!",
     icon: "warning",
+    position: 'top-right',
+
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
@@ -101,6 +105,9 @@ export const deleteSupplier = (supplierID) => (dispatch) => {
           Swal.fire({
             title: "Deleted",
             icon: "success",
+            position: 'top-right',
+
+
             showConfirmButton: false,
             timer: 1000
           }).then(res => {
@@ -118,6 +125,8 @@ export const deleteSupplier = (supplierID) => (dispatch) => {
             });
           } else {
             Swal.fire({
+              position: 'top-right',
+
               title: "Error", text: "Connection Problem",
               icon: "error",
               showConfirmButton: false,
@@ -150,6 +159,8 @@ export const getCompany = () => (dispatch) => {
         Swal.fire({
           title: "Error", text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
+
           showConfirmButton: false,
           timer: 1000
         });
@@ -164,6 +175,8 @@ export const deleteCompany = (companyId) => (dispatch) => {
     text: "Are you not revert this action!",
     icon: "warning",
     showCancelButton: true,
+    position: 'top-right',
+
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes,",
@@ -176,6 +189,8 @@ export const deleteCompany = (companyId) => (dispatch) => {
           Swal.fire({
             title: "Deleted",
             icon: "success",
+            position: 'top-right',
+
             showConfirmButton: false,
             timer: 1000
           }).then(res => {
@@ -193,6 +208,8 @@ export const deleteCompany = (companyId) => (dispatch) => {
             });
           } else {
             Swal.fire({
+              position: 'top-right',
+
               title: "Error", text: "Connection Problem",
               icon: "error",
               showConfirmButton: false,
@@ -217,6 +234,8 @@ export const addMasterData = (masterData) => (dispatch) => {
       Swal.fire({
         title: "Added Product",
         icon: "success",
+        position: 'top-right',
+
         showConfirmButton: false,
         timer: 1000
       })
@@ -258,6 +277,8 @@ export const getAllMasterData = () => (dispatch) => {
         Swal.fire({
           title: "Error", text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
+
           showConfirmButton: false,
           timer: 1000
         })
@@ -287,6 +308,8 @@ export const getMasterData = () => (dispatch) => {
         Swal.fire({
           title: "Error", text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
+
           showConfirmButton: false,
           timer: 1000
         })
@@ -312,6 +335,7 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
         Swal.fire({
           title: "Error",
           text: "Connection Problem",
+          position: 'top-right',
           icon: "error",
           showConfirmButton: false,
           timer: 1000
@@ -335,6 +359,7 @@ export const getManufacturedOrders = (status1, status2 = statusTypes.finished) =
         console.log(err)
         Swal.fire({
           title: "Error",
+          position: 'top-right',
           text: "Connection Problem",
           icon: "error",
           showConfirmButton: false,

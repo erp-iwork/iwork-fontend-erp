@@ -105,9 +105,6 @@ class GRV extends React.Component {
         breadcrumbs={[{ name: 'Inventory', active: true }]}
       >
         <hr />
-        <div style={{
-          height: 100
-        }}></div>
         <div style={classes.pdf}>
           <div style={classes.Card}>
             <Row className="d-flex justify-content-between align-items-center"
@@ -152,7 +149,7 @@ class GRV extends React.Component {
                     <th>Batch Number</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
-                    <th>Unit</th>
+                    <th>UoM</th>
                     <th>Unit Cost</th>
                   </tr>
                 </thead>
@@ -162,8 +159,8 @@ class GRV extends React.Component {
                       <th scope="row">{index + 1}</th>
                       <td>{item.itemID}</td>
                       <td>{item.itemName}</td>
-                      <td>Unit Goes Here</td>
                       <td>{item.quantity}</td>
+                      <td>{item.unitOfMeasurement}</td>
                       <td>{item.price}</td>
                     </tr>
                   ))}

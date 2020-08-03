@@ -40,6 +40,7 @@ export const getOrders = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         });
@@ -72,6 +73,7 @@ export const getSingleOrder = (orderNumber) => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         });
@@ -100,6 +102,7 @@ export const getStatus = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         });
@@ -119,6 +122,7 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
       Swal.fire({
         title: "Delivered",
         icon: "success",
+        position: 'top-right',
         showConfirmButton: false,
         timer: 1000
       });
@@ -135,6 +139,7 @@ export const updateStatus = (orderNumber, status) => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         });
@@ -162,6 +167,7 @@ export const getDeliveredOrders = () => (dispatch) => {
           title: "Error",
           text: "Connection Problem",
           icon: "error",
+          position: 'top-right',
           showConfirmButton: false,
           timer: 1000
         })
