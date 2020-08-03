@@ -45,7 +45,7 @@ const Page = ({
         )}
 
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <FilterOptions/>
+          <FilterOptions />
           <FilterOptions/>
           <FilterOptions/>
         </div>
