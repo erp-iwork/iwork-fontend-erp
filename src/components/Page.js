@@ -11,7 +11,7 @@ const bem = bn.create('page');
 
 const Page = ({
   title,
-  breadcrumbs,
+  breadcrumbs, 
   tag: Tag,
   className,
   children,
