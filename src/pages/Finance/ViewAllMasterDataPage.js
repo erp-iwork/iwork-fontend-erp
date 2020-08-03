@@ -56,7 +56,7 @@ class ViewAllMasterData extends Component {
     getCategory = (id) => {
         const found = this.props.categories.find(item => item.catagoryId === id)
         return found.catagory
-    }
+    } 
 
     render() {
         if (this.props.loading || this.props.loading_categories) return <PageSpinner />
