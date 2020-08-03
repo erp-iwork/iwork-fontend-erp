@@ -54,7 +54,7 @@ class ViewSingleDelieveredOrderPage extends Component {
                             <CardHeader>Order Information</CardHeader>
                             <CardBody>
                                 <Row>
-                                    <Col>Order Id:</Col>
+                                    <Col>MO Id:</Col>
                                     <Col><b>{order.orderNumber}</b></Col>
                                 </Row>
                                 <Row>
