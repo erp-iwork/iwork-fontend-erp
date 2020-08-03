@@ -81,7 +81,7 @@ class ViewAllSuppliers extends Component {
 
     render() {
         if (this.props.loading) return <PageSpinner />
-        if (this.props.suppliers.length === 0) return <Page title="All Suppliers" breadcrumbs={[{ name: 'Finance', active: true }]}>No Suppliers have been registered></Page>
+        if (this.props.suppliers.length === 0) return <Page title="All Suppliers" breadcrumbs={[{ name: 'Finance', active: true }]} No Suppliers have been registered></Page>
         const { supplier } = this.state
 
         var filtered = []

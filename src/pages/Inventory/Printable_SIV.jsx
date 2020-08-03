@@ -210,7 +210,7 @@ class SIVPdf extends Component {
             }}
           >
             <Text style={styles.textBody} variant="body2" color="">
-              Order Number : {this.props.sivs.order}
+              Sales Number : {this.props.sivs.order}
             </Text>
             <Text style={styles.textBody} variant="body2" gutterBottom>
               Issued By : {localStorage.getItem("username")}

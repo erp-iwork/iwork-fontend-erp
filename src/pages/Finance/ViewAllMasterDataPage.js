@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import { getAllMasterData } from '../../store/company/action'
 import { getExistingCategories } from '../../store/inventory/action'
 import { reverse, filter } from '../../useCases'
+import { MdDelete, MdRemoveRedEye } from "react-icons/md"
 
 const Data = ({ item, index, toggle, category }) => {
     return (
@@ -21,9 +22,18 @@ const Data = ({ item, index, toggle, category }) => {
                 <td>{item.productPrice}</td>
                 <td>{item.unitOfMeasurement}</td>
                 <td>
-                    <Button size='sm' color='primary' onClick={() => toggle(item)} >
-                        See Product
-                    </Button>
+
+                    {/* delete function not added  */}
+
+                    <Row>
+                        <Button style={{ margin: '10px' }} onClick={() => toggle(item)} color='primary' size='sm' >
+                            <MdRemoveRedEye />
+                        </Button>
+                        <Button style={{ margin: '10px' }} color='danger' size='sm' onClick={() => console.log('delete button touched ')} className='spacing'>
+                            <MdDelete />
+                        </Button>
+                    </Row>
+
                 </td>
             </tr>
         </tbody>
@@ -56,13 +66,13 @@ class ViewAllMasterData extends Component {
     getCategory = (id) => {
         const found = this.props.categories.find(item => item.catagoryId === id)
         return found.catagory
-    } 
+    }
 
     render() {
         if (this.props.loading || this.props.loading_categories) return <PageSpinner />
         if (this.props.masterData.length === 0) return <h2>No products to show</h2>
         const { data } = this.state
-        
+
         return (
             <Page
                 title="All Master Data"
