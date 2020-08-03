@@ -9,7 +9,8 @@ import routes from '../../config/routes'
 import PageSpinner from '../../components/PageSpinner'
 import ModelCusttom from '../popupNotification/customModal'
 import SuccessModal from '../popupNotification/success'
-import { filter } from '../../useCases'
+import { filter, employeeFilter } from '../../useCases'
+import { updateFilter } from '../../store/search/action'
 
 class AllEmployees extends Component {
     constructor(props) {
@@ -60,6 +61,9 @@ class AllEmployees extends Component {
 
     componentDidMount() {
         this.props.getEmploye()
+        this.props.updateFilter('Department', null)
+        this.props.updateFilter('Level', null)
+        this.props.updateFilter('Role', null)
     }
 
     render() {
@@ -74,11 +78,20 @@ class AllEmployees extends Component {
         var filtered = filter({
             name: { value: this.props.searchValue, tag: 'firstName' }
         }, employeeInfo)
+    
+        var filteredEmployees = employeeFilter({
+            department: this.props.filter['Department'],
+            level: this.props.filter['Level'],
+            role: this.props.filter['Role']
+        }, filtered)
+
         return (
             <Page
                 title="All Employees"
                 breadcrumbs={[{ name: 'Human Resource', active: true }]}
                 className="TablePage"
+                hasFilter={true}
+                isEmployeeList={true}
             >
                 <Row>
                     <Col>
@@ -89,7 +102,7 @@ class AllEmployees extends Component {
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th  >First Name</th>
+                                            <th>First Name</th>
                                             <th>Email</th>
                                             <th>Hired Date</th>
                                             <th>Phone Number</th>
@@ -101,7 +114,7 @@ class AllEmployees extends Component {
                                     </thead>
                                     <tbody>
                                         {
-                                            filtered ? filtered.map((employeeInfos, index) => (
+                                            filteredEmployees ? filteredEmployees.map((employeeInfos, index) => (
                                                 <tr align='left' key={index}>
                                                     <th scope="row">{index + 1}</th>
                                                     <td >{employeeInfos.firstName + " " + employeeInfos.lastName}</td>
@@ -137,9 +150,7 @@ class AllEmployees extends Component {
                 {this.props.delete_empoyee_success ? (<SuccessModal title={"Congratulations!"} message={"Employe deleted successfully"} show={this.state.showSuccess} okFun={this.okFun} />) : null}
                 {this.state.showModal && !this.props.delete_empoyee_success ? (<ModelCusttom doSomething={this.doSomething} cancel={this.cancel} />) : null}
             </Page>
-
-
-        );
+        )
     }
 }
 
@@ -153,13 +164,15 @@ const mapStateToProps = (state) => {
         users: state.hrReducer.users,
         employees: state.hrReducer.employees,
         errors: state.hrReducer.errors,
-        searchValue: state.searchData.value
+        searchValue: state.searchData.value,
+        filter: state.searchData.filter
     }
 }
 
 const mapDispatchToProps = {
     getEmploye: actions.getEmploye,
-    deleteEmploye: actions.deleteEmploye
+    deleteEmploye: actions.deleteEmploye,
+    updateFilter
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllEmployees)

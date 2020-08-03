@@ -19,14 +19,14 @@ class RecordTracking extends Component {
 
     }
 
-
-
     render() {
         if (this.props.loading_records) return <PageSpinner />
         return (
             <Page
                 title="Record Tracking"
                 breadcrumbs={[{ name: 'Inventory', active: true }]}
+                hasFilter={true}
+                isInventory={true}
             >
                 <Row>
                     <Col>
@@ -79,6 +79,7 @@ const mapStateToProps = (state) => {
         loading_records: state.inventoryReducer.loading_records,
         records: state.inventoryReducer.records,
         categories: state.inventoryReducer.categories,
+        filter: state.searchData.filter
     }
 }
 
