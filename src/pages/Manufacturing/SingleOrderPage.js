@@ -124,7 +124,7 @@ class SingleOrderPage extends Component {
                             <CardBody>
                                 <Row>
                                     <Col>
-                                        Order ID:
+                                        MO ID:
                                     </Col>
                                     <Col>
                                         <b>{order.orderNumber}</b>

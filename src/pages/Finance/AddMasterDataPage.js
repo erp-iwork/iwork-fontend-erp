@@ -161,12 +161,12 @@ class AddMasterDataPage extends Component {
 
         return (
             <Page
-                title="Add Master Data"
+                title="Add Product Data"
                 breadcrumbs={[{ name: 'Finance', active: true }]}
             >
                 <Col lg={12} md={12}>
                     <Card>
-                        <CardHeader>Add Master Data</CardHeader>
+                        <CardHeader>Add Product Data</CardHeader>
                         <CardBody>
                             <Form>
                                 <FormGroup >

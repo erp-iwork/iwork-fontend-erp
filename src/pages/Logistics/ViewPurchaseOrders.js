@@ -71,10 +71,10 @@ class ViewAllOrdersPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='left'>
-                                    <th>PO#</th>
+                                    <th>N0</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
-                                    <th>Order Number</th>
+                                    <th>PO#</th>
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th style={{ margin: "auto" }}>Approve</th>

@@ -10,7 +10,7 @@ const FilterOptions = () => {
 
         justifyContent: 'flex-end',
         alignItems: 'end',
-       padding:'20px',
+        padding: '20px',
         marginLeft: '30px'
 
     };

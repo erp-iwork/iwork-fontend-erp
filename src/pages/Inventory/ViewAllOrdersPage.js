@@ -103,20 +103,20 @@ class ViewAllOrdersPage extends Component {
         if (createdOrders.length === 0) return <h4>No orders to show</h4>
         return (
             <Page
-                title="All Orders"
+                title="All Sales Orders"
                 breadcrumbs={[{ name: 'Inventory', active: true }]}
                 className="TablePage">
                 <Card className="mb-3">
-                    <CardHeader>All Orders</CardHeader>
+                    <CardHeader>All Sales Orders</CardHeader>
                     <CardBody>
                         <Table responsive >
                             <thead>
                                 <tr align='left'>
-                                    <th>SO#</th>
+                                    <th>N0</th>
                                     <th>Customer</th>
                                     <th>Sales Person</th>
                                     <th>Shipment Address</th>
-                                    <th>Order Number</th>
+                                    <th>Sales Order #</th>
                                     <th>Status</th>
                                     <th>Generate SIV</th>
                                     <th>Actions</th>

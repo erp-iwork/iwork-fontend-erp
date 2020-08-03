@@ -10,7 +10,7 @@ import status from '../../constant/status'
 
 const Order = ({ order, index, handleApprove }) => {
     return (
-        <tr align="center">
+        <tr align="left">
             <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
@@ -77,11 +77,11 @@ class ViewAllPurchaseOrderPage extends Component {
                     <CardBody>
                         <Table responsive >
                             <thead>
-                                <tr align='center'>
-                                    <th>#</th>
+                                <tr align='left'>
+                                    <th>N0</th>
                                     <th>Supplier</th>
                                     <th>Ordered By</th>
-                                    <th>Ordered Number</th>
+                                    <th>PO#</th>
                                     <th>Order Date</th>
                                     <th>Status</th>
                                     <th colSpan={2} >Actions</th>

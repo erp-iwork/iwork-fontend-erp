@@ -84,12 +84,12 @@ class ViewAllOrdersPage extends Component {
                 breadcrumbs={[{ name: 'Finance', active: true }]}
                 className="TablePage">
                 <Card className="mb-3">
-                    <CardHeader>All Orders</CardHeader>
+                    <CardHeader>All Sales Orders</CardHeader>
                     <CardBody>
                         <Table responsive >
                             <thead>
                                 <tr align='left'>
-                                    <th>SO#</th>
+                                    <th>N0</th>
                                     <th>Customer</th>
                                     <th>Sales Person</th>
                                     <th>Shipment Address</th>

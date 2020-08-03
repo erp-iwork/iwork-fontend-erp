@@ -91,11 +91,11 @@ class CreateOrderManufacturingPage extends Component {
             errors = this.props.errors
         }
         return (
-            <Page title="Create Order" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
+            <Page title="Create Manufacturing Order" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
 
                 <Col md={12}>
                     <Card>
-                        <CardHeader>Order Information</CardHeader>
+                        <CardHeader>Manufacturing Order Information</CardHeader>
                         <CardBody>
                             <Form onSubmit={this.submit}>
                                 <Row>

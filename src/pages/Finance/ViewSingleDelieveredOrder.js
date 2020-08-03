@@ -97,8 +97,8 @@ class ViewSingleDelieveredOrderPage extends Component {
                                             <th>Item ID</th>
                                             <th>Item Name</th>
                                             <th>Quantity</th>
-                                            <th>Cost Price</th>
-                                            <th>Sales Price</th>
+                                            <th>Unit Price</th>
+                                            <th>PO Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
