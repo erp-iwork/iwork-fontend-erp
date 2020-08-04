@@ -1,4 +1,5 @@
 import React from 'react'
+import filters from '../constant/filters'
 
 export const reverse = (array = []) => {
     return array.slice(0).reverse()
@@ -25,42 +26,69 @@ export const getCount = (count) => {
 
 export const filter = (options, data) => {
     var updatedName = []
-    if (options.name !== undefined) {
+    if (options.name !== undefined && options.name !== null) {
         const exp = new RegExp("^" + options.name.value, "gi")
         updatedName = data.filter(item => item[options.name.tag].match(exp))
     } else updatedName = data
 
     var updatedType = []
-    if (options.type !== undefined || options.type !== null) {
+    if (options.type !== undefined && options.type !== null) {
         if (options.type.value) {
             updatedType = updatedName.filter(item => item[options.type.tag] === options.type.value)
         } else updatedType = updatedName
     } else updatedType = updatedName
 
-    return updatedType
+    var updatedDates = []
+    if (options.date !== undefined && options.date !== null) {
+        if (options.date.value) {
+            updatedDates = dateFilter(options.date.value, options.date.tag, updatedType)
+        } else updatedDates = updatedType
+    } else updatedDates = updatedType
+
+    return updatedDates
 }
 
-/*
-    amount: 2.34
-​
-    itemCost: 2.34
-    ​
-    orderId: "1"
-    ​
-    productCategory: "Row material"
-    ​
-    productId: "5"
-    ​
-    productName: "Iron oxides and pigment pastes."
-    ​
-    purchaseQuantity: "1"
-    ​
-    transactionDate: "2020-06-05"
-    ​
-    transactionId: 1
-    ​
-    transactionType: "Receipents"
-*/
+const isThisWeek = date => {
+    var now = new Date(Date.now())
+    var day = now.getDay()
+    var diff =  now.getDate() - day + (day === 9? -6 : 1)
+    const monday = new Date(now.setDate(diff)).getDate()
+    if (now.getMonth() === date.getMonth()) {
+        if (date.getDate() >= monday && date.getDate() < monday + 6) return true
+    }
+    return false
+}
+
+export const dateFilter = (type, tag, data) => {
+    var updatedDates = []
+    data.forEach(item => {
+        var date = new Date(item[tag])
+        var now = new Date(Date.now())
+        if (type === filters.DATE.TODAY) {
+            if (now.getDate() === date.getDate()) {
+                updatedDates.push(item)
+            }
+        } else if (type === filters.DATE.YESTERDAY) {
+            if (now.getDate() === date.getDate() + 1) {
+                updatedDates.push(item)
+            }
+        } else if (type === filters.DATE["THIS WEEK"]) {
+            if (isThisWeek(date)) {
+                updatedDates.push(item)
+            }
+        } else if (type === filters.DATE["THIS MONTH"]) {
+            if (now.getMonth() === date.getMonth()) {
+                updatedDates.push(item)
+            }
+        } else if (type === filters.DATE["LAST MONTH"]) {
+            if (now.getMonth() === date.getMonth() + 1) {
+                updatedDates.push(item)
+            }
+        }
+    })
+
+    return updatedDates
+}
 
 export const employeeFilter = (options, data) => {
     var updatedDepartments = []

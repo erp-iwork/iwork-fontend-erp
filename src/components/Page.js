@@ -5,7 +5,8 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import Typography from './Typography'
 import FilterOptions from './filterOptions'
 import { connect } from 'react-redux'
-import transactionTypes from '../constant/transactions'
+import { transactionTypes } from '../constant/transactions'
+import filters from '../constant/filters'
 
 const bem = bn.create('page')
 
@@ -28,15 +29,24 @@ const Page = ({
   var levels = []
   var roles = []
   employees.forEach(employee => {
-    if (!departments.find(dept => employee.department.departmentName === dept)) {
-      departments.push(employee.department.departmentName)
+    if (!departments.find(dept => employee.department.departmentName === dept.tag)) {
+      departments.push({
+        tag: employee.department.departmentName,
+        value: employee.department.departmentName
+      })
     }
-    if (!levels.find(level => employee.level.level === level)) {
-      levels.push(employee.level.level)
+    if (!levels.find(level => employee.level.level === level.tag)) {
+      levels.push({
+        tag: employee.level.level,
+        value: employee.level.level
+      })
     }
 
-    if (!roles.find(role => employee.roles.role === role)) {
-      roles.push(employee.roles.role)
+    if (!roles.find(role => employee.roles.role === role.tag)) {
+      roles.push({
+        tag: employee.roles.role,
+        value: employee.roles.role
+      })
     }
   })
 
@@ -71,8 +81,16 @@ const Page = ({
         }
         {isInventory?
           <div style={{ display: hasFilter? 'flex' : 'none', justifyContent: 'flex-end' }}>
-            <FilterOptions type="Type" data={[transactionTypes.in, transactionTypes.out]} />
-            <FilterOptions type="Date" data={['Yesterday', 'This Week', 'Last Month']} />
+            <FilterOptions type={filters.RECORD} data={
+              [transactionTypes['Reception'], transactionTypes['Withdrwal']]
+            } />
+            <FilterOptions type="Date" data={[
+              { tag: filters.DATE["TODAY"], value: filters.DATE["TODAY"] },
+              { tag: filters.DATE['YESTERDAY'], value: filters.DATE['YESTERDAY'] },
+              { tag: filters.DATE['THIS WEEK'], value: filters.DATE['THIS WEEK'] },
+              { tag: filters.DATE['THIS MONTH'], value: filters.DATE['THIS MONTH']},
+              { tag: filters.DATE['LAST MONTH'], value: filters.DATE['LAST MONTH'] }
+            ]} />
           </div> : <div></div>
         }
       </div>

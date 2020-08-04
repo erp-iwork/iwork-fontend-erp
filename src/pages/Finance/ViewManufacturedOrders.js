@@ -82,10 +82,10 @@ class ViewAllPurchaseOrderPage extends Component {
                         <Table responsive >
                             <thead>
                                 <tr align='center'>
-                                    <th>#</th>
+                                    <th>N0</th>
                                     <th>Product Name</th>
                                     <th>Manufacture Personnel</th>
-                                    <th>Ordered Number</th>
+                                    <th>MO #</th>
                                     <th>Cost</th>
                                     <th>Quantity</th>
                                     <th>End Date</th>

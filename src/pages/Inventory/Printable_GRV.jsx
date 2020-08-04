@@ -188,7 +188,7 @@ class GRVpdf extends Component {
             }}
           >
             <Text style={styles.textBody} variant="body2" color="">
-              Order Number : {this.props.grv.GRVID}
+             Purchase Order # : {this.props.grv.GRVID}
             </Text>
             <Text style={styles.textBody} variant="body2" gutterBottom>
               Received By : {localStorage.getItem("username")}

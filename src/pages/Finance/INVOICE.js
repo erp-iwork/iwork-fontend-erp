@@ -169,10 +169,15 @@ function PdfDocument({ data }) {
                                         <Text align='right' style={{
                                             color: '#11669F',
                                             fontSize: 12
-                                        }}>Company name : <Text style={styles.textBody} >{customer.customerName} </Text> </Text>
+                                        }}>customer name : <Text style={styles.textBody} >{customer.customerName} </Text> </Text>
                                     </View>
                                 </View>
-                                <View style={{
+
+
+
+
+
+                                {/* <View style={{
                                     height: 10
                                 }} />
                                 <View container style={{
@@ -244,7 +249,10 @@ function PdfDocument({ data }) {
                                     flexDirection: 'row',
                                     display: 'flex',
                                     justifyContent: 'space-between'
-                                }}>
+                                }}> */}
+
+
+
                                     <View item >
                                         <Text align='right' style={{
                                             color: '#11669F',
@@ -282,7 +290,7 @@ function PdfDocument({ data }) {
                                     <Text align='right' style={{
                                         color: '#11669F',
                                         fontSize: 12
-                                    }}>Order no: <Text style={styles.textBody} >
+                                    }}>Sales no: <Text style={styles.textBody} >
                                             {data.order}
                                         </Text> </Text>
                                 </View>
@@ -344,7 +352,7 @@ function PdfDocument({ data }) {
                                 height: 10
                             }} />
                         </View>
-                    </View>
+                  
                     <View style={{
                         height: 20
                     }} />

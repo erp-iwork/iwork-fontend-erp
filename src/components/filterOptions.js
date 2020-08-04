@@ -27,14 +27,14 @@ const FilterOptions = ({ type, data, filter, updateFilter }) => {
                         All {type}s
                     </DropdownItem>
                     {data.map((item, index) => (
-                        <DropdownItem key={index} onClick={event => {
-                            if (!checked[index]) updateFilter(type, item)
+                        <DropdownItem key={index} onClick={_ => {
+                            if (!checked[index]) updateFilter(type, item.value)
                             else updateFilter(type, null)
-                            var updatedCheck = checked.map(item => false)
+                            var updatedCheck = checked.map(_ => false)
                             updatedCheck[index] = !checked[index]
                             setChecked(updatedCheck)
                         }}>
-                            <Input type="checkbox" checked={filter[type] === item} /> {item}
+                            <Input type="checkbox" checked={filter[type] === item.value} /> {item.tag}
                         </DropdownItem>
                     ))}
                 </FormGroup>

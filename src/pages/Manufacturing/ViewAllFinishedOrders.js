@@ -72,11 +72,11 @@ class ViewAllFinishedOrdersPage extends Component {
                         <Table responsive>
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>N0</th>
                                     <th>Product Name</th>
                                     <th>Product Price</th>
                                     <th>Product Cost</th>
-                                    <th>Order Number</th>
+                                    <th>MO #</th>
                                     <th>UoM</th>
                                     <th>Status</th>
                                     <th>Actions</th>

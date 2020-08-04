@@ -122,7 +122,7 @@ class CreateOrdersPage extends Component {
                 <Row>
                     <Col md={6} sm={12}>
                         <Card>
-                            <CardHeader>Order Information</CardHeader>
+                            <CardHeader>Sales Order Information</CardHeader>
                             <CardBody>
                                 <Form>
                                     <FormGroup>
@@ -251,7 +251,7 @@ class CreateOrdersPage extends Component {
                     </Col>
                     <Col md={6} sm={12}>
                         <Card >
-                            <CardHeader>Recent Orders</CardHeader>
+                            <CardHeader>Recent Sales Orders</CardHeader>
                             <CardBody>
                                 <Table responsive className="scrollTable">
                                     <thead>

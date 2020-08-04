@@ -124,7 +124,7 @@ class SingleOrderPage extends Component {
                             <CardBody>
                                 <Row>
                                     <Col>
-                                        Order ID:
+                                        MO ID:
                                     </Col>
                                     <Col>
                                         <b>{order.orderNumber}</b>
@@ -192,7 +192,10 @@ class SingleOrderPage extends Component {
                                     <tbody>
                                         {order.manufacture_item_set ? order.manufacture_item_set.map((item, index) => (
                                             <tr>
-                                                <td>{index + 1}</td>
+                                                <td>{index
+                                                //  + 1
+                                                
+                                                }</td>
                                                 <td>{item.componentName}</td>
                                                 <td>{item.price}</td>
                                                 <td>{item.quantity}</td>

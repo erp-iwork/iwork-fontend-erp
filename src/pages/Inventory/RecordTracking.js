@@ -6,6 +6,7 @@ import { updateFilter } from '../../store/search/action'
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { filter as filterRecords } from '../../useCases'
+import filters from '../../constant/filters'
 
 const RecordTracking = ({ loading_records, records, getRecords, filter, updateFilter, searchValue }) => {
     var _records = []
@@ -22,7 +23,8 @@ const RecordTracking = ({ loading_records, records, getRecords, filter, updateFi
 
     const filtered = filterRecords({
         name: { value: searchValue, tag: 'productName' },
-        type: { value: filter['Type'], tag: 'transactionType' }
+        type: { value: filter[filters.RECORD], tag: 'transactionType' },
+        date: { value: filter[filters.DATE._type], tag: 'transactionDate' }
     }, _records)
 
     return (
