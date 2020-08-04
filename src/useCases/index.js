@@ -25,11 +25,19 @@ export const getCount = (count) => {
 
 export const filter = (options, data) => {
     var updatedName = []
-    if (options.name.value !== null || options.name.value !== "") {
+    if (options.name !== undefined) {
         const exp = new RegExp("^" + options.name.value, "gi")
         updatedName = data.filter(item => item[options.name.tag].match(exp))
     } else updatedName = data
-    return updatedName
+
+    var updatedType = []
+    if (options.type !== undefined || options.type !== null) {
+        if (options.type.value) {
+            updatedType = updatedName.filter(item => item[options.type.tag] === options.type.value)
+        } else updatedType = updatedName
+    } else updatedType = updatedName
+
+    return updatedType
 }
 
 /*

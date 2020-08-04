@@ -194,6 +194,7 @@ export const deleteItem = (InventoryItemId) => (dispatch) => {
 
 export const getExistingCategories = () => (dispatch) => {
   dispatch({ type: inventoryConstant.REQUEST_GET_EXISTING_CATEGORIES })
+  console.log("Here")
   return axios.get(API + routes.category, headers)
     .then(res => {
       dispatch({
@@ -380,7 +381,6 @@ export const getRecords = () => (dispatch) => {
           text: "Connection Problem",
           icon: "error",
           position: 'top-right',
-
           showConfirmButton: false,
           timer: 1000
         });

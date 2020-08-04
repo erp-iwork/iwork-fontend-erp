@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from '../utils/propTypes';
-import bn from '../utils/bemnames';
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import Typography from './Typography';
-import FilterOptions from './filterOptions';
+import React from 'react'
+import PropTypes from '../utils/propTypes'
+import bn from '../utils/bemnames'
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap'
+import Typography from './Typography'
+import FilterOptions from './filterOptions'
 import { connect } from 'react-redux'
+import transactionTypes from '../constant/transactions'
 
-const bem = bn.create('page');
+const bem = bn.create('page')
 
 const Page = ({
   title,
@@ -21,7 +22,8 @@ const Page = ({
   isInventory,
   ...restProps
 }) => {
-  const classes = bem.b('px-3', className);
+  
+  const classes = bem.b('px-3', className)
   var departments = []
   var levels = []
   var roles = []
@@ -38,17 +40,8 @@ const Page = ({
     }
   })
 
-  console.log(records)
-
-  var categories = []
-  records.forEach(record => {
-    if (!categories.find(_cat => _cat === record.productCategory)) {
-      categories.push(record.productCategory)
-    }
-  })
-
   return (
-    <Tag className={classes} {...restProps}>
+    <Tag className={classes}>
       <div className={bem.e('header')}>
         {title && typeof title === 'string' ? (
           <Typography type="h2" className={bem.e('title')}>
@@ -78,18 +71,16 @@ const Page = ({
         }
         {isInventory?
           <div style={{ display: hasFilter? 'flex' : 'none', justifyContent: 'flex-end' }}>
-            <FilterOptions type="Category" data={departments} />
-            <FilterOptions type="Type" data={categories} />
-            <FilterOptions type="Date" data={[]} />
+            <FilterOptions type="Type" data={[transactionTypes.in, transactionTypes.out]} />
+            <FilterOptions type="Date" data={['Yesterday', 'This Week', 'Last Month']} />
           </div> : <div></div>
         }
-
       </div>
       <hr></hr>
       {children}
     </Tag>
-  );
-};
+  )
+}
 
 Page.propTypes = {
   tag: PropTypes.component,
@@ -102,20 +93,15 @@ Page.propTypes = {
       active: PropTypes.bool,
     })
   ),
-};
+}
 
 Page.defaultProps = {
   tag: 'div',
   title: '',
-};
+}
 
 const mapStateToProps = state => ({
   employees: state.hrReducer.employees,
-  records: state.inventoryReducer.records,
-  loading_categories: state.inventoryReducer.loading_categories,
-        loading_records: state.inventoryReducer.loading_records,
-        records: state.inventoryReducer.records,
-        categories: state.inventoryReducer.categories
 })
 
 export default connect(mapStateToProps)(Page)
