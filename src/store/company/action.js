@@ -255,6 +255,39 @@ export const addMasterData = (masterData) => (dispatch) => {
     });
 }
 
+export const deleteMasterData = id => dispatch => {
+  dispatch({ type: companyConstant.REQUEST_DELETE_MASTERDATA })
+  axios.delete(API + routes.masterData + id)
+    .then(_ => {
+      Swal.fire({
+        title: 'Deleted',
+        icon: 'success',
+        timer: 1000,
+        position: 'top-right',
+        showConfirmButton: false
+      })
+      window.location.reload()
+      dispatch({ type: companyConstant.SUCCESS_DELETE_MASTERDATA, payload: id })
+    })
+    .catch(err => {
+      if (err.response && err.response.data) {
+        dispatch({
+          type: errorsConstant.GET_ERRORS,
+          payload: err.response.data,
+        })
+      } else {
+        Swal.fire({
+          title: "Error", text: "Connection Problem",
+          icon: "error",
+          position: 'top-right',
+
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+    })
+}
+
 export const getAllMasterData = () => (dispatch) => {
   dispatch({
     type: companyConstant.REQUEST_GET_MASTERDATA,

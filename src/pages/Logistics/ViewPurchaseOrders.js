@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom'
 import { getCustomOrders, updateStatus } from '../../store/procurement/action'
 import routes from '../../config/routes'
 import status from '../../constant/status'
-import { filter, getCount } from '../../useCases' 
+import { filter, getCount } from '../../useCases'
+import { getDateFormat } from '../../useCases/getDateFormat'
 import { updateFilter } from '../../store/search/action'
 import filters from '../../constant/filters'
 
@@ -20,7 +21,7 @@ const Order = ({ order, index, deliver }) => {
                 <td>{order.suplier.suplierName}</td>
                 <td>{order.orderdBy}</td>
                 <td>{getCount(order.purchaseOrderNumber)}</td>
-                <td>{order.purchaseOrderDate}</td>
+                <td>{getDateFormat(order.purchaseOrderDate)}</td>
                 <td>{order.status_purchase_order[0]['status']}</td>
                 <td align='left'>
                     <Button size='sm' color='primary'

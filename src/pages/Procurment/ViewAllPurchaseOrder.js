@@ -7,6 +7,7 @@ import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
 import { reverse, filter, getCount } from '../../useCases'
+import { getDateFormat } from '../../useCases/getDateFormat'
 import { updateFilter } from '../../store/search/action'
 import filters from '../../constant/filters'
 
@@ -17,7 +18,7 @@ const Order = ({ order, index }) => {
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
             <td>{getCount(order.purchaseOrderNumber)}</td>
-            <td>{order.purchaseOrderDate}</td>
+            <td>{getDateFormat(order.purchaseOrderDate)}</td>
             <td>{order.status_purchase_order[0].status}</td>
             <td>
                 <Link to={{ pathname: routes.ViewSinglePurchaseOrder, state: order }}>

@@ -6,12 +6,12 @@ import {
 } from 'reactstrap';
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
-import { getAllMasterData } from '../../store/company/action'
+import { getAllMasterData, deleteMasterData } from '../../store/company/action'
 import { getExistingCategories } from '../../store/inventory/action'
 import { reverse } from '../../useCases'
 import { MdDelete, MdRemoveRedEye } from "react-icons/md"
 
-const Data = ({ item, index, toggle, category }) => {
+const Data = ({ item, index, toggle, deleteMasterData }) => {
     return (
         <tbody>
             <tr>
@@ -22,18 +22,14 @@ const Data = ({ item, index, toggle, category }) => {
                 <td>{item.productPrice}</td>
                 <td>{item.unitOfMeasurement}</td>
                 <td>
-
-                    {/* delete function not added  */}
-
                     <Row>
                         <Button style={{ margin: '10px' }} onClick={() => toggle(item)} color='primary' size='sm' >
                             <MdRemoveRedEye />
                         </Button>
-                        <Button style={{ margin: '10px' }} color='danger' size='sm' onClick={() => console.log('delete button touched ')} className='spacing'>
+                        <Button style={{ margin: '10px' }} color='danger' size='sm' onClick={() => deleteMasterData(item.productId)} className='spacing'>
                             <MdDelete />
                         </Button>
                     </Row>
-
                 </td>
             </tr>
         </tbody>
@@ -69,10 +65,10 @@ class ViewAllMasterData extends Component {
     }
 
     render() {
+        console.log(this.props.loading_manufactured_orders)
         if (this.props.loading || this.props.loading_categories) return <PageSpinner />
         if (this.props.masterData.length === 0) return <h2>No products to show</h2>
         const { data } = this.state
-
         return (
             <Page
                 title="All Master Data"
@@ -115,7 +111,7 @@ class ViewAllMasterData extends Component {
                                 </tr>
                             </thead>
                             {reverse(this.props.masterData).map((item, index) => (
-                                <Data item={item} key={index} index={index} toggle={this.toggle} />
+                                <Data item={item} key={index} index={index} toggle={this.toggle} deleteMasterData={this.props.deleteMasterData} />
                             ))}
                         </Table>
                     </CardBody>
@@ -132,9 +128,10 @@ const mapStateToProps = (state) => {
         loading_categories: state.inventoryReducer.loading_categories,
         loading: state.companyReducer.loading,
         masterData: state.companyReducer.masterData,
+        loading_manufactured_orders: state.companyReducer.loading_manufactured_orders,
         searchValue: state.searchData.value
     }
 }
-const mapDispatchToProps = { getAllMasterData, getExistingCategories }
+const mapDispatchToProps = { getAllMasterData, getExistingCategories, deleteMasterData }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewAllMasterData)

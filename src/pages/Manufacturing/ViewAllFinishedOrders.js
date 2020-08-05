@@ -7,7 +7,7 @@ import PageSpinner from '../../components/PageSpinner'
 import routes from '../../config/routes'
 import { Link } from 'react-router-dom'
 import status from '../../constant/status'
-import { filter, reverse } from '../../useCases'
+import { filter, reverse, getCount } from '../../useCases'
 
 const Order = ({ order, index, handleQualityCheck }) => {
     return (
@@ -16,7 +16,7 @@ const Order = ({ order, index, handleQualityCheck }) => {
             <td>{order.requiredProductName}</td>
             <td>{order.retailPrice}</td>
             <td>{order.cost}</td>
-            <td>{order.orderNumber}</td>
+            <td>{getCount(order.orderNumber)}</td>
             <td>{order.unitOfMesurement}</td>
             <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status : null}</td>
             <td>{order.status_manufacture_order ? order.status_manufacture_order[0].status === status.manuFactured ?
@@ -46,7 +46,6 @@ class ViewAllFinishedOrdersPage extends Component {
         this.props.getOrders()
     }
 
-
     componentDidUpdate(prevProps, prevState) {
         if (!this.props.loading_manufactured_orders && !this.state.qualitychecked) {
             this.setState({
@@ -55,8 +54,6 @@ class ViewAllFinishedOrdersPage extends Component {
             })
         }
     }
-
-
 
     handleQualityCheck(order, status) {
         this.props.updateStatus(order, status)

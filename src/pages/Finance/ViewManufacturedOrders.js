@@ -8,7 +8,8 @@ import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
 import status from '../../constant/status'
-import { filter, getCount } from '../../useCases' 
+import { filter, getCount } from '../../useCases'
+import { getDateFormat } from '../../useCases/getDateFormat'
 import { updateFilter } from '../../store/search/action'
 import filters from '../../constant/filters'
 
@@ -21,7 +22,7 @@ const Order = ({ order, index }) => {
             <td>{getCount(order.orderNumber)}</td>
             <td>{order.cost}</td>
             <td>{order.requiredProductQuantity}</td>
-            <td>{order.status_manufacture_order[0]['date']}</td>
+            <td>{getDateFormat(order.status_manufacture_order[0]['date'])}</td>
             <td>{order.status_manufacture_order[0]['status']}</td>
             <td>
                 {order.status_manufacture_order[0]['status'] === status.confirmed ?

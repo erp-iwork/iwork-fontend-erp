@@ -9,8 +9,7 @@ import { getStatus, getOrders } from '../../store/order/action'
 import { getSiv, updateSiv } from '../../store/Siv/action'
 import routes from '../../config/routes'
 import status from '../../constant/status'
-import { reverse, getCount } from '../../useCases/'
-import { filter } from '../../useCases' 
+import { reverse, getCount, filter } from '../../useCases/'
 import { updateFilter } from '../../store/search/action'
 import filters from '../../constant/filters'
 
@@ -24,11 +23,11 @@ const Order = ({ order, index, handleApprove, currentOrder, success }) => {
     return (
         <tbody>
             <tr>
-                <th scope="row">{getCount(index + 1)}</th>
+                <th scope="row">{index + 1}</th>
                 <td>{order.customer}</td>
                 <td>{order.salesPerson}</td>
                 <td>{order.shipmentAddress}</td>
-                <td>{order.orderNumber}</td>
+                <td>{getCount(order.orderNumber)}</td>
                 <td>{success? status.issued : order.status}</td>
                 {currentOrder.orderNumber === order.orderNumber && success?
                 (

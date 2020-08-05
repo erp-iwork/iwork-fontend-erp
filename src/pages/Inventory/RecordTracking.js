@@ -6,6 +6,7 @@ import { updateFilter } from '../../store/search/action'
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { filter as filterRecords, getCount } from '../../useCases'
+import { getDateFormat } from '../../useCases/getDateFormat'
 import filters from '../../constant/filters'
 
 const RecordTracking = ({ loading_records, records, getRecords, filter, updateFilter, searchValue }) => {
@@ -67,7 +68,7 @@ const RecordTracking = ({ loading_records, records, getRecords, filter, updateFi
                                             <td>{item.productCategory}</td>
                                             <td>{getCount(item.orderId)}</td>
                                             <td>{item.amount}</td>
-                                            <td>{item.transactionDate}</td>
+                                            <td>{getDateFormat(item.transactionDate)}</td>
                                         </tr>
                                     )) : null}
                                 </tbody>

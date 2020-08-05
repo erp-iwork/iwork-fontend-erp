@@ -149,7 +149,22 @@ export default function companyReducer(state = initialState, action) {
         errors: [],
       }
 
+    case companyConstant.REQUEST_DELETE_MASTERDATA: {
+      return {
+        ...state, loading_manufactured_orders: true
+      }
+    }
 
+    case companyConstant.SUCCESS_DELETE_MASTERDATA: {
+      const index = state.masterData.findIndex(item => item.id === action.payload)
+      var data = state.masterData
+      if (index !== -1) {
+        data.splice(index, 1)
+      }
+      return {
+        ...state, masterData: data, loading_manufactured_orders: false
+      }
+    }
 
     default:
       return state;

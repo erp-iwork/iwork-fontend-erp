@@ -8,6 +8,7 @@ import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
 import status from '../../constant/status'
 import { reverse, filter, getCount } from '../../useCases'
+import { getDateFormat } from '../../useCases/getDateFormat'
 import { updateFilter } from '../../store/search/action'
 
 const Order = ({ order, index, handleReceive }) => {
@@ -19,7 +20,7 @@ const Order = ({ order, index, handleReceive }) => {
             <td>{getCount(order.orderNumber)}</td>
             <td>{order.cost}</td>
             <td>{order.requiredProductQuantity}</td>
-            <td>{order.status_manufacture_order[0]['date']}</td>
+            <td>{getDateFormat(order.status_manufacture_order[0]['date'])}</td>
             <td>{order.status_manufacture_order[0]['status']}</td>
             <td>
                 {order.status_manufacture_order[0]['status'] === status.finished ?

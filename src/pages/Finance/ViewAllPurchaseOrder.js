@@ -8,6 +8,7 @@ import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
 import status from '../../constant/status'
 import { filter, getCount } from '../../useCases' 
+import { getDateFormat } from '../../useCases/getDateFormat'
 import { updateFilter } from '../../store/search/action'
 import filters from '../../constant/filters'
 
@@ -18,7 +19,7 @@ const Order = ({ order, index, handleApprove }) => {
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
             <td>{getCount(order.purchaseOrderNumber)}</td>
-            <td>{order.purchaseOrderDate}</td>
+            <td>{getDateFormat(order.purchaseOrderDate)}</td>
             <td>{order.status_purchase_order[0].status}</td>
             <td>
                 {order.status_purchase_order[0]['status'] === status.created?

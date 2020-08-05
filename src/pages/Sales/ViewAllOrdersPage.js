@@ -9,6 +9,7 @@ import PageSpinner from '../../components/PageSpinner'
 import { reverse } from '../../useCases'
 import { filter } from '../../useCases' 
 import { updateFilter } from '../../store/search/action'
+import { getDateFormat } from '../../useCases/getDateFormat'
 import filters from '../../constant/filters'
 
 const Order = ({ order, id }) => {
@@ -18,7 +19,7 @@ const Order = ({ order, id }) => {
             <td>{order.customer}</td>
             <td>{order.salesPerson}</td>
             <td>{order.shipmentAddress}</td>
-            <td>{order.orderDate}</td>
+            <td>{getDateFormat(order.orderDate)}</td>
             <td>{order.status}</td>
             <td>
                 <Link to={{ pathname: routes.ViewSingleOrderPage, state: order }}>
