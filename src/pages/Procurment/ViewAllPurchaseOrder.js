@@ -6,7 +6,9 @@ import { getOrders } from '../../store/procurement/action'
 import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
-import { reverse } from '../../useCases'
+import { reverse, filter, getCount } from '../../useCases'
+import { updateFilter } from '../../store/search/action'
+import filters from '../../constant/filters'
 
 const Order = ({ order, index }) => {
     return (
@@ -14,7 +16,7 @@ const Order = ({ order, index }) => {
             <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
-            <td>{order.purchaseOrderNumber}</td>
+            <td>{getCount(order.purchaseOrderNumber)}</td>
             <td>{order.purchaseOrderDate}</td>
             <td>{order.status_purchase_order[0].status}</td>
             <td>
@@ -43,6 +45,8 @@ class ViewAllPurchaseOrderPage extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.props.loading_orders && !this.state.done) {
+            updateFilter('Type', null)
+            updateFilter(filters.ADVANCED_DATE, null)
             this.setState({
                 orders: this.props.orders,
                 done: true
@@ -53,8 +57,18 @@ class ViewAllPurchaseOrderPage extends Component {
     render() {
         if (!this.state.done) return <PageSpinner />
         if (this.state.orders.length === 0) return <h2>No orders created yet.</h2>
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'orderdBy' },
+            date: { value: this.props.filter[filters.DATE._type], tag: 'purchaseOrderDate' },
+            advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'purchaseOrderDate' }
+        }, this.props.orders)
         return (
-            <Page title="All Purchase Orders" breadcrumbs={[{ name: 'Procurment', active: true }]}>
+            <Page
+                title="All Purchase Orders"
+                breadcrumbs={[{ name: 'Procurment', active: true }]}
+                hasFilter={true}
+                hasAdvancedDate={true}
+            >
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>
                     <CardBody>
@@ -71,8 +85,8 @@ class ViewAllPurchaseOrderPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {reverse(this.state.orders).map((order, index) => (
-                                    <Order order={order} index={index} />
+                                {reverse(filtered).map((order, index) => (
+                                    <Order order={order} index={index} key={index} />
                                 ))}
                             </tbody>
                         </Table>
@@ -86,8 +100,10 @@ class ViewAllPurchaseOrderPage extends Component {
 const mapStateToProps = (state) => {
     return {
         loading_orders: state.procurementReducer.loading_orders,
-        orders: state.procurementReducer.orders
+        orders: state.procurementReducer.orders,
+        filter: state.searchData.filter,
+        searchValue: state.searchData.value
     }
 }
 
-export default connect(mapStateToProps, { getOrders })(ViewAllPurchaseOrderPage)
+export default connect(mapStateToProps, { getOrders, updateFilter })(ViewAllPurchaseOrderPage)

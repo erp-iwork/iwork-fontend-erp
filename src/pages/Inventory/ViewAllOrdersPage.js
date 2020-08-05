@@ -10,6 +10,9 @@ import { getSiv, updateSiv } from '../../store/Siv/action'
 import routes from '../../config/routes'
 import status from '../../constant/status'
 import { reverse, getCount } from '../../useCases/'
+import { filter } from '../../useCases' 
+import { updateFilter } from '../../store/search/action'
+import filters from '../../constant/filters'
 
 const Order = ({ order, index, handleApprove, currentOrder, success }) => {
     const [loading, setLoading] = React.useState(false)
@@ -78,6 +81,8 @@ class ViewAllOrdersPage extends Component {
 
     componentDidMount() {
         this.props.getOrders()
+        updateFilter('Type', null)
+        updateFilter(filters.ADVANCED_DATE, null)
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -101,11 +106,19 @@ class ViewAllOrdersPage extends Component {
         if (!this.state.done) return <PageSpinner />
         const createdOrders = this.state.orders ? this.state.orders.filter((order) => { return order.status === status.created || order.status === status.issued }) : "";
         if (createdOrders.length === 0) return <h4>No orders to show</h4>
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'customer' },
+            date: { value: this.props.filter[filters.DATE._type], tag: 'orderDate' },
+            advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'orderDate' }
+        }, createdOrders)
         return (
             <Page
                 title="All Sales Orders"
                 breadcrumbs={[{ name: 'Inventory', active: true }]}
-                className="TablePage">
+                className="TablePage"
+                hasFilter={true}
+                hasAdvancedDate={true}
+            >
                 <Card className="mb-3">
                     <CardHeader>All Sales Orders</CardHeader>
                     <CardBody>
@@ -122,7 +135,7 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {reverse(createdOrders).map((item, index) => (
+                            {reverse(filtered).map((item, index) => (
                                 <Order order={item} key={index} index={index} handleApprove={this.handleApprove} currentOrder={this.state.order} success={this.props.success} />
                             ))}
                         </Table>
@@ -142,7 +155,11 @@ const mapStateToProps = (state) => {
         sivs: state.sivReducer.sivs,
         success: state.sivReducer.success,
         siv_item: state.invoiceReducer.siv_item,
+        filter: state.searchData.filter,
+        searchValue: state.searchData.value
     }
 }
 
-export default connect(mapStateToProps, { getOrders, getStatus, getSiv, updateSiv })(ViewAllOrdersPage)
+export default connect(mapStateToProps, {
+    getOrders, getStatus, getSiv, updateSiv, updateFilter
+})(ViewAllOrdersPage)

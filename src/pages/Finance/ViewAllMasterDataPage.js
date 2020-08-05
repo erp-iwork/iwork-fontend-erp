@@ -8,7 +8,7 @@ import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
 import { getAllMasterData } from '../../store/company/action'
 import { getExistingCategories } from '../../store/inventory/action'
-import { reverse, filter } from '../../useCases'
+import { reverse } from '../../useCases'
 import { MdDelete, MdRemoveRedEye } from "react-icons/md"
 
 const Data = ({ item, index, toggle, category }) => {

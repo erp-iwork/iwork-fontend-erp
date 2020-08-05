@@ -7,6 +7,7 @@ import PageSpinner from '../../components/PageSpinner'
 import routes from '../../config/routes'
 import { Link } from 'react-router-dom'
 import status from '../../constant/status'
+import { filter, reverse } from '../../useCases'
 
 const Order = ({ order, index, handleQualityCheck }) => {
     return (
@@ -63,6 +64,9 @@ class ViewAllFinishedOrdersPage extends Component {
 
     render() {
         if (!this.state.qualitychecked) return <PageSpinner />
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'requiredProductName' },
+        }, this.props.orders)
         return (
             <Page title="View Finished Orders" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
 
@@ -84,10 +88,9 @@ class ViewAllFinishedOrdersPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.orders.filter(o => o.status_manufacture_order[0].status === "Manufactured" || o.status_manufacture_order[0].status === "Quantity Checked" || o.status_manufacture_order[0].status === "Confirmed").slice(0).reverse().map((item, index) => (
+                                {filtered.filter(o => o.status_manufacture_order[0].status === "Manufactured" || o.status_manufacture_order[0].status === "Quantity Checked" || o.status_manufacture_order[0].status === "Confirmed").slice(0).reverse().map((item, index) => (
                                     <Order key={index} index={index} order={item} handleQualityCheck={() => this.handleQualityCheck(item.orderNumber, "Quantity Checked")} />
                                 ))}
-
                             </tbody>
                         </Table>
                     </CardBody>
@@ -104,7 +107,9 @@ const mapStateToProps = (state) => {
         orders: state.manuFacturingReducer.orders,
         loading_manufacture: state.manuFacturingReducer.loading_manufacture,
         success: state.manuFacturingReducer.success,
-        updatedOrders: state.manuFacturingReducer.orders
+        updatedOrders: state.manuFacturingReducer.orders,
+        filter: state.searchData.filter,
+        searchValue: state.searchData.value
     }
 }
 

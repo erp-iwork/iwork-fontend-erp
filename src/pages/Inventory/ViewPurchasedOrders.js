@@ -8,7 +8,9 @@ import { connect } from 'react-redux'
 import routes from '../../config/routes'
 import { Link } from 'react-router-dom'
 import status from '../../constant/status'
-import { reverse } from '../../useCases'
+import { reverse, filter, getCount } from '../../useCases'
+import { updateFilter } from '../../store/search/action'
+import filters from '../../constant/filters'
 
 const Order = ({ order, index, handleApprove }) => {
     return (
@@ -16,7 +18,7 @@ const Order = ({ order, index, handleApprove }) => {
             <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
-            <td>{order.purchaseOrderNumber}</td>
+            <td>{getCount(order.purchaseOrderNumber)}</td>
             <td>{order.purchaseOrderDate}</td>
             <td>{order.status_purchase_order[0]['status']}</td>
             <td align="left">
@@ -63,6 +65,8 @@ class ViewPurchasedItems extends Component {
 
     componentDidMount() {
         this.props.getCustomOrders(status.invoiced, status.received)
+        updateFilter('Type', null)
+        updateFilter(filters.ADVANCED_DATE, null)
     }
 
     handleApprove = (orderNumber) => {
@@ -72,8 +76,18 @@ class ViewPurchasedItems extends Component {
     render() {
         if (!this.state.done) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No Purchased Items</h2>
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'orderdBy' },
+            date: { value: this.props.filter[filters.DATE._type], tag: 'purchaseOrderDate' },
+            advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'purchaseOrderDate' }
+        }, this.props.orders)
         return (
-            <Page title="Purchased Products" breadcrumbs={[{ name: 'Inventory', active: true }]}>
+            <Page
+                title="Purchased Products"
+                breadcrumbs={[{ name: 'Inventory', active: true }]}
+                hasFilter={true}
+                hasAdvancedDate={true}
+            >
                 <Card className="mb-3">
                     <CardHeader>Purchased Items</CardHeader>
                     <CardBody>
@@ -91,7 +105,7 @@ class ViewPurchasedItems extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {reverse(this.state.orders).map((item, index) => (
+                                {reverse(filtered).map((item, index) => (
                                     <Order key={index} index={index} order={item} handleApprove={this.handleApprove} />
                                 ))}
                             </tbody>
@@ -111,8 +125,10 @@ const mapStateToProps = (state) => {
         orders: state.procurementReducer.orders,
         success: state.procurementReducer.success,
         order: state.procurementReducer.order,
-        status: state.procurementReducer.status
+        status: state.procurementReducer.status,
+        filter: state.searchData.filter,
+        searchValue: state.searchData.value
     }
 }
 
-export default connect(mapStateToProps, { updateStatus, getCustomOrders })(ViewPurchasedItems)
+export default connect(mapStateToProps, { updateStatus, getCustomOrders, updateFilter })(ViewPurchasedItems)

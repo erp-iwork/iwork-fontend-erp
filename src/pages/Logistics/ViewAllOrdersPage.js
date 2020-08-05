@@ -8,6 +8,9 @@ import { Link } from 'react-router-dom'
 import { getOrders, updateStatus } from '../../store/order/action'
 import routes from '../../config/routes'
 import status from '../../constant/status'
+import { filter, getCount } from '../../useCases' 
+import { updateFilter } from '../../store/search/action'
+import filters from '../../constant/filters'
 
 const Order = ({ order, index, deliver }) => {
     return (
@@ -17,7 +20,7 @@ const Order = ({ order, index, deliver }) => {
                 <td>{order.customer}</td>
                 <td>{order.salesPerson}</td>
                 <td>{order.shipmentAddress}</td>
-                <td>{order.orderNumber}</td>
+                <td>{getCount(order.orderNumber)}</td>
                 <td>{order.status}</td>
                 <td align='left'>
                     <Button size='sm' color='primary'
@@ -48,6 +51,8 @@ class ViewAllOrdersPage extends Component {
 
     componentDidMount() {
         this.props.getOrders()
+        updateFilter('Type', null)
+        updateFilter(filters.ADVANCED_DATE, null)
     }
 
     deliver(order) {
@@ -58,11 +63,20 @@ class ViewAllOrdersPage extends Component {
         if (this.props.loading) return <PageSpinner />
         const deliveredOrders = this.props.orders ? this.props.orders.filter((order) => { return order.status === status.delivered || order.status === status.issued }) : null
         if (deliveredOrders === null) return <h2>No orders to show</h2>
+
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'customer' },
+            date: { value: this.props.filter[filters.DATE._type], tag: 'orderDate' },
+            advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'orderDate' }
+        }, deliveredOrders)
         return (
             <Page
                 title="All Orders"
                 breadcrumbs={[{ name: 'Logistics', active: true }]}
-                className="TablePage">
+                className="TablePage"
+                hasFilter={true}
+                hasAdvancedDate={true}
+            >
                 <Card className="mb-3">
                     <CardHeader>All Created & Delivered Orders</CardHeader>
                     <CardBody>
@@ -79,7 +93,7 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {deliveredOrders.map((item, index) => (
+                            {filtered.map((item, index) => (
                                 <Order order={item} key={index} index={index} deliver={this.deliver} />
                             ))}
                         </Table>
@@ -97,7 +111,9 @@ const mapStateToProps = (state) => {
         orders: state.ordersReducer.orders,
         status: state.ordersReducer.status,
         success: state.ordersReducer.success,
+        filter: state.searchData.filter,
+        searchValue: state.searchData.value
     }
 }
 
-export default connect(mapStateToProps, { getOrders, updateStatus })(ViewAllOrdersPage)
+export default connect(mapStateToProps, { getOrders, updateStatus, updateFilter })(ViewAllOrdersPage)

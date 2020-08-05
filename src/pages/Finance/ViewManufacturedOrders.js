@@ -8,6 +8,9 @@ import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
 import status from '../../constant/status'
+import { filter, getCount } from '../../useCases' 
+import { updateFilter } from '../../store/search/action'
+import filters from '../../constant/filters'
 
 const Order = ({ order, index }) => {
     return (
@@ -15,7 +18,7 @@ const Order = ({ order, index }) => {
             <th scope="row">{index + 1}</th>
             <td>{order.requiredProductName}</td>
             <td>{order.manufacturePerson}</td>
-            <td>{order.orderNumber}</td>
+            <td>{getCount(order.orderNumber)}</td>
             <td>{order.cost}</td>
             <td>{order.requiredProductQuantity}</td>
             <td>{order.status_manufacture_order[0]['date']}</td>
@@ -61,6 +64,8 @@ class ViewAllPurchaseOrderPage extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.props.loading_manufactured_orders && !this.state.done) {
+            updateFilter('Type', null)
+            updateFilter(filters.ADVANCED_DATE, null)
             this.setState({
                 orders: this.props.orders,
                 done: true
@@ -70,10 +75,16 @@ class ViewAllPurchaseOrderPage extends Component {
 
     render() {
         if (!this.state.done) return <PageSpinner />
-        if (this.props.orders.length === 0)
-            return <Page title="Manufactured Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
-                No orders created yet.
-        </Page>
+        if (this.props.orders.length === 0){
+            return (
+                <Page title="Manufactured Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
+                    No orders created yet.
+                </Page>
+            )
+        }
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'requiredProductName' },
+        }, this.props.orders)
         return (
             <Page title="Manufactured Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
                 <Card className="mb-3">
@@ -94,7 +105,7 @@ class ViewAllPurchaseOrderPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.done ? this.state.orders.slice(0).reverse().map((item, index) => (
+                                {this.state.done ? filtered.slice(0).reverse().map((item, index) => (
                                     <Order key={index} index={index} order={item} handleApprove={() => null} />
                                 )) : ''}
                             </tbody>
@@ -112,8 +123,10 @@ const mapStateToProps = (state) => {
         orders: state.companyReducer.orders,
         loading_manufacture: state.manuFacturingReducer.loading_manufacture,
         success: state.manuFacturingReducer.success,
-        updatedOrders: state.manuFacturingReducer.orders
+        updatedOrders: state.manuFacturingReducer.orders,
+        filter: state.searchData.filter,
+        searchValue: state.searchData.value
     }
 }
 
-export default connect(mapStateToProps, { getManufacturedOrders, updateStatus })(ViewAllPurchaseOrderPage)
+export default connect(mapStateToProps, { getManufacturedOrders, updateStatus, updateFilter })(ViewAllPurchaseOrderPage)

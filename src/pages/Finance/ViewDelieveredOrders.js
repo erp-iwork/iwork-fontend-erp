@@ -7,6 +7,9 @@ import PageSpinner from '../../components/PageSpinner'
 import { Link } from 'react-router-dom'
 import routes from '../../config/routes'
 import status from '../../constant/status'
+import { filter, getCount } from '../../useCases' 
+import { updateFilter } from '../../store/search/action'
+import filters from '../../constant/filters'
 
 const Order = ({ order, index }) => {
     return (
@@ -14,7 +17,7 @@ const Order = ({ order, index }) => {
             <th scope="row">{index + 1}</th>
             <td>{order.suplier.suplierName}</td>
             <td>{order.orderdBy}</td>
-            <td>{order.purchaseOrderNumber}</td>
+            <td>{getCount(order.purchaseOrderNumber)}</td>
             <td>{order.purchaseOrderDate}</td>
             <td>{order.status_purchase_order[0].status}</td>
             <td>
@@ -45,6 +48,8 @@ class ViewDelieveredOrdersPage extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.props.loading_orders && !this.state.done) {
+            updateFilter('Type', null)
+            updateFilter(filters.ADVANCED_DATE, null)
             this.setState({
                 orders: this.props.orders,
                 done: true
@@ -54,8 +59,18 @@ class ViewDelieveredOrdersPage extends Component {
 
     render() {
         if (!this.state.done) return <PageSpinner />
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'orderdBy' },
+            date: { value: this.props.filter[filters.DATE._type], tag: 'purchaseOrderDate' },
+            advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'purchaseOrderDate' }
+        }, this.props.orders)
         return (
-            <Page title="Delivered Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
+            <Page
+                title="Delivered Orders"
+                breadcrumbs={[{ name: 'Finance', active: true }]}
+                hasFilter={true}
+                hasAdvancedDate={true}
+            >
                 <Row>
                     <Col>
                         <Card className="mb-3">
@@ -74,7 +89,7 @@ class ViewDelieveredOrdersPage extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.props.orders.slice(0).reverse().map((item, index) => (
+                                        {filtered.slice(0).reverse().map((item, index) => (
                                             <Order key={index} index={index} order={item} />
                                         ))}
                                     </tbody>
@@ -90,7 +105,9 @@ class ViewDelieveredOrdersPage extends Component {
 
 const mapStateToProps = (state) => ({
     loading_orders: state.procurementReducer.loading_orders,
-    orders: state.procurementReducer.orders
+    orders: state.procurementReducer.orders,
+    filter: state.searchData.filter,
+    searchValue: state.searchData.value
 })
 
-export default connect(mapStateToProps, { getCustomOrders })(ViewDelieveredOrdersPage)
+export default connect(mapStateToProps, { getCustomOrders, updateFilter })(ViewDelieveredOrdersPage)

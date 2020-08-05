@@ -11,7 +11,24 @@ describe('filter operations', () => {
             name: { value: 'Iro', tag: 'productName' },
             date: { value: filters.DATE["LAST MONTH"], tag: 'transactionDate' }
         }, data)
+        console.log(response)
         expect(response).toContain(data[0])
     })
-    
 })
+
+describe('sth', () => {
+    it('should filter by date range', () => {
+        const startDate = "2020-06-01"
+        const endDate = "2020-08-05"
+        var response = filter({
+            name: { value: 'Iro', tag: 'productName' },
+            advancedDate: {
+                value: [startDate, endDate],
+                tag: 'transactionDate'
+            }
+        }, data)
+
+        expect(response).toContain(data[0])
+    })
+})
+

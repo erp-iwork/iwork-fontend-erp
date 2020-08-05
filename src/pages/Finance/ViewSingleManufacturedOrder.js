@@ -34,9 +34,8 @@ class ViewSingleDelieveredOrderPage extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (this.props.success && !this.state.lockPage) {
-            this.props.getSingleManufacturedOrder(this.state.order.orderNumber).then(res => {
-                this.setState({ lockPage: true })
-            })
+            this.props.getSingleManufacturedOrder(this.state.order.orderNumber)
+            this.setState({ lockPage: true })
         }
     }
 
@@ -100,10 +99,10 @@ class ViewSingleDelieveredOrderPage extends Component {
                                         <Col style={{
                                             display: order.status_manufacture_order[0]['status'] === status.finished ? 'none' : 'flex', flexDirection: 'row', alignItems: 'center'
                                         }}>
-                                            Margin:
                                             <Input onChange={event => this.setState({
-                                            margin: event.target.value
-                                        })} type="number" />
+                                                margin: event.target.value
+                                            })} type="number" value={order.requiredProductQuantity * order.retailPrice}
+                                            />
                                         </Col>
                                         <Col>
                                             <Button align='center' color='primary' onClick={this.invoice} disabled={

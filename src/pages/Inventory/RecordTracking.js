@@ -5,7 +5,7 @@ import { getRecords } from '../../store/inventory/action'
 import { updateFilter } from '../../store/search/action'
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
-import { filter as filterRecords } from '../../useCases'
+import { filter as filterRecords, getCount } from '../../useCases'
 import filters from '../../constant/filters'
 
 const RecordTracking = ({ loading_records, records, getRecords, filter, updateFilter, searchValue }) => {
@@ -13,7 +13,8 @@ const RecordTracking = ({ loading_records, records, getRecords, filter, updateFi
     useEffect(() => {
         getRecords()
         updateFilter('Type', null)
-    }, [getRecords])
+        updateFilter(filters.ADVANCED_DATE, null)
+    }, [getRecords, updateFilter])
 
     if (loading_records) return <PageSpinner />
 
@@ -24,7 +25,8 @@ const RecordTracking = ({ loading_records, records, getRecords, filter, updateFi
     const filtered = filterRecords({
         name: { value: searchValue, tag: 'productName' },
         type: { value: filter[filters.RECORD], tag: 'transactionType' },
-        date: { value: filter[filters.DATE._type], tag: 'transactionDate' }
+        date: { value: filter[filters.DATE._type], tag: 'transactionDate' },
+        advancedDate: { value: filter[filters.ADVANCED_DATE], tag: 'transactionDate' }
     }, _records)
 
     return (
@@ -33,6 +35,7 @@ const RecordTracking = ({ loading_records, records, getRecords, filter, updateFi
             breadcrumbs={[{ name: 'Inventory', active: true }]}
             hasFilter={true}
             isInventory={true}
+            hasAdvancedDate={true}
         >
             <Row>
                 <Col>
@@ -42,14 +45,14 @@ const RecordTracking = ({ loading_records, records, getRecords, filter, updateFi
                             <Table responsive>
                                 <thead>
                                     <tr>
-                                        <th>Transaction ID</th>
-                                        <th>Product ID</th>
+                                        <th>TID</th>
+                                        <th>SKU</th>
                                         <th>Product Name</th>
+                                        <th>Quantity</th>
                                         <th>Unit Price</th>
                                         <th>Product Category</th>
                                         <th>Order ID</th>
                                         <th>Amount</th>
-                                        <th>Quantity</th>
                                         <th>Transaction Date</th>
                                     </tr>
                                 </thead>
@@ -59,11 +62,11 @@ const RecordTracking = ({ loading_records, records, getRecords, filter, updateFi
                                             <td>{item.transactionId}</td>
                                             <td>{item.productId}</td>
                                             <td>{item.productName}</td>
+                                            <td>{item.purchaseQuantity}</td>
                                             <td>{item.itemCost}</td>
                                             <td>{item.productCategory}</td>
-                                            <td>{item.orderId}</td>
+                                            <td>{getCount(item.orderId)}</td>
                                             <td>{item.amount}</td>
-                                            <td>{item.purchaseQuantity}</td>
                                             <td>{item.transactionDate}</td>
                                         </tr>
                                     )) : null}

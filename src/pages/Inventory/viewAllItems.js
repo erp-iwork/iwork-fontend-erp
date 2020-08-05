@@ -7,6 +7,9 @@ import Page from '../../components/Page';
 import { getItemsByCategory } from '../../store/inventory/action'
 import PageSpinner from '../../components/PageSpinner'
 import { connect } from 'react-redux'
+import { filter } from '../../useCases' 
+import { updateFilter } from '../../store/search/action'
+import filters from '../../constant/filters'
 
 class ViewAllItems extends Component {
     constructor(props) {
@@ -41,6 +44,8 @@ class ViewAllItems extends Component {
 
     componentDidMount() {
         this.props.getItemsByCategory(this.props.location.state)
+        updateFilter('Type', null)
+        updateFilter(filters.ADVANCED_DATE, null)
     }
 
     render() {
@@ -49,13 +54,22 @@ class ViewAllItems extends Component {
             retailPrice, catagory, productType, unitOfMeasurement, quantity
         } = this.state.item
 
-        if (this.props.items.item_catagory.length === 0 || this.props.items.item_catagory === null) return <Page title="All Products"
-        breadcrumbs={[{ name: 'Inventory', active: true }]}> No Items have been registered in this Category</Page>
+        if (this.props.items.item_catagory.length === 0 || this.props.items.item_catagory === null) {
+            return (
+                <Page title="All Products" breadcrumbs={[{ name: 'Inventory', active: true }]}>
+                    No Items have been registered in this Category
+                </Page>
+            )
+        }
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'itemName' }
+        }, this.props.items.item_catagory)
         return (
             <Page
                 title="All Products"
                 breadcrumbs={[{ name: 'Inventory', active: true }]}
-                className="TablePage">
+                className="TablePage"
+            >
                 <Modal
                     isOpen={this.state.modal}
                     backdrop="static"
@@ -95,8 +109,8 @@ class ViewAllItems extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.props.items.item_catagory.map((item, index) => (
-                                        <tr align='left'>
+                                    {filtered.map((item, index) => (
+                                        <tr align='left' key={index}>
                                             <th scope="row">{index + 1}</th>
                                             <td>{item.itemName}</td>
                                             <td>{item.quantity}</td>
@@ -125,8 +139,10 @@ const mapStateToProps = (state) => {
     return {
         loading_items: state.inventoryReducer.loading_items,
         items: state.inventoryReducer.items,
-        success: state.inventoryReducer.success
+        success: state.inventoryReducer.success,
+        filter: state.searchData.filter,
+        searchValue: state.searchData.value
     }
 }
 
-export default connect(mapStateToProps, { getItemsByCategory })(ViewAllItems)
+export default connect(mapStateToProps, { getItemsByCategory, updateFilter })(ViewAllItems)

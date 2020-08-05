@@ -45,6 +45,45 @@ export const filter = (options, data) => {
         } else updatedDates = updatedType
     } else updatedDates = updatedType
 
+    var updatedAdvancedDates = []
+    if (
+        options.advancedDate !== undefined && options.advancedDate !== null
+        && options.advancedDate.value !== undefined && options.advancedDate.value !== null) {
+        if (options.advancedDate.value.length === 2) {
+            updatedAdvancedDates = advancedDateFilter(
+                options.advancedDate.value,
+                options.advancedDate.tag,
+                updatedDates
+            )
+        } else updatedAdvancedDates = updatedDates
+    } else updatedAdvancedDates = updatedDates
+
+    return updatedAdvancedDates
+}
+
+export const advancedDateFilter = (values, tag, data) => {
+    var updatedDates = []
+    if (typeof values !== "object") return data
+    var startDate = new Date(values[0])
+    var endDate = new Date(values[1])
+    var count = -1
+    var date = null
+    data.forEach(item => {
+        count = 0
+        date = new Date(item[tag])
+        if (date.getFullYear() === startDate.getFullYear() && date.getFullYear() === endDate.getFullYear()) {
+            count++
+        }
+        if (date.getMonth() >= startDate.getMonth() && date.getMonth() <= endDate.getMonth()) {
+            count++
+        }
+        if (date.getDate() >= startDate.getDate() && date.getDate() <= endDate.getDate()) {
+            count++
+        }
+        if (count === 3) {
+            updatedDates.push(item)
+        }
+    })
     return updatedDates
 }
 
@@ -64,8 +103,11 @@ export const dateFilter = (type, tag, data) => {
     data.forEach(item => {
         var date = new Date(item[tag])
         var now = new Date(Date.now())
+        if (now.getFullYear() !== date.getFullYear() && type !== null) {
+            return updatedDates
+        }
         if (type === filters.DATE.TODAY) {
-            if (now.getDate() === date.getDate()) {
+            if (now.getDate() === date.getDate() && now.getMonth() === date.getMonth()) {
                 updatedDates.push(item)
             }
         } else if (type === filters.DATE.YESTERDAY) {
@@ -81,7 +123,7 @@ export const dateFilter = (type, tag, data) => {
                 updatedDates.push(item)
             }
         } else if (type === filters.DATE["LAST MONTH"]) {
-            if (now.getMonth() === date.getMonth() + 1) {
+            if (now.getMonth() === (date.getMonth() + 1)) {
                 updatedDates.push(item)
             }
         }

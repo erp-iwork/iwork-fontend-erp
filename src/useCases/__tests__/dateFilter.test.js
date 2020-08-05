@@ -1,12 +1,12 @@
-const { dateFilter } = require('../index')
+const { dateFilter, advancedDateFilter } = require('../index')
 const filter = require('../../constant/filters').default
 
 const today = [
-    { transactionDate: "2020-07-04" }
+    { transactionDate: "2020-07-05" }
 ]
 
 const yesterday = [
-    { transactionDate: "2020-07-03" }
+    { transactionDate: "2020-07-04" }
 ]
 
 const thisWeek = [
@@ -21,6 +21,14 @@ const lastMonth = [
     { transactionDate: "2020-07-01" }
 ]
 
+const notThisYear = [
+    { transactionDate: "2019-07-01" }
+]
+
+const dateRange = [
+    { transactionDate: "2020-01-04" }, { transactionDate: "2019-02-06" }
+]
+
 describe('filters date', () => {
     it('should filter date', () => {
         var response = dateFilter(filter.DATE.TODAY, 'transactionDate', today)
@@ -33,10 +41,16 @@ describe('filters date', () => {
         expect(response).toContain(thisMonth[0])
         response = dateFilter(filter.DATE["LAST MONTH"], 'transactionDate', lastMonth)
         expect(response).toContain(lastMonth[0])
+        response = dateFilter(filter.DATE["LAST MONTH"], 'transactionDate', notThisYear)
+        expect(response.length).toBe(0)
     })
 })
 
-
-/*
-    { transactionId: 1, transactionType: "Receipents", orderId: "1", transactionDate: "2020-06-05", productId: "5", productName: "Iron oxides and pigment pastes.", itemCost: 2.34, productCategory: "Row material", purchaseQuantity: "1", amount: 2.34 }
-*/
+describe('tests for advanced date filtering', () => {
+    it('should fetch items based on date', () => {
+        const startDate = "2020-01-01"
+        const endDate = "2020-02-05"
+        const response = advancedDateFilter([startDate, endDate], 'transactionDate', dateRange)
+        expect(response).toContain(dateRange[0])
+    })
+})

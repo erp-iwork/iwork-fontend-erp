@@ -21,6 +21,8 @@ const Page = ({
   hasFilter,
   isEmployeeList,
   isInventory,
+  includeFilters,
+  hasAdvancedDate,
   ...restProps
 }) => {
   
@@ -84,14 +86,19 @@ const Page = ({
             <FilterOptions type={filters.RECORD} data={
               [transactionTypes['Reception'], transactionTypes['Withdrwal']]
             } />
+          </div> : <div></div>
+        }
+        {
+          <div style={{ display: hasFilter? 'flex' : 'none', justifyContent: 'flex-end' }}>
             <FilterOptions type="Date" data={[
               { tag: filters.DATE["TODAY"], value: filters.DATE["TODAY"] },
               { tag: filters.DATE['YESTERDAY'], value: filters.DATE['YESTERDAY'] },
               { tag: filters.DATE['THIS WEEK'], value: filters.DATE['THIS WEEK'] },
               { tag: filters.DATE['THIS MONTH'], value: filters.DATE['THIS MONTH']},
-              { tag: filters.DATE['LAST MONTH'], value: filters.DATE['LAST MONTH'] }
-            ]} />
-          </div> : <div></div>
+              { tag: filters.DATE['LAST MONTH'], value: filters.DATE['LAST MONTH'] },
+              { tag: filters.ADVANCED_DATE, value: filters.ADVANCED_DATE }
+            ]} hasAdvancedDate={hasAdvancedDate} />
+          </div>
         }
       </div>
       <hr></hr>

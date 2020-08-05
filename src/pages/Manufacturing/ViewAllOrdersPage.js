@@ -7,6 +7,7 @@ import PageSpinner from '../../components/PageSpinner'
 import routes from '../../config/routes'
 import { Link } from 'react-router-dom'
 import status from '../../constant/status'
+import { filter, reverse } from '../../useCases'
 
 const Order = ({ order, index, handleDone }) => {
     return (
@@ -60,6 +61,9 @@ class ViewAllOrdersManufacturingPage extends Component {
     
     render() {
         if (!this.state.done) return <PageSpinner />
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'requiredProductName' },
+        }, this.props.orders)
         return (
             <Page title="View All Orders" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
 
@@ -81,7 +85,7 @@ class ViewAllOrdersManufacturingPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.orders.slice(0).reverse().map((item, index) => (
+                                {reverse(filtered).map((item, index) => (
                                     <Order key={index} index={index} order={item} handleDone={() => this.handleDone(item.orderNumber, "Manufactured")} />
                                 ))}
 
@@ -102,7 +106,9 @@ const mapStateToProps = (state) => {
         orders: state.manuFacturingReducer.orders,
         loading_manufacture: state.manuFacturingReducer.loading_manufacture,
         success: state.manuFacturingReducer.success,
-        updatedOrders: state.manuFacturingReducer.orders
+        updatedOrders: state.manuFacturingReducer.orders,
+        filter: state.searchData.filter,
+        searchValue: state.searchData.value
     }
 }
 

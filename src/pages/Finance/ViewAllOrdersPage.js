@@ -9,6 +9,9 @@ import { getInvoice } from '../../store/Invoice/action'
 import routes from '../../config/routes'
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import Invoice from './INVOICE'
+import { filter } from '../../useCases' 
+import { updateFilter } from '../../store/search/action'
+import filters from '../../constant/filters'
 
 const Order = ({ order, index, data, handlePrint }) => {
     return (
@@ -61,6 +64,8 @@ class ViewAllOrdersPage extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.props.loading && !this.state.lockPage) {
+            updateFilter('Type', null)
+            updateFilter(filters.ADVANCED_DATE, null)
             this.setState({
                 orders: this.props.orders,
                 lockPage: true
@@ -78,11 +83,21 @@ class ViewAllOrdersPage extends Component {
         const deliveredOrders = this.state.orders ? this.state.orders.filter((order) => {
             return (order.status === "Delivered") || (order.status === "Invoiced")
         }) : ""
+
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'customer' },
+            date: { value: this.props.filter[filters.DATE._type], tag: 'orderDate' },
+            advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'orderDate' }
+        }, deliveredOrders)
+
         return (
             <Page
                 title="All Sales Orders"
                 breadcrumbs={[{ name: 'Finance', active: true }]}
-                className="TablePage">
+                className="TablePage"
+                hasFilter={true}
+                hasAdvancedDate={true}
+            >
                 <Card className="mb-3">
                     <CardHeader>All Sales Orders</CardHeader>
                     <CardBody>
@@ -98,7 +113,7 @@ class ViewAllOrdersPage extends Component {
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {deliveredOrders.map((item, index) => (
+                            {filtered.map((item, index) => (
                                 <Order order={item} key={index} index={index} data={{
                                     currentOrder: this.state.order,
                                     success: this.props.success,
@@ -122,6 +137,8 @@ const mapStateToProps = (state) => ({
     invoices: state.invoiceReducer.invoices,
     invoice_item: state.invoiceReducer.invoice_item,
     success: state.invoiceReducer.success,
+    filter: state.searchData.filter,
+    searchValue: state.searchData.value
 })
 
-export default connect(mapStateToProps, { getOrders, getInvoice })(ViewAllOrdersPage)
+export default connect(mapStateToProps, { getOrders, getInvoice, updateFilter })(ViewAllOrdersPage)

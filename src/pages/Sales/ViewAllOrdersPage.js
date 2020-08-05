@@ -7,6 +7,9 @@ import routes from '../../config/routes'
 import { Card, CardBody, CardHeader, Button, Table } from 'reactstrap'
 import PageSpinner from '../../components/PageSpinner'
 import { reverse } from '../../useCases'
+import { filter } from '../../useCases' 
+import { updateFilter } from '../../store/search/action'
+import filters from '../../constant/filters'
 
 const Order = ({ order, id }) => {
     return (
@@ -43,6 +46,8 @@ class ViewAllOrdersPage extends Component {
             await this.props.getAllOrder()
             this.setState({ passedOrders: true })
         } else this.setState({ passedOrders: true })
+        updateFilter('Type', null)
+        updateFilter(filters.ADVANCED_DATE, null)
     }
 
     render() {
@@ -50,10 +55,17 @@ class ViewAllOrdersPage extends Component {
             if (this.props.loading) return <PageSpinner />
             if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
         }
+        const filtered = filter({
+            name: { value: this.props.searchValue, tag: 'customer' },
+            date: { value: this.props.filter[filters.DATE._type], tag: 'orderDate' },
+            advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'orderDate' }
+        }, this.props.lists? this.props.lists : this.props.orders)
         return (
             <Page
                 title="All Sales Orders"
                 breadcrumbs={[{ name: 'Sales', active: true }]}
+                hasFilter={true}
+                hasAdvancedDate={true}
             >
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>
@@ -72,9 +84,7 @@ class ViewAllOrdersPage extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.props.lists ? reverse(this.props.lists).map((order, index) => (
-                                    <Order order={order} id={index + 1} />
-                                )) : reverse(this.props.orders).map((order, index) => (
+                                {reverse(filtered).map((order, index) => (
                                     <Order order={order} id={index + 1} />
                                 ))}
                             </tbody>
@@ -93,14 +103,17 @@ const mapStateToProps = (state) => {
         items: state.salesReducer.items,
         companys: state.salesReducer.companys,
         success: state.salesReducer.success,
-        orders: state.salesReducer.orders
+        orders: state.salesReducer.orders,
+        filter: state.searchData.filter,
+        searchValue: state.searchData.value
     }
 }
 const mapDispatchToProps = {
     createOrder: actions.createOrder,
     getAllItem: actions.getAllItem,
     getAllCompany: actions.getAllCompany,
-    getAllOrder: actions.getAllOrder
+    getAllOrder: actions.getAllOrder,
+    updateFilter
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewAllOrdersPage)

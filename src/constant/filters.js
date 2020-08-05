@@ -7,5 +7,6 @@ export default {
         'THIS WEEK': 'This Week',
         'THIS MONTH': 'This Month',
         'LAST MONTH': 'Last Month'
-    }
+    },
+    ADVANCED_DATE: 'Advanced Date'
 }
