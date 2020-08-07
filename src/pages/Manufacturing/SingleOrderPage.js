@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../../components/Page';
-import { Col, Row, Card, CardHeader, Table, Button, CardBody, Input } from 'reactstrap';
+import { Col, Row, Card, CardHeader, Table, Button, CardBody, Input, Form, FormGroup, Label } from 'reactstrap';
 import "./Manufacturing.scss"
 import status from '../../constant/status'
 import { updateQuantity } from '../../store/manufacturing/action'
@@ -193,8 +193,8 @@ class SingleOrderPage extends Component {
                                         {order.manufacture_item_set ? order.manufacture_item_set.map((item, index) => (
                                             <tr>
                                                 <td>{index
-                                                //  + 1
-                                                
+                                                    //  + 1
+
                                                 }</td>
                                                 <td>{item.componentName}</td>
                                                 <td>{item.price}</td>
@@ -213,6 +213,62 @@ class SingleOrderPage extends Component {
                                         )) : null}
                                     </tbody>
                                 </Table>
+
+
+
+                                //new addeded inputs 
+                                <Col>
+                                    <Card>
+                                        <CardHeader>Categorize Manufactured outputs</CardHeader>
+                                        <CardBody>
+                                            <Form>
+                                                <Row>
+                                                    <Col md={6} sm={12}>
+                                                        <FormGroup>
+                                                            <Label for="For_Export" sm={12}>For Export</Label>
+                                                            <Col sm={12}>
+                                                                <Input placeholder="Enter amount to be exported " name="ToExport" onChange={console.log('export selected ')} />
+
+                                                            </Col>
+                                                        </FormGroup>
+                                                    </Col>
+                                                    <Col>
+                                                        <FormGroup>
+                                                            <Label for="For_Local" sm={12}>For Local Use </Label>
+                                                            <Col sm={12}>
+                                                                <Input placeholder="Enter amount for the local usage " name="ToExport" onChange={console.log('export selected ')} />
+
+                                                            </Col>
+                                                        </FormGroup>
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col md={6} sm={12}>
+                                                        <FormGroup>
+                                                            <Label for="Waste" sm={12}>Waste</Label>
+                                                            <Col sm={12}>
+                                                                <Input placeholder="Enter amount to be thrown away" name="Waste" onChange={console.log('Waste selected  ')} />
+
+                                                            </Col>
+                                                        </FormGroup>
+                                                    </Col>
+                                                    <Col >
+                                                        <Button color='primary' onClick={console.log('button clicked ')}>
+                                                            SUBMIT
+                                        </Button>
+                                                    </Col>
+
+                                                </Row>
+
+                                            </Form>
+                                        </CardBody>
+                                    </Card>
+
+                                </Col>
+
+
+
+
                             </CardBody>
                         </Col>
                     </Row>
