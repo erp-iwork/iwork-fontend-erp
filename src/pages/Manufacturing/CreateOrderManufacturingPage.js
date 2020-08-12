@@ -122,6 +122,20 @@ class CreateOrderManufacturingPage extends Component {
                                                 </Input>
                                                 <Error error={errors.requiredProduct ? errors.requiredProduct : null} />
 
+
+                                                <Col sm={12} md={6}>
+
+
+                                                    {/* // new added checkbox  */}
+                                                    <Input name="expect_multiple_outputs" type="checkbox" id="multiple_output" onChange={
+                                                        console.log('checkbox clicked ')
+                                                    } />
+                                                    <Label for="checkbox1">Multiple outputs </Label>
+                                                </Col>
+                                                {/* //// */}
+
+
+                                                
                                             </Col>
                                         </FormGroup>
                                     </Col>

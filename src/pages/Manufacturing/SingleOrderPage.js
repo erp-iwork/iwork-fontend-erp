@@ -291,6 +291,62 @@ class SingleOrderPage extends Component {
                                         )) : null}
                                     </tbody>
                                 </Table>
+
+
+
+                                //new addeded inputs 
+                                <Col>
+                                    <Card>
+                                        <CardHeader>Categorize Manufactured outputs</CardHeader>
+                                        <CardBody>
+                                            <Form>
+                                                <Row>
+                                                    <Col md={6} sm={12}>
+                                                        <FormGroup>
+                                                            <Label for="For_Export" sm={12}>For Export</Label>
+                                                            <Col sm={12}>
+                                                                <Input placeholder="Enter amount to be exported " name="ToExport" onChange={console.log('export selected ')} />
+
+                                                            </Col>
+                                                        </FormGroup>
+                                                    </Col>
+                                                    <Col>
+                                                        <FormGroup>
+                                                            <Label for="For_Local" sm={12}>For Local Use </Label>
+                                                            <Col sm={12}>
+                                                                <Input placeholder="Enter amount for the local usage " name="ToExport" onChange={console.log('export selected ')} />
+
+                                                            </Col>
+                                                        </FormGroup>
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col md={6} sm={12}>
+                                                        <FormGroup>
+                                                            <Label for="Waste" sm={12}>Waste</Label>
+                                                            <Col sm={12}>
+                                                                <Input placeholder="Enter amount to be thrown away" name="Waste" onChange={console.log('Waste selected  ')} />
+
+                                                            </Col>
+                                                        </FormGroup>
+                                                    </Col>
+                                                    <Col >
+                                                        <Button color='primary' onClick={console.log('button clicked ')}>
+                                                            SUBMIT
+                                        </Button>
+                                                    </Col>
+
+                                                </Row>
+
+                                            </Form>
+                                        </CardBody>
+                                    </Card>
+
+                                </Col>
+
+
+
+
                             </CardBody>
                         </Col>
                     </Row>
