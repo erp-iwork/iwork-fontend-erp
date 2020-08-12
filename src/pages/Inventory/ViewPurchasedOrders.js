@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import status from '../../constant/status'
 import { reverse, filter, getCount } from '../../useCases'
 import { getDateFormat } from '../../useCases/getDateFormat'
+import { getSupplierFormat } from '../../useCases/getCustomFormat'
 import { updateFilter } from '../../store/search/action'
 import filters from '../../constant/filters'
 
@@ -78,10 +79,10 @@ class ViewPurchasedItems extends Component {
         if (!this.state.done) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No Purchased Items</h2>
         const filtered = filter({
-            name: { value: this.props.searchValue, tag: 'orderdBy' },
+            name: { value: this.props.searchValue, tag: 'supplierName' },
             date: { value: this.props.filter[filters.DATE._type], tag: 'purchaseOrderDate' },
             advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'purchaseOrderDate' }
-        }, this.props.orders)
+        }, getSupplierFormat(this.props.orders))
         return (
             <Page
                 title="Purchased Products"

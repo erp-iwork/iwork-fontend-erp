@@ -5,6 +5,7 @@ const initialState = {
     masterdata: [],
     orders: [],
     order: [],
+    orderID: -1,
     loading_masterdata: true,
     loading_manufacture: false,
     loading_orders: true,
@@ -39,7 +40,7 @@ const manuFacturingReducer = (state = initialState, action) => {
         case manuFacturingConstant.SUCCESS_POST_MANUFATURE:
             return {
                 ...state, errors: [], loading_manufacture: false,
-                success: true
+                success: true, orderID: action.payload.data.orderNumber
             }
         case manuFacturingConstant.REQUEST_PUT_ORDERS:
             return { ...state, errors: [], loading_manufacture: true }

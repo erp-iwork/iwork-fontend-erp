@@ -136,7 +136,7 @@ class AddMasterDataPage extends Component {
             order_items, productType, productPrice, unitOfMeasurement, non_stock_material
         } = this.state
         const data = {
-            productName, productCategory, is_manufactured: can_be_manufactured,
+            productName, productCategory, isManufactured: can_be_manufactured,
             canBePurchased: can_be_purchased, canBeSold: can_be_sold, non_stock_material: non_stock_material, productType,
             productPrice, unitOfMeasurement, product_material: order_items,
             cost

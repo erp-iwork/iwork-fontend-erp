@@ -10,6 +10,7 @@ import status from '../../constant/status'
 import { filter, getCount } from '../../useCases' 
 import { getDateFormat } from '../../useCases/getDateFormat'
 import { updateFilter } from '../../store/search/action'
+import { getSupplierFormat } from '../../useCases/getCustomFormat'
 import filters from '../../constant/filters'
 
 const Order = ({ order, index, handleApprove }) => {
@@ -77,10 +78,10 @@ class ViewAllPurchaseOrderPage extends Component {
         if (!this.state.done) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No orders created yet.</h2>
         const filtered = filter({
-            name: { value: this.props.searchValue, tag: 'orderdBy' },
+            name: { value: this.props.searchValue, tag: 'supplierName' },
             date: { value: this.props.filter[filters.DATE._type], tag: 'purchaseOrderDate' },
             advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'purchaseOrderDate' }
-        }, this.props.orders)
+        }, getSupplierFormat(this.props.orders))
         return (
             <Page
                 title="Purchase Orders"

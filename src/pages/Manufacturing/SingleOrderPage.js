@@ -1,25 +1,115 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Page from '../../components/Page';
-import { Col, Row, Card, CardHeader, Table, Button, CardBody, Input } from 'reactstrap';
+import {
+    Col, Row, Card, CardHeader, Table,
+    Button, CardBody, Input, Label
+} from 'reactstrap';
 import "./Manufacturing.scss"
 import status from '../../constant/status'
 import { updateQuantity } from '../../store/manufacturing/action'
 import { connect } from 'react-redux'
+import { identifyCustomProduct } from './functions/identifyCustomProduct'
+import { updateCustomProduct } from './functions/updateCustomProduct'
+import Swal from 'sweetalert2'
+
+const UpdateComponents = ({ orderID, quantity }) => {
+    const [state, setState] = useState({
+        exportData: { amount: 0, percentage: 0 },
+        localData: { amount: 0, percentage: 0 },
+        wastedData: { amount: 0, percentage: 0 }
+    })
+
+    const [failure, setFailure] = useState({
+        exportData: false,
+        localData: false,
+        wastedData: false,
+        invalidPercentage: false
+    })
+    
+    const handleChange = ({ target: { name, value } }) =>
+        setState({ ...state, [name]: { amount: value, percentage: Math.round((value / quantity) * 100) } })
 
 
+    const handleUpdate = async () => {
+        var totalPercentage = 0
+        var emptyValue = false
+        var components = {}
+        for (var prop in state) {
+            totalPercentage += state[prop]['percentage']
+            components[prop] = { amount: state[prop]['amount'], percentage: state[prop]['percentage'] }
+        }
+
+        var updated = { ...failure }
+
+        for (var prop in state) {
+            if (state[prop].amount === 0) {
+                updated[prop] = true
+                emptyValue = true
+            }
+        }
+
+        if (totalPercentage > 100) setFailure({ ...failure, invalidPercentage: true })
+        setFailure(updated)
+        if (!failure.invalidPercentage && !emptyValue) {
+            const response = await updateCustomProduct(orderID, components)
+            if (response) {
+                Swal.fire({
+                    title: "Added Sub Components",
+                    icon: "success",
+                    position: "top-right",
+                    timer: 1000,
+                    showConfirmButton: false
+                }).then(_ => window.location.reload())
+            }
+        }
+    }
+
+    return (
+        <div>
+            <Row>
+                <Col>
+                    <Label for="exportedAmount">
+                        Exported Amount
+                    </Label>
+                    <Input type="number" id="exportedAmount" name="exportData" onChange={handleChange} />
+                    <div style={{ color: "red", display: failure.exportData? "flex" : "none" }}>Please enter exported amount</div>
+                </Col>
+                <Col>
+                    <Label for="localAmount">
+                        Local Amount
+                    </Label>
+                    <Input type="number" id="localAmount" name="localData" onChange={handleChange} />
+                    <div style={{ color: "red", display: failure.localData? "flex" : "none" }}>Please enter local amount</div>
+                </Col>
+                <Col>
+                    <Label for="wastedAmount">
+                        Wasted Amount
+                    </Label>
+                    <Input type="number" id="wastedAmount" name="wastedData" onChange={handleChange} />
+                    <div style={{ color: "red", display: failure.wastedData? "flex" : "none" }}>Please enter wasted amount</div>
+                </Col>
+            </Row>
+            <Row>
+                <Col style={{ display: "flex", justifyContent: "center" }}>
+                    <Button color="primary" outline onClick={handleUpdate}>Update Products</Button>
+                </Col>
+            </Row>
+        </div>
+    )
+}
 
 class SingleOrderPage extends Component {
     constructor(props) {
-
         super(props);
         this.state = {
-            order: props.location.state
+            order: props.location.state,
+            hasComponents: false
         }
         this.calculateTotalPrice = this.calculateTotalPrice.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const orders = this.props.location.state.manufacture_item_set.map((item, index) => {
             return {
                 componentId: item.componentId,
@@ -27,7 +117,8 @@ class SingleOrderPage extends Component {
             }
         })
         this.setState({ orders });
-        // this.props.getSingleOrder(this.props.location.state.purchaseOrderNumber)
+        const hasComponents = await identifyCustomProduct(this.state.order.orderNumber)
+        this.setState({ hasComponents })
     }
 
     calculateTotalPrice() {
@@ -52,12 +143,8 @@ class SingleOrderPage extends Component {
         this.props.updateQuantity(order.orderNumber, this.state.orders)
     }
 
-
-
     render() {
         const { order } = this.state
-        console.log(order);
-
         return (
             <Page title="Single Order" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
                 <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
@@ -97,7 +184,6 @@ class SingleOrderPage extends Component {
                         </div>
                         <h4 class="step-title">Quantity Checked</h4>
                     </div>
-
 
                     <div class={order.status_manufacture_order ?
                         order.status_manufacture_order[0].status === status.finished || order.status_manufacture_order[0].status === status.received ?
@@ -177,25 +263,17 @@ class SingleOrderPage extends Component {
                                             <th>MO#</th>
                                             <th>Material Name</th>
                                             <th>Material Cost</th>
-                                            <th> Estimated Quantity</th>
+                                            <th>Estimated Quantity</th>
                                             <th>
-
-                                                {
-                                                    order.status_manufacture_order[0].status === status.quantityCheck ?
-                                                        "Used Quantity"
-                                                        : null}
+                                                {order.status_manufacture_order[0].status === status.quantityCheck ?
+                                                        "Used Quantity": null}
                                             </th>
-
-
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {order.manufacture_item_set ? order.manufacture_item_set.map((item, index) => (
                                             <tr>
-                                                <td>{index
-                                                //  + 1
-                                                
-                                                }</td>
+                                                <td>{index + 1}</td>
                                                 <td>{item.componentName}</td>
                                                 <td>{item.price}</td>
                                                 <td>{item.quantity}</td>
@@ -216,11 +294,19 @@ class SingleOrderPage extends Component {
                             </CardBody>
                         </Col>
                     </Row>
-                    {order.status_manufacture_order[0].status === status.quantityCheck ?
-                        <Button color='primary' size='sm' onClick={this.updateBomQuantity} disabled={
-                            order.status_manufacture_order[0].status === status.confirmed}>
-                            Confirm BOM
-                    </Button> : null}
+                    <CardBody>
+                        {order.status_manufacture_order[0].status === status.quantityCheck ?
+                        <div>
+                            <Row style={{ display: "flex", justifyContent: "center" }}>
+                                <Button color='primary' className='pl-5 pr-5' onClick={this.updateBomQuantity} disabled={
+                                    order.status_manufacture_order[0].status === status.confirmed} style={{ marginBottom: 20 }}>
+                                    Confirm BOM
+                                </Button>
+                            </Row>
+                            {this.state.hasComponents? <UpdateComponents orderID={this.state.order.orderNumber} quantity={this.calculateTotalPrice().quantity} /> : null}
+                        </div>
+                        : null}
+                    </CardBody>
                 </Card>
             </Page>
         );

@@ -8,6 +8,7 @@ import routes from '../../config/routes'
 import { Link } from 'react-router-dom'
 import status from '../../constant/status'
 import { filter, reverse, getCount } from '../../useCases'
+import filters from '../../constant/filters'
 
 const Order = ({ order, index, handleDone }) => {
     return (
@@ -63,10 +64,16 @@ class ViewAllOrdersManufacturingPage extends Component {
         if (!this.state.done) return <PageSpinner />
         const filtered = filter({
             name: { value: this.props.searchValue, tag: 'requiredProductName' },
+            date: { value: this.props.filter[filters.DATE._type], tag: 'manufatureEndDate' },
+            advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'manufatureEndDate' }
         }, this.props.orders)
         return (
-            <Page title="View All Orders" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
-
+            <Page
+                title="View All Orders"
+                breadcrumbs={[{ name: 'Manufacturing', active: true }]}
+                hasFilter={true}
+                hasAdvancedDate={true}
+            >
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>
                     <CardBody>
@@ -88,9 +95,7 @@ class ViewAllOrdersManufacturingPage extends Component {
                                 {reverse(filtered).map((item, index) => (
                                     <Order key={index} index={index} order={item} handleDone={() => this.handleDone(item.orderNumber, "Manufactured")} />
                                 ))}
-
                             </tbody>
-
                         </Table>
                     </CardBody>
                 </Card>

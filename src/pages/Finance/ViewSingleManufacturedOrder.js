@@ -82,12 +82,12 @@ class ViewSingleDelieveredOrderPage extends Component {
                                             <th>Item ID</th>
                                             <th>Item Name</th>
                                             <th>Quantity</th>
-                                            <th>Cost Price</th>
+                                            <th>Cost Prices</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {order.manufacture_item_set.map((item, index) => (
-                                            <tr>
+                                            <tr key={index}>
                                                 <th scope="row">{item.componentId}</th>
                                                 <td>{item.componentName}</td>
                                                 <td>{item.quantity}</td>
@@ -100,20 +100,19 @@ class ViewSingleDelieveredOrderPage extends Component {
                                             display: order.status_manufacture_order[0]['status'] === status.finished ? 'none' : 'flex', flexDirection: 'row', alignItems: 'center'
                                         }}>
                                             <Input onChange={event => this.setState({
-                                                margin: event.target.value
-                                            })} type="number" value={order.requiredProductQuantity * order.retailPrice}
+                                                    margin: event.target.value
+                                                })}
+                                                type="number"
                                             />
                                         </Col>
                                         <Col>
                                             <Button align='center' color='primary' onClick={this.invoice} disabled={
                                                 order.status_manufacture_order[0]['status'] === status.finished
                                             }>
-                                                {this.props.loading_invoice ? <Loader /> : "Update Price"}
+                                                {this.props.loading_invoice ? <Loader /> : "Margin Update"}
                                             </Button>
                                         </Col>
-                                        {
-                                            this.props.errors.errors ? <Error error={[this.props.errors.errors.margin]} /> : ""
-                                        }
+                                        {this.props.errors.errors ? <Error error={[this.props.errors.errors.margin]} /> : ""}
                                     </Row>
                                 </Table>
                             </CardBody>

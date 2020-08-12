@@ -1,4 +1,3 @@
-
 import Page from '../../components/Page'
 import React from 'react'
 import { Bar } from 'react-chartjs-2'

@@ -9,11 +9,9 @@ import { getMasterdata, addManufacturingOrder } from '../../store/manufacturing/
 import PageSpinner from '../../components/PageSpinner'
 import Error from '../../components/error/index'
 import CustomAlert from '../../components/error/Alert'
-
 import Loader from '../../components/loader'
 import BOM from './billOfMaterial'
-
-
+import { addCustomProduct } from './functions/addCustomProduct'
 
 class CreateOrderManufacturingPage extends Component {
     constructor(props) {
@@ -23,6 +21,7 @@ class CreateOrderManufacturingPage extends Component {
             dropdown: false,
             productMaterial: [],
             productID: null,
+            productName: "",
             canBeManudactured: [],
             lockPage: false,
             quantity: null,
@@ -31,19 +30,19 @@ class CreateOrderManufacturingPage extends Component {
             endDate: '',
             customCategory: '',
             showalert: false,
-
+            splitIntoComponents: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.setProducts = this.setProducts.bind(this)
     }
     handleChange = event => {
-
         const { name, value } = event.target
         if (name === "productMaterial") {
             this.setState({
                 showalert: !this.state.showalert,
                 productMaterial: this.state.canBeManudactured[value]['product_material'] ? this.state.canBeManudactured[value]['product_material'] : null, dropdown: true,
-                productID: this.state.canBeManudactured[value]['productId'] ? this.state.canBeManudactured[value]['productId'] : null
+                productID: this.state.canBeManudactured[value]['productId'] ? this.state.canBeManudactured[value]['productId'] : null,
+                productName: this.state.canBeManudactured[value]['productName']? this.state.canBeManudactured[value]['productName'] : null,
             })
         } else {
             this.setState({ [name]: value })
@@ -80,6 +79,16 @@ class CreateOrderManufacturingPage extends Component {
             manufacture_item_set: manufacture_item_set
         })
     }
+
+    async componentDidUpdate(prevProps, prevState) {
+        if (this.props.success && this.state.splitIntoComponents) {
+            await addCustomProduct(
+                this.props.orderID, this.state.productName,
+                this.state.quantity, this.state.endDate
+            )
+        }
+    }
+    
 
     render() {
         let { dropdown } = this.state
@@ -175,19 +184,31 @@ class CreateOrderManufacturingPage extends Component {
                                     ) : null}
                                 </div>
                                 <FormGroup >
-                                    <Label for="description" sm={12}>
-                                        Description
-                                    </Label>
-                                    <Col sm={12}>
-                                        <Input
-                                            type='textarea'
-                                            name="description"
-                                            id="description"
-                                            placeholder="Description"
-                                            onChange={this.handleChange}
-                                        />
-                                        <Error error={errors.description ? errors.description : null} />
-                                    </Col>
+                                    <Row>
+                                        <Label for="description" sm={12}>
+                                            Description
+                                        </Label>
+                                        <Col sm={12} md={8}>
+                                            <Input
+                                                type='textarea'
+                                                name="description"
+                                                id="description"
+                                                placeholder="Description"
+                                                onChange={this.handleChange}
+                                            />
+                                            <Error error={errors.description ? errors.description : null} />
+                                        </Col>
+                                        <Col sm={12} md={4}>
+                                            <FormGroup>
+                                                <Input id="components" type="checkbox" onChange={({ target: { checked } }) => {
+                                                    this.setState({ splitIntoComponents: checked })
+                                                }} value={this.state.splitIntoComponents} />&nbsp;
+                                                <Label for="components">
+                                                    Split into output components
+                                                </Label>
+                                            </FormGroup>
+                                        </Col>
+                                    </Row>
                                 </FormGroup>
                                 <Row>
                                     <Col sm={12} md={6}>
@@ -253,6 +274,7 @@ const mapStateToProps = (state) => {
         success: state.manuFacturingReducer.success,
         loading_masterdata: state.manuFacturingReducer.loading_masterdata,
         loading_manufacture: state.manuFacturingReducer.loading_manufacture,
+        orderID: state.manuFacturingReducer.orderID,
         masterdata: state.manuFacturingReducer.masterdata
     }
 }

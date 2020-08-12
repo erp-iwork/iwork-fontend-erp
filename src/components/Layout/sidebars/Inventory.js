@@ -81,7 +81,7 @@ class Inventory extends React.Component {
             { to: routes.ViewInventoryManufacturedOrders, name: 'Manufactured Orders', exact: false, Icon: MdWidgets },
             { to: routes.RecordTracking, name: 'Inventory Item Tracking', exact: false, Icon: MdWidgets },
             // { to: routes.DeliveredOrders, name: 'Delivered Orders Tracking', exact: false, Icon: MdWidgets },
-
+            { to: routes.ViewAllCustomProducts, name: 'Exported Products', exact: false, Icon: MdWidgets }
         ]
         return (
             <React.Fragment>

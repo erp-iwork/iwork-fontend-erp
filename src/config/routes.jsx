@@ -50,5 +50,8 @@ export default {
   ViewDelieveredOrders: "/ViewDelieveredOrders",
   ViewSingleDelieveredOrder: "/ViewSingleDelieveredOrder",
   RecordTracking: "/records/received",
-  DeliveredOrders: '/records/delivered'
+  DeliveredOrders: "/records/delivered",
+
+  // Custom
+  ViewAllCustomProducts: "/inventory/exports"
 };

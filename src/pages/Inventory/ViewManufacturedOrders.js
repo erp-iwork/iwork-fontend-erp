@@ -10,6 +10,7 @@ import status from '../../constant/status'
 import { reverse, filter, getCount } from '../../useCases'
 import { getDateFormat } from '../../useCases/getDateFormat'
 import { updateFilter } from '../../store/search/action'
+import filters from '../../constant/filters'
 
 const Order = ({ order, index, handleReceive }) => {
     return (
@@ -84,10 +85,17 @@ class ViewAllPurchaseOrderPage extends Component {
 
         const filtered = filter({
             name: { value: this.props.searchValue, tag: 'requiredProductName' },
+            date: { value: this.props.filter[filters.DATE._type], tag: 'manufatureEndDate' },
+            advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'manufatureEndDate' }
         }, this.props.orders)
 
         return (
-            <Page title="Manufactured Orders" breadcrumbs={[{ name: 'Finance', active: true }]}>
+            <Page
+                title="View All Orders"
+                breadcrumbs={[{ name: 'Manufacturing', active: true }]}
+                hasFilter={true}
+                hasAdvancedDate={true}
+            >
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>
                     <CardBody>

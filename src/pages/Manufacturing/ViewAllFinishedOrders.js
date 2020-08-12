@@ -7,7 +7,8 @@ import PageSpinner from '../../components/PageSpinner'
 import routes from '../../config/routes'
 import { Link } from 'react-router-dom'
 import status from '../../constant/status'
-import { filter, reverse, getCount } from '../../useCases'
+import { filter, getCount } from '../../useCases'
+import filters from '../../constant/filters'
 
 const Order = ({ order, index, handleQualityCheck }) => {
     return (
@@ -63,10 +64,16 @@ class ViewAllFinishedOrdersPage extends Component {
         if (!this.state.qualitychecked) return <PageSpinner />
         const filtered = filter({
             name: { value: this.props.searchValue, tag: 'requiredProductName' },
+            date: { value: this.props.filter[filters.DATE._type], tag: 'manufatureEndDate' },
+            advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'manufatureEndDate' }
         }, this.props.orders)
         return (
-            <Page title="View Finished Orders" breadcrumbs={[{ name: 'Manufacturing', active: true }]}>
-
+            <Page
+                title="View All Orders"
+                breadcrumbs={[{ name: 'Manufacturing', active: true }]}
+                hasFilter={true}
+                hasAdvancedDate={true}
+            >
                 <Card className="mb-3">
                     <CardHeader>All Orders</CardHeader>
                     <CardBody>

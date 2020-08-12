@@ -10,6 +10,7 @@ import routes from '../../config/routes'
 import status from '../../constant/status'
 import { filter, getCount } from '../../useCases'
 import { getDateFormat } from '../../useCases/getDateFormat'
+import { getSupplierFormat } from '../../useCases/getCustomFormat'
 import { updateFilter } from '../../store/search/action'
 import filters from '../../constant/filters'
 
@@ -67,10 +68,10 @@ class ViewAllOrdersPage extends Component {
         if (this.props.loading_orders) return <PageSpinner />
         if (this.props.orders.length === 0) return <h2>No orders to show</h2>
         const filtered = filter({
-            name: { value: this.props.searchValue, tag: 'orderdBy' },
+            name: { value: this.props.searchValue, tag: 'supplierName' },
             date: { value: this.props.filter[filters.DATE._type], tag: 'purchaseOrderDate' },
             advancedDate: { value: this.props.filter[filters.ADVANCED_DATE], tag: 'purchaseOrderDate' }
-        }, this.props.orders)
+        }, getSupplierFormat(this.props.orders))
         return (
             <Page
                 title="Purchase Orders"
