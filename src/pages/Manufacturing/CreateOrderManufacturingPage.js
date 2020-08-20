@@ -95,7 +95,7 @@ class CreateOrderManufacturingPage extends Component {
         if (this.props.loading_masterdata) return <PageSpinner />
         const canBeManudactured = this.props.masterdata.filter((data) => { return data.isManufactured })
         this.setProducts(canBeManudactured)
-        var errors = {}
+        var errors = {} 
         if (this.props.errors) {
             errors = this.props.errors
         }
